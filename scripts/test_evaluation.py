@@ -10,12 +10,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from evaluation import PROTOCOL
 from evaluation.aggregate import export_report, paired_difference, summarize
-from evaluation.cli import scaffold
+from evaluation.cli import evaluate_manifest, scaffold
 from evaluation.features import adjacent_cosine
-from evaluation.judges import cached_call, unknown_judgment
+from evaluation.judges import cached_call, covers_interval, judge, pairwise, unknown_judgment
 from evaluation.loop import analyze, transition
 from evaluation.media import delivery_status, nearest, prepare
-from evaluation.protocol import file_hash, freeze, read, validate_card, validate_judgment
+from evaluation.protocol import file_hash, freeze, read, signature, validate_card, validate_judgment, write
+from evaluation.reliability import agreement, preferences
 from evaluation.scoring import score
 
 
@@ -219,6 +220,110 @@ class EvaluationTests(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["requirement"], "exact original request")
         self.assertEqual(rows[0]["status"], "draft")
+
+    def test_optional_damage_cannot_be_escalated(self):
+        self.j["damages"] = [{"severity": "major", "related_item_ids": ["button"], "evidence": "fixture"}]
+        with self.assertRaisesRegex(ValueError, "Optional-detail"):
+            score(self.card, self.j)
+
+    def test_dense_interval_coverage(self):
+        self.assertFalse(covers_interval([[1, 2]], [0, 5]))
+        self.assertTrue(covers_interval([[0, 2], [2, 5]], [0, 5]))
+        self.assertFalse(covers_interval([[0, 2], [3, 5]], [0, 5]))
+        self.assertTrue(covers_interval([[0, 5]], [1, 2]))
+
+    def test_missing_output_kept_in_batch_denominator(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); write(root / "card.json", self.card)
+            records = evaluate_manifest([{"case_id": "missing", "method": "A", "seed": 1,
+                                          "card": "card.json", "output_video": "missing.mp4"}], root / "run", root, None)
+            self.assertEqual(len(records), 1)
+            self.assertEqual(records[0]["result"]["success"], "fail")
+            self.assertEqual(records[0]["result"]["delivery"], "invalid")
+
+    def test_agreement_retains_missing(self):
+        result = agreement([{"case_id": "a", "a": 3.5, "b": 3.2}, {"case_id": "b", "a": None, "b": 4.0}])
+        self.assertEqual((result["n"], result["total"]), (1, 2))
+        self.assertAlmostEqual(result["mean_absolute_difference"], .3)
+
+    def test_creativity_overview_preserves_dense_semantic_evidence(self):
+        card = copy.deepcopy(self.card)
+        card["creativity"] = "open"
+        card = freeze(card, "fixture")
+        truth = judgment_fixture(card)
+        requests = []
+
+        class Client:
+            model = "synthetic-fixture"
+
+            def predict_json(self, *, system_prompt, user_text, image_paths):
+                requests.append((json.loads(user_text), len(image_paths)))
+                if "For EVERY item" in system_prompt:
+                    return {k: copy.deepcopy(truth[k]) for k in ("items", "damage_review", "damages")}
+                creative = "optional fixed anonymous REFERENCE" in system_prompt
+                return {"ratings": {k: copy.deepcopy(v) for k, v in truth["ratings"].items()
+                                    if (k in {"scene_specific_design", "relative_originality"}) == creative}}
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "fixture.jpg"
+            path.write_bytes(b"opaque fake-client-only evidence")
+            evidence = {"card_sha256": card["card_sha256"], "source_sha256": card["source_sha256"],
+                        "output_sha256": "b" * 64, "source_images": [str(path)] * 3,
+                        "output_images": [str(path)] * 3, "image_sha256": [file_hash(path)] * 6,
+                        "dense_ranges": [[0, 2]], "delivery": truth["delivery"],
+                        "pairs": [{"source_seconds": t, "output_seconds": t, "overview": n != 1, "dense": True}
+                                  for n, t in enumerate([.1, 1.0, 1.9])]}
+            evidence["evidence_sha256"] = signature(evidence)
+            refs = {"task_id": card["task_id"], "candidates": [
+                {"images": [str(path)], "image_sha256": [file_hash(path)], "output_sha256": "b" * 64},
+                {"images": [str(path)], "image_sha256": [file_hash(path)], "output_sha256": "c" * 64}]}
+            result = judge(card, evidence, Client(), Path(tmp) / "judge", references=refs,
+                           creativity_overview=True, creativity_exclude_self=True)
+            self.assertEqual([n for _, n in requests], [6, 3, 5])
+            self.assertEqual(requests[0][0]["dense_ranges"], [[0, 2]])
+            self.assertEqual(requests[1][0]["dense_ranges"], [[0, 2]])
+            self.assertEqual(requests[2][0]["dense_ranges"], [])
+            self.assertEqual(requests[2][0]["image_groups"], [2, 2, 1])
+            self.assertEqual(requests[2][0]["excluded_self_reference_count"], 1)
+            self.assertEqual(len(requests[2][0]["pairs"]), 2)
+            self.assertEqual(result["comparison_set_sha256"], signature(refs))
+            self.assertEqual(result["ratings"]["temporal_coherence"]["score"], 3.7)
+
+    def test_blind_calls_and_counterbalanced_preferences(self):
+        card, truth = self.card, copy.deepcopy(self.j)
+        label(truth, "action", "unknown")
+        truth["ratings"]["temporal_coherence"] = {"status": "unknown", "score": None, "evidence": "sparse fixture"}
+        class Client:
+            model = "synthetic-fixture"; requests = []
+            def predict_json(self, *, system_prompt, user_text, image_paths):
+                request = json.loads(user_text); self.requests.append(request)
+                if "Compare original-task semantics" in system_prompt:
+                    return {"semantics": "unknown", "design": "A", "creativity": "not_applicable", "evidence": "fixture"}
+                if "For EVERY item" in system_prompt:
+                    response = {k: copy.deepcopy(truth[k]) for k in ("items", "damage_review", "damages")}
+                    # Attempts to overwrite trusted wrapper metadata must be ignored.
+                    response["delivery"] = {"status": "invalid", "reason": "untrusted extra field"}
+                    return response
+                return {"ratings": {k: copy.deepcopy(v) for k, v in truth["ratings"].items() if k not in {"scene_specific_design", "relative_originality"}}}
+        client = Client()
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "fixture.jpg"; path.write_bytes(b"opaque fake-client-only evidence")
+            evidence = {"card_sha256": card["card_sha256"], "source_sha256": card["source_sha256"], "output_sha256": "b" * 64,
+                        "source_images": [str(path), str(path)], "output_images": [str(path), str(path)],
+                        "image_sha256": [file_hash(path)] * 4, "dense_ranges": [], "delivery": truth["delivery"],
+                        "pairs": [{"source_seconds": .1, "output_seconds": .1}, {"source_seconds": 1.9, "output_seconds": 1.9}]}
+            evidence["evidence_sha256"] = signature(evidence)
+            result = judge(card, evidence, client, Path(tmp) / "judge")
+            self.assertEqual(result["delivery"]["status"], "valid")
+            self.assertNotIn("groups", client.requests[1]["card"])
+            self.assertNotIn("source_video", client.requests[0]["card"])
+            pair = pairwise(card, evidence, evidence, client, Path(tmp) / "pair")
+            self.assertEqual(pair["result"]["design"]["verdict"], "tie")
+            self.assertTrue(pair["result"]["design"]["order_disagreement"])
+            self.assertEqual(pair["result"]["semantics"]["verdict"], "unknown")
+            summary = preferences([pair])
+            self.assertEqual(summary["design"]["a_preference_percent"], 50)
+            self.assertIsNone(summary["semantics"]["a_preference_percent"])
 
 
 class MediaIntegrationTests(unittest.TestCase):

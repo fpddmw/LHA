@@ -81,17 +81,20 @@ def evaluate_manifest(cases, destination, root, client, *, frame_count=12, dense
                 judgment = judge(card, evidence, client, directory, references=refs)
             write(directory / "judgment.json", judgment)
             row["result"] = score(card, judgment)
-            if case.get("features"):
-                automatic = read(root / case["features"])
-                require(output.exists() and automatic["output_sha256"] == file_hash(output), "Feature/output mismatch")
-                require(automatic["protocol"] == "lha-output-consistency-v1", "Feature protocol mismatch")
-                row["result"]["automatic"] = automatic
         except Exception as exc:
             # An evaluator failure remains unresolved, never a failed generation or an omitted case.
             row["evaluation_error"] = f"{type(exc).__name__}: {exc}"
             judgment = unknown_judgment(card, {"status": "unknown", "reason": "Evaluation could not establish delivery"}, row["evaluation_error"])
             row["result"] = score(card, judgment)
             write(directory / "evaluation_error.json", row)
+        if case.get("features"):
+            try:
+                automatic = read(root / case["features"])
+                require(output.exists() and automatic["output_sha256"] == file_hash(output), "Feature/output mismatch")
+                require(automatic["protocol"] == "lha-output-consistency-v1", "Feature protocol mismatch")
+                row["result"]["automatic"] = automatic
+            except Exception as exc:
+                row["feature_error"] = f"{type(exc).__name__}: {exc}"
         records.append(row)
         write(destination / "records.json", records)
         print(json.dumps({"case_id": case["case_id"], "success": row["result"]["success"], "error": row.get("evaluation_error")}, ensure_ascii=False), flush=True)
@@ -155,7 +158,7 @@ def main(argv=None):
         records = evaluate_manifest(load_records(args.manifest), args.out, args.root, client,
                                     frame_count=args.frames, dense_ranges=args.dense)
         export_report(records, args.out / "report")
-        return int(any(r.get("evaluation_error") for r in records))
+        return int(any(r.get("evaluation_error") or r.get("feature_error") for r in records))
     elif args.command == "report":
         export_report(load_records(args.records), args.out, repeats=args.bootstrap)
     elif args.command == "compare":

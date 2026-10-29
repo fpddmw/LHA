@@ -35,7 +35,7 @@ def write(path, value):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8", newline="\n")
     temporary.replace(path)
 
 
@@ -89,6 +89,10 @@ def validate_card(card, *, frozen=True):
             require(item.get("evidence") in {"frames", "sequence"}, "Evidence must be frames/sequence")
             require(isinstance(item.get("temporal"), bool), "temporal must be explicit")
             require(bool(item.get("partial_rule")), "Define partial or say not allowed")
+            if "interval_seconds" in item:
+                interval = item["interval_seconds"]
+                require(isinstance(interval, list) and len(interval) == 2 and all(number(v) for v in interval)
+                        and 0 <= interval[0] < interval[1] <= card["duration_seconds"], "Invalid item evidence interval")
     return card
 
 
@@ -147,4 +151,8 @@ def validate_judgment(card, judgment):
     require(judgment.get("damage_review") in {"complete", "unknown"}, "Damage review status required")
     for damage in judgment.get("damages", []):
         require(damage.get("severity") in {"minor", "major"} and bool(damage.get("evidence")), "Invalid damage")
+        linked = damage.get("related_item_ids")
+        require(isinstance(linked, list) and set(linked).issubset(expected), "Damage needs valid related_item_ids (empty for unlisted issues)")
+        if damage["severity"] == "major" and linked:
+            require(any(expected[i][0]["kind"] == "preserve_core" or expected[i][1]["mandatory"] for i in linked), "Optional-detail damage cannot become a major failure")
     return judgment

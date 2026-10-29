@@ -22,9 +22,13 @@ First image group is SOURCE; second is OUTPUT, paired by timestamps.
 For EVERY item return {id,label:pass|partial|fail|unknown,evidence,times_seconds:[output seconds],evidence_kind:frames|sequence|none}.
 Use the card's partial_rule. Sequence-required claims MUST be unknown unless dense evidence establishes them;
 even a dense short interval does not establish preservation over the entire video. 'sequence' refers only to supplied dense_ranges.
-Return {items:[...],damage_review:complete|unknown,damages:[{severity:minor|major,evidence,times_seconds:[...]}]}.
-Major damage changes identity, count, key action/relation or another hard semantic constraint outside allowed scope.
-Minor damage changes an incidental detail. Describe actual evidence and location, not a guess about intent.
+The required interval is item.interval_seconds when specified, otherwise [0,duration_seconds]. Dense evidence must cover that interval.
+Return {items:[...],damage_review:complete|unknown,damages:[{severity:minor|major,related_item_ids:[...],evidence,times_seconds:[...]}]}.
+Link each damage to existing item ids whenever applicable; an empty list means a genuinely unlisted issue.
+Major damage violates core or mandatory semantics, or introduces an unlisted change to a KEY entity/action/relation.
+Damage corresponding ONLY to optional detail items is MINOR, including their counts and structures. Never upgrade these
+to a major failure by rephrasing the same change. Severity follows the card's preset boundary, not a post hoc judgment.
+Describe actual evidence and location, not a guess about intent.
 """
 DESIGN = COMMON + """
 Images are OUTPUT only. The card includes source observations and the original requirement.
@@ -36,12 +40,13 @@ Other anchors: 1 clear failures; 2 noticeable shortcomings; 3 good with minor is
 Narrative/emotion: supports the scene's action/mood and request. World consistency: coherent people, objects and environment.
 Composition/lighting: coordinated space, framing and illumination. Color/texture: intentional harmonious materials and palette.
 Hierarchy/readability: clear focal subjects, objects and action. Temporal coherence: appearance/structure/motion continuity.
-Use decimal interpolation with a concrete reason. Sparse images alone generally leave temporal_coherence unknown.
+Use decimal interpolation with a concrete reason. temporal_coherence is unknown unless dense evidence covers the full task interval.
 Style is not_applicable only if style_required=false; other dimensions remain applicable.
 """
 CREATIVITY = COMMON + """
 Image groups are SOURCE, OUTPUT, then optional fixed anonymous REFERENCE candidates for the same task.
-Return {ratings:{scene_specific_design:rating,relative_originality:rating}} with the same rating schema.
+Return {ratings:{scene_specific_design:rating,relative_originality:rating}}.
+Each rating is {status:scored|unknown|not_applicable,score:number|null,evidence:string}; all three fields are required.
 Scene-specific design: 1 generic/no useful adaptation; 2 limited scene-based choices; 3 coherent useful adaptation to
 existing subjects/objects/space/action; 4 distinctive integrated scene-specific design with clear value.
 Relative originality: 1 routine within this reference set; 2 small variation; 3 identifiable distinctive solution;
@@ -116,7 +121,16 @@ def verify_evidence(card, evidence):
     require(evidence["evidence_sha256"] == signature({k: v for k, v in evidence.items() if k != "evidence_sha256"}), "Evidence metadata changed")
 
 
-def judge(card, evidence, client, destination, *, references=None):
+def covers_interval(ranges, interval):
+    covered = interval[0]
+    for start, end in sorted(ranges):
+        if start > covered + 1e-6:
+            break
+        covered = max(covered, end)
+    return covered >= interval[1] - 1e-6
+
+
+def judge(card, evidence, client, destination, *, references=None, creativity_overview=False, creativity_exclude_self=False):
     validate_card(card)
     verify_evidence(card, evidence)
     destination = Path(destination)
@@ -127,26 +141,52 @@ def judge(card, evidence, client, destination, *, references=None):
     sem = cached_call(client, SEMANTIC, {**request, "image_groups": [len(source), len(output)]}, source + output, destination / "semantic.raw.json")
     for row in sem["items"]:
         if row["label"] != "unknown" and row["evidence_kind"] == "sequence":
-            require(evidence["dense_ranges"], "Judge claimed sequence evidence without supplied sequence")
-    design = cached_call(client, DESIGN, {**request, "image_groups": [len(output)]}, output, destination / "design.raw.json")
-    if not evidence["dense_ranges"]:
+            item = items(card)[row["id"]][1]
+            interval = item.get("interval_seconds", [0, card["duration_seconds"]])
+            require(covers_interval(evidence["dense_ranges"], interval), "Judge claimed sequence evidence outside supplied interval")
+        if row["label"] != "unknown":
+            require(all(any(abs(t - p["output_seconds"]) <= .051 for p in evidence["pairs"]) for t in row["times_seconds"]), "Judge cited an unsampled timestamp")
+    design_request = {**request, "card": {k: v for k, v in blind_card(card).items() if k != "groups"}, "image_groups": [len(output)]}
+    design = cached_call(client, DESIGN, design_request, output, destination / "design.raw.json")
+    if not covers_interval(evidence["dense_ranges"], [0, card["duration_seconds"]]):
         require(design["ratings"]["temporal_coherence"]["status"] == "unknown", "Temporal coherence requires dense evidence")
     result = unknown_judgment(card, evidence["delivery"], "Not evaluated")
-    result.update(sem)
+    result.update({key: sem[key] for key in ("items", "damage_review", "damages")})
+    require(set(design["ratings"]) == {"style", *AESTHETICS, "temporal_coherence"}, "Unexpected design rating keys")
     result["ratings"].update(design["ratings"])
     if card["creativity"] != "none":
-        ref_images, ref_groups = [], []
+        creative_source, creative_output, creative_request = source, output, request
+        if creativity_overview:
+            indices = [i for i, pair in enumerate(evidence["pairs"]) if pair.get("overview", True)]
+            creative_source = [source[i] for i in indices]
+            creative_output = [output[i] for i in indices]
+            creative_request = {**request, "pairs": [evidence["pairs"][i] for i in indices], "dense_ranges": [],
+                                "evidence_scope": "Appearance/design overview; do not infer fine temporal novelty"}
+        ref_images, ref_groups, excluded_self = [], [], 0
         if references:
             require(references["task_id"] == card["task_id"], "Reference set must use the same task")
             for ref in references["candidates"]:
+                if creativity_exclude_self:
+                    require(isinstance(ref.get("output_sha256"), str) and len(ref["output_sha256"]) == 64,
+                            "Self exclusion requires each reference video's hash")
+                    if ref["output_sha256"] == evidence["output_sha256"]:
+                        excluded_self += 1
+                        continue
                 paths = ref["images"]
                 require([file_hash(p) for p in paths] == ref["image_sha256"], "Reference images changed")
                 ref_images.extend(paths)
                 ref_groups.append(len(paths))
-            require(ref_images, "Empty comparison set")
+            require(ref_images or (creativity_exclude_self and excluded_self), "Empty comparison set")
             result["comparison_set_sha256"] = signature(references)
-        creative = cached_call(client, CREATIVITY, {**request, "image_groups": [len(source), len(output), *ref_groups],
-                               "reference_set_available": bool(ref_images)}, source + output + ref_images, destination / "creativity.raw.json")
+        if creativity_exclude_self:
+            creative_request = {**creative_request, "reference_protocol": "fixed-cohort-leave-one-out-v2",
+                                "excluded_self_reference_count": excluded_self,
+                                "comparison_rule": "Compare permitted design against the supplied other candidates. Exact copies of the evaluated video have been excluded by video hash."}
+            result["creativity_reference_protocol"] = "fixed-cohort-leave-one-out-v2"
+        creative_cache = "creativity_v2.raw.json" if creativity_exclude_self else "creativity.raw.json"
+        creative = cached_call(client, CREATIVITY, {**creative_request, "image_groups": [len(creative_source), len(creative_output), *ref_groups],
+                               "reference_set_available": bool(ref_images)}, creative_source + creative_output + ref_images, destination / creative_cache)
+        require(set(creative["ratings"]) == {"scene_specific_design", "relative_originality"}, "Unexpected creativity rating keys")
         result["ratings"].update(creative["ratings"])
     result.update(evidence_sha256=evidence["evidence_sha256"], output_sha256=evidence["output_sha256"],
                   evaluator={"model": getattr(client, "model", None), "reasoning_effort": getattr(client, "reasoning_effort", None)})
@@ -193,4 +233,9 @@ number of knowledge reads, persuasive explanations or claimed intentions. Use un
     edit_ids = {i for i, (g, _) in items(card).items() if g["kind"] == "edit"}
     require(len(response["requirements"]) == len(edit_ids) and {r["id"] for r in response["requirements"]} == edit_ids, "Plan coverage id mismatch")
     require(len(response["proposals"]) == len(plan["proposals"]) and {r["id"] for r in response["proposals"]} == {p["id"] for p in plan["proposals"]}, "Proposal id mismatch")
+    for row in response["requirements"]:
+        require(isinstance(row.get("covered"), bool) and isinstance(row.get("conflict"), bool) and bool(row.get("evidence")), "Invalid plan coverage fact")
+    for row in response["proposals"]:
+        require(isinstance(row.get("allowed"), bool) and row.get("visible") in {"pass", "partial", "fail", "unknown"}
+                and bool(row.get("evidence")), "Invalid proposal realization")
     return {"protocol": PROTOCOL, "diagnostic_only": True, "card_sha256": card["card_sha256"], "plan_sha256": signature(plan), "judgment": response}

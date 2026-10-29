@@ -25,6 +25,7 @@ PickScore 不属于本版。代码入口为 `scripts/eval/evaluate_benchmark.py`
 | `partial_rule` | 明确部分达成边界；不允许部分时填 `not allowed` |
 | `temporal` | 是否属于动作／事件／时序语义 |
 | `evidence` | `frames` 或 `sequence`，细微动作与事件需连续证据 |
+| `interval_seconds` | 可选的局部证据时间范围；缺省表示整个任务区间 |
 | `allowed_changes` | 用户授权的修改及设计自由，保留语义所允许的绘制变化 |
 | `creativity` | `open`、`bounded`、`none` |
 | `duration_seconds` | 实际约定的完整片段长度，5 秒任务填 5.0 |
@@ -62,8 +63,10 @@ S = 100 / K * sum(mean(该组检查项分值))
 
 只要存在 unknown，该组汇总 `score=null`，同时给出 lower/upper/coverage。
 lower 将未确认项按 0、upper 按 1 计算，表示**证据上下界**，不等于统计置信区间。
+coverage 采用相同的组等权规则，items/unknown 另外提供原始检查项数量，因此 coverage 不一定等于简单的已知项数／总项数。
 unknown 不删除、不填 0.5；没有适用项目与证据不足分别记录。
 damage_review 未完成时，无已确认损伤不能自动解释为零损伤。
+每条 damage 通过 related_item_ids 关联既有检查项；仅涉及 optional detail 的变化只能记 minor，包括这些细节对象的数量与结构。空关联表示未列出的新问题，major 仍须涉及关键主体、行为或硬约束。judge 不能通过另写一条严重损伤，把预先确定的细节要求升级成硬门槛。
 
 整题成功需要：有效交付，所有 mandatory 项与全部核心保留项 pass，无严重额外损伤，且风格任务的 style >=3.0。
 任何已知硬失败产生 fail；没有硬失败但关键证据不足产生 unresolved；其余为 pass。
@@ -114,7 +117,7 @@ damage_review 未完成时，无已确认损伤不能自动解释为零损伤。
 
 `--dense START END` 追加该区间所有输出帧及对应源帧，可重复传入。
 无 dense 时，代码拒绝 judge 声称拥有连续证据，temporal_coherence 必须 unknown。
-有 dense 也仍需检查证据范围：一个局部片段不能证明全片细微动作保留。必要时整段提供或人工看片。
+有 dense 也检查证据范围：只有覆盖检查项 interval_seconds（缺省为全片）才允许确定性 sequence 判断；全片 temporal_coherence 需要全片 dense 覆盖。局部片段不能证明全片细微动作保留。必要时整段提供或人工看片。
 `pairwise` 使用统一概览采样协议，允许原生帧率导致的至多 0.1 秒取帧差异；每个候选都带自己的真实对应源帧与时间表，避免把不同帧率强行视为逐像素同步。超过容差会报错，不进行尾帧填补。
 
 CLIP-F/DINO-F 使用输出本身，在固定 4 fps 采样后，对相邻帧特征归一化并取余弦均值；不输入原视频。
