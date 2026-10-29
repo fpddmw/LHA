@@ -1,0 +1,7 @@
+# Scoring, aggregation, schemas and loop analysis use Python >=3.10 stdlib only.
+# Install these for real video evidence and CLIP-F/DINO-F. Pin resolved versions
+# and encoder revisions in the publication environment after hardware validation.
+av>=14,<20
+Pillow>=10,<13
+torch>=2.4,<3
+transformers>=4.45,<5
