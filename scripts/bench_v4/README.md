@@ -1,5 +1,7 @@
 # bench_v4
 
+Historical experiment snapshot. The current 50 + 7 benchmark is [benchmark_data](../../benchmark_data/README.md). Old prompts, checklists and results in this directory describe their original runs.
+
 Benchmark for the low-cost -> high-cost video edit task, rebuilt from bench_v3
 after two of its properties made its headline numbers unusable:
 

@@ -294,8 +294,26 @@ def _variant_availability(variant: EditVariant) -> tuple[bool, list[str]]:
     missing: list[str] = []
     if variant.backend == "bernini":
         # Diffusers layout, not Wan sharded weights, so validate its own entry points.
-        if not variant.checkpoint_path.exists():
-            missing.append(str(variant.checkpoint_path))
+        import json
+        root = variant.checkpoint_path
+        for relative in ("config.json", "tokenizer/tokenizer_config.json", "scheduler/scheduler_config.json"):
+            if not (root / relative).is_file():
+                missing.append(str(root / relative))
+        for component in ("text_encoder", "transformer", "vae"):
+            directory = root / component
+            if not (directory / "config.json").is_file():
+                missing.append(str(directory / "config.json"))
+            indices = list(directory.glob("*.safetensors.index.json"))
+            if indices:
+                try:
+                    shards = {name for index in indices for name in json.loads(index.read_text())["weight_map"].values()}
+                    if not shards:
+                        missing.append(str(directory / "weights"))
+                    missing.extend(str(directory / name) for name in shards if not _existing_weight(directory / name))
+                except (ValueError, KeyError, TypeError):
+                    missing.append(str(directory / "valid weight index"))
+            elif not any(_existing_weight(path) for path in directory.glob("*.safetensors")):
+                missing.append(str(directory / "*.safetensors"))
         if not (BERNINI_REPO / "infer_single_gpu.py").exists():
             missing.append(str(BERNINI_REPO / "infer_single_gpu.py"))
         return (not missing), missing
@@ -554,6 +572,8 @@ def _render_with_bernini(request: EditRequest, variant: EditVariant) -> dict:
     metadata = _probe_video_metadata(request.low_video)
     num_frames = _normalize_num_frames(request.num_frames, metadata["frame_count"])
     fps = request.fps or metadata["fps"]
+    # Bernini's CLI currently accepts integer fps only.
+    rendered_fps = max(1, int(round(float(fps))))
     width, height = variant.resolution
     request.output_video.parent.mkdir(parents=True, exist_ok=True)
 
@@ -574,20 +594,26 @@ def _render_with_bernini(request: EditRequest, variant: EditVariant) -> dict:
         "--seed", str(request.seed),
         "--fps", str(rendered_fps),
     ]
-    completed = subprocess.run(command, cwd=str(BERNINI_REPO), capture_output=True, text=True)
+    log_path = request.output_video.with_suffix(".bernini.log")
+    with log_path.open("w", encoding="utf-8") as log:
+        completed = subprocess.run(command, cwd=str(BERNINI_REPO), stdout=log, stderr=subprocess.STDOUT, text=True)
     if completed.returncode != 0 or not request.output_video.exists():
-        tail = (completed.stderr or completed.stdout or "").strip()[-1500:]
+        tail = log_path.read_text(encoding="utf-8", errors="replace").strip()[-3000:]
         raise RuntimeError(f"Bernini inference failed (rc={completed.returncode}): {tail}")
 
+    actual = _probe_video_metadata(request.output_video)
     return {
         "variant": variant.variant_id,
         "backend": variant.backend,
         "checkpoint_path": str(variant.checkpoint_path),
         "output_video": str(request.output_video),
-        "resolution": [width, height],
-        "fps": rendered_fps,
+        "inference_log": str(log_path),
+        "resolution": [actual["width"], actual["height"]],
+        "requested_resolution": [width, height],
+        "fps": actual["fps"],
         "requested_fps": fps,
-        "num_frames": num_frames,
+        "num_frames": actual["frame_count"],
+        "requested_num_frames": num_frames,
         "num_inference_steps": variant.num_inference_steps,
         "guidance_mode": "v2v_apg",
         "lora_paths": [],

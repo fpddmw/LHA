@@ -348,7 +348,9 @@ def _run_bestof_sample(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate bench videos for one arm/shard.")
     parser.add_argument("--arm", required=True, choices=sorted(ARMS))
-    parser.add_argument("--sample-index", type=Path, required=True)
+    parser.add_argument("--sample-index", type=Path,
+                        default=PROJECT_ROOT / "benchmark_data/sample_index.json",
+                        help="benchmark index; defaults to the current dest.zip 50-sample split")
     parser.add_argument("--source-dir", type=Path, default=None,
                         help="directory of <sample_id>.mp4 sources; omit to use each row's source_video")
     parser.add_argument("--output-root", type=Path, required=True)
@@ -451,6 +453,8 @@ def main() -> int:
         # instead; sample_index.json's source_video points at the original host, so
         # it is only used when --source-dir is omitted.
         low_video = args.source_dir / f"{sample_id}.mp4" if args.source_dir else Path(str(row.get("source_video") or ""))
+        if row.get("benchmark_version") and not low_video.is_absolute() and args.source_dir is None:
+            low_video = PROJECT_ROOT / low_video
         started = time.time()
         record: dict = {"arm": args.arm, "sample_id": sample_id, "shard": args.shard_index}
         try:

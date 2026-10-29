@@ -1,4 +1,6 @@
 __pycache__/
+.env.openbayes
+.venv/
 *.py[cod]
 
 .DS_Store

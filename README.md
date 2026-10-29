@@ -1,5 +1,26 @@
 # Low-High New
 
+## 当前实现与实验入口（2026-10-30）
+
+- **Skill 与共享知识库**：[知识地图](knowledge/README.md)、[阅读说明](knowledge/READING.md)。三类 Skill 共用 111 个完整条目；语义与任务理解、风格与视觉方案、生成与迭代决策按需读取。
+- **Planner 与 agent loop**：[当前架构](docs/agent-loop.md)、[Planner 使用说明](docs/planner-harness.md)。入口为 `scripts/run_agent_loop.py`，实现位于 `src/planner_harness/`；Planner 选择输入、调用工具、根据反馈继续或结束。
+- **在线 Critic**：[实现与验证状态](docs/critic-harness.md)。通过执行配置显式启用，提供主动取证和比较反馈；其验证与正式终评分开记录。
+- **独立评价**：[评价协议](docs/evaluation-protocol.md)、[首批执行说明](docs/evaluation-first-wave.md)。保持冻结任务卡、盲评输入和分项指标。
+- **代码、视频与报告快照**：[2026-10-30 同步包](reports/20261030-sync/README.md)。包含已完成视频、实际提示词、逐项评分、阶段报告与版本记录；实验继续运行，快照时间和待完成项见包内状态。
+- **经验更新**：[实施方案](docs/planner-loop-experience-plan.md)。已有提议、审阅后发布与回退接口；经验选择和效果验证机制仍在完善。
+
+下文第 1 节起保留早期原型说明，其 Planner、Critic、memory 与固定分支描述对应历史实现；当前运行以本节链接的文档和入口为准。
+
+当前 benchmark 已更新为 `dest.zip` 的 **50 条正式题目＋7 条示例**，版本
+`2026-10-29-dest`。完整视频、原始提示词、长短提示词索引与旧 ID 映射见
+[当前 benchmark](benchmark_data/README.md)。正式数据入口为
+`benchmark_data/sample_index.json`，7 条示例单列在 `benchmark_data/fewshot_index.json`。
+下文及 `bench_v3/v4/v5` 中的旧实验记录保留其原始输入与结果。
+
+OpenBayes 4090 / RTX PRO 6000 部署、Bernini 直接提示词测试与 Ditto 环境准备：见
+[安装、重启恢复与端到端运行说明](scripts/deploy/README.md)。该入口使用
+`requirements.openbayes.txt` 和 `scripts/deploy/setup_openbayes.sh`。
+
 ## 1. 项目概述
 
 本项目旨在探索一个面向 `low-cost -> high-cost` 视频生成/编辑的 agent 化框架。

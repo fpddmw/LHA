@@ -145,6 +145,7 @@ class LiteLLMVisionModel:
         temperature: float | None = None,
         timeout: int = 600,
         retries: int = 8,
+        role: str = "planner",
     ) -> None:
         self.base_url = (base_url or _env("LOW_HIGH_JUDGE_BASE_URL", DEFAULT_BASE_URL)).rstrip("/")
         self.model = model or _env("LOW_HIGH_AGENT_LITELLM_MODEL", DEFAULT_MODEL)
@@ -155,10 +156,12 @@ class LiteLLMVisionModel:
         self.temperature = temperature
         self.timeout = int(_env("LOW_HIGH_AGENT_LITELLM_TIMEOUT") or timeout)
         self.retries = int(_env("LOW_HIGH_AGENT_LITELLM_RETRIES") or retries)
+        self.role = role
 
     @property
     def url(self) -> str:
-        return f"{self.base_url}/v1/chat/completions"
+        base = self.base_url if self.base_url.endswith("/v1") else self.base_url + "/v1"
+        return f"{base}/chat/completions"
 
     def _completion_budget(self, max_new_tokens: int) -> int:
         """Output-token budget: the caller's answer length plus room to reason.
@@ -239,12 +242,22 @@ class LiteLLMVisionModel:
                             f"empty completion: hit length limit, budget widened to {body['max_completion_tokens']}"
                         )
                     raise RuntimeError("empty completion content")
+                log_path = _env("LOW_HIGH_VLM_AUDIT_LOG")
+                if log_path:
+                    record = {"backend": "litellm", "role": self.role, "model": self.model,
+                        "returned_model": payload.get("model"), "reasoning_effort": self.reasoning_effort,
+                        "images": len(image_paths or []), "elapsed_seconds": round(time.time() - started, 2),
+                        "usage": payload.get("usage", {})}
+                    with self._usage_lock:
+                        Path(log_path).parent.mkdir(parents=True, exist_ok=True)
+                        with open(log_path, "a", encoding="utf-8") as stream:
+                            stream.write(json.dumps(record) + "\n")
                 return text
             except Exception as exc:  # noqa: BLE001 - retry transport and parse failures alike
                 last_error = exc
-                if isinstance(exc, urllib.error.HTTPError) and exc.code in {400, 413}:
+                if isinstance(exc, urllib.error.HTTPError) and exc.code in {400, 401, 403, 404, 413}:
                     try:
-                        detail = exc.read().decode("utf-8", "replace")[:600]
+                        detail = exc.read().decode("utf-8", "replace").replace(self.api_key, "[redacted]")[:600]
                     except Exception:
                         detail = ""
                     if not _is_transient_gateway_error(exc.code, detail):

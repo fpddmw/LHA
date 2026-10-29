@@ -1,5 +1,10 @@
 # Top50 Video Bundle
 
+This directory is a historical results bundle with its original instructions.
+The current 50 + 7 benchmark and rewritten prompts are in
+[benchmark_data](../../benchmark_data/README.md). These historical scores were
+not recomputed for the new prompts.
+
 - Samples: `50`
 - Grid playback speed: `2.0x`
 - Methods configured: `16`

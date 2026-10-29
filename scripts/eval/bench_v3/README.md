@@ -1,5 +1,7 @@
 # bench_v3
 
+Historical experiment snapshot. The current 50 + 7 benchmark is [benchmark_data](../../../benchmark_data/README.md). Old prompts, checklists and results in this directory describe their original runs.
+
 Measures whether the agent (planner / reference translator in front of the Wan2.1-VACE-14B
 "ours" edit model) beats feeding the user's request straight to the edit model, at three
 levels of user input, judged by two LLM judges plus GT metrics where a target exists.

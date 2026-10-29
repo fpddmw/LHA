@@ -158,6 +158,25 @@ def test_end_to_end_tags() -> None:
     assert payload["hold_checks"][0]["held"] is False
 
 
+def test_bare_held_does_not_consume_next_dimension() -> None:
+    # Real subscription reply: a HELD line without a note followed by a violation.
+    # Whitespace after HELD must not match a newline and swallow the next row.
+    for newline in ["\n", "\r\n"]:
+        text = newline.join([
+            "- environment: VIOLATED (room replaced)",
+            "- headwear: HELD",
+            "- props: VIOLATED (foreground shell displaced)",
+            "- subject_surface: HELD",
+        ])
+        checks = _parse_hold_checks(text, ["environment", "headwear", "props", "subject_surface"])
+        by_dim = {c.dimension: c for c in checks}
+        assert all(c.reported for c in checks), checks
+        assert by_dim["headwear"].held and by_dim["headwear"].note == ""
+        assert not by_dim["props"].held
+        assert by_dim["props"].note == "foreground shell displaced"
+        assert hold_failure_tags(checks) == ["hold_violated:environment", "hold_violated:props"]
+
+
 def test_no_holds_keeps_old_behaviour() -> None:
     """A run with no holds must not be flagged incomplete for a missing section."""
     result = _parse_evaluation_text(

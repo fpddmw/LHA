@@ -1,0 +1,93 @@
+[
+  {
+    "sample_id": "fewshot_001",
+    "package_id": "001",
+    "split": "fewshot",
+    "benchmark_version": "2026-10-29-dest",
+    "source_video": "benchmark_data/fewshot/001/001.mp4",
+    "prompt_file": "benchmark_data/fewshot/001/prompt.txt",
+    "instruction": "Transform the basketball game video into a high-budget cinematic Wuxia movie scene. The two players are now wearing elegant, flowing ancient Chinese Hanfu robes with wide sleeves. The basketball court is replaced by an ancient, weathered stone training platform located high in the misty mountains, surrounded by a dense bamboo forest and traditional wooden pagodas. Add dramatic golden hour sunlight filtering through the leaves, creating long shadows and atmospheric haze.",
+    "prompt_long": "Transform the basketball game video into a high-budget cinematic Wuxia movie scene. The two players are now wearing elegant, flowing ancient Chinese Hanfu robes with wide sleeves. The basketball court is replaced by an ancient, weathered stone training platform located high in the misty mountains, surrounded by a dense bamboo forest and traditional wooden pagodas. Add dramatic golden hour sunlight filtering through the leaves, creating long shadows and atmospheric haze.",
+    "prompt_short": null,
+    "source_video_sha256": "f0f055c5ce1ae01b845246ebd6a7b0b370028ca67ca1632f77d504dfd7c62c6c",
+    "prompt_file_sha256": "b40a9dd7e8b1c5bf1e7569737f0563df156c227826e7d6b2658f9cfe251743fc"
+  },
+  {
+    "sample_id": "fewshot_002",
+    "package_id": "002",
+    "split": "fewshot",
+    "benchmark_version": "2026-10-29-dest",
+    "source_video": "benchmark_data/fewshot/002/002.mp4",
+    "prompt_file": "benchmark_data/fewshot/002/prompt.txt",
+    "instruction": "Transform the café into a luxurious piano lounge with crystal chandeliers, dark wood paneling, and warm cinematic lighting. Dress the pianist in a black tuxedo and the guests in elegant evening wear. Give the piano a polished black finish. Preserve faces, playing motions, keyboard alignment, and camera movement.",
+    "prompt_long": "Transform the café into a luxurious piano lounge with crystal chandeliers, dark wood paneling, and warm cinematic lighting. Dress the pianist in a black tuxedo and the guests in elegant evening wear. Give the piano a polished black finish. Preserve faces, playing motions, keyboard alignment, and camera movement.",
+    "prompt_short": null,
+    "source_video_sha256": "703484ab2151e3f9f8ef423d887a5a8de64ce49333a74d1e3d42a081dcdc478c",
+    "prompt_file_sha256": "d05bb53090f16e62d2bb4289804b5e5fbf6307db959c3e46e41fd3f5621fc84f"
+  },
+  {
+    "sample_id": "fewshot_003",
+    "package_id": "003",
+    "split": "fewshot",
+    "benchmark_version": "2026-10-29-dest",
+    "source_video": "benchmark_data/fewshot/003/003.mp4",
+    "prompt_file": "benchmark_data/fewshot/003/prompt.txt",
+    "instruction": "Transform the venue into an elegant Chinese palace music salon with carved wooden screens, silk drapes, and warm lantern lighting. Dress both performers in embroidered silk hanfu. Preserve their faces, poses, guitar, and hand movements.",
+    "prompt_long": "Transform the venue into an elegant Chinese palace music salon with carved wooden screens, silk drapes, and warm lantern lighting. Dress both performers in embroidered silk hanfu. Preserve their faces, poses, guitar, and hand movements.",
+    "prompt_short": null,
+    "source_video_sha256": "641fd5ea806609b881a303eb4f1216e791a028848bb01362118d6eac11ada5fd",
+    "prompt_file_sha256": "11726b8feb6b6fa20926df1e655e2ae2f1e069c5ff15ccac76163f567d45989e"
+  },
+  {
+    "sample_id": "fewshot_004",
+    "package_id": "004",
+    "split": "fewshot",
+    "benchmark_version": "2026-10-29-dest",
+    "source_video": "benchmark_data/fewshot/004/004.mp4",
+    "prompt_file": "benchmark_data/fewshot/004/prompt.txt",
+    "instruction": "Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement.",
+    "prompt_long": "Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement.",
+    "prompt_short": null,
+    "source_video_sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+    "prompt_file_sha256": "c08bad1437e87a03d0ddbe0cd027708ee30007ab93dd880d41d0b6b71511a054"
+  },
+  {
+    "sample_id": "fewshot_005",
+    "package_id": "005",
+    "split": "fewshot",
+    "benchmark_version": "2026-10-29-dest",
+    "source_video": "benchmark_data/fewshot/005/005.mp4",
+    "prompt_file": "benchmark_data/fewshot/005/prompt.txt",
+    "instruction": "Turn the room into a luxury casino lounge with warm cinematic lighting. Dress all four players in tailored suits and upgrade the mahjong table to polished dark wood. Keep faces, actions, and camera motion unchanged.",
+    "prompt_long": "Turn the room into a luxury casino lounge with warm cinematic lighting. Dress all four players in tailored suits and upgrade the mahjong table to polished dark wood. Keep faces, actions, and camera motion unchanged.",
+    "prompt_short": null,
+    "source_video_sha256": "836a89177f2e1c36cf22d12cc2338cede761ab6a96782e621d91724b429dd5da",
+    "prompt_file_sha256": "7d5cded1f8844d8497e600a6d41c5496bf96e79130222027f035f51af682dfe8"
+  },
+  {
+    "sample_id": "fewshot_006",
+    "package_id": "006",
+    "split": "fewshot",
+    "benchmark_version": "2026-10-29-dest",
+    "source_video": "benchmark_data/fewshot/006/006.mp4",
+    "prompt_file": "benchmark_data/fewshot/006/prompt.txt",
+    "instruction": "Transform the park into a cinematic Chinese fantasy garden with distant floating mountains, ornate pavilions, and drifting cherry petals. Dress the person in embroidered silk hanfu. Preserve the face, phone, hand movements, and camera motion.",
+    "prompt_long": "Transform the park into a cinematic Chinese fantasy garden with distant floating mountains, ornate pavilions, and drifting cherry petals. Dress the person in embroidered silk hanfu. Preserve the face, phone, hand movements, and camera motion.",
+    "prompt_short": null,
+    "source_video_sha256": "e945d4e983e6a42e09b1a4418b6e6a0797d8314e0987b04a7add7b002d4224fd",
+    "prompt_file_sha256": "22305d6c934f56d3546c3e358b888dc61a8866e79afdf23dac36dd3a159c5c6f"
+  },
+  {
+    "sample_id": "fewshot_007",
+    "package_id": "007",
+    "split": "fewshot",
+    "benchmark_version": "2026-10-29-dest",
+    "source_video": "benchmark_data/fewshot/007/007.mp4",
+    "prompt_file": "benchmark_data/fewshot/007/prompt.txt",
+    "instruction": "Transform the train into a futuristic sci-fi train with titanium panels, glowing blue light strips, and sleek rooftop power modules. Upgrade the surroundings to a futuristic urban transit hub with cinematic lighting and realistic reflections. Preserve the train’s motion, window layout, and camera movement.",
+    "prompt_long": "Transform the train into a futuristic sci-fi train with titanium panels, glowing blue light strips, and sleek rooftop power modules. Upgrade the surroundings to a futuristic urban transit hub with cinematic lighting and realistic reflections. Preserve the train’s motion, window layout, and camera movement.",
+    "prompt_short": null,
+    "source_video_sha256": "733ab4676d454172f04a885e8d6363ef5f87900b3b5bf6daf4db7d75e7a800ff",
+    "prompt_file_sha256": "5de8572fb05139185ce63a3696978c1b4e185139366f4a638b4c02052e076e92"
+  }
+]

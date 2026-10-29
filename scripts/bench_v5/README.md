@@ -1,5 +1,9 @@
 # bench_v5
 
+Historical experiment snapshot. The current 50 + 7 benchmark is
+[benchmark_data](../../benchmark_data/README.md). This directory retains the
+instructions, derived targets and scores used by the original experiment.
+
 The low->high benchmark, rebuilt on axis profiles. Supersedes bench_v4's headline.
 
 ## Why

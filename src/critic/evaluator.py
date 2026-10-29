@@ -272,7 +272,7 @@ def _merge_image_paths(low_video: Path, edited_video: Path, max_frames_per_video
 
 
 _HOLD_LINE = re.compile(
-    r"^-\s*([a-z_]+)\s*:\s*(HELD|VIOLATED)\b[:\s]*(.*)$",
+    r"^-[ \t]*([a-z_]+)[ \t]*:[ \t]*(HELD|VIOLATED)\b[: \t]*([^\r\n]*)\r?$",
     re.IGNORECASE | re.MULTILINE,
 )
 

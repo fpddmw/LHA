@@ -35,8 +35,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sample-id", default=DEFAULT_SAMPLE_ID,
                         help="Sample ID (when --pair-dir is set). Overrides --sample-index.")
     parser.add_argument("--prompt", default="")
-    parser.add_argument("--prompt-file", default=DEFAULT_PROMPT_FILE)
-    parser.add_argument("--low-video", default=DEFAULT_LOW_VIDEO)
+    parser.add_argument("--prompt-file", default="")
+    parser.add_argument("--low-video", default="")
     parser.add_argument("--output-dir", default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--variant", default=DEFAULT_VARIANT)
     parser.add_argument("--memory-path", default=DEFAULT_MEMORY_PATH)
@@ -74,17 +74,23 @@ def main() -> None:
         f"[run_planner_and_edit] start sample_id={sample.sample_id} variant={args.variant} max_attempts={args.max_attempts} output_dir={resolved_output_dir}",
         flush=True,
     )
-    prompt = args.prompt.strip() if args.prompt else sample.prompt_text
+    prompt = args.prompt.strip() if args.prompt else (
+        Path(args.prompt_file).read_text(encoding="utf-8").strip()
+        if args.prompt_file else sample.prompt_text
+    )
     result = run_planner_and_edit_loop(
         sample_id=sample.sample_id,
         prompt=prompt,
-        low_video=str(sample.low_video),
+        low_video=args.low_video or str(sample.low_video),
         output_dir=resolved_output_dir,
         variant=args.variant,
         memory_path=args.memory_path or None,
         max_attempts=args.max_attempts,
     )
     print(f"[run_planner_and_edit] done status={result.get('status', '')}", flush=True)
+    (resolved_output_dir / "loop.result.json").write_text(
+        json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

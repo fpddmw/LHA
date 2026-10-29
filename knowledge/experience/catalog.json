@@ -1,0 +1,37 @@
+[
+  {
+    "id": "experience-map",
+    "path": "knowledge/experience/README.md",
+    "title": "Generation and iteration experience",
+    "version": 1,
+    "origin": "common-sense starting guidance with separately attributed experimental observations"
+  },
+  {
+    "id": "choose-editing-input",
+    "path": "knowledge/experience/choose-editing-input.md",
+    "title": "Choose an editing input",
+    "version": 1,
+    "origin": "common-sense starting guidance with separately attributed experimental observations"
+  },
+  {
+    "id": "express-edits",
+    "path": "knowledge/experience/express-edits.md",
+    "title": "Express an edit for its actual input",
+    "version": 1,
+    "origin": "common-sense starting guidance with separately attributed experimental observations"
+  },
+  {
+    "id": "inspect-and-compare",
+    "path": "knowledge/experience/inspect-and-compare.md",
+    "title": "Inspect and compare results",
+    "version": 1,
+    "origin": "common-sense starting guidance with separately attributed experimental observations"
+  },
+  {
+    "id": "use-design-knowledge",
+    "path": "knowledge/experience/use-design-knowledge.md",
+    "title": "Use design knowledge where it changes the work",
+    "version": 1,
+    "origin": "common-sense starting guidance with separately attributed experimental observations"
+  }
+]

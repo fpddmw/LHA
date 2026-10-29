@@ -80,7 +80,7 @@ def main() -> None:
     low_video = args.low_video or str(sample.low_video)
     planner_payload = json.loads(Path(args.planner_response).read_text(encoding="utf-8")) if args.planner_response else None
     edit_payload = json.loads(Path(args.edit_response).read_text(encoding="utf-8")) if args.edit_response else None
-    artifact_summary = load_critic_artifact_summary()
+    artifact_summary = load_critic_artifact_summary() or {}
 
     evaluation = evaluate_edit_result(
         sample_id=sample.sample_id,
