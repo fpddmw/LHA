@@ -45,16 +45,17 @@ def nearest(times, target, tolerance):
     return idx
 
 
-def prepare(card, output, destination, *, root=Path("."), frame_count=12, dense_ranges=(), mapping=None):
+def prepare(card, output, destination, *, root=Path("."), frame_count=12, dense_ranges=(), mapping=None, decoder=None):
     validate_card(card)
     require(frame_count >= 2, "Need at least two overview samples")
     source = root / card["source_video"]
     require(file_hash(source) == card["source_sha256"], "Source hash mismatch")
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=True)
-    src = decode(source)
+    decode_video = decoder or decode
+    src = decode_video(source)
     require(src["duration"] + 0.08 >= card.get("source_start_seconds", 0) + card["duration_seconds"], "Source does not cover task interval")
-    out = decode(output)
+    out = decode_video(output)
     output_hash = file_hash(output)
     delivery = delivery_status(out["duration"], card["duration_seconds"], out["step"])
     if mapping is not None:

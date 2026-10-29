@@ -1,0 +1,25 @@
+{
+  "id": "041-loop-validation",
+  "source": "benchmark_data/main/041/041.mp4",
+  "source_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+  "request": "Make it look like a children's storybook.",
+  "max_generations": 3,
+  "max_turns": 24,
+  "max_context_chars": 180000,
+  "execution": {
+    "mode": "live",
+    "renderer": {
+      "backend": "bernini",
+      "seed": 42,
+      "output": {"frames": 101, "fps": 20, "width": 848, "height": 480},
+      "generation": {
+        "num_inference_steps": 40,
+        "guidance_mode": "v2v_apg",
+        "max_image_size": 848,
+        "negative_prompt": "",
+        "prompt_enhancer": false
+      }
+    },
+    "critic": {"max_turns": 18, "duration_seconds": 5.0}
+  }
+}

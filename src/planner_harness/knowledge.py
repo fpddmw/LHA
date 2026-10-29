@@ -38,7 +38,7 @@ class Knowledge:
 
     def freeze(self, path):
         """One text snapshot pins readable material without duplicating historical videos."""
-        with RunLock(self.root / "knowledge/experience"):
+        with RunLock(self.root / "knowledge/experience", timeout=60):
             # Reload the catalog under the publication lock so text and versions agree.
             self.__init__(self.root)
             journal = self.root / "knowledge/experience/.publication.json"

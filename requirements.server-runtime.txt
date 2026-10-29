@@ -1,0 +1,4 @@
+# Controller/evidence dependencies only. Use the existing verified Bernini GPU environment.
+# Installing this file does not install or upgrade torch/CUDA or provision authentication.
+-r requirements.planner.txt
+av==19.0.2

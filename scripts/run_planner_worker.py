@@ -71,7 +71,7 @@ def ditto(job, directory, source, root, verified):
         "generation_seconds": result["elapsed_seconds"], "renderer_result": result}}
 
 
-def evaluate(job, directory, root):
+def evaluate(job, directory, root, model=None):
     import evaluation
     from evaluation.media import prepare
     from evaluation.judges import judge
@@ -85,10 +85,11 @@ def evaluate(job, directory, root):
         raise ValueError("Evaluation card does not match the original task")
     if sha(p["video"]["path"]) != p["video"]["sha256"]:
         raise ValueError("Evaluation video changed")
-    os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(directory / "evaluation-usage.jsonl")
+    if model is None:
+        os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(directory / "evaluation-usage.jsonl")
     evidence = prepare(card, Path(p["video"]["path"]), directory / "evidence", root=root,
                        dense_ranges=cfg.get("dense_ranges", []), mapping=p["video"].get("time_mapping"))
-    client = EnglishEvaluationClient(CodexVisionModel(role="online_feedback"), directory / "english-evaluation")
+    client = EnglishEvaluationClient(model or CodexVisionModel(role="online_feedback"), directory / "english-evaluation")
     judgment = judge(card, evidence, client, directory / "judge")
     return {"protocol": {"id": card["protocol"], "version": card["card_sha256"],
                          "implementation_sha256": {p.name: sha(p) for p in Path(evaluation.__file__).parent.glob("*.py")}},
