@@ -1,0 +1,22 @@
+{
+  "case_id": "fewshot_004__long",
+  "signature": "06542a9f7718dcd19d5d6b74e09fa298a8396098e8c4335b993dcb019667f0ee",
+  "status": "complete",
+  "started_unix": 1793262399.1244805,
+  "elapsed_seconds": 410.88472270965576,
+  "native": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "delivery": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "output_sha256": "9afe01e1bb798950b49f2216f865ee004f45fa41de1a9516cfd992456a07bd7e"
+}

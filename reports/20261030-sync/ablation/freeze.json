@@ -1,0 +1,2101 @@
+{
+  "schema_version": 1,
+  "frozen_utc": "2026-10-29T16:53:46.743626+00:00",
+  "files": [
+    {
+      "path": "LESSONS.md",
+      "sha256": "441c780526870339ed9aaa815d28d65c4ef66ed0ad3383622c26905ae0150abe",
+      "bytes": 35842
+    },
+    {
+      "path": "_deprecated/eval/bench_v2/HANDOFF.md",
+      "sha256": "ff0fccf2b182c06d21fe236c9cb7f7c036fe99edc86bae0254bc4f786eea4aa5",
+      "bytes": 19833
+    },
+    {
+      "path": "_deprecated/eval/bench_v2/data/walkthrough_notes.json",
+      "sha256": "aac4ff861e1c77237cfdbfa54f2dc51af11a87dc05e150cff35d3d27f35accba",
+      "bytes": 7030
+    },
+    {
+      "path": "benchmark_data/fewshot/004/004.mp4",
+      "sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+      "bytes": 435604
+    },
+    {
+      "path": "benchmark_data/main/024/024.mp4",
+      "sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+      "bytes": 437784
+    },
+    {
+      "path": "benchmark_data/main/027/027.mp4",
+      "sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+      "bytes": 525249
+    },
+    {
+      "path": "benchmark_data/main/041/041.mp4",
+      "sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+      "bytes": 632417
+    },
+    {
+      "path": "knowledge/INTEGRATION.md",
+      "sha256": "9224d86628b83b292f48d375e04d00b27928d1f17768347010a39bd351b27ef9",
+      "bytes": 10582
+    },
+    {
+      "path": "knowledge/READING.md",
+      "sha256": "fecbe57effc472ebdaed8bad2a5b2caae69bb04f1697da9468a83f6918eeaa60",
+      "bytes": 11479
+    },
+    {
+      "path": "knowledge/README.md",
+      "sha256": "f9d9b1a89b5a9968a4b89ee5ac41ae29280f0e9adbe8e8ea316fbd355a3cc0d6",
+      "bytes": 35625
+    },
+    {
+      "path": "knowledge/domain-references/chinese_period.md",
+      "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+      "bytes": 12776
+    },
+    {
+      "path": "knowledge/domain-references/nature_landscape.md",
+      "sha256": "c54f087cffca90e0a4dbd8c06a8e279d3965c94a99dd2a450707a71f4a00680b",
+      "bytes": 8722
+    },
+    {
+      "path": "knowledge/domain-references/sci_fi_modern.md",
+      "sha256": "787094374dacb372817484bfcfb6a9ec5274d0a97b5b852837aac2547a5ed7d0",
+      "bytes": 10801
+    },
+    {
+      "path": "knowledge/domain-references/style_filter.md",
+      "sha256": "102fe9f03e0807b5c9ff8f31787327fc5782d87e8e1c439316f15684a8c06051",
+      "bytes": 10181
+    },
+    {
+      "path": "knowledge/domain-references/western_period_fantasy.md",
+      "sha256": "50f67abe71ed44d3bad809e7f2b6dfd792e3850876d1b37053915d2eca9dc47b",
+      "bytes": 10676
+    },
+    {
+      "path": "knowledge/entries/base-alien_biomech.md",
+      "sha256": "f9d79deaef433d45cd5acce566ee353292f2208189ea60add0e88804cb728613",
+      "bytes": 5320
+    },
+    {
+      "path": "knowledge/entries/base-clean_lab.md",
+      "sha256": "6701b483ed8183be478107fbdf42ab88c271135793f35beca06cbd030558dd88",
+      "bytes": 4373
+    },
+    {
+      "path": "knowledge/entries/base-cyberpunk_anime.md",
+      "sha256": "912e7868bcc3361f75492c20f668cc4d6b9a46224dd3c697b41cb507ac6fa704",
+      "bytes": 3517
+    },
+    {
+      "path": "knowledge/entries/base-cyberpunk_dystopia.md",
+      "sha256": "44f7f270222feb5475f028f1f562720d80b25f9b8a6334cccb979219d44d4249",
+      "bytes": 4462
+    },
+    {
+      "path": "knowledge/entries/base-fantasy_anime.md",
+      "sha256": "5b57fcdafbb0606526aed01a721c2fc64b599eee2547b908aca2d03fae1e4cce",
+      "bytes": 3503
+    },
+    {
+      "path": "knowledge/entries/base-industrial_wasteland.md",
+      "sha256": "967a483702f50c1980f5b6643aa567bd10b593a5299a5e6184b9dc249d74e392",
+      "bytes": 3987
+    },
+    {
+      "path": "knowledge/entries/base-mad_max_wasteland.md",
+      "sha256": "80fb2ce48794b92183d5e8b769ba28a79e90b539a23c3260579073bfe6ba4a2a",
+      "bytes": 3870
+    },
+    {
+      "path": "knowledge/entries/base-medieval_fantasy.md",
+      "sha256": "2ae17a06b2e7de774e213bfd2ae8a6f676cc2af99c5d9252859258cb076a7f65",
+      "bytes": 3479
+    },
+    {
+      "path": "knowledge/entries/base-star_wars_scifi.md",
+      "sha256": "076e7db0b974f03195f2643fa364735b3f7d7ea37e39679670e8e7f72f71c4ab",
+      "bytes": 4223
+    },
+    {
+      "path": "knowledge/entries/base-studio_ghibli.md",
+      "sha256": "d7a899c0aabfc0474f55fa6629946e0e9392f35de13fb3987818ca9a91c14a12",
+      "bytes": 3601
+    },
+    {
+      "path": "knowledge/entries/base-wormhole_portal.md",
+      "sha256": "7e7cb9dc1e77f5cfe070dfb73fe27760b18b8d17a58df92b00f005c642ac44eb",
+      "bytes": 4757
+    },
+    {
+      "path": "knowledge/entries/base-wuxia.md",
+      "sha256": "a3113faaad95b6a1f7e6b98f30b34b6863a024347abcca50e2c6b29f0da8095a",
+      "bytes": 3178
+    },
+    {
+      "path": "knowledge/entries/base-xianxia.md",
+      "sha256": "3cdb82e0b37dbd59e760a8632d770aee646dcea6f652ede3c24e9a0e55325623",
+      "bytes": 3874
+    },
+    {
+      "path": "knowledge/entries/opuscar-001.md",
+      "sha256": "2d0553a18d22d2648f91cca8e77310b401ccdffc37b488bfff3ebc4bdce76941",
+      "bytes": 8265
+    },
+    {
+      "path": "knowledge/entries/opuscar-002.md",
+      "sha256": "2a2f07cee36a88da67ba82a641811dface79747ae13caf3b81d997835d9711cf",
+      "bytes": 7842
+    },
+    {
+      "path": "knowledge/entries/opuscar-003.md",
+      "sha256": "949588ad917cbd6225110055c5f257dec25f54aa6c5ef649d578118a7ed4282f",
+      "bytes": 8245
+    },
+    {
+      "path": "knowledge/entries/opuscar-004.md",
+      "sha256": "d0a39c2e5d847451457bc0f986dc5609e07483ae37ffc047f40b7736552f9e0f",
+      "bytes": 7690
+    },
+    {
+      "path": "knowledge/entries/opuscar-005.md",
+      "sha256": "c69fa1c0bbad7f799bb8c0a5c93ede22ddb1ea5f192277e68df7685d4bd8f440",
+      "bytes": 7700
+    },
+    {
+      "path": "knowledge/entries/opuscar-006.md",
+      "sha256": "da8bd5e6ceca3288f2f6f713bbdff965e091b5bac84557f1c20a28b7e1cb880c",
+      "bytes": 7619
+    },
+    {
+      "path": "knowledge/entries/opuscar-007.md",
+      "sha256": "53bc49c92e96a988296e975c2e316fa951a583e091ad7dd7f0ce405f69dceef1",
+      "bytes": 7938
+    },
+    {
+      "path": "knowledge/entries/opuscar-008.md",
+      "sha256": "0d93bd351e028d2b01e1004861f98cec27761e4652a9239e92615f1573b4093c",
+      "bytes": 7627
+    },
+    {
+      "path": "knowledge/entries/opuscar-009.md",
+      "sha256": "8c70050d3f3f73911067c75e5fd4557a500e21cd1702b522d7cac875346e3287",
+      "bytes": 7666
+    },
+    {
+      "path": "knowledge/entries/opuscar-010.md",
+      "sha256": "72773ee08516b5cbc5754c0048d797d1621fb5ffff8bb38596a8a0ebede1e0d9",
+      "bytes": 7881
+    },
+    {
+      "path": "knowledge/entries/opuscar-011.md",
+      "sha256": "edf45e57080ff9dc7dcd6d422e5d327f22b37c87ac5ddc0eb01da77b324d1ab5",
+      "bytes": 7989
+    },
+    {
+      "path": "knowledge/entries/opuscar-012.md",
+      "sha256": "14fe54e80899570fde182f05b19097d4b9804a6c8f08dae038813d131f743211",
+      "bytes": 7893
+    },
+    {
+      "path": "knowledge/entries/opuscar-013.md",
+      "sha256": "8fec50c0a48bcc43a3471e99b9a50b3212d6b0f45695b2fde13e2a0f93a54203",
+      "bytes": 7968
+    },
+    {
+      "path": "knowledge/entries/opuscar-014.md",
+      "sha256": "1f3875e21ffc6fe91960dddcd9c2d42a74e1b09411ee6b93145ed6ae46e43094",
+      "bytes": 7796
+    },
+    {
+      "path": "knowledge/entries/opuscar-015.md",
+      "sha256": "bd9c5b993b642cd20829911edaf6e1e87d04e3cbb47c880447017c6d92fa8922",
+      "bytes": 7893
+    },
+    {
+      "path": "knowledge/entries/opuscar-016.md",
+      "sha256": "c894f1b382997d2fcffe81327a2a26cf661e088cf9db279bbeb5f88b9e7d514e",
+      "bytes": 7601
+    },
+    {
+      "path": "knowledge/entries/opuscar-017.md",
+      "sha256": "617c1654752dd890fbead26ecaee6b8653e08395cd06f2a04879be7694f3a592",
+      "bytes": 7925
+    },
+    {
+      "path": "knowledge/entries/opuscar-018.md",
+      "sha256": "835148cb29faf5e1607290b2700e548e979b8a3ba896d12817f026b15a89ece1",
+      "bytes": 7530
+    },
+    {
+      "path": "knowledge/entries/opuscar-019.md",
+      "sha256": "171e5e054af8aa511127a397ca39c7f2fbdaf2d7e6107a126a610489a32ae1cf",
+      "bytes": 8123
+    },
+    {
+      "path": "knowledge/entries/opuscar-020.md",
+      "sha256": "df1a10a502670eafdf5544d317318a29642100233ad5fd7417b715fc6bf64036",
+      "bytes": 7994
+    },
+    {
+      "path": "knowledge/entries/opuscar-021.md",
+      "sha256": "7b8612bab4e83a701c109912955e079040941a2d70e6eeb670b38a255329d3a2",
+      "bytes": 7585
+    },
+    {
+      "path": "knowledge/entries/opuscar-022.md",
+      "sha256": "4e13e9ea6f2657bcbe6b9ccd3885e5684f8cd774ba36010bfca52cc54a51c22f",
+      "bytes": 7453
+    },
+    {
+      "path": "knowledge/entries/opuscar-023.md",
+      "sha256": "7026bbadd8f84dce1c2aaaa41665e230e570bde455d3d715399e5a90a20a9c6d",
+      "bytes": 8103
+    },
+    {
+      "path": "knowledge/entries/opuscar-024.md",
+      "sha256": "d73fbcbc128721f3eba612be03f2487d0a745ea39f5cf54789fbbbbeb6e4f267",
+      "bytes": 8125
+    },
+    {
+      "path": "knowledge/entries/opuscar-025.md",
+      "sha256": "9facc50f2723f9f1c6ba02de6d824e5af4eac935b739c849f833c4e68958eadd",
+      "bytes": 7890
+    },
+    {
+      "path": "knowledge/entries/opuscar-026.md",
+      "sha256": "1efc81404ef62948b964edf74da523448dd28b969371a297d0c5ee9f652669cc",
+      "bytes": 7770
+    },
+    {
+      "path": "knowledge/entries/opuscar-027.md",
+      "sha256": "6e2d340f848ea6ed17ac723c6f6c6ac19b2a0eee0bc4815bf6e4f67f14abec0c",
+      "bytes": 7566
+    },
+    {
+      "path": "knowledge/entries/opuscar-028.md",
+      "sha256": "dbff0e8cc29bf7c6b53011623536ad93b2aa01cfa3fd00c239a58f66aa2c204f",
+      "bytes": 8133
+    },
+    {
+      "path": "knowledge/entries/opuscar-029.md",
+      "sha256": "98ae873d6c56c31560e21036fe132f7917a79cb7653fa4edd9bac4b0f15f59a7",
+      "bytes": 7970
+    },
+    {
+      "path": "knowledge/entries/opuscar-030.md",
+      "sha256": "cd1cf7d8e1a0540168323f46b8ce9ec961ab5f070d362f3102008516779d6d17",
+      "bytes": 8121
+    },
+    {
+      "path": "knowledge/entries/opuscar-031.md",
+      "sha256": "ddf5ba65ce68f82602107dd8b60a9282309a2120a09fb692317f604fc8539f60",
+      "bytes": 7404
+    },
+    {
+      "path": "knowledge/entries/opuscar-032.md",
+      "sha256": "99ba88a9c2e9c8182bfe9123d4f9cc3879ae6aa2299ac8aa8c2bd43c170e8918",
+      "bytes": 8096
+    },
+    {
+      "path": "knowledge/entries/opuscar-033.md",
+      "sha256": "03fc5b3720a5f0aee85c2e965f9c6ef1830dbf546a2c2d23408ddc70fa76c289",
+      "bytes": 7441
+    },
+    {
+      "path": "knowledge/entries/opuscar-034.md",
+      "sha256": "8eba8791f9ccb49d2bfe9be9f8259bd6e3b3685b2198f83b6f6e6031272275b4",
+      "bytes": 7744
+    },
+    {
+      "path": "knowledge/entries/opuscar-035.md",
+      "sha256": "62631b4b4c19b9a4f5cc3667ca1c3afe0241c0e139bacb0c75be004fecb6662e",
+      "bytes": 7454
+    },
+    {
+      "path": "knowledge/entries/opuscar-036.md",
+      "sha256": "7afa2e9de32cafeb71cc3b394d7ac49f87a20bd255ef1fc988f7ab4e837c1da1",
+      "bytes": 7957
+    },
+    {
+      "path": "knowledge/entries/opuscar-037.md",
+      "sha256": "905dac63247925d8d519b9440e81af7eef7bc61429a1eac651523ebd780537ae",
+      "bytes": 7430
+    },
+    {
+      "path": "knowledge/entries/opuscar-038.md",
+      "sha256": "a2c1bfa4ecc267ac3ac4fbfe851a8f087fd762332b89905442907d0bea455425",
+      "bytes": 8272
+    },
+    {
+      "path": "knowledge/entries/opuscar-039.md",
+      "sha256": "d92236b24366244d71aaaa27ea4d7d37dc5f2a7e4c31201b5d4f0e3526d7e242",
+      "bytes": 7397
+    },
+    {
+      "path": "knowledge/entries/opuscar-040.md",
+      "sha256": "e69d655218b967581f1cfd156d889cec3dc35ecea6070a80f35d8ede08331092",
+      "bytes": 7924
+    },
+    {
+      "path": "knowledge/entries/opuscar-041.md",
+      "sha256": "2568e99a29a0b6e676d2b56f805b94099b725bd12ccafb02ebccbaf28b41ca48",
+      "bytes": 7930
+    },
+    {
+      "path": "knowledge/entries/opuscar-042.md",
+      "sha256": "9112087ba3e3b6b5c2915e2dda86f2279a5719eff759477d5f96c793bdeffd6d",
+      "bytes": 8217
+    },
+    {
+      "path": "knowledge/entries/opuscar-043.md",
+      "sha256": "b447e1520d3cc2fa1a6db78843e2de62b63ae127ce2dbb5de0dbc6697f2fa782",
+      "bytes": 7681
+    },
+    {
+      "path": "knowledge/entries/opuscar-044.md",
+      "sha256": "18acf60dc4375b16c2ee4a4a1c2831908e13f3bc842e6582bfa88d38eaeefbc2",
+      "bytes": 7697
+    },
+    {
+      "path": "knowledge/entries/opuscar-045.md",
+      "sha256": "9420828b0bf6ceedb3453c2326062c290de23a5d0f8054c3820ce34381d1eddb",
+      "bytes": 7829
+    },
+    {
+      "path": "knowledge/entries/opuscar-046.md",
+      "sha256": "ad50765e5069e62fdb5e4bf7d93a83e38327c5e71f63356d994568270e09213e",
+      "bytes": 7288
+    },
+    {
+      "path": "knowledge/entries/opuscar-047.md",
+      "sha256": "10dfb5a4462a43c6092657d6c12358f661978abc16f80cdd084e04c82df653eb",
+      "bytes": 7767
+    },
+    {
+      "path": "knowledge/entries/opuscar-048.md",
+      "sha256": "8ee8f1ee534f3d76d5bc96281a19e3d0492a710355b04eab1c1cfa7092d01ea1",
+      "bytes": 7382
+    },
+    {
+      "path": "knowledge/entries/opuscar-049.md",
+      "sha256": "ec47dfbe36d95954480172de357fed11a0259b22f0101b66f723066b95081019",
+      "bytes": 7605
+    },
+    {
+      "path": "knowledge/entries/opuscar-050.md",
+      "sha256": "1312553f2aaab117651c790d65ce3bbe98a1895c2e097c853eeb06d5b6657bf5",
+      "bytes": 7884
+    },
+    {
+      "path": "knowledge/entries/opuscar-051.md",
+      "sha256": "b63c8909d6cfd9774b48201c97959624217e2dcddf7d73d347c7cc777e350765",
+      "bytes": 7424
+    },
+    {
+      "path": "knowledge/entries/opuscar-052.md",
+      "sha256": "a81f9e5df4be9d030b7af467e0a8d4d2d452383d9115de9c730dc8d669ef9d20",
+      "bytes": 7910
+    },
+    {
+      "path": "knowledge/entries/opuscar-053.md",
+      "sha256": "442ae710ee08cec46bb967f7878ba3aa4f088f0f63140ec40a002bea56ceb993",
+      "bytes": 8152
+    },
+    {
+      "path": "knowledge/entries/opuscar-054.md",
+      "sha256": "d71963a93ec9b9718564b802151eb6ac0dc3f1cdf9e0a9d2b7c820c85d683514",
+      "bytes": 7657
+    },
+    {
+      "path": "knowledge/entries/opuscar-055.md",
+      "sha256": "d4bf37f174a4b237e4242e195208c9230e58c80f1bf8cf22dc7f37b963d62b0d",
+      "bytes": 7661
+    },
+    {
+      "path": "knowledge/entries/opuscar-056.md",
+      "sha256": "eedc70b00bbffb15fc5bf456c82d5f0ffd337428124df35ba21f0175dcf46f4f",
+      "bytes": 7997
+    },
+    {
+      "path": "knowledge/entries/opuscar-057.md",
+      "sha256": "dd5a4fe785a1a194a0b0064c81edf3c4f37bdb662b2a7b1d7ea79c8563143bed",
+      "bytes": 7532
+    },
+    {
+      "path": "knowledge/entries/opuscar-058.md",
+      "sha256": "cc9fe1f52c60c05e236b5259d6a199b0da8579ccd5825d0d0578b0d1c00bfd33",
+      "bytes": 7766
+    },
+    {
+      "path": "knowledge/entries/opuscar-059.md",
+      "sha256": "9784075b46755938e3dee699ca63c810cafea88d7b4a010db67d6d0feb17e676",
+      "bytes": 7328
+    },
+    {
+      "path": "knowledge/entries/opuscar-060.md",
+      "sha256": "0a837359c1fb9b35d3c066da1d26d68e049f6a10afee02603c3656abf6a2fe94",
+      "bytes": 7915
+    },
+    {
+      "path": "knowledge/entries/opuscar-061.md",
+      "sha256": "6b8b811a2cf9efa58e02cdf9d93987e72ab91f363050e4ab6aabf1e91e373c62",
+      "bytes": 7690
+    },
+    {
+      "path": "knowledge/entries/opuscar-062.md",
+      "sha256": "dd95e43860edfcd58fcc5222f6dc2b24098d5ca11b79b75316200c39ca7ab1fc",
+      "bytes": 7911
+    },
+    {
+      "path": "knowledge/entries/opuscar-063.md",
+      "sha256": "bb759a8301cfbb2ea44bdbf581aa8b9f569418ba3d8f191c7e3456e9abb00d34",
+      "bytes": 7964
+    },
+    {
+      "path": "knowledge/entries/opuscar-064.md",
+      "sha256": "43d94c38ba63f2acf9ede3d9eadc593e126a218800d54603044d3653c77562bf",
+      "bytes": 7568
+    },
+    {
+      "path": "knowledge/entries/opuscar-065.md",
+      "sha256": "687231b7c2c5286d169a9207fcc722ad324b8a130d2d4c5b79dc2cc7c4ff0dc9",
+      "bytes": 7507
+    },
+    {
+      "path": "knowledge/entries/opuscar-066.md",
+      "sha256": "b7880cd5c5ccfa5b6f0c4bb801add7410fcc1cb34ec8b38014af131c46323d6d",
+      "bytes": 7773
+    },
+    {
+      "path": "knowledge/entries/opuscar-067.md",
+      "sha256": "3a60c9cb8b4416f9276d359ade10092be2301a556a92538f1f32894293885dae",
+      "bytes": 7808
+    },
+    {
+      "path": "knowledge/entries/opuscar-068.md",
+      "sha256": "28cb09e7851227fe9c368e7cbaaaa7b42d072397cf51e2bdbd4b822a210fb458",
+      "bytes": 8001
+    },
+    {
+      "path": "knowledge/entries/opuscar-069.md",
+      "sha256": "ee654ea9ed177a276468c36c182b00b87eb0bada6f955b35a8f1697b1e33c8d3",
+      "bytes": 7623
+    },
+    {
+      "path": "knowledge/entries/opuscar-070.md",
+      "sha256": "63743999b3ee149f6889a36c2a290b5ba4b2626450cd493ede7428021ec6fc3e",
+      "bytes": 7661
+    },
+    {
+      "path": "knowledge/entries/opuscar-071.md",
+      "sha256": "7165aec2e928233976797d9aa98f8a35ac2b98358a31e9b280ed40550287c3ad",
+      "bytes": 7916
+    },
+    {
+      "path": "knowledge/entries/opuscar-072.md",
+      "sha256": "d4dd2bd4ac99f024235397d34cac706565e395739986f32050f3ebea04a35f05",
+      "bytes": 7469
+    },
+    {
+      "path": "knowledge/entries/opuscar-073.md",
+      "sha256": "e84842a7fe6eedd3e10e78a2117bf1ced5c121ca48beaf96e126d3389ece202a",
+      "bytes": 7573
+    },
+    {
+      "path": "knowledge/entries/opuscar-074.md",
+      "sha256": "0ee1260fb8422c9762f2808d25d4384c0ca7f10fbd22d79053c2749913f5f467",
+      "bytes": 7708
+    },
+    {
+      "path": "knowledge/entries/opuscar-075.md",
+      "sha256": "befc7adaa4b60ae473db2a1ca9cb9525dde31ae0ec6a41c732c396cf4ffb380e",
+      "bytes": 7936
+    },
+    {
+      "path": "knowledge/entries/opuscar-076.md",
+      "sha256": "95e326f1247382d98986065025e185005cfbd0402e2c0a97c78543470cef2d58",
+      "bytes": 7833
+    },
+    {
+      "path": "knowledge/entries/opuscar-077.md",
+      "sha256": "efe929800d8580c9f16857195211a5b11dc6646899b393c79bc39e336850b8bd",
+      "bytes": 7248
+    },
+    {
+      "path": "knowledge/entries/opuscar-078.md",
+      "sha256": "c42af0d3f595f03b0fe634b26c1753b1336854097827eeb18b2c8e3288e3bf40",
+      "bytes": 7295
+    },
+    {
+      "path": "knowledge/entries/opuscar-079.md",
+      "sha256": "f97e91e66211bbaa36bbe7d3a1cbc81fb183d78b2c7798988f7e70b275db8a15",
+      "bytes": 7558
+    },
+    {
+      "path": "knowledge/entries/opuscar-080.md",
+      "sha256": "30a843628bdd985ec17c39a196f7a53bac1b201546941ef82b40fc9e9dc3a5c5",
+      "bytes": 7392
+    },
+    {
+      "path": "knowledge/entries/opuscar-081.md",
+      "sha256": "abede1537c55172273e090a15b5583127bbb41b8cb17fee4b49785bf8a0914e7",
+      "bytes": 7675
+    },
+    {
+      "path": "knowledge/entries/opuscar-082.md",
+      "sha256": "dde456f4a8530d1960e7cb65f49079c07265f0e2ef4bac33b360aedd297d396d",
+      "bytes": 8007
+    },
+    {
+      "path": "knowledge/entries/opuscar-083.md",
+      "sha256": "2f61defe20522c08f61969b861802ecc16b084a7f28320867ddb0e5ee9e016da",
+      "bytes": 7861
+    },
+    {
+      "path": "knowledge/entries/opuscar-084.md",
+      "sha256": "a142e9ceb311cbca866d2af51f2603bfc158dc61e29f8b27f3ece17f508bffde",
+      "bytes": 7930
+    },
+    {
+      "path": "knowledge/entries/opuscar-085.md",
+      "sha256": "c9df959e28a5a83e1bb6c5ac14b02d0f4bdb715b76e415c7bef7edb65d3bab0a",
+      "bytes": 7336
+    },
+    {
+      "path": "knowledge/entries/opuscar-086.md",
+      "sha256": "81f1cd0c0aa68e5161144a4ec7ba3979a01e90c72be8cbf60960f0a547fe2ba3",
+      "bytes": 7330
+    },
+    {
+      "path": "knowledge/entries/opuscar-087.md",
+      "sha256": "de44c5e17f70c58672a936ac388fc940d383c58abc976ccfe969c2fb7d11ae53",
+      "bytes": 7873
+    },
+    {
+      "path": "knowledge/entries/opuscar-088.md",
+      "sha256": "3a28f231e3a2691862ac4e8bf31b611ed5abc3a70c04af34cf2860b9d5db5ae9",
+      "bytes": 7529
+    },
+    {
+      "path": "knowledge/entries/opuscar-089.md",
+      "sha256": "8f6f97efa96ac60c87f2d4c5cf991f7977d2e47015b73fa42846fa200ee59680",
+      "bytes": 7302
+    },
+    {
+      "path": "knowledge/entries/opuscar-090.md",
+      "sha256": "476c32b1e08aab6505a5149f73c84a4a84e57e5f36df2e248e6d3bb8feb71c28",
+      "bytes": 8146
+    },
+    {
+      "path": "knowledge/entries/opuscar-091.md",
+      "sha256": "db4e169509c46160a8fc7cee6aba03506e0859efae1e9688eb967b8ab5968ae8",
+      "bytes": 7586
+    },
+    {
+      "path": "knowledge/entries/opuscar-092.md",
+      "sha256": "48d131fe593cf320830824393ace014ee711350be05ae22d5e16f0f4c54dfb9b",
+      "bytes": 7924
+    },
+    {
+      "path": "knowledge/entries/opuscar-093.md",
+      "sha256": "1e0bb15cab4c629d4290948358e08b38db0dc5ad90595861abc56032b9daca1a",
+      "bytes": 7349
+    },
+    {
+      "path": "knowledge/entries/opuscar-094.md",
+      "sha256": "161000cb4dbcf7504fe7d40df6fde59a6b359914ed96e9766580ffded7c8adc9",
+      "bytes": 7417
+    },
+    {
+      "path": "knowledge/entries/opuscar-095.md",
+      "sha256": "f7d5edafbafcbb9f91ddd060ee46ab1c0a7c1a0a4f0b88d8826a0dc99effe293",
+      "bytes": 8874
+    },
+    {
+      "path": "knowledge/entries/opuscar-096.md",
+      "sha256": "f83b638c88ca707d8a52a7c11b067925eda4d0a93fcd3f92dea0af3dc735d8dc",
+      "bytes": 8140
+    },
+    {
+      "path": "knowledge/entries/opuscar-097.md",
+      "sha256": "35851057ef09fb4aad71920bcb51ae52c11fbfd05c12ee56f35ebc5fefc6caca",
+      "bytes": 8057
+    },
+    {
+      "path": "knowledge/entries/opuscar-098.md",
+      "sha256": "6aabde54264593c314c650b1bc77c7064971df83459384d5de2af0190a59d8e3",
+      "bytes": 8101
+    },
+    {
+      "path": "knowledge/experience/README.md",
+      "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+      "bytes": 1890
+    },
+    {
+      "path": "knowledge/experience/catalog.json",
+      "sha256": "55a7244b8ee303cd3b268a8829c4e57c5508ffec7a02fb321bf327bca0fb35d3",
+      "bytes": 1361
+    },
+    {
+      "path": "knowledge/experience/choose-editing-input.md",
+      "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+      "bytes": 4165
+    },
+    {
+      "path": "knowledge/experience/express-edits.md",
+      "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+      "bytes": 3295
+    },
+    {
+      "path": "knowledge/experience/inspect-and-compare.md",
+      "sha256": "cd114f955375aeb5ad6d89b0ad665b42acd1a3564e225bb4ed3af4e0b43ed284",
+      "bytes": 3283
+    },
+    {
+      "path": "knowledge/experience/use-design-knowledge.md",
+      "sha256": "d25bf74c845de634a27a2f149aeefcbf5afa5f1efc42ae8766a48afebaeb76f0",
+      "bytes": 2899
+    },
+    {
+      "path": "knowledge/guides/combination.md",
+      "sha256": "b261ce91470a8d183867bdba8e70fadfe231fe805cb137d6687c4f1c0d48d7dd",
+      "bytes": 15550
+    },
+    {
+      "path": "knowledge/guides/design-expression.md",
+      "sha256": "79845428125103465561e3964bfb33628d6439577b1db2ee3bdf34a742091d12",
+      "bytes": 12733
+    },
+    {
+      "path": "knowledge/guides/experience.md",
+      "sha256": "a9eb05539361fab286cf59472c90b9febc75f11d3b661cd96623a2b27cedd174",
+      "bytes": 11073
+    },
+    {
+      "path": "knowledge/guides/meaning.md",
+      "sha256": "070f55c86a3ef430610b3e5ed351badc21448ae797f3a00e0eea459048309d9b",
+      "bytes": 16742
+    },
+    {
+      "path": "knowledge/guides/media.md",
+      "sha256": "de0ae00f23a2dc0007bd439dcc9d415b412a0dd4c7caa92f434c4271b9108b10",
+      "bytes": 11790
+    },
+    {
+      "path": "knowledge/guides/theme.md",
+      "sha256": "0f674c576cb45caf79328fc8b49badcd1de5880c480af79cec909f2faae29455",
+      "bytes": 15109
+    },
+    {
+      "path": "knowledge/guides/time.md",
+      "sha256": "d5afbfa6b382ff1f49edff9a46cf9ff052619234883c343d78df6f65aef7c9a9",
+      "bytes": 13164
+    },
+    {
+      "path": "knowledge/model-experience/bernini-r.md",
+      "sha256": "e8f765a0aff981a5d706e1637e046f7db567e084188188d766150d2e822dea5b",
+      "bytes": 15632
+    },
+    {
+      "path": "knowledge/source-map.json",
+      "sha256": "0ca4d67554ee5b3de42ad4bb289e940ec094fe5640dd185dcbb41a14f59014dc",
+      "bytes": 247718
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/024__long/input.json",
+      "sha256": "4b2883fa681b8c2eef3cb9d770e044f36dd30688c4c441603f138bf8c92e717c",
+      "bytes": 1874
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/024__long/judgment.json",
+      "sha256": "057945d8c54790124e28dac526c5258ff168a8cd4645c733a3b4985d6b7368b5",
+      "bytes": 4452
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/024__long/result.json",
+      "sha256": "d64697caca4149dbec18b95266b0d2e2e0dbe9c2db6df9dbbf4157d9d1a69676",
+      "bytes": 526
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/024__long_keep/input.json",
+      "sha256": "1d6dcd65006283260afe3d8bb38fa98a27666cd35849bd134d740a94d0353367",
+      "bytes": 2509
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/024__long_keep/judgment.json",
+      "sha256": "5cb5c870f6ecd4267977422a6e5aaacd11723bc9ad8f5e35ff22feb712645d0d",
+      "bytes": 4563
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/024__long_keep/result.json",
+      "sha256": "964595df64cffe3a9279132998f6c10dae214af10ea0491d2b06c570ba060f3f",
+      "bytes": 532
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__long/input.json",
+      "sha256": "db2271d783eca426568dea2bb851ccdf47526ee651dcafdef363e3431f9d77e6",
+      "bytes": 1781
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__long/judgment.json",
+      "sha256": "dc241b76dfc539a386cf7e02a5452fd33cac8dfed56a2c3220b3511d3279e796",
+      "bytes": 3905
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__long/result.json",
+      "sha256": "be76873d3072024cacfe7ee9f27963bf33f83beb2b1c3324dd36835342b85789",
+      "bytes": 527
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__long_keep/input.json",
+      "sha256": "aa3c8df0adad83ac9de245cf0d3c59b629a9694ab37f8883428813d47c73e0b0",
+      "bytes": 2280
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__long_keep/judgment.json",
+      "sha256": "960c4b186ef4dce3e8f0604f33489c4e38714410330a0490c4153df74ae7c746",
+      "bytes": 4271
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__long_keep/result.json",
+      "sha256": "d50c51823db5647034c5e71c3da3c8885f4be99ce4f7ff55e1850eb220118121",
+      "bytes": 532
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__short/input.json",
+      "sha256": "4db5d8e2ba144dc44cc066d1aa05fd6a119abfbbc30f992300c8bf0f96229737",
+      "bytes": 1225
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__short/judgment.json",
+      "sha256": "d5ee55e498c9728558a4be234716418461f8c8e3f12bb8b6600f9e7c80b2e25f",
+      "bytes": 3932
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/027__short/result.json",
+      "sha256": "b8adf8f3428318b270c2e0d65b946c71d735969f98b4b8af42f7c6d879317365",
+      "bytes": 527
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041-paired-review.json",
+      "sha256": "0151cc5b17cf378d77ab8759a07ac6ca9663164342b83227229fbcf774c9a7e2",
+      "bytes": 4775
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__long/input.json",
+      "sha256": "842cec7e973c6b073a2a79fe4a4e25536900bc5157cf14d0e939a4a71d0d99b9",
+      "bytes": 1841
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__long/judgment.json",
+      "sha256": "8ecdd952032549336ad41ab92717b2849b65eb7ee72998fb965b9f29d61a4793",
+      "bytes": 4345
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__long/result.json",
+      "sha256": "21ee671a85a0922618a30170e7f701791d6475017225174357b59ef5fabb6ae3",
+      "bytes": 525
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__long_keep/input.json",
+      "sha256": "70ecfaa324f878902cb9715353b570088d14b9da0323b2c1a5a8d8a60ad2bc5f",
+      "bytes": 2548
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__long_keep/judgment.json",
+      "sha256": "29e13c67f6cc9537d32dff81ccb5f80acef2d712ae12a0f03044d60ff31df1fd",
+      "bytes": 4272
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__long_keep/result.json",
+      "sha256": "76bf9adf3e094aeed0e7b2e42e5bcf862a41b1c475a11c9ec6b9277abb2e1b16",
+      "bytes": 530
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__short/input.json",
+      "sha256": "771f7a5badc68816ae7160753206f4a1ef067a2f9103df8f3de35547124f8cab",
+      "bytes": 1311
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__short/judgment.json",
+      "sha256": "db65a6ac1bce7095d1c44618749c70fe47051d5036c98d02890349f68c272b8f",
+      "bytes": 4148
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/041__short/result.json",
+      "sha256": "d131cc13a9f7187d200646115c8d6f2c01a62f51ded8537a488d45fc693fcce1",
+      "bytes": 527
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/cases.json",
+      "sha256": "0f23696a583996d0371b6eb51db479366a88bb5839145a6ceb8528d0c7cc6107",
+      "bytes": 15941
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/comparison.html",
+      "sha256": "2b702cfe69fd68ef8ec33dbd31e67297539d13e63444b0616d2c60e17dc5b655",
+      "bytes": 38057
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/evaluation-provenance.json",
+      "sha256": "0b6e81f3fe0facb4e8705e1b75cbf001814f2c55661979c4892c516da5036d2d",
+      "bytes": 1242
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/fewshot_004__long/input.json",
+      "sha256": "7c54b0afda6223463a0d43edce5a1f04daa9c656423b19c63d6cae25e4afea5f",
+      "bytes": 1878
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/fewshot_004__long/judgment.json",
+      "sha256": "e255e5b30b8afb5ffca80f4f213d49ff89439e96c1ebe821a695757091ab3bc7",
+      "bytes": 4798
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/fewshot_004__long/result.json",
+      "sha256": "a184478e40bd22af5cde56d51eac9f8bce5d89c22a6bb283d6bb9e124a6e2bf3",
+      "bytes": 562
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/fewshot_004__long_keep/input.json",
+      "sha256": "83642210d9d6f66c8b04f4851e76b6e45051d552bde8a1ce8411326500d12d1e",
+      "bytes": 2505
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/fewshot_004__long_keep/judgment.json",
+      "sha256": "f45d5fa9ffef641544e65554cc80a0e6f130d2f801fcadf4c50fe60f5923f4bb",
+      "bytes": 4823
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/fewshot_004__long_keep/result.json",
+      "sha256": "5226955f0325d45fb5432c87d6267290dcf3c53dceb759264fa248b47c71a925",
+      "bytes": 566
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/frame-mapping-audit.json",
+      "sha256": "ca26b1f404b3f1bd236f60dd584819c19e6f517e9cd7f8a5bc53f300f64f0aad",
+      "bytes": 8789
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/local-output-verification.json",
+      "sha256": "5f66faecb1e96a9dab7eddf4c1d7d933a9c21d25c0fd1484e356447be5e6d327",
+      "bytes": 2440
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/preflight.json",
+      "sha256": "9fede9d687c4ac6aa1cb43f2f9dfbbcb3980b3d4aaf733d08f2fa1476440ec3f",
+      "bytes": 9746
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/review_notes.json",
+      "sha256": "5c13e1dc4ccb5e6356d5761758d0dfa5b2c51f5096875344f8bb3d86eb6d7f9d",
+      "bytes": 2880
+    },
+    {
+      "path": "out/prompt_probe/20261029_bernini/run-summary.json",
+      "sha256": "c1747e7f7a31520fd25445d490e876bf2b75e3f6639ef7a5328a6547d85a8541",
+      "bytes": 1582
+    },
+    {
+      "path": "scripts/bench_v4/README.md",
+      "sha256": "9ea221d523d6ce6933155404239d71769a80aa03d3b6043aeef431f53a91dc89",
+      "bytes": 6194
+    },
+    {
+      "path": "scripts/build_opuscar_templates.py",
+      "sha256": "9d6da61fee01ac0dbf25ee54544cee92d32b0a81d6778260bdb4b70b7c8d1242",
+      "bytes": 10885
+    },
+    {
+      "path": "scripts/deploy/judge_prompt_probe.py",
+      "sha256": "e1089192b74bf148226ecc730173fb0ddaf112da373b7f4df629c68a3869e544",
+      "bytes": 5710
+    },
+    {
+      "path": "scripts/deploy/run_prompt_probe.py",
+      "sha256": "5d4e6d55f4bab5addffabfe35fb68d0367af888063f2c23522ac20a50c5697cd",
+      "bytes": 7104
+    },
+    {
+      "path": "scripts/eval/bench_v3/README.md",
+      "sha256": "45278d583aa91ca3acc8af7e047a0c23edbe4455a1805d67505779780993e557",
+      "bytes": 8637
+    },
+    {
+      "path": "scripts/eval/bench_v3/skills_v3.py",
+      "sha256": "c0b8d0f530e464d59e5d9212adfdb1abaa4e4dea3659c24aebbb9fe121cf5584",
+      "bytes": 14314
+    },
+    {
+      "path": "scripts/run_planner_harness.py",
+      "sha256": "8583f4c7f1f29b777b063ecb99bcdd0c6af4d6c1dfc931e03ab881d61ce1bdbc",
+      "bytes": 4262
+    },
+    {
+      "path": "scripts/verify_planner_run.py",
+      "sha256": "812a532d62e3cd3642d47221d55342b67c7d520ede13b2a13f4a9a8a786cab52",
+      "bytes": 5500
+    },
+    {
+      "path": "src/planner_harness/OPERATIONS.md",
+      "sha256": "3a56494e35b42101089d74de7905893184580b8ef93b8d92d0fb40e4b4d9593f",
+      "bytes": 5228
+    },
+    {
+      "path": "src/planner_harness/__init__.py",
+      "sha256": "eb3d548b53dd3b83fd27e32867b8f8381545e8bd41e1e3e97ffeda2056bb3945",
+      "bytes": 141
+    },
+    {
+      "path": "src/planner_harness/common.py",
+      "sha256": "57c9efa64d95a670e9b97f2793b410a8239baa2ee09efda947ed23cb2de3726e",
+      "bytes": 1498
+    },
+    {
+      "path": "src/planner_harness/execution.py",
+      "sha256": "a152818607f0b62a0a4fb64f47e2154e7e173ff22f3234b4e893eab3da814940",
+      "bytes": 10767
+    },
+    {
+      "path": "src/planner_harness/experience.py",
+      "sha256": "90bb83d3b408a2c6613cefdfadcbf3aa4c88fe84207f4f40fa883469a56a2358",
+      "bytes": 10463
+    },
+    {
+      "path": "src/planner_harness/knowledge.py",
+      "sha256": "4e463c759d42a5ecbc27eb6bee0281b67950493344ae3308c0f0ddb19a9017f5",
+      "bytes": 7464
+    },
+    {
+      "path": "src/planner_harness/lock.py",
+      "sha256": "e8c9aa1580be6604d9775db790a0174bec63689ce3d4a2b294e68ec8a6052e6b",
+      "bytes": 1455
+    },
+    {
+      "path": "src/planner_harness/report.py",
+      "sha256": "c14bccf036c02dd47c59bae1b508b6474b6463cc0b465bcb2200ccdd274a829a",
+      "bytes": 7893
+    },
+    {
+      "path": "src/planner_harness/runner.py",
+      "sha256": "4a4716a943ecbfd1894dfabc61fc378483d8d92d270c77a8c883feeb9b2e0938",
+      "bytes": 23023
+    },
+    {
+      "path": "src/planner_harness/video.py",
+      "sha256": "3cccb93dd7bd31af63f1789968ab9be86db8466bd6138926b8e6b781ef9be780",
+      "bytes": 3377
+    },
+    {
+      "path": "src/skills/dimensions.py",
+      "sha256": "097e70b8d0f88d168f9187e91f9100c9f2ca0de3ef56c79d5c69e619073107dc",
+      "bytes": 15180
+    },
+    {
+      "path": "src/skills/templates/anime/cyberpunk_anime.py",
+      "sha256": "442cf4e68a433d83386a0f07816742ff556a0cdc456143fc087536603c4ecca9",
+      "bytes": 1204
+    },
+    {
+      "path": "src/skills/templates/anime/fantasy_anime.py",
+      "sha256": "ec6251228fb03dee53e385bc079dd00a46407d6f20bc4541f07abfcf70ab598a",
+      "bytes": 1231
+    },
+    {
+      "path": "src/skills/templates/anime/studio_ghibli.py",
+      "sha256": "28198f5e5307df294e2e7903b0c6f6a215e539c17e6203402638f8f04732c7b0",
+      "bytes": 1318
+    },
+    {
+      "path": "src/skills/templates/historical_fantasy/medieval_fantasy.py",
+      "sha256": "eed5f80b2644185287e2fa83de3d3f2419bfd3d10f98c2ecc7cc63630609d644",
+      "bytes": 1213
+    },
+    {
+      "path": "src/skills/templates/historical_fantasy/wuxia.py",
+      "sha256": "89d0135b39a02852e613089da00a5ef5976bde70e4c8052c8ee4675de43ff5d7",
+      "bytes": 1215
+    },
+    {
+      "path": "src/skills/templates/historical_fantasy/xianxia.py",
+      "sha256": "ba5284260975dbe319052c680c832d0275dd46f52814037e3c41268f7aad90cf",
+      "bytes": 1251
+    },
+    {
+      "path": "src/skills/templates/sci_fi/alien_biomech.py",
+      "sha256": "b4f80af02f178697e018eb84834e01064779bea4935c152bf58d8c67e4066962",
+      "bytes": 2646
+    },
+    {
+      "path": "src/skills/templates/sci_fi/clean_lab.py",
+      "sha256": "2d30b72501100dd6c25f856e7142a4fb9cfd28dff5ecbf839680c420a5257174",
+      "bytes": 1532
+    },
+    {
+      "path": "src/skills/templates/sci_fi/cyberpunk_dystopia.py",
+      "sha256": "17be6271eb10782bc6e1330e0c98660435d5dc2420dd83048d5bfc53d92a88ed",
+      "bytes": 1560
+    },
+    {
+      "path": "src/skills/templates/sci_fi/industrial_wasteland.py",
+      "sha256": "2764c8d097deccc23f2580ea6c8202259fb13bd66ba9058c8491fb51525c3999",
+      "bytes": 1567
+    },
+    {
+      "path": "src/skills/templates/sci_fi/mad_max_wasteland.py",
+      "sha256": "0a165fb09c6da89b93ae66b68f87495d3ac3d29d523a2b256da4c068f6f7811d",
+      "bytes": 1526
+    },
+    {
+      "path": "src/skills/templates/sci_fi/star_wars_scifi.py",
+      "sha256": "7ae9c4683f04f2738ad7a67053c9f02880b90be3e7deea0ee2f2d84282c73526",
+      "bytes": 1496
+    },
+    {
+      "path": "src/skills/templates/sci_fi/wormhole_portal.py",
+      "sha256": "00442af89d94af04ec214f3da5bee91519d81c74115e246adf3f8c3a3e6f1c48",
+      "bytes": 2309
+    },
+    {
+      "path": "src/skills/templates/styles_25d/opuscar_19_picture_magazine_halftone_spread.py",
+      "sha256": "a8c1c1d68078b6c291e3b6a471f6bc86ef539ddc1aff20acede3dbc1e8b9cdde",
+      "bytes": 2026
+    },
+    {
+      "path": "src/skills/templates/styles_25d/opuscar_41_victorian_toy_theatre.py",
+      "sha256": "d5ee09e117119e5d71f7e4c73fef4aa26ee9f0f4d66aef13830a3f390a50e9a4",
+      "bytes": 2205
+    },
+    {
+      "path": "src/skills/templates/styles_25d/opuscar_47_hand_tinted_sepia_photograph.py",
+      "sha256": "52dbeefb7e7029cb97294147a6da0f1199c203e4ed2617b0419740f7b0b8edf2",
+      "bytes": 2046
+    },
+    {
+      "path": "src/skills/templates/styles_25d/opuscar_67_sabuda_pop_up_book_on_a_real_desk.py",
+      "sha256": "97f5c61790a607068ebd76849a471eb4d993c69a050525fe172654fe0ed630e9",
+      "bytes": 1841
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_02_black_gold_art_deco_revue_poster.py",
+      "sha256": "0b5ca82eefb41dc91022e9b6796eed165724f0d6247bc589a62828025e1501b1",
+      "bytes": 1795
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_03_kollwitz_anti_war_woodcut.py",
+      "sha256": "92d63368f726dc270510088e48e97475448ae9db98a805bfb4e57a71841b7e52",
+      "bytes": 1856
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_04_1889_sepia_albumen_panorama.py",
+      "sha256": "25a4f88de7b01822aa50956ef88918ee79a26f543d4d9698e6cb62f740cdf694",
+      "bytes": 2040
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_06_mucha_art_nouveau_panel.py",
+      "sha256": "231e7c7c83d3707f789a93027fa76aee842996986dcd87568a1bda4ad6e099e7",
+      "bytes": 1816
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_07_1930s_b_w_rubber_hose_cartoon.py",
+      "sha256": "7333cf8a09e06c97497bdc766bcb51f3dc6815211c2ff5c1e602d35d35a6dd9b",
+      "bytes": 2109
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_08_admiralty_sea_chart_copperplate.py",
+      "sha256": "95d52ea14a66be723e1b2abe9094adbaff38dba5631efd277a527b2e2396ee5b",
+      "bytes": 1989
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_10_newsprint_letterpress_and_line_engraving.py",
+      "sha256": "7e111d8a284d5078ec2f5f4502bcc2c0d31e0b3370bee73644d0e8e424d4d85f",
+      "bytes": 2059
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_11_wpa_silkscreen_poster.py",
+      "sha256": "57acda22bbb0aa9b7a3242b385f641f2022749f61016dc558c5525e6a25aea64",
+      "bytes": 1846
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_12_technicolor_impasto_oil.py",
+      "sha256": "ff2c2889f89e6b9c6eb5d2741069c08c6348efe6e141ac856870a35b6a61983e",
+      "bytes": 1712
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_13_gothic_charcoal_drawing.py",
+      "sha256": "4794cc3cf64269d57c58f78697529a9872da1028f51c2e923f0edf7ca560bcc9",
+      "bytes": 1910
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_14_welsh_valley_gouache.py",
+      "sha256": "8eaacc34a7b890bcf2d7b1f9dac5dad2e41b25fd937b8760a68c6d16a7c1dcc9",
+      "bytes": 1957
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_15_home_front_stone_lithograph.py",
+      "sha256": "40d72d57b785c6d6a7038ddc8ba18eba1322383ea1e29ac8705a2db8b8fad788",
+      "bytes": 1795
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_16_studio_glamour_black_and_white.py",
+      "sha256": "73ef457239e710cc31ab6c2aad6b09287a98647e55573566e4c0237ce080551a",
+      "bytes": 1914
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_17_backlit_gothic_stained_glass.py",
+      "sha256": "6a75c664412788373da3a9877237b4ae92daec07f8f1428f9be3f0820cf5a72a",
+      "bytes": 1927
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_18_typewriter_character_art.py",
+      "sha256": "1df31f4cbdeae57988852fbe60ecc7edd8ad360ed2257afaebb0beae3a463338",
+      "bytes": 1918
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_20_1940s_graphite_magazine_illustration.py",
+      "sha256": "d1947d3a0d7ceec34cfead6e6a844061d7532247a1bee11b67ba171b8cd53081",
+      "bytes": 1929
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_22_wood_type_campaign_poster.py",
+      "sha256": "f57287f69ae9bf5db0680e695d0ac7f351145dd25a2d592d7fea231975b6658f",
+      "bytes": 1741
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_23_hirschfeld_one_line_caricature.py",
+      "sha256": "56494b8d0b0b36dac3b7beeb63367e9c39278669103b3b0ab6f42a9783b2e9f3",
+      "bytes": 2066
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_24_dufy_watercolour_ballet.py",
+      "sha256": "e535c52a7c4fc4ab1ae887c0e70bb159c6d49a458f69f44be9868e2b8a6341c5",
+      "bytes": 1820
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_25_strobridge_circus_lithograph.py",
+      "sha256": "deb325adba88bf5ab41f9a262815b65d04c2044dfa13fe472afb6f9cdd21f77a",
+      "bytes": 2044
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_26_high_key_beach_black_and_white.py",
+      "sha256": "19811d4340c38d9453d1fd6d897425e368cf682f938178c00b240ce4f133692d",
+      "bytes": 1820
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_27_ben_shahn_social_realism.py",
+      "sha256": "fde10d2cc3d2d96b1171ffd50834e0cddf6064871992240755db48f4c115b3be",
+      "bytes": 1849
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_28_1955_kinescope_on_a_living_room_tv.py",
+      "sha256": "ef9b6a1e9b00eac61421366243f8f644dfaf0ad8a92d56d9ffc81ad913b018be",
+      "bytes": 2020
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_29_1950s_upa_modernist_cartoon.py",
+      "sha256": "1c13fb9378134001ac52a53905be8bd32648e49745bd24c6884031ed9ca1232a",
+      "bytes": 1861
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_30_cyanotype_engineering_blueprint.py",
+      "sha256": "b75bd2abdc09eb6a07a59e4e634f9eef0a4c769cd9916da572bd545210b52787",
+      "bytes": 1842
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_31_lautrec_belle_poque_lithograph.py",
+      "sha256": "fdad1a5b5c4cfbba8b70f89346462e94f9fc4f265a5e45719ed7570e73b7647a",
+      "bytes": 1710
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_33_saul_bass_line_titles_in_black_white.py",
+      "sha256": "7beeee661f071de3b395ad82417edaa8065dddf8dbb5ff15c86f7a177d14c5be",
+      "bytes": 1906
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_35_terpning_epic_poster_gouache.py",
+      "sha256": "639cc62ff13f5b0c43d5a2bc3ed7c84289c67ec3b8954b7db8e31c7b3cbd3a9b",
+      "bytes": 1769
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_36_hand_coloured_georgian_satirical_print.py",
+      "sha256": "4b0d8a2fcada46e57eaca99366f6db071da4643edb889d6de37c2967f178a1e9",
+      "bytes": 2029
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_37_bob_peak_fashion_illustration.py",
+      "sha256": "14b448cfdccfd90dcf1c36bbe8cdf75725a1ee6514fe0126f62c947b6a26925b",
+      "bytes": 1779
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_39_holbein_tudor_portrait_in_oils.py",
+      "sha256": "e091c39a8047d887938e6db0848e78f54ab72e9c119c7efb00a47f13c95bd711",
+      "bytes": 1775
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_40_three_ink_risograph_night.py",
+      "sha256": "3ba2e67a37fef2fe08dced5b367341b99f3ab0a6c51498c3c2db3bb71d7144a3",
+      "bytes": 1930
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_42_warhol_photo_silkscreen_double_elvis.py",
+      "sha256": "d33c5fde9ccdacba97535381334b0e200b54715182a031361e3364ae0870e354",
+      "bytes": 2087
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_43_wwii_war_bond_lithograph.py",
+      "sha256": "2d7b92d32bf1f843f77889b8ac2d146ba839edee26cf6f6e024df3b54e71b915",
+      "bytes": 1994
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_45_rembrandt_top_light_oil_painting.py",
+      "sha256": "40744efd2c4353a16c10a3e79253cfc2aba85ebcdfb656da5ef0ffac4966e412",
+      "bytes": 1720
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_46_saturday_evening_post_illustration.py",
+      "sha256": "d1e5e2bc22f93650841626a5334adaad6801d7ba4cd317a8bf1067e71016292d",
+      "bytes": 1841
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_48_hopper_style_american_realism.py",
+      "sha256": "79fba18a55c41116bce5f7987311d9fa34c21029714123cd8ae77cd993a95ad2",
+      "bytes": 1919
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_50_new_yorker_cartoon_ink_and_wash.py",
+      "sha256": "5b5ed101a85d271e7ae6f1ca87c63fb2685acdc69b1a4d096675ff459b71fcb0",
+      "bytes": 2207
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_51_andrew_wyeth_egg_tempera.py",
+      "sha256": "f5b18bc092db11786d0cd55007d5dce1569a4e01594b624e455cd8f3ef06f415",
+      "bytes": 1808
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_52_child_s_wax_crayon_drawing.py",
+      "sha256": "a99661f67bdfcd0661db88f2174febdce2f873bcc3ef6f274677eb2216ddd3ec",
+      "bytes": 2168
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_53_autumn_transparent_watercolour.py",
+      "sha256": "dfb5880b5c2277907006c1b44939162e0bbec88d4af56b6b86aa2dd920999dd8",
+      "bytes": 1754
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_54_1924_paris_olympics_stone_lithograph.py",
+      "sha256": "39cc510a04ca1b8253d0dfcc69ec044a1b53fc2689d261b937cc6d61de573ef2",
+      "bytes": 1826
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_55_rajasthani_hand_block_print.py",
+      "sha256": "08ff90b739839869efa47eddee21635dcbc69dad2f276dcc9dfb5beaf66e47b3",
+      "bytes": 1961
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_56_family_album_polaroids.py",
+      "sha256": "c88e9ef0c357dacdb3a99853868764282af06457b887a4ddf360d84738fc80aa",
+      "bytes": 2205
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_57_rococo_silhouettes_in_gilt_candlelight.py",
+      "sha256": "fabe147e49c2b50a82fae5cfac1f3524ecf560e03c3f970622dfbcd2779b2512",
+      "bytes": 1963
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_59_combat_artist_field_sketch_pen_wash.py",
+      "sha256": "b73be393b5e3df4e73a5281d3a29c92302929302eb50b7ffe489724b3d0db741",
+      "bytes": 1705
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_60_gongbi_court_painting_on_silk.py",
+      "sha256": "f502fed6b6be122621ff18329d3f697410c871988c95f7ad0be7078d8befc0e8",
+      "bytes": 1792
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_61_80s_airbrush_raymond_s_count.py",
+      "sha256": "6d13badca1063798c30bec1c59abecfebbaa665b3139a99dbc24e1b16da78f38",
+      "bytes": 1905
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_62_rockwell_style_oil_illustration.py",
+      "sha256": "5edb8e79b0b4c68c9b74dbcdd7602e1e79a7c15d44e67b72a9ed31882e7dc53e",
+      "bytes": 1997
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_63_field_journal_pencil_watercolour.py",
+      "sha256": "6f8d91225848d9312a6202655c41a10a46306d78158f10710a4e7b5ffed4062f",
+      "bytes": 1678
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_64_hand_coloured_natural_history_copperplate.py",
+      "sha256": "3701faf3b71d4a2423819636ddec7996dc70eed76b4e5ca6a8d0727fa07e3ac5",
+      "bytes": 1929
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_65_remington_western_oil_sunset_nocturne.py",
+      "sha256": "a5593784d3ef03f31bb9613e3471914e8362b2cb57e1e762a74dcf1e2f29260a",
+      "bytes": 1888
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_66_black_and_white_film_one_red_coat.py",
+      "sha256": "f71c03b7a09b676abdeff474448cbb8c567de32f7f5137536f415c66b0efe4c2",
+      "bytes": 1852
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_68_illuminated_manuscript_with_gold_leaf.py",
+      "sha256": "bf2ba1daa2bca3373fd7831dd546e7dc4697ddf3308ebb02713aaf1b503fc6dd",
+      "bytes": 2156
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_69_explorer_s_scrapbook_watercolour.py",
+      "sha256": "83196eb6e2b4eaa8da971900fb1f28c6d59364af41af6d82a393890874cf4198",
+      "bytes": 1808
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_71_hilliard_elizabethan_miniature.py",
+      "sha256": "f956f34a7b36559e6bd02c21b06409c0325f8bb6b8b08ec34fd9c6862a37a34a",
+      "bytes": 1954
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_72_suburban_symmetry_dv_camcorder.py",
+      "sha256": "fed5a880471041dba5e695d86da2c54ce41d6207d4f86f9ea69cce30dc4b96e3",
+      "bytes": 1858
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_73_roman_floor_mosaic.py",
+      "sha256": "9b4cf7f0343da105fbcbfa0687fc598750956d7857fe19fec03d9804d6acce47",
+      "bytes": 1907
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_74_window_marker_chalk_gold_pattern.py",
+      "sha256": "35b4aeb52992e1552801a8dacf59d42bdf7d0a29222432521ded8b1a276a39a1",
+      "bytes": 2011
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_75_fosse_stage_in_red_and_black.py",
+      "sha256": "449f1b61ac77c09bc075bc621103791b3ea72e4677e3bdf440a02484441c50f3",
+      "bytes": 2004
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_76_alan_lee_watercolour_tolkien_map.py",
+      "sha256": "d9bec829796ebe7df0bdb3725ca01c7c9af63b674cbc29d07955c678ae53c17c",
+      "bytes": 1865
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_77_16_bit_arcade_fighting_game.py",
+      "sha256": "a4f5865c8d96bbb164f5c343a437399ff395eb8b649ea941fbc63005047d9742",
+      "bytes": 2005
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_78_la_night_light_trails_snow.py",
+      "sha256": "3e9aaa89fc0f54f809b0beaa32c42ae65c4fbc1016905c479492fe1351ba2ec0",
+      "bytes": 1802
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_79_street_stencil_on_boston_brick.py",
+      "sha256": "cec82572c8525b24480f27f5e424e728fec03b93e43be8879e2ebd8660095c4b",
+      "bytes": 1852
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_81_quiz_show_studio_mumbai_orange_teal.py",
+      "sha256": "4087ee961ab7bbfd5235397b4cc1fae1f885fe1ba82facd340e1d86a53ee8199",
+      "bytes": 2015
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_82_eod_technical_manual_line_art.py",
+      "sha256": "0bded1eec6b1a92f2d6a0edfa949684a8594352e35d69076112af582644602ab",
+      "bytes": 2139
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_83_peeling_wall_gold_broadcast_booth.py",
+      "sha256": "d6c3d5e5e4ffe0436f3f9ec25d5d1aafd2ec121f695f1b02aabdd25154680704",
+      "bytes": 2038
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_84_polished_silent_film_black_white.py",
+      "sha256": "751cdd3d492d1c23813a722760515f257390508e3723b3a746e562c702de1d48",
+      "bytes": 2039
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_85_jack_kirby_70s_comic_page.py",
+      "sha256": "dad367f274e868d2eabd08276f886c384d2a6f556173558e60c91a9c8c392377",
+      "bytes": 1796
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_86_cased_daguerreotype_developing.py",
+      "sha256": "b38ef79f04c5095b24dcebbceb4c6d5c7e4d8abe295fd11a3a8377828e7ae954",
+      "bytes": 1972
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_88_microfiche_reader_newsprint_halftone.py",
+      "sha256": "1f0f0edd0fd1850515a16249e97ae457fa98874023729e1fc5ba8900251d3b01",
+      "bytes": 1907
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_89_moonlight_blue_oil_portraiture.py",
+      "sha256": "b16033dd5ed550649489c11eb9645aa194147490f2647090e466786e29279bb5",
+      "bytes": 1745
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_91_1960s_linen_postcard.py",
+      "sha256": "c94e296bf8c7acd7d4b10afded6cc1078029323e0bf223f0cfe717e22347cc43",
+      "bytes": 2039
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_92_architectural_section_axonometric.py",
+      "sha256": "93dccf5b5cb453eea3c42427d52d448309d351cc2fac87a9dc84ee18566e3bc5",
+      "bytes": 1976
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_93_magic_hour_soft_pastel.py",
+      "sha256": "460d5b9dfb0f7933dbe02518303a54e3b11798009412b4c58736caa34cbbb5e3",
+      "bytes": 1806
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_94_scrimshaw_on_a_whale_tooth.py",
+      "sha256": "4d868f1580b8d1c70bac2b6d256718ded329d98f02a91737b2e1da127e396c26",
+      "bytes": 1970
+    },
+    {
+      "path": "src/skills/templates/styles_2d/opuscar_97_snowy_neon_night.py",
+      "sha256": "e211b4c572e9ea8366b64ba89b12ba15ffd2adebde7d40e7d7f870d24c6023ac",
+      "bytes": 1784
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_01_silent_era_3d_dogfight_tinted_ortho_b_w.py",
+      "sha256": "ef5b60e8de851c5a7355063143e0f221f6dc413c364e7bb99bc98e47bbb9f29b",
+      "bytes": 1948
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_05_mgm_silver_b_w_3d_lobby.py",
+      "sha256": "8c600e02f5cfa20e63f73c1a3383893f4edc382e24f5c1f39507ef97741978ee",
+      "bytes": 2038
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_09_silver_b_w_3d_wedding_cake_stage.py",
+      "sha256": "5ef9a689c83c37b093605d55ba963e3f90e69bd207987059917635fd2dcb9375",
+      "bytes": 2006
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_21_deep_focus_fog_castle_3d_b_w.py",
+      "sha256": "1c999d78e07175da17fe6090713f2528a6c3584527a94adaa27a5b51c8257ac3",
+      "bytes": 2012
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_32_3d_circus_chariot_race_65mm_epic.py",
+      "sha256": "ba67a7376a30719f62e597192fe87d88512a95b9dd8e0e2cbe82a0210bca03ca",
+      "bytes": 1889
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_34_technicolor_3d_stage_set.py",
+      "sha256": "12abd83a422a735f7c2be70e248763dfb49c3261d6e24837218bcef20a0a25db",
+      "bytes": 1860
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_38_storybook_3d_alpine_aerial.py",
+      "sha256": "2241ca4df03ccf6932413b7d02abcd57dd8b509610c34cb87843c44aa62b8df0",
+      "bytes": 2007
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_44_16mm_chase_under_the_el.py",
+      "sha256": "170e5dc43038dc32ef08e61013f0083a7d65f3b4a3705deedeb16adba5f8f1c5",
+      "bytes": 1979
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_49_philadelphia_sunrise_3d_on_35mm.py",
+      "sha256": "e37e2b32e076e278a14f8b0aaa69389552807315ec7edd47799e70bf572a0d39",
+      "bytes": 1807
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_58_3d_biplane_over_the_rift_valley.py",
+      "sha256": "7bea14a764568c6effa6f9f5e131db1594e5985331ee4c22c0ab25412a62aff8",
+      "bytes": 2074
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_70_blueprint_developing_into_3d_sunset.py",
+      "sha256": "01f9ee7fe0a060c12e75dfb1fa2bbce454d87c6b456a83e5c3acb39f98c14d3d",
+      "bytes": 1810
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_80_3d_west_texas_dusk_deakins_light.py",
+      "sha256": "f5ca7068a3e8b38b6ed7bd2735904df6a19ef6c83bfb78c73eac378eebef7ecb",
+      "bytes": 1812
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_87_3d_backstage_long_take.py",
+      "sha256": "76e85ff16c1a9ead9d1181fef6a6640dbd2ebfc0b815a825d7315efadeccc226",
+      "bytes": 2102
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_90_3d_underwater_teal_caustics.py",
+      "sha256": "e5ccc9e6de73b8c5549ade6191da6fc1f34e0eb04f4f62ec0787bcf715135de6",
+      "bytes": 2022
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_95_ray_marched_multiverse_jump_cuts.py",
+      "sha256": "407b0c1521abfffd197cb70dfb0fdd90856a0a32b14bc3150f2aa5a59e703757",
+      "bytes": 2176
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_96_3d_particle_fireball_imax_grain.py",
+      "sha256": "bd197bf514d849c3df827d55313eec40ec60bd15a27221b5e674a59977717210",
+      "bytes": 2138
+    },
+    {
+      "path": "src/skills/templates/styles_3d/opuscar_98_3d_dip_road_chase_long_lens.py",
+      "sha256": "585892cc4aba6da8bde59731e5eeee210a078989d4cc32352a71c544455e645d",
+      "bytes": 2038
+    },
+    {
+      "path": "src/vlm/__init__.py",
+      "sha256": "479b4975e84ac5ea3bd5e8693dba0972ad088d238e3afb7e32b1aac052ef5333",
+      "bytes": 2059
+    },
+    {
+      "path": "src/vlm/base.py",
+      "sha256": "17ad0fbc341f516aec6a4d4700f52cac1dd90becc30555c7ec1fbd5256467f47",
+      "bytes": 213
+    },
+    {
+      "path": "src/vlm/codex_vlm.py",
+      "sha256": "50432b39ea3b368180630e38d0468383d2a7a5757933e045c9c8dc935766788b",
+      "bytes": 6444
+    },
+    {
+      "path": "src/vlm/litellm_vlm.py",
+      "sha256": "2f538f7a7edc811fa1148e50229b1d3117a009f7f79a9de3300aaa5e78876c81",
+      "bytes": 13328
+    },
+    {
+      "path": "src/vlm/local_qwen.py",
+      "sha256": "58c7c57b8dfe25f9240fef338a35ea0ebac2da3e53f692999fef90867ba02426",
+      "bytes": 16597
+    },
+    {
+      "path": "src/vlm/openrouter.py",
+      "sha256": "aff924ee53a86695448b6fb3909bfcbd7fe4c443f23ab885011b9116c4190b12",
+      "bytes": 4131
+    },
+    {
+      "path": "zyx/README.md",
+      "sha256": "a7bfd7083e833f14199f099a55731a0a89165ec366557ac3c741d2e55b5d217f",
+      "bytes": 2319
+    },
+    {
+      "path": "zyx/img/opuscar98/01.jpg",
+      "sha256": "90d82d5107abf5bb0eab25eb05e6c2c0dd10166c0883993dcc975d5a244d4b98",
+      "bytes": 45280
+    },
+    {
+      "path": "zyx/img/opuscar98/02.jpg",
+      "sha256": "fd4f67a428cf0bf8d30197611c1515a8548954fb9e096e7ad550f58c11531b83",
+      "bytes": 90554
+    },
+    {
+      "path": "zyx/img/opuscar98/03.jpg",
+      "sha256": "573e2e5c445cb6b55e7693604af3ba4f4edd814ef5cada1d77bc0d7ea83c537f",
+      "bytes": 57605
+    },
+    {
+      "path": "zyx/img/opuscar98/04.jpg",
+      "sha256": "d78847fdb114dec3adcbad7c2e414c21817a8a585536f69f758b1fdbf81dcc43",
+      "bytes": 38668
+    },
+    {
+      "path": "zyx/img/opuscar98/05.jpg",
+      "sha256": "b502386a913fe43d4a6158cfca5ff2f64c246fc9962028ac6ff346f5f8671993",
+      "bytes": 51211
+    },
+    {
+      "path": "zyx/img/opuscar98/06.jpg",
+      "sha256": "d42f10d37de744ab5a6b692252e062e4b75f374c68cd87e03f01852b1100c516",
+      "bytes": 81826
+    },
+    {
+      "path": "zyx/img/opuscar98/07.jpg",
+      "sha256": "e98662b48c506457d3b4bd7270885c364899dafcfffed4f1f4a00a54f6631f3b",
+      "bytes": 58265
+    },
+    {
+      "path": "zyx/img/opuscar98/08.jpg",
+      "sha256": "ac1a3fbc2389d6208147f12b83c0136fb5ab38c172428db0fea148710984de43",
+      "bytes": 80083
+    },
+    {
+      "path": "zyx/img/opuscar98/09.jpg",
+      "sha256": "c08b751b290e556ef3b13a63fae3bb767c8ae1367a46c90a1465cd639a5f344f",
+      "bytes": 61455
+    },
+    {
+      "path": "zyx/img/opuscar98/10.jpg",
+      "sha256": "12063897b2cf373c8570fef256c3b9cb35d31accac40a1b1c2b3fd9d40b412c4",
+      "bytes": 111853
+    },
+    {
+      "path": "zyx/img/opuscar98/11.jpg",
+      "sha256": "d21150b8d8a983d6a597a80e879a7d2a9cf34549c7dd1aa5787119fa83efde4c",
+      "bytes": 83443
+    },
+    {
+      "path": "zyx/img/opuscar98/12.jpg",
+      "sha256": "4f2bc4f58cceed5bdd41a13225d091ecb4547ab3713e81de6b88f0ab98b5bdec",
+      "bytes": 58894
+    },
+    {
+      "path": "zyx/img/opuscar98/13.jpg",
+      "sha256": "2929969b365faeb4053100535d69adc5b260bda6ed699c8039b37adcd2651f4a",
+      "bytes": 83706
+    },
+    {
+      "path": "zyx/img/opuscar98/14.jpg",
+      "sha256": "29cba2c1211c2b152375ad16a2a2dfe29fbbdbbbeb0ba76d5307fd87a0775258",
+      "bytes": 70368
+    },
+    {
+      "path": "zyx/img/opuscar98/15.jpg",
+      "sha256": "74ba115c1c138f832be024e5b08bab64558a3d4bcf4e1226a0855ad32c040e7e",
+      "bytes": 97686
+    },
+    {
+      "path": "zyx/img/opuscar98/16.jpg",
+      "sha256": "b05d7701af3865ac15cef6f4d175ae7257291df30de10e33ae8477cec7c976a7",
+      "bytes": 24904
+    },
+    {
+      "path": "zyx/img/opuscar98/17.jpg",
+      "sha256": "8b39f2fb74d5522227f85e67e12ee7ba54640ca08f2765ff645e0b1793792068",
+      "bytes": 62097
+    },
+    {
+      "path": "zyx/img/opuscar98/18.jpg",
+      "sha256": "5887153b26cc90fbd065008f438fe4b334795dedcbb4027a345e22f3cfa1d41c",
+      "bytes": 135285
+    },
+    {
+      "path": "zyx/img/opuscar98/19.jpg",
+      "sha256": "840254ed47b3c6bf51d6b0d704aa1df0f16c8e9b1f1e060fb3c6d03ef315e9c4",
+      "bytes": 169823
+    },
+    {
+      "path": "zyx/img/opuscar98/20.jpg",
+      "sha256": "687437f67a2ab30606ddb2c1c497287e6d96a613b0ece241740686a9fbfac27c",
+      "bytes": 66029
+    },
+    {
+      "path": "zyx/img/opuscar98/21.jpg",
+      "sha256": "fdd0ec7ca25f349e647ecf66d179dc9bf715043656231ffae341f381b193cb68",
+      "bytes": 27403
+    },
+    {
+      "path": "zyx/img/opuscar98/22.jpg",
+      "sha256": "9ae7ec0fb924f22864f422565f0bad416b90b36c0e14378d336227290ef51620",
+      "bytes": 177878
+    },
+    {
+      "path": "zyx/img/opuscar98/23.jpg",
+      "sha256": "8beb94b88c476eeaa436b5f97ff633af7e64c5bcedc0eda5d8de2029c07bcbce",
+      "bytes": 68810
+    },
+    {
+      "path": "zyx/img/opuscar98/24.jpg",
+      "sha256": "4114e6776f8849423c5bd524bc780a082b5c7224c0cea3abdd1c9dfb39c5a890",
+      "bytes": 75632
+    },
+    {
+      "path": "zyx/img/opuscar98/25.jpg",
+      "sha256": "0ce4e6e516e82446b637ae1ba90b753d651bc99060bee50f05cc83bdbff3ddad",
+      "bytes": 166864
+    },
+    {
+      "path": "zyx/img/opuscar98/26.jpg",
+      "sha256": "97588e3f883eca639c368bdeb7b9243ac694bc87cfd14fb4c991c2ae7ef499a7",
+      "bytes": 57619
+    },
+    {
+      "path": "zyx/img/opuscar98/27.jpg",
+      "sha256": "d380d2e3a4331bb2c7f93afc2e2f19080ee0f98d5954f03898466793fe6ddd3a",
+      "bytes": 63572
+    },
+    {
+      "path": "zyx/img/opuscar98/28.jpg",
+      "sha256": "3e2cd27f160680b571db14d6f92182cca28925833dcad1c0f05c29831483f8d7",
+      "bytes": 47745
+    },
+    {
+      "path": "zyx/img/opuscar98/29.jpg",
+      "sha256": "f0343a177ed594f8005b66b66d181d2ef0c08d5f3ad2cd35fc2a17412fe76ab0",
+      "bytes": 66956
+    },
+    {
+      "path": "zyx/img/opuscar98/30.jpg",
+      "sha256": "4eee108d11cb3bc3abba50f608c248d9b861e5ab3eea8d0f96be83a68d618b32",
+      "bytes": 96667
+    },
+    {
+      "path": "zyx/img/opuscar98/31.jpg",
+      "sha256": "9a4ee933ae3b2e102a337080745774b1b13a4160cb5fb3bea6a7985b6da6507e",
+      "bytes": 70277
+    },
+    {
+      "path": "zyx/img/opuscar98/32.jpg",
+      "sha256": "d588942f5ed892bb9bffa115ac6162da8375f2be85e3adb414a6f0724d230583",
+      "bytes": 58258
+    },
+    {
+      "path": "zyx/img/opuscar98/33.jpg",
+      "sha256": "59a8d44dbb52f72e605b5cfaa2efa4ab7d5a1d5d1941d8715cdacca94d13eb4a",
+      "bytes": 56339
+    },
+    {
+      "path": "zyx/img/opuscar98/34.jpg",
+      "sha256": "8a3b2cae578848b2695c6331761dc22d8c33f771efc6dc0def6b8e2358149fe1",
+      "bytes": 63875
+    },
+    {
+      "path": "zyx/img/opuscar98/35.jpg",
+      "sha256": "e6efab06e005595084c693dc355152c5357c39e49375db7fdde637833ba70323",
+      "bytes": 56964
+    },
+    {
+      "path": "zyx/img/opuscar98/36.jpg",
+      "sha256": "43444406babd31e992281b8a95c2b80488fe556503b7b3433e1e58813e698398",
+      "bytes": 117032
+    },
+    {
+      "path": "zyx/img/opuscar98/37.jpg",
+      "sha256": "dc0e38b6f28e35596e4ac2c35f37167e5c2d568a22e8bf271845b0cce3c98431",
+      "bytes": 80853
+    },
+    {
+      "path": "zyx/img/opuscar98/38.jpg",
+      "sha256": "f84f488b4b32788f7a7d6233a1956594552b6830f39215b781a80ddc4e3bc1f1",
+      "bytes": 55202
+    },
+    {
+      "path": "zyx/img/opuscar98/39.jpg",
+      "sha256": "8dc79d638094d398b35267fb928efca14c75148d702ad7efcd68aed516c0937d",
+      "bytes": 36571
+    },
+    {
+      "path": "zyx/img/opuscar98/40.jpg",
+      "sha256": "16cb9cd830f16ff9bcdb576abe24cde469d42999157aa76da918bd1c920ed0f6",
+      "bytes": 158243
+    },
+    {
+      "path": "zyx/img/opuscar98/41.jpg",
+      "sha256": "939a523b6ced515686b1c8a358e726ad2f846fc7489bb49166aac72e8a5e5d43",
+      "bytes": 83906
+    },
+    {
+      "path": "zyx/img/opuscar98/42.jpg",
+      "sha256": "c8aa286a277f85116882d30244d390fe2b8cd11b7958e4c919792ec736266989",
+      "bytes": 73993
+    },
+    {
+      "path": "zyx/img/opuscar98/43.jpg",
+      "sha256": "42dd182bbe211bf8727ef4d035103de34f3abab2c9039791c7199d790908997e",
+      "bytes": 107226
+    },
+    {
+      "path": "zyx/img/opuscar98/44.jpg",
+      "sha256": "2b1089bf4ae078531423bbc7615fc45f3d3733376d35d13fb886eee039ec372f",
+      "bytes": 53300
+    },
+    {
+      "path": "zyx/img/opuscar98/45.jpg",
+      "sha256": "fa65bb9c7b24fdedd3fef2194ae274b29153e7ea21ec8bea09db2067f6aefdbd",
+      "bytes": 32659
+    },
+    {
+      "path": "zyx/img/opuscar98/46.jpg",
+      "sha256": "8417185a8c7d30bfbfe4b3cdb1e90a49dda5230646af67023da796121a51f3c6",
+      "bytes": 61692
+    },
+    {
+      "path": "zyx/img/opuscar98/47.jpg",
+      "sha256": "56daea46bb8e23538371f01aa8dac5adb1583308abe3b65376aec6e50184966e",
+      "bytes": 37222
+    },
+    {
+      "path": "zyx/img/opuscar98/48.jpg",
+      "sha256": "a37025a67b20e145f5993e2cac8a6fba6ac1cba0c0550e2ba420927b5f818b1c",
+      "bytes": 38891
+    },
+    {
+      "path": "zyx/img/opuscar98/49.jpg",
+      "sha256": "e7591e0460864744b57230df102df9e3db072520a9f69457a540ea3dcbd91f05",
+      "bytes": 52829
+    },
+    {
+      "path": "zyx/img/opuscar98/50.jpg",
+      "sha256": "8c3b63a70f6519eef98ba69a16a80c4f2a1c21fdfbb1b6e9c9630967a0bacb5d",
+      "bytes": 53843
+    },
+    {
+      "path": "zyx/img/opuscar98/51.jpg",
+      "sha256": "cb4079b7168b780f5c178e7106c76af66fd1bebf370cdf1229d87b260a6ed840",
+      "bytes": 43038
+    },
+    {
+      "path": "zyx/img/opuscar98/52.jpg",
+      "sha256": "216a010fe99404fa059f2a2226ac7cb79bca7253203ae62265c3c249b37d67a7",
+      "bytes": 148961
+    },
+    {
+      "path": "zyx/img/opuscar98/53.jpg",
+      "sha256": "9b45d9fd56df434368a7a1840fa2c15f7251ec3c4a18ba646f435ef753e9bb5c",
+      "bytes": 56046
+    },
+    {
+      "path": "zyx/img/opuscar98/54.jpg",
+      "sha256": "dcf351993fe8a9c353992f7462858adb948466ddfc0c5a71a47b517ee744dc99",
+      "bytes": 135362
+    },
+    {
+      "path": "zyx/img/opuscar98/55.jpg",
+      "sha256": "7b514bea3d57aba4fb42c528dabf24c62406c683c2117e5e47cdc07bd17ec56a",
+      "bytes": 84686
+    },
+    {
+      "path": "zyx/img/opuscar98/56.jpg",
+      "sha256": "d281883627fcbaeb784c8c2e0d97f5df49745fcf7e56a64e55f1a8fe79469afe",
+      "bytes": 30900
+    },
+    {
+      "path": "zyx/img/opuscar98/57.jpg",
+      "sha256": "fee26d995caf18cd4f0f6956bea596ee8a8704b2dd5ed957f68ce86fabd46603",
+      "bytes": 52075
+    },
+    {
+      "path": "zyx/img/opuscar98/58.jpg",
+      "sha256": "116ed8711c5cfa84c4c207afc25481955189e30ed3ffd6e9fbc22464aacac96f",
+      "bytes": 36120
+    },
+    {
+      "path": "zyx/img/opuscar98/59.jpg",
+      "sha256": "7d0bd4124b751dfdc186b46da715ae8f7c8a7643cb475699c73cc658bcfed928",
+      "bytes": 65040
+    },
+    {
+      "path": "zyx/img/opuscar98/60.jpg",
+      "sha256": "f5035fa3bc9b096c595f82239d9ffb51b6d7b950b67a875d86d76c7f3f8d4ec0",
+      "bytes": 54579
+    },
+    {
+      "path": "zyx/img/opuscar98/61.jpg",
+      "sha256": "070c4f824cfa2d7ce206f6f94336def6fcba0ab7d9228caf098fc75db83addd7",
+      "bytes": 55953
+    },
+    {
+      "path": "zyx/img/opuscar98/62.jpg",
+      "sha256": "648eb5ed1e047f8937a31ad225c6c2e16b0a25f0e28b22aef9198e521a3360a7",
+      "bytes": 53489
+    },
+    {
+      "path": "zyx/img/opuscar98/63.jpg",
+      "sha256": "8d070e02e05fd6436e6df4e26b732f9d7399378b148908a10818f211f6040f3d",
+      "bytes": 47479
+    },
+    {
+      "path": "zyx/img/opuscar98/64.jpg",
+      "sha256": "5c0fa815d778f24acb63b7dea7df7d36220c0b3a21a8582769e480021c53d944",
+      "bytes": 57374
+    },
+    {
+      "path": "zyx/img/opuscar98/65.jpg",
+      "sha256": "62527cd1caf1e14f0ed2dabb3e2ef0883e2e4e60a842a94e7c7588fb2efe168e",
+      "bytes": 45921
+    },
+    {
+      "path": "zyx/img/opuscar98/66.jpg",
+      "sha256": "20888bb10146936c080e8772a36e7ab289b3f7ed818044ff88e62d85b7899bb6",
+      "bytes": 79960
+    },
+    {
+      "path": "zyx/img/opuscar98/67.jpg",
+      "sha256": "3568ca13bcfe07887a5c25c36d80efd93529483e0e3ef0bd850daa09cd64ed65",
+      "bytes": 36514
+    },
+    {
+      "path": "zyx/img/opuscar98/68.jpg",
+      "sha256": "aaedd8831c114652b6cf191b92c9a6b4899cae26f0b355adf0d6fb3f122f8045",
+      "bytes": 99532
+    },
+    {
+      "path": "zyx/img/opuscar98/69.jpg",
+      "sha256": "82e3ebcb226a7adc3ab2c26ac5796aa1310ddf16e8db30a368130b46f815dbc2",
+      "bytes": 65560
+    },
+    {
+      "path": "zyx/img/opuscar98/70.jpg",
+      "sha256": "3c5461f9140782d0fdcdf30021e24756118844cc1103295dddca66bbfbd7ca0e",
+      "bytes": 60297
+    },
+    {
+      "path": "zyx/img/opuscar98/71.jpg",
+      "sha256": "770eb9749cef425582264ec53c5eee841fdcbca80f313df16c77a04d6df41133",
+      "bytes": 48712
+    },
+    {
+      "path": "zyx/img/opuscar98/72.jpg",
+      "sha256": "2e27088ee1851c27089ff152a77f871336f29c834d296d24fa511c7787d4ef99",
+      "bytes": 67855
+    },
+    {
+      "path": "zyx/img/opuscar98/73.jpg",
+      "sha256": "dbeb9ca37ed2519e3dde2f0ae07307f414b7720ffd16a7475c56c34d210b5973",
+      "bytes": 104439
+    },
+    {
+      "path": "zyx/img/opuscar98/74.jpg",
+      "sha256": "fdb637731b2becc73e82dd625e9d99b1aff4f01a4b1de40e607cc56528086bbf",
+      "bytes": 43994
+    },
+    {
+      "path": "zyx/img/opuscar98/75.jpg",
+      "sha256": "8a4bd7c238d23049b5321235daf9aaed2d82873b0cca61032328aa094375f0b0",
+      "bytes": 57818
+    },
+    {
+      "path": "zyx/img/opuscar98/76.jpg",
+      "sha256": "4077420a302beae941085d9c006f9d256b4d14e5b5990f5f2d178d8f0b3272dd",
+      "bytes": 37799
+    },
+    {
+      "path": "zyx/img/opuscar98/77.jpg",
+      "sha256": "8f41bacf5cc7c0d9a18896331a4885fa83d1d35100905e7cf8bdd89e524de336",
+      "bytes": 53452
+    },
+    {
+      "path": "zyx/img/opuscar98/78.jpg",
+      "sha256": "4429a58d1037da5015362f7c06a3ee3424498ffec9228cdcf8bf6ad75ed501f5",
+      "bytes": 56325
+    },
+    {
+      "path": "zyx/img/opuscar98/79.jpg",
+      "sha256": "49a89adadc9ff581b837701cb76655be335cfcaa8b7b021c0ff8f936966bd477",
+      "bytes": 70746
+    },
+    {
+      "path": "zyx/img/opuscar98/80.jpg",
+      "sha256": "a313a546f3af969a155fa572c0a2cd1e706e5d4440b90b026b79d407b50249fa",
+      "bytes": 29867
+    },
+    {
+      "path": "zyx/img/opuscar98/81.jpg",
+      "sha256": "9e4808b13d6b10c36659beabe452e7227b91ab585b4f4a4e4d96c2c4dbda5b60",
+      "bytes": 67602
+    },
+    {
+      "path": "zyx/img/opuscar98/82.jpg",
+      "sha256": "ca02e10d76525cf457911f698b6ecc4db62bdc56f2cf40b97829206778cd6af1",
+      "bytes": 98883
+    },
+    {
+      "path": "zyx/img/opuscar98/83.jpg",
+      "sha256": "6869328e9a60eac4521d5a70e11867653ad1ad2faf45895bc577994005271061",
+      "bytes": 44074
+    },
+    {
+      "path": "zyx/img/opuscar98/84.jpg",
+      "sha256": "f708027e57134ad63f76b62994a3fee6dda9f60e7bdcd8346d7226e9a572b0ff",
+      "bytes": 55592
+    },
+    {
+      "path": "zyx/img/opuscar98/85.jpg",
+      "sha256": "c57251361ab8cc7883516af368ac1e33dd958a482ac6b98959e4539c483da8ad",
+      "bytes": 122846
+    },
+    {
+      "path": "zyx/img/opuscar98/86.jpg",
+      "sha256": "f1a2318f94438af13731418f25bb0f46dcb3eb056431cd64ca1390e634c35689",
+      "bytes": 24907
+    },
+    {
+      "path": "zyx/img/opuscar98/87.jpg",
+      "sha256": "6bcf04689855915706615762a453058f363509014a019e15000b3916b5064cc2",
+      "bytes": 28517
+    },
+    {
+      "path": "zyx/img/opuscar98/88.jpg",
+      "sha256": "51b3eb04689e2d08bb80a20af26850b190ac65c5c390f60ccf1a4a672f13e3cd",
+      "bytes": 89759
+    },
+    {
+      "path": "zyx/img/opuscar98/89.jpg",
+      "sha256": "9a7d91c49a5c49bc6e6ad1dccc3cbc84264b8dbc1165fcad8b8b136d2fbca47c",
+      "bytes": 33817
+    },
+    {
+      "path": "zyx/img/opuscar98/90.jpg",
+      "sha256": "a8a32a0c54c16ec80f40dc198abdde90a4eaa305c34d90b2acc5dd46c92b0cea",
+      "bytes": 29764
+    },
+    {
+      "path": "zyx/img/opuscar98/91.jpg",
+      "sha256": "9a7f69f837557772f92c58a88b2c750007f9e6a37f1a17fbad3162e0341668b4",
+      "bytes": 65842
+    },
+    {
+      "path": "zyx/img/opuscar98/92.jpg",
+      "sha256": "151f2670fbc2bda57a4d7f2c83a60bc7011a818e48d6e4ba90a5cb0769bb6bf5",
+      "bytes": 42563
+    },
+    {
+      "path": "zyx/img/opuscar98/93.jpg",
+      "sha256": "7dfa7a3b9a8d301db58273f0ccbf596f0eb88bb7570765956931a862da3a83a5",
+      "bytes": 31454
+    },
+    {
+      "path": "zyx/img/opuscar98/94.jpg",
+      "sha256": "0749985ea2359e065ce4a7fc63ec0359f27f1995dd55d16cb2dcd4302e9cadd1",
+      "bytes": 67090
+    },
+    {
+      "path": "zyx/img/opuscar98/95.jpg",
+      "sha256": "c081ff365ff92500b0ea6fca4f9c4e1b9be0cdeacc2a12b00dd02ccccfb583b8",
+      "bytes": 41204
+    },
+    {
+      "path": "zyx/img/opuscar98/96.jpg",
+      "sha256": "418023a42d1a87025a1ffefb6bee933e1da1bf74eb869e0ad4506ff4f117452f",
+      "bytes": 36418
+    },
+    {
+      "path": "zyx/img/opuscar98/97.jpg",
+      "sha256": "415964f05f9efe6979331cc473186f1b3231db5e4cc944a7a4edb49d8acd4bfa",
+      "bytes": 42789
+    },
+    {
+      "path": "zyx/img/opuscar98/98.jpg",
+      "sha256": "cb919afcc79f7419991a139dd7a37d6c449bade9687d4e1ad60cd163f6ab4824",
+      "bytes": 58963
+    },
+    {
+      "path": "zyx/opuscar98/index.html",
+      "sha256": "d36a84ed2b7e719f0023084442348a5e929a8c082b12c126c6a831da9750adbf",
+      "bytes": 714864
+    },
+    {
+      "path": "zyx/styles.json",
+      "sha256": "5182416599cce02d3c35ea863a570630167ec20ee96836682f0fd3a5d272cad9",
+      "bytes": 470070
+    }
+  ],
+  "snapshot_sha256": "99968683e0ffda06a96b5a8de82e282f57ffc634840c2f2a3829b42ec9a246cc",
+  "total_bytes": 11726266,
+  "source_stable_during_capture": true,
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "max_turns": 24,
+  "max_context_chars": 180000,
+  "mode": "plan",
+  "target_model": "unspecified",
+  "source_observation_policy": "Same frozen Video implementation, initial overview and optional observe/crop tools; no imported videos."
+}

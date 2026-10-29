@@ -1,0 +1,15 @@
+{
+  "case_id": "041__restart__r2",
+  "signature": "761ad4f68f4802ada57cf6e510c668debc164a0bb83a1e8079287a61176e1980",
+  "status": "complete",
+  "started_unix": 1793290432.034134,
+  "elapsed_seconds": 694.1537227630615,
+  "native": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  },
+  "native_sha256": "7d310b2e426072c187f08590206b2068a79bb3d92e3cfcbe6e76e63a16a89ee9"
+}

@@ -1,0 +1,7 @@
+{
+  "prior_run": "../20261030",
+  "reason": "Real model repeatedly alternated crop and overview because prior visual findings were not retained across stateless calls. The final first review correctly limited itself to the latest crop. Planner requested broader review. Only the demonstration process and its inference child were stopped.",
+  "change": "Retain source/input/candidate overviews alongside the latest observation; carry model-authored brief observation notes with evidence IDs; preserve raw failed attempts.",
+  "runtime": "All src imports for this demonstration are pinned to runtime/src. Knowledge and operating instructions are snapshotted per run.",
+  "scope": "Existing videos only. No renderer dispatch, no formal evaluation modification."
+}

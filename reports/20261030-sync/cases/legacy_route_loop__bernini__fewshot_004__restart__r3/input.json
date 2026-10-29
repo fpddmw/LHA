@@ -1,0 +1,418 @@
+{
+  "case_id": "fewshot_004__restart__r3",
+  "sample_id": "fewshot_004",
+  "split": "fewshot",
+  "condition": "long_keep",
+  "prompt": "Transform the entire gym background into a futuristic space-station sports arena: continuous brushed-metal walls, structural ribs, large panoramic windows showing Earth and stars, and blue-white ceiling and window-frame lighting. Replace the gym curtains, cabinets, exercise equipment and blue barriers with integrated station architecture. Dress the near-left player in a fitted silver-white athletic suit with cyan seams and the far-right player in a sleek blue-and-silver technical suit. Keep both faces and hairstyles unchanged, especially the far player's short black hair, glasses and rounded facial proportions. Add a narrow, continuous electric-blue luminous strip directly along the tabletop's outer edges, following every corner in perspective. Keep the white playing lines distinct and retain the existing support geometry. Preserve the tabletop dimensions, net endpoints and flat mesh silhouette. Keep the players on their existing sides, with their body proportions, paddle grips, swing sequence and footwork intact. Preserve the single white ball's trajectory, bounce and contact timing, including natural blur and occlusion. Retain the original framing and camera movement.",
+  "source_video": "benchmark_data/fewshot/004/004.mp4",
+  "source_video_sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+  "fps": 30,
+  "num_frames": 133,
+  "delivery_frames": 133,
+  "seed": 44,
+  "evaluation": {
+    "style": [
+      "Space-station environment with metallic walls",
+      "Blue-white lighting and Earth visible through windows",
+      "Sci-fi athletic clothing",
+      "Glowing blue table edges"
+    ],
+    "preserve": [
+      "Same two players and original sides",
+      "Paddle-swing sequence",
+      "Visible ball motion",
+      "Table and net geometry",
+      "Original camera movement"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "route": "restart",
+  "round": 3,
+  "root_video": "benchmark_data/fewshot/004/004.mp4",
+  "root_video_sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+  "parent_accepted": "out/prompt_probe/20261029_bernini/fewshot_004__long_keep/native.mp4",
+  "user_requirement": "Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement.",
+  "planner": {
+    "route": "restart",
+    "prompt": "Transform the entire gym background into a futuristic space-station sports arena: continuous brushed-metal walls, structural ribs, large panoramic windows showing Earth and stars, and blue-white ceiling and window-frame lighting. Replace the gym curtains, cabinets, exercise equipment and blue barriers with integrated station architecture. Dress the near-left player in a fitted silver-white athletic suit with cyan seams and the far-right player in a sleek blue-and-silver technical suit. Keep both faces and hairstyles unchanged, especially the far player's short black hair, glasses and rounded facial proportions. Add a narrow, continuous electric-blue luminous strip directly along the tabletop's outer edges, following every corner in perspective. Keep the white playing lines distinct and retain the existing support geometry. Preserve the tabletop dimensions, net endpoints and flat mesh silhouette. Keep the players on their existing sides, with their body proportions, paddle grips, swing sequence and footwork intact. Preserve the single white ball's trajectory, bounce and contact timing, including natural blur and occlusion. Retain the original framing and camera movement.",
+    "rationale": "从原片重新生成，优先落实完整舱景和真正的桌面发光边缘；明确保留远侧眼镜与面部，兼顾此前身份改善和场景退化的反馈。",
+    "repair_targets": [
+      "完整实现空间站金属舱壁、地球窗景与蓝白照明",
+      "连续蓝光沿桌面外缘分布"
+    ],
+    "preserve_targets": [
+      "两名球员的面容、发型及远侧眼镜",
+      "近左远右站位、挥拍顺序和步法",
+      "单枚比赛白球及原有球路、触拍和弹跳时序",
+      "桌面几何、透视、球网端点与轮廓",
+      "原有取景和镜头运动"
+    ],
+    "recovery_limitations": [
+      "原片可提供身份和运动依据；现有稀疏采样不足以验证完整球路、精确触球时刻及逐帧镜头运动。"
+    ]
+  },
+  "feedback": {
+    "candidate": {
+      "style_match": {
+        "label": "partial",
+        "evidence": "两名球员已有蓝白科幻运动服，前景增加青蓝光线；背景仍是原体育馆，金属舱壁、太空窗景和地球均未呈现，桌缘也未发光。"
+      },
+      "edits": [
+        {
+          "item": "Space-station environment with metallic walls",
+          "label": "not_done",
+          "confidence": "high",
+          "evidence": "全部采样帧仍保留原有白色立柱、窗帘、储物柜、健身器材及蓝色围挡，未见空间站金属墙面。"
+        },
+        {
+          "item": "Blue-white lighting and Earth visible through windows",
+          "label": "partial",
+          "confidence": "high",
+          "evidence": "右下方地面出现青蓝发光线，但室内仍以原有日光照明为主；普通窗户保持原状，没有可见地球。"
+        },
+        {
+          "item": "Sci-fi athletic clothing",
+          "label": "done",
+          "confidence": "high",
+          "evidence": "近端球员穿白色贴身服，带蓝色拼块和青色线条；远端球员穿蓝白拼接套装，两人的服装改造贯穿全部采样帧。"
+        },
+        {
+          "item": "Glowing blue table edges",
+          "label": "not_done",
+          "confidence": "high",
+          "evidence": "0、60、132帧中，桌面边沿仍是原来的细白线与深色桌框；明显蓝光位于前景地面，没有沿球桌边缘分布。"
+        }
+      ],
+      "preservation": [
+        {
+          "item": "原来的两名球员及各自身份特征",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "近端球员的短发、侧脸轮廓，以及远端球员的短发、眼镜和面部轮廓均能与原片对应。"
+        },
+        {
+          "item": "球员的左右位置与角色",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "近端球员持续位于画面左侧、背侧朝向镜头；远端球员位于右侧并面向近端，双方对打角色保持。"
+        },
+        {
+          "item": "可观察的挥拍动作顺序",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "采样中近端球员反复呈现屈膝准备、向前挥拍、回收的顺序；132帧远端球员向画面右侧跨步转身，与原片末段的可见动作对应。"
+        },
+        {
+          "item": "可见球体数量，没有新增独立球体",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "0、24、36、60、96、132帧的球桌附近可辨认单个白色球影，未见明确分离的额外乒乓球；部分其他帧球影模糊或被遮挡。"
+        },
+        {
+          "item": "球路与击球时刻",
+          "label": "unjudgeable",
+          "confidence": "high",
+          "evidence": "离散球影大致出现在原片对应的桌面两侧，但约0.4秒一次的采样无法建立完整球路，也无法定位球拍触球和桌面弹跳时刻。"
+        },
+        {
+          "item": "球桌桌面的几何形状和透视",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "桌面四角、长宽比例、中线以及近大远小的斜向透视均与原片对应，未见明显桌面变形。"
+        },
+        {
+          "item": "球网的位置和形状",
+          "label": "partial",
+          "confidence": "medium",
+          "evidence": "多数采样帧中球网仍横跨桌面中部，两端位置与原片相近；120帧右半段网面出现发白、粗条纹和局部重叠，形态保留不完整。"
+        },
+        {
+          "item": "镜头取景与可见的运动趋势",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "保持原片斜侧全景构图，球桌近角随序列略向右上移动的趋势相近，末帧也保留了右侧球员跨步的取景范围。"
+        }
+      ],
+      "summary": "服装改造明确，场景改造主要停留在前景地面光线；空间站背景、地球窗景和发光桌缘尚未实现。人物身份、站位、桌面透视及采样动作顺序基本保留，球网局部存在重绘问题。"
+    },
+    "previous": {
+      "style_match": {
+        "label": "clear",
+        "evidence": "金属舱壁、大幅太空窗景、可见地球及蓝白灯带形成明确的空间站运动场氛围，人物服装也加入科幻元素；桌面边缘的发光改造仍不完整。"
+      },
+      "edits": [
+        {
+          "item": "Space-station environment with metallic walls",
+          "label": "done",
+          "confidence": "high",
+          "evidence": "原体育馆背景被金属墙板、倾斜舱体支柱和顶部灯带替换，空间站舱室结构贯穿全部采样帧。"
+        },
+        {
+          "item": "Blue-white lighting and Earth visible through windows",
+          "label": "done",
+          "confidence": "high",
+          "evidence": "顶部与窗框具有蓝白灯带，左上大窗内持续可见地球，其他窗区呈现星空。"
+        },
+        {
+          "item": "Sci-fi athletic clothing",
+          "label": "done",
+          "confidence": "medium",
+          "evidence": "近端球员穿银色反光、青紫发光拼接套装；远端球员换成带轨道状白色图案的蓝色运动上衣及拼接长裤，具有科幻运动服元素。"
+        },
+        {
+          "item": "Glowing blue table edges",
+          "label": "partial",
+          "confidence": "high",
+          "evidence": "强烈青蓝光沿桌下弧形支架及底部框架分布，但桌面四周边沿仍主要呈灰白色，没有形成连续的蓝色发光桌缘。"
+        }
+      ],
+      "preservation": [
+        {
+          "item": "原来的两名球员及各自身份特征",
+          "label": "partial",
+          "confidence": "high",
+          "evidence": "近端球员仍保留可对应的短发和侧脸轮廓；远端球员的发型变为较蓬的侧分，原有眼镜不可辨，面部轮廓也被重绘，身份特征保留不完整。"
+        },
+        {
+          "item": "球员的左右位置与角色",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "近端球员仍在左侧背向镜头，远端球员仍在右侧面向镜头，双方隔桌对打的位置关系保持。"
+        },
+        {
+          "item": "可观察的挥拍动作顺序",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "近端球员的准备、前挥和回收姿态按原有顺序出现，132帧远端球员向右跨步并转身挥拍，整体采样动作顺序可对应原片。"
+        },
+        {
+          "item": "可见球体数量，没有新增独立球体",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "可辨球影的采样帧中，球桌附近呈现单个运动白球，未见明确新增的独立乒乓球；窗外地球与星体属于背景景物。"
+        },
+        {
+          "item": "球路与击球时刻",
+          "label": "unjudgeable",
+          "confidence": "high",
+          "evidence": "白色球影在桌面两侧出现，但稀疏采样及运动模糊不足以核验完整飞行轨迹、触拍时刻或弹跳时刻。"
+        },
+        {
+          "item": "球桌桌面的几何形状和透视",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "桌面仍保留原片的四边形轮廓、中央分线和斜向透视，四角位置大致对应；桌下支架的发光改造未明显改变桌面几何。"
+        },
+        {
+          "item": "球网的位置和形状",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "球网持续位于桌面中部，两端支点、上沿倾斜方向和网面轮廓与原片大致对应，网格细节有所简化。"
+        },
+        {
+          "item": "镜头取景与可见的运动趋势",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "仍采用近端左侧、远端右侧的斜向全景，球桌在画面内缓慢向右上移动的总体趋势与原片接近。"
+        }
+      ],
+      "summary": "空间站环境、地球窗景和蓝白照明已清楚呈现，蓝光主要集中于桌下支架。人物站位及采样动作顺序保留，远端球员的眼镜、发型等身份特征发生变化。"
+    },
+    "next_focus": [
+      {
+        "item": "Space-station environment with metallic walls",
+        "visible_problem": "候选背景仍保留体育馆的白柱、窗帘、储物柜和健身器材。",
+        "desired_visible_state": "背景形成连续的空间站金属舱壁、舱体结构及大型观景窗。",
+        "evidence_frame_indices": [
+          0,
+          60,
+          132
+        ]
+      },
+      {
+        "item": "Blue-white lighting and Earth visible through windows",
+        "visible_problem": "候选只有前景地面蓝光，普通窗户内没有地球。",
+        "desired_visible_state": "场馆具有可见的蓝白灯带与相应照明，大窗内清楚呈现地球。",
+        "evidence_frame_indices": [
+          0,
+          60,
+          132
+        ]
+      },
+      {
+        "item": "Glowing blue table edges",
+        "visible_problem": "候选的发光线位于地面，桌面边沿仍保持原状。",
+        "desired_visible_state": "蓝色发光线沿桌面四周边缘连续分布，并保持原桌面轮廓和透视。",
+        "evidence_frame_indices": [
+          0,
+          60,
+          132
+        ]
+      },
+      {
+        "item": "球网的位置和形状",
+        "visible_problem": "候选120帧右半段网面出现发白、粗条纹和局部重叠。",
+        "desired_visible_state": "球网保持原有两端位置和网面轮廓，局部网格清晰稳定。",
+        "evidence_frame_indices": [
+          120
+        ]
+      }
+    ],
+    "temporal_limitations": [
+      "上述帧号及 evidence_frame_indices 均采用各组 native_index；每组仅12张采样图，相邻约0.4秒。",
+      "采样只能支持可见姿态和动作顺序的总体判断，无法核验帧间连续性、细微肢体运动、球拍接触细节或运动平滑度。",
+      "快速球存在模糊、遮挡及采样缺失，完整球路、精确击球时刻和弹跳时刻均无法判定。",
+      "原片后六张采样的实际时间比对应编辑帧约晚1/30秒，小幅球位和姿态差异不足以确定时序变化。",
+      "镜头取景与整体位移趋势可比较，细微抖动及逐帧相机运动无法从这些采样中核实。"
+    ]
+  },
+  "generation": {
+    "num_inference_steps": 40,
+    "guidance_mode": "v2v_apg",
+    "negative_prompt": ""
+  },
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "token_count": 258,
+  "conditioning_source_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132
+  ],
+  "source_info": {
+    "frames": 134,
+    "fps": 30.0,
+    "seconds": 4.466666666666667,
+    "width": 720,
+    "height": 406
+  }
+}

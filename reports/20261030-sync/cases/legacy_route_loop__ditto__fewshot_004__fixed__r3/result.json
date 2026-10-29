@@ -1,0 +1,18 @@
+{
+  "case_id": "fewshot_004__fixed__r3",
+  "signature": "4a76c0d1e0e56b036edd5ebc402ca5c8683224bf6945b70acc3aa8d62e0dbce4",
+  "status": "complete",
+  "stage": "complete",
+  "started_unix": 1793293106.1854792,
+  "inference_started_unix": 1793293108.681747,
+  "elapsed_seconds": 1052.2199175357819,
+  "native": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "native_sha256": "5b6fff816b51fcd3533ea4461dd5d8e0a34f278d0559c005e359dc51ec7d76e2",
+  "peak_gpu_allocated_gb": 43.571305472
+}

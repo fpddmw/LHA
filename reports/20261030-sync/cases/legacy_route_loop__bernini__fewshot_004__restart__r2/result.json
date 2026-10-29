@@ -1,0 +1,15 @@
+{
+  "case_id": "fewshot_004__restart__r2",
+  "signature": "0dc3ba5d94bb52e4ce9c364b0b8c0c92e10e0b6cddf8c2da063bf81a768b0cda",
+  "status": "complete",
+  "started_unix": 1793292372.1757052,
+  "elapsed_seconds": 615.6838414669037,
+  "native": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "native_sha256": "7d7ae60aa6949f0f455f4fae3bd8a0719dfabceeb3bef672f54919a95e4ba3cc"
+}

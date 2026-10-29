@@ -1,0 +1,25 @@
+{
+  "case_id": "041__planner",
+  "signature": "5b57a1d650975506d9cff7b171bab307cec7226cfdac481b837ede17ac239c3d",
+  "status": "complete",
+  "started_unix": 1793283526.7736974,
+  "stage": "complete",
+  "inference_started_unix": 1793283586.5477924,
+  "elapsed_seconds": 1246.2150304317474,
+  "native": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  },
+  "delivery": {
+    "frames": 100,
+    "fps": 20.0,
+    "seconds": 5.0,
+    "width": 848,
+    "height": 480
+  },
+  "output_sha256": "8068c20121543677df45251245414bbcb3cdc9ca507a44e993cf78215e5b6c09",
+  "peak_gpu_allocated_gb": 44.287856128
+}

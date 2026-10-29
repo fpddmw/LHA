@@ -1,0 +1,281 @@
+{
+  "case_id": "041__cumulative__r2",
+  "sample_id": "041",
+  "split": "main",
+  "condition": "long_keep",
+  "prompt": "Keep the established children's storybook appearance: warm pastel watercolor, delicate drawn contours, colored-pencil hatching and textured cream paper. A long dark-haired woman in a white blazer stands at the left, her head cropped; a light-haired man in a blue striped shirt sits center-right, looking down and writing with his right hand. Her upper hand rests on his shoulder; her lower index finger indicates the writing area. Depict his writing instrument as a slim black ink pen with a smooth barrel, visible pocket clip and narrow pen tip. The writing surface is a small landscape-format white spiral notebook: a single stacked pad with dense binding loops along its camera-facing edge and visible page thickness. To its right lies an independent pale beige loose sheet, with its own outline and a clear separation or overlap boundary from the notebook. His left hand steadies the notebook's right edge; both paper objects lie flat on the tabletop. Preserve the room, composition and existing small movements. Reconstruct the missing pen and binding features from these descriptions in the established illustration style.",
+  "source_video": "out/prompt_probe/20261029_bernini/041__long_keep/native.mp4",
+  "source_video_sha256": "49c26315f1b1bab5ae4b9a1f909bbe4490717934c8c0156e92a4c112a8f1001c",
+  "fps": 20,
+  "num_frames": 101,
+  "delivery_frames": 100,
+  "seed": 43,
+  "evaluation": {
+    "style": [
+      "Recognizable children's storybook illustration",
+      "Warm pastel watercolor washes",
+      "Soft pencil outlines and paper texture"
+    ],
+    "preserve": [
+      "Two original people and their positions",
+      "Man writing with pen and notebook",
+      "Woman beside him and original shoulder contact",
+      "Object layout and camera movement",
+      "Original movement sequence"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "route": "cumulative",
+  "round": 2,
+  "root_video": "benchmark_data/main/041/041.mp4",
+  "root_video_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+  "parent_accepted": "out/prompt_probe/20261029_bernini/041__long_keep/native.mp4",
+  "user_requirement": "Make it look like a children's storybook.",
+  "planner": {
+    "route": "cumulative",
+    "prompt": "Keep the established children's storybook appearance: warm pastel watercolor, delicate drawn contours, colored-pencil hatching and textured cream paper. A long dark-haired woman in a white blazer stands at the left, her head cropped; a light-haired man in a blue striped shirt sits center-right, looking down and writing with his right hand. Her upper hand rests on his shoulder; her lower index finger indicates the writing area. Depict his writing instrument as a slim black ink pen with a smooth barrel, visible pocket clip and narrow pen tip. The writing surface is a small landscape-format white spiral notebook: a single stacked pad with dense binding loops along its camera-facing edge and visible page thickness. To its right lies an independent pale beige loose sheet, with its own outline and a clear separation or overlap boundary from the notebook. His left hand steadies the notebook's right edge; both paper objects lie flat on the tabletop. Preserve the room, composition and existing small movements. Reconstruct the missing pen and binding features from these descriptions in the established illustration style.",
+    "rationale": "候选的绘本风格与人物互动已经成立。完整描述目标画面，集中重建笔和纸本结构，同时保住已实现的外观与空间关系。",
+    "repair_targets": [
+      "将黄褐色铅笔状工具改为带笔夹的黑色墨水笔",
+      "将对开页外观改为近侧装订的线圈本，并区分右侧独立散纸"
+    ],
+    "preserve_targets": [
+      "现有浅色水彩、手绘轮廓、彩铅排线和纸纹",
+      "人物特征、服装、相对位置及低头姿态",
+      "女子搭肩、指页与男子书写、扶本的关系",
+      "手、纸本与桌面的空间关系",
+      "现有背景、取景和小幅运动"
+    ],
+    "recovery_limitations": [
+      "输入候选已丢失笔夹和线圈细节，只能依据文字重建，无法保证与原片的具体几何形态一致。",
+      "散纸边界已弱化，可重建两个对象的关系，原有边缘形状仍有不确定性。"
+    ]
+  },
+  "feedback": {
+    "candidate": {
+      "style_match": {
+        "label": "clear",
+        "evidence": "全部候选样本均呈现柔和浅色、手绘轮廓、彩铅排线和纸面纹理，人物经过插画化简化，儿童绘本风格清楚。"
+      },
+      "edits": [
+        {
+          "item": "Recognizable children's storybook illustration",
+          "label": "done",
+          "confidence": "high",
+          "evidence": "人物、衣物、桌面和背景均统一转为柔和彩铅插画，具有可辨认的儿童故事书观感。"
+        }
+      ],
+      "preservation": [
+        {
+          "item": "原来的两个人及各自身份特征（允许绘本化简化）",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "男子的浅色卷发、蓝色条纹衬衫，以及女子的深色长发、白色外套均保留；面部和发丝变化符合绘本化简化。"
+        },
+        {
+          "item": "两人的相对位置",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "女子仍站在画面左侧，男子仍坐在中右侧并低头面向桌上的书写区域。"
+        },
+        {
+          "item": "男子继续进行书写动作",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "各样本中男子均右手握笔、笔尖朝向纸页，手和笔有小幅位置变化，保留了低头书写的姿态与动作趋势。"
+        },
+        {
+          "item": "书写工具的类别与可辨认形态",
+          "label": "changed",
+          "confidence": "high",
+          "evidence": "原片是带笔夹的黑色笔；候选变为黄褐色杆、削尖端的铅笔状工具，原笔夹和笔杆形态未保留。"
+        },
+        {
+          "item": "笔记本的装订和页本结构",
+          "label": "changed",
+          "confidence": "high",
+          "evidence": "原片小型笔记本的近侧边缘可见密集螺旋圈与叠页厚度；候选呈左右展开的纸页及中央接缝式外观，原有近侧螺旋装订结构消失。"
+        },
+        {
+          "item": "独立纸张与笔记本仍是两个可区分对象",
+          "label": "partial",
+          "confidence": "medium",
+          "evidence": "候选右侧仍有另一块带轮廓的白色纸面，但它与左侧书写面紧密相接，容易读成同一本子的右页；原片独立米色散纸与线圈本的区别更明确。"
+        },
+        {
+          "item": "女子与男子肩部的接触关系",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "女子上方的手仍位于男子画面左侧肩部，指尖与蓝色肩部轮廓相接或重叠，搭肩关系可辨。"
+        },
+        {
+          "item": "手、纸本和桌面的空间关系",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "男子右手握笔位于书写面上方，另一只手扶在纸本右侧；女子下方的手仍指向左侧书写区域，纸本平放于桌面。"
+        },
+        {
+          "item": "镜头取景与可见的运动趋势",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "候选保持相近的固定近景和女子头部出框的取景，男子低头、书写手及女子指页手的小幅变化与原片大致对应。"
+        }
+      ],
+      "summary": "儿童绘本风格已清楚实现，人物、位置和基本互动得到保留。书写工具呈铅笔化，笔记本装订结构改变，独立散纸的辨识度减弱。"
+    },
+    "previous": null,
+    "next_focus": [
+      {
+        "item": "书写工具的类别与可辨认形态",
+        "visible_problem": "黑色带笔夹的笔被改画为黄褐色铅笔状工具。",
+        "desired_visible_state": "在绘本画法中保留原笔的笔夹、笔杆和笔尖特征，使其仍清楚呈现原来的笔类别。",
+        "evidence_frame_indices": [
+          0,
+          5,
+          11
+        ]
+      },
+      {
+        "item": "笔记本的装订和页本结构",
+        "visible_problem": "原本近侧可见的螺旋圈和叠页结构被展开纸页、中央接缝式外观替代。",
+        "desired_visible_state": "恢复小型横向线圈本的页本形态，近侧清楚可见螺旋装订和纸页厚度。",
+        "evidence_frame_indices": [
+          0,
+          5,
+          11
+        ]
+      },
+      {
+        "item": "独立纸张与笔记本仍是两个可区分对象",
+        "visible_problem": "右侧纸面与书写本紧邻相接，容易被理解为同一本子的另一页。",
+        "desired_visible_state": "右侧散纸具有独立外轮廓和明确的分离或遮挡边界，与线圈本保持两个对象的关系。",
+        "evidence_frame_indices": [
+          0,
+          5,
+          11
+        ]
+      }
+    ],
+    "temporal_limitations": [
+      "evidence_frame_indices 按每组12张对齐样本从0计数；样本覆盖0至5秒，相邻间隔约0.45至0.5秒。",
+      "抽样支持判断可见姿态和大致变化；连续笔画、笔尖接触时序、细微手指运动及样本之间的稳定性无法可靠判断。"
+    ]
+  },
+  "generation": {
+    "num_inference_steps": 40,
+    "guidance_mode": "v2v_apg",
+    "negative_prompt": ""
+  },
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "token_count": 249,
+  "conditioning_source_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ],
+  "source_info": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  }
+}

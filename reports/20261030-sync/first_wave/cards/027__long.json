@@ -1,0 +1,156 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "task_id": "027__long",
+  "source_id": "027",
+  "track": "long",
+  "split": "development",
+  "source_video": "benchmark_data/main/027/027.mp4",
+  "source_sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+  "requirement": "Render the tree-lined town skyline as a 19th-century etching, with crisp black ink on lightly aged ivory paper. Define rooftops, domes, and towers with fine contour lines, and build the shaded foliage with dense crosshatching. Replace all color with monochrome tones, leaving the bright sky mostly unmarked for contrast.",
+  "duration_seconds": 5.0,
+  "source_start_seconds": 0,
+  "status": "frozen",
+  "style_required": true,
+  "creativity": "bounded",
+  "annotation_note": "Retrospective development evaluation. Source timeline reviewed before this scoring run; outputs already existed. Not a prospective held-out annotation.",
+  "style_family": "etching",
+  "scene_summary": "俯瞰树木间的城镇屋顶，远处有圆顶、塔楼，天空明亮且基本空旷，视点缓慢移动。",
+  "allowed_changes": [
+    "将颜色、材质、线条与明暗转为蚀刻版画语言；允许纸张质感和形体描绘的风格化简化。",
+    "保留城镇和树木的主要布局、地标轮廓及原有视点变化；不无故增加新的独立主体。"
+  ],
+  "groups": [
+    {
+      "id": "style_goal",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "etching_style",
+          "text": "整体呈现可辨认的十九世纪蚀刻版画风格。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "ink_paper",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "black_ivory",
+          "text": "使用清晰黑墨和轻微做旧的象牙白纸底。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "monochrome",
+          "text": "将原有彩色转为单色明暗。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "line_design",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "fine_contours",
+          "text": "用细轮廓线刻画屋顶、圆顶和塔楼。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "foliage_hatching",
+          "text": "树木阴影以密集交叉排线建立。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "sky",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "unmarked_sky",
+          "text": "明亮天空大部分保持无刻线的留白，用于形成对比。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "layout",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "town_layout",
+          "text": "保留城镇、前景屋顶、远处天际线与树丛的主要相对位置。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "landmarks",
+          "text": "原有显著圆顶与塔楼仍可对应，其基本轮廓及相对位置保持；允许线描简化。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "camera",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "camera_progression",
+          "text": "保持原片缓慢的视点移动方向及主要画面变化顺序。",
+          "mandatory": true,
+          "temporal": true,
+          "evidence": "sequence",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "incidental",
+      "kind": "preserve_detail",
+      "items": [
+        {
+          "id": "roof_details",
+          "text": "可辨认的屋顶边缘和附属结构得到保留，允许线描概括。",
+          "mandatory": false,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "open_sky",
+          "text": "天空没有增加无关的独立物体或明显新主体；纸纹与排线属于允许表达。",
+          "mandatory": false,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    }
+  ],
+  "reviewed_by": "source-review-by-evaluation-session-2026-10-30",
+  "card_sha256": "4b2e84b4e13b493a0ae502df2483cf9efac13ecdb3dd8d91f1bf0411e56fcf57"
+}

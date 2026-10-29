@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "case_id": "bernini__baseline__027__short",
+      "method": "bernini__baseline_short",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__short.json",
+      "output_video": "reports/20261030-sync/media/1269d52ce2626bf0cad6bfc5430595fe367e9c024082da7e6a7efec31a9f60c1.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__027__short.json"
+    },
+    {
+      "case_id": "bernini__baseline__027__long",
+      "method": "bernini__baseline_long",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__long.json",
+      "output_video": "reports/20261030-sync/media/1ec406b5563568822f8d06851abb81537b8113f6046ff44a07b35b1c0f3ce16f.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__027__long.json"
+    },
+    {
+      "case_id": "bernini__baseline__027__long_keep",
+      "method": "bernini__baseline_long_keep",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__long.json",
+      "output_video": "reports/20261030-sync/media/5f624085e062729e9b35f9326be306dff7e87b1beea3c49857bc1600a30b49a5.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__027__long_keep.json"
+    },
+    {
+      "case_id": "bernini__baseline__041__short",
+      "method": "bernini__baseline_short",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__short.json",
+      "output_video": "reports/20261030-sync/media/6a9961b509bfa8c5b312fa5cbb7a4b09e05ba107f7bde9a7e764bccbcb2fa2a4.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__041__short.json"
+    },
+    {
+      "case_id": "bernini__baseline__041__long",
+      "method": "bernini__baseline_long",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__long.json",
+      "output_video": "reports/20261030-sync/media/d8875e3d451a060367de30cab9057d9329506b585a1bb1439802ce828ae18f8d.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__041__long.json"
+    },
+    {
+      "case_id": "bernini__baseline__041__long_keep",
+      "method": "bernini__baseline_long_keep",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__long.json",
+      "output_video": "reports/20261030-sync/media/49c26315f1b1bab5ae4b9a1f909bbe4490717934c8c0156e92a4c112a8f1001c.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__041__long_keep.json"
+    },
+    {
+      "case_id": "bernini__baseline__fewshot_004__long",
+      "method": "bernini__baseline_long",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+      "output_video": "reports/20261030-sync/media/4dcdac10fbb987091ecb89d05a2d913f5102d46fb6feb48b3193504931fd551c.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__fewshot_004__long.json"
+    },
+    {
+      "case_id": "bernini__baseline__fewshot_004__long_keep",
+      "method": "bernini__baseline_long_keep",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+      "output_video": "reports/20261030-sync/media/f8f6ccb0eba548a6a4890636f04a03986e6fe6e7519ec3f57f6b6728a7aac3b0.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__fewshot_004__long_keep.json"
+    },
+    {
+      "case_id": "bernini__baseline__024__long",
+      "method": "bernini__baseline_long",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/024__long.json",
+      "output_video": "reports/20261030-sync/media/3a085bd7dc580c3c8fe67e0071c056e582f88001e0a81ce2368e19d4256f2cd1.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__024__long.json"
+    },
+    {
+      "case_id": "bernini__baseline__024__long_keep",
+      "method": "bernini__baseline_long_keep",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/024__long.json",
+      "output_video": "reports/20261030-sync/media/b3b8b4cc6e829021e19d1126309a9fe23e62646eab3f624b2173771cfbb1a796.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__baseline__024__long_keep.json"
+    },
+    {
+      "case_id": "bernini__planner__041__planner",
+      "method": "bernini__planner_planner",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__short.json",
+      "output_video": "reports/20261030-sync/media/084845954240b71d1ab83f376215da0eeaf6b57b08e1ca13be35ee8dac4a4c4f.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__planner__041__planner.json"
+    },
+    {
+      "case_id": "bernini__planner__fewshot_004__planner",
+      "method": "bernini__planner_planner",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+      "output_video": "reports/20261030-sync/media/7fcc2cca80405e35344700779265ea9e7f8bb79cd24923383396e1c29fc4762f.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__planner__fewshot_004__planner.json"
+    },
+    {
+      "case_id": "bernini__planner__027__planner",
+      "method": "bernini__planner_planner",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__short.json",
+      "output_video": "reports/20261030-sync/media/c9dd33efcfd591846e18d1bf478cf159bdb94ac54af0c9ad9cb9520dcc8dcb58.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__planner__027__planner.json"
+    },
+    {
+      "case_id": "bernini__planner__024__planner",
+      "method": "bernini__planner_planner",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/024__long.json",
+      "output_video": "reports/20261030-sync/media/025008264d78e21bdb4bb8518659ffaf3271daf7ad59020b13beb9e8f9f726bc.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/bernini__planner__024__planner.json"
+    },
+    {
+      "case_id": "ditto__baseline__027__short",
+      "method": "ditto__baseline_short",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__short.json",
+      "output_video": "reports/20261030-sync/media/11b7c7240e3527d418455f25984b1aefdb2fef3c83c5b85897f84a436a571944.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__027__short.json"
+    },
+    {
+      "case_id": "ditto__baseline__027__long",
+      "method": "ditto__baseline_long",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__long.json",
+      "output_video": "reports/20261030-sync/media/a575b96319fad2d805e3498cb5a5c157a9616129d04352d0927caa612124ed3b.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__027__long.json"
+    },
+    {
+      "case_id": "ditto__baseline__027__long_keep",
+      "method": "ditto__baseline_long_keep",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__long.json",
+      "output_video": "reports/20261030-sync/media/aec694ef36c414966f716a7e184899d17a59d3ecb1c22cfb369b15bfde796b53.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__027__long_keep.json"
+    },
+    {
+      "case_id": "ditto__baseline__041__short",
+      "method": "ditto__baseline_short",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__short.json",
+      "output_video": "reports/20261030-sync/media/4b96c51685f8a3d038614167c15b5dd6e159c1731e1978fdb2e9c8ee6c327e0d.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__041__short.json"
+    },
+    {
+      "case_id": "ditto__baseline__041__long",
+      "method": "ditto__baseline_long",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__long.json",
+      "output_video": "reports/20261030-sync/media/59df455539cc6ea9d7b6988cf1e663676fcd1c7ac6758527a02a4f72632e2889.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__041__long.json"
+    },
+    {
+      "case_id": "ditto__baseline__041__long_keep",
+      "method": "ditto__baseline_long_keep",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__long.json",
+      "output_video": "reports/20261030-sync/media/0482749fc23f83d803b985dac23cb68d8579f0ce9750bacdf5e346145655c2b8.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__041__long_keep.json"
+    },
+    {
+      "case_id": "ditto__baseline__fewshot_004__long",
+      "method": "ditto__baseline_long",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+      "output_video": "reports/20261030-sync/media/8d8be1abd228e2f44f0c9ac6b0b2e7f79bd7844f42ff4292c751d53eb45d779c.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__fewshot_004__long.json"
+    },
+    {
+      "case_id": "ditto__baseline__fewshot_004__long_keep",
+      "method": "ditto__baseline_long_keep",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+      "output_video": "reports/20261030-sync/media/6cc19bd6dedf957f50ea61f12dadb34b938abb3c8357ad2afdc17113f5ab84b3.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__fewshot_004__long_keep.json"
+    },
+    {
+      "case_id": "ditto__baseline__024__long",
+      "method": "ditto__baseline_long",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/024__long.json",
+      "output_video": "reports/20261030-sync/media/4fe84c16a08a9bdae8613eec3260d112d001cca6a5367ea8740f8ba5d5ec6f0a.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__024__long.json"
+    },
+    {
+      "case_id": "ditto__baseline__024__long_keep",
+      "method": "ditto__baseline_long_keep",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/024__long.json",
+      "output_video": "reports/20261030-sync/media/62316dea35336318a92fcdd2ead8531fbe0279ba2abc54fad0200130367b6744.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__baseline__024__long_keep.json"
+    },
+    {
+      "case_id": "ditto__planner__041__planner",
+      "method": "ditto__planner_planner",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__short.json",
+      "output_video": "reports/20261030-sync/media/6701a4f8ac8ccc818b834d537b0056bd9b66d3bcc1d1a98847cba01e93e35b0f.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__planner__041__planner.json"
+    },
+    {
+      "case_id": "ditto__planner__fewshot_004__planner",
+      "method": "ditto__planner_planner",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+      "output_video": "reports/20261030-sync/media/fa2d443e25f190ace4676bf28a81e6727596d843bfd07914a7d57d7a3e216690.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__planner__fewshot_004__planner.json"
+    },
+    {
+      "case_id": "ditto__planner__027__planner",
+      "method": "ditto__planner_planner",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__short.json",
+      "output_video": "reports/20261030-sync/media/e69d8eeccd3e468c7c716ff0f81b93b07eefc0920a08a40b0c2e153558d13d4e.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__planner__027__planner.json"
+    },
+    {
+      "case_id": "ditto__planner__024__planner",
+      "method": "ditto__planner_planner",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/024__long.json",
+      "output_video": "reports/20261030-sync/media/c19851e110af7f7bb328f0adc053ed2883724e74df79b6ed4ab35da36acc8bc2.mp4",
+      "mapping": "reports/20261030-sync/first_wave/mappings/ditto__planner__024__planner.json"
+    },
+    {
+      "case_id": "source_control__041",
+      "method": "source_control",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/041__short.json",
+      "output_video": "benchmark_data/main/041/041.mp4"
+    },
+    {
+      "case_id": "source_control__027",
+      "method": "source_control",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/027__short.json",
+      "output_video": "benchmark_data/main/027/027.mp4"
+    },
+    {
+      "case_id": "source_control__024",
+      "method": "source_control",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/024__long.json",
+      "output_video": "benchmark_data/main/024/024.mp4"
+    },
+    {
+      "case_id": "source_control__fewshot_004",
+      "method": "source_control",
+      "seed": 42,
+      "card": "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+      "output_video": "benchmark_data/fewshot/004/004.mp4"
+    }
+  ]
+}

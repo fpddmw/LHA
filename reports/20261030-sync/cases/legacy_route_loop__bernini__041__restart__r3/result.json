@@ -1,0 +1,15 @@
+{
+  "case_id": "041__restart__r3",
+  "signature": "38a6ccf0a8c22c6ea5015261cedc611ebad157d80f2decdad18528ca5b9be6bd",
+  "status": "complete",
+  "started_unix": 1793294409.630141,
+  "elapsed_seconds": 710.0289485454559,
+  "native": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  },
+  "native_sha256": "9cccb24d3ddb74ec0355f7b063bfb0f930515d2fbd542babda56323c683e59fd"
+}

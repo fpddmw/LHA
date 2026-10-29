@@ -1,0 +1,22 @@
+{
+  "case_id": "fewshot_004__long_keep",
+  "signature": "879c5823f278ce1ed9bca37ae404b007809706749e9277d2f7edc9124ed93fa9",
+  "status": "complete",
+  "started_unix": 1793262810.0196435,
+  "elapsed_seconds": 410.1079375743866,
+  "native": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "delivery": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "output_sha256": "722b3e7e730e8ccbe9ea2df0927443d2b2242aadd0cb1e7afb8c8b19b096a538"
+}

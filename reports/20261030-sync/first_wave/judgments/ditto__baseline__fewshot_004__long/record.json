@@ -1,0 +1,83 @@
+{
+  "case_id": "ditto__baseline__fewshot_004__long",
+  "method": "ditto__baseline_long",
+  "seed": 42,
+  "output_video": "out/prompt_probe/20261029_ditto/fewshot_004__long/native.mp4",
+  "evaluation_revision": "first-wave-v2-self-excluded",
+  "case_sha256": "67ad770c6dd70f31f82a8f4e2a5e1fe550ffa41df5eb67ee59d3fa54d2bf6569",
+  "evidence_sha256": "d110258993c40047fe87fcdbc062bb7dbd446929936282c528d0274dedaa5523",
+  "status": "complete",
+  "result": {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+    "task_id": "fewshot_004__long",
+    "source_id": "fewshot_004",
+    "track": "long",
+    "split": "development",
+    "style_family": "space_station_sports",
+    "creativity": "bounded",
+    "semantic": {
+      "edit": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 5,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_core": {
+        "score": 61.111111111111114,
+        "lower": 61.111111111111114,
+        "upper": 61.111111111111114,
+        "complete_rate": 38.88888888888889,
+        "coverage": 100.0,
+        "items": 7,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_detail": {
+        "score": 50.0,
+        "lower": 50.0,
+        "upper": 50.0,
+        "complete_rate": 0.0,
+        "coverage": 100.0,
+        "items": 1,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_time": {
+        "score": 83.33333333333334,
+        "lower": 83.33333333333334,
+        "upper": 83.33333333333334,
+        "complete_rate": 66.66666666666666,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      }
+    },
+    "ratings": {
+      "style": 3.9,
+      "narrative_emotional_fit": 3.1,
+      "style_world_consistency": 2.6,
+      "composition_lighting": 3.5,
+      "color_texture": 3.6,
+      "hierarchy_readability": 2.9,
+      "temporal_coherence": 2.9,
+      "scene_specific_design": 3.3,
+      "relative_originality": 2.0,
+      "aesthetic_mean": 3.14
+    },
+    "success": "fail",
+    "failure_reasons": [
+      "mandatory_semantics",
+      "major_unrequested_damage"
+    ],
+    "delivery": "valid",
+    "unrequested_damage": true,
+    "major_damage": true
+  },
+  "elapsed_seconds": 999.5647642612457
+}

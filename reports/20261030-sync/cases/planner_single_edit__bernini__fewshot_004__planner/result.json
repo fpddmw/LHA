@@ -1,0 +1,22 @@
+{
+  "case_id": "fewshot_004__planner",
+  "signature": "f83b53175c0f54772b36f2c7fe2d0fc8c8054ebddfa7932d9551aa592748cb8d",
+  "status": "complete",
+  "started_unix": 1793285525.7366261,
+  "elapsed_seconds": 605.8375377655029,
+  "native": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "delivery": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "output_sha256": "522482d96b9784c4d5ec9db5b94b31ab4dfaf7f6a5186164ff4259febeb3f31d"
+}

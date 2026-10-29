@@ -1,0 +1,55 @@
+{
+  "validated_at_utc": "2026-10-29T18:47:52.946124+00:00",
+  "isolated_copy": true,
+  "suites": [
+    {
+      "suite": "test_critic_harness.py",
+      "exit_code": 0,
+      "tests": 22
+    },
+    {
+      "suite": "test_planner_harness.py",
+      "exit_code": 0,
+      "tests": 11
+    },
+    {
+      "suite": "test_continuous_planner.py",
+      "exit_code": 0,
+      "tests": 6
+    },
+    {
+      "suite": "test_planner_worker.py",
+      "exit_code": 0,
+      "tests": 6
+    },
+    {
+      "suite": "test_planner_experience.py",
+      "exit_code": 0,
+      "tests": 3
+    },
+    {
+      "suite": "test_agent_loop.py",
+      "exit_code": 0,
+      "tests": 12
+    },
+    {
+      "suite": "test_evaluation.py",
+      "exit_code": 0,
+      "tests": 32,
+      "skipped": 0
+    },
+    {
+      "suite": "test_critic_holds.py",
+      "exit_code": 0,
+      "tests": 9
+    }
+  ],
+  "all_passed": true,
+  "scope": "Synthetic/local checks only; no paid model or GPU generation calls.",
+  "notes": [
+    "Critic suite also imports 11 Planner tests; test executions are not distinct cases.",
+    "Initial concurrent tests contended on the shared knowledge lock; final checks ran sequentially in an isolated copy.",
+    "Legacy revision source/original labeling regression was fixed, then its 12 tests passed.",
+    "No model or GPU generation was invoked by these checks."
+  ]
+}

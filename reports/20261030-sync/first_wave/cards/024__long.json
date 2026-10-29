@@ -1,0 +1,156 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "task_id": "024__long",
+  "source_id": "024",
+  "track": "long",
+  "split": "development",
+  "source_video": "benchmark_data/main/024/024.mp4",
+  "source_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+  "requirement": "Transform the man’s phone call in the beige leather car interior into digital glitch art, with high-contrast shadows and RGB color separation across his navy suit, seats, and window reflections. Apply horizontal pixel shifts, fragmented blocks, and flickering scan-line textures across the entire frame, with distorted color highlights.",
+  "duration_seconds": 5.0,
+  "source_start_seconds": 0,
+  "status": "frozen",
+  "style_required": true,
+  "creativity": "bounded",
+  "annotation_note": "Retrospective development evaluation. Source timeline reviewed before this scoring run; outputs already existed. Not a prospective held-out annotation.",
+  "style_family": "digital_glitch",
+  "scene_summary": "男子在米色皮质汽车后座持黑色手机贴耳通话，穿深色西装及白衬衫，头部、嘴部有细小动作。",
+  "allowed_changes": [
+    "按要求让全画面呈现高反差、RGB 分离、像素横移、碎片方块和闪烁扫描线。",
+    "允许有意的通道重影、局部位移及色彩高光变化；仍需辨认原男子、手机通话和车内关系。"
+  ],
+  "groups": [
+    {
+      "id": "style_goal",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "glitch_style",
+          "text": "整段画面形成清晰可识别的数字故障艺术表达。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "color",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "contrast",
+          "text": "阴影具有高对比，并有失真的彩色高光。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "rgb",
+          "text": "男子深色西装、座椅与车窗反射等处可见 RGB 通道分离。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "spatial_glitches",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "horizontal_shifts",
+          "text": "画面存在水平像素位移。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "fragmented_blocks",
+          "text": "画面存在碎片块状故障效果。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "scanlines",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "scanline_flicker",
+          "text": "扫描线纹理在全画面范围随时间闪烁。",
+          "mandatory": true,
+          "temporal": true,
+          "evidence": "sequence",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "subject_relation",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "same_man",
+          "text": "男子仍是原来可辨认的人物；允许故障风格造成的通道重影，不将重影当成新增人物。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "phone_contact",
+          "text": "黑色手机、手与耳朵之间的通话关系仍清楚可辨。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "event",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "call_continues",
+          "text": "保持原有持续通话活动及主要动作进程；不要求消除用户指定的像素扰动。",
+          "mandatory": true,
+          "temporal": true,
+          "evidence": "sequence",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "layout",
+      "kind": "preserve_detail",
+      "items": [
+        {
+          "id": "car_layout",
+          "text": "座椅、车窗和人物的主要空间关系保持，允许故障位移。",
+          "mandatory": false,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "fine_motion",
+          "text": "仍可对应原有细小头部、嘴部及手部运动顺序；不能由静态姿态推断。",
+          "mandatory": false,
+          "temporal": true,
+          "evidence": "sequence",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    }
+  ],
+  "reviewed_by": "source-review-by-evaluation-session-2026-10-30",
+  "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72"
+}

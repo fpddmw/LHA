@@ -1,0 +1,80 @@
+{
+  "case_id": "bernini__planner__024__planner",
+  "method": "bernini__planner_planner",
+  "seed": 42,
+  "output_video": "out/planner_probe/20261029_bernini/024__planner/native.mp4",
+  "evaluation_revision": "first-wave-v2-self-excluded",
+  "case_sha256": "3ff9614635df236fadf84f4734f756454a72bad2216e1fc58efa4787d62b1655",
+  "evidence_sha256": "28ec8626f4d734a2468a74c4754a649c3e66ba1de6bf7218b52530376f36d41f",
+  "status": "complete",
+  "result": {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+    "task_id": "024__long",
+    "source_id": "024",
+    "track": "long",
+    "split": "development",
+    "style_family": "digital_glitch",
+    "creativity": "bounded",
+    "semantic": {
+      "edit": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 6,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_core": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_detail": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 2,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_time": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 2,
+        "unknown": 0,
+        "status": "complete"
+      }
+    },
+    "ratings": {
+      "style": 3.7,
+      "narrative_emotional_fit": 3.6,
+      "style_world_consistency": 3.8,
+      "composition_lighting": 3.6,
+      "color_texture": 3.7,
+      "hierarchy_readability": 3.5,
+      "temporal_coherence": 3.8,
+      "scene_specific_design": 3.1,
+      "relative_originality": 2.6,
+      "aesthetic_mean": 3.64
+    },
+    "success": "pass",
+    "failure_reasons": [],
+    "delivery": "valid",
+    "unrequested_damage": false,
+    "major_damage": false
+  },
+  "elapsed_seconds": 387.1643784046173
+}

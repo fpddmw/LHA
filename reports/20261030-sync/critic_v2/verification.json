@@ -1,0 +1,14 @@
+{
+  "distinct_tests_passed": 34,
+  "suites": {
+    "scripts/test_critic_harness.py": 11,
+    "scripts/test_planner_harness.py": 11,
+    "scripts/test_continuous_planner.py": 6,
+    "scripts/test_planner_worker.py": 6
+  },
+  "test_executions": 37,
+  "synthetic_fixtures": true,
+  "additional_boundary_check": "Temporal findings without explicit continuous evidence are rejected.",
+  "real_validation": "Running separately in this directory; no fixture outputs are counted as model evidence.",
+  "prior_issue": "See revision.json for the observed visual-memory defect and repair."
+}

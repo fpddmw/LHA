@@ -1,0 +1,330 @@
+{
+  "case_id": "041__cumulative__r3",
+  "sample_id": "041",
+  "split": "main",
+  "condition": "long_keep",
+  "prompt": "Maintain the established children's storybook rendering: pastel watercolor washes, colored-pencil hatching, delicate outlines and cream paper grain. Keep the light-haired man in his blue striped shirt seated center-right, looking down and writing right-handed with the slim black ink pen. The long-haired woman in a white blazer stands cropped at the left, retaining her bracelet and dark nails. Her upper hand touches his shoulder; her lower index finger points beside his pen. His left hand steadies the notebook. Make this notebook one small, flat landscape pad with a single exposed white writing surface and a thin stack of aligned pages. A continuous row of small spiral loops runs left-to-right along its bottom long edge nearest the viewer, directly below the writing area. Remove the inner diagonal binding and central fold; the pad has no attached facing-page spread. Preserve the separate beige loose sheet to its right, with its own clear outline. Keep both paper objects flat and retain the hands' contact positions. Preserve the room, plants, framing and existing subtle movements. Leave the remaining tabletop clear.",
+  "source_video": "out/loop_probe/20261029_bernini/041__cumulative__r2/native.mp4",
+  "source_video_sha256": "775879d45f8653d95eae9cd0ce0d2852eef434f7ac0ba8e8d50eaeab874631b9",
+  "fps": 20,
+  "num_frames": 101,
+  "delivery_frames": 100,
+  "seed": 44,
+  "evaluation": {
+    "style": [
+      "Recognizable children's storybook illustration",
+      "Warm pastel watercolor washes",
+      "Soft pencil outlines and paper texture"
+    ],
+    "preserve": [
+      "Two original people and their positions",
+      "Man writing with pen and notebook",
+      "Woman beside him and original shoulder contact",
+      "Object layout and camera movement",
+      "Original movement sequence"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "route": "cumulative",
+  "round": 3,
+  "root_video": "benchmark_data/main/041/041.mp4",
+  "root_video_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+  "parent_accepted": "out/loop_probe/20261029_bernini/041__cumulative__r2/native.mp4",
+  "user_requirement": "Make it look like a children's storybook.",
+  "planner": {
+    "route": "cumulative",
+    "prompt": "Maintain the established children's storybook rendering: pastel watercolor washes, colored-pencil hatching, delicate outlines and cream paper grain. Keep the light-haired man in his blue striped shirt seated center-right, looking down and writing right-handed with the slim black ink pen. The long-haired woman in a white blazer stands cropped at the left, retaining her bracelet and dark nails. Her upper hand touches his shoulder; her lower index finger points beside his pen. His left hand steadies the notebook. Make this notebook one small, flat landscape pad with a single exposed white writing surface and a thin stack of aligned pages. A continuous row of small spiral loops runs left-to-right along its bottom long edge nearest the viewer, directly below the writing area. Remove the inner diagonal binding and central fold; the pad has no attached facing-page spread. Preserve the separate beige loose sheet to its right, with its own clear outline. Keep both paper objects flat and retain the hands' contact positions. Preserve the room, plants, framing and existing subtle movements. Leave the remaining tabletop clear.",
+    "rationale": "已接受版本保留了绘本风格、黑笔和独立散纸，残留问题集中在线圈边位置及对页展开结构。本轮完整描述目标场景，重点修正为近侧长边装订的单叠平放页本。",
+    "repair_targets": [
+      "将内侧斜边线圈改到靠近观众的下侧长边",
+      "消除对页展开与中央折线，形成薄而清楚的单叠页本"
+    ],
+    "preserve_targets": [
+      "现有水彩、彩铅和纸面纹理",
+      "人物特征、位置、扶肩与指页关系",
+      "黑色书写笔及持续书写姿态",
+      "独立米色散纸、桌面承托和手指接触关系",
+      "背景、取景与现有细微运动"
+    ],
+    "recovery_limitations": [
+      "输入中的页本几何已被改写，可按描述重建装订方向与单叠结构；原线圈数量、间距和精确页边轮廓无法保证逐一复原。"
+    ]
+  },
+  "feedback": {
+    "candidate": {
+      "style_match": {
+        "label": "clear",
+        "evidence": "12个采样帧均呈现柔和的彩铅与水彩质感、纸面纹理、简化轮廓和暖色人物肤色，具有明确的儿童绘本插画风格。"
+      },
+      "edits": [
+        {
+          "item": "Recognizable children's storybook illustration",
+          "label": "done",
+          "confidence": "high",
+          "evidence": "人物、衣服、桌面及背景均统一绘本化；浅蓝条纹、淡色背景和手绘排线贯穿全部采样帧。"
+        }
+      ],
+      "preservation": [
+        {
+          "item": "原来的两个人及各自身份特征（允许绘本化简化）",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "浅色短卷发、蓝色条纹衬衫的男子与长直发、白色外套的女子均可辨认；五官与发色经过绘本化简化。"
+        },
+        {
+          "item": "两人的相对位置",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "女子始终站在画面左侧，男子坐在中右侧并俯身朝向桌面，与原片一致。"
+        },
+        {
+          "item": "男子继续进行书写动作",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "男子保持低头握笔、笔尖朝向纸页的姿态，采样间可见握笔手的小幅位置变化，符合原片的书写动作趋势。"
+        },
+        {
+          "item": "书写工具的类别与可辨认形态",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "候选中为深色笔杆、笔式端部和细笔尖，与原片黑色书写笔的可辨认形态相符。"
+        },
+        {
+          "item": "笔记本的装订和页本结构",
+          "label": "partial",
+          "confidence": "high",
+          "evidence": "源帧0、45、100均可见线圈与叠页，但候选线圈位于画面中的内侧斜边，右侧呈摊开书页形态；原片线圈位于靠近镜头的长边，页本平放且未呈现这种双页展开结构。"
+        },
+        {
+          "item": "独立纸张与笔记本仍是两个可区分对象",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "白色笔记本右侧有轮廓独立的米色纸张，两者在全部采样帧中均可区分；纸张比原片更靠右，边缘也更规整。"
+        },
+        {
+          "item": "女子与男子肩部的接触关系",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "女子上方手的指尖仍落在男子画面左侧肩部轮廓处，保留原片扶肩的可见关系。"
+        },
+        {
+          "item": "手、纸本和桌面的空间关系",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "男子握笔手位于纸页上方，另一手按在纸本右侧；女子下方手指向页边，纸本和独立纸张均平置于桌面。"
+        },
+        {
+          "item": "镜头取景与可见的运动趋势",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "保留固定中近景、女子头部出画和男子上半身入画的构图；采样中以低头书写及手部轻微变化为主，与原片的总体趋势相符。"
+        }
+      ],
+      "summary": "儿童绘本风格明确，深色书写笔和独立米色纸张可辨。人物及互动关系基本保留，笔记本的装订位置与展开结构仍偏离原片。"
+    },
+    "previous": {
+      "style_match": {
+        "label": "clear",
+        "evidence": "12个采样帧均使用柔和彩铅排线、水彩晕染、纸面纹理及简化人物轮廓，儿童绘本风格清楚。"
+      },
+      "edits": [
+        {
+          "item": "Recognizable children's storybook illustration",
+          "label": "done",
+          "confidence": "high",
+          "evidence": "人物和室内环境均转为统一的手绘插画，淡蓝衣服、暖色肤色与低对比背景符合儿童绘本观感。"
+        }
+      ],
+      "preservation": [
+        {
+          "item": "原来的两个人及各自身份特征（允许绘本化简化）",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "男子的浅色短卷发、蓝色条纹衬衫，以及女子的长直发、白色外套均保留，人物简化仍与原片角色对应。"
+        },
+        {
+          "item": "两人的相对位置",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "女子在左侧站立，男子在中右侧坐着俯身书写，位置关系与原片一致。"
+        },
+        {
+          "item": "男子继续进行书写动作",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "男子持续保持低头握持书写工具、尖端朝向纸页的姿态，采样中手部有小幅变化。"
+        },
+        {
+          "item": "书写工具的类别与可辨认形态",
+          "label": "changed",
+          "confidence": "high",
+          "evidence": "原片的黑色书写笔变成黄褐色杆身、尖削端部的铅笔形态，全部采样帧均可见该差异。"
+        },
+        {
+          "item": "笔记本的装订和页本结构",
+          "label": "changed",
+          "confidence": "high",
+          "evidence": "原片近侧长边的线圈装订未清楚保留；上一版纸本呈中央接缝连接左右展开页的结构。"
+        },
+        {
+          "item": "独立纸张与笔记本仍是两个可区分对象",
+          "label": "changed",
+          "confidence": "medium",
+          "evidence": "原片右侧独立的米色纸片未单独呈现；对应区域为与左侧纸本相接的白色展开页，两个对象的独立边界不再清楚。"
+        },
+        {
+          "item": "女子与男子肩部的接触关系",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "女子上方手的指尖仍位于男子肩部轮廓处，扶肩关系在采样帧中可辨。"
+        },
+        {
+          "item": "手、纸本和桌面的空间关系",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "男子一手握持工具朝向页上，另一手压住纸本，女子下方手指向左侧页边；纸本仍放在桌面上。"
+        },
+        {
+          "item": "镜头取景与可见的运动趋势",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "固定取景及两人的画面占位与原片对应，采样中保持俯身书写和轻微手部移动的总体趋势。"
+        }
+      ],
+      "summary": "儿童绘本风格明确，人物位置与互动基本保留；书写笔呈铅笔形态，线圈本结构及独立纸张的区分发生变化。"
+    },
+    "next_focus": [
+      {
+        "item": "笔记本的装订和页本结构",
+        "visible_problem": "候选虽有清晰线圈，但装订边转为内侧斜边，页本右侧仍呈双页摊开的结构。",
+        "desired_visible_state": "呈现原片靠近镜头一侧长边装订的平放线圈本，保持整叠页的清楚边界。",
+        "evidence_frame_indices": [
+          0,
+          45,
+          100
+        ]
+      }
+    ],
+    "temporal_limitations": [
+      "每组仅提供0至5秒的12个对齐采样帧；可判断可见姿态与总体趋势，帧间连续性、短暂闪烁和细微形变无法确定。",
+      "采样不足以确认逐笔书写轨迹、精确落笔时刻及笔迹随时间生成的过程。"
+    ]
+  },
+  "generation": {
+    "num_inference_steps": 40,
+    "guidance_mode": "v2v_apg",
+    "negative_prompt": ""
+  },
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "token_count": 257,
+  "conditioning_source_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ],
+  "source_info": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  }
+}

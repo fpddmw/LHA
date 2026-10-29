@@ -1,0 +1,15 @@
+{
+  "case_id": "fewshot_004__fixed__r3",
+  "signature": "876ba0ddb4032ddc941e6d3aa143cebc64dcccd9cd3ae9295c6a0c2ba7d262e8",
+  "status": "complete",
+  "started_unix": 1793283493.3915331,
+  "elapsed_seconds": 645.8965973854065,
+  "native": {
+    "frames": 133,
+    "fps": 30.0,
+    "seconds": 4.433333333333334,
+    "width": 720,
+    "height": 400
+  },
+  "native_sha256": "86c5675fe66391acacd1dc670b2bc28613f1ac76470960e138680da57aeebbb9"
+}

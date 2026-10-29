@@ -1,0 +1,32 @@
+{
+  "case_id": "fewshot_004__long",
+  "sample_id": "fewshot_004",
+  "split": "fewshot",
+  "condition": "long",
+  "prompt": "Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement.",
+  "source_video": "benchmark_data/fewshot/004/004.mp4",
+  "source_video_sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+  "fps": 30,
+  "num_frames": 133,
+  "delivery_frames": 133,
+  "seed": 42,
+  "evaluation": {
+    "style": [
+      "Space-station environment with metallic walls",
+      "Blue-white lighting and Earth visible through windows",
+      "Sci-fi athletic clothing",
+      "Glowing blue table edges"
+    ],
+    "preserve": [
+      "Same two players and original sides",
+      "Paddle-swing sequence",
+      "Visible ball motion",
+      "Table and net geometry",
+      "Original camera movement"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "effective_text": "You are a helpful assistant specialized in video editing.Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement.",
+  "token_count": 80
+}

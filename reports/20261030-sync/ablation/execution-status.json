@@ -1,0 +1,28 @@
+{
+  "updated_utc": "2026-10-29T18:29:06.709218+00:00",
+  "planned_new_videos": 16,
+  "generated_verified_local": {
+    "bernini": 2,
+    "ditto": 1
+  },
+  "renderers": {
+    "bernini": {
+      "status": "waiting_for_loop",
+      "wait_pid": 59363,
+      "pid": 59364
+    },
+    "ditto": {
+      "status": "rendering",
+      "case_ids": [
+        "041__short__full_knowledge",
+        "041__short__no_knowledge"
+      ],
+      "pid": 21189,
+      "started_unix": 1793296621.1740625
+    }
+  },
+  "bernini_loop_worker_pid": 59363,
+  "bernini_following_launcher_pid": 59364,
+  "h800_priority_launcher_pid": 21189,
+  "latest_handoff": "out/ablation_probe/20261030_no_knowledge/handoff/20261029T182725Z"
+}

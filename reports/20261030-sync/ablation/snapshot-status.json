@@ -1,0 +1,8 @@
+{
+  "verified_videos_in_this_export": 4,
+  "available_by_renderer": {
+    "bernini": 2,
+    "ditto": 2
+  },
+  "status_basis": "Hash-verified complete result.json/native.mp4 pairs at the video snapshot cutoff. execution-status.json is an earlier coordinator checkpoint."
+}

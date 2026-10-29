@@ -1,0 +1,30 @@
+{
+  "case_id": "027__long",
+  "sample_id": "027",
+  "split": "main",
+  "condition": "long",
+  "prompt": "Render the tree-lined town skyline as a 19th-century etching, with crisp black ink on lightly aged ivory paper. Define rooftops, domes, and towers with fine contour lines, and build the shaded foliage with dense crosshatching. Replace all color with monochrome tones, leaving the bright sky mostly unmarked for contrast.",
+  "source_video": "benchmark_data/main/027/027.mp4",
+  "source_video_sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+  "fps": 20,
+  "num_frames": 101,
+  "delivery_frames": 100,
+  "seed": 42,
+  "evaluation": {
+    "style": [
+      "Recognizable monochrome etching",
+      "Black contour lines and crosshatching",
+      "Lightly aged ivory paper appearance"
+    ],
+    "preserve": [
+      "Skyline and building layout",
+      "Rooftop, dome and tower shapes and relative positions",
+      "Tree-mass layout",
+      "Camera movement"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "effective_text": "You are a helpful assistant specialized in video editing.Render the tree-lined town skyline as a 19th-century etching, with crisp black ink on lightly aged ivory paper. Define rooftops, domes, and towers with fine contour lines, and build the shaded foliage with dense crosshatching. Replace all color with monochrome tones, leaving the bright sky mostly unmarked for contrast.",
+  "token_count": 94
+}

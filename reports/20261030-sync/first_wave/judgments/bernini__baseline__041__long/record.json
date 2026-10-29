@@ -1,0 +1,80 @@
+{
+  "case_id": "bernini__baseline__041__long",
+  "method": "bernini__baseline_long",
+  "seed": 42,
+  "output_video": "out/prompt_probe/20261029_bernini/041__long/native.mp4",
+  "evaluation_revision": "first-wave-v2-self-excluded",
+  "case_sha256": "842edd66fad0f6087737bf140d1bec583c2e1ed125e99b864b981802cb5ae1cf",
+  "evidence_sha256": "2e62c927e256dc26c881476b213df064027e1213a0018516d044e41111b16760",
+  "status": "complete",
+  "result": {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+    "task_id": "041__long",
+    "source_id": "041",
+    "track": "long",
+    "split": "development",
+    "style_family": "storybook",
+    "creativity": "bounded",
+    "semantic": {
+      "edit": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 6,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_core": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_detail": {
+        "score": 0.0,
+        "lower": 0.0,
+        "upper": 0.0,
+        "complete_rate": 0.0,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_time": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 1,
+        "unknown": 0,
+        "status": "complete"
+      }
+    },
+    "ratings": {
+      "style": 3.9,
+      "narrative_emotional_fit": 4.0,
+      "style_world_consistency": 3.8,
+      "composition_lighting": 3.8,
+      "color_texture": 4.0,
+      "hierarchy_readability": 3.7,
+      "temporal_coherence": 3.9,
+      "scene_specific_design": 3.0,
+      "relative_originality": 1.5,
+      "aesthetic_mean": 3.86
+    },
+    "success": "pass",
+    "failure_reasons": [],
+    "delivery": "valid",
+    "unrequested_damage": true,
+    "major_damage": false
+  },
+  "elapsed_seconds": 352.42422318458557
+}

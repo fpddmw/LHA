@@ -1,0 +1,20 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "handoff": "out\\evaluation_handoff\\20261029T163320Z",
+  "status": "prepared",
+  "judge_model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "generated_outputs": 28,
+  "source_controls": 4,
+  "primary_pairs": 8,
+  "scope": "Retrospective development evaluation. Independent blind judge; process records excluded.",
+  "evidence": "Native frame PTS/root mappings. Full dense interval for semantic and temporal evaluation; no endpoint repetition.",
+  "cards": {
+    "027__short": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+    "027__long": "4b2e84b4e13b493a0ae502df2483cf9efac13ecdb3dd8d91f1bf0411e56fcf57",
+    "041__short": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+    "041__long": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+    "fewshot_004__long": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+    "024__long": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72"
+  }
+}

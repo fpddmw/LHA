@@ -1,0 +1,261 @@
+{
+  "status": "priority_pairs_bernini_complete_ditto_running",
+  "snapshot_sha256": "99968683e0ffda06a96b5a8de82e282f57ffc634840c2f2a3829b42ec9a246cc",
+  "planned_new_videos": 16,
+  "runs": [
+    {
+      "task_id": "041__short",
+      "arm": "full_knowledge",
+      "planning_status": "complete",
+      "renders": {
+        "bernini": "priority_after_current_safe_boundary",
+        "ditto": "priority_after_current_safe_boundary"
+      },
+      "run_id": "p01",
+      "planning_path": "out/ablation_probe/20261030_no_knowledge/planning/p01",
+      "attempts": 1,
+      "reads": 0,
+      "prompt_sha256": "8fce9685b4ea329438e14d1c1e0406de1a147839dd42e84f9191ebe0d114820e"
+    },
+    {
+      "task_id": "041__short",
+      "arm": "no_knowledge",
+      "planning_status": "complete",
+      "renders": {
+        "bernini": "priority_after_current_safe_boundary",
+        "ditto": "priority_after_current_safe_boundary"
+      },
+      "run_id": "p02",
+      "planning_path": "out/ablation_probe/20261030_no_knowledge/planning/p02",
+      "attempts": 1,
+      "reads": 0,
+      "prompt_sha256": "0b1347843d5dd17e881fa29c9dc66b2288f178f9469558ccfefadec5fbd5f5ce"
+    },
+    {
+      "task_id": "027__short",
+      "arm": "full_knowledge",
+      "planning_status": "complete",
+      "renders": {
+        "bernini": "after_priority_pair_and_resumed_loop",
+        "ditto": "after_priority_pair_and_resumed_loop"
+      },
+      "run_id": "p04",
+      "planning_path": "out/ablation_probe/20261030_no_knowledge/planning/p04",
+      "attempts": 1,
+      "reads": 0,
+      "prompt_sha256": "89b39897400d99a9db13ba95f7995f041d26ffd4ee11a2e77b139cadade06de6"
+    },
+    {
+      "task_id": "027__short",
+      "arm": "no_knowledge",
+      "planning_status": "complete",
+      "renders": {
+        "bernini": "after_priority_pair_and_resumed_loop",
+        "ditto": "after_priority_pair_and_resumed_loop"
+      },
+      "run_id": "p03",
+      "planning_path": "out/ablation_probe/20261030_no_knowledge/planning/p03",
+      "attempts": 1,
+      "reads": 0,
+      "prompt_sha256": "0b64c8a4bab69160a30a264b8fbd898b6c0003b69f9ee0837e0c0e01cc80b16e"
+    },
+    {
+      "task_id": "024__long",
+      "arm": "full_knowledge",
+      "planning_status": "complete",
+      "renders": {
+        "bernini": "after_priority_pair_and_resumed_loop",
+        "ditto": "after_priority_pair_and_resumed_loop"
+      },
+      "run_id": "p05",
+      "planning_path": "out/ablation_probe/20261030_no_knowledge/planning/p05",
+      "attempts": 1,
+      "reads": 0,
+      "prompt_sha256": "dc7c1a1eb7a6d3274336dceddb4f2f54d6473ca58a84e4ff2fb49d9f4498ab1c"
+    },
+    {
+      "task_id": "024__long",
+      "arm": "no_knowledge",
+      "planning_status": "complete",
+      "renders": {
+        "bernini": "after_priority_pair_and_resumed_loop",
+        "ditto": "after_priority_pair_and_resumed_loop"
+      },
+      "run_id": "p06",
+      "planning_path": "out/ablation_probe/20261030_no_knowledge/planning/p06",
+      "attempts": 1,
+      "reads": 0,
+      "prompt_sha256": "11d6693b8d3a90f353f5d8b6b29d7b608c3e28004061e72cd5fce0bb7c9053b9"
+    },
+    {
+      "task_id": "fewshot_004__long",
+      "arm": "full_knowledge",
+      "planning_status": "complete",
+      "renders": {
+        "bernini": "after_priority_pair_and_resumed_loop",
+        "ditto": "after_priority_pair_and_resumed_loop"
+      },
+      "run_id": "p08",
+      "planning_path": "out/ablation_probe/20261030_no_knowledge/planning/p08",
+      "attempts": 1,
+      "reads": 0,
+      "prompt_sha256": "46b3d2e3b301f597b62c864cd7ee737e8c2c72c302410d47c82a3cc08af7cf91"
+    },
+    {
+      "task_id": "fewshot_004__long",
+      "arm": "no_knowledge",
+      "planning_status": "complete",
+      "renders": {
+        "bernini": "after_priority_pair_and_resumed_loop",
+        "ditto": "after_priority_pair_and_resumed_loop"
+      },
+      "run_id": "p07",
+      "planning_path": "out/ablation_probe/20261030_no_knowledge/planning/p07",
+      "attempts": 1,
+      "reads": 0,
+      "prompt_sha256": "d7b6dd0fd09903bac12e818f5f81ba9de1bd9e05a1ccf5c1847b3f6ba4e248c1"
+    }
+  ],
+  "formal_evaluation_owner": "separate session",
+  "authorization": {
+    "source_thread": "01a1862f-9d81-7921-ab98-4fc1ac212c3c",
+    "verified_user_message": "你可以先让消融实验跑起来安排好任务（交给4090部署方案3去做吧，它那边有定时任务），就是无知识库的，然后你这边主持评价。你的方案没问题"
+  },
+  "updated_at": "2026-10-29T17:05:46.005537+00:00",
+  "launchers": {
+    "bernini": {
+      "launcher_pid": 49095,
+      "wait_loop_pid": 40105,
+      "renderer": "bernini",
+      "launched_unix": 1793293716.703558,
+      "status": "waiting_for_existing_loop"
+    },
+    "ditto": {
+      "launcher_pid": 18956,
+      "wait_loop_pid": 15853,
+      "renderer": "ditto",
+      "launched_unix": 1793293650.3531756,
+      "status": "waiting_for_existing_loop"
+    }
+  },
+  "actual_active_knowledge_reads": 0,
+  "priority_schedules": {
+    "bernini": {
+      "schedule_id": "priority-ablation-20261029T172039Z",
+      "requested_unix": 1793294439.0535145,
+      "renderer": "bernini",
+      "wait_loop_pid": 40105,
+      "loop_argv": [
+        "/opt/lha-loop/venv/bin/python",
+        "-u",
+        "scripts/deploy/run_bernini_loop_queue.py",
+        "--run",
+        "out/loop_probe/20261029_bernini"
+      ],
+      "loop_log": "out/deployment/bernini-loop-5090/session.log",
+      "stop_token": "scheduler-yield:priority-ablation-20261029T172039Z",
+      "priority_case_ids": [
+        "041__short__full_knowledge",
+        "041__short__no_knowledge"
+      ],
+      "completed_loop_candidates": 12,
+      "published_unfinished_candidates": [
+        "041__restart__r3"
+      ],
+      "running_candidate": "041__restart__r3",
+      "observed_progress": {
+        "step": 0,
+        "total_steps": 40,
+        "seconds_per_step": 16.59
+      },
+      "safe_boundary": "after_current_preloaded_batch",
+      "remaining_current_candidate_seconds_estimate": 663.6,
+      "yield_wait_seconds_estimate": 663.6,
+      "estimate_scope": "Ditto current candidate estimate; Bernini conservative upper estimate over currently published unfinished queue because the old worker does not expose its already-loaded batch.",
+      "subsequent_order": [
+        "first full/no 041 pair",
+        "resume remaining loop from saved requests and accepted parents",
+        "remaining six ablation cases"
+      ],
+      "no_running_renderer_terminated": true,
+      "priority_launcher_pid": 53766,
+      "replaced_waiting_launcher_pid": 49095,
+      "actual_resume": {
+        "loop_worker_pid": 59363,
+        "following_launcher_pid": 59364,
+        "resumed_unix": 1793296621.4888716,
+        "schedule_id": "priority-ablation-20261029T172039Z",
+        "remaining_order": "Resume unfinished loop, then render remaining ablation cases without repeating the first pair."
+      }
+    },
+    "ditto": {
+      "schedule_id": "priority-ablation-20261029T174556Z",
+      "requested_unix": 1793295956.2473102,
+      "renderer": "ditto",
+      "wait_loop_pid": 20322,
+      "loop_argv": [
+        "/root/lha-runtime/venv/bin/python",
+        "-u",
+        "scripts/deploy/run_ditto_loop_queue.py",
+        "--run",
+        "out/loop_probe/20261029_ditto",
+        "--verified-manifest",
+        "configs/ditto-models-verified.json"
+      ],
+      "loop_log": "out/deployment/ditto-loop-h800/session.log",
+      "stop_token": "scheduler-yield:priority-ablation-20261029T174556Z",
+      "priority_case_ids": [
+        "041__short__full_knowledge",
+        "041__short__no_knowledge"
+      ],
+      "completed_loop_candidates": 5,
+      "published_unfinished_candidates": [
+        "041__incremental__r2",
+        "041__restart__r2",
+        "fewshot_004__cumulative__r2",
+        "fewshot_004__incremental__r2",
+        "fewshot_004__restart__r2"
+      ],
+      "running_candidate": "041__incremental__r2",
+      "observed_progress": {
+        "step": 21,
+        "total_steps": 50,
+        "elapsed_seconds": 511.97539162635803,
+        "updated_unix": 1793295939.6040597
+      },
+      "safe_boundary": "after_current_candidate",
+      "remaining_current_candidate_seconds_estimate": 707.0136360554468,
+      "yield_wait_seconds_estimate": 707.0136360554468,
+      "estimate_scope": "Ditto current candidate estimate; Bernini conservative upper estimate over currently published unfinished queue because the old worker does not expose its already-loaded batch.",
+      "subsequent_order": [
+        "first full/no 041 pair",
+        "resume remaining loop from saved requests and accepted parents",
+        "remaining six ablation cases"
+      ],
+      "no_running_renderer_terminated": true,
+      "priority_launcher_pid": 21189,
+      "replaced_waiting_launcher_pid": 20323
+    }
+  },
+  "knowledge_use_audit": "knowledge-use-audit.json",
+  "local_media_handoff_script": "out/ablation_probe/20261030_no_knowledge/prepare_handoff.py",
+  "infrastructure_issue": {
+    "renderer": "ditto",
+    "phase": "T5 checkpoint loading before inference",
+    "signal": "SIGKILL",
+    "output_generated": false,
+    "loop_resumed_pid": 20322,
+    "following_launcher_pid": 20323,
+    "cgroup_oom_kill_counter": 0,
+    "cause": "Original SIGKILL cause remains unestablished; storage adapter recovery has now produced a verified full native video.",
+    "next_step": "validate a memory-mapped checkpoint loading adapter while current loop candidate continues",
+    "state": "recovery_verified_by_completed_generation",
+    "recovery_adapter": "scripts/deploy/run_ditto_memory_safe.py",
+    "probe": "render_ditto/loading-probe.json",
+    "new_priority_launcher_pid": 21189,
+    "current_loop_worker_pid": 20322,
+    "inference_retries_or_output_selection": 0,
+    "verified_case": "041__short__full_knowledge"
+  },
+  "latest_media_handoff": "out/ablation_probe/20261030_no_knowledge/handoff/20261029T182725Z"
+}

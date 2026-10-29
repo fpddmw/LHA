@@ -1,0 +1,31 @@
+{
+  "case_id": "041__long_keep",
+  "sample_id": "041",
+  "split": "main",
+  "condition": "long_keep",
+  "prompt": "Transform the bright scene of a man writing beside a woman into a children’s storybook illustration, using warm pastel colors and soft pencil outlines. Render his blue striped shirt, her white blouse, the notebook, and the tabletop with gentle watercolor washes, softened shadows, and subtle paper texture. Keep the same two people in their original positions. Preserve the man writing in the notebook and the woman standing beside him with her original hand contact on his shoulder. Keep the pen, notebook, and tabletop in their original spatial relationships. Preserve their movements and the camera motion while rendering the scene as an illustration.",
+  "source_video": "benchmark_data/main/041/041.mp4",
+  "source_video_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+  "fps": 20,
+  "num_frames": 101,
+  "delivery_frames": 100,
+  "seed": 42,
+  "evaluation": {
+    "style": [
+      "Recognizable children's storybook illustration",
+      "Warm pastel watercolor washes",
+      "Soft pencil outlines and paper texture"
+    ],
+    "preserve": [
+      "Two original people and their positions",
+      "Man writing with pen and notebook",
+      "Woman beside him and original shoulder contact",
+      "Object layout and camera movement",
+      "Original movement sequence"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "effective_text": "You are a helpful assistant specialized in video editing.Transform the bright scene of a man writing beside a woman into a children's storybook illustration, using warm pastel colors and soft pencil outlines. Render his blue striped shirt, her white blouse, the notebook, and the tabletop with gentle watercolor washes, softened shadows, and subtle paper texture. Keep the same two people in their original positions. Preserve the man writing in the notebook and the woman standing beside him with her original hand contact on his shoulder. Keep the pen, notebook, and tabletop in their original spatial relationships. Preserve their movements and the camera motion while rendering the scene as an illustration.",
+  "token_count": 144
+}

@@ -1,0 +1,80 @@
+{
+  "case_id": "ditto__planner__027__planner",
+  "method": "ditto__planner_planner",
+  "seed": 42,
+  "output_video": "out/planner_probe/20261029_ditto/027__planner/native.mp4",
+  "evaluation_revision": "first-wave-v2-self-excluded",
+  "case_sha256": "b53e76a49f410fd7f17b353e8620a505d622da5030a4d52223978b85f9337689",
+  "evidence_sha256": "eafd7eec7a45ca41ece04b7bb09ec2edec51c8d1bbd42bda700473af729b2339",
+  "status": "complete",
+  "result": {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+    "task_id": "027__short",
+    "source_id": "027",
+    "track": "short",
+    "split": "development",
+    "style_family": "etching",
+    "creativity": "open",
+    "semantic": {
+      "edit": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 1,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_core": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_detail": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 2,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_time": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 1,
+        "unknown": 0,
+        "status": "complete"
+      }
+    },
+    "ratings": {
+      "style": 3.7,
+      "narrative_emotional_fit": 3.8,
+      "style_world_consistency": 3.8,
+      "composition_lighting": 3.6,
+      "color_texture": 3.6,
+      "hierarchy_readability": 3.4,
+      "temporal_coherence": 3.7,
+      "scene_specific_design": 3.3,
+      "relative_originality": 2.2,
+      "aesthetic_mean": 3.64
+    },
+    "success": "pass",
+    "failure_reasons": [],
+    "delivery": "valid",
+    "unrequested_damage": false,
+    "major_damage": false
+  },
+  "elapsed_seconds": 306.4845857620239
+}

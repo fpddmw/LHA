@@ -1,0 +1,83 @@
+{
+  "case_id": "bernini__baseline__024__long",
+  "method": "bernini__baseline_long",
+  "seed": 42,
+  "output_video": "out/prompt_probe/20261029_bernini/024__long/native.mp4",
+  "evaluation_revision": "first-wave-v2-self-excluded",
+  "case_sha256": "aacc5636341181e1e499b6eb947cb11a2981213f19b20e6b67f83c7e7745f7ca",
+  "evidence_sha256": "46470faf44c6b8894b74fa6ebc3e76e65419af25ca27eba3df0708b162bbd887",
+  "status": "complete",
+  "result": {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+    "task_id": "024__long",
+    "source_id": "024",
+    "track": "long",
+    "split": "development",
+    "style_family": "digital_glitch",
+    "creativity": "bounded",
+    "semantic": {
+      "edit": {
+        "score": 75.0,
+        "lower": 75.0,
+        "upper": 75.0,
+        "complete_rate": 62.5,
+        "coverage": 100.0,
+        "items": 6,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_core": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_detail": {
+        "score": 75.0,
+        "lower": 75.0,
+        "upper": 75.0,
+        "complete_rate": 50.0,
+        "coverage": 100.0,
+        "items": 2,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_time": {
+        "score": 75.0,
+        "lower": 75.0,
+        "upper": 75.0,
+        "complete_rate": 50.0,
+        "coverage": 100.0,
+        "items": 2,
+        "unknown": 0,
+        "status": "complete"
+      }
+    },
+    "ratings": {
+      "style": 2.8,
+      "narrative_emotional_fit": 3.4,
+      "style_world_consistency": 3.4,
+      "composition_lighting": 3.6,
+      "color_texture": 3.0,
+      "hierarchy_readability": 3.3,
+      "temporal_coherence": 3.7,
+      "scene_specific_design": 3.2,
+      "relative_originality": 2.6,
+      "aesthetic_mean": 3.34
+    },
+    "success": "fail",
+    "failure_reasons": [
+      "mandatory_semantics",
+      "style_below_3.0"
+    ],
+    "delivery": "valid",
+    "unrequested_damage": true,
+    "major_damage": false
+  },
+  "elapsed_seconds": 75.76350951194763
+}

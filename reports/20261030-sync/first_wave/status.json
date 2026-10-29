@@ -1,0 +1,19 @@
+{
+  "snapshot_utc": "2026-10-29T18:48:47.070663+00:00",
+  "total": 32,
+  "completed": 22,
+  "errors": 0,
+  "pending": [
+    "bernini__baseline__027__long",
+    "bernini__baseline__027__long_keep",
+    "bernini__baseline__fewshot_004__long_keep",
+    "ditto__baseline__027__long",
+    "ditto__baseline__027__long_keep",
+    "ditto__baseline__fewshot_004__long_keep",
+    "ditto__baseline__024__long_keep",
+    "source_control__027",
+    "source_control__024",
+    "source_control__fewshot_004"
+  ],
+  "interim": true
+}

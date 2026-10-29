@@ -1,0 +1,31 @@
+{
+  "case_id": "024__long_keep",
+  "sample_id": "024",
+  "split": "main",
+  "condition": "long_keep",
+  "prompt": "Transform the man’s phone call in the beige leather car interior into digital glitch art, with high-contrast shadows and RGB color separation across his navy suit, seats, and window reflections. Apply horizontal pixel shifts, fragmented blocks, and flickering scan-line textures across the entire frame, with distorted color highlights. Keep the same man holding the phone to his ear inside the car. Preserve his original head, mouth, and hand movements and their order. Preserve the arrangement of the man, phone, seats, and windows. Apply the requested glitch distortions while keeping these scene elements and the phone-call action recognizable.",
+  "source_video": "benchmark_data/main/024/024.mp4",
+  "source_video_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+  "fps": 20,
+  "num_frames": 101,
+  "delivery_frames": 100,
+  "seed": 42,
+  "evaluation": {
+    "style": [
+      "Recognizable digital glitch art",
+      "RGB color separation",
+      "Horizontal pixel shifts and fragmented blocks",
+      "Flickering scan-line textures"
+    ],
+    "preserve": [
+      "Same man and phone-call action",
+      "Phone held to ear",
+      "Original head, mouth and hand movement sequence",
+      "Car-interior arrangement and camera movement"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "effective_text": "You are a helpful assistant specialized in video editing.Transform the man's phone call in the beige leather car interior into digital glitch art, with high-contrast shadows and RGB color separation across his navy suit, seats, and window reflections. Apply horizontal pixel shifts, fragmented blocks, and flickering scan-line textures across the entire frame, with distorted color highlights. Keep the same man holding the phone to his ear inside the car. Preserve his original head, mouth, and hand movements and their order. Preserve the arrangement of the man, phone, seats, and windows. Apply the requested glitch distortions while keeping these scene elements and the phone-call action recognizable.",
+  "token_count": 149
+}

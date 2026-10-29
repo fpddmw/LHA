@@ -1,0 +1,42 @@
+[
+  {
+    "task_id": "041__short",
+    "sample_id": "041",
+    "track": "short",
+    "source_video": "benchmark_data/main/041/041.mp4",
+    "source_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+    "user_requirement": "Make it look like a children's storybook.",
+    "seed": 42,
+    "development_exposed": true
+  },
+  {
+    "task_id": "027__short",
+    "sample_id": "027",
+    "track": "short",
+    "source_video": "benchmark_data/main/027/027.mp4",
+    "source_sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+    "user_requirement": "Make it look like a 19th-century etching.",
+    "seed": 42,
+    "development_exposed": true
+  },
+  {
+    "task_id": "024__long",
+    "sample_id": "024",
+    "track": "long",
+    "source_video": "benchmark_data/main/024/024.mp4",
+    "source_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+    "user_requirement": "Transform the man’s phone call in the beige leather car interior into digital glitch art, with high-contrast shadows and RGB color separation across his navy suit, seats, and window reflections. Apply horizontal pixel shifts, fragmented blocks, and flickering scan-line textures across the entire frame, with distorted color highlights.",
+    "seed": 42,
+    "development_exposed": true
+  },
+  {
+    "task_id": "fewshot_004__long",
+    "sample_id": "fewshot_004",
+    "track": "long",
+    "source_video": "benchmark_data/fewshot/004/004.mp4",
+    "source_sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+    "user_requirement": "Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement.",
+    "seed": 42,
+    "development_exposed": true
+  }
+]

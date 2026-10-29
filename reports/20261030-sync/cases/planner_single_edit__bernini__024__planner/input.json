@@ -1,0 +1,44 @@
+{
+  "case_id": "024__planner",
+  "sample_id": "024",
+  "split": "main",
+  "condition": "planner",
+  "prompt": "Transform the entire shot of the man making a phone call in the beige leather car interior into digital glitch art. Use deep, high-contrast shadows in his navy suit and the cabin, with bright, distorted color highlights on his face, white shirt, leather seats, and windows. Split red, green, and blue channels into visibly offset contours across his face, hand, black phone, jacket seams, seat edges, and window reflections. Apply horizontal pixel shifts in narrow and broad bands that briefly slide sections of the image sideways. Rectangular blocks of displaced image fragments flicker into view and reassemble. Fine horizontal scan-line textures flicker across the entire frame throughout the clip. Let cyan, magenta, and electric green highlights pulse through the existing reflections and material edges. Vary the distortion in short, irregular bursts while keeping his phone-call gesture readable.",
+  "source_video": "benchmark_data/main/024/024.mp4",
+  "source_video_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+  "fps": 20,
+  "num_frames": 101,
+  "delivery_frames": 100,
+  "seed": 42,
+  "evaluation": {
+    "style": [
+      "Recognizable digital glitch art",
+      "RGB color separation",
+      "Horizontal pixel shifts and fragmented blocks",
+      "Flickering scan-line textures"
+    ],
+    "preserve": [
+      "Same man and phone-call action",
+      "Phone held to ear",
+      "Original head, mouth and hand movement sequence",
+      "Car-interior arrangement and camera movement"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "user_requirement": "Transform the man’s phone call in the beige leather car interior into digital glitch art, with high-contrast shadows and RGB color separation across his navy suit, seats, and window reflections. Apply horizontal pixel shifts, fragmented blocks, and flickering scan-line textures across the entire frame, with distorted color highlights.",
+  "task_prompt_kind": "long",
+  "planner_run": "out/planner_harness/20261029_comparison/024_glitch",
+  "planner_prompt_sha256": "ed2d168866ad550aec5eeefe2659fc8cfbee33328106795e7e8c1958995094b2",
+  "planner_handoff_sha256": "45d7c26f6d57d6ec36752d19aa84f1d7f44591714f4b9349fe360950cfcb7fb7",
+  "planner_model": "gpt-6.1-sol",
+  "planner_reasoning_effort": "xhigh",
+  "planner_target_model": "unspecified",
+  "baseline_case_ids": [
+    "024__long",
+    "024__long_keep"
+  ],
+  "comparison_note": "Same immutable source, seed and renderer settings. Source prompt is handed off unchanged; no automatic shortening.",
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "effective_text": "You are a helpful assistant specialized in video editing.Transform the entire shot of the man making a phone call in the beige leather car interior into digital glitch art. Use deep, high-contrast shadows in his navy suit and the cabin, with bright, distorted color highlights on his face, white shirt, leather seats, and windows. Split red, green, and blue channels into visibly offset contours across his face, hand, black phone, jacket seams, seat edges, and window reflections. Apply horizontal pixel shifts in narrow and broad bands that briefly slide sections of the image sideways. Rectangular blocks of displaced image fragments flicker into view and reassemble. Fine horizontal scan-line textures flicker across the entire frame throughout the clip. Let cyan, magenta, and electric green highlights pulse through the existing reflections and material edges. Vary the distortion in short, irregular bursts while keeping his phone-call gesture readable.",
+  "token_count": 208
+}

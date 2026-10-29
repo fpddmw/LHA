@@ -1,0 +1,489 @@
+{
+  "scope": "Knowledge availability plus automatic reading-manual injection; no forced retrieval or output-driven revision.",
+  "shared_source_observations_verified": true,
+  "actual_active_knowledge_reads_across_eight_runs": 0,
+  "interpretation": "Full exposes the complete frozen reading manual and entrance metadata before the first model call, even though none of the runs actively uses material-access tools. This experiment estimates the combined availability/interface/manual treatment. Explicit retrieval of the wider corpus was not exercised in this sample; mental use of supplied text is not directly observable.",
+  "frozen_reading_manual": {
+    "path": "snapshot/knowledge/READING.md",
+    "chars": 11371,
+    "words_whitespace": 1604,
+    "text_sha256": "558883f4b6856fd503946cff5e564d8eac2163b0cf02337d5b9b4827ecfe4d4d"
+  },
+  "full_auto_injection_components": [
+    "frozen OPERATIONS.md",
+    "complete frozen knowledge/READING.md",
+    "Knowledge.browse() entrance metadata and totals in user context"
+  ],
+  "no_auto_injection_components": [
+    "generic observation/runtime/output instructions after documented knowledge-related removals",
+    "source task and identical initial source frames"
+  ],
+  "no_reference_images_supplied": true,
+  "frame_hash_scope": "Harness JPEG observations; frozen transport applies the same max-side1024/JPEG90 preprocessing to both arms.",
+  "runs": [
+    {
+      "task_id": "041__short",
+      "arm": "full_knowledge",
+      "run_id": "p01",
+      "prompt_sha256": "8fce9685b4ea329438e14d1c1e0406de1a147839dd42e84f9191ebe0d114820e",
+      "active_knowledge_read_receipts": 0,
+      "knowledge_tool_calls": 0,
+      "knowledge_tool_actions": [],
+      "operation_actions": [
+        "submit"
+      ],
+      "calls": [
+        {
+          "call": "event-0001",
+          "system_chars": 16588,
+          "system_words_whitespace": 2350,
+          "system_text_sha256": "58f7a14cb7263ea14bab485efeaed43b795e471b3a81ae16878e99200bdef61b",
+          "transport_developer_instruction_chars": 16762,
+          "transport_developer_instruction_sha256": "8ecf290c4adb3aad8c3a5cc86d1360e2fed75167a90797e6094fd9020b5050ca",
+          "user_context_chars": 8273,
+          "user_context_words_whitespace": 569,
+          "user_context_sha256": "4a7373be8a1db2279c1020fb5e65ebb5d2a222b679ef692c2422198e2f6a31a8",
+          "knowledge_manual_auto_injected": true,
+          "knowledge_entrances_present": true,
+          "knowledge_entrances_chars": 3001,
+          "knowledge_entrances_canonical_sha256": "4664b494c2bb453394cd62ba5f093d93b7adbfde8f12304aa08a3d18755e7c78",
+          "read_receipt_count": 0,
+          "attached_source_frames": [
+            {
+              "video_id": "source",
+              "sha256": "f9a4d016bfa0076f6415bca46a654146f012bf530546a5c2a276d28eba41ea55"
+            },
+            {
+              "video_id": "source",
+              "sha256": "0495686193e8136db9a7eaf8c1d2db20ceddd3714a0d32d0308319335152e154"
+            },
+            {
+              "video_id": "source",
+              "sha256": "e01fdcb2a446c2bf0e7cdca357f9be9e41273d609630849abdbe39d6f4a48e31"
+            },
+            {
+              "video_id": "source",
+              "sha256": "5188cc7c360e09167280e787cdafef435314720981dc10ad7c1693a072d95348"
+            },
+            {
+              "video_id": "source",
+              "sha256": "b6c9ff152724dad56a1343f1ca4f0d2d539210702e5a780b4238f04de56d1f2c"
+            },
+            {
+              "video_id": "source",
+              "sha256": "791a2202b6cc35ddf7e09fe5ec3cac9a34c20b5b9f3feec1b7b586a7a1ff4981"
+            }
+          ],
+          "actual_model_visible_input": "out/ablation_probe/20261030_no_knowledge/planning/p01/calls/event-0001/input.json"
+        }
+      ],
+      "model_visible_audit_passed": true
+    },
+    {
+      "task_id": "041__short",
+      "arm": "no_knowledge",
+      "run_id": "p02",
+      "prompt_sha256": "0b1347843d5dd17e881fa29c9dc66b2288f178f9469558ccfefadec5fbd5f5ce",
+      "active_knowledge_read_receipts": 0,
+      "knowledge_tool_calls": 0,
+      "knowledge_tool_actions": [],
+      "operation_actions": [
+        "submit"
+      ],
+      "calls": [
+        {
+          "call": "event-0001",
+          "system_chars": 4047,
+          "system_words_whitespace": 593,
+          "system_text_sha256": "08d965fd1a8522f85ec782439423f9a54f29269699d1b2cfd8b425bca97efe2d",
+          "transport_developer_instruction_chars": 4221,
+          "transport_developer_instruction_sha256": "ba07f5c0784a4d498ab6fead97a2fa89d47759eb44704b389f7f2d1aa5d376bd",
+          "user_context_chars": 4330,
+          "user_context_words_whitespace": 250,
+          "user_context_sha256": "8c2d201ee802d44679ef6aa3889425b6a6617e25d7218ce5a0d8c72e3eea4d5d",
+          "knowledge_manual_auto_injected": false,
+          "knowledge_entrances_present": false,
+          "knowledge_entrances_chars": 0,
+          "knowledge_entrances_canonical_sha256": null,
+          "read_receipt_count": 0,
+          "attached_source_frames": [
+            {
+              "video_id": "source",
+              "sha256": "f9a4d016bfa0076f6415bca46a654146f012bf530546a5c2a276d28eba41ea55"
+            },
+            {
+              "video_id": "source",
+              "sha256": "0495686193e8136db9a7eaf8c1d2db20ceddd3714a0d32d0308319335152e154"
+            },
+            {
+              "video_id": "source",
+              "sha256": "e01fdcb2a446c2bf0e7cdca357f9be9e41273d609630849abdbe39d6f4a48e31"
+            },
+            {
+              "video_id": "source",
+              "sha256": "5188cc7c360e09167280e787cdafef435314720981dc10ad7c1693a072d95348"
+            },
+            {
+              "video_id": "source",
+              "sha256": "b6c9ff152724dad56a1343f1ca4f0d2d539210702e5a780b4238f04de56d1f2c"
+            },
+            {
+              "video_id": "source",
+              "sha256": "791a2202b6cc35ddf7e09fe5ec3cac9a34c20b5b9f3feec1b7b586a7a1ff4981"
+            }
+          ],
+          "actual_model_visible_input": "out/ablation_probe/20261030_no_knowledge/planning/p02/calls/event-0001/input.json"
+        }
+      ],
+      "model_visible_audit_passed": true
+    },
+    {
+      "task_id": "027__short",
+      "arm": "full_knowledge",
+      "run_id": "p04",
+      "prompt_sha256": "89b39897400d99a9db13ba95f7995f041d26ffd4ee11a2e77b139cadade06de6",
+      "active_knowledge_read_receipts": 0,
+      "knowledge_tool_calls": 0,
+      "knowledge_tool_actions": [],
+      "operation_actions": [
+        "submit"
+      ],
+      "calls": [
+        {
+          "call": "event-0001",
+          "system_chars": 16588,
+          "system_words_whitespace": 2350,
+          "system_text_sha256": "58f7a14cb7263ea14bab485efeaed43b795e471b3a81ae16878e99200bdef61b",
+          "transport_developer_instruction_chars": 16762,
+          "transport_developer_instruction_sha256": "8ecf290c4adb3aad8c3a5cc86d1360e2fed75167a90797e6094fd9020b5050ca",
+          "user_context_chars": 8273,
+          "user_context_words_whitespace": 569,
+          "user_context_sha256": "2942b627df2efa568aa8508bc0eece0e4d011d2ab9db15567773b0ddbbf81891",
+          "knowledge_manual_auto_injected": true,
+          "knowledge_entrances_present": true,
+          "knowledge_entrances_chars": 3001,
+          "knowledge_entrances_canonical_sha256": "4664b494c2bb453394cd62ba5f093d93b7adbfde8f12304aa08a3d18755e7c78",
+          "read_receipt_count": 0,
+          "attached_source_frames": [
+            {
+              "video_id": "source",
+              "sha256": "0459320be4d187e7dd41271ccc5d76fa5733e24022d8217234c7105485277b38"
+            },
+            {
+              "video_id": "source",
+              "sha256": "375d0ef12419513b5bf75e1ae2b5d47a8a92f9ba99d8bc5094b88dcc418deb67"
+            },
+            {
+              "video_id": "source",
+              "sha256": "4ddd0708d8815e47ea709084d03d1b4e70283586c330d0aa2729439eef46b71e"
+            },
+            {
+              "video_id": "source",
+              "sha256": "a8152e99fac68af5feef6d4b1d46375f5f3acb5e8d747110e23e19ded87960d6"
+            },
+            {
+              "video_id": "source",
+              "sha256": "a38bc5b9d1780ba1fd9699107687a19b5b4809d3b9eeb3f67377eceba51a55c9"
+            },
+            {
+              "video_id": "source",
+              "sha256": "7b3ad6bc2d0fb1c95fbfcd41cde79ebed5d3ca2cb66149bef487774c8fa6dc12"
+            }
+          ],
+          "actual_model_visible_input": "out/ablation_probe/20261030_no_knowledge/planning/p04/calls/event-0001/input.json"
+        }
+      ],
+      "model_visible_audit_passed": true
+    },
+    {
+      "task_id": "027__short",
+      "arm": "no_knowledge",
+      "run_id": "p03",
+      "prompt_sha256": "0b64c8a4bab69160a30a264b8fbd898b6c0003b69f9ee0837e0c0e01cc80b16e",
+      "active_knowledge_read_receipts": 0,
+      "knowledge_tool_calls": 0,
+      "knowledge_tool_actions": [],
+      "operation_actions": [
+        "submit"
+      ],
+      "calls": [
+        {
+          "call": "event-0001",
+          "system_chars": 4047,
+          "system_words_whitespace": 593,
+          "system_text_sha256": "08d965fd1a8522f85ec782439423f9a54f29269699d1b2cfd8b425bca97efe2d",
+          "transport_developer_instruction_chars": 4221,
+          "transport_developer_instruction_sha256": "ba07f5c0784a4d498ab6fead97a2fa89d47759eb44704b389f7f2d1aa5d376bd",
+          "user_context_chars": 4330,
+          "user_context_words_whitespace": 250,
+          "user_context_sha256": "60c904c69f42e023585e6347c2785a00a89be7877f467d68d0535aeaf9c93a21",
+          "knowledge_manual_auto_injected": false,
+          "knowledge_entrances_present": false,
+          "knowledge_entrances_chars": 0,
+          "knowledge_entrances_canonical_sha256": null,
+          "read_receipt_count": 0,
+          "attached_source_frames": [
+            {
+              "video_id": "source",
+              "sha256": "0459320be4d187e7dd41271ccc5d76fa5733e24022d8217234c7105485277b38"
+            },
+            {
+              "video_id": "source",
+              "sha256": "375d0ef12419513b5bf75e1ae2b5d47a8a92f9ba99d8bc5094b88dcc418deb67"
+            },
+            {
+              "video_id": "source",
+              "sha256": "4ddd0708d8815e47ea709084d03d1b4e70283586c330d0aa2729439eef46b71e"
+            },
+            {
+              "video_id": "source",
+              "sha256": "a8152e99fac68af5feef6d4b1d46375f5f3acb5e8d747110e23e19ded87960d6"
+            },
+            {
+              "video_id": "source",
+              "sha256": "a38bc5b9d1780ba1fd9699107687a19b5b4809d3b9eeb3f67377eceba51a55c9"
+            },
+            {
+              "video_id": "source",
+              "sha256": "7b3ad6bc2d0fb1c95fbfcd41cde79ebed5d3ca2cb66149bef487774c8fa6dc12"
+            }
+          ],
+          "actual_model_visible_input": "out/ablation_probe/20261030_no_knowledge/planning/p03/calls/event-0001/input.json"
+        }
+      ],
+      "model_visible_audit_passed": true
+    },
+    {
+      "task_id": "024__long",
+      "arm": "full_knowledge",
+      "run_id": "p05",
+      "prompt_sha256": "dc7c1a1eb7a6d3274336dceddb4f2f54d6473ca58a84e4ff2fb49d9f4498ab1c",
+      "active_knowledge_read_receipts": 0,
+      "knowledge_tool_calls": 0,
+      "knowledge_tool_actions": [],
+      "operation_actions": [
+        "submit"
+      ],
+      "calls": [
+        {
+          "call": "event-0001",
+          "system_chars": 16588,
+          "system_words_whitespace": 2350,
+          "system_text_sha256": "58f7a14cb7263ea14bab485efeaed43b795e471b3a81ae16878e99200bdef61b",
+          "transport_developer_instruction_chars": 16762,
+          "transport_developer_instruction_sha256": "8ecf290c4adb3aad8c3a5cc86d1360e2fed75167a90797e6094fd9020b5050ca",
+          "user_context_chars": 8568,
+          "user_context_words_whitespace": 610,
+          "user_context_sha256": "322c0542defdaf85c18141396649f3a9a80f7164d3537894faf60913048eff98",
+          "knowledge_manual_auto_injected": true,
+          "knowledge_entrances_present": true,
+          "knowledge_entrances_chars": 3001,
+          "knowledge_entrances_canonical_sha256": "4664b494c2bb453394cd62ba5f093d93b7adbfde8f12304aa08a3d18755e7c78",
+          "read_receipt_count": 0,
+          "attached_source_frames": [
+            {
+              "video_id": "source",
+              "sha256": "7ca05097b170ec0c35b4f0635709aea3f964f3b2ecaf54874758f9d636cca458"
+            },
+            {
+              "video_id": "source",
+              "sha256": "4d418a1f2854adb7dff38c4dce2c49459cc5e559de8caa4bb0ec1436575776f4"
+            },
+            {
+              "video_id": "source",
+              "sha256": "ecf73399eda5aa6fc0b41bb4265c68c641003d53540f4be8f2160cd95646050b"
+            },
+            {
+              "video_id": "source",
+              "sha256": "576f7bb5e4a1d8d7f8382ba7fe01267c5cd7096a96e0ace2a89b7bed65a71e02"
+            },
+            {
+              "video_id": "source",
+              "sha256": "87fca414adfb689e17a458dae2968e76f08582850e8c7f548c29df558ca30a74"
+            },
+            {
+              "video_id": "source",
+              "sha256": "b489bfdb2c13811d7f73459361cd4afd9ea9a8609adad96835ab82d215409858"
+            }
+          ],
+          "actual_model_visible_input": "out/ablation_probe/20261030_no_knowledge/planning/p05/calls/event-0001/input.json"
+        }
+      ],
+      "model_visible_audit_passed": true
+    },
+    {
+      "task_id": "024__long",
+      "arm": "no_knowledge",
+      "run_id": "p06",
+      "prompt_sha256": "11d6693b8d3a90f353f5d8b6b29d7b608c3e28004061e72cd5fce0bb7c9053b9",
+      "active_knowledge_read_receipts": 0,
+      "knowledge_tool_calls": 0,
+      "knowledge_tool_actions": [],
+      "operation_actions": [
+        "submit"
+      ],
+      "calls": [
+        {
+          "call": "event-0001",
+          "system_chars": 4047,
+          "system_words_whitespace": 593,
+          "system_text_sha256": "08d965fd1a8522f85ec782439423f9a54f29269699d1b2cfd8b425bca97efe2d",
+          "transport_developer_instruction_chars": 4221,
+          "transport_developer_instruction_sha256": "ba07f5c0784a4d498ab6fead97a2fa89d47759eb44704b389f7f2d1aa5d376bd",
+          "user_context_chars": 4625,
+          "user_context_words_whitespace": 291,
+          "user_context_sha256": "da233f50d29929f4ba56e3ce93f2372eb16baaae9d85a39931a55f94fd730f0f",
+          "knowledge_manual_auto_injected": false,
+          "knowledge_entrances_present": false,
+          "knowledge_entrances_chars": 0,
+          "knowledge_entrances_canonical_sha256": null,
+          "read_receipt_count": 0,
+          "attached_source_frames": [
+            {
+              "video_id": "source",
+              "sha256": "7ca05097b170ec0c35b4f0635709aea3f964f3b2ecaf54874758f9d636cca458"
+            },
+            {
+              "video_id": "source",
+              "sha256": "4d418a1f2854adb7dff38c4dce2c49459cc5e559de8caa4bb0ec1436575776f4"
+            },
+            {
+              "video_id": "source",
+              "sha256": "ecf73399eda5aa6fc0b41bb4265c68c641003d53540f4be8f2160cd95646050b"
+            },
+            {
+              "video_id": "source",
+              "sha256": "576f7bb5e4a1d8d7f8382ba7fe01267c5cd7096a96e0ace2a89b7bed65a71e02"
+            },
+            {
+              "video_id": "source",
+              "sha256": "87fca414adfb689e17a458dae2968e76f08582850e8c7f548c29df558ca30a74"
+            },
+            {
+              "video_id": "source",
+              "sha256": "b489bfdb2c13811d7f73459361cd4afd9ea9a8609adad96835ab82d215409858"
+            }
+          ],
+          "actual_model_visible_input": "out/ablation_probe/20261030_no_knowledge/planning/p06/calls/event-0001/input.json"
+        }
+      ],
+      "model_visible_audit_passed": true
+    },
+    {
+      "task_id": "fewshot_004__long",
+      "arm": "full_knowledge",
+      "run_id": "p08",
+      "prompt_sha256": "46b3d2e3b301f597b62c864cd7ee737e8c2c72c302410d47c82a3cc08af7cf91",
+      "active_knowledge_read_receipts": 0,
+      "knowledge_tool_calls": 0,
+      "knowledge_tool_actions": [],
+      "operation_actions": [
+        "submit"
+      ],
+      "calls": [
+        {
+          "call": "event-0001",
+          "system_chars": 16588,
+          "system_words_whitespace": 2350,
+          "system_text_sha256": "58f7a14cb7263ea14bab485efeaed43b795e471b3a81ae16878e99200bdef61b",
+          "transport_developer_instruction_chars": 16762,
+          "transport_developer_instruction_sha256": "8ecf290c4adb3aad8c3a5cc86d1360e2fed75167a90797e6094fd9020b5050ca",
+          "user_context_chars": 8604,
+          "user_context_words_whitespace": 608,
+          "user_context_sha256": "04e66d39b590a0f326eed9064560718e2b684417fa730bd20298574bc6615158",
+          "knowledge_manual_auto_injected": true,
+          "knowledge_entrances_present": true,
+          "knowledge_entrances_chars": 3001,
+          "knowledge_entrances_canonical_sha256": "4664b494c2bb453394cd62ba5f093d93b7adbfde8f12304aa08a3d18755e7c78",
+          "read_receipt_count": 0,
+          "attached_source_frames": [
+            {
+              "video_id": "source",
+              "sha256": "f35321fd585aa10d6634cd7e1a54e50ad566b32e47d966077371444e8fd17c68"
+            },
+            {
+              "video_id": "source",
+              "sha256": "235eb78388e4733097d58782bdc045d7b7ef81de019eee31c4f2c114d5faf594"
+            },
+            {
+              "video_id": "source",
+              "sha256": "c5a071dbd2eaf8c50b05c743ff01a4d70e0f18f7dc22a456572b2267cb54021e"
+            },
+            {
+              "video_id": "source",
+              "sha256": "93800473c80c8fcbf36bd561b0306534602e52541e051ce22ac65e8d93c40ca1"
+            },
+            {
+              "video_id": "source",
+              "sha256": "0a11900ac5ecda4dd5948577380dd1eb7743339304bef3237708ef10f48e689b"
+            },
+            {
+              "video_id": "source",
+              "sha256": "17dab5bf20d3db3852d119a0a94ca7db074388b2fe4ede9721849884ed1ac702"
+            }
+          ],
+          "actual_model_visible_input": "out/ablation_probe/20261030_no_knowledge/planning/p08/calls/event-0001/input.json"
+        }
+      ],
+      "model_visible_audit_passed": true
+    },
+    {
+      "task_id": "fewshot_004__long",
+      "arm": "no_knowledge",
+      "run_id": "p07",
+      "prompt_sha256": "d7b6dd0fd09903bac12e818f5f81ba9de1bd9e05a1ccf5c1847b3f6ba4e248c1",
+      "active_knowledge_read_receipts": 0,
+      "knowledge_tool_calls": 0,
+      "knowledge_tool_actions": [],
+      "operation_actions": [
+        "submit"
+      ],
+      "calls": [
+        {
+          "call": "event-0001",
+          "system_chars": 4047,
+          "system_words_whitespace": 593,
+          "system_text_sha256": "08d965fd1a8522f85ec782439423f9a54f29269699d1b2cfd8b425bca97efe2d",
+          "transport_developer_instruction_chars": 4221,
+          "transport_developer_instruction_sha256": "ba07f5c0784a4d498ab6fead97a2fa89d47759eb44704b389f7f2d1aa5d376bd",
+          "user_context_chars": 4661,
+          "user_context_words_whitespace": 289,
+          "user_context_sha256": "7de74e3cfa1df922ff58239bd22fb78e8176438c263ad5ee289088a88d637473",
+          "knowledge_manual_auto_injected": false,
+          "knowledge_entrances_present": false,
+          "knowledge_entrances_chars": 0,
+          "knowledge_entrances_canonical_sha256": null,
+          "read_receipt_count": 0,
+          "attached_source_frames": [
+            {
+              "video_id": "source",
+              "sha256": "f35321fd585aa10d6634cd7e1a54e50ad566b32e47d966077371444e8fd17c68"
+            },
+            {
+              "video_id": "source",
+              "sha256": "235eb78388e4733097d58782bdc045d7b7ef81de019eee31c4f2c114d5faf594"
+            },
+            {
+              "video_id": "source",
+              "sha256": "c5a071dbd2eaf8c50b05c743ff01a4d70e0f18f7dc22a456572b2267cb54021e"
+            },
+            {
+              "video_id": "source",
+              "sha256": "93800473c80c8fcbf36bd561b0306534602e52541e051ce22ac65e8d93c40ca1"
+            },
+            {
+              "video_id": "source",
+              "sha256": "0a11900ac5ecda4dd5948577380dd1eb7743339304bef3237708ef10f48e689b"
+            },
+            {
+              "video_id": "source",
+              "sha256": "17dab5bf20d3db3852d119a0a94ca7db074388b2fe4ede9721849884ed1ac702"
+            }
+          ],
+          "actual_model_visible_input": "out/ablation_probe/20261030_no_knowledge/planning/p07/calls/event-0001/input.json"
+        }
+      ],
+      "model_visible_audit_passed": true
+    }
+  ]
+}

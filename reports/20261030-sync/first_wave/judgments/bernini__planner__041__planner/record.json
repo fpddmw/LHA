@@ -1,0 +1,80 @@
+{
+  "case_id": "bernini__planner__041__planner",
+  "method": "bernini__planner_planner",
+  "seed": 42,
+  "output_video": "out/planner_probe/20261029_bernini/041__planner/native.mp4",
+  "evaluation_revision": "first-wave-v2-self-excluded",
+  "case_sha256": "5696899777cacf09f5294265262a8af4bdc76b325366b1f18730b55ef2ee1e41",
+  "evidence_sha256": "3dd6c48f58f0d92e17a8f72476c9f1ffe56a2fa942f81d33cbea32e39f29867b",
+  "status": "complete",
+  "result": {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+    "task_id": "041__short",
+    "source_id": "041",
+    "track": "short",
+    "split": "development",
+    "style_family": "storybook",
+    "creativity": "open",
+    "semantic": {
+      "edit": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 1,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_core": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_detail": {
+        "score": 50.0,
+        "lower": 50.0,
+        "upper": 50.0,
+        "complete_rate": 33.33333333333333,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_time": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 1,
+        "unknown": 0,
+        "status": "complete"
+      }
+    },
+    "ratings": {
+      "style": 4.0,
+      "narrative_emotional_fit": 3.5,
+      "style_world_consistency": 3.5,
+      "composition_lighting": 3.6,
+      "color_texture": 3.9,
+      "hierarchy_readability": 3.7,
+      "temporal_coherence": 3.8,
+      "scene_specific_design": 3.2,
+      "relative_originality": 3.1,
+      "aesthetic_mean": 3.64
+    },
+    "success": "pass",
+    "failure_reasons": [],
+    "delivery": "valid",
+    "unrequested_damage": true,
+    "major_damage": false
+  },
+  "elapsed_seconds": 76.38102889060974
+}

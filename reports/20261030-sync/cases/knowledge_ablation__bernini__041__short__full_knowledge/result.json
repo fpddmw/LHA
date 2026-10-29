@@ -1,0 +1,22 @@
+{
+  "case_id": "041__short__full_knowledge",
+  "signature": "be8be53b10ddaac68117e665c8e1ec40b1c0ef28d7bd166d08158786210a9781",
+  "status": "complete",
+  "started_unix": 1793295182.5205579,
+  "elapsed_seconds": 726.9883248806,
+  "native": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  },
+  "delivery": {
+    "frames": 100,
+    "fps": 20.0,
+    "seconds": 5.0,
+    "width": 848,
+    "height": 480
+  },
+  "output_sha256": "9ebb47e26d8a0df6feb0b1bd2fdbec607d2021afef87dd2d0994a20b29d7f2e0"
+}

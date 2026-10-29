@@ -1,0 +1,16 @@
+{
+  "review_id": "fewshot004_baseline_visual_spotcheck",
+  "case_id": "bernini__baseline__fewshot_004__long",
+  "evidence_sha256": "e2e44035636c6ba19d663d02b499d6d7bc3bb3abc473dd13e4c06fd162ed9c32",
+  "inspected_output_times_seconds": [
+    0.8,
+    2.0
+  ],
+  "findings": [
+    "Strong blue illumination is on the curved under-table supports while the tabletop rim is mostly gray. This supports the recorded blue_edges partial evidence.",
+    "Two extra pale spheres occur at similar tabletop locations at both inspected times and are absent in the corresponding source frames.",
+    "The far player has a visible red paddle in both source frames; the corresponding edited hand does not clearly retain it."
+  ],
+  "scope": "Two-time visual spot check supports the described visible defects. It does not independently verify the full ball trajectory or the complete motion sequence.",
+  "scoring_action": "No score overrides. Original judgments retained."
+}

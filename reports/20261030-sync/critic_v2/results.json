@@ -1,0 +1,35 @@
+[
+  {
+    "case": "041",
+    "critic_status": "complete",
+    "planner_status": "waiting_tool",
+    "next_operation": {
+      "id": "event-0001-generate",
+      "kind": "generate",
+      "mode": "live",
+      "payload": {
+        "input_id": "prior2",
+        "input": {
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\loop_probe\\20261029_bernini\\041__incremental__r2\\native.mp4",
+          "sha256": "acb1ceaf6123c3ccbf50cc87e72eb16c4f199a6d808b23112c8af6bbf8db872f",
+          "fps": 20.0,
+          "frames": 101,
+          "duration_seconds": 5.05,
+          "width": 848,
+          "height": 480,
+          "timing_basis": "decoder frame index and reported FPS; sampled observations, not a continuous-motion verification",
+          "imported": true,
+          "provenance": "Historical incremental second edit; exact prompt and input recorded in \\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\loop_probe\\20261029_bernini\\041__incremental__r2\\input.json",
+          "parent": "prior1",
+          "prompt": "Replace the tan pencil-shaped tool in the man's right hand with a slim black ink pen featuring a smooth barrel, visible pocket clip and narrow pen tip. Keep his grip, the tool's placement and ongoing writing motion. Rework the paper arrangement beneath the hands into a small landscape-format white spiral pad with dense loops along the camera-facing edge and visible stacked-page thickness. The pale beige loose sheet on its right must remain a separate object with its own outline and a clear separation or overlap boundary. Eliminate the joined, facing-pages appearance. Keep both objects flat and maintain the man's left-hand support and the woman's pointing contact without shifting their arms. Match the existing illustration rendering; preserve the people, shoulder contact, background and framing. Reconstruct the missing clip and binding from this description; their exact former geometry is unavailable."
+        },
+        "prompt": "Refine the small white spiral notebook at the bottom center so it blends naturally into the existing children's storybook illustration. Soften its heavy black page-stack contours into thin, gently textured warm-gray pencil lines, with subtle cream watercolor shading between the pages. Draw the spiral loops delicately while keeping them recognizable. Match the contour weight and paper texture of the surrounding hands and clothing. Keep the notebook's current size and placement, the slim black pen, the writing grip and motion, and the separate beige cloth to its right. Retain the warm pastel illustration, both people, the woman's pointing and shoulder contact, and the existing composition throughout the clip.",
+        "renderer": {}
+      },
+      "sha256": "862c471a7e51eabdc1b1d373357e81efae9903ee2440f48b9b5ec31905faf582"
+    },
+    "final": null,
+    "new_video_generations": 0,
+    "scope": "Real Critic and Planner calls on historical videos. Pending generation is a proposal only; no renderer was called."
+  }
+]

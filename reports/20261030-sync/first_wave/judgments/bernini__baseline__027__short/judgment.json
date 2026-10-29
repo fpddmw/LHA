@@ -1,0 +1,151 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "etching_style",
+      "label": "pass",
+      "evidence": "整体采用棕褐色印墨、细密排线、刻线明暗及纸张纹理，呈现可辨认的十九世纪蚀刻版画风格。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "town_layout",
+      "label": "pass",
+      "evidence": "前景屋顶、中部建筑与树丛、远处天际线的主要相对位置均可对应。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "landmarks",
+      "label": "pass",
+      "evidence": "中央偏左的带尖顶圆顶及画面最右侧的高塔仍可对应，保留了基本轮廓与相对位置，细节经过线描简化。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "camera_progression",
+      "label": "pass",
+      "evidence": "覆盖全片的密集帧中，建筑与地标均缓慢向画面左上方偏移，左下浅色墙面逐渐显露，输出保留了原片的变化方向和顺序。",
+      "times_seconds": [
+        0,
+        1.35,
+        2.7,
+        4.05,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "roof_details",
+      "label": "pass",
+      "evidence": "前景中央屋脊、左下斜屋檐及右侧亮色屋顶边缘仍可辨认，右侧屋顶上的突出附属结构也有对应的线描概括。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "open_sky",
+      "label": "fail",
+      "evidence": "原片基本空旷的天空被加入四个醒目的同心圆盘和多组云朵，形成了独立的新物体。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 3.2,
+      "evidence": "褐色墨调、细密排线和磨损纸边贯穿全段，蚀刻版画感明确；树群与部分屋顶仍以大片暗色晕染为主，刻线塑形较弱。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 2.6,
+      "evidence": "安静的城镇俯瞰与旧纸墨色支持历史氛围；天空中重复的明亮圆盘和装饰云团带入强烈奇幻意味，分散了城镇观景的重心。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 2.2,
+      "evidence": "屋顶、树群和远处地标仍组成连贯城镇，绘制语言基本统一；基本空旷的天空被加入四个大型同心圆盘及多组云团，新增独立主体超出允许变化。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 2.6,
+      "evidence": "前景屋顶、中景树群与远景地标仍有空间层次，亮天空衬出建筑轮廓；下半部暗块连片，上方圆盘过于醒目，构图的视觉重量偏向天空。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.3,
+      "evidence": "暖褐、深墨与米白形成统一配色，排线、纸面纹理和旧边效果协调；局部浓重墨色使树木与屋顶的材质区别减弱。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 2.3,
+      "evidence": "城镇布局及远处地标仍可辨认；四个高亮圆盘成为首要焦点，部分建筑与树冠在暗部混合，主体层级受到干扰。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "覆盖全段的密集帧显示，屋脊、地标、树群及天空图案保持稳定对应，视点逐步变化，未见明显结构跳变或纹理闪烁。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 2.8,
+      "evidence": "前景屋脊的亮边、树丛的深色墨块与较浅的远处天际线形成空间层次，呼应原有城镇布局；磨损纸边和天空密纹较为通用。新增天空圆盘超出允许变化，不计入设计价值。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 2.0,
+      "evidence": "相较参考中的黄底黑线双框版画、浅色旧纸排线方案，输出主要通过深褐色调、团块状树冠纹理和不规则磨损边缘形成变化，属于小幅变体；新增天空圆盘不作为原创性加分依据。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "open_sky"
+      ],
+      "evidence": "天空左上、中央偏左、中央上方及右上新增圆盘，并新增多组浅色云朵；这些具体形状超出了纸纹与排线的表达范围。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ]
+    }
+  ],
+  "comparison_set_sha256": "e806589338d4cdc6645f71c3be4c873a1fcc5a9a3ded02fdae225b522f4aa882",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "a3d96ca7a927a8da692c49293646d26db13daf508d57c49d1cead07ad6b83ce3",
+  "output_sha256": "1269d52ce2626bf0cad6bfc5430595fe367e9c024082da7e6a7efec31a9f60c1",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

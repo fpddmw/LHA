@@ -1,0 +1,256 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 4.433333333333334,
+    "expected_seconds": 4.433333333333334,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "space_arena",
+      "label": "pass",
+      "evidence": "场馆呈现金属舱壁、圆角舷窗和金属立柱，可识别为未来太空站内的运动空间。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "blue_white_lighting",
+      "label": "pass",
+      "evidence": "蓝色环境光与白色高光覆盖舱壁、地面和人物。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "earth_windows",
+      "label": "pass",
+      "evidence": "多扇大窗外可辨蓝色地球弧面、白色云层和黑色太空。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "scifi_suits",
+      "label": "pass",
+      "evidence": "三名可见人物均穿着带流线接缝与金属光泽的科幻运动服。",
+      "times_seconds": [
+        0,
+        1.6,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "blue_edges",
+      "label": "pass",
+      "evidence": "台面外沿形成连续蓝色发光轮廓，近侧与远侧桌沿均可见。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "faces",
+      "label": "fail",
+      "evidence": "右侧球员原有的眼镜、脸型和发型被替换；左侧球员的发际线与侧脸、后方人物的面部及年龄特征也明显改变。",
+      "times_seconds": [
+        0,
+        0.8,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "player_roles",
+      "label": "partial",
+      "evidence": "前景两人的左右位置和隔桌对打关系保留，人物总数仍为三人；原先位于另一球桌后方的人物被移近并显著放大，站到主桌左后侧持拍，原有空间关系改变。",
+      "times_seconds": [
+        0,
+        0.8,
+        2.4,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "table_geometry",
+      "label": "pass",
+      "evidence": "台面的矩形外形、斜向透视及下方弯曲拱形支架与源画面基本对应。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "net",
+      "label": "pass",
+      "evidence": "球网仍横跨台面中部，两端网柱、倾斜走向及基本轮廓保持。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "playing_motion",
+      "label": "pass",
+      "evidence": "全段密集配对帧中，前景两人交替挥拍的主要顺序、方向与节奏对应，末段右侧球员侧移并转身引拍的动作也保留。",
+      "times_seconds": [
+        0,
+        0.5,
+        1,
+        1.7,
+        2.1,
+        2.8,
+        3.3,
+        4,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "ball_trajectory",
+      "label": "pass",
+      "evidence": "全段可追踪小球在左右球员之间往返，跨网、落台反弹及接近球拍的主要位置和时序与配对源帧基本对应。",
+      "times_seconds": [
+        0,
+        0.167,
+        0.4,
+        0.8,
+        1.433,
+        2,
+        2.6,
+        3.2,
+        3.8,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "camera_motion",
+      "label": "pass",
+      "evidence": "全段保持相同斜向全景，球桌与中央立柱在画面中的轻微位移顺序对应，未出现新增切镜或明显重构取景。",
+      "times_seconds": [
+        0,
+        0.8,
+        1.6,
+        2.4,
+        3.2,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "table_markings",
+      "label": "pass",
+      "evidence": "台面中线、外边线与球网上沿的相对关系仍可辨，表面和发光处理后主要标线布局保持。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 3.9,
+      "evidence": "金属舱壁、地球舷窗、蓝白照明、科幻运动服及蓝色发光台沿贯穿全段，各项设计共同构成完整的太空站运动场景。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "双方对打、后方持拍人物和末段右侧球员跨步清楚呈现运动情境，未来场馆氛围贴合要求；部分击球瞬间的手拍重叠稍弱化动作表达。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "人物服装、金属空间与球桌共享一致的冷光和反射关系，弯曲支架与球网结构可辨；局部手部和拍柄连接轮廓含混。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "斜向球桌连接两侧球员，立柱和舷窗形成清楚的空间层次，地面蓝光呼应台沿；胸前亮斑和台边强光略分散对面部的注意。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "深蓝台面、青色金属和蓝白光形成协调配色，服装褶皱及舱壁反光统一；少数高光区域压缩了材质细节。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.5,
+      "evidence": "球桌、双方球员及白球通常容易辨认，对打关系明确；白球经过明亮地球背景时对比减弱，近侧手拍重叠也短暂影响辨识。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "覆盖全段的密集帧中，人物外观、舷窗、球桌和发光边缘总体稳定，挥拍与球的位置连续变化；手拍交界及球体轮廓有轻微形变，部分帧中球融入背景高光。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "原场地立柱被处理为金属舱柱，弧形桌架采用冷色金属表面，桌沿蓝光与地面反光、运动服肩胸亮区呼应；圆角大窗中的地球弧线构成球员身后的统一背景，形成连贯的太空运动空间。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 2.0,
+      "evidence": "相较参考中的紫银服装、发光球网和多边形舷窗，本片采用圆角窗、横贯窗景的地球地平线与统一青色金属运动服。不过整体与第四、第五组参考的深蓝舱室和青色桌沿方案接近，区别主要体现在窗框形状和服装亮区的安排。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "faces"
+      ],
+      "evidence": "人物身份特征被重绘，尤其右侧球员的眼镜消失，脸型和发型明显不同；后方人物也呈现不同面貌。",
+      "times_seconds": [
+        0,
+        0.8,
+        4.4
+      ]
+    },
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "player_roles"
+      ],
+      "evidence": "左后方人物由远处另一球桌后的较小人物，变为靠近主桌、完整站立持拍的较大人物，改变了其与前景对打者的空间关系。",
+      "times_seconds": [
+        0,
+        0.8,
+        2.4,
+        4.4
+      ]
+    }
+  ],
+  "comparison_set_sha256": "efe6dd46cba2b3efa55f1e77a8ea2e200a4acb8078b6ed972d48c9fe1d0b3caa",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "ef3bb0e8c75ebcffc6acef737c4442fac03df55bef7006fb92b234f43870f19d",
+  "output_sha256": "fa2d443e25f190ace4676bf28a81e6727596d843bfd07914a7d57d7a3e216690",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

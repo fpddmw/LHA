@@ -1,0 +1,54 @@
+[
+  {
+    "prior_run": "out/planner_harness/20261029/041_storybook",
+    "runtime_differences": [
+      "OPERATIONS.md",
+      "execution.py",
+      "experience.py",
+      "knowledge.py",
+      "report.py",
+      "runner.py"
+    ],
+    "eligible_for_reuse": false,
+    "reason": "Historical runtime/knowledge are not proven identical; use a new matched full arm."
+  },
+  {
+    "prior_run": "out/planner_harness/20261029/004_space_arena",
+    "runtime_differences": [
+      "OPERATIONS.md",
+      "execution.py",
+      "experience.py",
+      "knowledge.py",
+      "report.py",
+      "runner.py"
+    ],
+    "eligible_for_reuse": false,
+    "reason": "Historical runtime/knowledge are not proven identical; use a new matched full arm."
+  },
+  {
+    "prior_run": "out/planner_harness/20261029_comparison/027_etching",
+    "runtime_differences": [
+      "OPERATIONS.md",
+      "execution.py",
+      "experience.py",
+      "knowledge.py",
+      "report.py",
+      "runner.py"
+    ],
+    "eligible_for_reuse": false,
+    "reason": "Historical runtime/knowledge are not proven identical; use a new matched full arm."
+  },
+  {
+    "prior_run": "out/planner_harness/20261029_comparison/024_glitch",
+    "runtime_differences": [
+      "OPERATIONS.md",
+      "execution.py",
+      "experience.py",
+      "knowledge.py",
+      "report.py",
+      "runner.py"
+    ],
+    "eligible_for_reuse": false,
+    "reason": "Historical runtime/knowledge are not proven identical; use a new matched full arm."
+  }
+]

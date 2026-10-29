@@ -1,0 +1,22 @@
+{
+  "case_id": "024__long_keep",
+  "signature": "acef60f55137fe7d5dd3fe9abb036009c4c07ad82ed02675a48c56767fa1093b",
+  "status": "complete",
+  "started_unix": 1793263681.8525903,
+  "elapsed_seconds": 462.12637543678284,
+  "native": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  },
+  "delivery": {
+    "frames": 100,
+    "fps": 20.0,
+    "seconds": 5.0,
+    "width": 848,
+    "height": 480
+  },
+  "output_sha256": "f910f2cd1e5b611a40f395b0894ec023d40f033bd724661de5d7ec5c48b68d7d"
+}

@@ -1,0 +1,43 @@
+{
+  "snapshot_utc": "2026-10-29T18:43:05.118741+00:00",
+  "first_wave": {
+    "snapshot_utc": "2026-10-29T18:48:47.070663+00:00",
+    "total": 32,
+    "completed": 22,
+    "errors": 0,
+    "pending": [
+      "bernini__baseline__027__long",
+      "bernini__baseline__027__long_keep",
+      "bernini__baseline__fewshot_004__long_keep",
+      "ditto__baseline__027__long",
+      "ditto__baseline__027__long_keep",
+      "ditto__baseline__fewshot_004__long_keep",
+      "ditto__baseline__024__long_keep",
+      "source_control__027",
+      "source_control__024",
+      "source_control__fewshot_004"
+    ],
+    "interim": true
+  },
+  "generated_videos_by_group": {
+    "prompt_preexperiment": 20,
+    "planner_single_edit": 8,
+    "legacy_route_loop": 22,
+    "knowledge_ablation": 4
+  },
+  "unique_videos": 54,
+  "video_bytes": 224915206,
+  "critic_complete_feedback": [
+    "041"
+  ],
+  "limits": [
+    "Formal evaluation is ongoing; this is an interim snapshot.",
+    "First wave compares direct prompts with historical single-edit Planner, not the new continuous loop.",
+    "Legacy route-loop generation is separate from new Planner/Critic validation.",
+    "New Critic proposals have not been rendered by the demonstration.",
+    "CLIP-F and DINO-F have not been measured.",
+    "Dense evidence image caches and model weights remain local; evidence manifests and source/output media are included."
+  ],
+  "code_commit": "e77ef87916a9c75a299e7e7253e0eaeaebc592da",
+  "last_refresh_utc": "2026-10-29T18:48:47.070663+00:00"
+}

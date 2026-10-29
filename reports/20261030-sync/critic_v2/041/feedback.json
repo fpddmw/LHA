@@ -1,0 +1,1625 @@
+{
+  "protocol": "lha-online-critic-v1",
+  "usage": "online_feedback; not independent formal benchmark scoring",
+  "original_request": "Make it look like a children's storybook.",
+  "source_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+  "candidate": "candidate",
+  "videos": {
+    "source": {
+      "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\benchmark_data\\main\\041\\041.mp4",
+      "sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+      "times": [
+        0.0,
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        1.0,
+        1.05,
+        1.1,
+        1.15,
+        1.2,
+        1.25,
+        1.3,
+        1.35,
+        1.4,
+        1.45,
+        1.5,
+        1.55,
+        1.6,
+        1.65,
+        1.7,
+        1.75,
+        1.8,
+        1.85,
+        1.9,
+        1.95,
+        2.0,
+        2.05,
+        2.1,
+        2.15,
+        2.2,
+        2.25,
+        2.3,
+        2.35,
+        2.4,
+        2.45,
+        2.5,
+        2.55,
+        2.6,
+        2.65,
+        2.7,
+        2.75,
+        2.8,
+        2.85,
+        2.9,
+        2.95,
+        3.0,
+        3.05,
+        3.1,
+        3.15,
+        3.2,
+        3.25,
+        3.3,
+        3.35,
+        3.4,
+        3.45,
+        3.5,
+        3.55,
+        3.6,
+        3.65,
+        3.7,
+        3.75,
+        3.8,
+        3.85,
+        3.9,
+        3.95,
+        4.0,
+        4.05,
+        4.1,
+        4.15,
+        4.2,
+        4.25,
+        4.3,
+        4.35,
+        4.4,
+        4.45,
+        4.5,
+        4.55,
+        4.6,
+        4.65,
+        4.7,
+        4.75,
+        4.8,
+        4.85,
+        4.9,
+        4.95,
+        5.0
+      ],
+      "duration_seconds": 5.05,
+      "width": 1280,
+      "height": 720,
+      "frames": 101,
+      "pts_origin": 0.0,
+      "timing_basis": "Decoded native PTS"
+    },
+    "input": {
+      "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\prompt_probe\\20261029_bernini\\041__long_keep\\native.mp4",
+      "sha256": "49c26315f1b1bab5ae4b9a1f909bbe4490717934c8c0156e92a4c112a8f1001c",
+      "parent": "source",
+      "prompt": "Transform the bright scene of a man writing beside a woman into a children’s storybook illustration, using warm pastel colors and soft pencil outlines. Render his blue striped shirt, her white blouse, the notebook, and the tabletop with gentle watercolor washes, softened shadows, and subtle paper texture. Keep the same two people in their original positions. Preserve the man writing in the notebook and the woman standing beside him with her original hand contact on his shoulder. Keep the pen, notebook, and tabletop in their original spatial relationships. Preserve their movements and the camera motion while rendering the scene as an illustration.",
+      "provenance": "Historical first edit; exact prompt and input recorded in \\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\prompt_probe\\20261029_bernini\\041__long_keep\\input.json",
+      "times": [
+        0.0,
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        1.0,
+        1.05,
+        1.1,
+        1.15,
+        1.2,
+        1.25,
+        1.3,
+        1.35,
+        1.4,
+        1.45,
+        1.5,
+        1.55,
+        1.6,
+        1.65,
+        1.7,
+        1.75,
+        1.8,
+        1.85,
+        1.9,
+        1.95,
+        2.0,
+        2.05,
+        2.1,
+        2.15,
+        2.2,
+        2.25,
+        2.3,
+        2.35,
+        2.4,
+        2.45,
+        2.5,
+        2.55,
+        2.6,
+        2.65,
+        2.7,
+        2.75,
+        2.8,
+        2.85,
+        2.9,
+        2.95,
+        3.0,
+        3.05,
+        3.1,
+        3.15,
+        3.2,
+        3.25,
+        3.3,
+        3.35,
+        3.4,
+        3.45,
+        3.5,
+        3.55,
+        3.6,
+        3.65,
+        3.7,
+        3.75,
+        3.8,
+        3.85,
+        3.9,
+        3.95,
+        4.0,
+        4.05,
+        4.1,
+        4.15,
+        4.2,
+        4.25,
+        4.3,
+        4.35,
+        4.4,
+        4.45,
+        4.5,
+        4.55,
+        4.6,
+        4.65,
+        4.7,
+        4.75,
+        4.8,
+        4.85,
+        4.9,
+        4.95,
+        5.0
+      ],
+      "duration_seconds": 5.05,
+      "width": 848,
+      "height": 480,
+      "frames": 101,
+      "pts_origin": 0.0,
+      "timing_basis": "Decoded native PTS"
+    },
+    "candidate": {
+      "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\loop_probe\\20261029_bernini\\041__incremental__r2\\native.mp4",
+      "sha256": "acb1ceaf6123c3ccbf50cc87e72eb16c4f199a6d808b23112c8af6bbf8db872f",
+      "parent": "input",
+      "prompt": "Replace the tan pencil-shaped tool in the man's right hand with a slim black ink pen featuring a smooth barrel, visible pocket clip and narrow pen tip. Keep his grip, the tool's placement and ongoing writing motion. Rework the paper arrangement beneath the hands into a small landscape-format white spiral pad with dense loops along the camera-facing edge and visible stacked-page thickness. The pale beige loose sheet on its right must remain a separate object with its own outline and a clear separation or overlap boundary. Eliminate the joined, facing-pages appearance. Keep both objects flat and maintain the man's left-hand support and the woman's pointing contact without shifting their arms. Match the existing illustration rendering; preserve the people, shoulder contact, background and framing. Reconstruct the missing clip and binding from this description; their exact former geometry is unavailable.",
+      "provenance": "Historical incremental second edit; exact prompt and input recorded in \\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\loop_probe\\20261029_bernini\\041__incremental__r2\\input.json",
+      "times": [
+        0.0,
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        1.0,
+        1.05,
+        1.1,
+        1.15,
+        1.2,
+        1.25,
+        1.3,
+        1.35,
+        1.4,
+        1.45,
+        1.5,
+        1.55,
+        1.6,
+        1.65,
+        1.7,
+        1.75,
+        1.8,
+        1.85,
+        1.9,
+        1.95,
+        2.0,
+        2.05,
+        2.1,
+        2.15,
+        2.2,
+        2.25,
+        2.3,
+        2.35,
+        2.4,
+        2.45,
+        2.5,
+        2.55,
+        2.6,
+        2.65,
+        2.7,
+        2.75,
+        2.8,
+        2.85,
+        2.9,
+        2.95,
+        3.0,
+        3.05,
+        3.1,
+        3.15,
+        3.2,
+        3.25,
+        3.3,
+        3.35,
+        3.4,
+        3.45,
+        3.5,
+        3.55,
+        3.6,
+        3.65,
+        3.7,
+        3.75,
+        3.8,
+        3.85,
+        3.9,
+        3.95,
+        4.0,
+        4.05,
+        4.1,
+        4.15,
+        4.2,
+        4.25,
+        4.3,
+        4.35,
+        4.4,
+        4.45,
+        4.5,
+        4.55,
+        4.6,
+        4.65,
+        4.7,
+        4.75,
+        4.8,
+        4.85,
+        4.9,
+        4.95,
+        5.0
+      ],
+      "duration_seconds": 5.05,
+      "width": 848,
+      "height": 480,
+      "frames": 101,
+      "pts_origin": 0.0,
+      "timing_basis": "Decoded native PTS"
+    }
+  },
+  "question": "Assess the original task and compare this existing second edit with its actual input. Identify improvements, regressions, retained strengths and consequential unknowns that can inform the next Planner decision. Inspect localized or temporal evidence where it matters.",
+  "outcome": {
+    "summary": "The second edit retains a convincing children's storybook appearance and improves object fidelity by restoring a black pen, spiral notebook and separate beige cloth. The main tradeoff is the notebook's unusually heavy outlines against the softer illustration. Writing remains readable as a gesture, although page markings are largely absent. Motion looks coherent in the inspected intervals; continuity across the complete clip remains unassessed.",
+    "findings": [
+      {
+        "id": "storybook_style",
+        "dimension": "style",
+        "origin": "user_requirement",
+        "verdict": "pass",
+        "importance": "core",
+        "claim": "Soft blue and cream colors, paper grain, drawn contours and warm facial shading create a coherent children's storybook illustration. This successful treatment was already present in the input and is retained by the candidate.",
+        "scope": "whole frame at overview samples",
+        "evidence": [
+          {
+            "observation_id": "overview",
+            "video": "input"
+          },
+          {
+            "observation_id": "overview",
+            "video": "candidate"
+          }
+        ]
+      },
+      {
+        "id": "writing_objects",
+        "dimension": "preservation",
+        "origin": "preservation",
+        "verdict": "partial",
+        "importance": "core",
+        "claim": "The candidate restores the source's black writing instrument, recognizable spiral notebook and separate beige cloth more faithfully than the input's ochre instrument and loosely defined paper arrangement. The notebook's shape and binding placement remain approximate, and the source's visible page markings are largely lost.",
+        "partial_boundary": "Object identities and separation improve; detailed notebook geometry and written content remain simplified.",
+        "scope": "writing tools, notebook and adjacent cloth",
+        "evidence": [
+          {
+            "observation_id": "overview",
+            "video": "source"
+          },
+          {
+            "observation_id": "overview",
+            "video": "input"
+          },
+          {
+            "observation_id": "overview",
+            "video": "candidate"
+          },
+          {
+            "observation_id": "event-0001",
+            "video": "candidate"
+          }
+        ]
+      },
+      {
+        "id": "notebook_visual_integration",
+        "dimension": "design",
+        "origin": "design_quality",
+        "verdict": "partial",
+        "importance": "design",
+        "claim": "The restored notebook is easy to recognize, but its thick black page-stack contours and binding attract disproportionate attention beside the softly textured hands, clothing and table.",
+        "partial_boundary": "The repair improves object readability while introducing a local mismatch in contour weight.",
+        "scope": "notebook and surrounding illustration",
+        "evidence": [
+          {
+            "observation_id": "overview",
+            "video": "input"
+          },
+          {
+            "observation_id": "overview",
+            "video": "candidate"
+          },
+          {
+            "observation_id": "event-0001",
+            "video": "candidate"
+          },
+          {
+            "observation_id": "event-0002",
+            "video": "candidate"
+          }
+        ]
+      },
+      {
+        "id": "scene_and_gestures",
+        "dimension": "preservation",
+        "origin": "preservation",
+        "verdict": "pass",
+        "importance": "core",
+        "claim": "The seated writer, downward gaze, woman's pointing hand and shoulder gesture, striped shirt and room arrangement remain recognizable. The interaction retains its quiet, supportive character.",
+        "scope": "whole frame at overview samples",
+        "evidence": [
+          {
+            "observation_id": "overview",
+            "video": "source"
+          },
+          {
+            "observation_id": "overview",
+            "video": "input"
+          },
+          {
+            "observation_id": "overview",
+            "video": "candidate"
+          }
+        ]
+      },
+      {
+        "id": "local_writing_continuity",
+        "dimension": "temporal",
+        "origin": "preservation",
+        "verdict": "pass",
+        "importance": "core",
+        "claim": "During the inspected hand/page interval, small writing-hand movements remain visible and the candidate's black pen stays aligned with the page, without a conspicuous local hand or object discontinuity.",
+        "scope": "hand/paper crop",
+        "requires_sequence": true,
+        "interval_seconds": [
+          1.8,
+          2.4
+        ],
+        "sequence_videos": [
+          "source",
+          "input",
+          "candidate"
+        ],
+        "evidence": [
+          {
+            "observation_id": "event-0001",
+            "video": "source"
+          },
+          {
+            "observation_id": "event-0001",
+            "video": "input"
+          },
+          {
+            "observation_id": "event-0001",
+            "video": "candidate"
+          }
+        ]
+      },
+      {
+        "id": "later_scene_continuity",
+        "dimension": "temporal",
+        "origin": "preservation",
+        "verdict": "pass",
+        "importance": "detail",
+        "claim": "Across the later inspected sequence, the notebook, pen, hands and surrounding illustration remain coherent while small writing movements continue. No conspicuous object popping or whole-frame style change is visible in this interval.",
+        "scope": "whole frame",
+        "requires_sequence": true,
+        "interval_seconds": [
+          3.7,
+          4.25
+        ],
+        "sequence_videos": [
+          "source",
+          "input",
+          "candidate"
+        ],
+        "evidence": [
+          {
+            "observation_id": "event-0002",
+            "video": "source"
+          },
+          {
+            "observation_id": "event-0002",
+            "video": "input"
+          },
+          {
+            "observation_id": "event-0002",
+            "video": "candidate"
+          }
+        ]
+      }
+    ],
+    "comparisons": [
+      {
+        "against": "input",
+        "gains": [
+          "Restores source-consistent identities for the black pen, spiral notebook and beige cloth.",
+          "Makes the writing surface and adjacent cloth easier to distinguish."
+        ],
+        "regressions": [
+          "The notebook introduces heavier, sharper outlines than the input's softer paper rendering."
+        ],
+        "retained": [
+          "Established storybook palette, paper texture and illustrated character treatment.",
+          "Scene composition and the woman's pointing and shoulder gestures."
+        ],
+        "unknowns": [
+          "Whether a changing ink trace is present; it is not discernible in the inspected evidence.",
+          "Temporal coherence outside the two inspected continuous intervals."
+        ],
+        "evidence": [
+          {
+            "observation_id": "overview",
+            "video": "source"
+          },
+          {
+            "observation_id": "overview",
+            "video": "input"
+          },
+          {
+            "observation_id": "overview",
+            "video": "candidate"
+          },
+          {
+            "observation_id": "event-0001",
+            "video": "input"
+          },
+          {
+            "observation_id": "event-0001",
+            "video": "candidate"
+          },
+          {
+            "observation_id": "event-0002",
+            "video": "input"
+          },
+          {
+            "observation_id": "event-0002",
+            "video": "candidate"
+          }
+        ],
+        "relationship": "actual_input"
+      }
+    ],
+    "strengths": [
+      "The requested storybook look is clearly achieved and survives the second edit.",
+      "The object repair improves source fidelity without an obvious loss of the surrounding illustrated scene."
+    ],
+    "unresolved": [
+      "The complete five-second sequence has not been inspected densely; full-clip flicker and motion preservation remain unresolved.",
+      "The page appears largely blank, and fine ink accumulation cannot be established."
+    ]
+  },
+  "feedback": {
+    "summary": "The candidate achieves the requested children’s storybook look. Compared with its actual input, it restores a source-consistent black pen, recognizable spiral notebook and separate beige cloth while retaining the soft palette, paper texture and supportive interaction. The notebook’s heavy black outlines fit the surrounding illustration less well, and source page markings remain largely lost. Motion is coherent in the inspected intervals; full-clip continuity and changing ink traces remain unresolved. Duration passes the supplied check.",
+    "planner_feedback": "Preserve the established storybook treatment and improved object identities. If refining further, the clearest local opportunity is to soften the notebook’s page-stack and binding contours while keeping it recognizable. Page detail is a secondary fidelity limitation; readable text is unnecessary for the style request."
+  },
+  "observations": {
+    "overview": {
+      "observation_id": "overview",
+      "dense": false,
+      "requested_interval": [
+        0.0,
+        5.0
+      ],
+      "crop": null,
+      "videos": {
+        "source": {
+          "sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+          "actual_interval": [
+            0.0,
+            5.0
+          ],
+          "next_start": null,
+          "continuous": false,
+          "crop": null
+        },
+        "input": {
+          "sha256": "49c26315f1b1bab5ae4b9a1f909bbe4490717934c8c0156e92a4c112a8f1001c",
+          "actual_interval": [
+            0.0,
+            5.0
+          ],
+          "next_start": null,
+          "continuous": false,
+          "crop": null
+        },
+        "candidate": {
+          "sha256": "acb1ceaf6123c3ccbf50cc87e72eb16c4f199a6d808b23112c8af6bbf8db872f",
+          "actual_interval": [
+            0.0,
+            5.0
+          ],
+          "next_start": null,
+          "continuous": false,
+          "crop": null
+        }
+      },
+      "frames": [
+        {
+          "video": "source",
+          "index": 0,
+          "time_seconds": 0.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\source\\000000.jpg",
+          "sha256": "6fb2613c0d89ff852cd8d1c8ce1ec376272f2c48912856850a3709ac8987ac65",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 25,
+          "time_seconds": 1.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\source\\000025.jpg",
+          "sha256": "8ef461865870e338059565d844f4f4dba0ab00b731452ced240d557631671e77",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 50,
+          "time_seconds": 2.5,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\source\\000050.jpg",
+          "sha256": "60bc65fd6180173c292ab0dabd919be8dd1c438ca6088907f7fcf240f2a5c591",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 74,
+          "time_seconds": 3.7,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\source\\000074.jpg",
+          "sha256": "ac3315e888e2fef00b417709f50e7cc00bc4a7d33677de79b341a8855117d2c2",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 99,
+          "time_seconds": 4.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\source\\000099.jpg",
+          "sha256": "13e9ded97401e9ec2717a34005c38b3efe11de8e1f103919ca1925338329660d",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 0,
+          "time_seconds": 0.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\input\\000000.jpg",
+          "sha256": "83c298a2ac39ab95b9e3ebea4cf5d9ae5a70e094a1350e890d6f30b39622c724",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 25,
+          "time_seconds": 1.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\input\\000025.jpg",
+          "sha256": "89d53fe27344ce8f9fe2466297b9d5f5708c7fe970b96e318116564658374102",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 50,
+          "time_seconds": 2.5,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\input\\000050.jpg",
+          "sha256": "d3df1538ad4687eb97d7251d93fc9893bf32dab8680b413e1f53418406e39b1e",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 74,
+          "time_seconds": 3.7,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\input\\000074.jpg",
+          "sha256": "9d09b6132a7c4b93d3b778985ea565d72419934efcfbe227cce3e7c15f37c56a",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 99,
+          "time_seconds": 4.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\input\\000099.jpg",
+          "sha256": "cc57e8a7d45deee530ec21a85ee7ed69b4a98ed0a3f9f9819089c8acfa325e93",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 0,
+          "time_seconds": 0.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\candidate\\000000.jpg",
+          "sha256": "16529ff7979566e6e0658b87157646bf35b0918d9045a801578b97eb42024fc7",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 25,
+          "time_seconds": 1.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\candidate\\000025.jpg",
+          "sha256": "0ceb2417f0880b2fb537a3ab1663a65fa75e24206005fb0fb3cdf3cdb24d1eea",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 50,
+          "time_seconds": 2.5,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\candidate\\000050.jpg",
+          "sha256": "7f4a92240dd2bf68fb04f7d55ba32614d440424383cf61f0135012d93526307e",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 74,
+          "time_seconds": 3.7,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\candidate\\000074.jpg",
+          "sha256": "d733773295cacce8a278bf238895be90a48d7072488ae67f038a336bbba581d1",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 99,
+          "time_seconds": 4.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\overview\\candidate\\000099.jpg",
+          "sha256": "0fd9206b5ccb6cdc244e28cd92044d2893969d032ec6e20991e45a0f17080277",
+          "crop": null
+        }
+      ],
+      "scope": "Sparse samples; unseen motion remains unresolved. Full-frame view."
+    },
+    "event-0001": {
+      "observation_id": "event-0001",
+      "dense": true,
+      "requested_interval": [
+        1.8,
+        2.4
+      ],
+      "crop": [
+        0.3,
+        0.6,
+        0.85,
+        1
+      ],
+      "videos": {
+        "source": {
+          "sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+          "actual_interval": [
+            1.8,
+            2.4
+          ],
+          "next_start": null,
+          "continuous": true,
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        "input": {
+          "sha256": "49c26315f1b1bab5ae4b9a1f909bbe4490717934c8c0156e92a4c112a8f1001c",
+          "actual_interval": [
+            1.8,
+            2.4
+          ],
+          "next_start": null,
+          "continuous": true,
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        "candidate": {
+          "sha256": "acb1ceaf6123c3ccbf50cc87e72eb16c4f199a6d808b23112c8af6bbf8db872f",
+          "actual_interval": [
+            1.8,
+            2.4
+          ],
+          "next_start": null,
+          "continuous": true,
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        }
+      },
+      "frames": [
+        {
+          "video": "source",
+          "index": 36,
+          "time_seconds": 1.8,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000036.jpg",
+          "sha256": "52febaec11501b2a9d132ed5c8eaa838675e58ca62e1812ce231cf1f018f6337",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 37,
+          "time_seconds": 1.85,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000037.jpg",
+          "sha256": "4689f6ec8284ace08c3c5a3d99d36c0ed93a37a8f17be33a457df9540a912024",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 38,
+          "time_seconds": 1.9,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000038.jpg",
+          "sha256": "d1e26011572004ae6635461dc9a2ca3e28942b7e0d68bd0b2b815467eefaa6b5",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 39,
+          "time_seconds": 1.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000039.jpg",
+          "sha256": "e5447a8a16d2c48338bd9d01b9ba4dedf743b13953af3be2fc10094dcdb25a3a",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 40,
+          "time_seconds": 2.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000040.jpg",
+          "sha256": "d567bf20bcf9b325a6a05127c971a27d15f401f3dbcc7c26d7b9a3f67a13d439",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 41,
+          "time_seconds": 2.05,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000041.jpg",
+          "sha256": "6c45cb0574c3829e6b6927603a0d3edd0ac662e1cbab4763d08d518fc3813425",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 42,
+          "time_seconds": 2.1,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000042.jpg",
+          "sha256": "f383dedccfd18f182795c5afa90a7d57b75eb58c38beb902babb2f4d1201d516",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 43,
+          "time_seconds": 2.15,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000043.jpg",
+          "sha256": "8fa1ac191cfa6069fca85e09ea45125da1689573b127bf14634b317ab65bd80e",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 44,
+          "time_seconds": 2.2,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000044.jpg",
+          "sha256": "5d7244d319e763898be38cdd279f1e523d3a633084719ec7b933a2692fc86eac",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 45,
+          "time_seconds": 2.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000045.jpg",
+          "sha256": "1627b3d194952e4d628212aa25af8d8c1c95d5063a05d670207da56ad95af675",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 46,
+          "time_seconds": 2.3,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000046.jpg",
+          "sha256": "2a439e616b796570e14934cb9ad3be703876e44e0dbe8c45ceb75aac5416e73c",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "source",
+          "index": 47,
+          "time_seconds": 2.35,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\source\\000047.jpg",
+          "sha256": "d7811d7d3b296741b7973bc4163d8c89c5458791308e6feaee9b2f5042bcb5e3",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 36,
+          "time_seconds": 1.8,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000036.jpg",
+          "sha256": "0cff55af1eec81e068a58e386d2b66e5a90e74c0723b0b91e3a2af6b8cb611d8",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 37,
+          "time_seconds": 1.85,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000037.jpg",
+          "sha256": "1b8d24ce618a507180f6ab599c832384cfb98ea47aac5f49122d2657049369b3",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 38,
+          "time_seconds": 1.9,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000038.jpg",
+          "sha256": "c4d3a477a199e9ca52c3c5e7c398a0d6bd87cdff76e72079747a75c14fcf45b2",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 39,
+          "time_seconds": 1.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000039.jpg",
+          "sha256": "0239deedaffeaeb92cd58128119e66804f6820681ca4e9cae0d75e01fab04409",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 40,
+          "time_seconds": 2.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000040.jpg",
+          "sha256": "290aa1fcfb9aeef930f7d0e159582bd5e58d3c0faa7021d90253c7bb54afcbc7",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 41,
+          "time_seconds": 2.05,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000041.jpg",
+          "sha256": "1bc240ac11b8adb5e8262b802024f701aa3dee2931898d4c866f4080d27deb5b",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 42,
+          "time_seconds": 2.1,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000042.jpg",
+          "sha256": "22d135f431d04bb08e644d0e9914a07a48f2f399cb169b92b5a908377861f29b",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 43,
+          "time_seconds": 2.15,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000043.jpg",
+          "sha256": "3303717993286f150b551ef6a7393892b44e8e2eca2ac02e0c1536a133b3ec17",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 44,
+          "time_seconds": 2.2,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000044.jpg",
+          "sha256": "9b4d7ff8f57a9d44073f95d56a0a607f0979f45ff043edc05ee91186b571deb6",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 45,
+          "time_seconds": 2.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000045.jpg",
+          "sha256": "8056760f7b75834c45531083beb29dbc5a3e87d3b528e58438d44478af3dc272",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 46,
+          "time_seconds": 2.3,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000046.jpg",
+          "sha256": "a4dee901583856b9d52184d152c34ea8e55a83804b5c90659b63ed94475d5771",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "input",
+          "index": 47,
+          "time_seconds": 2.35,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\input\\000047.jpg",
+          "sha256": "8d6626c92a35299708ac82353b85a6ef44affe43eaffb9ec266e80cdd246676c",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 36,
+          "time_seconds": 1.8,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000036.jpg",
+          "sha256": "951bbb2d8b6db645cecf192fc93d08060310f031ea4a9b981a3ca91f175631c7",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 37,
+          "time_seconds": 1.85,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000037.jpg",
+          "sha256": "701b1a7e23fb0b2c4287773cb9e5c06c4aa22c16b9a036e167f0c057abde620d",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 38,
+          "time_seconds": 1.9,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000038.jpg",
+          "sha256": "d9dddbb959aaa81df74bfb7630ad4e462f1673b7aaa89a87d585ef4efa03f6cb",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 39,
+          "time_seconds": 1.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000039.jpg",
+          "sha256": "5a0427f0fba2aecbda020ab6eeb62b44e2cf466097da8f996056e57906eee335",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 40,
+          "time_seconds": 2.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000040.jpg",
+          "sha256": "e9f8f0cf20fa7a030b9567a860febda5b4b4a67244d0115674d7c6e70b64b63d",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 41,
+          "time_seconds": 2.05,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000041.jpg",
+          "sha256": "69e2ef8415cfc7366eac9317366337216397712f1c1a5ceadd7c89f46fcabcae",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 42,
+          "time_seconds": 2.1,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000042.jpg",
+          "sha256": "d8e89b7b5e7b8fae19733120ea8bb381c0a9004695b8c95313a7381626d461c6",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 43,
+          "time_seconds": 2.15,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000043.jpg",
+          "sha256": "bea0ce7f2cbf7fdef8c3bf1d63538393541ff9ab370229df2ad6f11fed7ce8d4",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 44,
+          "time_seconds": 2.2,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000044.jpg",
+          "sha256": "37b24ac649ebd253f59d2a8081db9ac44e6761aedfd1d93598322b75f4d0f416",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 45,
+          "time_seconds": 2.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000045.jpg",
+          "sha256": "6670ad2e273ff21f6d40bd40828a3f3c51c1e884b2e3b06677b06ab5c25a57b6",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 46,
+          "time_seconds": 2.3,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000046.jpg",
+          "sha256": "d11f75e049395de0e23cd0a4ca7f643b81c0537fd01530c5019204f956e367c0",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        },
+        {
+          "video": "candidate",
+          "index": 47,
+          "time_seconds": 2.35,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0001\\candidate\\000047.jpg",
+          "sha256": "c4974e9117c535eefb968e4c603147038d96a81126af94750fc37be1137169c6",
+          "crop": [
+            0.3,
+            0.6,
+            0.85,
+            1
+          ]
+        }
+      ],
+      "scope": "Native continuous frames within recorded coverage. Cropped evidence applies only to the inspected region.",
+      "purpose": "Compare writing motion, pen-to-page contact, hand anatomy and notebook integration in a continuous local interval."
+    },
+    "event-0002": {
+      "observation_id": "event-0002",
+      "dense": true,
+      "requested_interval": [
+        3.7,
+        4.3
+      ],
+      "crop": null,
+      "videos": {
+        "source": {
+          "sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+          "actual_interval": [
+            3.7,
+            4.3
+          ],
+          "next_start": null,
+          "continuous": true,
+          "crop": null
+        },
+        "input": {
+          "sha256": "49c26315f1b1bab5ae4b9a1f909bbe4490717934c8c0156e92a4c112a8f1001c",
+          "actual_interval": [
+            3.7,
+            4.3
+          ],
+          "next_start": null,
+          "continuous": true,
+          "crop": null
+        },
+        "candidate": {
+          "sha256": "acb1ceaf6123c3ccbf50cc87e72eb16c4f199a6d808b23112c8af6bbf8db872f",
+          "actual_interval": [
+            3.7,
+            4.3
+          ],
+          "next_start": null,
+          "continuous": true,
+          "crop": null
+        }
+      },
+      "frames": [
+        {
+          "video": "source",
+          "index": 74,
+          "time_seconds": 3.7,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000074.jpg",
+          "sha256": "ac3315e888e2fef00b417709f50e7cc00bc4a7d33677de79b341a8855117d2c2",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 75,
+          "time_seconds": 3.75,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000075.jpg",
+          "sha256": "43301f8db60ff661ea3395a753fbc6719584a4f638b495755f35101e35c3fba9",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 76,
+          "time_seconds": 3.8,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000076.jpg",
+          "sha256": "2defc2cf3cc4e4dd6a1dada4c05b12cc042ef74d6a24eaef08d79ec0039d477e",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 77,
+          "time_seconds": 3.85,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000077.jpg",
+          "sha256": "11632801bde92908953375b3b7e70d706ef4f758d666e7fedee2bdc620a8d2f8",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 78,
+          "time_seconds": 3.9,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000078.jpg",
+          "sha256": "c8746f931f7763d90a2d4ec4302612fb1887ffe23cb78d01e5cff42b8184f81a",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 79,
+          "time_seconds": 3.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000079.jpg",
+          "sha256": "333ca7ac3785e0b5c79d3a62a0cbc6cfe21952e19ae8e8b1ebb7095627ede2aa",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 80,
+          "time_seconds": 4.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000080.jpg",
+          "sha256": "fb8212be25031d2ac7638a975b4e2baabffea595c0d05b6292085be0b101e2da",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 81,
+          "time_seconds": 4.05,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000081.jpg",
+          "sha256": "da0d2749c8b184a519549466b94d534698a4cbc4c8cba32b38479192577b9799",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 82,
+          "time_seconds": 4.1,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000082.jpg",
+          "sha256": "944ec2b21540e50c83fc7389b35cc79eda19fd5238f2537a7447e84fee32b4aa",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 83,
+          "time_seconds": 4.15,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000083.jpg",
+          "sha256": "0f88bae3ff61ca10d72ed520821d972cb2a3f4daa25afee7a3b34866f8a84606",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 84,
+          "time_seconds": 4.2,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000084.jpg",
+          "sha256": "180b7dda1d21706315c815dacd6d0c6f4a7496e62f12698948160fe31e408192",
+          "crop": null
+        },
+        {
+          "video": "source",
+          "index": 85,
+          "time_seconds": 4.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\source\\000085.jpg",
+          "sha256": "5462f1e3b171762bf751f9c5824f96ca0ce91b4a02f9e0e0d79ec71ebd67235f",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 74,
+          "time_seconds": 3.7,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000074.jpg",
+          "sha256": "9d09b6132a7c4b93d3b778985ea565d72419934efcfbe227cce3e7c15f37c56a",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 75,
+          "time_seconds": 3.75,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000075.jpg",
+          "sha256": "4d6ecf05fdcfd7c633ff466c3ca5c5267083185e45d1fe4287cb0a135d6cc1aa",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 76,
+          "time_seconds": 3.8,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000076.jpg",
+          "sha256": "f571687ca2cc80e7372cd808e57cb463b3de27b96321763fbfae1fd3e3ec149e",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 77,
+          "time_seconds": 3.85,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000077.jpg",
+          "sha256": "393b5ca39d90a8255b2cea425129cbbad891c2f1682bf1e689652dde687d7d5d",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 78,
+          "time_seconds": 3.9,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000078.jpg",
+          "sha256": "3cb306bda43734cd2d19b423a09b80149f27670d796fb0aebdfbdb03d7b9b4a1",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 79,
+          "time_seconds": 3.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000079.jpg",
+          "sha256": "2925957679557d8cd148f41812ceeb290ac1bc51c52b441978bd657a742bf90e",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 80,
+          "time_seconds": 4.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000080.jpg",
+          "sha256": "2e4b06b84b79aad281b9e0e755e7fb673ae7bd20cd33cae95c5ed1b44e9d2e45",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 81,
+          "time_seconds": 4.05,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000081.jpg",
+          "sha256": "e75b37180644c39a496c29a47de550f634c79736e9d856ed4b47658f8fffc969",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 82,
+          "time_seconds": 4.1,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000082.jpg",
+          "sha256": "41a5871751182a5541106150805f392eae02ba0a959412e230cbb596c8cd4222",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 83,
+          "time_seconds": 4.15,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000083.jpg",
+          "sha256": "8be46f103821520204dfb455e80c5831479a5f4d391d9cc1ea5ba1d50eeae517",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 84,
+          "time_seconds": 4.2,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000084.jpg",
+          "sha256": "8d0238f3f31c7acf3a836135a7d8e0fa5ca37b1e53d88d2e6a642a5a7fbfb698",
+          "crop": null
+        },
+        {
+          "video": "input",
+          "index": 85,
+          "time_seconds": 4.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\input\\000085.jpg",
+          "sha256": "230d223ed19b79544c438223c0f50043f636ab03ea9d3b50586e5a84e82addcd",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 74,
+          "time_seconds": 3.7,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000074.jpg",
+          "sha256": "d733773295cacce8a278bf238895be90a48d7072488ae67f038a336bbba581d1",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 75,
+          "time_seconds": 3.75,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000075.jpg",
+          "sha256": "80299cf36a5162259a118a2997780e2c02e4df40ec6f08e221411f9bc6c1d1c0",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 76,
+          "time_seconds": 3.8,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000076.jpg",
+          "sha256": "101824d306af79bd556043ee1a16ce41bc8d0ed13c67e403809df4aa24a94f5e",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 77,
+          "time_seconds": 3.85,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000077.jpg",
+          "sha256": "9078962ab3c60773008ed8714276d18e5a871211a63f038188fe3c8148af020d",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 78,
+          "time_seconds": 3.9,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000078.jpg",
+          "sha256": "c7b4d6f3ae0b2e57f0b9d3202d49b79c7af7ae68d7f782496c6ac4f7da35ab97",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 79,
+          "time_seconds": 3.95,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000079.jpg",
+          "sha256": "dfc52b8163a60ffca4cc92f929f4f9041c2b83b45dc1cf1e33710ba2e62e1f83",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 80,
+          "time_seconds": 4.0,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000080.jpg",
+          "sha256": "cc2f2efeba8c54ccdba8833a3daa9cddfb29b19815dd9bcb0f9c9198ea05eb39",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 81,
+          "time_seconds": 4.05,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000081.jpg",
+          "sha256": "e7e836b5e2e9691a9696f2d3ba502c649a5cb81bf7bb70c6f8f5f893eb70b8c5",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 82,
+          "time_seconds": 4.1,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000082.jpg",
+          "sha256": "d07d1405d63af5fe057ba21fedd6581f25accc492ccce7ec9305faffdaf63a9f",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 83,
+          "time_seconds": 4.15,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000083.jpg",
+          "sha256": "bb4062f1a13fd8a1b2b86f711b8d22d0316183f360e3ec1c26ea86a7538f8805",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 84,
+          "time_seconds": 4.2,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000084.jpg",
+          "sha256": "193d38b0eb1fcbcadc4cd3d728252a289dfb8c8db18f61801a5cfb2c0f66e2cd",
+          "crop": null
+        },
+        {
+          "video": "candidate",
+          "index": 85,
+          "time_seconds": 4.25,
+          "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic\\observations\\event-0002\\candidate\\000085.jpg",
+          "sha256": "a470e00ccf395e029f8df9242c68daa7593da22e394041464bc742b6f658f276",
+          "crop": null
+        }
+      ],
+      "scope": "Native continuous frames within recorded coverage. Full-frame view.",
+      "purpose": "Check later whole-frame motion and whether the repaired notebook and pen remain integrated while the surrounding storybook treatment and gestures are retained."
+    }
+  },
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "run_directory": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\critic_harness\\20261030_v2\\041\\critic",
+  "instructions_sha256": "b1c06a8c2ba952cd70c34a5828c3a5be3cc7f528b726cac1e35b6e1fc20a0d55",
+  "knowledge_sha256": "f8dbe570cb09c951549110d12f6cabc41fd1e9f3cb5ba476e4a7b8331034a43d",
+  "sha256": "372ab26755fd9434cf1f6b3ba3ae5b1f60ce46dff144fe53d365b5630d1c9e9d"
+}

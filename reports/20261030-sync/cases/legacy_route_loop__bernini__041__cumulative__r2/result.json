@@ -1,0 +1,15 @@
+{
+  "case_id": "041__cumulative__r2",
+  "signature": "f39b64435f8e087fd699bca00706eb1b9686a5acc0d53493a2b2781984650890",
+  "status": "complete",
+  "started_unix": 1793289025.3606791,
+  "elapsed_seconds": 695.274361371994,
+  "native": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  },
+  "native_sha256": "775879d45f8653d95eae9cd0ce0d2852eef434f7ac0ba8e8d50eaeab874631b9"
+}

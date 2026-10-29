@@ -1,0 +1,44 @@
+{
+  "case_id": "027__planner",
+  "sample_id": "027",
+  "split": "main",
+  "condition": "planner",
+  "prompt": "Render this elevated, tree-filled townscape as a 19th-century copperplate etching printed in black ink on warm ivory paper. Use delicate, slightly irregular etched contours to describe pitched roofs, the distant dome, and towers. Build the foreground roofs and shaded trees from tightly spaced directional strokes and layered crosshatching, with small curved marks articulating foliage. Let lighter, finer, more widely spaced lines soften the distant town into atmospheric depth. Leave the broad bright sky largely as unprinted paper, with only a trace of fine horizontal hatching near the horizon. Show subtle paper fibers and slight ink variation. As the viewpoint shifts, the etched marks remain attached to the buildings and trees, forming a coherent moving print.",
+  "source_video": "benchmark_data/main/027/027.mp4",
+  "source_video_sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+  "fps": 20,
+  "num_frames": 101,
+  "delivery_frames": 100,
+  "seed": 42,
+  "evaluation": {
+    "style": [
+      "Recognizable monochrome etching",
+      "Black contour lines and crosshatching",
+      "Lightly aged ivory paper appearance"
+    ],
+    "preserve": [
+      "Skyline and building layout",
+      "Rooftop, dome and tower shapes and relative positions",
+      "Tree-mass layout",
+      "Camera movement"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "user_requirement": "Make it look like a 19th-century etching.",
+  "task_prompt_kind": "short",
+  "planner_run": "out/planner_harness/20261029_comparison/027_etching",
+  "planner_prompt_sha256": "a19b00f6df7801f1535fc4332e330dbe3d508e85caf34cbf2ab500636e165f28",
+  "planner_handoff_sha256": "58700559b146acd8a6ec2b25ca5bce0424a25ce6c8a1412d176dfcc98fba80a2",
+  "planner_model": "gpt-6.1-sol",
+  "planner_reasoning_effort": "xhigh",
+  "planner_target_model": "unspecified",
+  "baseline_case_ids": [
+    "027__short",
+    "027__long",
+    "027__long_keep"
+  ],
+  "comparison_note": "Same immutable source, seed and renderer settings. Source prompt is handed off unchanged; no automatic shortening.",
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "effective_text": "You are a helpful assistant specialized in video editing.Render this elevated, tree-filled townscape as a 19th-century copperplate etching printed in black ink on warm ivory paper. Use delicate, slightly irregular etched contours to describe pitched roofs, the distant dome, and towers. Build the foreground roofs and shaded trees from tightly spaced directional strokes and layered crosshatching, with small curved marks articulating foliage. Let lighter, finer, more widely spaced lines soften the distant town into atmospheric depth. Leave the broad bright sky largely as unprinted paper, with only a trace of fine horizontal hatching near the horizon. Show subtle paper fibers and slight ink variation. As the viewpoint shifts, the etched marks remain attached to the buildings and trees, forming a coherent moving print.",
+  "token_count": 190
+}

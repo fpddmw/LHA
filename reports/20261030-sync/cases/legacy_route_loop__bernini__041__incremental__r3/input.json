@@ -1,0 +1,329 @@
+{
+  "case_id": "041__incremental__r3",
+  "sample_id": "041",
+  "split": "main",
+  "condition": "long_keep",
+  "prompt": "Correct only the notebook's binding edge and page thickness. Place a continuous row of small spiral loops along the bottom long edge nearest the viewer, running left-to-right directly below the writing surface. Remove the loops from the far diagonal edge, leaving that edge as plain paper. Retain the pad's current position and orientation. Draw a thin, compact stack of aligned pages beneath one flat writing surface, reducing the exaggerated layered thickness. Preserve the black pen, its grip and writing motion, the man's supporting fingers and the woman's pointing finger at their existing contacts. Keep the beige loose sheet separate on the right with its current outline and placement. Match the notebook's existing illustrated texture. Reconstruct the binding from this description; its exact original loop spacing is unavailable.",
+  "source_video": "out/loop_probe/20261029_bernini/041__incremental__r2/native.mp4",
+  "source_video_sha256": "acb1ceaf6123c3ccbf50cc87e72eb16c4f199a6d808b23112c8af6bbf8db872f",
+  "fps": 20,
+  "num_frames": 101,
+  "delivery_frames": 100,
+  "seed": 44,
+  "evaluation": {
+    "style": [
+      "Recognizable children's storybook illustration",
+      "Warm pastel watercolor washes",
+      "Soft pencil outlines and paper texture"
+    ],
+    "preserve": [
+      "Two original people and their positions",
+      "Man writing with pen and notebook",
+      "Woman beside him and original shoulder contact",
+      "Object layout and camera movement",
+      "Original movement sequence"
+    ]
+  },
+  "evaluation_note": "Short prompts are evaluated on overall named style plus preservation; detailed style cues are descriptive and are not all mandatory for short prompts. Intended glitch/VHS/illustration changes are not generic artifacts. Ball visibility may be unjudgeable.",
+  "route": "incremental",
+  "round": 3,
+  "root_video": "benchmark_data/main/041/041.mp4",
+  "root_video_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+  "parent_accepted": "out/loop_probe/20261029_bernini/041__incremental__r2/native.mp4",
+  "user_requirement": "Make it look like a children's storybook.",
+  "planner": {
+    "route": "incremental",
+    "prompt": "Correct only the notebook's binding edge and page thickness. Place a continuous row of small spiral loops along the bottom long edge nearest the viewer, running left-to-right directly below the writing surface. Remove the loops from the far diagonal edge, leaving that edge as plain paper. Retain the pad's current position and orientation. Draw a thin, compact stack of aligned pages beneath one flat writing surface, reducing the exaggerated layered thickness. Preserve the black pen, its grip and writing motion, the man's supporting fingers and the woman's pointing finger at their existing contacts. Keep the beige loose sheet separate on the right with its current outline and placement. Match the notebook's existing illustrated texture. Reconstruct the binding from this description; its exact original loop spacing is unavailable.",
+    "rationale": "黑笔、独立散纸和主要互动已保留。本轮仅调整远侧线圈的位置与过厚页层，保持书写区的手部接触和现有插画表现。",
+    "repair_targets": [
+      "将远侧斜边线圈移至画面下方近侧长边",
+      "减薄夸张页层，保持紧凑平放的圈装本结构"
+    ],
+    "preserve_targets": [
+      "页本的位置、朝向和现有插画纹理",
+      "黑笔、握笔姿态与书写动作",
+      "男子扶本手指及女子指页手指的接触位置",
+      "右侧独立米色散纸的轮廓和位置"
+    ],
+    "recovery_limitations": [
+      "近侧装订细节已在输入中丢失，需依文字重建；无法保证原线圈间距及精确页层几何。"
+    ]
+  },
+  "feedback": {
+    "candidate": {
+      "style_match": {
+        "label": "clear",
+        "evidence": "12个候选帧均呈现柔和的彩铅、水彩质感、纸张肌理及简化线描，人物与室内环境具有清楚的儿童绘本插画风格。"
+      },
+      "edits": [
+        {
+          "item": "Recognizable children's storybook illustration",
+          "label": "done",
+          "confidence": "high",
+          "evidence": "写实影像已转为浅色纸底上的手绘插画，衣服、头发、肤色和植物均采用柔和色块与笔触，符合儿童绘本要求。"
+        }
+      ],
+      "preservation": [
+        {
+          "item": "原来的两个人及各自身份特征（允许绘本化简化）",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "男子的浅色短卷发、蓝色条纹衬衫，以及女子的长直发、白色外套、手链仍可辨认。女子头发变为棕色，人物五官与肤色经过绘本化概括，主要身份线索仍在。"
+        },
+        {
+          "item": "两人的相对位置",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "女子仍站在画面左侧，男子仍坐在中央偏右，女子身体靠近男子肩部，与原片一致。"
+        },
+        {
+          "item": "男子继续进行书写动作",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "各抽样帧中男子持续低头持笔，笔尖朝向本子表面，持笔手有轻微位置变化，保留了持续书写的大体动作。"
+        },
+        {
+          "item": "书写工具的类别与可辨认形态",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "候选中仍是黑色细长笔身、明确尖端的书写笔，与原片黑色笔的类别及外观相符。"
+        },
+        {
+          "item": "笔记本的装订和页本结构",
+          "label": "partial",
+          "confidence": "high",
+          "evidence": "候选具有可辨认的螺旋线圈和分层白色书页，但线圈位于本子的远侧斜边；原片线圈位于靠近观众的下侧长边。候选的页层也画得更厚、更突出。"
+        },
+        {
+          "item": "独立纸张与笔记本仍是两个可区分对象",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "左侧白色圈装本与右侧浅褐色独立纸张具有不同颜色和独立轮廓，两个对象在全部候选样本中均可区分。"
+        },
+        {
+          "item": "女子与男子肩部的接触关系",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "女子上方的手仍搭在男子画面左侧的肩头，指尖与衬衫肩部接触，保留了原片的互动关系。"
+        },
+        {
+          "item": "手、纸本和桌面的空间关系",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "男子持笔手位于书写页上方，另一只手靠着本子右缘；女子下方的手指向本子，纸本与散纸均放置在桌面上，前后遮挡关系清楚。"
+        },
+        {
+          "item": "镜头取景与可见的运动趋势",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "保留固定中近景、女子头部在画外及男子居中偏右的构图；抽样可见的低头姿态和手部轻微变化与原片大体对应。"
+        }
+      ],
+      "summary": "儿童绘本风格明确，主要人物、互动、黑色书写笔及独立散纸均保留；笔记本的螺旋装订边位置仍与原片不同。"
+    },
+    "previous": {
+      "style_match": {
+        "label": "clear",
+        "evidence": "12个上一版帧同样具有浅色纸底、彩铅水彩笔触及简化人物线描，儿童绘本插画风格清楚。"
+      },
+      "edits": [
+        {
+          "item": "Recognizable children's storybook illustration",
+          "label": "done",
+          "confidence": "high",
+          "evidence": "人物、衣服和背景均已转为柔和的手绘插画，纸张肌理和轻薄着色符合儿童绘本视觉要求。"
+        }
+      ],
+      "preservation": [
+        {
+          "item": "原来的两个人及各自身份特征（允许绘本化简化）",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "男子的浅色短卷发和蓝条纹衬衫、女子的长直发和白色外套等主要线索保留；女子发色转为棕色，五官与肤色作了绘本化简化。"
+        },
+        {
+          "item": "两人的相对位置",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "女子仍在左侧站立，男子仍在中央偏右坐着，两人靠近的布局与原片一致。"
+        },
+        {
+          "item": "男子继续进行书写动作",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "男子在各样本中持续低头握持书写工具，尖端朝向纸面，手部位置略有变化，书写的大体动作保留。"
+        },
+        {
+          "item": "书写工具的类别与可辨认形态",
+          "label": "changed",
+          "confidence": "high",
+          "evidence": "原片为黑色笔身的书写笔，上一版则呈黄褐色杆身与削尖端的铅笔外观，工具的可辨认形态发生变化。"
+        },
+        {
+          "item": "笔记本的装订和页本结构",
+          "label": "changed",
+          "confidence": "high",
+          "evidence": "原片靠近观众的一排螺旋线圈消失，白色书写载体呈近似摊开对页的形态，圈装页本结构未保留。"
+        },
+        {
+          "item": "独立纸张与笔记本仍是两个可区分对象",
+          "label": "partial",
+          "confidence": "medium",
+          "evidence": "书写区域右侧仍有白色片状轮廓，但它与左侧书写页在中间相接，整体近似摊开的书页；原片中独立散纸与本子的分界变得含糊。"
+        },
+        {
+          "item": "女子与男子肩部的接触关系",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "女子上方手的指尖仍落在男子画面左侧肩头，接触位置与原片相符。"
+        },
+        {
+          "item": "手、纸本和桌面的空间关系",
+          "label": "kept",
+          "confidence": "high",
+          "evidence": "持笔手、按住纸面的手及女子指向书写区域的手仍围绕桌上纸面分布，笔尖接近书写面，桌面承托关系清楚。"
+        },
+        {
+          "item": "镜头取景与可见的运动趋势",
+          "label": "kept",
+          "confidence": "medium",
+          "evidence": "固定取景与两人的画面占位保留，抽样中的低头姿态和轻微手部变化与原片大体对应。"
+        }
+      ],
+      "summary": "儿童绘本风格明确，人物布局与互动保留；书写工具呈铅笔外观，原有圈装结构消失，独立散纸与本子的区分减弱。"
+    },
+    "next_focus": [
+      {
+        "item": "笔记本的装订和页本结构",
+        "visible_problem": "候选的螺旋线圈位于远侧斜边，原片位于靠近观众的下侧长边，候选前缘出现较厚的层叠书页。",
+        "desired_visible_state": "将螺旋装订位置与原片的近侧长边对应，保留清晰、连贯的小型圈装页本结构。",
+        "evidence_frame_indices": [
+          0,
+          45,
+          100
+        ]
+      }
+    ],
+    "temporal_limitations": [
+      "帧索引采用各组对齐的 source_index。所给12帧覆盖0至5秒，间隔约0.45至0.5秒，仅支持可见姿态与大体运动趋势的判断。",
+      "笔尖的精细移动、实际形成的笔划及帧间动作连续性无法由这些稀疏样本确定。"
+    ]
+  },
+  "generation": {
+    "num_inference_steps": 40,
+    "guidance_mode": "v2v_apg",
+    "negative_prompt": ""
+  },
+  "system_prompt": "You are a helpful assistant specialized in video editing.",
+  "token_count": 183,
+  "conditioning_source_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ],
+  "source_info": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  }
+}

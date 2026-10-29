@@ -1,0 +1,82 @@
+{
+  "case_id": "ditto__baseline__041__long_keep",
+  "method": "ditto__baseline_long_keep",
+  "seed": 42,
+  "output_video": "out/prompt_probe/20261029_ditto/041__long_keep/native.mp4",
+  "evaluation_revision": "first-wave-v2-self-excluded",
+  "case_sha256": "1329651ef1d3f61976a0b2e8b7bd165b70cafe49209d5fc9b00898bf0dfe8d6f",
+  "evidence_sha256": "d7b5fcce27cf7585ceb8deb5a4732f9ffd1bb608ad501c069e88fb323f184c2f",
+  "status": "complete",
+  "result": {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+    "task_id": "041__long",
+    "source_id": "041",
+    "track": "long",
+    "split": "development",
+    "style_family": "storybook",
+    "creativity": "bounded",
+    "semantic": {
+      "edit": {
+        "score": 83.33333333333334,
+        "lower": 83.33333333333334,
+        "upper": 83.33333333333334,
+        "complete_rate": 66.66666666666666,
+        "coverage": 100.0,
+        "items": 6,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_core": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_detail": {
+        "score": 83.33333333333334,
+        "lower": 83.33333333333334,
+        "upper": 83.33333333333334,
+        "complete_rate": 66.66666666666666,
+        "coverage": 100.0,
+        "items": 3,
+        "unknown": 0,
+        "status": "complete"
+      },
+      "preserve_time": {
+        "score": 100.0,
+        "lower": 100.0,
+        "upper": 100.0,
+        "complete_rate": 100.0,
+        "coverage": 100.0,
+        "items": 1,
+        "unknown": 0,
+        "status": "complete"
+      }
+    },
+    "ratings": {
+      "style": 3.4,
+      "narrative_emotional_fit": 3.8,
+      "style_world_consistency": 3.8,
+      "composition_lighting": 3.7,
+      "color_texture": 3.3,
+      "hierarchy_readability": 3.7,
+      "temporal_coherence": 3.7,
+      "scene_specific_design": 3.0,
+      "relative_originality": 1.2,
+      "aesthetic_mean": 3.66
+    },
+    "success": "fail",
+    "failure_reasons": [
+      "mandatory_semantics"
+    ],
+    "delivery": "valid",
+    "unrequested_damage": true,
+    "major_damage": false
+  },
+  "elapsed_seconds": 378.42644476890564
+}

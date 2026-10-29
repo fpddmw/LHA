@@ -1,0 +1,18 @@
+{
+  "case_id": "041__fixed__r3",
+  "signature": "947710d78325fbb5d52f325f937b545973196581b6ceab5917785904b52c2c26",
+  "status": "complete",
+  "stage": "complete",
+  "started_unix": 1793291884.5697603,
+  "inference_started_unix": 1793291890.2203052,
+  "elapsed_seconds": 1221.4250690937042,
+  "native": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  },
+  "native_sha256": "be811a71269cc3b50dbcebb988c46c7db3fa9137803a029607a7a15342109d84",
+  "peak_gpu_allocated_gb": 44.289359872
+}

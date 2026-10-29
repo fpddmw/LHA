@@ -1,0 +1,15 @@
+{
+  "case_id": "041__fixed__r3",
+  "signature": "d7c2890df7067974fe3f4ea32f7bcac2ebcfca50a298bf54bb88dfb0f0224d01",
+  "status": "complete",
+  "started_unix": 1793282756.041517,
+  "elapsed_seconds": 736.9472663402557,
+  "native": {
+    "frames": 101,
+    "fps": 20.0,
+    "seconds": 5.05,
+    "width": 848,
+    "height": 480
+  },
+  "native_sha256": "6ee192c06cace5f2485df4e9c9d544792d5d9ba1c83fbc6dec2ebcaf5e3fdb12"
+}

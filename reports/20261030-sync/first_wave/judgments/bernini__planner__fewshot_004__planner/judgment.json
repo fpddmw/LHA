@@ -1,0 +1,253 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 4.433333333333334,
+    "expected_seconds": 4.433333333333334,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "space_arena",
+      "label": "pass",
+      "evidence": "背景出现带圆角窗洞和分块结构的蓝灰舱壁，结合大型太空窗，可辨认为未来太空站运动场馆。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "blue_white_lighting",
+      "label": "partial",
+      "evidence": "蓝光集中在球网附近、台面局部和服装边线；场馆其余区域仍主要保持原有室内照明，蓝白照明仅局部体现。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "earth_windows",
+      "label": "pass",
+      "evidence": "后方大型窗区可见蓝白云层、地球弧面及外围黑色太空，地球景象可辨。",
+      "times_seconds": [
+        0,
+        2.4,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "scifi_suits",
+      "label": "pass",
+      "evidence": "前景两人均换成贴身银白与蓝色科幻运动服，带流线分区及发光线条。",
+      "times_seconds": [
+        0,
+        1.6,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "blue_edges",
+      "label": "fail",
+      "evidence": "明显的青蓝发光带位于球网区域；台面外周桌沿仍为原有浅色线和深色边框，未见桌沿蓝色发光。",
+      "times_seconds": [
+        0,
+        1.6,
+        3.2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "faces",
+      "label": "partial",
+      "evidence": "左侧球员的头部和侧脸大体对应；右侧球员原有眼镜消失，脸型、五官及发型明显改变，身份特征保留不足。",
+      "times_seconds": [
+        0,
+        1.2,
+        2.4,
+        4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "player_roles",
+      "label": "pass",
+      "evidence": "两名前景球员保持左近右远的位置和隔桌对打关系，后方人物仍在对应区域可见。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "table_geometry",
+      "label": "pass",
+      "evidence": "台面四角、透视、桌体比例及红色弯曲支架均与源画面大体对应。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "net",
+      "label": "pass",
+      "evidence": "球网仍位于台面中央，两端网柱、横跨方向和基本矩形轮廓保持。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "playing_motion",
+      "label": "pass",
+      "evidence": "全段密集配对画面中，左侧多次前伸挥拍、右侧回击及末段向右跨步的主要顺序、方向和节奏对应。",
+      "times_seconds": [
+        0,
+        0.5,
+        1,
+        1.733,
+        2.133,
+        2.8,
+        3.4,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "ball_trajectory",
+      "label": "pass",
+      "evidence": "密集画面中可见小球在双方之间往返，经过球网上方并在两侧台面反弹，主要路径和击球阶段大体对应。",
+      "times_seconds": [
+        0,
+        0.2,
+        0.6,
+        1.2,
+        1.9,
+        2.6,
+        3.2,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "camera_motion",
+      "label": "pass",
+      "evidence": "全段取景及缓慢构图变化对应，立柱、球桌和人物在画面中的相对位置随时间保持一致。",
+      "times_seconds": [
+        0,
+        1.2,
+        2.4,
+        3.6,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "table_markings",
+      "label": "partial",
+      "evidence": "台面外周标线仍可辨；球网大部分被不透明青蓝光带覆盖，原有网孔和细部不可辨。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 2.8,
+      "evidence": "银白科幻运动服、青色光带和窗外地球形成明确风格；金属墙面与蓝白环境照明较弱，蓝光主要集中在球网，桌沿仍暗。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.3,
+      "evidence": "两人隔桌对打的竞技关系清楚，科幻服装与地球景观支持太空运动主题；场馆整体氛围仍有较强的日常训练室特征。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 2.7,
+      "evidence": "人物、球拍、球桌及后方人物的空间关系清楚；未来服装和太空窗景与布围挡、普通立柱、格栅窗及椅子的设计衔接较弱。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 2.9,
+      "evidence": "球桌连接左右球员，前后层次明确；球网亮度突出，蓝光对墙柱、地面和人物的照明联系较弱。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "银白、深蓝与青色形成统一的服装配色，金属反光可辨；墙面金属质感不足，球网呈大片纯亮青色，材质辨识较弱。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 2.8,
+      "evidence": "两名球员、桌体和红色球拍容易辨认；高亮球网抢占视觉中心，白球接近光带时辨识度下降。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "全段密集帧中服装分区、发光线、桌体和支架保持稳定，挥拍及末段横移连贯；白球经过亮网时短暂难以追踪。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 2.4,
+      "evidence": "近侧球员的青色背部分缝与远侧球员的弧形蓝色胸片形成区分，地球景象结合后墙窗区布置。但金属墙面与原立柱、围挡的整合有限，蓝光主要集中在球网位置，桌沿缺少相应设计。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 1.8,
+      "evidence": "参考候选已包含银白青蓝运动服、地球舷窗及发光线条。本片的可辨变化主要是背部Y形分缝与蓝色弧形胸片的组合，属于小幅变体；球网整片发光涉及保留项改变，不计为原创性贡献。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "faces"
+      ],
+      "evidence": "右侧球员的眼镜被移除，脸型、五官和发型出现持续改变，原有身份特征受损。",
+      "times_seconds": [
+        0,
+        1.2,
+        2.4,
+        4
+      ]
+    },
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "table_markings"
+      ],
+      "evidence": "球网中央至右端被实心状青蓝光带覆盖，原有网孔纹理和细部丢失。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ]
+    }
+  ],
+  "comparison_set_sha256": "efe6dd46cba2b3efa55f1e77a8ea2e200a4acb8078b6ed972d48c9fe1d0b3caa",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "1d490fb08bb949bbc3ac27f9ee2dd1d304bfd471e5ff81daf2afab2e9564b649",
+  "output_sha256": "7fcc2cca80405e35344700779265ea9e7f8bb79cd24923383396e1c29fc4762f",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}
