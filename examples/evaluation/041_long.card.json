@@ -1,0 +1,158 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "task_id": "041__long",
+  "source_id": "041",
+  "split": "development",
+  "track": "long",
+  "source_video": "benchmark_data/main/041/041.mp4",
+  "source_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+  "requirement": "Transform the bright scene of a man writing beside a woman into a children’s storybook illustration, using warm pastel colors and soft pencil outlines. Render his blue striped shirt, her white blouse, the notebook, and the tabletop with gentle watercolor washes, softened shadows, and subtle paper texture.",
+  "style_family": "storybook",
+  "style_required": true,
+  "creativity": "bounded",
+  "duration_seconds": 5.0,
+  "source_start_seconds": 0,
+  "status": "frozen",
+  "scene_summary": "原视频中男子在桌边书写，女子在旁；桌面有书写工具、笔记本和独立纸张。此题已用于开发与提示词测试。",
+  "allowed_changes": [
+    "将材质与线条转换为绘本绘制方式，允许适度形体简化。",
+    "在用户要求的色彩、轮廓、材质和光影范围内组织画面；不新增独立人物或改换行为。"
+  ],
+  "annotation_note": "Source-reviewed development example; not an untouched evaluation sample. No new judge scores are supplied.",
+  "groups": [
+    {
+      "id": "storybook",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "storybook_style",
+          "text": "将要求的画面转换成可识别的儿童绘本插画风格。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        }
+      ]
+    },
+    {
+      "id": "palette_lines",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "warm_pastels",
+          "text": "使用暖色粉彩。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        },
+        {
+          "id": "pencil_outlines",
+          "text": "使用柔和的铅笔轮廓。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        }
+      ]
+    },
+    {
+      "id": "watercolor_surface",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "watercolor",
+          "text": "男子蓝色条纹衬衫、女子白色上衣、笔记本和桌面以柔和水彩晕染呈现。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        },
+        {
+          "id": "soft_shadows",
+          "text": "阴影柔化。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        },
+        {
+          "id": "paper_texture",
+          "text": "有细微纸张纹理。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "same_two_people",
+          "text": "保留原来的两个人及可辨认的身份特征，允许绘本化简化。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        },
+        {
+          "id": "roles_positions",
+          "text": "保持男子书写、女子在其旁边的角色和相对位置。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        }
+      ]
+    },
+    {
+      "id": "event",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "writing_action",
+          "text": "男子的书写过程持续，关键手部动作与原片对应。",
+          "mandatory": true,
+          "temporal": true,
+          "evidence": "sequence",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        }
+      ]
+    },
+    {
+      "id": "objects",
+      "kind": "preserve_detail",
+      "items": [
+        {
+          "id": "writing_tool",
+          "text": "保留书写工具的类别及可辨认形态；允许绘制风格变化。",
+          "mandatory": false,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        },
+        {
+          "id": "notebook_binding",
+          "text": "保留笔记本装订和页本结构。",
+          "mandatory": false,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        },
+        {
+          "id": "separate_paper",
+          "text": "独立纸张与笔记本仍是两个可区分对象。",
+          "mandatory": false,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "The requested property is present only in part of the required visible extent."
+        }
+      ]
+    }
+  ],
+  "reviewed_by": "assistant-source-review-2026-10-29",
+  "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1"
+}
