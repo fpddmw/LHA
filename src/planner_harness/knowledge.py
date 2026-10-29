@@ -4,6 +4,7 @@ import re
 import hashlib
 from pathlib import Path
 from .common import load, page, sha, save
+from .lock import RunLock
 
 
 class Knowledge:
@@ -37,6 +38,15 @@ class Knowledge:
 
     def freeze(self, path):
         """One text snapshot pins readable material without duplicating historical videos."""
+        with RunLock(self.root / "knowledge/experience"):
+            # Reload the catalog under the publication lock so text and versions agree.
+            self.__init__(self.root)
+            journal = self.root / "knowledge/experience/.publication.json"
+            if journal.exists() and load(journal).get("status") == "pending":
+                raise ValueError("An experience publication is interrupted; finish it before starting a new reading snapshot")
+            return self._freeze(path)
+
+    def _freeze(self, path):
         documents, assets = {}, {}
         for relative in self.paths:
             file = self.root / relative

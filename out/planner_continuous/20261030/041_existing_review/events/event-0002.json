@@ -1,0 +1,68 @@
+{
+  "event_id": "event-0002",
+  "at": "2026-10-29T17:04:46.908982+00:00",
+  "request": {
+    "action": "observe",
+    "arguments": {
+      "video": "prior1",
+      "start": 0,
+      "end": 5,
+      "count": 6
+    },
+    "purpose": "Compare the available storybook versions for illustration quality and preservation of the writing gesture, pen, notebook, and woman's guiding hands."
+  },
+  "status": "ok",
+  "result": {
+    "observation_id": "event-0002",
+    "requested_interval": [
+      0.0,
+      5.0
+    ],
+    "frames": [
+      {
+        "frame_index": 0,
+        "timestamp_seconds": 0.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0002\\000000.jpg",
+        "sha256": "4028d95782a985c705e62d91cd17e8d0f432298c3d47b22e7d005ef9591a2b2b",
+        "crop": null
+      },
+      {
+        "frame_index": 20,
+        "timestamp_seconds": 1.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0002\\000020.jpg",
+        "sha256": "2d33cf265e05dc0f3e83040283fbe89e797c31c442c6f9e92a17e61f2ed535c7",
+        "crop": null
+      },
+      {
+        "frame_index": 40,
+        "timestamp_seconds": 2.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0002\\000040.jpg",
+        "sha256": "b406c4c85fd3424b47ffd05f0ed28b8c9bcf4b62344f8a5dc39aedbbcb737f2d",
+        "crop": null
+      },
+      {
+        "frame_index": 60,
+        "timestamp_seconds": 3.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0002\\000060.jpg",
+        "sha256": "ec8242ced8e374a2637e4e41f3c17e9a2c3d758cbe44679727315dc03f64e6b1",
+        "crop": null
+      },
+      {
+        "frame_index": 80,
+        "timestamp_seconds": 4.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0002\\000080.jpg",
+        "sha256": "f4c6a6644ba0f9264004c2a2e616b3edc78938e83f464042dbbf99f8031c0ae3",
+        "crop": null
+      },
+      {
+        "frame_index": 100,
+        "timestamp_seconds": 5.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0002\\000100.jpg",
+        "sha256": "0607eaaf530f0c7f5320826f6cfacba1cf8882c484388097eaf706b7c7efcc75",
+        "crop": null
+      }
+    ],
+    "scope": "Sampled frames from prior1; precise motion needs suitable temporal evidence.",
+    "video_id": "prior1"
+  }
+}

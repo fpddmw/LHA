@@ -1,0 +1,82 @@
+{
+  "event_id": "event-0006",
+  "at": "2026-10-29T17:12:09.040798+00:00",
+  "request": {
+    "action": "observe",
+    "arguments": {
+      "video": "prior2",
+      "start": 0.8,
+      "end": 5.0,
+      "count": 8
+    },
+    "purpose": "The consecutive opening frames show a coherent pen, hands and notebook. Check the full illustrated composition and later poses before selecting this existing result; exact motion across the entire clip remains unverified."
+  },
+  "status": "ok",
+  "result": {
+    "observation_id": "event-0006",
+    "requested_interval": [
+      0.8,
+      5.0
+    ],
+    "frames": [
+      {
+        "frame_index": 16,
+        "timestamp_seconds": 0.8,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0006\\000016.jpg",
+        "sha256": "11e7ff5532ff02aae16d67b7d3d7daba59bf7a6f7cc61abe65529bb1a1b1038c",
+        "crop": null
+      },
+      {
+        "frame_index": 28,
+        "timestamp_seconds": 1.4,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0006\\000028.jpg",
+        "sha256": "39b9b4f13da276c9018ca5cf4055f15aed6cc23f14a687ab62b06f664d37dac0",
+        "crop": null
+      },
+      {
+        "frame_index": 40,
+        "timestamp_seconds": 2.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0006\\000040.jpg",
+        "sha256": "1b1823b3e0f4afdff1a5489751979c09db2b9709382f55bd22f30e4ba1dc28d9",
+        "crop": null
+      },
+      {
+        "frame_index": 52,
+        "timestamp_seconds": 2.6,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0006\\000052.jpg",
+        "sha256": "4ee4e9f9770b6de6f9e8983fe97893e46c8671606a89fd273334b93683da14a4",
+        "crop": null
+      },
+      {
+        "frame_index": 64,
+        "timestamp_seconds": 3.2,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0006\\000064.jpg",
+        "sha256": "276a7c3eafb5d7bcab434a9ae543e59d2e6fb81350a18ff3d2c6825f3354f1f6",
+        "crop": null
+      },
+      {
+        "frame_index": 76,
+        "timestamp_seconds": 3.8,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0006\\000076.jpg",
+        "sha256": "8f8fb2e72f754f48029d6437c932600ca2965dca7218a0237e945a5b9a96971c",
+        "crop": null
+      },
+      {
+        "frame_index": 88,
+        "timestamp_seconds": 4.4,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0006\\000088.jpg",
+        "sha256": "83ac5e798a99afb84271222a8bdda3a8b2051e4d3111c18bf35cf83f54704c7d",
+        "crop": null
+      },
+      {
+        "frame_index": 100,
+        "timestamp_seconds": 5.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0006\\000100.jpg",
+        "sha256": "4754500d95db2adc64db7301a447801a7f9fc2637b3818242c3a98c8832077bf",
+        "crop": null
+      }
+    ],
+    "scope": "Sampled frames from prior2; precise motion needs suitable temporal evidence.",
+    "video_id": "prior2"
+  }
+}

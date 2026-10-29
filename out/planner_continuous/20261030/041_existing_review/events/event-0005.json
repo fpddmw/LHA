@@ -1,0 +1,224 @@
+{
+  "event_id": "event-0005",
+  "at": "2026-10-29T17:11:34.901318+00:00",
+  "request": {
+    "action": "observe",
+    "arguments": {
+      "video": "prior2",
+      "start": 0,
+      "end": 0.75,
+      "count": 16,
+      "crop": [
+        0.28,
+        0.55,
+        0.82,
+        1.0
+      ]
+    },
+    "purpose": "Inspect consecutive frames around the hands, pen and notebook to assess short-interval writing continuity before selecting the existing storybook result."
+  },
+  "status": "ok",
+  "result": {
+    "observation_id": "event-0005",
+    "requested_interval": [
+      0.0,
+      0.75
+    ],
+    "frames": [
+      {
+        "frame_index": 0,
+        "timestamp_seconds": 0.0,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000000.jpg",
+        "sha256": "9bd643f27bb16323f64bd158917b53bb07dce96ab4a1f6b8f54968ae0223f99e",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 1,
+        "timestamp_seconds": 0.05,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000001.jpg",
+        "sha256": "3ca87e0815b848765e6ef6887e7d277727a91853bae3e8654279e97b11c39a39",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 2,
+        "timestamp_seconds": 0.1,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000002.jpg",
+        "sha256": "2f6936fd1088ed93d3b461599a705a7188d5367eb4eaa42080eee52464541522",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 3,
+        "timestamp_seconds": 0.15,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000003.jpg",
+        "sha256": "e4717221fdb2faba89ddd3ea9b736f52399920a8127ddf8eab7763dade1ad97c",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 4,
+        "timestamp_seconds": 0.2,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000004.jpg",
+        "sha256": "8f7a781c5b87bda433455dbe05467c5c43604e194dd9e2c9345099f2ca4a8c15",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 5,
+        "timestamp_seconds": 0.25,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000005.jpg",
+        "sha256": "7b782538f96453a5b3f377ec383630e6d4b3ace7d17290a5cefe5d7097ab3e6f",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 6,
+        "timestamp_seconds": 0.3,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000006.jpg",
+        "sha256": "241647f1f621da8612ded578bb4f22b2edbcdb118ebcfe33e1b8112393ee5616",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 7,
+        "timestamp_seconds": 0.35,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000007.jpg",
+        "sha256": "e4306c457267465fd17b37f3c136b42df01eb1f4ab2af33c26a766888d5cce5f",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 8,
+        "timestamp_seconds": 0.4,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000008.jpg",
+        "sha256": "39a314cdf663218b68724c0e84d12a56810b0dbcca4def28c90f3af6b470206e",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 9,
+        "timestamp_seconds": 0.45,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000009.jpg",
+        "sha256": "9cf91d482980955c07b02259edc5fc64c5438562f5d69df0e863da4f385a753d",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 10,
+        "timestamp_seconds": 0.5,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000010.jpg",
+        "sha256": "3d08832ad226fdbf971a4dcd43f62d6bbca28bda61bea19eafe83d33ab28690a",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 11,
+        "timestamp_seconds": 0.55,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000011.jpg",
+        "sha256": "36391e0b4444a61fb992d685d7aaee8e61c7bebb6b75edeb496dc9221bbbc496",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 12,
+        "timestamp_seconds": 0.6,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000012.jpg",
+        "sha256": "229e34f4c772532084b594a8a98623a4c568cc08963c6b3bb231763fbefeee7e",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 13,
+        "timestamp_seconds": 0.65,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000013.jpg",
+        "sha256": "a2b9d3d0617d8dfb0eee526194fafcda8c522ba781b8886940bc8b7955932529",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 14,
+        "timestamp_seconds": 0.7,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000014.jpg",
+        "sha256": "e123a004dc35a1820e1975396d2fe3b46d08ca2b9c7c3927d8cb5dc09aeb1814",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      },
+      {
+        "frame_index": 15,
+        "timestamp_seconds": 0.75,
+        "path": "\\\\wsl.localhost\\Ubuntu-24.04\\home\\fpddmw\\projects\\LHA\\out\\planner_continuous\\20261030\\041_existing_review\\observations\\event-0005\\000015.jpg",
+        "sha256": "6a31fc3217650541b48fe87cf468e8153692ce165c55b82017eb237e7e0588d9",
+        "crop": [
+          0.28,
+          0.55,
+          0.82,
+          1.0
+        ]
+      }
+    ],
+    "scope": "Sampled frames from prior2; precise motion needs suitable temporal evidence.",
+    "video_id": "prior2"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "event_id": "event-0004",
+  "at": "2026-10-29T17:07:25.694102+00:00",
+  "request": {
+    "action": "evaluate",
+    "arguments": {
+      "video": "prior2",
+      "question": "Assess whether this result convincingly resembles a children's storybook, with coherent illustrated characters, soft painted color, and paper texture. Check temporal stability and whether the source interaction remains readable: the seated man writes with a black pen in a small spiral notebook while the woman points at the page and rests her other hand on his shoulder. Identify any defects that materially affect suitability."
+    }
+  },
+  "status": "ok",
+  "result": {
+    "status": "pending",
+    "job_id": "event-0004-evaluate",
+    "input_video": "prior2",
+    "message": "The runtime will return the tool result here; no polling action is needed."
+  }
+}
