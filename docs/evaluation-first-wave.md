@@ -57,3 +57,8 @@ python scripts/eval/run_first_wave.py --run out/evaluation_runs/20261030_first_w
 
 汇报保留语义修改、核心保留、细节保留、风格、美学、创造性设计、时序及未知覆盖率的分项结果，
 并提供原视频、生成视频和逐项证据。读知识次数与提示词长度只用于解释过程，不进入视频质量得分。
+
+使用 `python scripts/eval/render_evaluation_review.py --run out/evaluation_runs/20261030_first_wave`
+可生成或刷新 `review.html`，同页查看原视频、各条件原生输出、小数分数和逐项证据，并按渲染模型筛选。
+该步骤只读取已有材料，不调用模型；页面显示当前评分覆盖数量，未评分项保持待评价。
+生成提示词单独折叠展示，用于复盘；它们不进入最终评价模型的上下文。
