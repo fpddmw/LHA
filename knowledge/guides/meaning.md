@@ -88,3 +88,12 @@ These entries extend the comparisons above. Each provides a complete reading edi
 | [Wuxia: action, historical materials, and poetic space](../entries/base-wuxia.md) | A martial-arts film direction built around heroic figures, flowing cloth, and layered landscapes. |
 | [Chinese period settings: vocabulary, visible evidence, and historical card scope](../domain-references/chinese_period.md) | The original card supplies terms for headwear, clothing, sets, and light sources, while recording visible-region restrictions and their trade-offs. |
 | [Nature and landscape: space, light, and human experience](../domain-references/nature_landscape.md) | The original card organizes sky, vegetation, distance, and aerial perspective; other cases add different times and viewing relationships. |
+
+
+## Read the request in relation to the actual scene
+
+An appearance edit, an object replacement and a change to an activity can affect different relationships. A writing scene includes a person using an implement on a surface; the implement's exact material and the activity's identity are distinct questions. A request to recolor a robe can be precise in one sentence, while a request for a cyber-xianxia world leaves substantial interpretation open. A long instruction may already specify the design and several localized changes. Instruction length does not determine creative freedom.
+
+Read explicit requirements, visible evidence and proposed additions in their own roles. A hand on a shoulder is visible contact; a family relationship may remain unknown. A sampled pose suggests part of an activity; a complete trajectory requires evidence across time. A partial crop or an obscured object can leave a useful question open without forcing an invented answer.
+
+These distinctions can support a proposal or a later revision. They require no fixed scene graph, inventory, narrative template or semantic form. Ordinary activities can remain ordinary. The current model may organize notes or questions in whatever way helps the task. [Inspection experience](../experience/inspect-and-compare.md) discusses when a closer observation can change the next action.

@@ -1,5 +1,14 @@
 # LHA knowledge map
 
+## Reading entrances
+
+- **Meaning and requests:** [Video meaning](guides/meaning.md) connects visible events, relationships, uncertainty and the scope of an edit.
+- **Visual design:** the comparative guides and complete cases below explain media, settings, composition, time and combinations.
+- **Generation and iteration experience:** [experience topics](experience/README.md) give actionable common-sense starting preferences alongside scoped model evidence. They can improve through reviewed experience revisions.
+
+The [reading manual](READING.md) explains access and provenance. These entrances are a bookshelf, not a required workflow. The model chooses what to read and how to organize its task.
+
+
 This package organizes existing repository skill material into an explorable, comparable, traceable knowledge base. It contains **111 complete entries, 5 domain references, 7 guides, and 1 model-experience record**. Entries retain the relationships within an original proposal; guides explain differences across proposals; source links lead to original records, legacy templates, and reference images.
 
 The working language is **English**. Working pages contain English editorial prose, navigation, guidance, and source material. Existing English source text is preserved; translations of Chinese-only template fields are identified explicitly. Original-language records remain unchanged at their source locations for provenance.
