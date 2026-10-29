@@ -1,0 +1,13 @@
+{
+  "understanding": "The sampled clip shows a man in a navy suit and white shirt holding a black phone to his ear in a beige leather car interior. His expression changes slightly, with buildings visible through the windows. The user requests high-contrast digital glitch art across the entire frame. Exact motion between sampled frames is unverified.",
+  "proposal": "Treat the whole image as a corrupted digital video signal. Deep shadows in the navy suit and car interior contrast with bright skin, shirt, and leather highlights. Separate red, green, and blue channels along facial contours, the phone, jacket seams, seat edges, and reflected buildings. Horizontal bands briefly displace image strips sideways, while rectangular pixel blocks fragment and reassemble portions of the same scene. Fine scan lines flicker across the full frame throughout the clip. Cyan, magenta, and electric green highlights break across the leather and window reflections. Distortion varies in short, irregular bursts while the man's phone-call gesture remains readable.",
+  "prompt": "Transform the entire shot of the man making a phone call in the beige leather car interior into digital glitch art. Use deep, high-contrast shadows in his navy suit and the cabin, with bright, distorted color highlights on his face, white shirt, leather seats, and windows. Split red, green, and blue channels into visibly offset contours across his face, hand, black phone, jacket seams, seat edges, and window reflections. Apply horizontal pixel shifts in narrow and broad bands that briefly slide sections of the image sideways. Rectangular blocks of displaced image fragments flicker into view and reassemble. Fine horizontal scan-line textures flicker across the entire frame throughout the clip. Let cyan, magenta, and electric green highlights pulse through the existing reflections and material edges. Vary the distortion in short, irregular bursts while keeping his phone-call gesture readable.",
+  "sources": [
+    {
+      "read_id": "read-0001",
+      "use": "The recorded glitch example and guidance on naming affected image regions informed the explicit distribution of RGB separation across the subject, seats, and reflections. Its findings apply to the documented Bernini configuration; the temporal treatment here is a design choice."
+    }
+  ],
+  "self_review": "The proposal includes every requested effect, covers the entire frame, and specifies how the distortions change over time. It uses the visible scene without adding narrative or scenery. The target model is unspecified, and rendering quality and continuous-motion behavior remain untested.",
+  "unresolved": []
+}

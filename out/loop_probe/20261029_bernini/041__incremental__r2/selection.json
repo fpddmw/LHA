@@ -1,0 +1,91 @@
+{
+  "accepted": true,
+  "selected": "out/loop_probe/20261029_bernini/041__incremental__r2/native.mp4",
+  "candidate": "out/loop_probe/20261029_bernini/041__incremental__r2/native.mp4",
+  "previous": "out/prompt_probe/20261029_bernini/041__long_keep/native.mp4",
+  "reason": "Observed improvement without a confident item regression",
+  "transitions": [
+    {
+      "category": "edits",
+      "item": "Recognizable children's storybook illustration",
+      "before": "done",
+      "after": "done",
+      "transition": "stable",
+      "evidence": "写实影像已转为浅色纸底上的手绘插画，衣服、头发、肤色和植物均采用柔和色块与笔触，符合儿童绘本要求。"
+    },
+    {
+      "category": "preservation",
+      "item": "原来的两个人及各自身份特征（允许绘本化简化）",
+      "before": "kept",
+      "after": "kept",
+      "transition": "stable",
+      "evidence": "男子的浅色短卷发、蓝色条纹衬衫，以及女子的长直发、白色外套、手链仍可辨认。女子头发变为棕色，人物五官与肤色经过绘本化概括，主要身份线索仍在。"
+    },
+    {
+      "category": "preservation",
+      "item": "两人的相对位置",
+      "before": "kept",
+      "after": "kept",
+      "transition": "stable",
+      "evidence": "女子仍站在画面左侧，男子仍坐在中央偏右，女子身体靠近男子肩部，与原片一致。"
+    },
+    {
+      "category": "preservation",
+      "item": "男子继续进行书写动作",
+      "before": "kept",
+      "after": "kept",
+      "transition": "stable",
+      "evidence": "各抽样帧中男子持续低头持笔，笔尖朝向本子表面，持笔手有轻微位置变化，保留了持续书写的大体动作。"
+    },
+    {
+      "category": "preservation",
+      "item": "书写工具的类别与可辨认形态",
+      "before": "changed",
+      "after": "kept",
+      "transition": "improved",
+      "evidence": "候选中仍是黑色细长笔身、明确尖端的书写笔，与原片黑色笔的类别及外观相符。"
+    },
+    {
+      "category": "preservation",
+      "item": "笔记本的装订和页本结构",
+      "before": "changed",
+      "after": "partial",
+      "transition": "improved",
+      "evidence": "候选具有可辨认的螺旋线圈和分层白色书页，但线圈位于本子的远侧斜边；原片线圈位于靠近观众的下侧长边。候选的页层也画得更厚、更突出。"
+    },
+    {
+      "category": "preservation",
+      "item": "独立纸张与笔记本仍是两个可区分对象",
+      "before": "partial",
+      "after": "kept",
+      "transition": "improved",
+      "evidence": "左侧白色圈装本与右侧浅褐色独立纸张具有不同颜色和独立轮廓，两个对象在全部候选样本中均可区分。"
+    },
+    {
+      "category": "preservation",
+      "item": "女子与男子肩部的接触关系",
+      "before": "kept",
+      "after": "kept",
+      "transition": "stable",
+      "evidence": "女子上方的手仍搭在男子画面左侧的肩头，指尖与衬衫肩部接触，保留了原片的互动关系。"
+    },
+    {
+      "category": "preservation",
+      "item": "手、纸本和桌面的空间关系",
+      "before": "kept",
+      "after": "kept",
+      "transition": "stable",
+      "evidence": "男子持笔手位于书写页上方，另一只手靠着本子右缘；女子下方的手指向本子，纸本与散纸均放置在桌面上，前后遮挡关系清楚。"
+    },
+    {
+      "category": "preservation",
+      "item": "镜头取景与可见的运动趋势",
+      "before": "kept",
+      "after": "kept",
+      "transition": "stable",
+      "evidence": "保留固定中近景、女子头部在画外及男子居中偏右的构图；抽样可见的低头姿态和手部轻微变化与原片大体对应。"
+    }
+  ],
+  "source": "online critic plus fixed item-wise acceptance rule",
+  "selected_unix": 1793291745.2093725
+}

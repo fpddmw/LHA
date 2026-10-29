@@ -1,0 +1,25 @@
+{
+  "understanding": "The sampled frames show two foreground players exchanging table-tennis shots in a sports room, with another player and tables behind them. The requested edit replaces the setting and clothing and adds blue table-edge lighting while preserving faces, playing motions, ball trajectory, table geometry, and camera movement. Sparse observations establish the broad action but do not verify the continuous ball path.",
+  "proposal": "Create a realistic, functioning space-station sports arena within the source room's spatial arrangement. Clad the walls and central column in matte silver alloy panels, with broad blue-white practical lighting and a charcoal sports floor. Convert the existing window bays into large station windows showing a coherent view of Earth's blue curvature and white cloud systems against space. Retain the structural divisions and background sporting layout. Dress the visible players in streamlined graphite-and-silver athletic suits, using flexible ribbed fabric at bending joints and subtle cyan seams. Keep faces, hair, and eyewear exposed and recognizable. Retain the blue playing surface, markings, net, and distinctive curved table supports. Fit a thin blue luminous strip along the outer rim of the upper playing surface, with restrained bloom and slight spill onto the adjoining apron. Carry the transformation consistently through the clip while retaining the original performance, ball motion, table geometry, and camera movement.",
+  "prompt": "Transform the room into a realistic futuristic space-station sports arena. Follow the existing room layout and structural divisions with matte silver metallic wall panels, a metal-clad central column, a charcoal sports floor, and broad blue-white panel lighting. Turn the existing window bays into large station windows revealing Earth's blue curvature and white clouds against black space, with a coherent exterior view across the windows. Dress the visible players in sleek graphite-and-silver sci-fi athletic suits made of flexible technical fabric, with fine ribbing at bending joints and subtle cyan seams. Preserve every person's face, expression, hair, and eyewear, keeping faces clearly visible. Add a thin, continuous glowing blue strip fitted to the outer perimeter of the table's upper playing surface. Keep its bloom narrow, with gentle blue spill on the adjacent table apron and clear visibility of the white ball. Preserve the original blue tabletop, markings, net, curved supports, table dimensions, and perspective. Preserve the players' exact playing motions, paddle contacts, ball trajectory, bounces, and timing, together with the original framing and camera movement. Keep the new materials, suits, lighting, and window views consistent throughout the clip.",
+  "sources": [
+    {
+      "read_id": "read-0003",
+      "use": "Adapted the relationship between matte alloy panels, glass boundaries, and controlled panel illumination to a sports arena while retaining the scene's sporting purpose."
+    },
+    {
+      "read_id": "read-0004",
+      "use": "Adapted ribbed technical fabric and restrained seams into flexible athletic suits. Historical local-editing restrictions and prompt-length advice were kept within their original experimental context."
+    },
+    {
+      "read_id": "read-0005",
+      "use": "Adapted the relationship between an emitting element and nearby receiving surfaces into a narrow blue tabletop strip with localized spill."
+    },
+    {
+      "read_id": "read-0001",
+      "use": "The guide's reported distinction between tabletop edges and lower supports informed explicit placement on the upper tabletop rim. This wording has no established performance advantage."
+    }
+  ],
+  "self_review": "The proposal includes every requested transformation and preservation requirement. Added materials and suit details serve the specified arena without introducing new activity. The prompt identifies the emitting table part explicitly. No rendered result or preservation outcome is claimed; target-model behavior and continuous motion fidelity remain untested.",
+  "unresolved": []
+}

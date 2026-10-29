@@ -1,0 +1,21 @@
+{
+  "understanding": "The sampled four-second interior shot shows a composed woman in pale blue embroidered clothing and an elaborate floral updo, a woman behind her who lifts her gaze and develops a slight smile, and a blurred figure at the left foreground. The user requests a cyber-xianxia style without specifying palette or intensity. The close framing favors changes to visible textiles, jewelry, hair ornaments, lighting, and background surfaces.",
+  "proposal": "Reimagine the interior as an elegant chamber where cultivation energy flows through advanced materials. The main woman's pale blue silk retains its floral embroidery, now woven with fine silver conductors and cyan light following the embroidered stems. Her floral hair ornaments become translucent jade petals mounted in intricate silver mechanisms; her dangling earrings combine pearl-like luminous beads with delicate metal links. Give the woman behind her a quieter ivory-and-sage version of this textile technology. Rework the background into dark lacquer and jade architectural panels with talisman-shaped circuit inlays and softly illuminated lattice seams. A restrained violet accent adds depth behind the cyan ornament glow. Keep warm, natural faces, glossy black hair, shallow focus, and the original intimate arrangement. A slow current through the embroidery and a few distant suspended motes provide gentle temporal life.",
+  "prompt": "Give this scene a cinematic cyber-xianxia visual style, with advanced technology integrated into traditional Chinese fantasy craftsmanship. Keep the intimate close-up arrangement: the woman in pale blue dominates the right foreground, the second woman stands behind her, and the figure at the left remains softly blurred. Let the main woman's composed expression and the rear woman's gradually emerging small smile remain clearly readable.\n\nTransform the main woman's robe into pale blue silk woven with fine silver circuitry that follows its existing embroidered floral stems. A faint cyan current travels gently along these threads, revealing the fabric's weave and folds. Her elaborate black updo carries translucent jade flower petals with luminous inner cores, held by delicate articulated silver settings. Refine the dangling earrings into pearl-like light beads joined by fine silver links. Give the rear woman's ivory-and-sage clothing subtler versions of the same embroidered energy channels and jade ornament details.\n\nRework the softly focused interior into dark lacquer, brushed silver, and translucent jade panels. Fine circuit inlays form angular talisman patterns within the traditional architectural framing. Cyan light glows from lattice seams, with a restrained violet accent deeper in the room. These embedded light sources cast subtle colored reflections on the ornaments and silk. Keep facial illumination soft and warm, with natural skin texture, clear eyes, and glossy black hair. Add delicate atmospheric depth behind the women and a few slowly drifting luminous motes. Maintain a refined live-action fantasy appearance, with the luminous details anchored consistently to the garments, jewelry, and architecture throughout the shot.",
+  "sources": [
+    {
+      "read_id": "read-0001",
+      "use": "Adapted the relationship among silk, reflective spiritual metal, translucent materials, and soft radiance to the visible robes and ornaments."
+    },
+    {
+      "read_id": "read-0002",
+      "use": "Adapted embedded devices and colored light interacting with nearby materials into illuminated jade components and architectural circuits suited to the interior."
+    },
+    {
+      "read_id": "read-0003",
+      "use": "Used the component-integration approach to make circuitry, embroidery, and ornament structure express one shared energy system."
+    }
+  ],
+  "self_review": "The design makes both technological and cultivation elements visible at the scale of the source shot. Its additions support the quiet expressions and require no new action or narrative relationship. Palette, materials, and energy behavior are design choices. Source templates supply visual relationships; this prompt has not been rendered or tested, and the target model is unspecified.",
+  "unresolved": []
+}

@@ -1,0 +1,19 @@
+{
+  "event_id": "event-0003",
+  "at": "2026-10-29T16:28:02.302622+00:00",
+  "request": {
+    "action": "generate",
+    "arguments": {
+      "input_video": "source",
+      "prompt": "Transform the entire clip into a warm children's storybook illustration, drawn in soft colored pencil and transparent watercolor on lightly textured ivory paper. Use gently irregular pencil contours visible through the washes, rounded expressive features, rosy cheeks, and simplified painted shading. Render the man's wavy hair with loose golden-brown pencil strokes, his striped shirt with pale blue washes and delicate drawn stripes, and the woman's long black hair and white jacket with soft charcoal lines and cream highlights. Keep both people as adults. Paint the room in airy cream and muted sage, with loosely brushed plants and a softly shaded gray tabletop. Let paper show through the brightest areas, with subtle pigment pooling along selected painted edges. Apply this illustrated treatment to the people, hands, clothing, objects, and background throughout the clip. Retain the original composition and small writing movements: the seated man writes with a distinct black pen in the white spiral notebook, while the standing woman points at the page and rests her other hand on his shoulder. Keep the notebook's rectangular pages and near-edge spiral binding clearly drawn. Maintain consistent character features, outlines, and paper texture as they move.",
+      "seed": 42
+    }
+  },
+  "status": "ok",
+  "result": {
+    "status": "pending",
+    "job_id": "event-0003-generate",
+    "input_video": "source",
+    "message": "The runtime will return the tool result here; no polling action is needed."
+  }
+}

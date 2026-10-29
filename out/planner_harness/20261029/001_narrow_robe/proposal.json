@@ -1,0 +1,8 @@
+{
+  "understanding": "The sampled frames show a woman at the front right wearing a blue-gray embroidered robe, blue hair ornaments, and dangling pearl earrings. Another woman stands behind her, while a blurred figure occupies the left foreground. The user requests changing only the front-right woman's robe to deep red.",
+  "proposal": "Recolor the front-right woman's visible robe, including its collar, shoulders, and chest, to deep red. Preserve its embroidery, fabric texture, folds, sheen, and existing shading. Apply the color consistently throughout the clip, with all other visual elements unchanged.",
+  "prompt": "Change only the blue-gray robe worn by the clearly visible foreground woman on the right to deep red throughout the clip. Include the robe's collar and all visible robe fabric. Preserve its embroidery pattern, texture, folds, sheen, and existing highlights and shadows. Confine the recoloring to her robe. Keep her face, skin, hair, blue hair ornaments, earrings, the other figures, and the setting unchanged. Preserve the original framing and movements.",
+  "sources": [],
+  "self_review": "The proposal directly matches the single requested color change. The target garment is clear in all six sampled frames, so additional design research is unnecessary. Continuous-frame consistency and the rendered result remain unverified.",
+  "unresolved": []
+}
