@@ -60,10 +60,10 @@ def references(run, manifest):
             ref = {"images": images, "image_sha256": [file_hash(p) for p in images],
                    "output_sha256": file_hash(ROOT / case["output_video"])}
             write(marker, ref)
-        pools.setdefault(task, []).append({k: ref[k] for k in ("images", "image_sha256")})
+        pools.setdefault(task, []).append({k: ref[k] for k in ("images", "image_sha256", "output_sha256")})
     for task, candidates in pools.items():
         candidates.sort(key=lambda c: c["image_sha256"][0])
-        path = run / "references_fixed" / f"{task}.json"
+        path = run / "references_cohort_v2" / f"{task}.json"
         value = {"task_id": task, "candidates": candidates}
         if path.exists():
             require(read(path) == value, "Reference pool changed")
@@ -88,12 +88,15 @@ def execute(case, run, factory):
     card = validate_card(read(ROOT / case["card"]))
     directory = run / "judgments" / case["case_id"]
     evidence = read(run / "evidence" / case["case_id"] / "evidence.json")
-    row = {"case_id": case["case_id"], "method": case["method"], "seed": case["seed"], "output_video": case["output_video"]}
+    row = {"case_id": case["case_id"], "method": case["method"], "seed": case["seed"], "output_video": case["output_video"],
+           "evaluation_revision": "first-wave-v2-self-excluded", "case_sha256": signature(case),
+           "evidence_sha256": evidence["evidence_sha256"]}
     started = time.time()
     try:
         client = client_from_factory(factory, {"role": "benchmark_final"})
         j = judge(card, evidence, client, directory,
-                  references=read(run / "references_fixed" / f"{card['task_id']}.json"), creativity_overview=True)
+                  references=read(run / "references_cohort_v2" / f"{card['task_id']}.json"),
+                  creativity_overview=True, creativity_exclude_self=True)
         write(directory / "judgment.json", j)
         row.update(status="complete", result=score(card, j))
     except Exception as exc:
@@ -140,7 +143,13 @@ def main():
     for case in manifest:
         path = run / "judgments" / case["case_id"] / "record.json"
         if path.exists():
-            records[case["case_id"]] = read(path)
+            row = read(path)
+            if row.get("evaluation_revision") != "first-wave-v2-self-excluded":
+                continue
+            require(row["case_sha256"] == signature(case), "Completed case manifest changed")
+            evidence = read(run / "evidence" / case["case_id"] / "evidence.json")
+            require(row["evidence_sha256"] == evidence["evidence_sha256"], "Completed case evidence changed")
+            records[case["case_id"]] = row
     while len(records) < len(manifest):
         ready = [c for c in manifest if c["case_id"] not in records and (run / "evidence" / c["case_id"] / "evidence.json").exists()]
         publish(run, manifest, records)

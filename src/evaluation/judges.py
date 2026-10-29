@@ -130,7 +130,7 @@ def covers_interval(ranges, interval):
     return covered >= interval[1] - 1e-6
 
 
-def judge(card, evidence, client, destination, *, references=None, creativity_overview=False):
+def judge(card, evidence, client, destination, *, references=None, creativity_overview=False, creativity_exclude_self=False):
     validate_card(card)
     verify_evidence(card, evidence)
     destination = Path(destination)
@@ -162,18 +162,30 @@ def judge(card, evidence, client, destination, *, references=None, creativity_ov
             creative_output = [output[i] for i in indices]
             creative_request = {**request, "pairs": [evidence["pairs"][i] for i in indices], "dense_ranges": [],
                                 "evidence_scope": "Appearance/design overview; do not infer fine temporal novelty"}
-        ref_images, ref_groups = [], []
+        ref_images, ref_groups, excluded_self = [], [], 0
         if references:
             require(references["task_id"] == card["task_id"], "Reference set must use the same task")
             for ref in references["candidates"]:
+                if creativity_exclude_self:
+                    require(isinstance(ref.get("output_sha256"), str) and len(ref["output_sha256"]) == 64,
+                            "Self exclusion requires each reference video's hash")
+                    if ref["output_sha256"] == evidence["output_sha256"]:
+                        excluded_self += 1
+                        continue
                 paths = ref["images"]
                 require([file_hash(p) for p in paths] == ref["image_sha256"], "Reference images changed")
                 ref_images.extend(paths)
                 ref_groups.append(len(paths))
-            require(ref_images, "Empty comparison set")
+            require(ref_images or (creativity_exclude_self and excluded_self), "Empty comparison set")
             result["comparison_set_sha256"] = signature(references)
+        if creativity_exclude_self:
+            creative_request = {**creative_request, "reference_protocol": "fixed-cohort-leave-one-out-v2",
+                                "excluded_self_reference_count": excluded_self,
+                                "comparison_rule": "Compare permitted design against the supplied other candidates. Exact copies of the evaluated video have been excluded by video hash."}
+            result["creativity_reference_protocol"] = "fixed-cohort-leave-one-out-v2"
+        creative_cache = "creativity_v2.raw.json" if creativity_exclude_self else "creativity.raw.json"
         creative = cached_call(client, CREATIVITY, {**creative_request, "image_groups": [len(creative_source), len(creative_output), *ref_groups],
-                               "reference_set_available": bool(ref_images)}, creative_source + creative_output + ref_images, destination / "creativity.raw.json")
+                               "reference_set_available": bool(ref_images)}, creative_source + creative_output + ref_images, destination / creative_cache)
         require(set(creative["ratings"]) == {"scene_specific_design", "relative_originality"}, "Unexpected creativity rating keys")
         result["ratings"].update(creative["ratings"])
     result.update(evidence_sha256=evidence["evidence_sha256"], output_sha256=evidence["output_sha256"],

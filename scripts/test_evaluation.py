@@ -274,13 +274,17 @@ class EvaluationTests(unittest.TestCase):
                         "pairs": [{"source_seconds": t, "output_seconds": t, "overview": n != 1, "dense": True}
                                   for n, t in enumerate([.1, 1.0, 1.9])]}
             evidence["evidence_sha256"] = signature(evidence)
-            refs = {"task_id": card["task_id"], "candidates": [{"images": [str(path)], "image_sha256": [file_hash(path)]}]}
-            result = judge(card, evidence, Client(), Path(tmp) / "judge", references=refs, creativity_overview=True)
+            refs = {"task_id": card["task_id"], "candidates": [
+                {"images": [str(path)], "image_sha256": [file_hash(path)], "output_sha256": "b" * 64},
+                {"images": [str(path)], "image_sha256": [file_hash(path)], "output_sha256": "c" * 64}]}
+            result = judge(card, evidence, Client(), Path(tmp) / "judge", references=refs,
+                           creativity_overview=True, creativity_exclude_self=True)
             self.assertEqual([n for _, n in requests], [6, 3, 5])
             self.assertEqual(requests[0][0]["dense_ranges"], [[0, 2]])
             self.assertEqual(requests[1][0]["dense_ranges"], [[0, 2]])
             self.assertEqual(requests[2][0]["dense_ranges"], [])
             self.assertEqual(requests[2][0]["image_groups"], [2, 2, 1])
+            self.assertEqual(requests[2][0]["excluded_self_reference_count"], 1)
             self.assertEqual(len(requests[2][0]["pairs"]), 2)
             self.assertEqual(result["comparison_set_sha256"], signature(refs))
             self.assertEqual(result["ratings"]["temporal_coherence"]["score"], 3.7)
