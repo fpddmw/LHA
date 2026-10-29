@@ -130,7 +130,7 @@ def covers_interval(ranges, interval):
     return covered >= interval[1] - 1e-6
 
 
-def judge(card, evidence, client, destination, *, references=None):
+def judge(card, evidence, client, destination, *, references=None, creativity_overview=False):
     validate_card(card)
     verify_evidence(card, evidence)
     destination = Path(destination)
@@ -155,6 +155,13 @@ def judge(card, evidence, client, destination, *, references=None):
     require(set(design["ratings"]) == {"style", *AESTHETICS, "temporal_coherence"}, "Unexpected design rating keys")
     result["ratings"].update(design["ratings"])
     if card["creativity"] != "none":
+        creative_source, creative_output, creative_request = source, output, request
+        if creativity_overview:
+            indices = [i for i, pair in enumerate(evidence["pairs"]) if pair.get("overview", True)]
+            creative_source = [source[i] for i in indices]
+            creative_output = [output[i] for i in indices]
+            creative_request = {**request, "pairs": [evidence["pairs"][i] for i in indices], "dense_ranges": [],
+                                "evidence_scope": "Appearance/design overview; do not infer fine temporal novelty"}
         ref_images, ref_groups = [], []
         if references:
             require(references["task_id"] == card["task_id"], "Reference set must use the same task")
@@ -165,8 +172,8 @@ def judge(card, evidence, client, destination, *, references=None):
                 ref_groups.append(len(paths))
             require(ref_images, "Empty comparison set")
             result["comparison_set_sha256"] = signature(references)
-        creative = cached_call(client, CREATIVITY, {**request, "image_groups": [len(source), len(output), *ref_groups],
-                               "reference_set_available": bool(ref_images)}, source + output + ref_images, destination / "creativity.raw.json")
+        creative = cached_call(client, CREATIVITY, {**creative_request, "image_groups": [len(creative_source), len(creative_output), *ref_groups],
+                               "reference_set_available": bool(ref_images)}, creative_source + creative_output + ref_images, destination / "creativity.raw.json")
         require(set(creative["ratings"]) == {"scene_specific_design", "relative_originality"}, "Unexpected creativity rating keys")
         result["ratings"].update(creative["ratings"])
     result.update(evidence_sha256=evidence["evidence_sha256"], output_sha256=evidence["output_sha256"],

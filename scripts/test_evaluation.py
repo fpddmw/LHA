@@ -246,6 +246,45 @@ class EvaluationTests(unittest.TestCase):
         self.assertEqual((result["n"], result["total"]), (1, 2))
         self.assertAlmostEqual(result["mean_absolute_difference"], .3)
 
+    def test_creativity_overview_preserves_dense_semantic_evidence(self):
+        card = copy.deepcopy(self.card)
+        card["creativity"] = "open"
+        card = freeze(card, "fixture")
+        truth = judgment_fixture(card)
+        requests = []
+
+        class Client:
+            model = "synthetic-fixture"
+
+            def predict_json(self, *, system_prompt, user_text, image_paths):
+                requests.append((json.loads(user_text), len(image_paths)))
+                if "For EVERY item" in system_prompt:
+                    return {k: copy.deepcopy(truth[k]) for k in ("items", "damage_review", "damages")}
+                creative = "optional fixed anonymous REFERENCE" in system_prompt
+                return {"ratings": {k: copy.deepcopy(v) for k, v in truth["ratings"].items()
+                                    if (k in {"scene_specific_design", "relative_originality"}) == creative}}
+
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "fixture.jpg"
+            path.write_bytes(b"opaque fake-client-only evidence")
+            evidence = {"card_sha256": card["card_sha256"], "source_sha256": card["source_sha256"],
+                        "output_sha256": "b" * 64, "source_images": [str(path)] * 3,
+                        "output_images": [str(path)] * 3, "image_sha256": [file_hash(path)] * 6,
+                        "dense_ranges": [[0, 2]], "delivery": truth["delivery"],
+                        "pairs": [{"source_seconds": t, "output_seconds": t, "overview": n != 1, "dense": True}
+                                  for n, t in enumerate([.1, 1.0, 1.9])]}
+            evidence["evidence_sha256"] = signature(evidence)
+            refs = {"task_id": card["task_id"], "candidates": [{"images": [str(path)], "image_sha256": [file_hash(path)]}]}
+            result = judge(card, evidence, Client(), Path(tmp) / "judge", references=refs, creativity_overview=True)
+            self.assertEqual([n for _, n in requests], [6, 3, 5])
+            self.assertEqual(requests[0][0]["dense_ranges"], [[0, 2]])
+            self.assertEqual(requests[1][0]["dense_ranges"], [[0, 2]])
+            self.assertEqual(requests[2][0]["dense_ranges"], [])
+            self.assertEqual(requests[2][0]["image_groups"], [2, 2, 1])
+            self.assertEqual(len(requests[2][0]["pairs"]), 2)
+            self.assertEqual(result["comparison_set_sha256"], signature(refs))
+            self.assertEqual(result["ratings"]["temporal_coherence"]["score"], 3.7)
+
     def test_blind_calls_and_counterbalanced_preferences(self):
         card, truth = self.card, copy.deepcopy(self.j)
         label(truth, "action", "unknown")
