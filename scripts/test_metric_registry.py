@@ -67,6 +67,14 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(stats["not_applicable_sources"], 2)
         self.assertIsNone(stats["coverage_percent"])
 
+    def test_empty_planned_batch_only_has_semantic_population_bounds(self):
+        cohort = [{"method": "m", "seed": 42, "source_id": "a", "task_id": "a__short", "track": "short", "split": "development"}]
+        metrics = summarize([], cohort=cohort, repeats=0)[0]["metrics"]
+        self.assertEqual((metrics["edit"]["population_lower"], metrics["edit"]["population_upper"]), (0, 1))
+        self.assertNotIn("population_lower", metrics["style"])
+        self.assertNotIn("population_lower", metrics["success_confirmed"])
+        self.assertEqual(metrics["style"]["observation_counts"]["missing_record"], 1)
+
     def test_population_bounds_include_unknown_sources(self):
         rows = [self.record(str(n)) for n in range(10)]
         for i, row in enumerate(rows):

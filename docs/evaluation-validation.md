@@ -1,6 +1,6 @@
 # 当前统一指标实现
 
-当前代码采用 lha-metrics-v3 / lha-score-v3 / lha-report-v3，定义见 [生成指标表](evaluation-metrics.md)，方法见 [统一协议](evaluation-protocol.md)。新计分直接为 0–1，状态在全链路保留；当前检查包括：32 项评价行为、11 项汇总/兼容、15 项注册表/状态/分母、6 项 worker 合同及 2 项服务评价桥接，共 66 项通过。原始/计算契约还验证了纯显示修改可复用判断与分数。
+当前代码采用 lha-metrics-v3 / lha-score-v3 / lha-report-v3，定义见 [生成指标表](evaluation-metrics.md)，方法见 [统一协议](evaluation-protocol.md)。新计分直接为 0–1，状态在全链路保留；当前检查包括：32 项评价行为、11 项汇总/兼容、16 项注册表/状态/分母、6 项 worker 合同及 2 项服务评价桥接，共 67 项通过。原始/计算契约还验证了纯显示修改可复用判断与分数。
 
 32 条保存 judgment 已离线生成 primary_report_v3/report_v3，原始 288 个 VLM 评分、16 条主比较的分值、排序与成功状态不变；原始文件受 SHA 核对保护。没有新增模型调用或视频生成。
 

@@ -11,7 +11,7 @@ from statistics import mean
 from .protocol import require, write
 from .scoring import flat_metrics
 from .reporting import METRICS, VERSION, display, metric_spec, normalized_records
-from .registry import snapshot, fingerprint, judgment_fingerprint, scoring_fingerprint, overview, STATE_LABELS
+from .registry import snapshot, fingerprint, judgment_fingerprint, scoring_fingerprint, overview, STATE_LABELS, SEMANTIC
 
 
 def estimate(values, *, repeats=2000, seed=20261029):
@@ -74,7 +74,10 @@ def cells(row):
 
 def missing_cell(item, metric):
     status = "not_applicable" if item.get("applicability", {}).get(metric) is False else "missing_record"
-    return {"value": None, "status": status, "lower": 0.0, "upper": 1.0}
+    result = {"value": None, "status": status}
+    if metric in SEMANTIC:
+        result.update(lower=0.0, upper=1.0)
+    return result
 
 
 def fold(observations):
