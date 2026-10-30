@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "case_id": "bernini__baseline__027__short",
+      "method": "bernini__baseline_short",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__short.json",
+      "output_video": "out/prompt_probe/20261029_bernini/027__short/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__027__short.json"
+    },
+    {
+      "case_id": "bernini__baseline__027__long",
+      "method": "bernini__baseline_long",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__long.json",
+      "output_video": "out/prompt_probe/20261029_bernini/027__long/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__027__long.json"
+    },
+    {
+      "case_id": "bernini__baseline__027__long_keep",
+      "method": "bernini__baseline_long_keep",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__long.json",
+      "output_video": "out/prompt_probe/20261029_bernini/027__long_keep/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__027__long_keep.json"
+    },
+    {
+      "case_id": "bernini__baseline__041__short",
+      "method": "bernini__baseline_short",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__short.json",
+      "output_video": "out/prompt_probe/20261029_bernini/041__short/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__041__short.json"
+    },
+    {
+      "case_id": "bernini__baseline__041__long",
+      "method": "bernini__baseline_long",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__long.json",
+      "output_video": "out/prompt_probe/20261029_bernini/041__long/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__041__long.json"
+    },
+    {
+      "case_id": "bernini__baseline__041__long_keep",
+      "method": "bernini__baseline_long_keep",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__long.json",
+      "output_video": "out/prompt_probe/20261029_bernini/041__long_keep/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__041__long_keep.json"
+    },
+    {
+      "case_id": "bernini__baseline__fewshot_004__long",
+      "method": "bernini__baseline_long",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\fewshot_004__long.json",
+      "output_video": "out/prompt_probe/20261029_bernini/fewshot_004__long/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__fewshot_004__long.json"
+    },
+    {
+      "case_id": "bernini__baseline__fewshot_004__long_keep",
+      "method": "bernini__baseline_long_keep",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\fewshot_004__long.json",
+      "output_video": "out/prompt_probe/20261029_bernini/fewshot_004__long_keep/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__fewshot_004__long_keep.json"
+    },
+    {
+      "case_id": "bernini__baseline__024__long",
+      "method": "bernini__baseline_long",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\024__long.json",
+      "output_video": "out/prompt_probe/20261029_bernini/024__long/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__024__long.json"
+    },
+    {
+      "case_id": "bernini__baseline__024__long_keep",
+      "method": "bernini__baseline_long_keep",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\024__long.json",
+      "output_video": "out/prompt_probe/20261029_bernini/024__long_keep/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__baseline__024__long_keep.json"
+    },
+    {
+      "case_id": "bernini__planner__041__planner",
+      "method": "bernini__planner_planner",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__short.json",
+      "output_video": "out/planner_probe/20261029_bernini/041__planner/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__planner__041__planner.json"
+    },
+    {
+      "case_id": "bernini__planner__fewshot_004__planner",
+      "method": "bernini__planner_planner",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\fewshot_004__long.json",
+      "output_video": "out/planner_probe/20261029_bernini/fewshot_004__planner/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__planner__fewshot_004__planner.json"
+    },
+    {
+      "case_id": "bernini__planner__027__planner",
+      "method": "bernini__planner_planner",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__short.json",
+      "output_video": "out/planner_probe/20261029_bernini/027__planner/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__planner__027__planner.json"
+    },
+    {
+      "case_id": "bernini__planner__024__planner",
+      "method": "bernini__planner_planner",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\024__long.json",
+      "output_video": "out/planner_probe/20261029_bernini/024__planner/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/bernini__planner__024__planner.json"
+    },
+    {
+      "case_id": "ditto__baseline__027__short",
+      "method": "ditto__baseline_short",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__short.json",
+      "output_video": "out/prompt_probe/20261029_ditto/027__short/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__027__short.json"
+    },
+    {
+      "case_id": "ditto__baseline__027__long",
+      "method": "ditto__baseline_long",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__long.json",
+      "output_video": "out/prompt_probe/20261029_ditto/027__long/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__027__long.json"
+    },
+    {
+      "case_id": "ditto__baseline__027__long_keep",
+      "method": "ditto__baseline_long_keep",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__long.json",
+      "output_video": "out/prompt_probe/20261029_ditto/027__long_keep/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__027__long_keep.json"
+    },
+    {
+      "case_id": "ditto__baseline__041__short",
+      "method": "ditto__baseline_short",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__short.json",
+      "output_video": "out/prompt_probe/20261029_ditto/041__short/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__041__short.json"
+    },
+    {
+      "case_id": "ditto__baseline__041__long",
+      "method": "ditto__baseline_long",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__long.json",
+      "output_video": "out/prompt_probe/20261029_ditto/041__long/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__041__long.json"
+    },
+    {
+      "case_id": "ditto__baseline__041__long_keep",
+      "method": "ditto__baseline_long_keep",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__long.json",
+      "output_video": "out/prompt_probe/20261029_ditto/041__long_keep/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__041__long_keep.json"
+    },
+    {
+      "case_id": "ditto__baseline__fewshot_004__long",
+      "method": "ditto__baseline_long",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\fewshot_004__long.json",
+      "output_video": "out/prompt_probe/20261029_ditto/fewshot_004__long/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__fewshot_004__long.json"
+    },
+    {
+      "case_id": "ditto__baseline__fewshot_004__long_keep",
+      "method": "ditto__baseline_long_keep",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\fewshot_004__long.json",
+      "output_video": "out/prompt_probe/20261029_ditto/fewshot_004__long_keep/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__fewshot_004__long_keep.json"
+    },
+    {
+      "case_id": "ditto__baseline__024__long",
+      "method": "ditto__baseline_long",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\024__long.json",
+      "output_video": "out/prompt_probe/20261029_ditto/024__long/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__024__long.json"
+    },
+    {
+      "case_id": "ditto__baseline__024__long_keep",
+      "method": "ditto__baseline_long_keep",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\024__long.json",
+      "output_video": "out/prompt_probe/20261029_ditto/024__long_keep/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__baseline__024__long_keep.json"
+    },
+    {
+      "case_id": "ditto__planner__041__planner",
+      "method": "ditto__planner_planner",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__short.json",
+      "output_video": "out/planner_probe/20261029_ditto/041__planner/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__planner__041__planner.json"
+    },
+    {
+      "case_id": "ditto__planner__fewshot_004__planner",
+      "method": "ditto__planner_planner",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\fewshot_004__long.json",
+      "output_video": "out/planner_probe/20261029_ditto/fewshot_004__planner/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__planner__fewshot_004__planner.json"
+    },
+    {
+      "case_id": "ditto__planner__027__planner",
+      "method": "ditto__planner_planner",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__short.json",
+      "output_video": "out/planner_probe/20261029_ditto/027__planner/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__planner__027__planner.json"
+    },
+    {
+      "case_id": "ditto__planner__024__planner",
+      "method": "ditto__planner_planner",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\024__long.json",
+      "output_video": "out/planner_probe/20261029_ditto/024__planner/native.mp4",
+      "mapping": "out/evaluation_handoff/20261029T163320Z/mappings/ditto__planner__024__planner.json"
+    },
+    {
+      "case_id": "source_control__041",
+      "method": "source_control",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\041__short.json",
+      "output_video": "benchmark_data/main/041/041.mp4"
+    },
+    {
+      "case_id": "source_control__027",
+      "method": "source_control",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\027__short.json",
+      "output_video": "benchmark_data/main/027/027.mp4"
+    },
+    {
+      "case_id": "source_control__024",
+      "method": "source_control",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\024__long.json",
+      "output_video": "benchmark_data/main/024/024.mp4"
+    },
+    {
+      "case_id": "source_control__fewshot_004",
+      "method": "source_control",
+      "seed": 42,
+      "card": "out\\evaluation_runs\\20261030_first_wave\\cards\\fewshot_004__long.json",
+      "output_video": "benchmark_data/fewshot/004/004.mp4"
+    }
+  ]
+}

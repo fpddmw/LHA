@@ -162,7 +162,9 @@ def main(argv=None):
     elif args.command == "report":
         export_report(load_records(args.records), args.out, repeats=args.bootstrap)
     elif args.command == "compare":
-        write(args.out, paired_difference(load_records(args.records), args.a, args.b, args.metric))
+        from .reporting import VERSION, difference_spec, normalized_records
+        panels = paired_difference(normalized_records(load_records(args.records)), args.a, args.b, args.metric, include_overall=True)
+        write(args.out, [{**p, "reporting_version": VERSION, "metadata": difference_spec(args.metric)} for p in panels])
     elif args.command == "agreement":
         from .reliability import agreement
         write(args.out, agreement(read(args.pairs)))

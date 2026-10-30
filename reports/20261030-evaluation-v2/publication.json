@@ -1,0 +1,10 @@
+{
+  "version": "lha-report-v2",
+  "records": 32,
+  "primary": 16,
+  "pairs": 8,
+  "reused_video_files_hash_verified": 28,
+  "links_verified": true,
+  "source_run": "out/evaluation_runs/20261030_first_wave",
+  "source_records_sha256": "4205948410572090853694ff7774242bdb0979b20df1083aef01a5f74d787a9f"
+}

@@ -1,0 +1,138 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "etching_style",
+      "label": "fail",
+      "evidence": "输出仍呈现摄影画面：蓝色天空、彩色树冠与连续明暗均保留，未见可辨认的蚀刻刻线、排线或版画印痕，十九世纪蚀刻风格未实现。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "town_layout",
+      "label": "pass",
+      "evidence": "前景屋顶、中部树丛与建筑、远处天际线的主要相对位置均与原片对应。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "landmarks",
+      "label": "pass",
+      "evidence": "中部偏左的显著圆顶、右侧远处塔楼及中右部小塔均保留，基本轮廓与相对位置对应原片。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "camera_progression",
+      "label": "pass",
+      "evidence": "覆盖全片的密集帧显示，地标逐渐向画面左上方移动，左下前景屋顶与白墙露出增多；移动方向和主要画面变化顺序与原片一致。",
+      "times_seconds": [
+        0.0,
+        1.25,
+        2.5,
+        3.75,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "roof_details",
+      "label": "pass",
+      "evidence": "前景斜屋顶的边缘、白色墙沿及后段露出的烟囱等附属结构均可与原片对应，右侧明亮反光屋面也保留。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "open_sky",
+      "label": "pass",
+      "evidence": "天空保持基本空旷，原有左上方细白痕仍在，未见新增无关独立物体或明显新主体。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "全段保持彩色摄影外观，未见蚀刻线条、交叉排线、油墨或纸张质感，十九世纪蚀刻风格缺失。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 2.5,
+      "evidence": "开阔的城镇俯瞰与秋色支持宁静的风景氛围，但摄影呈现未建立所要求的历史版画气质。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "屋顶、树木、圆顶和塔楼的比例、透视与遮挡关系自洽，各物件表现统一，未见突兀的独立主体或结构异常。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 2.7,
+      "evidence": "天空、城镇与前景形成明确纵深，但前中景大片阴影使建筑和树木连成暗块，右侧屋顶的强烈反光较抢眼。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 2.0,
+      "evidence": "蓝灰天空与棕橙树叶配色协调，但材质仍为连续摄影色调，缺少以墨线组织明暗及纸面承载的蚀刻质感。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 2.8,
+      "evidence": "中央圆顶和右侧塔楼的天际线轮廓可辨，城镇布局清楚；阴影中的屋顶与树冠分离较弱，亮白屋顶分散焦点。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "覆盖全段的密集帧显示视点逐步变化，建筑与树冠轮廓、色彩和光照稳定，未见明显闪烁、变形或位置跳变。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "输出仍保留原片的蓝天、彩色树木和摄影式明暗，屋顶、树冠与地标未见蚀刻线条处理，缺少针对该城镇场景的有效设计。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "参考候选以屋顶排线、树冠点刻、棕褐纸纹或黄黑印版效果组织画面；输出基本沿用原片外观，未呈现可识别的独特蚀刻方案。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [],
+  "comparison_set_sha256": "e806589338d4cdc6645f71c3be4c873a1fcc5a9a3ded02fdae225b522f4aa882",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "f6b138dbe7cb01b6f777c1ee3e6625ea7541ffa2cd0301f48bdc055c13dc0ba7",
+  "output_sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

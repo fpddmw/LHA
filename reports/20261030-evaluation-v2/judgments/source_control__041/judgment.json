@@ -1,0 +1,150 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "storybook_style",
+      "label": "fail",
+      "evidence": "输出仍为摄影画面，皮肤、发丝、衣料纹理和桌面反光保持照片质感，未呈现可识别的儿童绘本插画风格。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "same_two_people",
+      "label": "pass",
+      "evidence": "男子的面容、金棕色短发及蓝白条纹衬衣保留；左侧女子的黑色长发、白色外套及可见身体特征与原片对应。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "roles_positions",
+      "label": "pass",
+      "evidence": "男子仍坐在桌边低头执笔，女子位于画面左侧，一手搭在男子肩部，另一手指向笔记本，角色和相对位置保留。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "writing_action",
+      "label": "pass",
+      "evidence": "覆盖0至5秒的密集配对序列中，男子持笔书写，持笔手和笔尖位置的细小变化与原片对应，另一只手保持扶住页本。",
+      "times_seconds": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "writing_tool",
+      "label": "pass",
+      "evidence": "男子手中的黑色笔保留，细长笔杆及接近纸面的笔尖均可辨认。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "notebook_binding",
+      "label": "pass",
+      "evidence": "桌上的白色笔记本保留，靠近画面下沿的螺旋装订及叠页结构可见。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "separate_paper",
+      "label": "pass",
+      "evidence": "笔记本右侧仍有浅棕色独立纸张，其不规则边缘与白色笔记本清楚区分。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "全段保持摄影外观，皮肤、发丝、衣料和光影均未呈现明显绘制处理，儿童绘本风格缺失。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.2,
+      "evidence": "男子专注书写，女子搭肩并指向页面，互动支持温和的协助情境；女子面部在画外，情绪表达主要依靠手势。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "人物、服装和室内环境的视觉体系一致，手、笔与笔记本关系合理，右侧独立纸张清楚保留，未见明显结构冲突。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.5,
+      "evidence": "柔和光线与简洁背景突出男子及书写区域；笔记本靠近画面下缘，双人互动的取景较局部。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 2.5,
+      "evidence": "浅蓝、白灰与暖肤色搭配协调，但材质持续呈摄影质感，缺少与绘本要求相符的笔触、色块或纸面表现。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "低头视线、指向页面的手和黑笔共同引导注意力，书写行为清楚；笔记本面积较小且位置偏低。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "覆盖全段的密集帧中，人物外貌、衣物纹理、手部及桌面物品保持稳定，未见明显闪烁、结构突变或位置跳变。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "输出保留原片的摄影外观、人物衣纹和金属桌面，未见围绕男子书写、女子指页及搭肩关系形成的绘本材质、轮廓或光影设计。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "参考候选分别采用纸纹彩铅、浅暖色柔和描绘及深色轮廓插画方案；输出仍呈现原片照片外观，未显示可辨认的独特设计选择。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [],
+  "comparison_set_sha256": "80bc6e92f287b91e57b851abeb768b3dc1c9ead9cbe429bbdd92e9e5e3d9f25d",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "4030f671c8e90a673805183fdf0caa79c4e6773a2577e679f7999792954460f9",
+  "output_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

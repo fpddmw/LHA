@@ -193,6 +193,9 @@ def main():
         write(run / "pairwise_results.json", comparisons)
     write(run / "completion.json", {"completed_unix": time.time(), "cases": len(records), "pairwise": len(comparisons),
           "evaluation_errors": [r["case_id"] for r in records.values() if r["status"] != "complete"]})
+    if all(row["status"] == "complete" for row in records.values()):
+        from reexport_first_wave import reexport
+        reexport(run)  # Pure export: never invokes a model or changes the saved judgments.
     handle.close()
     return 0
 

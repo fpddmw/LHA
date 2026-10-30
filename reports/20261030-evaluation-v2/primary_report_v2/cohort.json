@@ -1,0 +1,174 @@
+{
+  "version": "lha-report-v2",
+  "planned_cases": [
+    {
+      "case_id": "bernini__baseline__027__short",
+      "method": "bernini_direct",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__baseline__041__short",
+      "method": "bernini_direct",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__baseline__fewshot_004__long",
+      "method": "bernini_direct",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__baseline__024__long",
+      "method": "bernini_direct",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__planner__041__planner",
+      "method": "bernini_planner",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__planner__fewshot_004__planner",
+      "method": "bernini_planner",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__planner__027__planner",
+      "method": "bernini_planner",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__planner__024__planner",
+      "method": "bernini_planner",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__baseline__027__short",
+      "method": "ditto_direct",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__baseline__041__short",
+      "method": "ditto_direct",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__baseline__fewshot_004__long",
+      "method": "ditto_direct",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__baseline__024__long",
+      "method": "ditto_direct",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__planner__041__planner",
+      "method": "ditto_planner",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__planner__fewshot_004__planner",
+      "method": "ditto_planner",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__planner__027__planner",
+      "method": "ditto_planner",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__planner__024__planner",
+      "method": "ditto_planner",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development"
+    }
+  ],
+  "main_outputs": 16,
+  "tasks_per_method": 4,
+  "model_task_pairs": 8,
+  "independent_sources": 4,
+  "seed": 42,
+  "supplementary_outputs": 12,
+  "source_controls": 4,
+  "pairwise_results": "../pairwise_results.json",
+  "design": "Retrospective development set; two short/two long, each renderer separately, fixed original task/card; variants and controls outside primary cohort"
+}

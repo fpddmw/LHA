@@ -1,0 +1,201 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "glitch_style",
+      "label": "fail",
+      "evidence": "输出仍呈现与原片相同的自然摄影画面，人物、座椅和车窗均未形成可识别的数字故障艺术效果。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "contrast",
+      "label": "fail",
+      "evidence": "脸部、西装和座椅保留原有明暗层次，未见要求的高反差阴影处理及失真彩色高光。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "rgb",
+      "label": "fail",
+      "evidence": "深色西装边缘、米色座椅轮廓和车窗反射均未出现可见的红绿蓝通道分离。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "horizontal_shifts",
+      "label": "fail",
+      "evidence": "人物面部、衣领、座椅接缝和窗框轮廓完整，未见水平像素错位或横向切片位移。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "fragmented_blocks",
+      "label": "fail",
+      "evidence": "人物与车内背景均保持原有连续表面，未见碎片方块、矩形断裂或块状故障覆盖。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "scanline_flicker",
+      "label": "fail",
+      "evidence": "覆盖0至5秒的密集帧中，未见全画面扫描线纹理及其闪烁；车窗原有细横线仍局限于玻璃区域。",
+      "times_seconds": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "same_man",
+      "label": "pass",
+      "evidence": "男子的发型、面部轮廓、五官及深色西装配白衬衫均与原片对应，人物身份清楚可辨。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "phone_contact",
+      "label": "pass",
+      "evidence": "黑色手机仍由抬起的手握持并贴在耳侧，手、手机与头部之间的通话关系清晰。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "call_continues",
+      "label": "pass",
+      "evidence": "覆盖全段的密集帧显示男子持续坐在后座持手机贴耳，期间嘴部开合及头部姿态变化与原片对应。",
+      "times_seconds": [
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        4.0,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "car_layout",
+      "label": "pass",
+      "evidence": "人物位于画面左中部，身后及右侧为米色皮质座椅，侧窗和后窗位置与原片对应。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "fine_motion",
+      "label": "pass",
+      "evidence": "密集配对帧中，约3.0至3.15秒嘴部张开、随后至3.25秒收拢的顺序与原片对应；头部和持机手的细小姿态变化也保持对应。",
+      "times_seconds": [
+        0.0,
+        3.0,
+        3.1,
+        3.15,
+        3.2,
+        3.25,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "全段保持常规摄影外观，未见要求的RGB分离、水平像素横移、碎片方块或闪烁扫描线，数字故障艺术风格缺失。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 2.5,
+      "evidence": "男子在车内持手机贴耳通话的事件明确，神态平静；日常通话情境得到保留，但要求的数字失真氛围未形成。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "人物、黑色手机、深蓝西装、米色皮座椅与窗外建筑的形态及空间关系协调，未见明显结构冲突。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 2.8,
+      "evidence": "侧脸近景与车窗、座椅形成清楚的空间层次，侧窗光线方向一致；照明仍然柔和，缺少要求的高反差阴影处理。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 1.8,
+      "evidence": "米色、深蓝与白色搭配协调，皮革及衣料纹理可辨；西装、座椅和窗面均未呈现要求的通道分离、失真彩色高光与扫描线纹理。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "面部是明确的视觉中心，手持手机贴耳的姿态清楚，背景座椅与窗外景物没有干扰通话行为的辨认。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "覆盖全段的密集帧中，人物五官、手机、衣领及座椅结构保持稳定，眨眼、口型和头部变化未见明显跳变。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "输出保留原片的自然肤色、米色座椅和深色西装，未见围绕人物、手机或车窗形成的RGB分离、碎片块或扫描线设计，缺少可见的场景化改编。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "参考候选呈现了沿人物轮廓分布的网点碎片、面部与座椅的彩色通道错位，以及横贯车窗和衣服的扫描线。输出未见相应的设计选择，无法形成可辨识的独特方案。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [],
+  "comparison_set_sha256": "8a81764375d97c7dc24dd104fd1e88732395ce06173e6eea620419a02bc716fc",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "29fe421bc51c2320e8a4db9ad5813c4d7da4647d5628b3636b52c87e2c7634d3",
+  "output_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

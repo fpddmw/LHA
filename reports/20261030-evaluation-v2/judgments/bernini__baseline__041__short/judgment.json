@@ -1,0 +1,163 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "storybook_style",
+      "label": "fail",
+      "evidence": "输出整体仍呈实拍外观，人物皮肤、发丝、衣料和室内光影未形成可识别的儿童绘本插画风格。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "same_two_people",
+      "label": "pass",
+      "evidence": "保留了金棕色短卷发、穿蓝色条纹衬衫的男子，以及黑色长直发、穿白色外套的女子，身份特征与原片对应。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "roles_positions",
+      "label": "pass",
+      "evidence": "男子仍坐在画面中右侧持笔书写；女子站在左侧，一手搭肩，另一手指向书写区域。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "writing_action",
+      "label": "pass",
+      "evidence": "覆盖0至5秒的密集帧显示，男子持续右手持笔、左手按页，持笔手与笔杆的小幅位置变化与原片对应，书写过程保留。",
+      "times_seconds": [
+        0.0,
+        1.25,
+        2.5,
+        3.75,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "writing_tool",
+      "label": "pass",
+      "evidence": "原来的黑色细长书写笔仍在男子右手中，笔杆和笔尖形态可辨。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "notebook_binding",
+      "label": "fail",
+      "evidence": "原片的小型螺旋装订笔记本变成大型摊开书册；前缘螺旋圈消失，改为中央书脊及左右对页结构。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "separate_paper",
+      "label": "fail",
+      "evidence": "原片笔记本右侧的独立米色纸张消失；输出该处为大型书册的右页，无法再区分出独立纸张。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "全段仍呈实拍外观，皮肤、发丝和衣料保留摄影细节，未见儿童绘本式线条、手绘材质或形体概括。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "男子低头持笔，女子搭肩并指向纸面，专注与陪伴的氛围清楚；绘本式叙事表现较弱。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "人物、笔、本子与桌面的尺度及遮挡关系协调，搭肩、指页和持笔的互动关系清楚，整体呈一致的摄影世界。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.4,
+      "evidence": "柔和光照与简洁背景突出男子及桌面互动；左侧女子面部被裁出画面，限制了双方表情的呈现。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 2.8,
+      "evidence": "浅蓝、白色与温暖肤色搭配协调，但材质仍以摄影细节和连续明暗为主，缺少绘本绘制质感。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "男子视线、持笔手和女子指尖共同引向纸面，书写行为易辨；几只手靠近，局部轮廓稍显拥挤。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "覆盖全段的密集帧中，人物面貌、衣服条纹、手部、笔和书页结构保持稳定，未见明显闪烁、变形或突跳。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "输出中的人物、条纹衬衫及室内光影仍呈摄影外观，未见结合书写与指点场景的绘本线条、笔触或色彩设计。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 1.0,
+      "evidence": "参考分别采用纸纹铅笔笔触、柔和暖黄晕染及黄蓝配色配合明确轮廓；输出未呈现相应的风格转译，也未形成允许设计范围内可辨认的独特方案。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "notebook_binding",
+        "separate_paper"
+      ],
+      "evidence": "桌面上的小型螺旋笔记本和右侧独立纸张变为一个大型摊开书册，改变了装订、页本结构及两个对象的区分。",
+      "times_seconds": [
+        0.0,
+        2.5,
+        4.95
+      ]
+    }
+  ],
+  "comparison_set_sha256": "80bc6e92f287b91e57b851abeb768b3dc1c9ead9cbe429bbdd92e9e5e3d9f25d",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "ec4556a7b1156efd4e970c2deccc8fc6d1b127415ef02cb2a91eafb53b9e5aaa",
+  "output_sha256": "6a9961b509bfa8c5b312fa5cbb7a4b09e05ba107f7bde9a7e764bccbcb2fa2a4",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

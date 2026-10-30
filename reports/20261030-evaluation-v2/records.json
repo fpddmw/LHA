@@ -1,0 +1,2625 @@
+[
+  {
+    "case_id": "bernini__planner__041__planner",
+    "method": "bernini__planner_planner",
+    "seed": 42,
+    "output_video": "out/planner_probe/20261029_bernini/041__planner/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "5696899777cacf09f5294265262a8af4bdc76b325366b1f18730b55ef2ee1e41",
+    "evidence_sha256": "3dd6c48f58f0d92e17a8f72476c9f1ffe56a2fa942f81d33cbea32e39f29867b",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 33.33333333333333,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 4.0,
+        "narrative_emotional_fit": 3.5,
+        "style_world_consistency": 3.5,
+        "composition_lighting": 3.6,
+        "color_texture": 3.9,
+        "hierarchy_readability": 3.7,
+        "temporal_coherence": 3.8,
+        "scene_specific_design": 3.2,
+        "relative_originality": 3.1,
+        "aesthetic_mean": 3.64
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 76.38102889060974
+  },
+  {
+    "case_id": "bernini__baseline__041__short",
+    "method": "bernini__baseline_short",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/041__short/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "2928aa813dd27fa2375750cd1cc253058117b9859bbcf2dc262cf41c2be0ec15",
+    "evidence_sha256": "ec4556a7b1156efd4e970c2deccc8fc6d1b127415ef02cb2a91eafb53b9e5aaa",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 33.33333333333333,
+          "lower": 33.33333333333333,
+          "upper": 33.33333333333333,
+          "complete_rate": 33.33333333333333,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 1.0,
+        "narrative_emotional_fit": 3.0,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 3.4,
+        "color_texture": 2.8,
+        "hierarchy_readability": 3.8,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 1.0,
+        "relative_originality": 1.0,
+        "aesthetic_mean": 3.4
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 76.50837540626526
+  },
+  {
+    "case_id": "ditto__planner__041__planner",
+    "method": "ditto__planner_planner",
+    "seed": 42,
+    "output_video": "out/planner_probe/20261029_ditto/041__planner/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "47cc0d0b9c6e27d0404a6916c65b2dfc99741bbf20bd5996063e1b1cd715dd5f",
+    "evidence_sha256": "9949b009fd4c7b51175f2090d41f07b757456a4fc4400cbb42c3edc34525f419",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 4.0,
+        "narrative_emotional_fit": 3.9,
+        "style_world_consistency": 3.9,
+        "composition_lighting": 3.7,
+        "color_texture": 3.8,
+        "hierarchy_readability": 3.9,
+        "temporal_coherence": 3.6,
+        "scene_specific_design": 3.0,
+        "relative_originality": 2.2,
+        "aesthetic_mean": 3.84
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 427.30986166000366
+  },
+  {
+    "case_id": "ditto__baseline__041__short",
+    "method": "ditto__baseline_short",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/041__short/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "97ea93725f132745bc544c23e66da7b9eca8f55da1df141b5382b0ef48c29454",
+    "evidence_sha256": "177ce9bbaef608541e6def492560404e7a31700ebab3d998e6234af0e71c0040",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 33.33333333333333,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 4.0,
+        "narrative_emotional_fit": 3.7,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.7,
+        "color_texture": 3.9,
+        "hierarchy_readability": 3.8,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 3.0,
+        "relative_originality": 3.0,
+        "aesthetic_mean": 3.78
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 484.3468792438507
+  },
+  {
+    "case_id": "bernini__baseline__024__long",
+    "method": "bernini__baseline_long",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/024__long/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "aacc5636341181e1e499b6eb947cb11a2981213f19b20e6b67f83c7e7745f7ca",
+    "evidence_sha256": "46470faf44c6b8894b74fa6ebc3e76e65419af25ca27eba3df0708b162bbd887",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development",
+      "style_family": "digital_glitch",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 62.5,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 2.8,
+        "narrative_emotional_fit": 3.4,
+        "style_world_consistency": 3.4,
+        "composition_lighting": 3.6,
+        "color_texture": 3.0,
+        "hierarchy_readability": 3.3,
+        "temporal_coherence": 3.7,
+        "scene_specific_design": 3.2,
+        "relative_originality": 2.6,
+        "aesthetic_mean": 3.34
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 75.76350951194763
+  },
+  {
+    "case_id": "bernini__baseline__027__short",
+    "method": "bernini__baseline_short",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/027__short/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "2d39ea060930a821a8018a71f908f71c16adb3364abbf454093d4760b28dbbe4",
+    "evidence_sha256": "a3d96ca7a927a8da692c49293646d26db13daf508d57c49d1cead07ad6b83ce3",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.2,
+        "narrative_emotional_fit": 2.6,
+        "style_world_consistency": 2.2,
+        "composition_lighting": 2.6,
+        "color_texture": 3.3,
+        "hierarchy_readability": 2.3,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 2.8,
+        "relative_originality": 2.0,
+        "aesthetic_mean": 2.6
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 182.04561591148376
+  },
+  {
+    "case_id": "bernini__baseline__fewshot_004__long",
+    "method": "bernini__baseline_long",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/fewshot_004__long/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "ff0b2cc5e45b1b05c62362737b3a642ace1e878a89ba841829d2cb3ffd4e2372",
+    "evidence_sha256": "e2e44035636c6ba19d663d02b499d6d7bc3bb3abc473dd13e4c06fd162ed9c32",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development",
+      "style_family": "space_station_sports",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 83.33333333333334,
+          "lower": 83.33333333333334,
+          "upper": 83.33333333333334,
+          "complete_rate": 66.66666666666666,
+          "coverage": 100.0,
+          "items": 5,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 80.55555555555556,
+          "lower": 80.55555555555556,
+          "upper": 80.55555555555556,
+          "complete_rate": 61.111111111111114,
+          "coverage": 100.0,
+          "items": 7,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 66.66666666666666,
+          "lower": 66.66666666666666,
+          "upper": 66.66666666666666,
+          "complete_rate": 33.33333333333333,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.4,
+        "narrative_emotional_fit": 3.7,
+        "style_world_consistency": 3.5,
+        "composition_lighting": 3.5,
+        "color_texture": 3.6,
+        "hierarchy_readability": 3.4,
+        "temporal_coherence": 3.6,
+        "scene_specific_design": 3.0,
+        "relative_originality": 2.0,
+        "aesthetic_mean": 3.54
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 520.2056579589844
+  },
+  {
+    "case_id": "bernini__planner__024__planner",
+    "method": "bernini__planner_planner",
+    "seed": 42,
+    "output_video": "out/planner_probe/20261029_bernini/024__planner/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "3ff9614635df236fadf84f4734f756454a72bad2216e1fc58efa4787d62b1655",
+    "evidence_sha256": "28ec8626f4d734a2468a74c4754a649c3e66ba1de6bf7218b52530376f36d41f",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development",
+      "style_family": "digital_glitch",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.7,
+        "narrative_emotional_fit": 3.6,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.6,
+        "color_texture": 3.7,
+        "hierarchy_readability": 3.5,
+        "temporal_coherence": 3.8,
+        "scene_specific_design": 3.1,
+        "relative_originality": 2.6,
+        "aesthetic_mean": 3.64
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 387.1643784046173
+  },
+  {
+    "case_id": "bernini__planner__fewshot_004__planner",
+    "method": "bernini__planner_planner",
+    "seed": 42,
+    "output_video": "out/planner_probe/20261029_bernini/fewshot_004__planner/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "82ac425586e556f6aec64db15ea018c0aded5706f9eddd7ef79a74cdc49c8e0f",
+    "evidence_sha256": "1d490fb08bb949bbc3ac27f9ee2dd1d304bfd471e5ff81daf2afab2e9564b649",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development",
+      "style_family": "space_station_sports",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 61.111111111111114,
+          "lower": 61.111111111111114,
+          "upper": 61.111111111111114,
+          "complete_rate": 55.55555555555556,
+          "coverage": 100.0,
+          "items": 5,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 91.66666666666666,
+          "lower": 91.66666666666666,
+          "upper": 91.66666666666666,
+          "complete_rate": 83.33333333333334,
+          "coverage": 100.0,
+          "items": 7,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 2.8,
+        "narrative_emotional_fit": 3.3,
+        "style_world_consistency": 2.7,
+        "composition_lighting": 2.9,
+        "color_texture": 3.0,
+        "hierarchy_readability": 2.8,
+        "temporal_coherence": 3.8,
+        "scene_specific_design": 2.4,
+        "relative_originality": 1.8,
+        "aesthetic_mean": 2.94
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 738.7478411197662
+  },
+  {
+    "case_id": "bernini__planner__027__planner",
+    "method": "bernini__planner_planner",
+    "seed": 42,
+    "output_video": "out/planner_probe/20261029_bernini/027__planner/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "a93562d8247bc3d021a489cce5372fe6e860c8d4d9bf61f386adc21e65cec429",
+    "evidence_sha256": "343a15d2b421d547177f14a8a87b653906ba89daebe911eb7dadb89efa1ee777",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 4.0,
+        "narrative_emotional_fit": 4.0,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 3.8,
+        "color_texture": 3.9,
+        "hierarchy_readability": 3.6,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 3.4,
+        "relative_originality": 2.6,
+        "aesthetic_mean": 3.86
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 850.3115191459656
+  },
+  {
+    "case_id": "ditto__baseline__024__long",
+    "method": "ditto__baseline_long",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/024__long/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "ac3c4350afe69c9816a9bc668e2f512a971071b5617b0e0ffded4c45fe3701ba",
+    "evidence_sha256": "7326a020513c390a99c083dd81e2a5cf4ea6a7e9133bce7dcd6a8534055cd662",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development",
+      "style_family": "digital_glitch",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 81.25,
+          "lower": 81.25,
+          "upper": 81.25,
+          "complete_rate": 62.5,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 2.8,
+        "narrative_emotional_fit": 3.5,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 3.6,
+        "color_texture": 3.5,
+        "hierarchy_readability": 3.8,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 2.7,
+        "relative_originality": 1.9,
+        "aesthetic_mean": 3.68
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 494.38231110572815
+  },
+  {
+    "case_id": "ditto__baseline__027__short",
+    "method": "ditto__baseline_short",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/027__short/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "69d6ca2509e5ba82025132fa9b5d3099c3510343560810e96aaa7cf343ad84fe",
+    "evidence_sha256": "23ad565c44ac10172616fc53e0c4030b8ffec2c89315da963d9cb88e5fbde691",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.7,
+        "narrative_emotional_fit": 3.8,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 3.7,
+        "color_texture": 3.7,
+        "hierarchy_readability": 3.5,
+        "temporal_coherence": 3.9,
+        "scene_specific_design": 3.2,
+        "relative_originality": 2.0,
+        "aesthetic_mean": 3.74
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 826.2865898609161
+  },
+  {
+    "case_id": "ditto__baseline__fewshot_004__long",
+    "method": "ditto__baseline_long",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/fewshot_004__long/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "67ad770c6dd70f31f82a8f4e2a5e1fe550ffa41df5eb67ee59d3fa54d2bf6569",
+    "evidence_sha256": "d110258993c40047fe87fcdbc062bb7dbd446929936282c528d0274dedaa5523",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development",
+      "style_family": "space_station_sports",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 5,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 61.111111111111114,
+          "lower": 61.111111111111114,
+          "upper": 61.111111111111114,
+          "complete_rate": 38.88888888888889,
+          "coverage": 100.0,
+          "items": 7,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 83.33333333333334,
+          "lower": 83.33333333333334,
+          "upper": 83.33333333333334,
+          "complete_rate": 66.66666666666666,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.9,
+        "narrative_emotional_fit": 3.1,
+        "style_world_consistency": 2.6,
+        "composition_lighting": 3.5,
+        "color_texture": 3.6,
+        "hierarchy_readability": 2.9,
+        "temporal_coherence": 2.9,
+        "scene_specific_design": 3.3,
+        "relative_originality": 2.0,
+        "aesthetic_mean": 3.14
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 999.5647642612457
+  },
+  {
+    "case_id": "ditto__planner__024__planner",
+    "method": "ditto__planner_planner",
+    "seed": 42,
+    "output_video": "out/planner_probe/20261029_ditto/024__planner/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "65c705074d324bc126225d4128943b88ff2c0ed83449b2c6fdb01dfc65bfe1a0",
+    "evidence_sha256": "c7c0adcebf58f45097e63ff6f3299a1b963a7387f806c7b294abaceb5111c4b3",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development",
+      "style_family": "digital_glitch",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 68.75,
+          "lower": 68.75,
+          "upper": 68.75,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.1,
+        "narrative_emotional_fit": 3.7,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 3.6,
+        "color_texture": 3.5,
+        "hierarchy_readability": 3.6,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 3.0,
+        "relative_originality": 2.0,
+        "aesthetic_mean": 3.68
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 748.732949256897
+  },
+  {
+    "case_id": "ditto__planner__027__planner",
+    "method": "ditto__planner_planner",
+    "seed": 42,
+    "output_video": "out/planner_probe/20261029_ditto/027__planner/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "b53e76a49f410fd7f17b353e8620a505d622da5030a4d52223978b85f9337689",
+    "evidence_sha256": "eafd7eec7a45ca41ece04b7bb09ec2edec51c8d1bbd42bda700473af729b2339",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.7,
+        "narrative_emotional_fit": 3.8,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.6,
+        "color_texture": 3.6,
+        "hierarchy_readability": 3.4,
+        "temporal_coherence": 3.7,
+        "scene_specific_design": 3.3,
+        "relative_originality": 2.2,
+        "aesthetic_mean": 3.64
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 306.4845857620239
+  },
+  {
+    "case_id": "bernini__baseline__041__long",
+    "method": "bernini__baseline_long",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/041__long/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "842edd66fad0f6087737bf140d1bec583c2e1ed125e99b864b981802cb5ae1cf",
+    "evidence_sha256": "2e62c927e256dc26c881476b213df064027e1213a0018516d044e41111b16760",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+      "task_id": "041__long",
+      "source_id": "041",
+      "track": "long",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.9,
+        "narrative_emotional_fit": 4.0,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.8,
+        "color_texture": 4.0,
+        "hierarchy_readability": 3.7,
+        "temporal_coherence": 3.9,
+        "scene_specific_design": 3.0,
+        "relative_originality": 1.5,
+        "aesthetic_mean": 3.86
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 352.42422318458557
+  },
+  {
+    "case_id": "ditto__planner__fewshot_004__planner",
+    "method": "ditto__planner_planner",
+    "seed": 42,
+    "output_video": "out/planner_probe/20261029_ditto/fewshot_004__planner/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "b9e7538527b32a63a446a24df130aaf1644e235afce9eefcfcf6014c19fd1ea5",
+    "evidence_sha256": "ef3bb0e8c75ebcffc6acef737c4442fac03df55bef7006fb92b234f43870f19d",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development",
+      "style_family": "space_station_sports",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 5,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 66.66666666666666,
+          "coverage": 100.0,
+          "items": 7,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.9,
+        "narrative_emotional_fit": 3.7,
+        "style_world_consistency": 3.6,
+        "composition_lighting": 3.7,
+        "color_texture": 3.8,
+        "hierarchy_readability": 3.5,
+        "temporal_coherence": 3.6,
+        "scene_specific_design": 3.0,
+        "relative_originality": 2.0,
+        "aesthetic_mean": 3.66
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 532.50177526474
+  },
+  {
+    "case_id": "bernini__baseline__041__long_keep",
+    "method": "bernini__baseline_long_keep",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/041__long_keep/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "9c1254a4deceb437018c04491525639e1221e1c5936de3aa94d082d59e50f873",
+    "evidence_sha256": "b564183a3c77628dc3d4b51da8ffc2c64b85cc2423edcd2bf9db4c99e6bc4dda",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+      "task_id": "041__long",
+      "source_id": "041",
+      "track": "long",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.8,
+        "narrative_emotional_fit": 3.9,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.9,
+        "color_texture": 3.8,
+        "hierarchy_readability": 3.8,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 3.0,
+        "relative_originality": 1.2,
+        "aesthetic_mean": 3.84
+      },
+      "success": "pass",
+      "failure_reasons": [],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 376.46197533607483
+  },
+  {
+    "case_id": "ditto__baseline__041__long",
+    "method": "ditto__baseline_long",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/041__long/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "b68a632b91399bec0003f551669ed2edb7384059bbecb3974b1df6f6f11276a6",
+    "evidence_sha256": "2c8bde11950dcd7848d8fa155a856c57241806e71c75ebede8892a6faf772e8d",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+      "task_id": "041__long",
+      "source_id": "041",
+      "track": "long",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 77.77777777777779,
+          "lower": 77.77777777777779,
+          "upper": 77.77777777777779,
+          "complete_rate": 55.55555555555556,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 66.66666666666666,
+          "lower": 66.66666666666666,
+          "upper": 66.66666666666666,
+          "complete_rate": 33.33333333333333,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.4,
+        "narrative_emotional_fit": 3.8,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.7,
+        "color_texture": 3.3,
+        "hierarchy_readability": 3.8,
+        "temporal_coherence": 3.6,
+        "scene_specific_design": 3.0,
+        "relative_originality": 1.2,
+        "aesthetic_mean": 3.6799999999999997
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 579.0071449279785
+  },
+  {
+    "case_id": "ditto__baseline__041__long_keep",
+    "method": "ditto__baseline_long_keep",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/041__long_keep/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "1329651ef1d3f61976a0b2e8b7bd165b70cafe49209d5fc9b00898bf0dfe8d6f",
+    "evidence_sha256": "d7b5fcce27cf7585ceb8deb5a4732f9ffd1bb608ad501c069e88fb323f184c2f",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+      "task_id": "041__long",
+      "source_id": "041",
+      "track": "long",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 83.33333333333334,
+          "lower": 83.33333333333334,
+          "upper": 83.33333333333334,
+          "complete_rate": 66.66666666666666,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 83.33333333333334,
+          "lower": 83.33333333333334,
+          "upper": 83.33333333333334,
+          "complete_rate": 66.66666666666666,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.4,
+        "narrative_emotional_fit": 3.8,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.7,
+        "color_texture": 3.3,
+        "hierarchy_readability": 3.7,
+        "temporal_coherence": 3.7,
+        "scene_specific_design": 3.0,
+        "relative_originality": 1.2,
+        "aesthetic_mean": 3.66
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 378.42644476890564
+  },
+  {
+    "case_id": "source_control__041",
+    "method": "source_control",
+    "seed": 42,
+    "output_video": "benchmark_data/main/041/041.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "37e5e07f88ee72f5fa85312adef814f28a0e02a77c5285ff4b6d985ffcc6c638",
+    "evidence_sha256": "4030f671c8e90a673805183fdf0caa79c4e6773a2577e679f7999792954460f9",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development",
+      "style_family": "storybook",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 1.0,
+        "narrative_emotional_fit": 3.2,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 3.5,
+        "color_texture": 2.5,
+        "hierarchy_readability": 3.7,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 1.0,
+        "relative_originality": 1.0,
+        "aesthetic_mean": 3.38
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 362.18388319015503
+  },
+  {
+    "case_id": "bernini__baseline__024__long_keep",
+    "method": "bernini__baseline_long_keep",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/024__long_keep/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "e805395f455c4a94557e344c056ef9251ac5870149ba08077c3378be62aefeb7",
+    "evidence_sha256": "27c1e53af272c633f24f09012c4ce828ea55406422dae3ebd20e549cfa094f28",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development",
+      "style_family": "digital_glitch",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 87.5,
+          "lower": 87.5,
+          "upper": 87.5,
+          "complete_rate": 75.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": null,
+          "lower": 50.0,
+          "upper": 100.0,
+          "complete_rate": null,
+          "coverage": 50.0,
+          "items": 2,
+          "unknown": 1,
+          "status": "unresolved"
+        },
+        "preserve_time": {
+          "score": null,
+          "lower": 50.0,
+          "upper": 100.0,
+          "complete_rate": null,
+          "coverage": 50.0,
+          "items": 2,
+          "unknown": 1,
+          "status": "unresolved"
+        }
+      },
+      "ratings": {
+        "style": 3.6,
+        "narrative_emotional_fit": 3.5,
+        "style_world_consistency": 3.7,
+        "composition_lighting": 3.5,
+        "color_texture": 3.5,
+        "hierarchy_readability": 3.2,
+        "temporal_coherence": 3.8,
+        "scene_specific_design": 3.0,
+        "relative_originality": 2.6,
+        "aesthetic_mean": 3.48
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 351.1687180995941
+  },
+  {
+    "case_id": "bernini__baseline__027__long",
+    "method": "bernini__baseline_long",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/027__long/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "a4e47d9b7ba1e931f7d945f0b4e36090b6cae10dad2b858241b6b0f61b21f132",
+    "evidence_sha256": "cbb4c9a6171285a800c9610723bdb30ca0cec325ef6f51ed2cbfc5112352b848",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "4b2e84b4e13b493a0ae502df2483cf9efac13ecdb3dd8d91f1bf0411e56fcf57",
+      "task_id": "027__long",
+      "source_id": "027",
+      "track": "long",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 87.5,
+          "lower": 87.5,
+          "upper": 87.5,
+          "complete_rate": 75.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.8,
+        "narrative_emotional_fit": 4.0,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 3.8,
+        "color_texture": 3.7,
+        "hierarchy_readability": 3.7,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 3.2,
+        "relative_originality": 1.4,
+        "aesthetic_mean": 3.84
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 515.6032536029816
+  },
+  {
+    "case_id": "bernini__baseline__027__long_keep",
+    "method": "bernini__baseline_long_keep",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/027__long_keep/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "6a30d88d83506a76aecd427f2d7c2f8070a16d5f81a93cdbcf1cd3658f86ea25",
+    "evidence_sha256": "25fe2a44d8a4ce0997a0b2d6f6e56335ecfd31431921f9ff2582184595add2ac",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "4b2e84b4e13b493a0ae502df2483cf9efac13ecdb3dd8d91f1bf0411e56fcf57",
+      "task_id": "027__long",
+      "source_id": "027",
+      "track": "long",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 87.5,
+          "lower": 87.5,
+          "upper": 87.5,
+          "complete_rate": 75.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.8,
+        "narrative_emotional_fit": 4.0,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 3.8,
+        "color_texture": 3.7,
+        "hierarchy_readability": 3.6,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 2.8,
+        "relative_originality": 1.2,
+        "aesthetic_mean": 3.82
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 450.53053426742554
+  },
+  {
+    "case_id": "ditto__baseline__024__long_keep",
+    "method": "ditto__baseline_long_keep",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/024__long_keep/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "3e8b6406f286c05d30eabc47f652db1fa77b31217bafa5615f881152dceabf94",
+    "evidence_sha256": "89ee03b63c531d159353776c97fb6efeb5beae1884f68d57d0b59c255e235774",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development",
+      "style_family": "digital_glitch",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 87.5,
+          "lower": 87.5,
+          "upper": 87.5,
+          "complete_rate": 75.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.5,
+        "narrative_emotional_fit": 3.7,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.5,
+        "color_texture": 3.7,
+        "hierarchy_readability": 3.6,
+        "temporal_coherence": 3.8,
+        "scene_specific_design": 2.8,
+        "relative_originality": 1.9,
+        "aesthetic_mean": 3.66
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 353.35122513771057
+  },
+  {
+    "case_id": "bernini__baseline__fewshot_004__long_keep",
+    "method": "bernini__baseline_long_keep",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_bernini/fewshot_004__long_keep/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "6a9e9f8f638569fdb05b5d0524fca8e1d067ca1ccc7586c07b4b8faa35783ddb",
+    "evidence_sha256": "de6a3d9112f61e61e0aa08e9acd5f4b5f4211a97e73cc9e2316847a65ce69d25",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development",
+      "style_family": "space_station_sports",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 83.33333333333334,
+          "lower": 83.33333333333334,
+          "upper": 83.33333333333334,
+          "complete_rate": 66.66666666666666,
+          "coverage": 100.0,
+          "items": 5,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 77.77777777777779,
+          "lower": 77.77777777777779,
+          "upper": 77.77777777777779,
+          "complete_rate": 55.55555555555556,
+          "coverage": 100.0,
+          "items": 7,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 83.33333333333334,
+          "lower": 83.33333333333334,
+          "upper": 83.33333333333334,
+          "complete_rate": 66.66666666666666,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.2,
+        "narrative_emotional_fit": 3.3,
+        "style_world_consistency": 2.8,
+        "composition_lighting": 3.3,
+        "color_texture": 3.2,
+        "hierarchy_readability": 3.1,
+        "temporal_coherence": 2.9,
+        "scene_specific_design": 3.0,
+        "relative_originality": 2.0,
+        "aesthetic_mean": 3.14
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 508.3717911243439
+  },
+  {
+    "case_id": "ditto__baseline__027__long",
+    "method": "ditto__baseline_long",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/027__long/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "85d775be7553b62359424a8d94eda856360fd56644951ffcbf1b3737f2f87957",
+    "evidence_sha256": "a85a18d8dab974d70a9c2da8d29909f3a410f4c474d73065deae4deca87ce02c",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "4b2e84b4e13b493a0ae502df2483cf9efac13ecdb3dd8d91f1bf0411e56fcf57",
+      "task_id": "027__long",
+      "source_id": "027",
+      "track": "long",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 2.9,
+        "narrative_emotional_fit": 3.4,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.3,
+        "color_texture": 2.5,
+        "hierarchy_readability": 3.2,
+        "temporal_coherence": 3.7,
+        "scene_specific_design": 2.8,
+        "relative_originality": 1.3,
+        "aesthetic_mean": 3.2399999999999998
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": false
+    },
+    "elapsed_seconds": 529.3896572589874
+  },
+  {
+    "case_id": "ditto__baseline__027__long_keep",
+    "method": "ditto__baseline_long_keep",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/027__long_keep/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "eb5a08b27cb78b9f172da479dac98ce207ea924640b2126a0554e798ec4eb5ab",
+    "evidence_sha256": "17443b181767c5d902bac1a8649777bb683b13d4e516e436d0088796e30abf2f",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "4b2e84b4e13b493a0ae502df2483cf9efac13ecdb3dd8d91f1bf0411e56fcf57",
+      "task_id": "027__long",
+      "source_id": "027",
+      "track": "long",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 75.0,
+          "lower": 75.0,
+          "upper": 75.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 87.5,
+          "lower": 87.5,
+          "upper": 87.5,
+          "complete_rate": 75.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 50.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 2.6,
+        "narrative_emotional_fit": 3.2,
+        "style_world_consistency": 3.6,
+        "composition_lighting": 2.9,
+        "color_texture": 2.0,
+        "hierarchy_readability": 3.0,
+        "temporal_coherence": 3.7,
+        "scene_specific_design": 2.8,
+        "relative_originality": 1.3,
+        "aesthetic_mean": 2.94
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 606.5608568191528
+  },
+  {
+    "case_id": "source_control__024",
+    "method": "source_control",
+    "seed": 42,
+    "output_video": "benchmark_data/main/024/024.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "525cb85512419c6e101f862666ba3c881c8aeec06fd718ca19803a4164e07038",
+    "evidence_sha256": "29fe421bc51c2320e8a4db9ad5813c4d7da4647d5628b3636b52c87e2c7634d3",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development",
+      "style_family": "digital_glitch",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 6,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 1.0,
+        "narrative_emotional_fit": 2.5,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 2.8,
+        "color_texture": 1.8,
+        "hierarchy_readability": 4.0,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 1.0,
+        "relative_originality": 1.0,
+        "aesthetic_mean": 3.02
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 367.85470604896545
+  },
+  {
+    "case_id": "ditto__baseline__fewshot_004__long_keep",
+    "method": "ditto__baseline_long_keep",
+    "seed": 42,
+    "output_video": "out/prompt_probe/20261029_ditto/fewshot_004__long_keep/native.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "0127ab591a557d039709388dee8489cdc0f7ca36765e657ddbb1da2bfa0ffa8f",
+    "evidence_sha256": "816c77e12aca982e1e587bb8cf905a209faabbfecf3930dc9d8b3869deade1f2",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development",
+      "style_family": "space_station_sports",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 5,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 77.77777777777779,
+          "lower": 77.77777777777779,
+          "upper": 77.77777777777779,
+          "complete_rate": 72.22222222222221,
+          "coverage": 100.0,
+          "items": 7,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 50.0,
+          "lower": 50.0,
+          "upper": 50.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 83.33333333333334,
+          "lower": 83.33333333333334,
+          "upper": 83.33333333333334,
+          "complete_rate": 66.66666666666666,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 3.9,
+        "narrative_emotional_fit": 3.8,
+        "style_world_consistency": 3.8,
+        "composition_lighting": 3.7,
+        "color_texture": 3.8,
+        "hierarchy_readability": 3.5,
+        "temporal_coherence": 3.7,
+        "scene_specific_design": 3.5,
+        "relative_originality": 2.1,
+        "aesthetic_mean": 3.7199999999999998
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "major_unrequested_damage"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": true,
+      "major_damage": true
+    },
+    "elapsed_seconds": 607.0714735984802
+  },
+  {
+    "case_id": "source_control__027",
+    "method": "source_control",
+    "seed": 42,
+    "output_video": "benchmark_data/main/027/027.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "3a3fce5a4c96ebe62fa6126e43bd09f2ceaa17dd09ad092d1dc1f2906e814771",
+    "evidence_sha256": "f6b138dbe7cb01b6f777c1ee3e6625ea7541ffa2cd0301f48bdc055c13dc0ba7",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development",
+      "style_family": "etching",
+      "creativity": "open",
+      "semantic": {
+        "edit": {
+          "score": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 2,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 1.0,
+        "narrative_emotional_fit": 2.5,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 2.7,
+        "color_texture": 2.0,
+        "hierarchy_readability": 2.8,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 1.0,
+        "relative_originality": 1.0,
+        "aesthetic_mean": 2.8
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 351.13828015327454
+  },
+  {
+    "case_id": "source_control__fewshot_004",
+    "method": "source_control",
+    "seed": 42,
+    "output_video": "benchmark_data/fewshot/004/004.mp4",
+    "evaluation_revision": "first-wave-v2-self-excluded",
+    "case_sha256": "dd4941e1ab410cbbd56dbced7b3023d922a6f17459eba0fa7514090762122aa7",
+    "evidence_sha256": "70eeaee753c60bcff61a173fcbcc3e116725770dac8ed4e9290a599cb1799053",
+    "status": "complete",
+    "result": {
+      "protocol": "lha-evaluation-v1",
+      "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development",
+      "style_family": "space_station_sports",
+      "creativity": "bounded",
+      "semantic": {
+        "edit": {
+          "score": 0.0,
+          "lower": 0.0,
+          "upper": 0.0,
+          "complete_rate": 0.0,
+          "coverage": 100.0,
+          "items": 5,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_core": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 7,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_detail": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 1,
+          "unknown": 0,
+          "status": "complete"
+        },
+        "preserve_time": {
+          "score": 100.0,
+          "lower": 100.0,
+          "upper": 100.0,
+          "complete_rate": 100.0,
+          "coverage": 100.0,
+          "items": 3,
+          "unknown": 0,
+          "status": "complete"
+        }
+      },
+      "ratings": {
+        "style": 1.0,
+        "narrative_emotional_fit": 2.2,
+        "style_world_consistency": 4.0,
+        "composition_lighting": 2.8,
+        "color_texture": 2.0,
+        "hierarchy_readability": 3.6,
+        "temporal_coherence": 4.0,
+        "scene_specific_design": 1.0,
+        "relative_originality": 1.0,
+        "aesthetic_mean": 2.92
+      },
+      "success": "fail",
+      "failure_reasons": [
+        "mandatory_semantics",
+        "style_below_3.0"
+      ],
+      "delivery": "valid",
+      "unrequested_damage": false,
+      "major_damage": false
+    },
+    "elapsed_seconds": 340.10871624946594
+  }
+]

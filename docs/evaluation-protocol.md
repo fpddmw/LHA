@@ -44,13 +44,15 @@ PickScore 不属于本版。代码入口为 `scripts/eval/evaluate_benchmark.py`
 事实标签：`pass=1.0`、`partial=0.5`、`fail=0.0`、`unknown=null`。保留项的 pass 表示保留成立。
 每项须有证据和输出时间点；已判断的 sequence 项须有连续证据。
 
-对同一种类的 K 个要求组，完成度为：
+对同一种类的 K 个要求组，0–1 归一化语义得分为：
 
 ```
-S = 100 / K * sum(mean(该组检查项分值))
+S = 1 / K * sum(mean(该组检查项分值))
 ```
 
-完全达成率使用同样分组权重，只将 pass 计为 1。完成度与完全达成率分别保存。
+这是标签的分组加权计算分，显示两位小数；不采用 VLM 连续 0.1 打分。完整完成比例使用同样分组权重，只将 pass 计为 1，乘 100 后以 % 单列。证据覆盖率、成功比例、损伤比例同样明确标为 %。
+
+历史 `lha-evaluation-v1` 的 `score()`／record 将语义 score/lower/upper 保存为 `100*S`；此存储及原始 judgment 保留。报告导出 `lha-report-v2` 只把这三个字段转换为 0–1，添加 `reporting.semantic_score_scale=unit_interval`，并生成 `metadata.json` 和 `records.normalized.json`。没有 reporting 标记的旧记录按 legacy_0_100 读取；有 unit_interval 标记的结果再次导出时直接复用，避免双重除 100。coverage/complete_rate 继续采用 %。例如旧 68.75 对应新 0.6875 分，默认显示 0.69 分。
 
 | 输出指标 | 含义 |
 | --- | --- |
@@ -92,6 +94,7 @@ damage_review 未完成时，无已确认损伤不能自动解释为零损伤。
 | `relative_originality` | 固定同题匿名对照范围内的相对独特性 |
 
 五项美学等权平均为 `aesthetic_mean`。这是本版明确计算的平均值，和历史 holistic overall score 含义不同。
+单个 VLM 原始评分及其均值默认显示一位小数。`3.64` 可以是五项原始评分的算术均值，也可以是跨样本的计算均值；报告显式标为计算均值，默认显示 `3.6`，JSON 和 CSV 的 mean 保留完整精度，并另存 display_mean。显示舍入不改变排序计算、成功状态或原始评分精度。
 情绪依据原场景及用户要求；颗粒、轮廓简化、设计性闪烁按风格条件评判，不默认追求写实、昂贵感或高饱和。
 
 开放短任务完整评价创造性设计；详细长任务评价剩余自由；严格局部修改设 creativity=none，两项 N/A。
@@ -143,14 +146,15 @@ raw 响应、system/user 请求、模型配置与图像哈希分别保存。相�
 
 ## 7. 统计与输出
 
-`report` 按 method/split/track 分组。先在源视频内平均 seed，再对源视频平均，源级 bootstrap 2000 次，固定 seed=20261029，给出 95% 百分位区间。
+`report` 按 method/split/track 分组，并支持 `track=all` 的同一预定任务集合总体表。先在每个任务内平均 seed，同源多任务再等权合并，最后对源宏平均；源级 bootstrap 2000 次，固定 seed=20261029，给出 95% 百分位区间。四题主比较一源一题，因此总体等于四题等权平均；短 2、长 2 分轨采用同一指标、量尺和算法，区别在原始要求、冻结卡与创作自由度。Planner 扩写不改变原始 track。
 单个源视频不给统计区间。某源的某项存在缺失 seed 时，该源点估计留空，但语义上下界仍纳入报告；每个指标显示 n_sources/total_sources。
 `compare` 先匹配 task/source/seed，再计算 A-B，以源为单位 bootstrap；不匹配和缺失明确保留。
+CLI `compare` 同样使用展示 v2 的语义 0–1 尺度，并输出总体与短长差值及量尺元数据：语义差值范围 [-1,1]，VLM 差值范围 [-3,3]。Python 底层 `paired_difference` 保留输入量尺，调用者可显式先使用 `normalized_records`。
 所有方法必须共享同一 frozen card。完整评测必须提供完整的预定 manifest，不能仅提交成功生成的条目。
 缺少 output 计交付失败；judge／环境／证据准备失败计 evaluation_error，记录留在分母中并以 unresolved 表示，退出码 1。
 
-输出包括 `records.json`、逐视频 `judgment.json`、`summary.json`、`metrics.csv`、`report.md`。
-1–4 评分均值和比例显示两位小数，特征余弦四位小数；JSON 保留原始精度。
+原始输出包括 `records.json`、逐视频 `judgment.json`；展示 v2 输出 `records.normalized.json`、`metadata.json`、`summary.json`、`metrics.csv`、`report.md`。metadata 逐列给出 scale、unit、aggregation、display_decimals、computed_mean 等信息。
+0–1 语义计算分和比例显示两位小数，VLM 原始评分及其计算均值显示一位，特征余弦四位；JSON/CSV mean 保留完整计算精度。主表严格使用预定的主要对照清单，补充提示词 long/long_keep 变体和原片对照另列；源级有效样本量不会随检查项、seed 或同源变体增加。预定缺失输出、指标未知和证据覆盖分别可见。
 总体报告始终显示覆盖率；创造力合格子集的分析必须同时附全体结果及子集比例，不单独展示筛选后的高分。
 正式论文用语义表、设计与质量表、loop 表，避免把它们加权成一个可互相抵消的总分。
 

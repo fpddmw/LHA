@@ -1,0 +1,298 @@
+[
+  {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+    "choices": {
+      "ab": {
+        "semantics": "A",
+        "design": "A",
+        "creativity": "A",
+        "evidence": "A在全部抽样帧中呈现可识别的儿童绘本风格，并保留男子卷发、条纹衬衫及女子长发等身份线索，以及男子持笔书写、女子搭肩指页的关系；B仍呈实拍外观。A用彩铅纹理、柔和配色和简化轮廓统一人物与环境，设计与创意表达更贴合要求。两者均改动页本结构：A将线圈移至展开页中央，B将小线圈本变为大幅书本，独立纸张均未清楚保留。稀疏采样仅支持书写姿态对应，无法确认细微动作连续性。"
+      },
+      "ba": {
+        "semantics": "B",
+        "design": "B",
+        "creativity": "B",
+        "evidence": "A仍呈摄影外观，未实现儿童绘本风格，并将小线圈本与独立纸张改成大幅摊开的书本。B以彩铅线条、纸张肌理和浅蓝、淡紫配色形成统一的儿童绘本设计，保留两人的主要身份线索、男子执笔及女子搭肩指页的关系，笔和线圈装订仍可辨认；但独立纸张未清楚保留。现有抽样仅支持姿态对应，细微书写动作及帧间连续性证据不足。"
+      }
+    },
+    "result": {
+      "semantics": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "design": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "creativity": {
+        "verdict": "A",
+        "order_disagreement": false
+      }
+    },
+    "renderer": "bernini",
+    "task_id": "041__short",
+    "a": "bernini__planner__041__planner",
+    "b": "bernini__baseline__041__short",
+    "evidence_scope": "Matched overview only; do not use this preference as proof of fine motion preservation"
+  },
+  {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+    "choices": {
+      "ab": {
+        "semantics": "A",
+        "design": "tie",
+        "creativity": "tie",
+        "evidence": "两者均呈现儿童绘本风格，保留两人的可辨特征、相对位置及男子执笔、女子搭肩指纸的姿态。A保留笔记本线圈装订，右侧独立纸张也较清楚；B将桌面页本画得更像中缝相连的展开书页，原有装订和独立纸张关系较弱。A采用柔和水彩与细线，B采用厚重描边和黄蓝配色，两种设计均统一、易读，创意表现相当。稀疏抽帧不足以确认细微书写动作的连续性。"
+      },
+      "ba": {
+        "semantics": "B",
+        "design": "tie",
+        "creativity": "tie",
+        "evidence": "两者均呈现可辨认的儿童绘本风格，保留两人特征、男子执笔及女子搭肩指页的关系。B清楚保留螺旋装订和右侧独立纸张；A的装订消失，两部分更像摊开的书页，因此B的语义保留更完整。A采用粗轮廓与黄蓝配色，B采用柔和色洗与细线，均形成统一的绘本设计，创意表现相当。抽样帧不足以判断细微书写动作的连续性。"
+      }
+    },
+    "result": {
+      "semantics": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "design": {
+        "verdict": "tie",
+        "order_disagreement": false
+      },
+      "creativity": {
+        "verdict": "tie",
+        "order_disagreement": false
+      }
+    },
+    "renderer": "ditto",
+    "task_id": "041__short",
+    "a": "ditto__planner__041__planner",
+    "b": "ditto__baseline__041__short",
+    "evidence_scope": "Matched overview only; do not use this preference as proof of fine motion preservation"
+  },
+  {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+    "choices": {
+      "ab": {
+        "semantics": "A",
+        "design": "A",
+        "creativity": "A",
+        "evidence": "A在人物、西装、座椅及窗框处呈现更充分的RGB错位轮廓、失真高光和碎片色块，与高反差阴影、像素位移及线纹共同形成明确的数字故障风格。B主要采用黑灰、米白色面和网点，鲜艳色彩集中在手机处，要求的RGB分离覆盖较弱。两者均保留男子持机贴耳及车内空间关系。A将通道重影与块状切分结合得更充分，设计和限定范围内的创意更贴合任务。采样较稀疏，无法确认扫描线的闪烁节奏或细小动作的连续性。"
+      },
+      "ba": {
+        "semantics": "B",
+        "design": "B",
+        "creativity": "B",
+        "evidence": "两者均保留男子持手机贴耳及车内主要空间关系。B在人物、西装、座椅和窗边呈现更明确的RGB错位与失真彩色高光，水平切片、碎块和线纹结合更充分；A主要呈米黄、灰黑平涂和网点，彩色效果集中在手机。B的五官与持机关系在色层分裂中仍较易辨认，前景与背景的故障处理更协调，错位色块的组合也更有变化。采样可见色块和纹理变化，但不足以确认扫描线连续闪烁及细小动作顺序。"
+      }
+    },
+    "result": {
+      "semantics": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "design": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "creativity": {
+        "verdict": "A",
+        "order_disagreement": false
+      }
+    },
+    "renderer": "bernini",
+    "task_id": "024__long",
+    "a": "bernini__planner__024__planner",
+    "b": "bernini__baseline__024__long",
+    "evidence_scope": "Matched overview only; do not use this preference as proof of fine motion preservation"
+  },
+  {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+    "choices": {
+      "ab": {
+        "semantics": "A",
+        "design": "A",
+        "creativity": "A",
+        "evidence": "A保留了前景屋顶、树丛、远处圆顶与塔楼的主要对应关系，抽样中的视点变化也大体符合原片。其屋瓦和树冠采用有组织的排线，结合泛黄纸纹与磨损边缘，蚀刻版画语言更统一。B虽保留城镇主体布局，却在原本空旷的天空加入多个同心圆天体和成组云朵，形成抢眼的新主体，超出允许变化。A的创意主要体现在允许的刻线与纸张表达中。"
+      },
+      "ba": {
+        "semantics": "B",
+        "design": "B",
+        "creativity": "B",
+        "evidence": "两者均保留城镇、树丛和前景屋顶的主要布局，采样序列中的视点变化顺序也大体对应。B的圆顶与右侧塔楼轮廓更易对应原景，并保留空旷天空；A新增多个圆盘状天体和成组云朵，超出允许改动。设计上，B以随屋顶走向的排线、树冠放射状刻线和墨色层次呈现更明确的十九世纪蚀刻语言。其创意体现在线条对原有建筑与植被的重构，并与旧纸纹理协调；A的天空装饰不计入允许范围内的创意优势。"
+      }
+    },
+    "result": {
+      "semantics": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "design": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "creativity": {
+        "verdict": "A",
+        "order_disagreement": false
+      }
+    },
+    "renderer": "bernini",
+    "task_id": "027__short",
+    "a": "bernini__planner__027__planner",
+    "b": "bernini__baseline__027__short",
+    "evidence_scope": "Matched overview only; do not use this preference as proof of fine motion preservation"
+  },
+  {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+    "choices": {
+      "ab": {
+        "semantics": "A",
+        "design": "B",
+        "creativity": "B",
+        "evidence": "A在对应帧中更好保留原球位置、球桌外形及弯曲支架；B多帧台面出现额外白球，背景人物也被改成蓝色人形。两版右侧球员的脸部及眼镜均有改变。B的金属舱壁、蓝白灯带和可辨地球的大窗更完整统一，视觉设计与限定创意更突出。桌沿发光均未完整实现：A主要让球网发光，B主要让下方支架发光。采样姿态大致对应，细动作、反弹及接触时序证据不足。"
+      },
+      "ba": {
+        "semantics": "B",
+        "design": "A",
+        "creativity": "A",
+        "evidence": "B在对应采样帧中更好保留挥拍姿态、可见球位、桌体结构及背景人物；A台面持续多出多个球，背景还出现额外人影。两者均明显改变远端球员脸部，原有眼镜消失。A的金属舱壁、地球全景窗、蓝白灯带与科幻服装形成更统一的太空场馆设计；B仍保留较多原场馆设施。两者桌沿发光均不到位：A主要照亮下方支架，B主要将球网变成发光板。稀疏采样不足以核实精细动作节奏和击球接触时序。"
+      }
+    },
+    "result": {
+      "semantics": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "design": {
+        "verdict": "B",
+        "order_disagreement": false
+      },
+      "creativity": {
+        "verdict": "B",
+        "order_disagreement": false
+      }
+    },
+    "renderer": "bernini",
+    "task_id": "fewshot_004__long",
+    "a": "bernini__planner__fewshot_004__planner",
+    "b": "bernini__baseline__fewshot_004__long",
+    "evidence_scope": "Matched overview only; do not use this preference as proof of fine motion preservation"
+  },
+  {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+    "choices": {
+      "ab": {
+        "semantics": "A",
+        "design": "A",
+        "creativity": "tie",
+        "evidence": "两者均保留原男子、黑色手机贴耳及车内空间关系。A在西装、袖口、座椅和窗框上呈现更明确的RGB错位，横向扫描纹理覆盖前景与背景，更符合全画面数字故障要求；重复的分色轮廓也使整体设计更统一。B的窗外块状撕裂较明显，但人物与座椅主要呈现色阶压缩和网点效果。两者对失真高光与纹理的创意运用相当。现有稀疏抽帧不足以确认扫描线闪烁及细微动作连续性。"
+      },
+      "ba": {
+        "semantics": "B",
+        "design": "B",
+        "creativity": "B",
+        "evidence": "两者均保留原男子、手机贴耳通话及人物与座椅、车窗的关系。A有明显的高反差色阶和网点，碎块与横移主要集中在窗景。B在面部、衣领、西装和座椅边缘呈现更明确的RGB错位，并将横向错切、扫描线与失真高光贯穿人物和背景，更完整贴合全画面故障艺术要求；霓虹重影与深色阴影的组合也更统一。稀疏抽帧不足以确认扫描线闪烁频率或细微动作连续性。"
+      }
+    },
+    "result": {
+      "semantics": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "design": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "creativity": {
+        "verdict": "tie",
+        "order_disagreement": true
+      }
+    },
+    "renderer": "ditto",
+    "task_id": "024__long",
+    "a": "ditto__planner__024__planner",
+    "b": "ditto__baseline__024__long",
+    "evidence_scope": "Matched overview only; do not use this preference as proof of fine motion preservation"
+  },
+  {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+    "choices": {
+      "ab": {
+        "semantics": "tie",
+        "design": "B",
+        "creativity": "tie",
+        "evidence": "两者均呈现可辨认的复古蚀刻风格，保留中央圆顶、右侧塔楼、树丛与前景屋顶的主要位置，抽样帧中的视点变化顺序也相符。B的天空排线、建筑刻线与双线边框形成更统一的版画版面。A采用旧纸斑驳与渐隐边缘，B采用框饰与云状排线，两种创意处理各有特色。"
+      },
+      "ba": {
+        "semantics": "tie",
+        "design": "tie",
+        "creativity": "tie",
+        "evidence": "两者均用排线、点刻树冠和深色墨块形成可辨认的十九世纪版画风格，城镇、圆顶、塔楼与前景屋顶的主要相对位置均可对应；取样中屋顶逐渐上移的画面变化顺序也得到保留。A采用双线边框和密集天空排线，B采用旧纸斑纹、天空留白与渐隐边缘，两种设计均协调成立，未见明显新增独立主体。现有取样不足以判断细微运动连续性。"
+      }
+    },
+    "result": {
+      "semantics": {
+        "verdict": "tie",
+        "order_disagreement": false
+      },
+      "design": {
+        "verdict": "tie",
+        "order_disagreement": true
+      },
+      "creativity": {
+        "verdict": "tie",
+        "order_disagreement": false
+      }
+    },
+    "renderer": "ditto",
+    "task_id": "027__short",
+    "a": "ditto__planner__027__planner",
+    "b": "ditto__baseline__027__short",
+    "evidence_scope": "Matched overview only; do not use this preference as proof of fine motion preservation"
+  },
+  {
+    "protocol": "lha-evaluation-v1",
+    "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+    "choices": {
+      "ab": {
+        "semantics": "A",
+        "design": "B",
+        "creativity": "B",
+        "evidence": "A保留了背景第三人、清楚可辨的球拍，以及更接近原片的台面透视和弯曲支架。B删去了背景人物，多帧球拍难辨，小球变成较大的环状光球，桌座几何改动也更大。两者均改变了脸部特征，远端球员的眼镜消失；A的背景人物也被移近。两者都呈现金属太空站、地球大窗、科幻运动服和蓝色发光桌沿。B的多边形窗框、墙地板分缝、服装线条与胸章形成更统一且有辨识度的设计，因此设计及限定创意选B。稀疏帧不足以核实细微动作、接触时序与镜头连续性。"
+      },
+      "ba": {
+        "semantics": "B",
+        "design": "tie",
+        "creativity": "tie",
+        "evidence": "B保留左后方第三人，球拍形状清楚，桌面透视和弯曲支架也更接近原片；A省略背景人物，多处球拍难辨，球体明显放大。两版均改变了人物面貌，右侧球员原有眼镜均未保留。两版都呈现了金属太空舱、蓝白照明、窗外地球、科幻运动服和发蓝光的桌沿；A采用棱角窗框与轮廓光，B采用圆角舷窗与金属反光，视觉设计及限定范围内的创意表现相当。抽样姿态均保留左右对打及末段右侧跨步；精细球路、击球时序和帧间镜头连续性证据不足。"
+      }
+    },
+    "result": {
+      "semantics": {
+        "verdict": "A",
+        "order_disagreement": false
+      },
+      "design": {
+        "verdict": "tie",
+        "order_disagreement": true
+      },
+      "creativity": {
+        "verdict": "tie",
+        "order_disagreement": true
+      }
+    },
+    "renderer": "ditto",
+    "task_id": "fewshot_004__long",
+    "a": "ditto__planner__fewshot_004__planner",
+    "b": "ditto__baseline__fewshot_004__long",
+    "evidence_scope": "Matched overview only; do not use this preference as proof of fine motion preservation"
+  }
+]

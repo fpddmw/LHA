@@ -1,0 +1,218 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "4b2e84b4e13b493a0ae502df2483cf9efac13ecdb3dd8d91f1bf0411e56fcf57",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "etching_style",
+      "label": "pass",
+      "evidence": "建筑细排线、树冠刻纹和黑墨块面形成可辨认的十九世纪蚀刻版画风格。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "black_ivory",
+      "label": "partial",
+      "evidence": "黑墨清晰，纸面也有斑驳纹理，但底色呈强烈金黄色，明显偏离轻微做旧的象牙白。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "monochrome",
+      "label": "pass",
+      "evidence": "原片蓝天及绿褐树色均被统一为黑墨与同一黄色纸底上的明暗层次。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "fine_contours",
+      "label": "pass",
+      "evidence": "屋脊、屋檐、圆顶和塔身具有清楚的轮廓线，屋面及墙面可见细密线条。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "foliage_hatching",
+      "label": "partial",
+      "evidence": "部分树冠具有细密网状刻纹，但大片树木阴影主要由实黑块面和点状纹理构成，交叉排线并非主要塑形方式。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "unmarked_sky",
+      "label": "partial",
+      "evidence": "地平线上方保留了一条较干净的亮带，但天空上部和中部铺有大范围水平排线，留白未成为主要表达。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "town_layout",
+      "label": "pass",
+      "evidence": "前景斜屋顶、中央建筑、两侧树丛及远处天际线的主要相对位置仍可与源片对应。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "landmarks",
+      "label": "partial",
+      "evidence": "中央偏左圆顶和右端塔楼仍在对应位置，但右端塔楼原有圆拱顶被改成明显更高、更细的多节尖顶，基本轮廓发生改变。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "camera_progression",
+      "label": "pass",
+      "evidence": "所给覆盖0至5秒的密集序列中，两组画面的前景屋顶均逐步上移，远处地标略向左上移动，主要画面变化顺序对应。",
+      "times_seconds": [
+        0,
+        1.25,
+        2.5,
+        3.75,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "roof_details",
+      "label": "pass",
+      "evidence": "前景高檐墙、斜屋脊、后段露出的方形烟囱及右侧亮屋面均保留了可对应的线描结构。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "open_sky",
+      "label": "fail",
+      "evidence": "左上天空出现独立的双翼状飞鸟轮廓；源片该区域仅有细短的浅色直线痕迹。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 2.6,
+      "evidence": "屋顶、圆顶和塔楼具有清楚的细轮廓与排线，版画语言贯穿全片；但树叶多用实黑与点状留白，天空布满横线，鲜黄底色也偏离淡象牙纸上的单色蚀刻要求。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.2,
+      "evidence": "层叠屋顶、树冠和远处尖塔形成安静的历史城镇全景，符合场景气质；浓黄天空与厚重黑块使氛围比要求的轻度陈旧纸面更强烈。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "建筑、树木和远景共同采用黑墨与纸底的表现体系，空间关系可信；建筑细排线与树冠大片实黑、点状纹理之间的刻画方式略有脱节。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 2.9,
+      "evidence": "前景坡屋顶、中景树木和远景地标构成明确纵深，亮天空衬出塔楼轮廓；天空密集横线增加上半部视觉重量，树丛暗部也压缩了局部空间层次。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 2.0,
+      "evidence": "黑墨与黄色纸底形成统一配色，屋顶刻线清楚；但整幅持续呈鲜黄至橙黄色，明显偏离轻度老化的象牙白纸， foliage 的点状留白也弱化了要求的交叉排线质感。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "圆顶、细塔和右侧高塔容易辨认，前景屋脊提供清楚的观看入口；部分屋顶埋入连片黑色树冠，天空横线与城镇细节争夺注意力。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "覆盖全段的密集帧中，圆顶、塔楼、屋脊与树冠保持对应，前景屋顶随视点变化逐渐显露，未见明显结构跳变；初段天空纹理与纸底明暗有轻微游移。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 2.8,
+      "evidence": "前景屋顶以顺坡细线强调斜面，树冠用黑块与细碎亮点区分层次，远处圆顶和塔楼形成天际线重音，整体空间处理较连贯。但天空铺设大量横向排线，浓黄纸底也削弱了要求中的象牙白留白效果。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 1.3,
+      "evidence": "与第二组参考（图28—30）相比，横线组成的天空、树冠黑块与点状亮部、屋顶平行排线及边缘淡出处理均高度相近；可见差别主要在局部线条密度和明暗比例，未形成明显独立的设计方案。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "landmarks"
+      ],
+      "evidence": "画面最右侧地标塔楼的圆拱顶变为高细的多节尖顶，改变了要求保留的显著地标轮廓。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ]
+    },
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "open_sky"
+      ],
+      "evidence": "左上天空新增可辨认的飞鸟状独立轮廓。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ]
+    }
+  ],
+  "comparison_set_sha256": "217586a2bf60ff379c3351b786d5f418cf3b7d2bc40867b9c9bb5e3b63961b8e",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "17443b181767c5d902bac1a8649777bb683b13d4e516e436d0088796e30abf2f",
+  "output_sha256": "aec694ef36c414966f716a7e184899d17a59d3ecb1c22cfb369b15bfde796b53",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "task_id": "fewshot_004__long",
+  "source_id": "fewshot_004",
+  "track": "long",
+  "split": "development",
+  "source_video": "benchmark_data/fewshot/004/004.mp4",
+  "source_sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+  "requirement": "Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement.",
+  "duration_seconds": 4.433333333333334,
+  "source_start_seconds": 0,
+  "status": "frozen",
+  "style_required": true,
+  "creativity": "bounded",
+  "annotation_note": "Retrospective development evaluation. Source timeline reviewed before this scoring run; outputs already existed. Not a prospective held-out annotation.",
+  "style_family": "space_station_sports",
+  "scene_summary": "两名前景球员隔着蓝色球桌对打，后方还有可见人物和球桌；球桌带弯曲支架，原场地有窗户、立柱和蓝色围挡。",
+  "allowed_changes": [
+    "将环境改为金属墙面、蓝白光照和可透过大窗看到地球的太空站运动场馆。",
+    "将球员衣服改成流线科幻运动服，并让球桌边缘发蓝光；保持人脸、运动、球路、球桌几何及镜头运动。",
+    "背景表面和窗外景色可改变，保留明确要求的运动参与者与场景空间关系。"
+  ],
+  "groups": [
+    {
+      "id": "arena",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "space_arena",
+          "text": "室内成为可识别的未来太空站运动场馆，具有金属墙面。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "blue_white_lighting",
+          "text": "场馆具有蓝白色照明。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "earth_windows",
+          "text": "通过较大窗户能辨认地球景象。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "clothing",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "scifi_suits",
+          "text": "可见球员穿着流线科幻运动服。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "table_light",
+      "kind": "edit",
+      "items": [
+        {
+          "id": "blue_edges",
+          "text": "球桌边缘出现蓝色发光；台面／台面外沿属于球桌边缘，仅下方支架发光不足以完整满足该项。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅部分桌沿发光，或蓝光主要落在下方支架而非桌沿，记 partial；完全没有蓝色发光记 fail。"
+        }
+      ]
+    },
+    {
+      "id": "players",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "faces",
+          "text": "原有可辨认球员脸部及身份特征保持，允许衣服变化。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "player_roles",
+          "text": "保留前景两人的左右位置和对打关系；背景可见人物不被无故增删，正常遮挡不算删除。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "geometry",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "table_geometry",
+          "text": "保持台面外形、透视和弯曲支架等原有球桌几何结构，允许表面和光照改变。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "net",
+          "text": "球网的位置、走向和基本形状保持。",
+          "mandatory": true,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "performance",
+      "kind": "preserve_core",
+      "items": [
+        {
+          "id": "playing_motion",
+          "text": "挥拍及击球动作的主要顺序、方向与节奏保持。",
+          "mandatory": true,
+          "temporal": true,
+          "evidence": "sequence",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "ball_trajectory",
+          "text": "可观察球体的运动路径、反弹与接触时序保持；看不清小球时记 unknown。",
+          "mandatory": true,
+          "temporal": true,
+          "evidence": "sequence",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        },
+        {
+          "id": "camera_motion",
+          "text": "镜头取景及运动顺序保持。",
+          "mandatory": true,
+          "temporal": true,
+          "evidence": "sequence",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    },
+    {
+      "id": "incidental",
+      "kind": "preserve_detail",
+      "items": [
+        {
+          "id": "table_markings",
+          "text": "台面和球网的可辨细部、标线关系保持，允许表面处理改变。",
+          "mandatory": false,
+          "temporal": false,
+          "evidence": "frames",
+          "partial_rule": "仅在部分要求范围内成立；完全失效记 fail，证据不足记 unknown。"
+        }
+      ]
+    }
+  ],
+  "reviewed_by": "source-review-by-evaluation-session-2026-10-30",
+  "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31"
+}

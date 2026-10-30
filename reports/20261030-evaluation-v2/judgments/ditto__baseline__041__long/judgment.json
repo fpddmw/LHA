@@ -1,0 +1,232 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "storybook_style",
+      "label": "pass",
+      "evidence": "人物、衣物与室内背景均转为手绘插画，形体简化，具有清晰的儿童绘本风格。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "warm_pastels",
+      "label": "partial",
+      "evidence": "背景、肤色及桌面使用暖黄和浅杏色，但头发橙黄及衬衫青蓝较浓，粉彩效果仅覆盖部分画面。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "pencil_outlines",
+      "label": "partial",
+      "evidence": "脸部和头发轮廓较细柔；衣袖、衣领及上衣边缘则多为清晰、连续的蓝色描边，柔和铅笔感覆盖不完整。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "watercolor",
+      "label": "pass",
+      "evidence": "蓝色条纹衬衫、白色上衣、笔记本和暖色桌面均采用淡色铺染、渐淡边缘及留白，呈现柔和水彩效果。",
+      "times_seconds": [
+        0,
+        0.15,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "soft_shadows",
+      "label": "pass",
+      "evidence": "面颈、袖褶和手部下方的阴影转为柔和色阶，桌上物体的投影也较浅。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "paper_texture",
+      "label": "partial",
+      "evidence": "浅色背景晕染处局部可见轻微颗粒感；皮肤、笔记本及桌面大部分区域较平滑，纸张肌理覆盖有限。",
+      "times_seconds": [
+        0.1,
+        0.2,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "same_two_people",
+      "label": "pass",
+      "evidence": "保留浅色卷发、蓝色条纹衬衫的男子，以及长发、白色上衣的女子；人物数量与主要辨识特征对应。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "roles_positions",
+      "label": "pass",
+      "evidence": "男子仍坐在画面中右侧低头执笔；女子站在左侧，一手搭肩，另一手指向笔记本。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "writing_action",
+      "label": "pass",
+      "evidence": "覆盖全片的密集配对帧中，男子持续握笔在本页上书写，握笔手与笔尖逐渐向画面左侧小幅移动，另一手位于纸本右侧，与原片主要手部变化对应。",
+      "times_seconds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "writing_tool",
+      "label": "pass",
+      "evidence": "右手中的黑色细长笔及尖端保持可辨认，仍作为书写工具接触本页。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "notebook_binding",
+      "label": "partial",
+      "evidence": "笔记本保留叠页结构，但原片近侧边缘的螺旋装订圈消失，变成平整的蓝色封边。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "separate_paper",
+      "label": "partial",
+      "evidence": "笔记本右侧仍有独立浅黄色对象，但其厚边及下方伸出的条片使其呈现合上册子的形态，原有单张纸形态未完整保留。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 3.4,
+      "evidence": "儿童绘本造型、柔和彩色轮廓及水彩铺色贯穿画面；头发和衬衫的渐变较平滑规整，软铅笔笔触与细微纸纹表现偏弱。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "男子低头执笔、表情温和，女子扶肩并指向笔记本，暖色画面强化了安静、亲切的陪伴氛围，契合儿童绘本情境。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "两人、蓝条纹衬衫、白衣、笔记本及独立纸张均清楚可辨，执笔、指页和扶肩关系自洽；桌面、绿植与墙面采用协调的插画语言。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "男子面部与书写区域形成主要视觉中心，女子手臂引导视线，柔化阴影与明亮背景协调；后段笔记本靠近画面下缘，空间稍紧。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.3,
+      "evidence": "浅蓝、淡黄和暖肤色搭配协调，背景与白衣有水彩晕染；相对要求的粉彩效果，金发及部分黄蓝区域偏浓，纸面与桌面的纸纹较弱。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "蓝衬衫、深色笔和人物视线使书写主题明确，女子指尖进一步强调笔记本；笔尖附近的手指叠压略显拥挤。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "覆盖全段的密集帧中，人物外形、衣纹、笔和纸张结构总体稳定；约0.10至0.20秒背景与衣物的斑驳色块短暂增强后减弱，出现轻微纹理闪变。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "淡黄背景色块与边缘留白围合人物，衬衫条纹顺应衣褶，暖色桌面承接手部和纸本，使指示与书写交汇处成为视觉重心，形成贴合原有场景的连贯设计。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 1.2,
+      "evidence": "与参考候选1共享金棕卷发、黄底留白、亮蓝衬衫及暖色桌面的主要处理，设计高度接近。相较候选2、3的浅淡纸色和棕灰轮廓，差异主要在配色强度与蓝色描边，可辨认的独创变化有限。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "notebook_binding"
+      ],
+      "evidence": "桌面中央笔记本的螺旋装订被平整封边替代，损失原有装订细节。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ]
+    },
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "separate_paper"
+      ],
+      "evidence": "笔记本右侧的独立纸张被画出明显厚边和书签状条片，外观变为册子。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ]
+    }
+  ],
+  "comparison_set_sha256": "cb2b6be174514afd547f69cc3dfef6ef9a2fa8389479e1fa48adff4fdbff263f",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "2c8bde11950dcd7848d8fa155a856c57241806e71c75ebede8892a6faf772e8d",
+  "output_sha256": "59df455539cc6ea9d7b6988cf1e663676fcd1c7ac6758527a02a4f72632e2889",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

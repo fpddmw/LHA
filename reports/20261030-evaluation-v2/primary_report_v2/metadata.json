@@ -1,0 +1,570 @@
+{
+  "version": "lha-report-v2",
+  "metrics": {
+    "aesthetic_mean": {
+      "label": "美学计算均值",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "five_aesthetic_items_then_source_macro"
+    },
+    "clip_f": {
+      "label": "clip_f",
+      "unit": "cosine",
+      "scale": [
+        -1,
+        1
+      ],
+      "display_decimals": 4,
+      "aggregation": "source_macro"
+    },
+    "color_texture": {
+      "label": "色彩与纹理",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "composition_lighting": {
+      "label": "构图与光影",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "delivery_valid": {
+      "label": "有效交付比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_rates"
+    },
+    "dino_f": {
+      "label": "dino_f",
+      "unit": "cosine",
+      "scale": [
+        -1,
+        1
+      ],
+      "display_decimals": 4,
+      "aggregation": "source_macro"
+    },
+    "edit": {
+      "label": "编辑达成",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "edit_complete_rate": {
+      "label": "编辑达成：完整完成比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "group_weighted_rate_then_source_macro"
+    },
+    "edit_coverage": {
+      "label": "编辑达成：证据覆盖率",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "group_weighted_rate_then_source_macro"
+    },
+    "edit_lower": {
+      "label": "编辑达成下界",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "edit_upper": {
+      "label": "编辑达成上界",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "hierarchy_readability": {
+      "label": "层次与可读性",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "major_damage": {
+      "label": "存在重大损伤的比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_rates"
+    },
+    "narrative_emotional_fit": {
+      "label": "叙事与情绪",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "preserve_core": {
+      "label": "核心语义保留",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "preserve_core_complete_rate": {
+      "label": "核心语义保留：完整完成比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "group_weighted_rate_then_source_macro"
+    },
+    "preserve_core_coverage": {
+      "label": "核心语义保留：证据覆盖率",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "group_weighted_rate_then_source_macro"
+    },
+    "preserve_core_lower": {
+      "label": "核心语义保留下界",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "preserve_core_upper": {
+      "label": "核心语义保留上界",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "preserve_detail": {
+      "label": "细节保留",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "preserve_detail_complete_rate": {
+      "label": "细节保留：完整完成比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "group_weighted_rate_then_source_macro"
+    },
+    "preserve_detail_coverage": {
+      "label": "细节保留：证据覆盖率",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "group_weighted_rate_then_source_macro"
+    },
+    "preserve_detail_lower": {
+      "label": "细节保留下界",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "preserve_detail_upper": {
+      "label": "细节保留上界",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "preserve_time": {
+      "label": "时序语义保留",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "preserve_time_complete_rate": {
+      "label": "时序语义保留：完整完成比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "group_weighted_rate_then_source_macro"
+    },
+    "preserve_time_coverage": {
+      "label": "时序语义保留：证据覆盖率",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "group_weighted_rate_then_source_macro"
+    },
+    "preserve_time_lower": {
+      "label": "时序语义保留下界",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "preserve_time_upper": {
+      "label": "时序语义保留上界",
+      "unit": "score",
+      "scale": [
+        0,
+        1
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_group_weighted_label_score"
+    },
+    "relative_originality": {
+      "label": "相对独创性",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "scene_specific_design": {
+      "label": "场景化设计",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "style": {
+      "label": "目标风格",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "style_world_consistency": {
+      "label": "风格与世界一致性",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "success_confirmed": {
+      "label": "确认成功比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_rates"
+    },
+    "success_possible": {
+      "label": "成功比例上界",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_rates"
+    },
+    "success_unresolved": {
+      "label": "待判定比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_rates"
+    },
+    "temporal_coherence": {
+      "label": "视频自身时序协调",
+      "unit": "rating",
+      "scale": [
+        1,
+        4
+      ],
+      "raw_step": 0.1,
+      "display_decimals": 1,
+      "computed_mean": true,
+      "aggregation": "source_macro_of_raw_vlm_ratings"
+    },
+    "unrequested_damage": {
+      "label": "存在非预期损伤的比例",
+      "unit": "percent",
+      "scale": [
+        0,
+        100
+      ],
+      "display_decimals": 2,
+      "aggregation": "source_macro_of_rates"
+    }
+  },
+  "aggregation": "seed mean within task, equal task mean within source, equal source macro; missing planned observations retained",
+  "precision": "JSON/CSV preserve full precision; rating means displayed to one decimal; normalized semantic scores to two",
+  "cohort": [
+    {
+      "case_id": "bernini__baseline__027__short",
+      "method": "bernini_direct",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__baseline__041__short",
+      "method": "bernini_direct",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__baseline__fewshot_004__long",
+      "method": "bernini_direct",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__baseline__024__long",
+      "method": "bernini_direct",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__planner__041__planner",
+      "method": "bernini_planner",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__planner__fewshot_004__planner",
+      "method": "bernini_planner",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__planner__027__planner",
+      "method": "bernini_planner",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "bernini__planner__024__planner",
+      "method": "bernini_planner",
+      "renderer": "bernini",
+      "seed": 42,
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__baseline__027__short",
+      "method": "ditto_direct",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__baseline__041__short",
+      "method": "ditto_direct",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__baseline__fewshot_004__long",
+      "method": "ditto_direct",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__baseline__024__long",
+      "method": "ditto_direct",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__planner__041__planner",
+      "method": "ditto_planner",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "041__short",
+      "source_id": "041",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__planner__fewshot_004__planner",
+      "method": "ditto_planner",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "fewshot_004__long",
+      "source_id": "fewshot_004",
+      "track": "long",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__planner__027__planner",
+      "method": "ditto_planner",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "027__short",
+      "source_id": "027",
+      "track": "short",
+      "split": "development"
+    },
+    {
+      "case_id": "ditto__planner__024__planner",
+      "method": "ditto_planner",
+      "renderer": "ditto",
+      "seed": 42,
+      "task_id": "024__long",
+      "source_id": "024",
+      "track": "long",
+      "split": "development"
+    }
+  ],
+  "overall": true
+}

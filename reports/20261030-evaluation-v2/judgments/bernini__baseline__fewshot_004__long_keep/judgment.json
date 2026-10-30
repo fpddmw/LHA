@@ -1,0 +1,274 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 4.433333333333334,
+    "expected_seconds": 4.433333333333334,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "space_arena",
+      "label": "pass",
+      "evidence": "墙面改为金属分区板、倾斜结构柱和大型观景窗，可识别为未来太空站运动场馆。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "blue_white_lighting",
+      "label": "pass",
+      "evidence": "顶棚和窗框设有蓝白色灯带，场馆内可见对应照明。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "earth_windows",
+      "label": "pass",
+      "evidence": "左上方大窗外可辨认蓝色地球、陆地与云层，周围为星空。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "scifi_suits",
+      "label": "pass",
+      "evidence": "左前球员穿银色科幻运动服，带青蓝发光线；右后球员穿带太空图案的蓝色上衣和银灰色运动长裤。",
+      "times_seconds": [
+        0,
+        1.6,
+        4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "blue_edges",
+      "label": "partial",
+      "evidence": "强烈蓝光主要覆盖下方弯曲支架和连接部件；台面外沿仍呈灰色，未形成明确的蓝色发光桌沿。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "faces",
+      "label": "partial",
+      "evidence": "左前球员的短黑发和侧后头部轮廓大致对应；右后球员原有眼镜、黑发及面部轮廓变为无眼镜、浅棕侧分头和不同脸型。",
+      "times_seconds": [
+        0,
+        0.8,
+        3.2
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "player_roles",
+      "label": "partial",
+      "evidence": "前景两人的左右位置和隔桌对打关系保留；源片左后方球桌旁可见的第三人在输出中消失，对应区域直接呈现金属墙面与窗景。",
+      "times_seconds": [
+        0,
+        0.8,
+        2,
+        4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "table_geometry",
+      "label": "pass",
+      "evidence": "主球桌的四边形台面、斜向透视、近端桌角及弯曲承架总体保持，承架表面增加蓝色发光处理。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "net",
+      "label": "pass",
+      "evidence": "球网仍横跨台面中央，左右端点、斜向走向和基本矩形网面与源片对应。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "playing_motion",
+      "label": "pass",
+      "evidence": "全段密集帧中，左前球员收拍后前伸、右后球员回拍，以及末段右后球员向画面右侧跨步转身的主要顺序、方向和节奏大体对应。",
+      "times_seconds": [
+        0.4,
+        0.9667,
+        1.7333,
+        2.1333,
+        2.8,
+        3.3667,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "ball_trajectory",
+      "label": "partial",
+      "evidence": "球体总体仍在两人之间往返，但约1.63至1.73秒出现两处同时可见的白色球状影像，分别位于左前球员手前和球网上方；对应源帧没有这种双球现象，部分球点高度也发生偏移。",
+      "times_seconds": [
+        0,
+        0.1333,
+        1.6333,
+        1.6667,
+        1.7,
+        1.7333
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "camera_motion",
+      "label": "pass",
+      "evidence": "全段保持相同斜向全景，桌角、球网与人物在画面内的缓慢位移总体对应，未见新增切镜或明显改变取景的缩放。",
+      "times_seconds": [
+        0,
+        1.2,
+        2.4,
+        3.6,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "table_markings",
+      "label": "partial",
+      "evidence": "台面外周、中线和球网网格仍可对应；原桌侧多个白色品牌标记减少，近侧部分字样变成不对应的符号。",
+      "times_seconds": [
+        0,
+        2,
+        4
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 3.2,
+      "evidence": "金属墙板、蓝白顶灯、大窗外的地球和近侧球员的发光运动服形成明确的太空站风格；远侧服装较普通，蓝光主要集中在桌架，桌面边缘发光要求落实不足。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.3,
+      "evidence": "两人隔网迎球、挥拍及末段侧身移动清楚，未来场馆支持专注对打的运动氛围；两套服装的科幻化程度不均，整体设定稍欠完整。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 2.8,
+      "evidence": "窗框、墙板、灯带与弯曲桌架形成协调空间，两名主要球员及球桌关系明确；源观察提及的后方人物在输出中未见，近远球员的服装材质语言也有明显差异。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.3,
+      "evidence": "斜向球桌连接前后球员，窗框与顶灯组织出清楚纵深，桌架蓝光在地面有对应反射；桌架和近侧衣服的强亮区域稍压过人物面部。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.2,
+      "evidence": "银灰墙面、青蓝灯光和紫粉衣服形成统一的未来配色，红色地面提供暖色衬托；部分发光区域趋于平白，织物与金属的材质区分稍弱。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.1,
+      "evidence": "两名球员、球拍、桌网和比赛区域容易辨认，白球多数时候可从背景中分离；高亮桌架较抢眼，局部双球重影削弱球路辨读。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 2.9,
+      "evidence": "覆盖全段的密集帧中，窗景、墙板、球桌结构及服装主体保持稳定，人物动作可连续追踪；约1.6至1.8秒出现两个分离的白球状影像，局部持拍手轮廓也有轻微变形。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "沿原球桌弯曲支架布置青色双弧光带，配合舷窗斜框、分块金属墙和天花线灯，形成协调的场馆设计；近侧服装的青色分区与环境呼应。灯光主要集中于桌架，台面外沿的设计整合较弱。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 2.0,
+      "evidence": "参考中已有红地面、青色拱形桌架、斜框舷窗及蓝衣球员的相近组合。输出的银粉反光外套式服装、蓝上衣配灰裤提供了可辨变化，但整体仍属于该方案的小幅变体。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "faces"
+      ],
+      "evidence": "右后球员的眼镜消失，发色、发型和脸部轮廓同时改变，原有可辨认身份特征受损。",
+      "times_seconds": [
+        0,
+        0.8,
+        3.2
+      ]
+    },
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "player_roles"
+      ],
+      "evidence": "源片左后球桌旁持续可见的背景人物被删除；输出对应位置为无遮挡的墙面和窗景。",
+      "times_seconds": [
+        0,
+        0.8,
+        2,
+        4
+      ]
+    },
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "ball_trajectory"
+      ],
+      "evidence": "约1.63至1.73秒，左前球员手前与球网上方同时出现分离的白色球状影像，改变了源片单球往返的可见运动事件。",
+      "times_seconds": [
+        1.6333,
+        1.6667,
+        1.7,
+        1.7333
+      ]
+    },
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "table_markings"
+      ],
+      "evidence": "主球桌侧边原有白色品牌字样部分消失，近侧字样被替换为不对应字符。",
+      "times_seconds": [
+        0,
+        2,
+        4
+      ]
+    }
+  ],
+  "comparison_set_sha256": "efe6dd46cba2b3efa55f1e77a8ea2e200a4acb8078b6ed972d48c9fe1d0b3caa",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "de6a3d9112f61e61e0aa08e9acd5f4b5f4211a97e73cc9e2316847a65ce69d25",
+  "output_sha256": "f8f6ccb0eba548a6a4890636f04a03986e6fe6e7519ec3f57f6b6728a7aac3b0",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

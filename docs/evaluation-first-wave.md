@@ -8,7 +8,9 @@
 
 - 20 条提示词预实验视频、8 条已有 Planner 视频，以及 4 条原片直接交付对照，共 32 条。
 - 主要配对为 041 绘本短任务、027 蚀刻短任务、024 故障长任务、fewshot_004 太空乒乓球长任务；每题在 Bernini 和 Ditto 上分别比较直接提示词与 Planner，共 8 对。
-- 其余长提示词和保留约束变体作为提示词条件的补充分析。短任务与长任务按各自原始要求评价，分别汇总。
+- 主表由 `primary_cases.json` 预定的 16 条输出组成：每模型 direct/planner 各 4 题（041/027 短、024/fewshot_004 长），四源等权，形成 8 对。每个方法同时输出四题总体、短 2、长 2 三张表，共 12 个方法×轨道面板。
+- 其余 12 条长提示词和保留约束变体作为补充分析，4 条原片对照用于校准，均保留在逐视频页面；它们不扩大主表分母。每源为统计聚类单位，多检查项／多变体不增加独立样本量。
+- 短长任务共享指标定义和评分尺度，区别是原始要求、冻结卡和创作自由度。short 不继承未要求的 long 配色／材质细节；Planner 扩写后，原始 track 仍保持 short。
 - 这些素材已经用于开发，评价卡在本轮评分前固定，属于回溯性开发评价。四题、单 seed 的结果用于检查具体改善与失败模式。
 - 新增知识库消融和 loop 结果由部署会话交付新快照，按各自冻结版本加入后续评价批次。
 
@@ -62,3 +64,32 @@ python scripts/eval/run_first_wave.py --run out/evaluation_runs/20261030_first_w
 可生成或刷新 `review.html`，同页查看原视频、各条件原生输出、小数分数和逐项证据，并按渲染模型筛选。
 该步骤只读取已有材料，不调用模型；页面显示当前评分覆盖数量，未评分项保持待评价。
 生成提示词单独折叠展示，用于复盘；它们不进入最终评价模型的上下文。
+
+## 展示 v2：分数、比例与均值
+
+语义按 pass=1、partial=0.5、fail=0，先组内平均、组间等权，展示为 0–1 分、两位小数。编辑达成、核心保留、细节保留及时间语义分别列出；unknown 保留 score=null 和上下界。完整完成比例、成功比例、证据覆盖率和损伤比例为真正的比例，以 % 另列。历史 score/record 内 0–100 的编码不重写，版本化报告只转换语义 score/lower/upper 并记录 unit_interval，重复导出不会再次除 100。
+
+单个 VLM 原始评分范围 1–4、步长 0.1、显示一位。五项美学平均产生的 3.64 是计算均值，页面显示 3.6；跨视频均值也标为计算均值。JSON/CSV mean 保留完整精度，display_mean 单独提供默认展示。语义 0.69 这类数来自标签计算，与 VLM 原始评分的 0.1 步长属于不同量尺。
+
+完整批次可直接重新导出：
+
+```bash
+python scripts/eval/reexport_first_wave.py --run out/evaluation_runs/20261030_first_wave
+```
+
+该命令只读取已保存结果，输出 `primary_report_v2/`（四题主比较）、`report_v2/`（全部条件的分方法/轨道补充表）并刷新 `review.html`。入口包括：
+
+- `primary_report_v2/report.md`、`summary.json`：总体与短长表，每项标明有效／预定源数及缺失。
+- `primary_report_v2/metrics.csv`、`metadata.json`：完整精度、单位、计算来源及显示精度。
+- `primary_report_v2/cohort.json`、`paired_differences.json`：16 条入组清单及同 seed 配对差值（总体与分轨）。
+- `primary_report_v2/validation.json`：32 条记录的原始步长、标签公式、聚合公式、规范化幂等、排序及成功状态核验；记录受保护历史文件的 SHA。
+
+原始 record/judgment、旧 report/primary_report、8 组 A/B 偏好和原冻结卡均保留。页面说明 041 短任务的装订／独立纸页一致性复核仍 pending，本次保留原判分。
+
+本次可直接阅读的仓库导出在 [reports/20261030-evaluation-v2](../reports/20261030-evaluation-v2/README.md)，包含 32 条完整记录和新展示页面；复用已有快照的 28 份生成视频，并验证文件哈希，原片仍取 benchmark_data。原 22/32 阶段快照保持原样。重新发布入口为：
+
+```bash
+python scripts/eval/reexport_first_wave.py --run out/evaluation_runs/20261030_first_wave --publish reports/20261030-evaluation-v2
+```
+
+验证结果：32 项既有评价测试及 11 项新增汇总/展示测试通过；32 条记录的 288 个 VLM 原始评分均满足 1–4、0.1 步长，已核对标签公式、总体/短长数量、未知、旧数据兼容、排序与成功状态。未改变原始 judgment、record、偏好或复核队列，新增模型调用和生成次数均为 0。

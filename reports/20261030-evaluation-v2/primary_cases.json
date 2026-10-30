@@ -1,0 +1,18 @@
+[
+  "bernini__baseline__027__short",
+  "bernini__baseline__041__short",
+  "bernini__baseline__fewshot_004__long",
+  "bernini__baseline__024__long",
+  "bernini__planner__041__planner",
+  "bernini__planner__fewshot_004__planner",
+  "bernini__planner__027__planner",
+  "bernini__planner__024__planner",
+  "ditto__baseline__027__short",
+  "ditto__baseline__041__short",
+  "ditto__baseline__fewshot_004__long",
+  "ditto__baseline__024__long",
+  "ditto__planner__041__planner",
+  "ditto__planner__fewshot_004__planner",
+  "ditto__planner__027__planner",
+  "ditto__planner__024__planner"
+]

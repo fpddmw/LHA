@@ -1,0 +1,206 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "glitch_style",
+      "label": "pass",
+      "evidence": "各时段均可见碎片色块、密集条纹、轮廓断裂及彩色错位，数字故障艺术风格清晰。",
+      "times_seconds": [
+        0,
+        1.35,
+        2.7,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "contrast",
+      "label": "pass",
+      "evidence": "头发、肩后和座椅间形成深黑阴影，手部、面部及右侧座椅出现荧光绿、青色和紫红色失真高光。",
+      "times_seconds": [
+        0,
+        1.8,
+        3.35,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "rgb",
+      "label": "pass",
+      "evidence": "西装边缘和袖口出现彩色分离轮廓，座椅条带及车窗反射可见青、绿、紫红通道错位。",
+      "times_seconds": [
+        0,
+        1.35,
+        2.25,
+        3.5
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "horizontal_shifts",
+      "label": "pass",
+      "evidence": "面颊、嘴部和右侧座椅被横向拉出条带，局部图像形成明显的水平错位。",
+      "times_seconds": [
+        0.4,
+        0.6,
+        2.05,
+        3.45
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "fragmented_blocks",
+      "label": "pass",
+      "evidence": "额头、手机附近、面颊和车窗上沿分布矩形碎片及阶梯状块面。",
+      "times_seconds": [
+        0,
+        1.2,
+        2.7,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "scanline_flicker",
+      "label": "partial",
+      "evidence": "全长密集帧中，面部、座椅和车窗的细条纹反复改变位置与颜色；纹理主要集中于轮廓和局部条带，面部中央及西装大片区域的扫描线覆盖较弱。",
+      "times_seconds": [
+        0,
+        0.4,
+        1.8,
+        2.25,
+        3.35,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "same_man",
+      "label": "pass",
+      "evidence": "原男子的短黑发、侧脸轮廓、鼻形、耳部及深色西装仍可对应，故障碎片未形成独立新增人物。",
+      "times_seconds": [
+        0,
+        1.35,
+        3.15,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "phone_contact",
+      "label": "pass",
+      "evidence": "手机虽被彩色块和条纹覆盖，仍保留竖直机身及手握贴耳的位置关系，通话姿态可辨。",
+      "times_seconds": [
+        0,
+        0.9,
+        2.7,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "call_continues",
+      "label": "pass",
+      "evidence": "覆盖全长的密集帧中，男子持续举机贴耳，嘴部可见张合和头部姿态变化，通话活动及主要动作进程保持。",
+      "times_seconds": [
+        0,
+        0.65,
+        2,
+        3,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "car_layout",
+      "label": "pass",
+      "evidence": "人物仍位于画面左侧靠窗座位，头枕在其后方，右侧空座椅和后窗的位置关系保持。",
+      "times_seconds": [
+        0,
+        1.8,
+        3.6,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "fine_motion",
+      "label": "unknown",
+      "evidence": "密集帧可核对部分头部和嘴部变化，但嘴部与持机手持续受到横移碎片和纹理遮挡，细小头部、嘴部及手部运动顺序无法完整可靠核对。",
+      "times_seconds": [
+        0.35,
+        0.6,
+        2.05,
+        3.25,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "高反差黑影、横向像素错位、碎片色块和扫描纹理覆盖人物、座椅及窗区；青绿、品红通道错位明显，西装大面积上的RGB分离相对较弱。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.5,
+      "evidence": "男子持手机贴耳通话的事件持续可辨，数字故障氛围契合要求；口颊上的色块遮住了部分表情信息。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "黑发男子、深蓝西装、耳旁手机与米色汽车座椅保持一致，人物和车内空间关系在有意的碎裂与通道错位下仍然清楚。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.5,
+      "evidence": "人物居左、空座居右的近景布局明确，深黑阴影与亮色轮廓形成呼应；右侧座椅的高亮横条偶尔分散对人物的注意。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.5,
+      "evidence": "深蓝、米褐底色与荧绿、青色及品红碎块形成统一的故障配色，点阵和扫描纹理贯穿多种表面；绿色高光占比突出，红色通道表现较弱。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.2,
+      "evidence": "人物侧脸与持机姿势仍是主要信息，但手、手机和嘴部附近的密集亮块相互叠加，使通话细节需要稍加辨认。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "覆盖全段的密集帧显示，人物外形、耳旁持机关系和座椅结构持续对应；脸部与座椅色条的位置、长度和颜色随时间变化，形成符合要求的故障闪烁。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "黑白点阵沿额头、手掌、车窗斜框和座椅边缘展开，青绿阶梯状碎块集中于手机、口部及下颌，并在右侧座椅呼应；纹理编排贴合通话主体和车厢结构。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 2.6,
+      "evidence": "相较参考中的整脸霓虹色映射、满屏横纹和浓重RGB轮廓，输出采用局部肤色、黑白网点与青绿短块的组合，具有可辨识的局部编排；但与黑白分面、紫色手机的参考共享较多轮廓纹理和分块语言，独特性主要体现在配色及碎块布局。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [],
+  "comparison_set_sha256": "8a81764375d97c7dc24dd104fd1e88732395ce06173e6eea620419a02bc716fc",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "27c1e53af272c633f24f09012c4ce828ea55406422dae3ebd20e549cfa094f28",
+  "output_sha256": "b3b8b4cc6e829021e19d1126309a9fe23e62646eab3f624b2173771cfbb1a796",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

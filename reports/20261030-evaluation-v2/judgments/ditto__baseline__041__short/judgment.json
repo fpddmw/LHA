@@ -1,0 +1,164 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "storybook_style",
+      "label": "pass",
+      "evidence": "全画面采用绘制轮廓、柔和笔触和简化人物造型，呈现可识别的儿童绘本插画风格。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "same_two_people",
+      "label": "pass",
+      "evidence": "保留两个人；男子的蓬松卷发、蓝色条纹衬衫，以及女子的深色长发、白色外套和手链仍可辨认。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "roles_positions",
+      "label": "pass",
+      "evidence": "男子仍坐在画面右侧低头执笔，女子站在左侧，一手靠近其肩部、另一手指向书写处。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "writing_action",
+      "label": "pass",
+      "evidence": "覆盖0至5秒的密集帧中，握笔手和笔尖在纸面附近小幅移动，另一只手保持扶页，主要手部变化与原片对应。",
+      "times_seconds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "writing_tool",
+      "label": "pass",
+      "evidence": "男子手中仍有细长深色笔状书写工具，笔杆和接近纸面的尖端清楚可辨。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "notebook_binding",
+      "label": "partial",
+      "evidence": "仍能看到页本及层叠页边，但原片笔记本下缘的螺旋装订消失，输出呈中央展开的书页结构。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "separate_paper",
+      "label": "fail",
+      "evidence": "原片笔记本右侧的独立纸张在输出中呈为与左侧页本相接的右页，未保留可明确区分的独立纸张。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "圆润的人物造型、清晰描线、绘画式明暗和柔白边缘贯穿人物、器物与背景，完整呈现儿童故事绘本风格。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "男子低头执笔，女子指向纸页，书写与陪伴关系清楚；柔和神情和暖色支持亲切、安静的氛围，女子面部大多位于画外，表情交流呈现有限。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "两个人物及桌椅、笔、笔记本和右侧纸张均可辨，环境与人物采用统一的插画语言；指示手与执笔手交叠处的空间关系略紧。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "男子面部、手臂和纸页形成集中的构图，女子手势引导视线，绘画光影协调；女子头部与下方书写区域靠近画框，边缘空间稍显局促。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.9,
+      "evidence": "金黄背景、蓝绿衬衣与暖橙肤色形成协调的冷暖搭配，发丝、衣纹和纸页具有不同的绘制纹理；白衣受黄色调影响，与墙面的局部色差较小。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "男子面部、深色笔杆及浅色纸页构成清楚的视觉重点，女子指尖进一步强调书写位置；几只手集中交叠，局部轮廓需要稍加辨认。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "覆盖全段的0—4.95秒密集帧中，人物五官、发型、衣纹、笔及纸页结构持续稳定，手部小幅位置变化未见明显跳变，背景和色彩也保持一致。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "衬衫条纹随衣褶转折，浅色外套与青蓝衬衫区分两人，手部和笔的勾线突出搭肩、指页与书写关系。绘制处理与场景互动结合连贯，但场景专属设计主要集中在轮廓和配色。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "相较参考中的纸纹彩铅、柔光淡彩及写实方案，输出通过深色勾线、金黄背景与青蓝衣物的色块关系，以及装饰化卷发线条，形成可辨识的绘本方案；差异来自这些选择的组合。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "notebook_binding",
+        "separate_paper"
+      ],
+      "evidence": "桌面中央的螺旋笔记本与右侧独立纸张被重构为展开的页本，螺旋圈及两对象的独立结构丢失。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ]
+    }
+  ],
+  "comparison_set_sha256": "80bc6e92f287b91e57b851abeb768b3dc1c9ead9cbe429bbdd92e9e5e3d9f25d",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "177ce9bbaef608541e6def492560404e7a31700ebab3d998e6234af0e71c0040",
+  "output_sha256": "4b96c51685f8a3d038614167c15b5dd6e159c1731e1978fdb2e9c8ee6c327e0d",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

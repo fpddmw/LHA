@@ -173,8 +173,9 @@ class EvaluationTests(unittest.TestCase):
     def test_report_preserves_decimals(self):
         with tempfile.TemporaryDirectory() as tmp:
             export_report([{"method": "A", "seed": 1, "result": score(self.card, self.j)}], tmp)
-            text = (Path(tmp) / "report.md").read_text()
-            self.assertIn("3.70", text)
+            text = (Path(tmp) / "report.md").read_text(encoding="utf-8")
+            self.assertIn("| rating | 3.7 |", text)
+            self.assertIn("| score | 1.00 |", text)
             self.assertIn("100.00", text)
 
     def test_loop_compares_previous_accepted_not_rejected(self):

@@ -1,0 +1,283 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "2fcc7e2085b5ccc499e36970dbb28c5323ed58d329fdb0214d06a64392cb4b31",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 4.433333333333334,
+    "expected_seconds": 4.433333333333334,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "space_arena",
+      "label": "pass",
+      "evidence": "室内变为带金属墙板、舱体框架和发光设施的太空站运动空间。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "blue_white_lighting",
+      "label": "pass",
+      "evidence": "窗框、墙面和地板具有蓝色照明及蓝白色高光。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "earth_windows",
+      "label": "pass",
+      "evidence": "大型舷窗外可辨认地球的蓝色弧面、白色云层和星空。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "scifi_suits",
+      "label": "pass",
+      "evidence": "两名前景球员均穿着贴身深色科幻运动服，带有流线接缝和亮色饰线。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "blue_edges",
+      "label": "pass",
+      "evidence": "台面近侧、侧面和远侧外沿均出现连续的明亮蓝色发光。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "faces",
+      "label": "fail",
+      "evidence": "远端球员原有眼镜、圆润脸形和短发特征被改换；近端球员的发际线和侧脸轮廓也明显改变，原有面部身份特征未保持。",
+      "times_seconds": [
+        0,
+        2,
+        4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "player_roles",
+      "label": "partial",
+      "evidence": "前景两人仍保持左近右远、隔桌相对的位置关系；源片左后方可见的背景球员在输出对应区域消失。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "table_geometry",
+      "label": "partial",
+      "evidence": "球桌的斜向透视和拱形支架大体保留，但近端尖角变为明显圆角厚边，支架外轮廓也发生变化。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "net",
+      "label": "pass",
+      "evidence": "球网仍横跨台面中部，左右端点、倾斜走向和基本长方形轮廓与源片对应。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "playing_motion",
+      "label": "partial",
+      "evidence": "全段密集配对中，近端反复前挥与回收、远端末段向右跨步的主要顺序大体对应；但近端多次持拍前挥变为张开空手前伸，击球姿态未完整保持。",
+      "times_seconds": [
+        0.5,
+        1.7333333333333334,
+        2.9,
+        4,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "ball_trajectory",
+      "label": "pass",
+      "evidence": "全段密集序列中，球体向近端移动、反弹后返回远端、再次折返及末段移向右侧球员的主要路径和时序与源片对应。",
+      "times_seconds": [
+        0,
+        0.5,
+        0.8,
+        1.4,
+        2.4,
+        3.6,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "camera_motion",
+      "label": "pass",
+      "evidence": "全段保持相应的斜视全景构图，球桌与两名前景球员的画面布局及缓慢取景位移大体对应。",
+      "times_seconds": [
+        0,
+        1.2,
+        2.4,
+        3.6,
+        4.4
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "table_markings",
+      "label": "partial",
+      "evidence": "台面中线及分区关系大体保留；球网原有细密网格被简化为光滑线框和暗色区域。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 3.9,
+      "evidence": "金属舱壁、大窗外的地球、流线运动服与蓝色发光桌沿贯穿全段，太空站运动场馆风格完整；光照偏青蓝，蓝白照明中的白光较弱。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.1,
+      "evidence": "隔网对峙、前倾挥臂和末段侧步支持运动对打情境，窗外地球强化太空氛围；部分挥拍呈张掌姿态，击球表达稍弱。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 2.6,
+      "evidence": "服装、球桌与金属舱室设计协调，两名前景球员的对打空间关系清楚；任务卡记录的后方人物未出现，部分手掌与球拍轮廓混合。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.5,
+      "evidence": "斜向球桌连接近远两名球员，窗框和地面线条建立空间纵深，蓝光反射相互呼应；近处球员躯干较暗，明亮桌沿和地球略抢注意力。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "深蓝金属、青蓝灯带和服装反光形成统一配色，红色胸标提供少量区分；桌沿及手部附近的辉光局部掩盖材质边界。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 2.9,
+      "evidence": "球员、桌面和球网容易辨认，球在暗背景上较突出；球经过亮桌沿时辨识下降，挥拍处手掌与球拍难以分清，削弱动作焦点。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 2.9,
+      "evidence": "覆盖全段的密集帧中，舱壁、窗景、服装和桌架结构总体稳定，球的位置呈连续往返变化；球的外观多次在圆形、环形和月牙形之间变化，挥拍附近手部与球拍轮廓也有变形。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 3.3,
+      "evidence": "围绕原有球桌弧形支架组织金属表面与地板反光，连续双层青蓝桌沿、服装细线和层叠折角窗框形成统一设计；右侧地球舷窗衬托远端球员，对打区域的视觉层次清楚。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 2.0,
+      "evidence": "相比参考图25–27、31–33突出发光支架的方案，输出将灯光重点放在桌面轮廓，并采用深色描线运动服和层叠折角窗框。但参考图28–30、37–39已采用相近的深蓝金属舱、青蓝桌沿与服装光线，输出主要体现窗框造型和灯带配置的小幅变化。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "faces"
+      ],
+      "evidence": "两名前景球员的脸部被重绘，远端球员的眼镜、脸形及发型变化尤其明显。",
+      "times_seconds": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "player_roles"
+      ],
+      "evidence": "源片左后方的背景球员被删除，输出对应位置为空置的舱内区域。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ]
+    },
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "table_geometry"
+      ],
+      "evidence": "近端桌角从直线相交的尖角改为圆角，桌沿增厚，弯曲支架的轮廓也被改动。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ]
+    },
+    {
+      "severity": "major",
+      "related_item_ids": [
+        "playing_motion"
+      ],
+      "evidence": "近端球员多次前挥时看不到原有球拍，伸出的手掌和分开的手指直接显露，持拍击球动作发生改变。",
+      "times_seconds": [
+        0.5,
+        1.7333333333333334,
+        2.9,
+        4
+      ]
+    },
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "table_markings"
+      ],
+      "evidence": "球网细密网格消失，主要剩下平滑边框与暗色填充。",
+      "times_seconds": [
+        0,
+        2,
+        4.4
+      ]
+    }
+  ],
+  "comparison_set_sha256": "efe6dd46cba2b3efa55f1e77a8ea2e200a4acb8078b6ed972d48c9fe1d0b3caa",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "d110258993c40047fe87fcdbc062bb7dbd446929936282c528d0274dedaa5523",
+  "output_sha256": "8d8be1abd228e2f44f0c9ac6b0b2e7f79bd7844f42ff4292c751d53eb45d779c",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

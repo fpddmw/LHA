@@ -1,0 +1,150 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "2f6a14535af3bb5baebc5a577dee7a7d7ef16200d795e536dbada931d66d956d",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "etching_style",
+      "label": "pass",
+      "evidence": "整体采用棕黑墨线、密集排线与交叉线表现屋顶和树丛，配合泛黄纸面及旧纸边缘，呈现可辨认的十九世纪蚀刻版画风格。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "town_layout",
+      "label": "pass",
+      "evidence": "前景屋顶、中央建筑、两侧树丛和远处天际线的主要相对位置保留，仍为同一俯瞰城镇构图。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "landmarks",
+      "label": "pass",
+      "evidence": "中央偏左圆顶、中右小塔及最右侧高塔均可对应原片；圆顶与竖直塔身的基本轮廓在简化线描中仍可辨认。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "camera_progression",
+      "label": "pass",
+      "evidence": "覆盖全片的密集帧显示，远处地标缓慢向左上方移，前景屋顶逐步上移并占据更多画面，方向与主要变化顺序对应原片。",
+      "times_seconds": [
+        0,
+        1.35,
+        2.7,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "roof_details",
+      "label": "partial",
+      "evidence": "前景主要屋脊和左侧低楼仍能对应；左上边缘树冠位置出现额外斜屋面，右侧部分屋顶被重画为多重弧形檐线，附属结构未完整保留。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "open_sky",
+      "label": "pass",
+      "evidence": "天空保持空旷，新增可见纹理为纸面裂纹、斑点和淡线，没有新增独立主体。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "屋顶的细密排线、树冠的弧形刻线、褐黑墨色与泛黄纸面贯穿全景，完整呈现19世纪风景蚀刻版画风格。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "树木掩映的城镇、远处圆顶与空旷天空共同营造宁静、怀旧的氛围，与缓慢变化的俯瞰镜头协调。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "屋顶、烟囱、树群及远处地标采用统一的刻线语言，空间遮挡合理，未见明显物体类别混乱或结构冲突。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.8,
+      "evidence": "天空留白平衡下方密集建筑，近深远浅的明暗建立纵深；前景少量屋面与树影连成暗块，空间分隔稍弱。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.9,
+      "evidence": "褐黑墨线与米黄纸底和谐统一，屋瓦和树叶具有不同排线组织；少数浓墨树冠内部的纹理层次略少。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "前景屋脊、层叠树冠与远处圆顶形成清楚层次，但部分深色树丛与屋面相接，小建筑边界较难辨认。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "覆盖全段的密集帧中，屋脊、圆顶和烟囱随视点变化持续可追踪，刻线、纸色与整体结构稳定，未见明显闪烁或突跳。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 3.4,
+      "evidence": "屋顶以顺坡排线塑形，树冠采用弧形与放射状刻线，远景以较淡线层呈现；圆顶、塔楼和前景屋脊仍能对应。大片旧纸留白承接原有空旷天空，形成适合此城镇俯瞰构图的版画层次。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 2.6,
+      "evidence": "相较黄黑双线边框及橙黄底色的参照，输出选择浅褐纸面、深褐墨线和疏淡天空，树冠刻线更突出。另一棕褐参照已有旧纸与磨损边缘处理，因此其特色主要来自留白比例和刻线组织，整体属于有辨识度的有限变化。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "roof_details"
+      ],
+      "evidence": "左上画面边缘增加了原片树冠区域没有的明显斜屋面；右侧部分直坡屋顶变为多重弧形檐口，改变了局部屋顶结构。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ]
+    }
+  ],
+  "comparison_set_sha256": "e806589338d4cdc6645f71c3be4c873a1fcc5a9a3ded02fdae225b522f4aa882",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "343a15d2b421d547177f14a8a87b653906ba89daebe911eb7dadb89efa1ee777",
+  "output_sha256": "c9dd33efcfd591846e18d1bf478cf159bdb94ac54af0c9ad9cb9520dcc8dcb58",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

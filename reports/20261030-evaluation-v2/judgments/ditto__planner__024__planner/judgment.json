@@ -1,0 +1,210 @@
+{
+  "protocol": "lha-evaluation-v1",
+  "card_sha256": "00f498625a7f275c97b8aa84ff55f0fdd1c2d03c13672c5e2d2543ba10f41f72",
+  "delivery": {
+    "status": "valid",
+    "duration_seconds": 5.05,
+    "expected_seconds": 5.0,
+    "tolerance_seconds": 0.08,
+    "reason": "Decoded duration within tolerance"
+  },
+  "items": [
+    {
+      "id": "glitch_style",
+      "label": "pass",
+      "evidence": "输出各时段均呈现强烈的彩色通道重影、高反差色块和横线纹理，数字故障风格清楚可辨。",
+      "times_seconds": [
+        0,
+        1.35,
+        2.7,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "contrast",
+      "label": "pass",
+      "evidence": "男子面部、西装及车内形成大片深黑阴影，面部和衬衫出现红、黄、青色失真高光。",
+      "times_seconds": [
+        0,
+        2.25,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "rgb",
+      "label": "pass",
+      "evidence": "西装与衬衫边缘、右侧座椅轮廓及车窗反射均可见红绿蓝通道分离和彩色重影。",
+      "times_seconds": [
+        0,
+        1.8,
+        4.5
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "horizontal_shifts",
+      "label": "partial",
+      "evidence": "眉眼、鼻梁附近可见局部短横向错层；座椅和人物的大部分轮廓仍连续，明显的水平像素位移覆盖有限。",
+      "times_seconds": [
+        0,
+        2.5,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "fragmented_blocks",
+      "label": "fail",
+      "evidence": "面部和衣服主要呈现连续轮廓内的色阶斑块，未见清楚的碎片块切分、错拼或块状画面断裂。",
+      "times_seconds": [
+        0,
+        1.35,
+        2.7,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "scanline_flicker",
+      "label": "partial",
+      "evidence": "全段密集帧可见横线纹理，车窗和座椅最明显；纹理多数时间保持相近形态，开头明暗有变化，但全画面扫描线持续闪烁的表现较弱。",
+      "times_seconds": [
+        0,
+        0.05,
+        1.35,
+        2.7,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "same_man",
+      "label": "pass",
+      "evidence": "男子的发型、侧脸轮廓、鼻形及耳部位置仍与原片对应，彩色重影未妨碍人物辨认。",
+      "times_seconds": [
+        0,
+        2.25,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "phone_contact",
+      "label": "pass",
+      "evidence": "黑色竖向手机仍位于手掌与头部之间，抬手持机贴耳的通话关系清楚。",
+      "times_seconds": [
+        0,
+        2.7,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "call_continues",
+      "label": "pass",
+      "evidence": "全段密集帧中男子持续持机贴耳，约3秒处可见嘴部张开变化，主要通话活动及动作进程保留。",
+      "times_seconds": [
+        0,
+        1.5,
+        3,
+        3.15,
+        4.95
+      ],
+      "evidence_kind": "sequence"
+    },
+    {
+      "id": "car_layout",
+      "label": "pass",
+      "evidence": "人物仍位于画面左中部，车窗在其左侧及后方，右侧空座椅、头枕与人物的主要空间关系保持。",
+      "times_seconds": [
+        0,
+        2.25,
+        4.95
+      ],
+      "evidence_kind": "frames"
+    },
+    {
+      "id": "fine_motion",
+      "label": "partial",
+      "evidence": "约3至3.15秒的张嘴变化能与原片对应；原片2.1至2.15秒出现闭眼，输出对应帧仍呈睁眼状态，细小动作未完全对应。",
+      "times_seconds": [
+        2.1,
+        2.15,
+        3,
+        3.15
+      ],
+      "evidence_kind": "sequence"
+    }
+  ],
+  "ratings": {
+    "style": {
+      "status": "scored",
+      "score": 3.1,
+      "evidence": "全片呈现强烈黑影、RGB分离、失真高光和水平扫描线，人物、西装、座椅及窗景均受处理；横向像素错移和碎片方块较弱，扫描线闪烁也不突出。"
+    },
+    "narrative_emotional_fit": {
+      "status": "scored",
+      "score": 3.7,
+      "evidence": "男子持手机贴耳、望向窗外的通话情境清楚，红黄面部与冷色车厢形成紧张的电子氛围；手机的视觉强调略弱。"
+    },
+    "style_world_consistency": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "人物、手机、西装、皮座椅和车窗保持明确的类别及空间关系，同一套通道分离与扫描线语言贯穿人物和环境。"
+    },
+    "composition_lighting": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "斜向窗框与人物近景组织清楚，亮脸和深色西装构成鲜明层次；右侧座椅的大面积亮色略分散对通话主体的注意。"
+    },
+    "color_texture": {
+      "status": "scored",
+      "score": 3.5,
+      "evidence": "红黄高光、青蓝衣物及绿紫轮廓构成统一的故障色谱，座椅与窗景的横纹相互呼应；纹理主要依赖细扫描线，块状破碎层次较少。"
+    },
+    "hierarchy_readability": {
+      "status": "scored",
+      "score": 3.6,
+      "evidence": "面部、抬手和衬衫形成主要视觉焦点，通话姿态易辨；黑色手机与邻近暗部的分离较弱，右侧亮座椅形成次要竞争。"
+    },
+    "temporal_coherence": {
+      "status": "scored",
+      "score": 4.0,
+      "evidence": "覆盖全段的密集帧中，人物五官、持机手、手机及座椅结构保持连续；可见嘴形和眼睑变化，未见身份漂移、物体突变或空间关系跳变。"
+    },
+    "scene_specific_design": {
+      "status": "scored",
+      "score": 3.0,
+      "evidence": "面部和持机手形成红黄亮区，深蓝西装、青色衬衫与暗背景保持层次；座椅接缝、窗框和人物轮廓承接彩色错边与横向纹理。效果贴合原有光照及车内结构，手机贴耳的关系仍清楚，但设计主要依赖统一的色阶和扫描线处理。"
+    },
+    "relative_originality": {
+      "status": "scored",
+      "score": 2.0,
+      "evidence": "与参考第4、5组的红黄面部、蓝色西装及金黄座椅配色接近。输出以更深的暗部、细密横纹及座椅边缘的洋红绿色重影形成小幅变化，整体仍属于参考集中已有的霓虹色阶与横向干扰方案。"
+    }
+  },
+  "damage_review": "complete",
+  "damages": [
+    {
+      "severity": "minor",
+      "related_item_ids": [
+        "fine_motion"
+      ],
+      "evidence": "原片2.1至2.15秒的闭眼动作在输出对应帧中未保留，眉眼仍呈睁眼形态。",
+      "times_seconds": [
+        2.1,
+        2.15
+      ]
+    }
+  ],
+  "comparison_set_sha256": "8a81764375d97c7dc24dd104fd1e88732395ce06173e6eea620419a02bc716fc",
+  "creativity_reference_protocol": "fixed-cohort-leave-one-out-v2",
+  "evidence_sha256": "c7c0adcebf58f45097e63ff6f3299a1b963a7387f806c7b294abaceb5111c4b3",
+  "output_sha256": "c19851e110af7f7bb328f0adc053ed2883724e74df79b6ed4ab35da36acc8bc2",
+  "evaluator": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh"
+  }
+}

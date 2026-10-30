@@ -1,0 +1,24 @@
+{
+  "scope": "Evaluation quality-control queue; original judgments remain unchanged.",
+  "reviews": [
+    {
+      "id": "041_short_object_boundaries",
+      "status": "pending_blind_adjudication_after_first_wave",
+      "task_id": "041__short",
+      "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+      "case_ids": [
+        "bernini__baseline__041__short",
+        "bernini__planner__041__planner",
+        "ditto__baseline__041__short",
+        "ditto__planner__041__planner"
+      ],
+      "item_ids": [
+        "notebook_binding",
+        "separate_paper"
+      ],
+      "trigger": "Cross-case evidence-language consistency: two judgments describe missing spiral binding and an open-book structure but assign fail versus partial. The boundary between independent paper and an adjoining page also merits a common visual check.",
+      "observed_scope": "Supervisor inspected source and all four output frames at 2.5 seconds. Style conversion and broad roles visually match the recorded descriptions. This spot check does not verify continuous motion.",
+      "review_instructions": "Use the unchanged frozen card. Present anonymous source/output groups at start, middle and end, and object-region crops if needed. Do not expose method, generator prompt, initial labels or preferred ranking. Record whether the binding/page structure and two-object distinction are visible, with unknown when boundaries cannot be established. Apply the same partial criterion to all four cases. Preserve original scores and report agreement/sensitivity separately before deciding whether a systematic protocol revision is required."
+    }
+  ]
+}
