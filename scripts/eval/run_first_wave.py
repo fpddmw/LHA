@@ -17,7 +17,7 @@ from evaluation.aggregate import export_report, paired_difference
 from evaluation.judges import client_from_factory, judge, pairwise, unknown_judgment
 from evaluation.media import decode
 from evaluation.protocol import file_hash, read, require, signature, validate_card, write
-from evaluation.scoring import score
+from evaluation.scoring import score, error_result
 
 
 def overview_evidence(e):
@@ -98,11 +98,11 @@ def execute(case, run, factory):
                   references=read(run / "references_cohort_v2" / f"{card['task_id']}.json"),
                   creativity_overview=True, creativity_exclude_self=True)
         write(directory / "judgment.json", j)
-        row.update(status="complete", result=score(card, j))
+        row.update(status="complete", evaluation_role="final", result=score(card, j, role="final"))
     except Exception as exc:
         error = f"{type(exc).__name__}: {exc}"
         row.update(status="evaluation_error", evaluation_error=error,
-                   result=score(card, unknown_judgment(card, evidence["delivery"], error)))
+                   result=error_result(card, evidence["delivery"], error))
     row["elapsed_seconds"] = time.time() - started
     write(directory / "record.json", row)
     return row

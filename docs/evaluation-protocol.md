@@ -1,6 +1,8 @@
-# 视频编辑与 agent loop 评价协议 v1
+# 视频编辑与 agent loop 统一评价协议
 
-协议标识：`lha-evaluation-v1`。本规范落实已确认的语义、风格、美学、创造力、时序及 loop 评价方案。
+冻结卡/原始 judgment 协议仍为 `lha-evaluation-v1`；新计算结果为 `lha-score-v3`，统计/展示为 `lha-report-v3`，唯一指标定义为 `lha-metrics-v3`。
+
+可执行定义位于 `src/evaluation/registry.py`，名称、含义、尺度、精度、适用性、证据和计算方式见 [自动生成指标表](evaluation-metrics.md)。校验、计分、judge 评分定义、报告和文档共用注册表。三层依次为原始判断、确定性计算、源级统计。
 PickScore 不属于本版。代码入口为 `scripts/eval/evaluate_benchmark.py`，核心实现位于 `src/evaluation/`。
 
 ## 1. 评价对象与资产边界
@@ -52,46 +54,29 @@ S = 1 / K * sum(mean(该组检查项分值))
 
 这是标签的分组加权计算分，显示两位小数；不采用 VLM 连续 0.1 打分。完整完成比例使用同样分组权重，只将 pass 计为 1，乘 100 后以 % 单列。证据覆盖率、成功比例、损伤比例同样明确标为 %。
 
-历史 `lha-evaluation-v1` 的 `score()`／record 将语义 score/lower/upper 保存为 `100*S`；此存储及原始 judgment 保留。报告导出 `lha-report-v2` 只把这三个字段转换为 0–1，添加 `reporting.semantic_score_scale=unit_interval`，并生成 `metadata.json` 和 `records.normalized.json`。没有 reporting 标记的旧记录按 legacy_0_100 读取；有 unit_interval 标记的结果再次导出时直接复用，避免双重除 100。coverage/complete_rate 继续采用 %。例如旧 68.75 对应新 0.6875 分，默认显示 0.69 分。
+新 score() 直接产生 0–1 的 score/lower/upper，记录 scoring_version、semantic_scale、metric_registry_version/sha256。历史 v1 record 的语义 0–100 编码只由 compat.py 转换；历史 v2 unit_interval 标记直接复用。版本不明确且不属于已知旧协议的数据被拒绝，不按数值大小猜尺度。旧原始文件保留，重导出使用新版本目录。重复适配保持幂等，coverage/complete_rate 仍为 %。旧 68.75 对应新 0.6875 分，默认显示 0.69。
 
-| 输出指标 | 含义 |
-| --- | --- |
-| `edit` | 编辑完成度 E |
-| `preserve_core` | 核心语义保留度 |
-| `preserve_detail` | 细节保留度；无适用项目时 N/A |
-| `preserve_time` | 两类保留项中 temporal=true 的切片，单列而不重复加到总分 |
-| `unrequested_damage` | 存在超出设计范围的新增语义损伤的视频比例 |
-| `major_damage` | 存在身份、人数、关键行为／关系等严重损伤的视频比例 |
+四项语义为 edit、preserve_core、preserve_detail、preserve_time，定义由注册表生成。非预期/重大损伤是独立的视频比例。时序语义保留关注原行为与事件；输出自身时序协调关注输出连续性。
 
-只要存在 unknown，该组汇总 `score=null`，同时给出 lower/upper/coverage。
+某类语义指标包含 unknown 时，该指标 score=null，同时给出 lower/upper/coverage。
 lower 将未确认项按 0、upper 按 1 计算，表示**证据上下界**，不等于统计置信区间。
 coverage 采用相同的组等权规则，items/unknown 另外提供原始检查项数量，因此 coverage 不一定等于简单的已知项数／总项数。
 unknown 不删除、不填 0.5；没有适用项目与证据不足分别记录。
 damage_review 未完成时，无已确认损伤不能自动解释为零损伤。
 每条 damage 通过 related_item_ids 关联既有检查项；仅涉及 optional detail 的变化只能记 minor，包括这些细节对象的数量与结构。空关联表示未列出的新问题，major 仍须涉及关键主体、行为或硬约束。judge 不能通过另写一条严重损伤，把预先确定的细节要求升级成硬门槛。
 
-整题成功需要：有效交付，所有 mandatory 项与全部核心保留项 pass，无严重额外损伤，且风格任务的 style >=3.0。
+整题成功条件由注册表 SUCCESS 固定：有效交付、mandatory 及核心项全部 pass、无重大非预期损伤，以及适用时达到风格门槛；当前门槛见自动生成指标表。
 任何已知硬失败产生 fail；没有硬失败但关键证据不足产生 unresolved；其余为 pass。
 报告同时给出 `success_confirmed`、`success_possible` 和 `success_unresolved`。
 风格、美学与创造力分数不补偿语义硬失败。
 
 ## 4. 风格、美学与创造力
 
-单次评分范围 1.0–4.0，步长 0.1，拒绝 NaN、越界或 3.77 这类未经约定的单次精度。
+单次评分范围与步长读取注册表，当前为 1.0–4.0、0.1；拒绝 NaN、越界或超出步长的原始评分。
 1：明显不足；2：部分成立且有清楚缺陷；3：良好，只有较小问题；4：充分协调、达到该任务优秀水平。
 小数按可观察的程度插值，必须提供理由。小数显示不意味着 0.1 的差异必然可靠。
 
-| 字段 | 评分内容 |
-| --- | --- |
-| `style` | 目标风格：1 基本缺失，2 局部线索，3 清晰稳定，4 充分且贴合具体场景 |
-| `narrative_emotional_fit` | 情绪／叙事契合度 |
-| `style_world_consistency` | 人物、物件、环境的世界观一致性 |
-| `composition_lighting` | 构图、光源、明暗与空间协调 |
-| `color_texture` | 配色、材质与纹理的协调和细致程度 |
-| `hierarchy_readability` | 主次、焦点、物件和动作可读性 |
-| `temporal_coherence` | 输出自身的外观、结构、材质及运动连续性 |
-| `scene_specific_design` | 利用原场景的主体、空间、物件、行为形成有效设计 |
-| `relative_originality` | 固定同题匿名对照范围内的相对独特性 |
+风格、五项美学、输出自身时序协调及两项创造性的原始定义、锚点、证据和适用范围均在注册表维护，judge 提示词直接引用。详见自动生成指标表。
 
 五项美学等权平均为 `aesthetic_mean`。这是本版明确计算的平均值，和历史 holistic overall score 含义不同。
 单个 VLM 原始评分及其均值默认显示一位小数。`3.64` 可以是五项原始评分的算术均值，也可以是跨样本的计算均值；报告显式标为计算均值，默认显示 `3.6`，JSON 和 CSV 的 mean 保留完整精度，并另存 display_mean。显示舍入不改变排序计算、成功状态或原始评分精度。
@@ -144,16 +129,20 @@ raw 响应、system/user 请求、模型配置与图像哈希分别保存。相�
 它用于 1–4 小数评分的校准；二元事实和偏好的一致性另看原始标签／配对结果，不能把 0.5 容差率跨尺度比较。
 同一个模型隔离上下文提供流程独立性；模型偏好仍需要人工或第二评价模型检查。
 
-## 7. 统计与输出
+## 7. 状态、统计与输出
+
+每个结果保留 metric_status/rating_status；原始标签、证据和时间点在 judgment 中。unknown 是证据不足；not_applicable 由冻结卡决定并排除适用分母。evaluation_error、missing_output、invalid_delivery、missing_record、not_measured 分别表示评价失败、缺视频、交付不合格、尚无记录、尚未测量；legacy_status_unavailable 表示旧空值没有可恢复状态。有原判断时重新做确定性计算即可恢复状态，无需调用 VLM。
+
+汇总逐列给出 observation_counts、source_counts、n_sources、applicable_sources、total_sources、coverage_percent。无适用源时 coverage=null、missing_sources=0；未知及失败保留在适用分母。mean/ci95 针对完整适用源。语义 population_lower/upper 对全体适用源按同样权重汇总；执行缺项使用 [0,1] 可行范围并另列错误计数。十个等权任务中八个为 0.9、两个未知时，已知均值 0.9，全体区间 [0.72,0.92]；这与 bootstrap 置信区间分别解释。
 
 `report` 按 method/split/track 分组，并支持 `track=all` 的同一预定任务集合总体表。先在每个任务内平均 seed，同源多任务再等权合并，最后对源宏平均；源级 bootstrap 2000 次，固定 seed=20261029，给出 95% 百分位区间。四题主比较一源一题，因此总体等于四题等权平均；短 2、长 2 分轨采用同一指标、量尺和算法，区别在原始要求、冻结卡与创作自由度。Planner 扩写不改变原始 track。
 单个源视频不给统计区间。某源的某项存在缺失 seed 时，该源点估计留空，但语义上下界仍纳入报告；每个指标显示 n_sources/total_sources。
 `compare` 先匹配 task/source/seed，再计算 A-B，以源为单位 bootstrap；不匹配和缺失明确保留。
-CLI `compare` 同样使用展示 v2 的语义 0–1 尺度，并输出总体与短长差值及量尺元数据：语义差值范围 [-1,1]，VLM 差值范围 [-3,3]。Python 底层 `paired_difference` 保留输入量尺，调用者可显式先使用 `normalized_records`。
+CLI 和 Python 汇总/配对入口统一读取兼容适配后的 0–1 语义分。差值尺度从原指标范围推导，当前语义差值 [-1,1]，VLM 差值 [-3,3]。不保留第二套百分制语义计算路径。
 所有方法必须共享同一 frozen card。完整评测必须提供完整的预定 manifest，不能仅提交成功生成的条目。
-缺少 output 计交付失败；judge／环境／证据准备失败计 evaluation_error，记录留在分母中并以 unresolved 表示，退出码 1。
+缺少 output 计 missing_output，内容未评价且整题交付失败；不合格时长等计 invalid_delivery。judge／环境／证据准备失败计 evaluation_error，整题为 unresolved 或已知交付失败。执行错误单独记录，不构造假的 unknown judgment。CLI 评价执行失败退出码为 1，记录留在预定分母。
 
-原始输出包括 `records.json`、逐视频 `judgment.json`；展示 v2 输出 `records.normalized.json`、`metadata.json`、`summary.json`、`metrics.csv`、`report.md`。metadata 逐列给出 scale、unit、aggregation、display_decimals、computed_mean 等信息。
+原始输出包括 `records.json`、逐视频 `judgment.json`；新计算/统计输出 `records.normalized.json`、`metadata.json`、`summary.json`、`metrics.csv`、`report.md`。metadata 逐列给出 scale、unit、aggregation、display_decimals、computed_mean 等信息。
 0–1 语义计算分和比例显示两位小数，VLM 原始评分及其计算均值显示一位，特征余弦四位；JSON/CSV mean 保留完整计算精度。主表严格使用预定的主要对照清单，补充提示词 long/long_keep 变体和原片对照另列；源级有效样本量不会随检查项、seed 或同源变体增加。预定缺失输出、指标未知和证据覆盖分别可见。
 总体报告始终显示覆盖率；创造力合格子集的分析必须同时附全体结果及子集比例，不单独展示筛选后的高分。
 正式论文用语义表、设计与质量表、loop 表，避免把它们加权成一个可互相抵消的总分。
@@ -285,3 +274,15 @@ Loop 输入是数组，每项结构如下；judgment 为完整新协议对象，
 - 本文的分组权重、1–4 小数评分、成功门槛、创造力和 loop 定义是本项目 v1 协议，不宣称与上述论文的指标数值可直接互换。
 
 评测代码和可执行入口不等于已经完成全量标注或全量打分。正式运行前仍需完成全部任务的源视频评价卡审阅、固定参考集与独立人工校准；不得把 draft 或测试 fixture 作为正式成绩。
+
+## 12. 定义维护与版本边界
+
+```bash
+python scripts/eval/export_metric_definitions.py
+python scripts/eval/export_metric_definitions.py --check
+python scripts/test_metric_registry.py
+```
+
+新增或更改指标只修改 registry.py，并更新版本与生成文档。结果绑定注册表、冻结卡、原 judgment 签名及可用的证据/参照/evaluator 版本。新 judgment 绑定原始判断契约，计算结果绑定计算契约，完整注册表哈希用于追溯。原始定义/量尺/锚点/证据改变时拒绝复用旧判断；计分/权重/成功规则改变时需重新做确定性计分。仅改名称或显示精度时，两份契约哈希不变，可直接复用原判断和计算分。展示脚本不另建名称、尺度或精度表。
+
+在线结果标记 online_feedback/online_critic，正式汇总拒绝这些诊断记录；历史角色不明的记录保留来源供审计。Loop 先记录最终选择，再执行终评。此次重构不启动 loop、不改变候选选择。

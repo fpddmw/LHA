@@ -3,6 +3,8 @@ from __future__ import annotations
 
 from .protocol import LABELS, items, require
 from .scoring import flat_metrics, score
+from .registry import VERSION, fingerprint
+from .reporting import metric_spec
 
 
 def transition(card, before, after):
@@ -72,7 +74,10 @@ def analyze(card, rounds):
                       "metrics": flat_metrics(score(card, lookup[incumbent]["judgment"]))})
     final = score(card, lookup[incumbent]["judgment"])
     a, b = flat_metrics(first), flat_metrics(final)
-    return {"acceptance_policy": "no_fact_decrease_no_new_major_damage_valid_delivery_and_observed_improvement",
+    return {"metric_registry_version": VERSION, "metric_registry_sha256": fingerprint(),
+            "net_change_units": {k: metric_spec(k)["unit"] for k in a},
+            "transition_rate_unit": "percent", "generation_cost_unit": "seconds",
+            "acceptance_policy": "no_fact_decrease_no_new_major_damage_valid_delivery_and_observed_improvement",
             "first": first, "final": final, "final_version": incumbent, "transitions": transitions, "accepted_curve": curve,
             "net_change": {k: b[k] - a[k] if a[k] is not None and b[k] is not None else None for k in a},
             "generation_count": len(rounds), "generation_seconds": cost, "accepted_candidates": accepts,

@@ -22,7 +22,17 @@ class ReportingTests(unittest.TestCase):
         card = fixtures.card_fixture()
         r = score(card, fixtures.judgment_fixture(card))
         r.update(source_id=source, task_id=task or source + "__" + track, track=track)
-        r["semantic"]["edit"].update(score=value, lower=value, upper=value)
+        r["semantic"]["edit"].update(score=value / 100, lower=value / 100, upper=value / 100)
+        return r
+
+    def legacy(self, result):
+        r = copy.deepcopy(result)
+        for key in ("scoring_version", "semantic_scale", "metric_status", "rating_status", "legacy_origin"):
+            r.pop(key, None)
+        for part in r["semantic"].values():
+            for key in ("score", "lower", "upper"):
+                if part[key] is not None: part[key] *= 100
+            part["status"] = {"scored": "complete", "unknown": "unresolved"}.get(part["status"], part["status"])
         return r
 
     def rows(self):
@@ -35,7 +45,7 @@ class ReportingTests(unittest.TestCase):
         return [{"method": r["method"], "seed": r["seed"], **{k: r["result"][k] for k in ("source_id", "task_id", "track", "split")}} for r in rows]
 
     def test_legacy_normalization_and_idempotence(self):
-        result = self.result(68.75)
+        result = self.legacy(self.result(68.75))
         original = copy.deepcopy(result)
         norm = normalized_result(result)
         self.assertEqual(norm["semantic"]["edit"]["score"], .6875)
@@ -47,7 +57,8 @@ class ReportingTests(unittest.TestCase):
 
     def test_unknown_bounds_and_proportions_preserved(self):
         r = self.result()
-        r["semantic"]["edit"].update(score=None, lower=25, upper=75, complete_rate=None, coverage=50)
+        r["semantic"]["edit"].update(score=None, lower=.25, upper=.75, complete_rate=None, coverage=50, status="unknown")
+        r["metric_status"]["edit"] = "unknown"
         norm = normalized_result(r)["semantic"]["edit"]
         self.assertIsNone(norm["score"])
         self.assertEqual((norm["lower"], norm["upper"], norm["coverage"]), (.25, .75, 50))
@@ -91,7 +102,8 @@ class ReportingTests(unittest.TestCase):
 
     def test_paired_overall_has_same_task_seed_and_missing_coverage(self):
         rows = normalized_records(self.rows())
-        rows[-1]["result"]["semantic"]["edit"]["score"] = None
+        rows[-1]["result"]["semantic"]["edit"].update(score=None, status="unknown")
+        rows[-1]["result"]["metric_status"]["edit"] = "unknown"
         panels = {p["track"]: p for p in paired_difference(rows, "planner", "direct", "edit", include_overall=True, repeats=0)}
         self.assertEqual(panels["all"]["total_sources"], 4)
         self.assertEqual(panels["all"]["missing_sources"], 1)
@@ -117,16 +129,17 @@ class ReportingTests(unittest.TestCase):
     def test_mixed_or_unknown_scale_is_rejected_until_normalized(self):
         legacy = {"method": "m", "seed": 1, "result": self.result()}
         scaled = {"method": "m", "seed": 2, "result": normalized_result(self.result())}
-        with self.assertRaisesRegex(ValueError, "mixed semantic"):
-            summarize([legacy, scaled])
+        legacy["result"] = self.legacy(legacy["result"])
+        self.assertEqual(len(summarize([legacy, scaled])), 1)
         self.assertEqual(len(summarize(normalized_records([legacy, scaled]))), 1)
+        legacy["result"] = self.legacy(legacy["result"])
         legacy["result"]["reporting"] = {"semantic_score_scale": "unknown"}
         with self.assertRaisesRegex(ValueError, "Unknown semantic"):
             normalized_result(legacy["result"])
 
     def test_compare_cli_uses_normalized_deltas_and_signed_scale(self):
         rows = self.rows()
-        rows[4]["result"]["semantic"]["edit"].update(score=100, lower=100, upper=100)
+        rows[4]["result"]["semantic"]["edit"].update(score=1, lower=1, upper=1)
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp)
             write(path / "records.json", rows)

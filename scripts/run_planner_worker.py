@@ -95,7 +95,7 @@ def evaluate(job, directory, root, model=None):
                          "implementation_sha256": {p.name: sha(p) for p in Path(evaluation.__file__).parent.glob("*.py")}},
             "language": "English evidence prose; scoring instructions unchanged; exact adapted inputs retained",
             "usage": "online_feedback; not an independent final evaluation", "question": p.get("question", ""),
-            "judgment": judgment, "scores": score(card, judgment), "evidence_path": str(directory / "evidence")}
+            "judgment": judgment, "scores": score(card, judgment, role="online_feedback"), "evidence_path": str(directory / "evidence")}
 
 
 def main():

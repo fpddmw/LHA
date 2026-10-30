@@ -73,19 +73,19 @@ class EvaluationTests(unittest.TestCase):
 
     def test_hierarchical_weighting(self):
         label(self.j, "shirt", "fail")
-        self.assertEqual(score(self.card, self.j)["semantic"]["edit"]["score"], 50)
+        self.assertEqual(score(self.card, self.j)["semantic"]["edit"]["score"], .5)
 
     def test_partial_and_complete_rate_differ(self):
         label(self.j, "shirt", "partial")
         e = score(self.card, self.j)["semantic"]["edit"]
-        self.assertEqual(e["score"], 75)
+        self.assertEqual(e["score"], .75)
         self.assertEqual(e["complete_rate"], 50)
 
     def test_unknown_retains_bounds(self):
         label(self.j, "shirt", "unknown")
         result = score(self.card, self.j)
         self.assertIsNone(result["semantic"]["edit"]["score"])
-        self.assertEqual((result["semantic"]["edit"]["lower"], result["semantic"]["edit"]["upper"]), (50, 100))
+        self.assertEqual((result["semantic"]["edit"]["lower"], result["semantic"]["edit"]["upper"]), (.5, 1))
         self.assertEqual(result["success"], "unresolved")
 
     def test_detail_loss_not_automatically_hard_failure(self):
@@ -159,14 +159,14 @@ class EvaluationTests(unittest.TestCase):
         other = score(self.card, self.j)
         stats = summarize([{"method": "A", "seed": 1, "result": result}, {"method": "A", "seed": 2, "result": other}])[0]["metrics"]
         self.assertIsNone(stats["edit"]["mean"])
-        self.assertEqual(stats["edit_lower"]["mean"], 75)
+        self.assertEqual(stats["edit_lower"]["mean"], .75)
 
     def test_paired_difference_uses_same_seed(self):
         result = score(self.card, self.j)
         label(self.j, "shirt", "fail")
         other = score(self.card, self.j)
         records = [{"method": "A", "seed": 1, "result": result}, {"method": "B", "seed": 1, "result": other}]
-        self.assertEqual(paired_difference(records, "A", "B", "edit")[0]["mean"], 50)
+        self.assertEqual(paired_difference(records, "A", "B", "edit")[0]["mean"], .5)
         records[1]["seed"] = 2
         self.assertIsNone(paired_difference(records, "A", "B", "edit")[0]["mean"])
 

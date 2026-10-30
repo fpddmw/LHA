@@ -11,7 +11,7 @@ from .aggregate import export_report, paired_difference
 from .judges import ANNOTATE, cached_call, client_from_factory, judge, pairwise, plan_diagnostics, unknown_judgment
 from .media import decode, prepare
 from .protocol import file_hash, freeze, read, require, validate_card, validate_judgment, write
-from .scoring import score
+from .scoring import score, error_result
 
 
 def scaffold(index):
@@ -71,21 +71,25 @@ def evaluate_manifest(cases, destination, root, client, *, frame_count=12, dense
         directory = destination / case["case_id"]
         output = root / case["output_video"]
         row = {"case_id": case["case_id"], "method": case["method"], "seed": case["seed"], "output_video": str(output)}
+        row["evaluation_role"] = "final"
+        evidence = None
         try:
             if not output.exists():
-                judgment = unknown_judgment(card, {"status": "invalid", "reason": "No generated video delivered"}, "No output video")
+                row.update(status="missing_output", result=error_result(card, {"status": "invalid"}, "No output video", status="missing_output"))
             else:
                 evidence = prepare(card, output, directory / "evidence", root=root, frame_count=frame_count,
                                    dense_ranges=dense_ranges, mapping=read(root / case["mapping"]) if case.get("mapping") else None)
                 refs = read(root / case["references"]) if case.get("references") else None
                 judgment = judge(card, evidence, client, directory, references=refs)
-            write(directory / "judgment.json", judgment)
-            row["result"] = score(card, judgment)
+                write(directory / "judgment.json", judgment)
+                row.update(status="complete", result=score(card, judgment, role="final"))
         except Exception as exc:
             # An evaluator failure remains unresolved, never a failed generation or an omitted case.
-            row["evaluation_error"] = f"{type(exc).__name__}: {exc}"
-            judgment = unknown_judgment(card, {"status": "unknown", "reason": "Evaluation could not establish delivery"}, row["evaluation_error"])
-            row["result"] = score(card, judgment)
+            message = f"{type(exc).__name__}: {exc}"
+            status = "invalid_delivery" if evidence and evidence["delivery"]["status"] == "invalid" else "evaluation_error"
+            row["delivery_error" if status == "invalid_delivery" else "evaluation_error"] = message
+            row["status"] = status
+            row["result"] = error_result(card, evidence["delivery"] if evidence else {"status": "unknown"}, message, status=status)
             write(directory / "evaluation_error.json", row)
         if case.get("features"):
             try:
@@ -95,6 +99,8 @@ def evaluate_manifest(cases, destination, root, client, *, frame_count=12, dense
                 row["result"]["automatic"] = automatic
             except Exception as exc:
                 row["feature_error"] = f"{type(exc).__name__}: {exc}"
+        from .compat import canonical_record
+        row = canonical_record(row)
         records.append(row)
         write(destination / "records.json", records)
         print(json.dumps({"case_id": case["case_id"], "success": row["result"]["success"], "error": row.get("evaluation_error")}, ensure_ascii=False), flush=True)

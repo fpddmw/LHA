@@ -15,6 +15,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from evaluation.aggregate import export_report, paired_difference, summarize
 from evaluation.protocol import file_hash, read, require, validate_judgment, write
 from evaluation.reporting import SEMANTIC, VERSION, difference_spec, metric_spec, normalized_records
+from evaluation.reporting import PRIMARY_DIRECTORY as PRIMARY, REPORT_DIRECTORY as SUPPLEMENTARY
+from evaluation.registry import METRICS, applicable, RATING_STEP, RATING_SCALE, overview
 from evaluation.scoring import score
 
 
@@ -35,6 +37,7 @@ def primary_cohort(run, records, *, root=ROOT):
             require(cid == f"{renderer}__baseline__{card['source_id']}__{card['track']}", "Supplementary variants cannot enter the main cohort")
         method = renderer + "_" + role
         cohort.append({"case_id": cid, "method": method, "renderer": renderer, "seed": case["seed"],
+                       "applicability": {n: applicable(n, card) for n in METRICS},
                        **{k: card[k] for k in ("task_id", "source_id", "track", "split")}})
         if cid in lookup:
             row = lookup[cid]
@@ -58,32 +61,41 @@ def reexport(run, *, repeats=2000):
     require(len(records) == 32 and len(selected) == len(cohort) == 16, "This export requires the completed 32/16 first wave")
     require(all(r["status"] == "complete" for r in records), "Keep evaluation errors visible; first wave is not complete")
     require(Counter((r["method"], r["track"]) for r in cohort) == Counter({(m, t): 2 for m in ("bernini_direct", "bernini_planner", "ditto_direct", "ditto_planner") for t in ("short", "long")}), "Expected two short and two long tasks per method")
-    normalized = normalized_records(selected)
+    legacy_selected = selected
+    rebuilt = []
     raw_ratings = 0
     for row in records:
         case = next(c for c in read(run / "manifest.json")["cases"] if c["case_id"] == row["case_id"])
         card = read(ROOT / case["card"])
         j = validate_judgment(card, read(run / "judgments" / row["case_id"] / "judgment.json"))
-        require(score(card, j) == row["result"], "Saved score disagrees with original labels/formula")
+        current = score(card, j, role="final")
+        previous = normalized_records([row])[0]["result"]
+        require(current["success"] == previous["success"] and current["ratings"] == previous["ratings"], "Original verdict/rating changed")
+        for name in SEMANTIC:
+            for field in ("score", "lower", "upper", "coverage", "complete_rate"):
+                a, b = current["semantic"][name][field], previous["semantic"][name][field]
+                require((a is None and b is None) or (a is not None and b is not None and abs(a-b) < 1e-10), "Label-derived semantic formula changed")
+        rebuilt.append({**row, "result": current, "evaluation_role": "final"})
         for item in j["ratings"].values():
             if item["score"] is not None:
-                require(abs(item["score"] * 10 - round(item["score"] * 10)) < 1e-8, "Raw VLM rating off 0.1 grid")
+                require(abs(item["score"] / RATING_STEP - round(item["score"] / RATING_STEP)) < 1e-8, "Raw VLM rating off registry grid")
                 raw_ratings += 1
-    for old, new in zip(selected, normalized):
+    selected, cohort = primary_cohort(run, rebuilt)
+    normalized = normalized_records(selected)
+    for old, new in zip(normalized_records(legacy_selected), normalized):
         require(old["result"]["success"] == new["result"]["success"], "Success status changed")
         require(old["result"]["ratings"] == new["result"]["ratings"], "Raw or computed rating changed")
         for part in SEMANTIC:
             for field in ("score", "lower", "upper"):
                 a, b = old["result"]["semantic"][part][field], new["result"]["semantic"][part][field]
-                require((a is None and b is None) or abs(a / 100 - b) < 1e-12, "Semantic scale mismatch")
+                require((a is None and b is None) or abs(a - b) < 1e-12, "Semantic scale mismatch")
         require(new == normalized_records([new])[0], "Normalization applied twice")
-    old_summary = summarize(selected, repeats=0, include_overall=True, cohort=cohort)
-    main = export_report(selected, run / "primary_report_v2", repeats=repeats, cohort=cohort)
+    old_summary = summarize(legacy_selected, repeats=0, include_overall=True, cohort=cohort)
+    main = export_report(selected, run / PRIMARY, repeats=repeats, cohort=cohort)
     for old, new in zip(old_summary, main):
         for key, stats in old["metrics"].items():
-            factor = 100 if metric_spec(key)["unit"] == "score" else 1
             a, b = stats["mean"], new["metrics"][key]["mean"]
-            require((a is None and b is None) or abs(a / factor - b) < 1e-10, "Macro formula changed")
+            require((a is None and b is None) or abs(a - b) < 1e-10, "Macro formula changed")
     # Full precision ordering, including ties, is preserved by the positive scale conversion.
     metrics = sorted(main[0]["metrics"])
     for track in ("all", "short", "long"):
@@ -91,18 +103,18 @@ def reexport(run, *, repeats=2000):
             def ranks(rows):
                 return sorted((r["metrics"][metric]["mean"], r["method"]) for r in rows if r["track"] == track and r["metrics"][metric]["mean"] is not None)
             require([m for _, m in ranks(old_summary)] == [m for _, m in ranks(main)], "Method ordering changed")
-    export_report([{**r, "renderer": "source" if r["method"] == "source_control" else r["case_id"].split("__")[0]} for r in records],
-                  run / "report_v2", repeats=repeats, include_overall=False)
+    export_report([{**r, "renderer": "source" if r["method"] == "source_control" else r["case_id"].split("__")[0]} for r in rebuilt],
+                  run / SUPPLEMENTARY, repeats=repeats, include_overall=False)
     diffs = []
     for renderer in ("bernini", "ditto"):
         for metric in ("edit", "preserve_core", "preserve_detail", "preserve_time", "style", "aesthetic_mean", "scene_specific_design", "relative_originality"):
             values = paired_difference(normalized, renderer + "_planner", renderer + "_direct", metric,
                                        repeats=repeats, include_overall=True, cohort=cohort)
             diffs.extend({**r, "model": renderer, "metadata": difference_spec(metric)} for r in values)
-    write(run / "primary_report_v2/paired_differences.json", {"version": VERSION, "direction": "planner - direct", "panels": diffs})
+    write(run / PRIMARY / "paired_differences.json", {"version": VERSION, "direction": "planner - direct", "panels": diffs})
     pairs = read(run / "pairwise_results.json")
     require(len(pairs) == 8, "Expected eight saved A/B pairs")
-    write(run / "primary_report_v2/cohort.json", {"version": VERSION, "planned_cases": cohort,
+    write(run / PRIMARY / "cohort.json", {"version": VERSION, "planned_cases": cohort,
         "main_outputs": 16, "tasks_per_method": 4, "model_task_pairs": 8, "independent_sources": 4, "seed": 42,
         "supplementary_outputs": 12, "source_controls": 4, "pairwise_results": "../pairwise_results.json",
         "design": "Retrospective development set; two short/two long, each renderer separately, fixed original task/card; variants and controls outside primary cohort"})
@@ -111,21 +123,24 @@ def reexport(run, *, repeats=2000):
     after = source_hashes(run)
     require(before == after, "Historical records/judgments/pairwise/review queue changed")
     audit = {"version": VERSION, "records": 32, "primary_records": 16, "paired_comparisons": 8,
-        "summary_panels": len(main), "raw_vlm_ratings_verified": raw_ratings, "raw_vlm_rating_scale": [1, 4], "raw_vlm_rating_step": 0.1,
+        "summary_panels": len(main), "raw_vlm_ratings_verified": raw_ratings, "raw_vlm_rating_scale": list(RATING_SCALE), "raw_vlm_rating_step": RATING_STEP,
+        "canonical_scores_rebuilt_from_saved_judgments": True,
         "success_states_unchanged": True, "full_precision_rankings_unchanged": True,
         "aggregate_formula_verified": True, "normalization_idempotent": True,
         "source_files_unchanged": before, "pending_review": read(run / "review_queue.json") if (run / "review_queue.json").exists() else [],
         "model_calls": 0, "generation_calls": 0}
-    write(run / "primary_report_v2/validation.json", audit)
+    write(run / PRIMARY / "validation.json", audit)
     return {k: v for k, v in audit.items() if k not in {"source_files_unchanged", "pending_review"}}
 
 
 def publish(run, destination):
     """Small tracked export; reuse the already published, hash-verified video bundle."""
+    if (destination / "publication.json").exists():
+        require(read(destination / "publication.json")["version"] == VERSION, "Publish to a new version directory; preserve historical snapshots")
     destination.mkdir(parents=True, exist_ok=True)
     bundle = ROOT / "reports/20261030-sync"
     media = {str((ROOT / row["original_path"]).resolve()): row for row in read(bundle / "videos.json")}
-    for name in ("primary_report_v2", "report_v2", "cards"):
+    for name in (PRIMARY, SUPPLEMENTARY, "cards"):
         shutil.copytree(run / name, destination / name, dirs_exist_ok=True)
     for name in ("records.json", "manifest.json", "primary_cases.json", "pairwise_results.json", "review_queue.json", "completion.json"):
         shutil.copyfile(run / name, destination / name)
@@ -155,14 +170,13 @@ def publish(run, destination):
     html = re.sub(r'(src|href)="([^"]+)"', replace, (run / "review.html").read_text(encoding="utf-8"))
     (destination / "review.html").write_text(html, encoding="utf-8")
     (destination / "README.md").write_text(
-        "# 首批完整评价：展示 v2\n\n"
+        f"# 首批完整评价：{VERSION}\n\n"
         "32 条完整记录；16 条预定主比较；8 个模型×任务配对、4 个独立源。\n\n"
         "- [视频、四题总体、短长分轨及逐项证据](review.html)\n"
-        "- [主报告](primary_report_v2/report.md) · [完整精度 CSV](primary_report_v2/metrics.csv) · [量尺与计算元数据](primary_report_v2/metadata.json)\n"
-        "- [入组清单](primary_report_v2/cohort.json) · [配对差值](primary_report_v2/paired_differences.json) · [验证记录](primary_report_v2/validation.json)\n"
-        "- [全部条件补充表](report_v2/report.md) · [原始记录](records.json) · [冻结任务卡](cards)\n\n"
-        "语义为 0–1 分、两位小数；VLM 原始评分 1–4、0.1 步长，原始分及计算均值默认显示一位。"
-        "比例单列 %。原始判断、未知、损伤和成功状态保留。041 短任务的装订/独立纸页复核仍 pending。\n\n"
+        f"- [主报告]({PRIMARY}/report.md) · [完整精度 CSV]({PRIMARY}/metrics.csv) · [量尺与计算元数据]({PRIMARY}/metadata.json)\n"
+        f"- [入组清单]({PRIMARY}/cohort.json) · [配对差值]({PRIMARY}/paired_differences.json) · [验证记录]({PRIMARY}/validation.json)\n"
+        f"- [全部条件补充表]({SUPPLEMENTARY}/report.md) · [原始记录](records.json) · [冻结任务卡](cards)\n\n"
+        f"{overview()}原始判断、损伤和成功状态保留。041 短任务的装订/独立纸页复核仍 pending。\n\n"
         "HTML 复用 ../20261030-sync/media 中已发布视频，原片位于 ../../benchmark_data；克隆完整仓库后可离线浏览。"
         "JSON 中保留运行时原始路径供追溯，不将其重写为新的实验输入。更早的 22/32 阶段快照保留在 20261030-sync。"
         "本次只重新导出，没有模型调用或视频生成。\n", encoding="utf-8")

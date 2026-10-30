@@ -8,14 +8,8 @@ from pathlib import Path
 
 from . import PROTOCOL
 
-AESTHETICS = (
-    "narrative_emotional_fit", "style_world_consistency",
-    "composition_lighting", "color_texture", "hierarchy_readability",
-)
-RATINGS = ("style", *AESTHETICS, "temporal_coherence",
-           "scene_specific_design", "relative_originality")
+from .registry import AESTHETICS, LABELS, RATINGS, RATING_SCALE, RATING_STEP, applicable
 KINDS = ("edit", "preserve_core", "preserve_detail")
-LABELS = {"pass": 1.0, "partial": 0.5, "fail": 0.0, "unknown": None}
 
 
 def require(condition, message):
@@ -111,8 +105,8 @@ def validate_rating(rating, name):
     require(bool(rating.get("evidence")), f"{name} needs evidence or reason")
     value = rating.get("score")
     if rating["status"] == "scored":
-        require(number(value) and 1 <= value <= 4, f"{name} outside 1.0–4.0")
-        require(abs(value * 10 - round(value * 10)) < 1e-8, f"{name} must use 0.1 increments")
+        require(number(value) and RATING_SCALE[0] <= value <= RATING_SCALE[1], f"{name} outside {RATING_SCALE}")
+        require(abs(value / RATING_STEP - round(value / RATING_STEP)) < 1e-8, f"{name} must use {RATING_STEP} increments")
     else:
         require(value is None, f"Unscored {name} must be null")
 
@@ -143,7 +137,7 @@ def validate_judgment(card, judgment):
     for name in RATINGS:
         rating = judgment["ratings"][name]
         validate_rating(rating, name)
-        na = (name == "style" and not card["style_required"]) or (name in RATINGS[-2:] and card["creativity"] == "none")
+        na = not applicable(name, card)
         require((rating["status"] == "not_applicable") == na, f"Incorrect applicability for {name}")
     originality = judgment["ratings"]["relative_originality"]
     if originality["status"] == "scored":
