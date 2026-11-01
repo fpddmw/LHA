@@ -12,6 +12,12 @@ def video_brief(video):
 
 def feedback_summary(identity, value):
     """Older online feedback is quoted, never rejudged or ranked."""
+    if value.get("protocol") == "lha-creative-review-v1":
+        report = value["report"]
+        return {"video_id": value["video_id"], "protocol": value["protocol"], "usage": value["usage"],
+                "main_scores": report["main_scores"], "comparisons": report["comparisons"],
+                "unassessed": report["unassessed"],
+                "open": {"action": "history", "arguments": {"feedback": identity}}}
     outcome, feedback = value.get("outcome", {}), value.get("feedback", {})
     return {
         "video_id": value.get("video_id", value.get("candidate")),
@@ -37,7 +43,7 @@ def present(payload, state, knowledge):
     latest = next(reversed(evaluations), None)
     payload["evaluations"] = {
         identity: feedback_summary(identity, value)
-        if identity != latest and value.get("protocol") in {"lha-online-critic-v1", "lha-online-critic-rsi-v1"}
+        if identity != latest and value.get("protocol") in {"lha-online-critic-v1", "lha-online-critic-rsi-v1", "lha-creative-review-v1"}
         else copy.deepcopy(value)
         for identity, value in evaluations.items()
     }
@@ -58,6 +64,22 @@ def present(payload, state, knowledge):
          "interval": o.get("requested_interval"), "crop": o["frames"][0].get("crop") if o.get("frames") else None}
         for o in state.get("observations", [])
     ]
+    if state["config"].get("workflow") == "creative_loop_v1":
+        payload["workflow"] = "creative_loop_v1"
+        payload["delivery_candidate"] = state.get("delivery_candidate")
+        profile = state["config"]["execution"]["critic"]["frozen_profile"]
+        payload["execution_profile"]["critic"] = {
+            "protocol": profile["protocol_id"], "profile_sha256": profile["sha256"],
+            "dimensions": profile["dimensions"], "scale": "0-4 integers; unknown is null",
+            "use": "Optional single report per candidate; inspect video evidence yourself for further questions."}
+        for identity, value in payload["evaluations"].items():
+            if value.get("protocol") != "lha-creative-review-v1":
+                raise ValueError("Non-creative evaluation in creative-loop context")
+            # Keep the full report; media transport paths stay in the retrievable record.
+            if "evidence" in value:
+                value["evidence"] = [{k: e[k] for k in ("id", "video_id", "timestamp_seconds", "kind")}
+                                     for e in value["evidence"]]
+            value["open"] = {"action": "history", "arguments": {"feedback": identity}}
     payload["context_policy"] = (
         "Original task, optional notes and latest review remain available. Earlier online reviews are attributed summaries "
         "with unknowns and history links; raw findings are unchanged. Video provenance opens through video. "
@@ -83,8 +105,9 @@ def attachments(state):
                 images.append(frame["path"])
                 mapping.append({"attachment": len(images), "observation_id": observation["observation_id"],
                                 "video_id": observation.get("video_id", "source"), **frame})
-    reference = state.get("reference_image")
-    if reference:
-        images.append(reference["path"])
-        mapping.append({"attachment": len(images), "kind": "knowledge reference, not source-video evidence", **reference})
+    references = state.get("reference_images", [state["reference_image"]] if state.get("reference_image") else [])
+    for reference in references:
+        if reference["path"] not in images:
+            images.append(reference["path"])
+            mapping.append({"attachment": len(images), "kind": "knowledge reference, not source-video evidence", **reference})
     return images, mapping

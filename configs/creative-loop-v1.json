@@ -1,0 +1,17 @@
+{
+  "workflow": "creative_loop_v1",
+  "planner": {"model": "gpt-6.1-sol", "reasoning_effort": "high"},
+  "critic": {"protocol": "lha-creative-review-v1", "model": "gpt-6.1-sol", "reasoning_effort": "high"},
+  "completion_mode": "delivery",
+  "max_generations": null,
+  "max_turns": null,
+  "independent_judge": {
+    "provider": "paratera",
+    "model": "glm5.3flash",
+    "base_url_env": "LHA_PARATERA_BASE_URL",
+    "api_key_env": "LHA_PARATERA_API_KEY",
+    "reasoning_effort": null,
+    "live_capability_verification": "deferred"
+  },
+  "experiments": "deferred_until_user_resumes"
+}

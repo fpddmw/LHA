@@ -2,7 +2,6 @@
 from pathlib import Path
 
 from planner_harness.common import load, save
-from .runner import CriticHarness, load_feedback
 
 
 PLANNER_MANUAL = """
@@ -22,6 +21,10 @@ or act on supported findings; no fixed sequence or acceptance threshold is impos
 
 
 def critique(job, directory, root, model=None):
+    if job["payload"].get("critic", {}).get("protocol") == "lha-creative-review-v1":
+        from .one_shot import run_review
+        return run_review(job["payload"], directory, model=model)
+    from .runner import CriticHarness, load_feedback
     from vlm.codex_vlm import CodexVisionModel
     payload = job["payload"]
     directory = Path(directory) / "active-critic"

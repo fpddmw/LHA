@@ -1,0 +1,17 @@
+{
+  "profile": "creative_loop_v1",
+  "source_manifest": "knowledge/source-map.json",
+  "source_groups": ["entries", "domain_references", "guides", "model_experience", "supporting_sources"],
+  "static_topics": {
+    "experience-map": "knowledge/experience/README.md",
+    "choose-editing-input": "knowledge/experience/choose-editing-input.md",
+    "express-edits": "knowledge/experience/express-edits.md",
+    "inspect-and-compare": "knowledge/experience/inspect-and-compare.md",
+    "use-design-knowledge": "knowledge/experience/use-design-knowledge.md"
+  },
+  "navigation": {
+    "map": "knowledge/creative-loop/README.md",
+    "manual": "knowledge/creative-loop/READING.md"
+  },
+  "classes": ["operating_manual", "semantic_understanding", "visual_style_and_design", "generation_and_iteration"]
+}

@@ -41,6 +41,13 @@ def immutable(path, value):
 
 def request_job(harness, kind, args, event_id, *, internal=False):
     state = harness.state
+    from .creative import active
+    creative = active(state)
+    if creative:
+        allowed = {"generate": {"input_video", "prompt", "seed"},
+                   "critique": {"video", "compare_to", "focus", "extra_checks"}}
+        if kind not in allowed or set(args) - allowed[kind]:
+            raise ValueError("Unsupported creative-loop execution arguments")
     if state["config"].get("mode", "plan") != "loop":
         raise ValueError("This planning-only run has no execution tools")
     identity = args.get("input_video" if kind == "generate" else "video", "source")
@@ -96,6 +103,11 @@ def request_job(harness, kind, args, event_id, *, internal=False):
                 if "seed" in args and args["seed"] != seed:
                     raise ValueError("Recorded seed sequence cannot be overridden")
                 payload["renderer"] = {**payload["renderer"], "seed": seed}
+    elif kind == "critique" and creative:
+        from .creative import review_payload
+        payload, cached = review_payload(harness, args)
+        if cached is not None:
+            return cached
     elif kind == "critique":
         if not profile.get("critic"):
             return {"status": "unavailable", "message": "The active Critic is not configured for this task."}
@@ -253,6 +265,25 @@ def collect(harness):
                   "mode": job["mode"], "observation": observation}
     elif response["status"] == "complete":
         # Metric ownership stays in the configured evaluator. Preserve its complete response.
+        if state["config"].get("workflow") == "creative_loop_v1":
+            from critic_harness.one_shot import validate_report, PROTOCOL
+            feedback = response["payload"]
+            if feedback.get("protocol") != PROTOCOL or feedback.get("profile_sha256") != job["payload"]["critic"]["frozen_profile"]["sha256"]:
+                raise ValueError("Unexpected creative Critic protocol")
+            packet = load(feedback["request_path"])
+            visible = json.loads(packet["user_text"])
+            frozen = job["payload"]["critic"]["frozen_profile"]
+            if packet.get("profile_sha256") != frozen["sha256"] or packet.get("system_prompt") != frozen["rubric"]:
+                raise ValueError("Critic request differs from frozen instructions")
+            if visible["candidate_id"] != job["payload"]["video_id"] or visible["original_request"] != job["payload"]["request"]:
+                raise ValueError("Critic task binding mismatch")
+            if set(visible["videos"]) != set(job["payload"]["videos"]) or any(v["sha256"] != job["payload"]["videos"][i]["sha256"] for i, v in visible["videos"].items()):
+                raise ValueError("Critic video binding mismatch")
+            if visible.get("focus") != job["payload"].get("focus", "") or visible.get("compare_to") != job["payload"].get("compare_to") or [c["text"] for c in visible["extra_checks"]] != job["payload"].get("extra_checks", []):
+                raise ValueError("Critic focus/checks differ from signed request")
+            if any(sha(e["path"]) != e["sha256"] for e in packet["images"]):
+                raise ValueError("Critic evidence changed before collection")
+            validate_report(feedback["report"], packet)
         if job["kind"] == "critique" and job["payload"].get("requirements"):
             if response["payload"].get("outcome", {}).get("requirements_sha256") != job["payload"]["requirements"]["sha256"]:
                 raise ValueError("Critic requirement version differs from signed job")

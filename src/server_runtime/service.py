@@ -75,6 +75,11 @@ class Service:
         if not task.get("request"):
             raise ValueError("Task request required")
         from planner_harness.delivery import completion_mode
+        task["workflow"] = task.get("workflow", self.config.get("workflow", "legacy"))
+        if task["workflow"] == "creative_loop_v1":
+            if task.get("rsi") is not None or task.get("final_evaluation"):
+                raise ValueError("Creative tasks exclude RSI and legacy final-evaluation cards")
+            task.setdefault("completion_mode", "delivery")
         task["completion_mode"] = completion_mode(task.get("max_generations"), task.get("completion_mode"))
         execution = task.get("execution", {})
         if "renderer" not in execution:
@@ -147,7 +152,8 @@ class Service:
                         execution=task["execution"], max_turns=task.get("max_turns"),
                         max_context_chars=task.get("max_context_chars", 180000), max_generations=task.get("max_generations"),
                         completion_mode=task.get("completion_mode"),
-                        run_instructions=task.get("run_instructions", ""), rsi=task.get("rsi"))
+                        run_instructions=task.get("run_instructions", ""), rsi=task.get("rsi"),
+                        workflow=task.get("workflow", "legacy"))
             snapshot = directory / "planner-state.json"
             save(snapshot, state)
             return {"state": state, "artifacts": [artifact(snapshot)]}

@@ -40,11 +40,11 @@ After later user authorization, use the existing two-RTX-5090 AutoDL container a
 ## Progress and verification
 
 - Plan saved: complete.
-- Pre-refactor remote backup: pending.
-- Isolated knowledge and Planner integration: pending.
-- Frozen one-shot Critic: pending.
-- Paratera final-judge adapter: pending.
-- Offline tests and inspectable demonstration: pending.
+- Pre-refactor remote backup: verified at `433c5dfd9dab6dc9949c5d5111480cf34486dce0` on `codex/loop-pre-refactor-20261101`, before code changes. Runtime proposal logs and generated reports stayed local. Existing baseline line endings were preserved.
+- Isolated knowledge and Planner integration: implemented; CLI and server entry preserve `creative_loop_v1`. Original style/guide/static-topic files are unchanged. Snapshot checks retain 111 entries, 5 domain references and 98 reference images.
+- Frozen one-shot Critic: implemented with all five anchored dimensions, deterministic visual evidence, recorded bounded transport retries, successful-report reuse and no semantic repair calls.
+- Paratera final-judge adapter: implemented for exactly `glm5.3flash`, with anonymous input and separate results; no live capability check or fallback.
+- Offline tests and inspectable demonstration: final focused suite passed 113 unique tests with zero failures, errors or skips under `requirements.critic.txt` (OpenCV 4.13.0.92, NumPy 2.5.4, Pillow 12.3.0, PyAV 19.0.2). Saved fewshot_004 media and scripted responses produced `out/creative_loop_refactor/demo-final/`, with zero live model calls or renders. The demonstrated original request, successful reads, single Critic job, four classes and exported files were verified. Final test details are recorded in `out/creative_loop_refactor/test-summary.json`; [implementation details](creative-loop-implementation.md) explain the scope and limits.
 - Implementation remote synchronization: pending.
 - Live experiments and API capability verification: deferred by user.
 

@@ -15,7 +15,7 @@ class PlannerHarness:
         self.output = Path(output).resolve()
         self.model = model
         self.root = Path(root).resolve()
-        self.knowledge = Knowledge(root)
+        self.knowledge = None
         self.state = None
         self.video = None
 
@@ -25,12 +25,23 @@ class PlannerHarness:
 
     def start(self, source, request, *, target="unspecified", max_turns=None, max_context_chars=180000, label="",
               mode="plan", execution=None, max_generations=None, imported=None, feedback_files=None,
-              run_instructions="", rsi=None, completion_mode=None):
+              run_instructions="", rsi=None, completion_mode=None, workflow="legacy"):
+        if workflow not in {"legacy", "creative_loop_v1"}:
+            raise ValueError("Unknown Planner workflow")
+        if workflow == "creative_loop_v1":
+            if rsi is not None and rsi is not False:
+                raise ValueError("Creative loop cannot be mixed with RSI")
+            if mode != "loop" or feedback_files:
+                raise ValueError("Creative loop requires loop mode and excludes imported legacy feedback")
+            if getattr(self.model, "model", None) != "gpt-6.1-sol" or getattr(self.model, "reasoning_effort", None) != "high":
+                raise ValueError("Creative Planner is fixed to gpt-6.1-sol/high")
         if (self.output / "state.json").exists():
             raise ValueError("Run already exists. Use resume or a new output directory.")
         if mode not in {"plan", "loop"}:
             raise ValueError("Use plan/loop mode")
         from .delivery import completion_mode as resolve_completion_mode
+        if workflow == "creative_loop_v1" and completion_mode is None:
+            completion_mode = "delivery"
         completion_mode = resolve_completion_mode(max_generations, completion_mode)
         if mode == "plan" and max_turns is None:
             max_turns = 24
@@ -43,7 +54,7 @@ class PlannerHarness:
             "schema_version": 1, "status": "running", "created_at": stamp(), "label": label,
             "request": {"text": request, "source": self.video.info, "target_model": target},
             "config": {"max_turns": max_turns, "max_context_chars": max_context_chars, "context_version": 2,
-                       "mode": mode, "execution": execution or {}, "max_generations": max_generations,
+                       "mode": mode, "workflow": workflow, "execution": execution or {}, "max_generations": max_generations,
                        "completion_mode": completion_mode,
                        "run_instructions": run_instructions,
                        "backend": type(self.model).__name__, "model": getattr(self.model, "model", "unknown"),
@@ -58,7 +69,13 @@ class PlannerHarness:
         }
         self.output.mkdir(parents=True, exist_ok=True)
         from .execution import prepare_profile
-        self.state["config"]["execution"] = prepare_profile(execution, self.root, self.state["request"])
+        if workflow == "creative_loop_v1":
+            from .creative import configure
+            configure(self, execution)
+            prepare_profile(self.state["config"]["execution"], self.root, self.state["request"])
+        else:
+            self.knowledge = Knowledge(self.root)
+            self.state["config"]["execution"] = prepare_profile(execution, self.root, self.state["request"])
         if rsi is not None and rsi is not False:
             if mode != "loop":
                 raise ValueError("RSI is enabled only for continuous loop tasks")
@@ -66,10 +83,14 @@ class PlannerHarness:
             configure(self, rsi)
         self.knowledge.freeze(self.output / "knowledge-snapshot.json")
         self.state["knowledge_snapshot_sha256"] = sha(self.output / "knowledge-snapshot.json")
-        operations = (Path(__file__).parent / "OPERATIONS.md").read_text(encoding="utf-8")
-        manual = (self.root / "knowledge/READING.md").read_text(encoding="utf-8")
-        self.system = operations + "\n\n# Current knowledge reading manual\n\n" + manual
-        if self.state["config"]["execution"].get("critic") or feedback_files:
+        if workflow == "creative_loop_v1":
+            from .creative import system_prompt
+            self.system = system_prompt(self)
+        else:
+            operations = (Path(__file__).parent / "OPERATIONS.md").read_text(encoding="utf-8")
+            manual = (self.root / "knowledge/READING.md").read_text(encoding="utf-8")
+            self.system = operations + "\n\n# Current knowledge reading manual\n\n" + manual
+        if workflow != "creative_loop_v1" and (self.state["config"]["execution"].get("critic") or feedback_files):
             from critic_harness.adapter import PLANNER_MANUAL
             self.system += "\n\n" + PLANNER_MANUAL
         if self.state["config"].get("rsi"):
@@ -102,8 +123,13 @@ class PlannerHarness:
 
     def resume(self, *, additional_turns=0, execution=None, continue_delivery=False):
         self.state = load(self.output / "state.json")
-        from .task_criteria import verify_state
-        verify_state(self.state)
+        from .creative import active
+        if not active(self.state):
+            from .task_criteria import verify_state
+            verify_state(self.state)
+        else:
+            from critic_harness.one_shot import verify_profile
+            verify_profile(self.state["config"]["execution"]["critic"]["frozen_profile"])
         if self.state["status"] == "complete" and not continue_delivery:
             return self.state
         config = self.state["config"]
@@ -115,9 +141,15 @@ class PlannerHarness:
         if self.state.get("knowledge_snapshot_sha256"):
             if sha(self.output / "knowledge-snapshot.json") != self.state["knowledge_snapshot_sha256"]:
                 raise ValueError("Run knowledge snapshot changed")
-            self.knowledge = Knowledge(self.root, self.output / "knowledge-snapshot.json")
+            if active(self.state):
+                from .creative_knowledge import CreativeKnowledge
+                self.knowledge = CreativeKnowledge(self.root, self.output / "knowledge-snapshot.json")
+            else:
+                self.knowledge = Knowledge(self.root, self.output / "knowledge-snapshot.json")
         elif sha(self.root / "knowledge/source-map.json") != self.state["knowledge_manifest_sha256"]:
             raise ValueError("Knowledge manifest changed; use a new run")
+        else:
+            self.knowledge = Knowledge(self.root)
         if sha(self.output / "system-prompt.txt") != self.state["system_prompt_sha256"]:
             raise ValueError("Recorded operating instructions changed")
         self.system = (self.output / "system-prompt.txt").read_text(encoding="utf-8")
@@ -125,7 +157,7 @@ class PlannerHarness:
             from .execution import prepare_profile
             profile = prepare_profile(execution, self.root, self.state["request"])
             if profile != config.get("execution"):
-                if config.get("rsi"):
+                if config.get("rsi") or active(self.state):
                     raise ValueError("RSI execution profiles are frozen; start a new run to change them")
                 event = {"event_id": "runtime-config-" + str(len(self.state["events"]) + 1), "at": stamp(), "status": "ok",
                          "request": {"action": "configure_execution", "origin": "operator CLI"},
@@ -254,6 +286,10 @@ class PlannerHarness:
         action, args = response.get("action", response.get("tool")), response.get("arguments", {})
         if not isinstance(args, dict):
             raise ValueError("arguments must be an object")
+        from .creative import active
+        if active(self.state) and action not in {"browse", "search", "read", "observe", "view_reference", "video",
+                "history", "note", "workspace", "generate", "critique", "delivery_candidate", "finish"}:
+            raise ValueError("Operation is not available in creative_loop_v1")
         if "note" in response:
             self.remember(response["note"])
         if "workspace" in response:
@@ -286,6 +322,8 @@ class PlannerHarness:
             self.state["reference_image"] = references[-1]
             return references[0] if len(references) == 1 else {"images": references}
         if action == "workspace":
+            if args:
+                self.update_workspace(args)
             return {"saved": True, "workspace": self.state["workspace"]}
         if action == "note":
             self.remember(args.get("text", ""), append=args.get("append", True))
@@ -307,7 +345,7 @@ class PlannerHarness:
             from .task_criteria import objection
             return objection(self.state, args.get("text"), args.get("evidence"))
         if action == "delivery_candidate":
-            identity = args.get("id", "source")
+            identity = args.get("video", args.get("id", "source"))
             if identity not in self.state.get("videos", {}):
                 raise ValueError("Unknown video ID")
             self.state["delivery_candidate"] = identity
@@ -479,6 +517,9 @@ class PlannerHarness:
                         if self.state["config"].get("rsi"):
                             from .rsi_calls import call_once
                             raw = call_once(call_dir, self.model, self.system, user_text, images)
+                        elif self.state["config"].get("workflow") == "creative_loop_v1":
+                            from .model_call import call_text
+                            raw = call_text(call_dir / "transport", self.model, self.system, user_text, images)
                         else:
                             raw = self.model.predict_text(system_prompt=self.system, user_text=user_text, image_paths=images, max_new_tokens=7000)
                         raw_path.write_text(raw, encoding="utf-8")

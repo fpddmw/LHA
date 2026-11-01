@@ -20,7 +20,8 @@ def main():
     parser.add_argument("--output", required=True)
     parser.add_argument("--backend", choices=["codex", "litellm"], default="codex")
     parser.add_argument("--model", default="gpt-6.1-sol")
-    parser.add_argument("--reasoning", default="xhigh")
+    parser.add_argument("--reasoning", default=None)
+    parser.add_argument("--workflow", choices=["legacy", "creative_loop_v1"], default=None)
     parser.add_argument("--target", default="unspecified")
     parser.add_argument("--mode", choices=["plan", "loop"], default="plan")
     parser.add_argument("--execution-config")
@@ -40,6 +41,17 @@ def main():
     parser.add_argument("--worker-command", nargs=argparse.REMAINDER,
                         help="Optional worker argv, last on the command line. {request} and {response} are substituted without a shell.")
     args = parser.parse_args()
+    if args.resume:
+        import json
+        recorded = json.loads((Path(args.output) / "state.json").read_text(encoding="utf-8"))["config"]
+        if args.workflow and args.workflow != recorded.get("workflow", "legacy"):
+            parser.error("Resume must retain the recorded workflow")
+        args.workflow = recorded.get("workflow", "legacy")
+        args.reasoning = args.reasoning or recorded["reasoning_effort"]
+    args.workflow = args.workflow or "legacy"
+    args.reasoning = args.reasoning or ("high" if args.workflow == "creative_loop_v1" else "xhigh")
+    if args.workflow == "creative_loop_v1" and (args.rsi or args.rsi_config or args.task_card or args.critic_feedback):
+        parser.error("Creative loop excludes RSI, task cards and imported legacy feedback")
     if args.continue_delivery and not args.resume:
         parser.error("--continue-delivery requires --resume")
     if not args.resume and (not args.source or not (args.request or args.request_file)):
@@ -72,7 +84,7 @@ def main():
                                   max_context_chars=args.max_context_chars, mode=args.mode, execution=execution,
                                   max_generations=args.max_generations, completion_mode=args.completion_mode,
                                   imported=imported, feedback_files=args.critic_feedback,
-                                  rsi=rsi,
+                                  rsi=rsi, workflow=args.workflow,
                                   run_instructions=Path(args.run_instructions_file).read_text(encoding="utf-8") if args.run_instructions_file else "")
         while state["status"] == "waiting_tool" and args.worker_command:
             job = output / "jobs" / state["pending_tool"]
