@@ -1,6 +1,6 @@
 # EX-environment-replacement: Transform the structures that make the place recognizable
 
-Revision 2. Draft for review. Bernini and Ditto; B2/D2 plus F001/F004/F005/F006/F007.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; B2/D2 plus F001/F004/F005/F006/F007.
 
 **When a scene has the requested theme but still reads as the old location, target the surfaces, openings and sightlines carrying that location. Prefer concrete spatial remapping over adding more thematic objects around an unchanged setting.**
 

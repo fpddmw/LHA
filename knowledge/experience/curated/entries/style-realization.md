@@ -1,6 +1,6 @@
 # EX-style-realization: Choose a visible system that makes the style legible
 
-Revision 2. Draft for review. Bernini direct probe and Bernini/Ditto loops; X2/B1/D1/D4.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini direct probe and Bernini/Ditto loops; X2/B1/D1/D4.
 
 **For a broad style request, choose a coherent visual interpretation and express its defining relationships. For a detailed request, separate the specified structures from their surface decoration so a convincing atmosphere does not conceal a missing requirement.**
 

@@ -1,6 +1,6 @@
 # EX-connected-scope: Revise a coherent visual field
 
-Revision 3. Draft for review. Bernini; X6/X3, F004/F006/F007.
+Revision 4. Approved for use; editorial status synchronized on 2026-11-01. Bernini; X6/X3, F004/F006/F007.
 
 **Choose a revision scope by the relationships that must change together. A window, its frame, exterior view and nearby reflections can form one coherent edit; an unrelated face repair usually has a different cause and deserves separate consideration.**
 

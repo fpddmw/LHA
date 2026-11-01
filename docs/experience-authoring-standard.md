@@ -1,6 +1,6 @@
 # Writing judgment-bearing experience
 
-Shared by the three maintenance Skills. Purpose: turn development traces into practical understanding that improves video-editing decisions. The [complete library](../knowledge/staged/experience-full-maintenance-20261101/README.md) is the current writing reference; the earlier four examples remain historical drafts.
+Shared by the three maintenance Skills. Purpose: turn development traces into practical understanding that improves video-editing decisions. The [approved library](../knowledge/experience/curated/README.md) is the current writing reference; the earlier four examples remain historical drafts.
 
 ## Experience takes responsibility for a judgment
 
@@ -52,6 +52,14 @@ Compare the original request, selected input, exact submitted prompt and observe
 Read primary records for consequential claims. Use exact quotation for exact text and identify illustrative prompt wording as an example. Open frames or video for new visual observations; attribute saved reviews when using their observations. Record counts deterministically with explicit units. Keep online reviews, independent scores and human inspection identifiable in the evidence footer. Unknown remains an observation gap, with useful local evidence retained.
 
 Usage review should inspect what was available, what Planner said, what it actually did, and what happened. A failed generation can follow a sensible decision; a success can occur without the entry. These alternatives help decide whether to change discovery, wording, the underlying explanation or neither. Recommend exact edits when the record reveals a useful improvement.
+
+## Learn from the judgment before the outcome
+
+Read the continuation question and answer beside the actual selected input and submitted prompt. Identify the condition Planner relied on, the change it expected to matter, and the alternative it chose not to take. Then examine what was actually attempted and what the result changed. Use that contrast to sharpen a practical preference: which cue deserved attention, which transformation addressed it, and where the explanation failed.
+
+A useful review can find a sound judgment with a failed execution, an ineffective distinction, a mislabeled resample, or an experience that helped Planner retain an earlier answer. State the interpretation and its practical consequence directly, supported by exact source events. The runtime's nonempty check leaves this semantic work to maintenance. Avoid grading an answer by its confidence, length or compliance with a prose template.
+
+Read budget notices and protocol versions as the decision setting. Compare delivery proposals with the subsequent report-informed choice. Preserve unknown coverage and separate independent judge findings where they change the interpretation. A frozen library can supply conditional advice while a batch produces evidence for its next reviewed revision.
 
 ## Maintain and stage
 

@@ -59,6 +59,7 @@ Read `score-definitions` when the meaning of a numerical grade matters. Focus an
 checks ask about observable properties; they do not state desired grades, preferred
 candidates or reasons to continue generating. A transport interruption may pause a
 request for recovery; an invalid answer does not invite another interpretation.
+An unusable existing report pauses delivery for reconciliation of its original request.
 
 This task operates under a limited budget. Additional generation has a cost. The
 runtime shows generated candidates, failed or uncertain render attempts and known
@@ -71,6 +72,10 @@ unresolved; what this attempt changes or establishes and why that input fits
 (state plainly when resampling); and why another generation is preferable to
 entering delivery confirmation. No private reasoning transcript or numerical
 prediction is required. You can instead inspect, read, select or finish.
+The answer and actual submission are retained together. Use history to revisit
+that choice when its result changes your understanding; notes/workspace can
+carry the useful conclusion. Later batch maintenance reads these records to
+improve guidance, while this task keeps its frozen knowledge.
 
 You choose whether to continue, revisit an earlier candidate, change direction or
 finish. A satisfied `finish` first proposes delivery. A valid matching Critic

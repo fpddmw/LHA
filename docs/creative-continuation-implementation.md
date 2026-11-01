@@ -1,6 +1,6 @@
 # Continuation questions and report-informed delivery: implementation
 
-Date: 2026-11-01. Implements [the approved replacement plan](creative-continuation-and-delivery-plan.md). The withdrawn fresh-review-only partial implementation was reworked before deployment. Live experiment execution, real model calls, reruns and the existing heartbeat remain paused. Software examples and migration tests use mocked models and CPU synthetic media.
+Date: 2026-11-01. Implements [the approved replacement plan](creative-continuation-and-delivery-plan.md). The withdrawn fresh-review-only partial implementation was reworked before deployment. The subsequent [maintenance integration](continuation-maintenance-integration-plan.md) connects these records to the maintenance Skills and repairs the failed-ordinary-review replacement path. Live experiment execution, real model calls, reruns and the existing heartbeat remain paused. Software examples and migration tests use mocked models and CPU synthetic media.
 
 ## Continuation and factual resource use
 

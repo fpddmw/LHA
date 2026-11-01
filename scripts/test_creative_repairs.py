@@ -159,7 +159,8 @@ class Repairs(unittest.TestCase):
                             'renderer': {'backend': 'bernini', 'generation': {}, 'seed': 42}}})
             Engine(q, folder, service, service.expand, interval=.01).run(once=True)
         state = load(folder / 'tasks/scripted/run/state.json')
-        self.assertEqual(state['status'], 'complete')
+        self.assertEqual(state['status'], 'complete',
+                         {'stopped': load(folder / 'stopped.json'), 'queue': q.summary()})
         self.assertEqual(state['final']['video'], 'v1')
         self.assertEqual(renders, ['source', 'v1'])
         self.assertEqual(sum(role == 'online_critic' for role, _, _ in calls), 1)

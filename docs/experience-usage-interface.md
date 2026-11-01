@@ -23,7 +23,7 @@ The catalog and its texts/assets are pinned in the task's knowledge snapshot. Ol
 
 ## Planner-facing operations
 
-No new operation or mandatory argument. `browse(id="experience-map")` lists approved entries and existing static resources. Search matches indexed text; renderer names and relevant questions should occur in that text as well as navigation metadata. The two professional manuals are `understand-and-design` and `understand-and-revise`.
+Knowledge use adds no required citation or card-use declaration. The operating protocol conditionally requests a free-text `generate.justification`; runtime checks only that it is nonempty. `browse(id="experience-map")` lists approved entries and existing static resources. Search matches indexed text; renderer names and relevant questions should occur in that text as well as navigation metadata. The two professional manuals are `understand-and-design` and `understand-and-revise`.
 
 Planner can refer to an ID in normal notes/workspace when useful. These are concise task judgments, not private reasoning transcripts. No `intent`, required citations, card-use declaration or reflection form is introduced. Critic receives no usage records or new experience context. Independent final scoring remains separate.
 
@@ -43,7 +43,13 @@ The receipt represents prepared content, not attention. The offline projection d
 
 ## Per-run projection
 
-`experience-usage.json` is a disposable factual projection generated with the creative report. It links call surfaces, returned reads, literal ID references in model-authored notes/purpose/workspace/finish text, subsequent operations, candidates, saved online judgments and recorded generation seconds. It reads that run's snapshot, never the current library.
+`experience-usage.json` (`experience-use-v2`) is a disposable factual projection generated with the creative report. It links call surfaces, returned reads, literal ID references in model-authored notes/purpose/workspace/finish text and `generate.justification`, subsequent operations, candidates, saved online judgments and recorded generation seconds. It reads that run's snapshot, never the current library.
+
+`decisions` joins each generation, delivery selection and finish event to the saved model input/response, actual operation disposition, knowledge exposure and literal references. A submitted generation includes its signed request, input, exact prompt, returned candidate IDs and online-review IDs. The continuation audit binds the questions, notice and operator policy to the exact input hash. A refused operation has no submission. Prepared requests retain their dispatch/response status. Missing historical audits remain null.
+
+`delivery_proposals` supplies the proposal, report identity, full-report exposure and confirmation links. The decision view distinguishes `delivery_proposed` and `delivery_confirmed`, including superseded proposals. Follow the report and subsequent model response to understand a changed or retained preference. `cohort` includes experience mode, renderer, continuation policy, delivery protocol and migration records. Per-call audits identify the actual conditions before a migration; the latest configuration does not retrospectively assign questions to old decisions.
+
+These are operator/maintenance records. They never enter Planner knowledge or Critic input. They contain no automatic assessment of explanation quality. The reading projection resolves moved run-local artifacts while preserving their original paths and expected hashes; unavailable media remains explicit.
 
 Literal references remain unclassified. Their exact text and source event are available for the use-review Skill. Paraphrased adoption, implicit rejection and causal benefit are not inferred by code. Missing historical call receipts remain missing. Stored online outcomes are attributed to their own protocol; no conversion to the current main-score scale occurs.
 
@@ -64,16 +70,19 @@ Manifest paths are relative to the manifest file, or absolute:
   "batch_id": "development-review-01",
   "purpose": "development_maintenance",
   "runs": [
-    {"id": "task-003", "path": "/path/to/saved/run", "data_role": "development"}
+    {"id": "task-003-full", "path": "/path/to/topic/archive/runs/full", "data_role": "development",
+     "topic_archive": "/path/to/topic/archive"}
   ]
 }
 ```
 
 The exporter preserves every listed run, including missing/corrupt sources. It reads only explicitly `development` runs; other roles are recorded as excluded before their states are read. Duplicate IDs/directories and output locations overlapping source runs are rejected. Existing exports are not overwritten.
 
-Output: `README.md`, `batch.json`, and one `runs/<id>.json` for each available included run. Counts distinguish run inclusion/state, exact-version availability, read events, call exposure and literal references. Incomplete, paused and failed source runs remain included. Quality values stay in their original per-run protocol/cohort, not pooled into a usefulness score. Known generation costs are retained per candidate; absence is unknown, not zero. No external evaluator directory is scanned.
+Output: `README.md`, `batch.json` (`experience-batch-v2`), and `runs/<id>.json` plus a readable `runs/<id>.md` for each available included run. The reading page presents the questions, explanation, actual submission, delivery message and bound report, candidate video links, saved online scores/reasons, and available-evidence notes. The joined JSON retains full reports and frame references. Counts distinguish run inclusion/state, action dispositions, exact-version availability, read events, call exposure and literal references. Incomplete, paused and failed source runs remain included. Quality values stay in their original per-run protocol/cohort, not pooled into a usefulness score. Known generation costs are retained per candidate; absence is unknown, not zero.
 
-Maintenance reads this package and follows source links. A retrospective interpretation belongs in a separate authored review: identify the run, source events, relevant experience version, the interpretation and whether it quotes a model statement or is the maintainer's inference. Ordinary prose with exact links is sufficient; no mandatory interpretation schema is needed.
+`topic_archive` is optional, explicit offline authorization to read a completed development topic. The exporter verifies the archive manifest and the saved summary, arm record, judgment and identity hashes and checks task/source/candidate bindings. `independent_outcomes` preserves Direct and both Loop-first/final positions, separate GLM/Sonnet reports, disagreements and saved costs. Each run's candidates link to applicable positions by output hash. Unscored intermediates have no invented grade. Without this option no independent evaluator output is read. The exporter makes no provider calls and does not scan other evaluator directories. Archive source-video fallback is accepted only at its recorded hash. A failed archive check leaves independent outcomes unavailable and records the reason while retaining the task decision material.
+
+Maintenance reads this package and follows source links. Analysis examines the judgment behind the attempt and its actual outcome. Use review identifies where guidance was found, interpreted, applied or rejected. Curation changes the entry, discovery summary or professional manual where the improvement belongs. A retrospective interpretation identifies the run, source events, relevant experience version, and whether it quotes a model statement or is the maintainer's inference. Ordinary prose with exact links is sufficient; no mandatory interpretation schema is needed.
 
 ## Content lifecycle
 

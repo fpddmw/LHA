@@ -1,6 +1,6 @@
 # EX-object-continuity: Preserve a moving prop's role across state changes
 
-Revision 2. Draft for review. Bernini; F001/F006.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini; F001/F006.
 
 **For an existing action, prefer a concise account of the prop's continuous role over rewriting its choreography. Inspect retrieval, occlusion and release, where a recognizable object can become an extra instance or disappear from the action.**
 

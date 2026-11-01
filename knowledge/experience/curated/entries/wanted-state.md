@@ -1,6 +1,6 @@
 # EX-wanted-state: Replace an unwanted effect with a coherent visual alternative
 
-Revision 2. Draft for review. Primarily Ditto; R4/X1/D5 with Bernini F004.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Primarily Ditto; R4/X1/D5 with Bernini F004.
 
 **Lead corrections with the appearance and relationships you want to construct. If the unwanted effect follows from the surrounding design, change that relationship as well; asking to suppress its symptom leaves the competing instruction in place.**
 

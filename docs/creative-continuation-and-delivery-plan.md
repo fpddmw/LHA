@@ -78,7 +78,7 @@ The shared delivery verifier and experiment archival gate must check this sequen
 
 Use a small cohesive helper for continuation state if useful. Integrate with existing runner, context, execution/profile preparation, delivery review/verifier, recovery and reporting rather than duplicating them. Rework the uncommitted fresh-only implementation left by the withdrawn instruction.
 
-Update both full/no-experience common manuals and tool descriptions, common semantic operation guidance where needed, experiment task instructions and configuration projections. Keep style assets, curated experience bodies, renderer conditions, model identities and Critic rubric unchanged. Maintenance Skills may receive a minimal reference explaining the new evidence record; do not rewrite the experience library or invoke a maintenance pass.
+Update both full/no-experience common manuals and tool descriptions, common semantic operation guidance where needed, experiment task instructions and configuration projections. Keep style assets, curated experience bodies, renderer conditions, model identities and Critic rubric unchanged. The subsequent user-approved [maintenance integration plan](continuation-maintenance-integration-plan.md) requires updating the three maintenance Skills, professional guidance and exporter so the new decision evidence supports later experience revision. It preserves empirical claims and adds no automatic maintenance pass.
 
 Provide passive per-generation and batch navigation connecting pressure, questions, explanation, actual prompt/input and outcome. No online usefulness grading or automatic causal attribution is added.
 

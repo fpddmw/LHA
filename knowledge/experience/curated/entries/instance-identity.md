@@ -1,6 +1,6 @@
 # EX-instance-identity: Protect the individual by reducing competing reconstruction
 
-Revision 3. Draft for review. Bernini and Ditto; R6/X4/B4/D3 plus the seven-task batch.
+Revision 4. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; R6/X4/B4/D3 plus the seven-task batch.
 
 **When identity matters, favor an input that still shows the right individual and reduce unnecessary reconstruction around that person. Keep identity wording concise and direct; spend design effort on the surrounding transformations instead of building an increasingly detailed substitute face.**
 

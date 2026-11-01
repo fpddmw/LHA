@@ -1,6 +1,6 @@
 # EX-realization-change: Change the failed proposition, not just its emphasis
 
-Revision 2. Draft for review. Bernini and Ditto; R2/R3/S3/S5/B5/B6/D4/D8/D9/X7.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; R2/R3/S3/S5/B5/B6/D4/D8/D9/X7.
 
 **When an explicit operation repeatedly fails, lower the priority of wording-only retries. Prefer a different visual realization, a resolved design conflict or a better-conditioned input. Use direct specification first when the important relation was genuinely missing.**
 

@@ -135,18 +135,38 @@ class DeliveryReviewTests(unittest.TestCase):
         self.assertEqual(state['pending_tool'],job['id'])
         with self.assertRaises(ValueError):verify_delivery(self.h.output)
 
-    def test_invalid_cached_profile_is_not_reused_and_new_request_is_bound_neutrally(self):
+    def test_invalid_cached_profile_blocks_replacement_review(self):
         self.start();self.resume([action('critique',video='v1')]);old,critic=self.review()
         collect(self.h)
         self.h.state['evaluations'][old['id']]['profile_sha256']='wrong-profile'
         path=self.h.output/'jobs'/old['id']/'response.json';response=load(path)
         response['payload']['profile_sha256']='wrong-profile';save(path,response)
         save(path.with_name('collected.json'),response);self.h.checkpoint()
-        state=self.finish();new=state['jobs'][state['pending_tool']]
-        self.assertNotEqual(new['id'],old['id'])
-        self.assertEqual(set(new['payload']['videos']),{'source','v1'})
-        self.assertEqual(new['payload']['focus'],'');self.assertEqual(new['payload']['extra_checks'],[])
-        self.assertNotIn('tradeoffs',json.dumps(new['payload']))
+        state=self.finish()
+        self.assertEqual(state['status'],'needs_reconciliation')
+        self.assertEqual(sum(j['kind']=='critique' for j in state['jobs'].values()),1)
+        self.assertIn(old['id'],state['unresolved_jobs'])
+        self.assertNotIn('final',state)
+
+    def test_invalid_ordinary_answer_cannot_be_retried_through_delivery(self):
+        class InvalidCritic(fixtures.ScriptedCritic):
+            def predict_text(self, **kwargs):
+                self.inputs.append(kwargs)
+                return '{}'
+        self.start(); self.resume([action('critique', video='v1')])
+        job=self.h.state['jobs'][self.h.state['pending_tool']]
+        folder=self.h.output/'jobs'/job['id']; critic=InvalidCritic()
+        with self.assertRaises(ValueError):
+            critique(job,folder,ROOT,model=critic)
+        raw=(folder/'one-shot-critic/call/response.txt').read_bytes()
+        save(folder/'response.json',{'status':'failed','mode':job['mode'],
+            'request_sha256':job['sha256'],'error':'Invalid ordinary report; retain the answer.'})
+        collect(self.h); self.h.checkpoint()
+        state=self.finish()
+        self.assertEqual(state['status'],'needs_reconciliation')
+        self.assertEqual(len(critic.inputs),1)
+        self.assertEqual(sum(j['kind']=='critique' for j in state['jobs'].values()),1)
+        self.assertEqual((folder/'one-shot-critic/call/response.txt').read_bytes(),raw)
         self.assertNotIn('final',state)
 
     def test_both_experience_modes_and_tampered_confirmation(self):

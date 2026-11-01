@@ -52,10 +52,14 @@ def propose(harness, args, event_id, *, origin='planner_finish'):
     if any(proposal.get(k)!=v for k,v in body.items()):
         raise ValueError('Delivery proposal identity was reused with different inputs')
     state['active_delivery_proposal'] = proposal_id
+    rejected = {}
     for job_id in reversed(state.get('evaluations', {})):
+        if state['evaluations'][job_id].get('video_id') != identity:
+            continue
         try:
             feedback = validated_feedback(harness.output, state, identity, job_id)
-        except (ValueError, KeyError, TypeError, OSError):
+        except (ValueError, KeyError, TypeError, OSError) as exc:
+            rejected[job_id] = str(exc)
             continue
         proposal.update(review_job=job_id, review_origin='reused', status='ready',
                         response_sha256=sha(harness.output/'jobs'/job_id/'response.json'),
@@ -64,6 +68,19 @@ def propose(harness, args, event_id, *, origin='planner_finish'):
                   {k:proposal[k] for k in ('review_job','review_origin','response_sha256','feedback_sha256')})
         return {'status':'review_ready','proposal_id':proposal_id,'delivery_status':'proposed_not_confirmed',
                 'message':'The matching valid report is reused. It will be supplied completely in your next model input; decide whether to confirm this candidate or continue work.'}
+    prior = [key for key, job in state.get('jobs', {}).items()
+             if job['kind'] == 'critique' and job['payload']['video_id'] == identity]
+    if prior:
+        job_id = prior[-1]
+        issue = rejected.get(job_id, 'The original review request has no valid collected report.')
+        proposal.update(review_job=job_id, review_origin='existing_request', status='unresolved', review_issue=issue)
+        state.setdefault('unresolved_jobs', {})[job_id] = {
+            'job_id': job_id, 'failure_kind': 'delivery_review_unusable', 'error': issue,
+            'scope': 'Retain the original request and answer. Transport recovery uses that request; an invalid answer is not re-scored.'}
+        state['status'] = 'needs_reconciliation'
+        return {'status': 'review_unavailable', 'proposal_id': proposal_id, 'job_id': job_id,
+                'delivery_status': 'proposed_not_confirmed',
+                'message': 'The existing review needs reconciliation. No replacement scoring request was submitted.'}
     result = request_job(harness,'critique',{'video':identity},event_id,
                          internal=True,delivery_proposal=proposal_id)
     proposal.update(review_job=result['job_id'],review_origin='requested')

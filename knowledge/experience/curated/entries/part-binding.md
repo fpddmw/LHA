@@ -1,6 +1,6 @@
 # EX-part-binding: Bind the effect to the intended part and distinguish its neighbor
 
-Revision 2. Draft for review. Bernini and Ditto; X3/X5/I2/B3 and D6 geometry observations.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; X3/X5/I2/B3 and D6 geometry observations.
 
 **When the right attribute appears on the wrong part, clarify the target's relation to its neighbor before increasing the attribute's strength. For an existing object's shape, anchor that specific instance to surrounding geometry so the proposal calls for reshaping it rather than introducing another one.**
 

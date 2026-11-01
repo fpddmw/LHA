@@ -1,6 +1,6 @@
 # Understand the task and form a visual proposal
 
-Use this manual to interpret the event, weigh user priorities and develop a coherent visual direction.
+Use this manual to interpret the event, weigh user priorities and develop a coherent visual direction. Retain the distinction that makes a proposal promising in optional notes when it will help interpret the result. A later continuation explanation can develop that judgment as the actual video reveals what worked.
 
 ## Identify what makes this task distinctive
 

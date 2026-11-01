@@ -1,6 +1,6 @@
 # EX-time-binding: Inspect the transitions that can undo a convincing opening
 
-Revision 2. Draft for review. Bernini; B7 and F001/F005/F006.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini; B7 and F001/F005/F006.
 
 **Check whether the designed appearance survives the shot's important turns, occlusions and interactions. Inspect performance timing separately when the user cares about the original action or expression; a stable-looking image can still depict a different event.**
 

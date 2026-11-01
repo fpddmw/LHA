@@ -10,6 +10,10 @@ Check whether the problem was inherited from the input or introduced by the late
 
 When the relation was missing, direct specification can resolve the open choice. When it was already explicit, prioritize a changed visual realization, scope or input over stronger synonyms. Use the actual earlier prompt to decide what has changed in the proposal.
 
+## Revisit the judgment behind the attempt
+
+When a result returns, compare it with the reason you chose that attempt. Open the earlier operation through history when needed: check the actual input and prompt, then locate the visual change you expected to matter. Keep a useful explanation, revise one the result challenges, and recognize a resample on its own terms. Notes/workspace can carry the resulting judgment into the next choice.
+
 ## Choose the input and scope that fit the proposal
 
 Keep your intended delivery separate from the next editing input. A useful candidate is attractive when the remaining transformation can build on its appearance. An earlier candidate or source deserves priority when the current result has lost information central to the next proposal. Use the [input account](../experience/curated/entries/input-conditioning.md) for the scene conditions behind these preferences.
@@ -29,5 +33,7 @@ Compare plausible retained candidates, including the best earlier answer. Repair
 ## Decide what another attempt is worth
 
 Favor delivery when the central request is met and remaining discrepancies are incidental. Continue when an important gap remains and the proposed attempt has a concrete basis for improving the answer. The [continuation account](../experience/curated/entries/continuation-value.md) explains how regressions and adequate earlier candidates affect this judgment.
+
+When continuation questions appear, explain the concrete choice you are making using the candidates and observations you have. Submit that explanation with the actual input and prompt. At delivery, read the full report returned for your proposal and reconsider consequential findings against the video and original request. Confirm the retained choice with its accepted tradeoffs, or develop another direction.
 
 If no promising path remains for an unsuitable result, retain the best provisional candidate and explain the blockage through the operating interface. Use notes/workspace to carry forward the useful interpretation, alternative or rejected explanation. The recorded reads and operations preserve the underlying evidence.

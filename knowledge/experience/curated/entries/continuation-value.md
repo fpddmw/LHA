@@ -1,6 +1,6 @@
 # EX-continuation-value: Spend another attempt on a gap that can change the delivery
 
-Revision 2. Draft for review. Bernini and Ditto; S1/S2/S4/C1/C2/D7 with S3/S5.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; S1/S2/S4/C1/C2/D7 with S3/S5.
 
 **Favor delivery when a candidate satisfies the user's central request and the remaining discrepancy is incidental. Favor another attempt when an important gap remains and there is a concrete reason the next realization could improve the answer. Compare against the best retained candidate, not only the latest parent.**
 

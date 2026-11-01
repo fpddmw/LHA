@@ -5,7 +5,7 @@ description: Derive judgment-bearing video-editing experience from requested rev
 
 # Discover what the experiments teach
 
-Produce an explanation that changes a design or revision judgment. Read the [shared writing standard](../../../docs/experience-authoring-standard.md) and consult the [current complete library](../../../knowledge/staged/experience-full-maintenance-20261101/README.md) for existing accounts.
+Produce an explanation that changes a design or revision judgment. Read the [shared writing standard](../../../docs/experience-authoring-standard.md) and consult the [current complete library](../../../knowledge/experience/curated/README.md) for existing accounts.
 
 ## Find the consequential contrast
 
@@ -16,6 +16,14 @@ Locate the actual intervention. A later prompt can change scope or priority whil
 Develop an explanatory account and a working preference. Explain what Planner should notice, which realization or route deserves priority, and which plausible response is likely to repeat the trap. When evidence leaves several explanations open, recommend a discriminating inspection or a design that addresses their shared conflict. Mechanistic speculation should lead to a useful, visibly provisional proposal rather than a claim about inaccessible model internals.
 
 Use counterexamples to refine the condition. A preserved face during a heavy scene edit suggests examining the spatial interaction with the person; it does not erase the multi-person identity problem. A failed spatial remapping helps separate a coherent proposal from an executable one.
+
+## Follow the judgment through the attempt
+
+Use the [joined maintenance export](../../../docs/experience-usage-interface.md) to read the question and budget notice Planner received, its continuation explanation, and the actual dispatched input and prompt. A recorded answer identifies the distinction the model relied on. Check that distinction against the scene and the intervention it actually submitted. A declared change of realization may still preserve the same visual operation; explain which relationship remained unchanged and what construction would address the conflict.
+
+Follow the returned result into later choices. Did the proposed change appear? Did it alter the relationship that mattered? Did Planner retain, revise or abandon its explanation after observation or Critic review? Compare its initial delivery proposal with the decision after the full report. These contrasts can improve a renderer account, a design preference or a method for understanding results.
+
+Use the recorded policy and migration boundary to identify the decision setting. Separate a budget-induced choice from a newly understood scene condition. Explicitly supplied independent outcomes can test the direction suggested by online feedback; keep the two judges' findings identifiable. For an unscored intermediate, inspect the saved video or attribute the available online observation.
 
 ## Turn understanding into usable prose
 

@@ -1,6 +1,6 @@
 # EX-input-conditioning: Select the input that supports the next transformation
 
-Revision 3. Draft for review. Bernini and Ditto; I1-I4/R5 plus seven-task maintenance.
+Revision 4. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; I1-I4/R5 plus seven-task maintenance.
 
 **Prefer continuing a useful candidate when the remaining change builds on its intact achievements. When a face, activity or important structure has been reconstructed incorrectly, favor the source or an earlier candidate that still carries the needed relationship, and reconsider the transformation that lost it.**
 

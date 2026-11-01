@@ -1,6 +1,6 @@
 # EX-design-conflict: Change the design that hides the action
 
-Revision 3. Draft for review. Bernini; R7 and I3, extended by F001/F003.
+Revision 4. Approved for use; editorial status synchronized on 2026-11-01. Bernini; R7 and I3, extended by F001/F003.
 
 **When a costume, prop or lighting treatment covers the contact or support that makes an activity readable, revise that treatment before adding more preservation clauses. Keep the style's expressive contribution while relocating or reshaping the part that competes with the action.**
 

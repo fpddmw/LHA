@@ -1,6 +1,6 @@
 # EX-activity-relations: Give the new style a place without reassigning the activity
 
-Revision 2. Draft for review. Bernini; synthesis from F001/F003/F005.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini; synthesis from F001/F003/F005.
 
 **For a style or setting change that retains the event, anchor who acts on whom and what the action uses. Give the new genre concrete expression through the appropriate surfaces, clothing, architecture and light, so its familiar scene conventions do not silently redefine the activity.**
 

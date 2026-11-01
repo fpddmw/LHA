@@ -1,6 +1,6 @@
 # EX-lighting-integration: Design what the light does to the scene
 
-Revision 2. Draft for review. Bernini and Ditto; F002/F004/F005/F007 and D5.
+Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; F002/F004/F005/F007 and D5.
 
 **When lamps or glowing accents appear without the requested atmosphere, specify their effect on the visible scene. Prioritize the receiving surfaces, facial fill and reflections that carry the lighting change over adding more luminous objects.**
 

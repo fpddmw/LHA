@@ -1,13 +1,13 @@
 {
   "schema": "creative-experience-catalog-v1",
-  "revision": "20261101-reviewed-gemini-experience-v1",
+  "revision": "20261101-approved-status-maintenance-v2",
   "entries": [
     {
       "id": "EX-design-conflict",
       "title": "Change the design that hides the action",
       "path": "knowledge/experience/curated/entries/design-conflict.md",
-      "version": "3",
-      "sha256": "93ece171472df08de35914390bb1e43751cb1ea117e7e1d877fc691d0e7c43ac",
+      "version": "4",
+      "sha256": "fd5316879f4354e7649e7de04241c7a0dea956d4e252d48bef34fc5399ff1a15",
       "summary": "When a design hides the contacts that make the action readable, reshape or relocate that design before adding preservation clauses. Realize user-required features around the action.",
       "questions": [
         "Why did a visually successful addition make the action unreadable?"
@@ -21,14 +21,14 @@
         "EV-F001"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-activity-relations",
       "title": "Give the new style a place without reassigning the activity",
       "path": "knowledge/experience/curated/entries/activity-relations.md",
-      "version": "2",
-      "sha256": "3c1af6284941201fff34553fb822cb8b572c53f1eb22a40262ed8c01a177fab4",
+      "version": "3",
+      "sha256": "1e9dda804633b986fa43cbb4cf07dd5c64ce33a43a11da5776cb8f3cf8ea8731",
       "summary": "When retaining an event under a new genre, anchor who acts on whom and give the genre concrete visual scope. A preserved object inventory can still permit the wrong activity.",
       "questions": [
         "Why do the right people and objects still perform a different event?"
@@ -43,14 +43,14 @@
         "EV-visual-inspection"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-instance-identity",
       "title": "Protect the individual by reducing competing reconstruction",
       "path": "knowledge/experience/curated/entries/instance-identity.md",
-      "version": "3",
-      "sha256": "4a7b2b76cbdf9c51526b6034b7b0137e92a36cd9b42e265554b42ea670528a9b",
+      "version": "4",
+      "sha256": "7dbeb7da71821764389fe70785047b008611929b46355bd569946532196667fd",
       "summary": "For identity-sensitive edits, favor an input with the right individual and reduce competing reconstruction around the person. Keep identity wording concise while preserving explicit costume requirements.",
       "questions": [
         "Why did more accurate person descriptions fail to preserve identity?"
@@ -70,14 +70,14 @@
         "EV-visual-inspection"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-object-continuity",
       "title": "Preserve a moving prop's role across state changes",
       "path": "knowledge/experience/curated/entries/object-continuity.md",
-      "version": "2",
-      "sha256": "4a0ce150162bdc57b0f2467cd9471af994e44cbaa9b034e08d5440f6f7980b6d",
+      "version": "3",
+      "sha256": "3ee3ae014e853f9b7fdf680d77547e6aca6bbd05079088f93e298a41a180e51e",
       "summary": "For existing motion, favor concise source-linked object roles over unnecessary choreography. Inspect retrieval, occlusion and release before responding to duplication with more repetitions of one.",
       "questions": [
         "Why did a correctly named object multiply during an action?"
@@ -90,14 +90,14 @@
         "EV-F006"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-connected-scope",
       "title": "Revise a coherent visual field",
       "path": "knowledge/experience/curated/entries/connected-scope.md",
-      "version": "3",
-      "sha256": "fcbda798561052e1d35e1cea3c6738d1adec422dad8b18dfbd7a5b742a01714e",
+      "version": "4",
+      "sha256": "58aaaf127851cc234079649230c300ca42dae7e80b9e4ada2f663b3603ea3f05",
       "summary": "Group changes by visual dependency: a window, view and reflections can be one coherent edit. Separate unrelated repairs when they need different inputs or explanations.",
       "questions": [
         "What does a focused revision actually need to change?"
@@ -112,14 +112,14 @@
         "EV-F004"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-input-conditioning",
       "title": "Select the input that supports the next transformation",
       "path": "knowledge/experience/curated/entries/input-conditioning.md",
-      "version": "3",
-      "sha256": "d03207abf9e82ec21471efe5cbcc4cadeb939af859dd576f2a5f13e3fcedd013",
+      "version": "4",
+      "sha256": "febe86913fac9993436be38499c29b1442be88c122fbc391782d1d05c07a926b",
       "summary": "Continue a useful candidate when the next transformation builds on its achievements. If a central relationship is lost, favor the source or an earlier intact candidate and reconsider the transformation.",
       "questions": [
         "Which source or candidate supplies what the next proposal needs?"
@@ -141,14 +141,14 @@
         "EV-historical-score-extract"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-realization-change",
       "title": "Change the failed proposition, not just its emphasis",
       "path": "knowledge/experience/curated/entries/realization-change.md",
-      "version": "2",
-      "sha256": "b7bd7615be8c7948b9d624d6a731344877d9acd6674ff68ac3cbe297a5a8df4a",
+      "version": "3",
+      "sha256": "c426636e7d4472b2bfefd132d27a5710f8aca03edcec6bdcb9fa36a211b0bacc",
       "summary": "After repeated explicit failure, prioritize changed realization or conditioning over stronger synonyms. Direct specification is more promising when the decisive relation was genuinely missing.",
       "questions": [
         "Did the proposed alternative actually change the failed operation?"
@@ -169,14 +169,14 @@
         "EV-historical-score-extract"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-part-binding",
       "title": "Bind the effect to the intended part and distinguish its neighbor",
       "path": "knowledge/experience/curated/entries/part-binding.md",
-      "version": "2",
-      "sha256": "2bb33e27e2d8b0b858157851191d9ed3acb77fa414b9f3a8f9c57e02b964865a",
+      "version": "3",
+      "sha256": "86141aee9944153507152218c9dbcef73c0015b170d26ea911f4d9debae0c972",
       "summary": "For an effect on the wrong part, describe the intended carrier in contrast to its neighbor. Anchor shape repair to the existing instance; consider an earlier intact input when duplication appears.",
       "questions": [
         "Why did the correct effect appear on the wrong part?"
@@ -192,14 +192,14 @@
         "EV-H-B-027__short__no_knowledge"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-wanted-state",
       "title": "Replace an unwanted effect with a coherent visual alternative",
       "path": "knowledge/experience/curated/entries/wanted-state.md",
-      "version": "2",
-      "sha256": "5f9915b03b2e4e5efe3ccab4bce21f7d63ae5a7bcca8e3030efb759562aa6352",
+      "version": "3",
+      "sha256": "a48a5a6eb853468fbfa490ea13962180f7a52a36476093107387b2892494c1dd",
       "summary": "Lead correction with a positive visual replacement and resolve conflicts with the surrounding design. Use short exclusions to disambiguate that arrangement.",
       "questions": [
         "What visual state replaces the unwanted artifact?"
@@ -215,14 +215,14 @@
         "EV-H-B-fewshot_004__long__no_knowledge"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-style-realization",
       "title": "Choose a visible system that makes the style legible",
       "path": "knowledge/experience/curated/entries/style-realization.md",
-      "version": "2",
-      "sha256": "2048ed005c2cbf452c692793e762e5b9805d816c21d3000d2ff569d94ac9d3c0",
+      "version": "3",
+      "sha256": "86615f06765bcc642f9798f3138f309160be79176b00583ce9a397446d94cb12",
       "summary": "Choose a coherent visible system for broad style requests. For detailed requests, check required construction separately from convincing ornament and atmosphere.",
       "questions": [
         "What does style knowledge add beyond a genre label?"
@@ -236,14 +236,14 @@
         "EV-F003"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-environment-replacement",
       "title": "Transform the structures that make the place recognizable",
       "path": "knowledge/experience/curated/entries/environment-replacement.md",
-      "version": "2",
-      "sha256": "fb17b974378fcf4b22a7d0642d08fb3c563c8bed8083273a076343604966f24b",
+      "version": "3",
+      "sha256": "e6b9115a371075cb80a1d5736f905d2929b6eaa850ec7a3288d6da52f0dae7c3",
       "summary": "If theme cues appear but the old place persists, remap its defining surfaces, boundaries and sightlines. Reassess input and realization when that mapping was already explicit and failed.",
       "questions": [
         "Why does the scene have theme cues but remain the old place?"
@@ -261,14 +261,14 @@
         "EV-D-FS4-full"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-lighting-integration",
       "title": "Design what the light does to the scene",
       "path": "knowledge/experience/curated/entries/lighting-integration.md",
-      "version": "2",
-      "sha256": "0e9dd05f5d63c6c0eedd1808045b09157f71c1c735de706614938e562f535703",
+      "version": "3",
+      "sha256": "13ec1903e43c882c29a71b62a627ff8fc3632f9c2931bc5ccb73f141dc90eff5",
       "summary": "If lamps appear without atmosphere, describe receiving surfaces, fill and reflections. Separate facial illumination from the background cast when both matter.",
       "questions": [
         "Why are lamps and glows present without the intended atmosphere?"
@@ -285,14 +285,14 @@
         "EV-H-D-benchmark__001__short"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-time-binding",
       "title": "Inspect the transitions that can undo a convincing opening",
       "path": "knowledge/experience/curated/entries/time-binding.md",
-      "version": "2",
-      "sha256": "0a3a0de895a8bab923322eb2d008f0b489cc667229d89cd5eab71fdfd3769702",
+      "version": "3",
+      "sha256": "01626329a0fd3fd63363bb4ed70f10b52d53ea1a37d5a34c0bc73f4b6b380d05",
       "summary": "Inspect the turns, occlusions and interactions that can undo an attractive opening. Favor delivery for incidental drift; give timing further attention when it carries the requested event.",
       "questions": [
         "Did the design persist, and did the original event persist?"
@@ -310,14 +310,14 @@
         "EV-visual-inspection"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     },
     {
       "id": "EX-continuation-value",
       "title": "Spend another attempt on a gap that can change the delivery",
       "path": "knowledge/experience/curated/entries/continuation-value.md",
-      "version": "2",
-      "sha256": "4978aaa62285e24f4a382c7132241e4ff5f1aeba01335942cfc84702cbcdcda3",
+      "version": "3",
+      "sha256": "fff47a0f8ae0b8a73d5954f5b00d215136e7406c5c3ff3be493e11b69446f40d",
       "summary": "Favor delivery when the central request is met. Spend another attempt on an important gap with a concrete improvement basis, and compare with the best retained answer.",
       "questions": [
         "Is a repaired complaint enough to justify another attempt or a final choice?"
@@ -337,7 +337,7 @@
         "EV-batch-facts"
       ],
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
     }
   ],
   "resources": [

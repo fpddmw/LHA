@@ -5,3 +5,5 @@ Use understand-and-design for task meaning and visual proposals, and understand-
 Reading returns bounded pages with continuation positions. Follow next_line and next_char for remaining material. Earlier reads and observations remain available through history. Notes/workspace can retain useful task-specific understanding. Use score-definitions to interpret the fixed Critic dimensions. Use English for working notes and renderer prompts.
 
 This task provides operating, semantic and style material. Renderer experience, experiment histories and curated experience entries are outside its reading scope.
+
+Earlier continuation explanations and exact submitted operations are available through history. Use them to reconnect a new observation with the choice it was meant to test. The professional revision manual develops this comparison; notes/workspace hold the understanding you want to retain.

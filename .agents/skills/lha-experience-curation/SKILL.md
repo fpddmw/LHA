@@ -5,7 +5,7 @@ description: Sharpen and organize LHA experience entries and renderer profiles d
 
 # Curate a library that improves judgment
 
-Use the [shared writing standard](../../../docs/experience-authoring-standard.md) and the [complete maintenance package](../../../knowledge/staged/experience-full-maintenance-20261101/README.md). Work from the requested content problem or supplied analysis; editorial maintenance can stand on its own.
+Use the [shared writing standard](../../../docs/experience-authoring-standard.md) and the [current approved library](../../../knowledge/experience/curated/README.md). Work from the requested content problem or supplied analysis; editorial maintenance can stand on its own.
 
 ## Strengthen the decision value
 
@@ -14,6 +14,12 @@ Find the choice each entry helps a capable Planner make. State the relevant cond
 Preserve the explanatory relationship, not just its example objects. A robe/chair case can teach reasoning about silhouette and activity evidence without prescribing jackets for every scene. Keep recommendations strong enough to favor a course of action. Replace universal bans and numerical retry budgets with the underlying reason and the conditions for a different choice.
 
 Keep action-changing boundaries beside the advice. Move repeated protocol limitations and counting details into the evidence footer. Verify that a striking explanation still matches the actual prompts and outcomes; repair its factual basis without draining its practical consequence.
+
+## Place the improvement where it will be used
+
+Use the maintenance review's question, explanation, actual intervention and outcome links to revise the account that explains the decision. Preserve the decisive condition in its opening and summary. A changed understanding of a renderer belongs in an experience entry; a reusable way to interpret results belongs in a professional manual; argument names, report reuse and delivery confirmation belong in the operating manual. Link these materials so the next Planner can use the revised judgment without reading a batch postmortem.
+
+Keep source events, candidate identities, experience versions and counterexamples reachable in the evidence footer. Repair summaries and navigation alongside the entry when their wording would preserve the old mistake. Do not turn the runtime's pressure schedule into an empirical stopping rule. Maintain a single current approval state across the active text and catalog; historical staged packages retain their original labels and content.
 
 ## Organize for reading and revision
 
