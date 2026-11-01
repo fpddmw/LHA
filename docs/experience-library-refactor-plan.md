@@ -1,6 +1,6 @@
 # Experience library and maintenance Skills: bounded implementation
 
-Date: 2026-11-01. Status: implementation authorized by the user after review of the complete plan.
+Date: 2026-11-01. Status: bounded implementation complete; static/historical checks recorded below. Four authored entries await the planned content review before activation. Simulated and live workflows remain deferred.
 
 ## Purpose and boundaries
 
@@ -40,11 +40,13 @@ All 45 IDs have a disposition. Demonstrations distinguish recorded judgments, ex
 
 | Work | State | Evidence |
 |---|---|---|
-| Plan and pre-change backup | In progress | Pre-change commit recorded above |
-| 45-card audit and four demonstrations | Pending | |
-| Three maintenance Skills and shared standard | Pending | |
-| Planner manuals and scoped catalog | Pending | |
-| Passive usage records and batch export | Pending | |
-| Static/historical checks and GitHub sync | Pending | Model/simulation runs remain deferred |
+| Plan and pre-change backup | Complete | Remote pre-change commit verified; plan commit `b3c76b4` pushed on `codex/experience-curation-v1` |
+| 45-card audit and four demonstrations | Complete as review material | 45/45 dispositions; four complete drafts, six source extracts; activation awaits wording review |
+| Three maintenance Skills and shared standard | Complete | Three Skill metadata validations passed; no model-based Skill effectiveness test |
+| Planner manuals and scoped catalog | Implemented | Two optional professional manuals, compact operating/reading guidance; 111 design entries retained; approved curated list intentionally empty |
+| Passive usage records and batch export | Implemented | Call provenance hook, per-run projection and explicit development batch exporter; no model interpretation/publication |
+| Static/historical checks and GitHub sync | Checks complete; synchronization recorded in implementation report | Seven changed/new Python files parsed; real corpus navigation inspected; six saved runs exported. Six regression cases written but not executed. Model/simulation runs remain deferred |
+
+Implementation details and remaining limits: [implementation report](experience-curation-implementation.md). Content review entry point: [four demonstrations and audit](../knowledge/staged/experience-curation-20261101/README.md). Historical inspection output: `out/experience_curation/20261101/historical-six-source-final/` (local, not committed).
 
 Related: [agreed direction](skill-experience-workspace-direction.md), [creative development specification](creative-loop-development-plan.md).

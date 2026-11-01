@@ -72,3 +72,10 @@ Large sources and archived records have explicit continuation positions. Pass
 Only supplied pages count as read. Earlier bulky results become archive links;
 they remain available through history or another read. Notes and workspace
 organization remain optional and under your control.
+
+The optional `understand-and-design` and `understand-and-revise` manuals support
+task interpretation and result-based revision. Experience entries inform judgment;
+they do not impose retry limits, a ranking policy or a required reasoning sequence.
+If an entry changes or fails to fit your understanding, you may retain that concise
+judgment in an ordinary note. The harness records reading automatically; no citation
+or adoption form is required, and task notes never publish cross-task experience.

@@ -1,0 +1,158 @@
+{
+  "schema": "creative-experience-catalog-v1",
+  "revision": "20261101-four-drafts",
+  "entries": [
+    {
+      "id": "EX-design-conflict",
+      "path": "knowledge/staged/experience-curation-20261101/entries/design-conflict.md",
+      "title": "Authored designs and activity readability",
+      "version": "1",
+      "sha256": "3a0261c098f37b16de2119c728f6d85a40f87fc1af10f44808e92eba1e3d6454",
+      "review_status": "draft",
+      "review_reference": "Pending user content review",
+      "summary": "A preservation failure can originate in the visual proposal itself.** A costume, light effect or prop may be visually successful while covering the relationships that make the original activity intelligible. Repeating the preservation instruction leaves that conflict in place.",
+      "questions": [
+        "authored addition",
+        "activity readability"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "evidence_ids": [
+        "B-003"
+      ]
+    },
+    {
+      "id": "EX-instance-identity",
+      "path": "knowledge/staged/experience-curation-20261101/entries/instance-identity.md",
+      "title": "Category description and individual identity",
+      "version": "1",
+      "sha256": "4b93fcc9de06484eb590f6e22f56a264035a2cfee23c4c9102b1e9fbad598f9e",
+      "review_status": "draft",
+      "review_reference": "Pending user content review",
+      "summary": "More identity adjectives can add reconstruction instructions without establishing correspondence to the source person.** Age, hair and glasses describe categories of appearance. The desired preservation concerns a particular individual across the transformation.",
+      "questions": [
+        "identity preservation",
+        "accessory reconstruction"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "B-FS4-full",
+        "D-FS4-full",
+        "D-FS4-no"
+      ]
+    },
+    {
+      "id": "EX-connected-scope",
+      "path": "knowledge/staged/experience-curation-20261101/entries/connected-scope.md",
+      "title": "Coherent visual scope without a spatial mask",
+      "version": "1",
+      "sha256": "4f0a206ffc80004b68a891610417a182807c49fe19aba7036b71a2b643ea3384",
+      "review_status": "draft",
+      "review_reference": "Pending user content review",
+      "summary": "Calling a revision small does not constrain which pixels the renderer changes.** The interface provides a video and a text prompt, with no mask or invariant region. The proposal's actual visual dependencies provide a more useful way to understand its scope.",
+      "questions": [
+        "focused revision",
+        "visual dependency"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "evidence_ids": [
+        "B-FS4-full"
+      ]
+    },
+    {
+      "id": "EX-input-conditioning",
+      "path": "knowledge/staged/experience-curation-20261101/entries/input-conditioning.md",
+      "title": "Input as useful appearance and original information",
+      "version": "1",
+      "sha256": "70854ecaec24114f34da2ff246d7e40aafb75be35818958e310032755ffd9ad4",
+      "review_status": "draft",
+      "review_reference": "Pending user content review",
+      "summary": "An editing input supplies both useful achievements and existing losses.** Source input carries original identity, structure and motion evidence. A candidate can carry a partially realized visual direction that the source lacks. The relevant question is which of those conditions the proposed change needs.",
+      "questions": [
+        "input selection",
+        "inherited loss"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "B-024-full",
+        "B-003",
+        "D-027-full",
+        "historical-score-extract"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "B-003",
+      "path": "knowledge/staged/experience-curation-20261101/evidence/B-003.json",
+      "title": "B-003",
+      "version": "1",
+      "sha256": "acbbb4b91e8a13aefaee0ad842dbba0b3862d6ed29811cbd2de7ba11f57d390d",
+      "review_status": "draft",
+      "review_reference": "Pending user content review"
+    },
+    {
+      "id": "B-024-full",
+      "path": "knowledge/staged/experience-curation-20261101/evidence/B-024-full.json",
+      "title": "B-024-full",
+      "version": "1",
+      "sha256": "ccc295054f0a664af2ff90e30a635b57e64c0bcf04aee59ed402e7e3e945b9e3",
+      "review_status": "draft",
+      "review_reference": "Pending user content review"
+    },
+    {
+      "id": "B-FS4-full",
+      "path": "knowledge/staged/experience-curation-20261101/evidence/B-FS4-full.json",
+      "title": "B-FS4-full",
+      "version": "1",
+      "sha256": "9f924d28f8e478bb24e01a89785862b5f680a325c982edec63f3d60ffa2cde0d",
+      "review_status": "draft",
+      "review_reference": "Pending user content review"
+    },
+    {
+      "id": "D-027-full",
+      "path": "knowledge/staged/experience-curation-20261101/evidence/D-027-full.json",
+      "title": "D-027-full",
+      "version": "1",
+      "sha256": "d6d3f2d849ebaa716b9ae5095ed44d0f1be6ef31dc128c7be59f03b9d2c7e69a",
+      "review_status": "draft",
+      "review_reference": "Pending user content review"
+    },
+    {
+      "id": "D-FS4-full",
+      "path": "knowledge/staged/experience-curation-20261101/evidence/D-FS4-full.json",
+      "title": "D-FS4-full",
+      "version": "1",
+      "sha256": "99c4bf717879e7bf21f6233498d031dcf9a10de25a03301211d50bab237f522f",
+      "review_status": "draft",
+      "review_reference": "Pending user content review"
+    },
+    {
+      "id": "D-FS4-no",
+      "path": "knowledge/staged/experience-curation-20261101/evidence/D-FS4-no.json",
+      "title": "D-FS4-no",
+      "version": "1",
+      "sha256": "fbf7d657dc82a4974df21cab8b41600ab76f4a4658fe6fa54985a7043ef8c4d9",
+      "review_status": "draft",
+      "review_reference": "Pending user content review"
+    },
+    {
+      "id": "historical-score-extract",
+      "path": "knowledge/staged/experience-curation-20261101/evidence/historical-score-extract.md",
+      "title": "historical-score-extract",
+      "version": "1",
+      "sha256": "7ec3fa1e697c428606e5cd4c3f74924794043a38cfa44a28c3c8c93c557502ff",
+      "review_status": "draft",
+      "review_reference": "Pending user content review"
+    }
+  ]
+}

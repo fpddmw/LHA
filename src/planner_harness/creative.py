@@ -70,7 +70,9 @@ def experiment_profile(root):
         path = root / relative
         if path.is_file() and path.suffix.lower() in {".md", ".json", ".py", ".html", ".txt", ".jpg", ".jpeg", ".png", ".webp"}:
             files[relative] = sha(path)
-    for relative in ("knowledge/creative-loop/manifest.json", "knowledge/source-map.json"):
+    for relative in ("knowledge/creative-loop/manifest.json", "knowledge/source-map.json", knowledge.allowlist.get("curated_catalog")):
+        if relative is None:
+            continue
         files[relative] = sha(root / relative)
     body = {"protocol": "creative-experiment-v1", "critic": frozen_profile(),
             "planner": role_settings({}, "planner"), "independent_judge": "glm5.3flash", "files": files}

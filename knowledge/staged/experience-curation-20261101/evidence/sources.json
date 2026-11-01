@@ -1,0 +1,56 @@
+[
+  {
+    "id": "B-003",
+    "path": "knowledge/staged/experience-curation-20261101/evidence/B-003.json",
+    "sha256": "acbbb4b91e8a13aefaee0ad842dbba0b3862d6ed29811cbd2de7ba11f57d390d",
+    "source": {
+      "path": "out/agent_loop_live/20261030/phase2/completed-benchmark-003-short/tasks/benchmark__003__short/run/state.json",
+      "sha256": "496a6935d8cfc7428599fb4065aab1ad4f547d89c0595b213938a4432487d88d"
+    }
+  },
+  {
+    "id": "B-024-full",
+    "path": "knowledge/staged/experience-curation-20261101/evidence/B-024-full.json",
+    "sha256": "ccc295054f0a664af2ff90e30a635b57e64c0bcf04aee59ed402e7e3e945b9e3",
+    "source": {
+      "path": "out/agent_loop_live/20261030/phase2/completed-024-pair/tasks/024__long__full_knowledge/run/state.json",
+      "sha256": "4a028d06867b155f405d8c8dc30e9a6e1fe0e483a7b8740059cdc4458f5eee06"
+    }
+  },
+  {
+    "id": "B-FS4-full",
+    "path": "knowledge/staged/experience-curation-20261101/evidence/B-FS4-full.json",
+    "sha256": "9f924d28f8e478bb24e01a89785862b5f680a325c982edec63f3d60ffa2cde0d",
+    "source": {
+      "path": "out/agent_loop_live/20261030/phase2/completed-fewshot-004-pair/tasks/fewshot_004__long__full_knowledge/run/state.json",
+      "sha256": "974f90f7bb32ee47024bee5aee44bf69d9d38b4f0af19a70638336333b789f12"
+    }
+  },
+  {
+    "id": "D-FS4-full",
+    "path": "knowledge/staged/experience-curation-20261101/evidence/D-FS4-full.json",
+    "sha256": "99c4bf717879e7bf21f6233498d031dcf9a10de25a03301211d50bab237f522f",
+    "source": {
+      "path": "out/agent_loop_live/20261030/ditto-phase2/completed-fewshot004-full/tasks/fewshot_004__long__full_knowledge/run/state.json",
+      "sha256": "43285b0ed2ae0ad27f803bda2de06e9c6fbf695f29385000f93525cc912242d7"
+    }
+  },
+  {
+    "id": "D-FS4-no",
+    "path": "knowledge/staged/experience-curation-20261101/evidence/D-FS4-no.json",
+    "sha256": "fbf7d657dc82a4974df21cab8b41600ab76f4a4658fe6fa54985a7043ef8c4d9",
+    "source": {
+      "path": "out/agent_loop_live/20261030/ditto-phase2/completed-fewshot004-no/tasks/fewshot_004__long__no_knowledge/run/state.json",
+      "sha256": "81e8f7ad0967441b8d310f8e1bf09e9546dd11083cf91d4e4b66b999610b5eb9"
+    }
+  },
+  {
+    "id": "D-027-full",
+    "path": "knowledge/staged/experience-curation-20261101/evidence/D-027-full.json",
+    "sha256": "d6d3f2d849ebaa716b9ae5095ed44d0f1be6ef31dc128c7be59f03b9d2c7e69a",
+    "source": {
+      "path": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/027__short__full_knowledge/run/state.json",
+      "sha256": "232f290ed7180da361dd9b3a3e6302a6ad6bbc992e268ab91d01b792ce635826"
+    }
+  }
+]

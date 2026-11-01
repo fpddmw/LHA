@@ -27,6 +27,17 @@ def report(output, state):
     section("Original request", state["request"]["text"])
     section("Working notes and workspace", {k: state.get(k) for k in ("notes", "workspace")})
     section("Actual knowledge reads", state.get("reads", {}))
+    from .experience_usage import project_run, write_json
+    try:
+        usage = project_run(output)
+        write_json(output / "experience-usage.json", usage)
+        section("Experience use (factual provenance, not effectiveness)", {
+            "record": "experience-usage.json", "calls": usage["calls"],
+            "surfaces": usage["surfaces"], "model_references": usage["model_references"], "issues": usage["issues"]})
+        body.append('<p><a href="experience-usage.json">Complete experience-use record</a></p>')
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        section("Experience-use projection unavailable", {"error_type": type(exc).__name__,
+                "note": "Original operations remain available; missing projection is not zero use."})
     section("Exact generation requests", [{"job_id": k, "input_video": j["payload"]["input_id"],
         "prompt": j["payload"]["prompt"], "renderer": j["payload"]["renderer"]}
         for k, j in state["jobs"].items() if j["kind"] == "generate"])

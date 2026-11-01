@@ -1,0 +1,1369 @@
+{
+  "id": "D-FS4-no",
+  "extraction": "Deterministic excerpts from saved state; no new model call or visual judgment. Historical online findings are attributed, not instructions.",
+  "source": {
+    "path": "out/agent_loop_live/20261030/ditto-phase2/completed-fewshot004-no/tasks/fewshot_004__long__no_knowledge/run/state.json",
+    "sha256": "81e8f7ad0967441b8d310f8e1bf09e9546dd11083cf91d4e4b66b999610b5eb9"
+  },
+  "request": "Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement.",
+  "generations": [
+    {
+      "event_id": "event-0001",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "source",
+          "prompt": "Transform this table-tennis room into a realistic futuristic space-station sports arena. Replace the room surfaces with brushed metallic wall panels, structural columns and a dark satin-metal sports floor, illuminated by integrated blue-white light strips. Convert the existing background window areas into large reinforced observation windows revealing a clearly recognizable blue Earth with white clouds against black space. Keep the room's perspective and layout consistent with the original camera. Dress both foreground players and the visible background player in sleek, flexible graphite sci-fi athletic suits with subtle silver panels and thin cyan accents, with fitted athletic shoes. Keep their heads uncovered and preserve their original faces, hairstyles, glasses, body proportions and identities. Add narrow luminous blue strips along the table's existing outer edges, with restrained glow that leaves the playing surface and ball clearly visible. Preserve the table's exact shape, dimensions, position, blue playing surface, markings, net and curved supporting-base geometry. Preserve the original rally frame by frame: the players' poses, footwork, arm movements, paddle swings, paddle shapes, white ball position and trajectory, and the timing of every action. Preserve the original framing, perspective and camera movement throughout. Keep all environmental and costume details stable over time, with realistic materials and natural facial skin tones under the cool arena lighting."
+        }
+      }
+    },
+    {
+      "event_id": "event-0003",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "source",
+          "prompt": "Apply a selective futuristic makeover to this original table-tennis footage. Preserve the photographed people and rally. Keep both players' original heads unchanged: identical faces, facial proportions, skin texture, hairlines and hairstyles. Retain the near-left player's short thinning hair and original profile, and the far-right player's straight short hair and rectangular eyeglasses throughout. Keep their natural appearances without beautification or recasting. Change their clothing below the neck into sleek, flexible graphite sci-fi athletic suits with subtle silver seams and thin blue accents, following the original clothing silhouettes and body proportions. Keep bare hands, fingers, paddle grips and red paddles distinct and faithful to the source during every swing. Preserve the single white ball at its original position in every frame, including its size, motion blur, flight path, paddle contacts and bounce timing, especially during the final outgoing flight. Preserve every stance, step, arm movement and final sideways lunge. Transform the room surfaces into a space-station sports arena with brushed metallic wall panels, blue-white architectural lighting and large observation windows showing Earth and stars. Keep the original room perspective, columns, background player and secondary tables in their existing locations. Use balanced lighting so the original faces remain clearly recognizable. Add a narrow glowing blue strip to the main tabletop's existing outer rim. Keep the original blue playing surface, white markings, net, tabletop thickness and exact geometry unchanged. Leave the original red curved arch supports intact, including their thin profiles, feet and open spaces beneath the table; add no undercarriage panels or new supports. Preserve the original framing and camera movement. Keep the environment, clothing and edge lighting consistent throughout."
+        }
+      }
+    },
+    {
+      "event_id": "event-0005",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "source",
+          "seed": 137,
+          "prompt": "Edit this existing live-action table-tennis footage with realistic set and wardrobe replacements. Preserve the original photographed heads and exposed skin throughout. The near-left man retains his original facial profile and very short thinning hair with receding temples. The far-right man retains his original rounded face, short straight forward fringe and rectangular eyeglasses. Keep their actual facial features, ages, expressions and hair silhouettes unchanged. Use natural skin tones and soft neutral-white illumination on their faces.\n\nReplace the room surfaces with brushed-metal space-station architecture, integrated blue-white lights and a dark sports floor. Follow the existing walls, columns and room perspective. Large observation windows reveal a prominent blue Earth with recognizable white cloud systems and continents against black space; Earth occupies a substantial part of the window view. Retain the background player's location and the secondary tables.\n\nReplace clothing below the neck with sleek graphite technical-fabric athletic suits, fitted along the original body silhouettes, with silver seams and restrained cyan accents. Preserve bare hands and the original red paddles. Add thin glowing blue strips along the existing tabletop perimeter. Retain the original blue tabletop, white lines, net, thickness, corners, red curved arch supports, feet and all open spaces beneath it, with exactly the source geometry.\n\nPreserve the original action and camera movement: identical poses, footwork, swings, hand grips, paddle positions and final lateral lunge. Keep the single white ball in its source position at every corresponding frame, preserving its trajectory, motion blur, paddle contacts and bounce timing. Keep the photographic appearance and source framing. Establish the completed arena and costumes from the first frame, with clean solid structures and consistent details throughout; no opening transformation or dissolve."
+        },
+        "purpose": "Use the final source-based attempt to address changed identities, opening distortion and weak Earth visibility while retaining the original table structure and rally."
+      }
+    }
+  ],
+  "videos": {
+    "source": {
+      "path": "/root/autodl-tmp/LHA-ditto-loop-batch-20261030-v1/benchmark_data/fewshot/004/004.mp4",
+      "sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+      "duration_seconds": 4.466666666666667,
+      "fps": 30.0,
+      "frames": 134
+    },
+    "v1": {
+      "path": "/root/autodl-tmp/LHA-ditto-loop-batch-20261030-service/tasks/fewshot_004__long__no_knowledge/run/videos/v1/video.mp4",
+      "sha256": "b35bd817b396065232889027f47c55e44a58aee63aaeabca680b9dbe576003c5",
+      "parent": "source",
+      "prompt": "Transform this table-tennis room into a realistic futuristic space-station sports arena. Replace the room surfaces with brushed metallic wall panels, structural columns and a dark satin-metal sports floor, illuminated by integrated blue-white light strips. Convert the existing background window areas into large reinforced observation windows revealing a clearly recognizable blue Earth with white clouds against black space. Keep the room's perspective and layout consistent with the original camera. Dress both foreground players and the visible background player in sleek, flexible graphite sci-fi athletic suits with subtle silver panels and thin cyan accents, with fitted athletic shoes. Keep their heads uncovered and preserve their original faces, hairstyles, glasses, body proportions and identities. Add narrow luminous blue strips along the table's existing outer edges, with restrained glow that leaves the playing surface and ball clearly visible. Preserve the table's exact shape, dimensions, position, blue playing surface, markings, net and curved supporting-base geometry. Preserve the original rally frame by frame: the players' poses, footwork, arm movements, paddle swings, paddle shapes, white ball position and trajectory, and the timing of every action. Preserve the original framing, perspective and camera movement throughout. Keep all environmental and costume details stable over time, with realistic materials and natural facial skin tones under the cool arena lighting.",
+      "job_id": "event-0001-generate",
+      "duration_seconds": 4.433333333333334,
+      "fps": 30.0,
+      "frames": 133
+    },
+    "v2": {
+      "path": "/root/autodl-tmp/LHA-ditto-loop-batch-20261030-service/tasks/fewshot_004__long__no_knowledge/run/videos/v2/video.mp4",
+      "sha256": "836dbeb62e118c7999ff5d93d20eee0c9715e00ebed0a3eea05807dd576703f7",
+      "parent": "source",
+      "prompt": "Apply a selective futuristic makeover to this original table-tennis footage. Preserve the photographed people and rally. Keep both players' original heads unchanged: identical faces, facial proportions, skin texture, hairlines and hairstyles. Retain the near-left player's short thinning hair and original profile, and the far-right player's straight short hair and rectangular eyeglasses throughout. Keep their natural appearances without beautification or recasting. Change their clothing below the neck into sleek, flexible graphite sci-fi athletic suits with subtle silver seams and thin blue accents, following the original clothing silhouettes and body proportions. Keep bare hands, fingers, paddle grips and red paddles distinct and faithful to the source during every swing. Preserve the single white ball at its original position in every frame, including its size, motion blur, flight path, paddle contacts and bounce timing, especially during the final outgoing flight. Preserve every stance, step, arm movement and final sideways lunge. Transform the room surfaces into a space-station sports arena with brushed metallic wall panels, blue-white architectural lighting and large observation windows showing Earth and stars. Keep the original room perspective, columns, background player and secondary tables in their existing locations. Use balanced lighting so the original faces remain clearly recognizable. Add a narrow glowing blue strip to the main tabletop's existing outer rim. Keep the original blue playing surface, white markings, net, tabletop thickness and exact geometry unchanged. Leave the original red curved arch supports intact, including their thin profiles, feet and open spaces beneath the table; add no undercarriage panels or new supports. Preserve the original framing and camera movement. Keep the environment, clothing and edge lighting consistent throughout.",
+      "job_id": "event-0003-generate",
+      "duration_seconds": 4.433333333333334,
+      "fps": 30.0,
+      "frames": 133
+    },
+    "v3": {
+      "path": "/root/autodl-tmp/LHA-ditto-loop-batch-20261030-service/tasks/fewshot_004__long__no_knowledge/run/videos/v3/video.mp4",
+      "sha256": "2ef9433dc9339ddeeaf4ef9cf3738351e612f339052b81eaa69a5063e59259cf",
+      "parent": "source",
+      "prompt": "Edit this existing live-action table-tennis footage with realistic set and wardrobe replacements. Preserve the original photographed heads and exposed skin throughout. The near-left man retains his original facial profile and very short thinning hair with receding temples. The far-right man retains his original rounded face, short straight forward fringe and rectangular eyeglasses. Keep their actual facial features, ages, expressions and hair silhouettes unchanged. Use natural skin tones and soft neutral-white illumination on their faces.\n\nReplace the room surfaces with brushed-metal space-station architecture, integrated blue-white lights and a dark sports floor. Follow the existing walls, columns and room perspective. Large observation windows reveal a prominent blue Earth with recognizable white cloud systems and continents against black space; Earth occupies a substantial part of the window view. Retain the background player's location and the secondary tables.\n\nReplace clothing below the neck with sleek graphite technical-fabric athletic suits, fitted along the original body silhouettes, with silver seams and restrained cyan accents. Preserve bare hands and the original red paddles. Add thin glowing blue strips along the existing tabletop perimeter. Retain the original blue tabletop, white lines, net, thickness, corners, red curved arch supports, feet and all open spaces beneath it, with exactly the source geometry.\n\nPreserve the original action and camera movement: identical poses, footwork, swings, hand grips, paddle positions and final lateral lunge. Keep the single white ball in its source position at every corresponding frame, preserving its trajectory, motion blur, paddle contacts and bounce timing. Keep the photographic appearance and source framing. Establish the completed arena and costumes from the first frame, with clean solid structures and consistent details throughout; no opening transformation or dissolve.",
+      "job_id": "event-0005-generate",
+      "duration_seconds": 4.433333333333334,
+      "fps": 30.0,
+      "frames": 133
+    }
+  },
+  "online_reviews": {
+    "event-0002-critique": {
+      "video_id": "v1",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "space_station_transformation",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "Metallic wall panels, large windows showing Earth and stars, blue-white lighting, reflective sci-fi athletic suits, and glowing blue table edges clearly establish the requested setting.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "faces_hair_and_glasses",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "fail",
+          "importance": "core",
+          "claim": "Both players have substantially redesigned facial features and sculpted, swept-up hairstyles. The near player's source hairline and profile are changed; the far player has a different facial shape and hairstyle, and his source glasses are absent. These are identity changes beyond the requested wardrobe transformation.",
+          "scope": "both players' heads",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "table_geometry",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "The rectangular tabletop, center markings, net, and broad perspective remain recognizable. The source's open red arch supports have been replaced with a bulkier dark undercarriage, broad solid panels, and different curved openings; this changes the table's geometry rather than simply adding illuminated edges.",
+          "partial_boundary": "The playing surface and net layout are broadly retained; support shapes, thicknesses, and openings are redesigned.",
+          "scope": "table and supports",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "playing_motion_and_rally",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "The alternating stroke sequence, stance changes, and final far-player rightward lunge broadly correspond to the source. During several near-player strokes, however, the paddle and hand become indistinct or merge, reducing fidelity at the central playing action.",
+          "partial_boundary": "Broad body motion and rally event order survive; fine hand-and-paddle articulation is less faithful, and exact ball timing is separately imperfect.",
+          "scope": "both players and paddles",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "source",
+            "v1"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "final_ball_trajectory_and_timing",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "The final ball travels toward the far side and bounces in both videos, but its frame-by-frame position and bounce timing differ. The candidate ball advances ahead of the source during this flight and begins its rebound earlier: around 4.33 seconds it is already rising while the source ball is still approaching its lowest point. The final candidate ball is consequently visibly higher.",
+          "partial_boundary": "The broad flight direction and bounce event are retained; the exact trajectory and timing are not.",
+          "scope": "ball and table during final outgoing flight",
+          "requires_sequence": true,
+          "interval_seconds": [
+            4.0,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "source",
+            "v1"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "camera_movement",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "The broad gradual framing movement corresponds to the source, with similar changes in the table's screen position and the final lunge remaining framed. No conspicuous independent camera jump appears. Initial framing is slightly different, and the candidate has a shorter image height, so exact pixel registration is not established.",
+          "scope": "whole frame; broad camera movement",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "source",
+            "v1"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "temporal_stability",
+          "dimension": "temporal",
+          "origin": "design_quality",
+          "verdict": "partial",
+          "importance": "detail",
+          "claim": "Room panels, windows, Earth, table outline, glowing edges, and the redesigned supports remain generally coherent without conspicuous scene-wide jumps. Local hand-and-paddle definition deteriorates during some strokes. The bright ball also changes apparent size and elongation, although elongation alone can reflect motion blur.",
+          "partial_boundary": "The environment and large structures are stable; small fast-moving playing details are less consistent and readable.",
+          "scope": "whole frame, with local hand/paddle and ball limitations",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "v1"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "source",
+          "gains": [
+            "A clear, cohesive space-station setting with Earth visible through large windows.",
+            "Sleek athletic suits and luminous table edges integrated with the cool room lighting."
+          ],
+          "regressions": [
+            "Both facial identities and hairstyles change, and the far player's glasses disappear.",
+            "Table supports are structurally redesigned.",
+            "Exact ball positions and final bounce timing drift; some near-player hand/paddle boundaries become indistinct."
+          ],
+          "retained": [
+            "Broad tabletop and net layout.",
+            "Alternating rally actions, stance changes, and final far-player lunge.",
+            "Broad camera movement."
+          ],
+          "unknowns": [
+            "Exact optical equivalence of camera movement.",
+            "Fine finger anatomy and precise paddle-ball contact at the available full-frame scale."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ],
+          "relationship": "actual_input"
+        }
+      ],
+      "unresolved": [
+        "Precise finger articulation and paddle-ball contact remain difficult to resolve at this image scale.",
+        "The visible defects do not establish their generation cause; execution provenance has not been examined."
+      ]
+    },
+    "event-0004-critique": {
+      "video_id": "v2",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "arena_transformation",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "v2 clearly establishes a metallic space-station sports arena with blue-white lighting, sleek athletic suits, and glowing blue table edges.",
+          "scope": "whole frame at sampled times",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "earth_visibility",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "v2 shows stars and a narrow blue-white planetary horizon through the windows, but Earth is difficult to recognize specifically. v1's much larger blue globe and visible cloud patterns communicate Earth clearly.",
+          "partial_boundary": "The space-window setting is present; clear recognition of Earth is substantially weakened.",
+          "scope": "windows and exterior view at sampled times",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v2"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "near_player_identity",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "fail",
+          "importance": "core",
+          "claim": "The near player's source profile and short, receding hairline are replaced by a sharper facial profile and thick, raised, swept-back hair. v2 shows no convincing improvement over v1 in facial identity, hairline, or hairstyle.",
+          "scope": "near player's head in matched sparse crops",
+          "evidence": [
+            {
+              "observation_id": "event-0008",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "far_player_identity",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "fail",
+          "importance": "core",
+          "claim": "Despite restored eyewear, v2 replaces the far player's rounded facial shape and soft forward fringe with a more angular face and raised, swept-back hairstyle. Neither candidate preserves his facial identity or original hairline and hairstyle convincingly.",
+          "scope": "far player's head in matched sparse crops",
+          "evidence": [
+            {
+              "observation_id": "event-0007",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "rectangular_glasses",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "v2 restores clearly visible dark rectangular glasses on the far player, a meaningful improvement over their omission in v1. This restores an identifying accessory without resolving the changed face.",
+          "scope": "far player's eyewear at matched sampled times",
+          "evidence": [
+            {
+              "observation_id": "event-0007",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "table_geometry",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "v2 retains the recognizable tabletop, net, red arch supports, and open spaces beneath the table much more faithfully than v1's dark redesigned base. The support contours are still stylized, and the opening contains translucent distortions across the supports and tabletop edges.",
+          "partial_boundary": "The principal geometry and open red support structure are recovered, but exact source geometry and clean opening contours are not fully preserved.",
+          "scope": "table and supports",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "hand_paddle_separation",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "The near player's gripping hand remains simplified, with weak separation from the paddle handle during forward strokes. This is particularly apparent around 3.87–3.97 seconds in v2; v1 also has ambiguous grip contours. The red paddle blade remains recognizable in many frames.",
+          "partial_boundary": "The paddle and broad stroke remain readable, but the hand, handle, and paddle do not remain clearly articulated through the inspected stroke.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            3.2,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "source",
+            "v1",
+            "v2"
+          ],
+          "scope": "near player's gripping hand and paddle",
+          "evidence": [
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "ball_trajectory_and_bounces",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "v2 preserves the general cross-table ball route and bounce sequence. Exact timing is not identical: the near-side low point appears around 2.60 seconds in both edits versus 2.63 seconds in the source, approximately one native frame earlier. Later bounces also appear slightly early. Exact paddle-contact timing remains unresolved.",
+          "partial_boundary": "The rally trajectory and bounce order broadly correspond; frame-accurate bounce and contact timing are not established as preserved.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "source",
+            "v2"
+          ],
+          "scope": "ball and table across the full task interval",
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "playing_motion_and_camera",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "At the level of broad movement, v2 retains the alternating strokes, stance changes, final far-player lateral lunge, and source camera progression. This does not establish exact finger articulation or paddle-contact timing.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "source",
+            "v2"
+          ],
+          "scope": "whole-frame body movement and camera progression",
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "temporal_stability",
+          "dimension": "temporal",
+          "origin": "design_quality",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "v2 begins with conspicuous translucent, distorted structures across the background, table edges, and supports, diminishing over the first several frames. Subsequently, the main architecture, red support openings, and glasses remain broadly stable, with recurring local hand/paddle ambiguity.",
+          "partial_boundary": "Most of the clip maintains a coherent arena and table, but the opening has a material settling artifact and local grip definition remains weak.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "v2"
+          ],
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v2"
+            }
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "v1",
+          "gains": [
+            "v2 recovers the source-like red arch supports and their visible openings.",
+            "v2 restores the far player's dark rectangular glasses.",
+            "The sports-room arrangement remains more recognizable in v2."
+          ],
+          "regressions": [
+            "Earth is reduced from a prominent recognizable globe to a subtle blue-white horizon.",
+            "v2 has conspicuous opening ghosting and structural distortion."
+          ],
+          "retained": [
+            "Both provide convincing sci-fi suits, metallic architecture, blue-white lighting, and luminous table edges.",
+            "Both retain the broad rally staging and camera progression.",
+            "Both change facial identities and hairstyles, simplify gripping hands, and show small apparent bounce-timing offsets."
+          ],
+          "unknowns": [
+            "No convincing improvement in either facial identity or hairline is established.",
+            "Exact paddle-contact synchronization remains unresolved."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v2"
+            }
+          ],
+          "relationship": "alternative"
+        }
+      ],
+      "unresolved": [
+        "Exact paddle-contact timing cannot be reliably determined from the inspected evidence.",
+        "Fine finger and handle articulation remains difficult to read at native resolution."
+      ]
+    },
+    "event-0007-critique": {
+      "video_id": "v3",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "space_station_environment",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "V3 clearly establishes a space-station sports room with metallic wall panels and columns, large windows showing a recognizable blue-and-white Earth, and blue-white architectural lighting. Earth is substantially more prominent than in v2, whose windows show mostly stars initially and an Earth horizon in later samples.",
+          "scope": "whole frame, sampled times",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "overview",
+              "video": "source"
+            }
+          ]
+        },
+        {
+          "id": "athletic_suits",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "Both edited candidates replace the players' ordinary clothing with sleek dark athletic suits outlined by cyan accents. V3's suits fit the metallic arena coherently.",
+          "scope": "players, sampled times",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "table_edge_glow",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "V3 gives the tabletop a thin pale blue-white rim, but it reads primarily as an ordinary edge marking. V2 supplies a conspicuous cyan luminous perimeter and fulfills the requested glowing blue edges more clearly.",
+          "partial_boundary": "A light-colored perimeter is present in v3; the requested visible blue glow is weak.",
+          "scope": "table perimeter, sampled times and 0.6–0.9 s comparison",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0011",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0011",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "near_player_identity",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "fail",
+          "importance": "core",
+          "claim": "V3 changes the near player's short dark hair to silver-gray and substantially changes his facial profile, making him appear older. V2 also sharpens the profile and adds a raised tuft or topknot, but retains dark hair and is closer to the source. V3 has a briefly doubled facial contour in the opening crop.",
+          "scope": "near player's head",
+          "evidence": [
+            {
+              "observation_id": "event-0008",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v3"
+            },
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "far_player_face_hair_glasses",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "Both edits retain dark hair and eyewear on the far player, but alter his rounded facial proportions, forward fringe and thin glasses. V3 additionally shows a conspicuous cyan visor-like eye band and reddish facial distortion during roughly the first 0.15–0.2 seconds before resolving toward dark glasses. V2 has heavier eyewear and changed hair but no comparable cyan facial band.",
+          "partial_boundary": "The broad attributes of dark hair and eyewear survive; facial identity, hairstyle and original glasses are not faithfully preserved.",
+          "scope": "far player's head and upper body",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            0.6
+          ],
+          "sequence_videos": [
+            "source",
+            "v2",
+            "v3"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0009",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0009",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0009",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "table_geometry_supports",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "Both edits preserve a recognizable rectangular blue table, central net and red arch supports. In the 0.6–0.9 second comparison, the near tabletop corner and front support foot shift right relative to the source, and support contours are reshaped. V3's cleaner rendering does not establish exact geometry preservation.",
+          "partial_boundary": "Table type, net arrangement and red arch structure remain recognizable; original proportions and support outlines are altered.",
+          "scope": "tabletop, net and red supports",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.6,
+            0.9
+          ],
+          "sequence_videos": [
+            "source",
+            "v2",
+            "v3"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0011",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0011",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0011",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "opening_artifacts",
+          "dimension": "temporal",
+          "origin": "design_quality",
+          "verdict": "partial",
+          "importance": "detail",
+          "claim": "V3 improves the opening table and support outlines compared with v2's conspicuous translucent architectural and structural smearing. V3 still introduces opening facial artifacts, particularly the far player's visor-like band and the near player's doubled profile.",
+          "partial_boundary": "Structural clarity improves, while opening face and eyewear artifacts remain.",
+          "scope": "whole frame, with head crops resolving facial artifacts",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            0.6
+          ],
+          "sequence_videos": [
+            "v2",
+            "v3"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0009",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "rally_ball_camera_progression",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "Across the inspected sequence, both edits retain the broad alternating swings, ball crossings and tabletop bounces, ending with the far player's rightward lunge. Changes in table perspective broadly follow the source's camera progression. After candidate frame 66, comparison allows candidate frame n to correspond to source frame n+1 because source frame 67 was skipped; that known offset is not evidence of additional motion drift. No clear motion advantage for v3 over v2 was established.",
+          "scope": "whole frame; broad action, ball path and camera progression",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.433333333333334
+          ],
+          "sequence_videos": [
+            "source",
+            "v2",
+            "v3"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "fine_hand_contact_fidelity",
+          "dimension": "preservation",
+          "origin": "user_requirement",
+          "verdict": "unknown",
+          "importance": "detail",
+          "claim": "Red paddles and corresponding forward swings remain readable, but hand and paddle contours soften around fast contact in both edits. The source also contains motion blur. The inspected close view does not resolve exact grip anatomy or establish exact ball-paddle contact preservation.",
+          "scope": "near player's hand/paddle crop",
+          "requires_sequence": true,
+          "interval_seconds": [
+            1.4,
+            1.9
+          ],
+          "sequence_videos": [
+            "source",
+            "v2",
+            "v3"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0010",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0010",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0010",
+              "video": "v3"
+            }
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "source",
+          "gains": [
+            "V3 adds clear metallic space-station architecture, large Earth windows, blue-white lighting and sci-fi athletic suits."
+          ],
+          "regressions": [
+            "Both players' facial features and hairstyles change; the near player becomes gray-haired and older-looking.",
+            "Opening facial distortion appears, including a temporary visor-like eye band.",
+            "Table and support geometry are approximate, and the requested blue edge glow remains weak."
+          ],
+          "retained": [
+            "Recognizable tabletop, net and red arch supports.",
+            "Broad rally actions, ball crossings and bounces, final lunge and camera progression."
+          ],
+          "unknowns": [
+            "Exact grip anatomy, ball-paddle contacts, pixel-level trajectory correspondence and exact camera path."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0009",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0009",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0011",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0011",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0010",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0010",
+              "video": "v3"
+            }
+          ],
+          "relationship": "actual_input"
+        },
+        {
+          "against": "v2",
+          "gains": [
+            "V3 makes Earth immediately recognizable and much more prominent through large windows.",
+            "V3 reduces opening smearing around the table, supports and architecture."
+          ],
+          "regressions": [
+            "V3 makes a substantially larger near-player identity change through silver-gray hair and an older facial profile.",
+            "V3 introduces a conspicuous opening visor-like facial artifact.",
+            "V3 substantially weakens the requested luminous blue table perimeter."
+          ],
+          "retained": [
+            "Metallic arena styling, blue-white illumination and dark sci-fi suits.",
+            "Broad rally, ball-path and camera correspondence, with recognizable red arch supports."
+          ],
+          "unknowns": [
+            "No demonstrated v3 advantage in fine hand/paddle fidelity or exact trajectory preservation."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0008",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0009",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0009",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0010",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0010",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0011",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0011",
+              "video": "v3"
+            }
+          ],
+          "relationship": "alternative"
+        }
+      ],
+      "unresolved": [
+        "Exact finger/grip anatomy and contact fidelity remain unreadable in fast motion.",
+        "Broad ball-path and camera preservation are supported; exact geometric trajectories and camera parameters are unverified.",
+        "The supplied duration check reports v3 valid at 4.433333333333334 seconds; duration validity alone does not establish visual preservation."
+      ]
+    }
+  },
+  "final": {
+    "video": "v2",
+    "message": "Selected v2 as the strongest available result. It delivers the futuristic arena, sci-fi suits, glowing blue table edges, and recognizable rally. Remaining defects include altered faces and table geometry, opening smearing, and subtle Earth visibility. Exact ball trajectory and camera matching remain unverified.",
+    "outcome": "selected_video"
+  },
+  "limits": [
+    "Development-exposed historical task.",
+    "Media hashes are copied from recorded metadata; this extraction does not rehash or re-evaluate videos.",
+    "No independent evaluation is implied by an online verdict."
+  ]
+}

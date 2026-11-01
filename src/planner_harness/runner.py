@@ -532,6 +532,16 @@ class PlannerHarness:
                         save(call_dir / "decision-state.json", self.state)
                     self.state["pending_event"] = event_id
                     self.checkpoint()
+                if self.state["config"].get("workflow") == "creative_loop_v1":
+                    from .experience_usage import record_exposure
+                    try:
+                        record_exposure(call_dir, self.knowledge.usage_index(), self.state.get("knowledge_snapshot_sha256"))
+                    except (OSError, ValueError, KeyError, TypeError) as exc:
+                        # Telemetry must not turn a valid creative operation into a retry.
+                        warning = {"event_id": event_id, "error_type": type(exc).__name__}
+                        warnings = self.state.setdefault("experience_recording_warnings", [])
+                        if warning not in warnings:
+                            warnings.append(warning)
                 print(f"[{self.output.name}] {event_id}: model call, {len(images)} images", flush=True)
                 raw_path = call_dir / "response.txt"
                 try:

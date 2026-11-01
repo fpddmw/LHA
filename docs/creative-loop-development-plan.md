@@ -8,6 +8,8 @@ Current authorization: implement the full bounded repair plan and synchronize co
 
 Subsequent discussion, 2026-11-01: [Skills, experience and task workspace](skill-experience-workspace-direction.md) records the agreed direction for reorganizing manuals and experience. Its technical route and experience lifecycle remain open. The contracts below describe the existing implementation; the discussion record does not activate cards or authorize the next refactor.
 
+Subsequent approved implementation, 2026-11-01: [experience-library refactor](experience-library-refactor-plan.md) now resolves that direction. It adds two optional professional manuals, three external maintenance Skills, an explicitly reviewed curated catalog and passive usage/batch records. The old Wiki/E1/RSI exclusions below continue to apply. New explanatory entries are a separate bounded content surface; the current curated catalog is empty pending review of four drafted examples. Planner operations, Critic roles and the experiment deferral are unchanged.
+
 | Confirmed decision | Architectural consequence |
 |---|---|
 | The model chooses how to understand, design and revise the video | One continuing Planner owns creative and operational decisions; no keyword decomposition, prescribed aesthetic or mandatory reasoning sequence |

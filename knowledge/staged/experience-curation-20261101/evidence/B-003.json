@@ -1,0 +1,788 @@
+{
+  "id": "B-003",
+  "extraction": "Deterministic excerpts from saved state; no new model call or visual judgment. Historical online findings are attributed, not instructions.",
+  "source": {
+    "path": "out/agent_loop_live/20261030/phase2/completed-benchmark-003-short/tasks/benchmark__003__short/run/state.json",
+    "sha256": "496a6935d8cfc7428599fb4065aab1ad4f547d89c0595b213938a4432487d88d"
+  },
+  "request": "Turn this into a magical fantasy study.",
+  "generations": [
+    {
+      "event_id": "event-0003",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "source",
+          "prompt": "Transform the room into a richly detailed, photorealistic wizard’s study. Retain the fixed wide composition and the seated reader’s original movement as they lift and read the book. Give the vaulted ceiling aged stone ribs with faintly luminous celestial engravings. Turn the desk and chair into intricately carved dark oak, and the surrounding stacks into ancient leather spellbooks with brass clasps and loose parchment. Dress the reader in a midnight-blue robe with delicate gold embroidery, retaining their gray hair. The book they handle emits turquoise light from its pages, illuminating their hands and hair; tiny golden magical symbols drift just above the pages. A few closed books float gently beside the desk. Place hovering candles around the rear arch, their amber light contrasting with the turquoise magic. Within the existing fireplace at right, blue-violet enchanted flames flicker around the logs. Preserve the intimate, cluttered study atmosphere, with tangible materials, soft shadows and sparse glowing dust motes."
+        }
+      }
+    },
+    {
+      "event_id": "event-0005",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "source",
+          "prompt": "Transform this rear-view shot into a photorealistic magical fantasy study. Keep the camera behind the seated reader throughout: their gray hair, shoulders and back face the camera, and their face remains hidden as they lift and read the book toward the rear alcove. Preserve the clearly visible wooden slatted chair back between the camera and the reader, with the desk beyond them and the original furniture arrangement intact. Restyle their clothing as a midnight-blue scholar’s robe with fine gold constellation embroidery across the back and sleeves. Give the existing vaulted ceiling weathered stone blocks with faint luminous celestial engravings. Turn the existing book stacks into worn leather spellbooks with brass clasps, retaining their locations and irregular silhouettes. The book held ahead of the reader’s left shoulder emits a soft turquoise page glow, catching the edges of their hands and gray hair; a few tiny magical sparks rise above it. Place amber candles on the desk and surrounding book stacks. Blue-violet flames flicker around the logs inside the existing fireplace at right. Retain the original book-lifting movement, fixed wide framing and intimate clutter, with natural cloth, aged wood, rough stone and soft shadows."
+        }
+      }
+    },
+    {
+      "event_id": "event-0008",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "source",
+          "prompt": "Transform the room into a photorealistic magical fantasy study while retaining its intimate clutter and furniture arrangement. Keep the gray-haired reader seated with their back to the camera, lifting and reading the open book with the source movement. Retain the existing fitted jacket and trousers; recolor the jacket deep indigo with delicate gold embroidery on its shoulders and cuffs. Keep the wooden chair clearly visible between the camera and reader: its rounded top rail, vertical slats, seat and splayed legs frame the seated body, with the desk beyond. Turn the vaulted plaster ceiling into weathered stone with subtle luminous constellation engravings. Restyle the existing irregular book stacks as worn leather spellbooks with brass fittings and loose parchment. The lifted book remains open in a shallow V, with distinct cream page blocks, curved paper edges and a central fold. A gentle turquoise glow shines from the paper without obscuring its structure; a few golden sparks rise above the pages. Amber candles illuminate the rear alcove and desk. Small violet flames flicker around the logs inside the right-hand hearth. Maintain the fixed wide framing, natural proportions, textured materials and soft shadows."
+        },
+        "purpose": "Restart from the source to recover the visible seating and open-book structure, using a fitted scholar’s jacket instead of a concealing floor-length robe."
+      }
+    }
+  ],
+  "videos": {
+    "source": {
+      "path": "/output/LHA-loop-benchmark-20261030-preparation/benchmark_data/main/003/003.mp4",
+      "sha256": "e2bd39613ab09168885308a3e935a832c70e97ad830f47367fa690db28b9eaa7",
+      "duration_seconds": 4.380746349378042,
+      "fps": 18.49,
+      "frames": 81
+    },
+    "v1": {
+      "path": "/output/LHA-loop-batch-20261030-service/tasks/benchmark__003__short/run/videos/v1/video.mp4",
+      "sha256": "dbc47a4713c9184a1877198244ce7888ef90eb2dfc2103099879e023252512b2",
+      "parent": "source",
+      "prompt": "Transform the room into a richly detailed, photorealistic wizard’s study. Retain the fixed wide composition and the seated reader’s original movement as they lift and read the book. Give the vaulted ceiling aged stone ribs with faintly luminous celestial engravings. Turn the desk and chair into intricately carved dark oak, and the surrounding stacks into ancient leather spellbooks with brass clasps and loose parchment. Dress the reader in a midnight-blue robe with delicate gold embroidery, retaining their gray hair. The book they handle emits turquoise light from its pages, illuminating their hands and hair; tiny golden magical symbols drift just above the pages. A few closed books float gently beside the desk. Place hovering candles around the rear arch, their amber light contrasting with the turquoise magic. Within the existing fireplace at right, blue-violet enchanted flames flicker around the logs. Preserve the intimate, cluttered study atmosphere, with tangible materials, soft shadows and sparse glowing dust motes.",
+      "job_id": "event-0003-generate",
+      "duration_seconds": 4.409090909090909,
+      "fps": 22.0,
+      "frames": 97
+    },
+    "v2": {
+      "path": "/output/LHA-loop-batch-20261030-service/tasks/benchmark__003__short/run/videos/v2/video.mp4",
+      "sha256": "5a2085154b96b8eeb685e0995b87f372d7503833f3ca639abe3ff638b23a1913",
+      "parent": "source",
+      "prompt": "Transform this rear-view shot into a photorealistic magical fantasy study. Keep the camera behind the seated reader throughout: their gray hair, shoulders and back face the camera, and their face remains hidden as they lift and read the book toward the rear alcove. Preserve the clearly visible wooden slatted chair back between the camera and the reader, with the desk beyond them and the original furniture arrangement intact. Restyle their clothing as a midnight-blue scholar’s robe with fine gold constellation embroidery across the back and sleeves. Give the existing vaulted ceiling weathered stone blocks with faint luminous celestial engravings. Turn the existing book stacks into worn leather spellbooks with brass clasps, retaining their locations and irregular silhouettes. The book held ahead of the reader’s left shoulder emits a soft turquoise page glow, catching the edges of their hands and gray hair; a few tiny magical sparks rise above it. Place amber candles on the desk and surrounding book stacks. Blue-violet flames flicker around the logs inside the existing fireplace at right. Retain the original book-lifting movement, fixed wide framing and intimate clutter, with natural cloth, aged wood, rough stone and soft shadows.",
+      "job_id": "event-0005-generate",
+      "duration_seconds": 4.409090909090909,
+      "fps": 22.0,
+      "frames": 97
+    },
+    "v3": {
+      "path": "/output/LHA-loop-batch-20261030-service/tasks/benchmark__003__short/run/videos/v3/video.mp4",
+      "sha256": "02d92deae6dcfb1d295b77dbfd7eec8529d6242ff403daa6e9866b26e360aabb",
+      "parent": "source",
+      "prompt": "Transform the room into a photorealistic magical fantasy study while retaining its intimate clutter and furniture arrangement. Keep the gray-haired reader seated with their back to the camera, lifting and reading the open book with the source movement. Retain the existing fitted jacket and trousers; recolor the jacket deep indigo with delicate gold embroidery on its shoulders and cuffs. Keep the wooden chair clearly visible between the camera and reader: its rounded top rail, vertical slats, seat and splayed legs frame the seated body, with the desk beyond. Turn the vaulted plaster ceiling into weathered stone with subtle luminous constellation engravings. Restyle the existing irregular book stacks as worn leather spellbooks with brass fittings and loose parchment. The lifted book remains open in a shallow V, with distinct cream page blocks, curved paper edges and a central fold. A gentle turquoise glow shines from the paper without obscuring its structure; a few golden sparks rise above the pages. Amber candles illuminate the rear alcove and desk. Small violet flames flicker around the logs inside the right-hand hearth. Maintain the fixed wide framing, natural proportions, textured materials and soft shadows.",
+      "job_id": "event-0008-generate",
+      "duration_seconds": 4.409090909090909,
+      "fps": 22.0,
+      "frames": 97
+    }
+  },
+  "online_reviews": {
+    "event-0004-critique": {
+      "video_id": "v1",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "fantasy_transformation",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "Blue-and-gold robes, a glowing cyan book, floating particles, candles, stone vaulting and purple fire convincingly transform the room into a magical fantasy study.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "reader_orientation",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "fail",
+          "importance": "core",
+          "claim": "The source presents the reader's back at the desk; v1 presents a visible face and frontal torso. This substantially changes the subject's orientation and the original viewing relationship.",
+          "scope": "reader and desk",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "composition_and_furniture",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "The central seated reader, surrounding book stacks, vaulted enclosure and right-hand fireplace remain recognizable. However, the source's foreground slatted chair back is replaced by a broad dark furniture edge and heraldic panel across the lap, making the desk/chair relationship less readable.",
+          "partial_boundary": "Broad room layout survives; the foreground furniture arrangement and subject-to-desk relationship do not.",
+          "scope": "whole frame, especially foreground furniture",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "reading_action",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "The broad action survives: the seated reader raises an open book near the opening and then holds it for reading. Candidate observations show maintained two-handed contact and attention toward the book, although the frontal staging reinterprets the source gesture.",
+          "scope": "reader, hands and book",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0,
+            4.380746349378042
+          ],
+          "sequence_videos": [
+            "source",
+            "v1"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "temporal_stability",
+          "dimension": "temporal",
+          "origin": "design_quality",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "Across the inspected task interval, the reader, robe, architecture, stacks and furniture remain anchored without a visible large pose or geometry discontinuity. Particles and flames vary locally; the opening book lift proceeds gradually.",
+          "scope": "whole frame",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0,
+            4.380746349378042
+          ],
+          "sequence_videos": [
+            "v1"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v1"
+            }
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "source",
+          "gains": [
+            "A clearly magical study with coordinated costume, lighting, architecture and supernatural effects.",
+            "The luminous book creates a strong focal point."
+          ],
+          "regressions": [
+            "The reader changes from back-facing to front-facing.",
+            "The foreground chair and desk arrangement loses spatial clarity."
+          ],
+          "retained": [
+            "Broad central-reader composition, surrounding books, vaulted room and right-hand fireplace.",
+            "The general seated book-raising and reading activity."
+          ],
+          "unknowns": [
+            "Fine finger anatomy and precise page manipulation remain unresolved at the inspected scale."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            }
+          ],
+          "relationship": "actual_input"
+        }
+      ],
+      "unresolved": [
+        "Fine finger anatomy is not sufficiently readable to confirm or diagnose a hand defect.",
+        "Exact page-turn fidelity is not established; the supported preservation claim concerns the broad reading action."
+      ]
+    },
+    "event-0006-critique": {
+      "video_id": "v2",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "fantasy_transformation",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "The embroidered blue robe, glowing book, candlelit patterned vault, ornate book stacks and violet illumination clearly establish a magical fantasy study.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "reader_orientation",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "V2 restores the source’s back-facing reader orientation. V1 instead presents the reader facing the camera in the supplied comparison samples.",
+          "scope": "whole frame; sampled comparison poses",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "seating_and_furniture",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "fail",
+          "importance": "core",
+          "claim": "The source clearly shows the reader supported by a foreground wooden chair at the desk. In v2, the floor-length robe conceals the chair back, seat and legs, and no clear bent seated posture replaces those cues. A dark desk structure remains visible to the left, but the reader-chair-desk relationship is no longer legible. This does not establish that the reader is standing; it establishes lost visible seating support.",
+          "scope": "reader, foreground chair and desk region at sampled beginning, middle and ending poses",
+          "evidence": [
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v2"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "open_book_readability",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "V2 retains the lifting gesture and makes the held object visibly magical, but its luminous face reads as a thick bordered rectangle. The opening crop does not reveal a distinguishable hinge, paired page blocks or open spread, whereas the source visibly presents pale pages opening outward.",
+          "partial_boundary": "The lift and magical glow succeed; recognizable open-book geometry is weakened. The evidence does not prove that the object is closed.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            1.0909090909090908
+          ],
+          "sequence_videos": [
+            "source",
+            "v2"
+          ],
+          "scope": "book and hand crop",
+          "evidence": [
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "structural_temporal_stability",
+          "dimension": "temporal",
+          "origin": "design_quality",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "Across the inspected dense intervals, the back-facing reader, robe embroidery, book stacks and vaulted architecture remain visually stable, with no obvious structural jump. The obscured seating and unclear book spread persist as spatial readability problems rather than appearing as intermittent temporal failures.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.363636363636363
+          ],
+          "sequence_videos": [
+            "v2"
+          ],
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "violet_light_placement",
+          "dimension": "design",
+          "origin": "design_quality",
+          "verdict": "pass",
+          "importance": "detail",
+          "claim": "Violet illumination appears above the mantel while a small warm flame remains inside the firebox. The separation makes the violet effect read as an additional magical phenomenon rather than transformed fireplace fire. This is a permissible fantasy treatment under the original broad request, not a material instruction failure.",
+          "scope": "fireplace and area above mantel",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            }
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "source",
+          "gains": [
+            "A clear, cohesive magical study identity through costume, architecture, book glow and lighting."
+          ],
+          "regressions": [
+            "The foreground chair and visible seated support are concealed.",
+            "The lifted book’s open-page structure becomes difficult to recognize."
+          ],
+          "retained": [
+            "Back-facing reader orientation, book-lifting action, vaulted study layout, surrounding books and right-side fireplace."
+          ],
+          "unknowns": [
+            "The robe-covered body’s actual seated posture and the glowing book’s exact opening angle remain visually unresolved."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v2"
+            }
+          ],
+          "relationship": "actual_input"
+        },
+        {
+          "against": "v1",
+          "gains": [
+            "V2 restores the source’s back-facing orientation."
+          ],
+          "regressions": [
+            "V1’s sampled views communicate seated posture and an open book more clearly than v2."
+          ],
+          "retained": [
+            "Blue wizard attire, ornate book-filled surroundings, warm candlelight and contrasting cyan/violet magic."
+          ],
+          "unknowns": [
+            "V1 was inspected through sparse overview samples, so its continuous temporal quality is not compared."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v2"
+            }
+          ],
+          "relationship": "alternative"
+        }
+      ],
+      "unresolved": [
+        "Seating beneath the robe cannot be confirmed; visible chair and posture cues remain insufficient.",
+        "The glowing object’s exact opening angle is unresolved, although the loss of readable open pages is evident."
+      ]
+    },
+    "event-0009-critique": {
+      "video_id": "v3",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "fantasy_transformation",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "The stone vault, leather-bound tomes, candles, blue-and-gold costume, luminous cyan pages, stars and colored overhead light create a coherent magical fantasy study.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "seating_orientation_composition",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "V3 retains the back-facing seated reader, clearly visible wooden chair and fixed broad arrangement of desk, vaulted room and right-hand hearth. The chair remains readable during the movement. Furniture details and book arrangements are redesigned, so preservation concerns the composition and seated action rather than exact set dressing.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.380746349378042
+          ],
+          "sequence_videos": [
+            "source",
+            "v3"
+          ],
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "book_lift_and_geometry",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "V3 preserves the broad upward book-lifting action. During the lift, two luminous page halves emerge beside the reader’s head and form a recognizable open-book silhouette, improving substantially on v2’s framed rectangular object. The head obscures their central connection, and precise finger support remains indistinct.",
+          "partial_boundary": "The lift and open-spread appearance succeed; a continuous binding and exact hand-to-book contact cannot be verified. The evidence does not establish detached pages.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            1.0909090909090908
+          ],
+          "sequence_videos": [
+            "source",
+            "v3"
+          ],
+          "scope": "reader, hands and book crop",
+          "evidence": [
+            {
+              "observation_id": "event-0006",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "temporal_stability",
+          "dimension": "temporal",
+          "origin": "design_quality",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "Across the recorded dense observations, V3 maintains the chair, seated silhouette, page outlines and room structure without an obvious structural jump or composition drift. After the lift, both page halves remain consistently visible. Green/cyan illumination shifts overhead while the architecture stays fixed; the final native frame retains the same arrangement.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            4.380746349378042
+          ],
+          "sequence_videos": [
+            "v3"
+          ],
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v3"
+            }
+          ]
+        },
+        {
+          "id": "violet_effect_placement",
+          "dimension": "design",
+          "origin": "design_quality",
+          "verdict": "pass",
+          "importance": "detail",
+          "claim": "The violet flame-like glow appears along the upper-right mantel area, while an ordinary warm flame remains inside the hearth. This is a secondary design choice and does not violate the broad request for a magical fantasy study.",
+          "scope": "right-hand mantel and hearth",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v3"
+            }
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "v2",
+          "gains": [
+            "V3 exposes the wooden chair and makes the seated pose immediately understandable.",
+            "Two luminous page halves with visible text cues read more clearly as an open book than v2’s thick framed luminous rectangle.",
+            "Stars and overhead colored light reinforce the magical atmosphere."
+          ],
+          "regressions": [
+            "V3 replaces v2’s elaborate embroidered, floor-length robe with a simpler costume, trading some ornamental richness for clearer seating."
+          ],
+          "retained": [
+            "Both versions establish a fantasy study with blue clothing, warm candles, book-filled surroundings and the right-hand hearth.",
+            "The recorded intervals show stable broad composition in both versions."
+          ],
+          "unknowns": [
+            "V3’s binding and precise finger contact remain obscured; improved readability does not prove fully coherent hidden book geometry.",
+            "No additional material temporal regression is established by the inspected evidence."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0006",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0007",
+              "video": "v3"
+            }
+          ],
+          "relationship": "alternative"
+        }
+      ],
+      "unresolved": [
+        "The reader’s head hides the central book connection throughout the inspected lift and hold; precise binding and finger geometry remain unverified.",
+        "No confirmed material structural defect remains in the observed chair or page silhouettes."
+      ]
+    }
+  },
+  "final": {
+    "video": "v3",
+    "message": "Selected v3: a candlelit magical study with stone vaults, ancient spellbooks and glowing turquoise pages, retaining the back-facing seated reader, visible chair and fixed composition.",
+    "outcome": "selected_video"
+  },
+  "limits": [
+    "Development-exposed historical task.",
+    "Media hashes are copied from recorded metadata; this extraction does not rehash or re-evaluate videos.",
+    "No independent evaluation is implied by an online verdict."
+  ]
+}

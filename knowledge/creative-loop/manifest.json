@@ -3,7 +3,7 @@
   "source_manifest": "knowledge/source-map.json",
   "source_groups": ["entries", "domain_references", "guides", "model_experience", "supporting_sources"],
   "static_topics": {
-    "experience-map": "knowledge/experience/README.md",
+    "experience-map": "knowledge/experience/curated/README.md",
     "choose-editing-input": "knowledge/experience/choose-editing-input.md",
     "express-edits": "knowledge/experience/express-edits.md",
     "inspect-and-compare": "knowledge/experience/inspect-and-compare.md",
@@ -12,7 +12,10 @@
   "navigation": {
     "map": "knowledge/creative-loop/README.md",
     "manual": "knowledge/creative-loop/READING.md",
-    "score-definitions": "src/critic_harness/SCORE_DEFINITIONS.md"
+    "score-definitions": "src/critic_harness/SCORE_DEFINITIONS.md",
+    "understand-and-design": "knowledge/creative-loop/UNDERSTAND_AND_DESIGN.md",
+    "understand-and-revise": "knowledge/creative-loop/UNDERSTAND_AND_REVISE.md"
   },
+  "curated_catalog": "knowledge/experience/curated/catalog.json",
   "classes": ["operating_manual", "semantic_understanding", "visual_style_and_design", "generation_and_iteration"]
 }

@@ -1,0 +1,36 @@
+{
+  "batch_id": "historical-six-source-inspection-20261101",
+  "purpose": "development_maintenance",
+  "runs": [
+    {
+      "id": "B-003",
+      "path": "../out/agent_loop_live/20261030/phase2/completed-benchmark-003-short/tasks/benchmark__003__short/run",
+      "data_role": "development"
+    },
+    {
+      "id": "B-024-full",
+      "path": "../out/agent_loop_live/20261030/phase2/completed-024-pair/tasks/024__long__full_knowledge/run",
+      "data_role": "development"
+    },
+    {
+      "id": "B-FS4-full",
+      "path": "../out/agent_loop_live/20261030/phase2/completed-fewshot-004-pair/tasks/fewshot_004__long__full_knowledge/run",
+      "data_role": "development"
+    },
+    {
+      "id": "D-FS4-full",
+      "path": "../out/agent_loop_live/20261030/ditto-phase2/completed-fewshot004-full/tasks/fewshot_004__long__full_knowledge/run",
+      "data_role": "development"
+    },
+    {
+      "id": "D-FS4-no",
+      "path": "../out/agent_loop_live/20261030/ditto-phase2/completed-fewshot004-no/tasks/fewshot_004__long__no_knowledge/run",
+      "data_role": "development"
+    },
+    {
+      "id": "D-027-full",
+      "path": "../out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/027__short__full_knowledge/run",
+      "data_role": "development"
+    }
+  ]
+}
