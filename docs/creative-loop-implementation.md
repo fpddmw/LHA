@@ -4,6 +4,15 @@ Approved scope: [implementation plan](creative-loop-refactor-and-fewshot-plan.md
 Live experiments, model calls and deployment are deferred. Independent evaluation
 is configured for `glm5.3flash` at Paratera; its live API capabilities are unverified.
 
+Status correction, 2026-11-01: this is the implementation checkpoint before the
+[architecture audit](creative-loop-design-audit-20261101.md). Its tests and exported
+artifacts remain valid within their scope, but completion is partial: the audit
+reproduced gaps in context capacity, Critic input/output boundaries, failure recovery,
+bounded outcome semantics, server profile construction and report projection. See the
+[detailed development specification](creative-loop-development-plan.md) for the
+confirmed target and bounded follow-up work. No repairs or live experiments were
+performed in the documentation/audit pass.
+
 ## What changed
 
 `creative_loop_v1` is an explicit Planner workflow. The existing default is `legacy`,

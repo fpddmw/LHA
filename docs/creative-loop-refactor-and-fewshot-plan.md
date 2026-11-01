@@ -37,7 +37,13 @@ Planner and online Critic use `gpt-6.1-sol` with `high` reasoning. Newly authore
 
 After later user authorization, use the existing two-RTX-5090 AutoDL container and seven original fewshot long requests. Compare Direct (unchanged user prompt to Bernini) with Loop-first (joint knowledge and Planner/harness effect), then Loop-final with Loop-first (iteration and selection effect). Preserve the established 40-step v2v_apg, maximum size 848, native time axis and matching initial seeds/settings. Independent scoring uses `glm5.3flash` with anonymous inputs and frozen axes, without feeding scores back into the Planner. Report per-task results, unknowns, costs, actual generation count, ancestry and incomplete deliveries. Deployment, model calls, scoring and experiment automation remain deferred in this implementation pass.
 
-## Progress and verification
+## Development specification and design audit
+
+The detailed development specification is [creative-loop-development-plan.md](creative-loop-development-plan.md). It expands the approved route into responsibilities, data boundaries, runtime behavior, file-level work packages and observable completion criteria. It introduces no RSI workflow or new mandatory Planner forms. The current assignment is to save that specification and audit the implementation, not to change executable code or start experiments.
+
+The implementation checkpoints below are historical records of work and tests performed. They are not a claim that every architectural requirement is complete. The [2026-11-01 design audit](creative-loop-design-audit-20261101.md) classifies actual behavior separately, including gaps not exercised by the original tests. Context continuity, recovery/terminal states, Critic boundaries, server role configuration and reporting are partially complete; the audit has not implemented repairs.
+
+## Implementation checkpoints recorded before the design audit
 
 - Plan saved: complete.
 - Pre-refactor remote backup: verified at `433c5dfd9dab6dc9949c5d5111480cf34486dce0` on `codex/loop-pre-refactor-20261101`, before code changes. Runtime proposal logs and generated reports stayed local. Existing baseline line endings were preserved.
