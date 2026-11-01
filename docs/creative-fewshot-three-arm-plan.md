@@ -1,6 +1,6 @@
 # Seven-fewshot three-arm experiment preparation
 
-Date: 2026-11-01. Status: code and local/provider preflight complete; awaiting the correct opened host configuration. The user authorized this plan, the complete preflight repairs, activation of the reviewed experience/manual package, software checks and Git publication. The user subsequently supplied a new host and authorized startup after checks. The supplied endpoint currently exposes one RTX 4090 D (24GB), so hardware selection is being confirmed before generation.
+Date: 2026-11-01. Status: code and local/provider preflight complete; deployment to the user-authorized single RTX 4090 D is in progress. The user authorized this plan, the complete preflight repairs, activation of the reviewed experience/manual package, software checks and Git publication. The user subsequently supplied a new host and authorized startup after checks. The supplied endpoint exposes one RTX 4090 D (24GB). The user explicitly confirmed using it because the 5090 capacity was unavailable. All three arms will run sequentially on this one GPU with the same generation settings.
 
 ## Experimental contract
 
@@ -30,7 +30,7 @@ Delivery determines completion. There is no three-generation or hidden turn ceil
 | Topic coordinator, Direct and seed pairing | Implemented | Independent persistent GPU slots; native frames; successful-generation seeds 42, 43, ...; no generation/turn count cap |
 | Independent judging, comparisons and archive gate | Implemented | Two independent judge slots, hash-based reuse, six paired comparisons per judge, disagreement and verified per-topic archive |
 | Offline and provider preflight | Passed locally | 104 offline tests; synthetic image/report checks passed for gpt-6.1-sol/high, GLM-5.3-Flash and claude-sonnet-5-5/high |
-| Commit and remote synchronization | In progress | Implementation branch codex/experience-curation-v1 |
+| Commit and remote synchronization | Complete | Code commit 38b6cbc09b6ee8588d448170b843471eb9a27b48 on codex/experience-curation-v1; origin SHA verified |
 
 No automatic RSI, proposal/replay/adoption mechanism, mandatory reasoning form, automatic Critic call, target-score guidance or per-task scoring card is introduced. Experience stays frozen throughout all seven topics; all three arms start independent task state.
 
@@ -54,3 +54,5 @@ A synthetic provider contract check establishes image/request/report compatibili
 - The successful capability records live under `out/creative_fewshot_preparation/20261101/ready`; the release manifest and local preflight are prepared separately after code freeze. The final independent reports, online Critic report and software fixtures remain clearly separate from benchmark outcomes.
 
 Protocol references for provider-specific request controls: [Claude effort](https://platform.claude.com/docs/en/build-with-claude/effort) and [GLM reasoning/output capacity](https://docs.nvidia.com/nim/large-language-models/2.1.4/get-started/advanced/get-started-glm-5.3-flash.html). Actual endpoint compatibility is established by the retained preflight responses.
+
+Host inspection found the previous 27GB pinned Bernini model directory, the official Bernini code and a working Python environment (PyTorch 2.7.1+cu128, Transformers 4.57.3, PyAV and OpenCV). Reuse these through an isolated checkout; preserve all old runs. GitHub is reachable directly from the server, so no model files pass through the local VPN. Host asset/tokenizer/authentication preflight and the first actual render still precede a claim of GPU readiness.
