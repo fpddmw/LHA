@@ -6,6 +6,8 @@ Current authorization: implement the full bounded repair plan and synchronize co
 
 ## 1. Design decisions recovered from the conversation
 
+Subsequent discussion, 2026-11-01: [Skills, experience and task workspace](skill-experience-workspace-direction.md) records the agreed direction for reorganizing manuals and experience. Its technical route and experience lifecycle remain open. The contracts below describe the existing implementation; the discussion record does not activate cards or authorize the next refactor.
+
 | Confirmed decision | Architectural consequence |
 |---|---|
 | The model chooses how to understand, design and revise the video | One continuing Planner owns creative and operational decisions; no keyword decomposition, prescribed aesthetic or mandatory reasoning sequence |
