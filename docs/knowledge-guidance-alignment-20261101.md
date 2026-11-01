@@ -1,6 +1,6 @@
 # Align knowledge guidance with judgment-bearing writing
 
-Date: 2026-11-01. Status: content complete; static checks passed; publication pending. The user authorized the bounded edits identified in the read-only inventory and requested a commit. This pass prepares the reading surface for later experiments; it does not start experiments or activate the staged experience/manual package.
+Date: 2026-11-01. Status: complete. Content and static checks are committed and synchronized to GitHub. The user authorized the bounded edits identified in the read-only inventory and requested a commit. This pass prepares the reading surface for later experiments; it does not start experiments or activate the staged experience/manual package.
 
 ## Agreed editorial decisions
 
@@ -27,7 +27,7 @@ All 111 full entries, five domain references, original experimental records, leg
 | Three core guides | Complete |
 | Four comparative guides | Complete |
 | Current project navigation and historical labels | Complete |
-| Static verification and commit | Static checks complete; commit and remote verification pending |
+| Static verification and commit | Complete: content commit 6766798 pushed and remote SHA verified |
 
 ## Delivered editorial changes
 
@@ -44,3 +44,7 @@ Static inspection checked 54 changed/new Markdown files and 1,090 local links be
 Direct imports of the unchanged knowledge modules read all 17 checked navigation/guide resources from the actual 409-item index. No Wiki or staged path was indexed; the approved curated catalog still has zero entries. This isolated knowledge check bypassed the package initializer because the WSL Python lacks cv2. It did not simulate a Planner or run the video pipeline. The pre-existing unexecuted runtime regressions and live API check remain separate experiment-preparation work.
 
 Check details are saved locally under `out/knowledge_guidance_alignment/20261101/`. These checks establish content integrity and discovery, not generation quality. No code, fixed score, model setting, running snapshot or experience activation changed. Experiments remain deferred.
+
+## Publication receipt
+
+Content commit: `67667984c8cbccd61f9daeed0ee49d8087355494` on `codex/experience-curation-v1`, pushed to `https://github.com/fpddmw/LHA.git`; the remote branch SHA was checked independently after upload. This final plan update records that completed publication. Only the authorized editorial paths were included; unrelated local reports, demo drafts and runtime lock files were left untouched.
