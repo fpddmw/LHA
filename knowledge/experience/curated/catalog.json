@@ -1,6 +1,831 @@
 {
   "schema": "creative-experience-catalog-v1",
-  "revision": "20261101-empty-pending-content-review",
-  "entries": [],
-  "resources": []
+  "revision": "20261101-reviewed-gemini-experience-v1",
+  "entries": [
+    {
+      "id": "EX-design-conflict",
+      "title": "Change the design that hides the action",
+      "path": "knowledge/experience/curated/entries/design-conflict.md",
+      "version": "3",
+      "sha256": "93ece171472df08de35914390bb1e43751cb1ea117e7e1d877fc691d0e7c43ac",
+      "summary": "When a design hides the contacts that make the action readable, reshape or relocate that design before adding preservation clauses. Realize user-required features around the action.",
+      "questions": [
+        "Why did a visually successful addition make the action unreadable?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "evidence_ids": [
+        "EV-B-003",
+        "EV-F003",
+        "EV-F001"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-activity-relations",
+      "title": "Give the new style a place without reassigning the activity",
+      "path": "knowledge/experience/curated/entries/activity-relations.md",
+      "version": "2",
+      "sha256": "3c1af6284941201fff34553fb822cb8b572c53f1eb22a40262ed8c01a177fab4",
+      "summary": "When retaining an event under a new genre, anchor who acts on whom and give the genre concrete visual scope. A preserved object inventory can still permit the wrong activity.",
+      "questions": [
+        "Why do the right people and objects still perform a different event?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "evidence_ids": [
+        "EV-F003",
+        "EV-F005",
+        "EV-F001",
+        "EV-visual-inspection"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-instance-identity",
+      "title": "Protect the individual by reducing competing reconstruction",
+      "path": "knowledge/experience/curated/entries/instance-identity.md",
+      "version": "3",
+      "sha256": "4a7b2b76cbdf9c51526b6034b7b0137e92a36cd9b42e265554b42ea670528a9b",
+      "summary": "For identity-sensitive edits, favor an input with the right individual and reduce competing reconstruction around the person. Keep identity wording concise while preserving explicit costume requirements.",
+      "questions": [
+        "Why did more accurate person descriptions fail to preserve identity?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-D-FS4-no",
+        "EV-D-FS4-full",
+        "EV-F002",
+        "EV-F003",
+        "EV-F004",
+        "EV-F005",
+        "EV-F006",
+        "EV-visual-inspection"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-object-continuity",
+      "title": "Preserve a moving prop's role across state changes",
+      "path": "knowledge/experience/curated/entries/object-continuity.md",
+      "version": "2",
+      "sha256": "4a0ce150162bdc57b0f2467cd9471af994e44cbaa9b034e08d5440f6f7980b6d",
+      "summary": "For existing motion, favor concise source-linked object roles over unnecessary choreography. Inspect retrieval, occlusion and release before responding to duplication with more repetitions of one.",
+      "questions": [
+        "Why did a correctly named object multiply during an action?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "evidence_ids": [
+        "EV-F001",
+        "EV-F006"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-connected-scope",
+      "title": "Revise a coherent visual field",
+      "path": "knowledge/experience/curated/entries/connected-scope.md",
+      "version": "3",
+      "sha256": "fcbda798561052e1d35e1cea3c6738d1adec422dad8b18dfbd7a5b742a01714e",
+      "summary": "Group changes by visual dependency: a window, view and reflections can be one coherent edit. Separate unrelated repairs when they need different inputs or explanations.",
+      "questions": [
+        "What does a focused revision actually need to change?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "evidence_ids": [
+        "EV-B-FS4-full",
+        "EV-F006",
+        "EV-F007",
+        "EV-F004"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-input-conditioning",
+      "title": "Select the input that supports the next transformation",
+      "path": "knowledge/experience/curated/entries/input-conditioning.md",
+      "version": "3",
+      "sha256": "d03207abf9e82ec21471efe5cbcc4cadeb939af859dd576f2a5f13e3fcedd013",
+      "summary": "Continue a useful candidate when the next transformation builds on its achievements. If a central relationship is lost, favor the source or an earlier intact candidate and reconsider the transformation.",
+      "questions": [
+        "Which source or candidate supplies what the next proposal needs?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-batch-facts",
+        "EV-F002",
+        "EV-F003",
+        "EV-F004",
+        "EV-F006",
+        "EV-F007",
+        "EV-H-D-024__long__full_knowledge",
+        "EV-D-027-full",
+        "EV-B-024-full",
+        "EV-historical-score-extract"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-realization-change",
+      "title": "Change the failed proposition, not just its emphasis",
+      "path": "knowledge/experience/curated/entries/realization-change.md",
+      "version": "2",
+      "sha256": "b7bd7615be8c7948b9d624d6a731344877d9acd6674ff68ac3cbe297a5a8df4a",
+      "summary": "After repeated explicit failure, prioritize changed realization or conditioning over stronger synonyms. Direct specification is more promising when the decisive relation was genuinely missing.",
+      "questions": [
+        "Did the proposed alternative actually change the failed operation?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-B-003",
+        "EV-H-D-benchmark__003__short",
+        "EV-H-D-024__long__full_knowledge",
+        "EV-H-D-benchmark__001__long",
+        "EV-H-B-benchmark__001__long",
+        "EV-F001",
+        "EV-F003",
+        "EV-F005",
+        "EV-historical-score-extract"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-part-binding",
+      "title": "Bind the effect to the intended part and distinguish its neighbor",
+      "path": "knowledge/experience/curated/entries/part-binding.md",
+      "version": "2",
+      "sha256": "2bb33e27e2d8b0b858157851191d9ed3acb77fa414b9f3a8f9c57e02b964865a",
+      "summary": "For an effect on the wrong part, describe the intended carrier in contrast to its neighbor. Anchor shape repair to the existing instance; consider an earlier intact input when duplication appears.",
+      "questions": [
+        "Why did the correct effect appear on the wrong part?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-F004",
+        "EV-H-B-fewshot_004__long__no_knowledge",
+        "EV-D-027-full",
+        "EV-H-B-027__short__no_knowledge"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-wanted-state",
+      "title": "Replace an unwanted effect with a coherent visual alternative",
+      "path": "knowledge/experience/curated/entries/wanted-state.md",
+      "version": "2",
+      "sha256": "5f9915b03b2e4e5efe3ccab4bce21f7d63ae5a7bcca8e3030efb759562aa6352",
+      "summary": "Lead correction with a positive visual replacement and resolve conflicts with the surrounding design. Use short exclusions to disambiguate that arrangement.",
+      "questions": [
+        "What visual state replaces the unwanted artifact?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-H-D-benchmark__001__short",
+        "EV-H-D-027__short__no_knowledge",
+        "EV-F004",
+        "EV-H-B-fewshot_004__long__no_knowledge"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-style-realization",
+      "title": "Choose a visible system that makes the style legible",
+      "path": "knowledge/experience/curated/entries/style-realization.md",
+      "version": "2",
+      "sha256": "2048ed005c2cbf452c692793e762e5b9805d816c21d3000d2ff569d94ac9d3c0",
+      "summary": "Choose a coherent visible system for broad style requests. For detailed requests, check required construction separately from convincing ornament and atmosphere.",
+      "questions": [
+        "What does style knowledge add beyond a genre label?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-H-D-benchmark__001__long",
+        "EV-F003"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-environment-replacement",
+      "title": "Transform the structures that make the place recognizable",
+      "path": "knowledge/experience/curated/entries/environment-replacement.md",
+      "version": "2",
+      "sha256": "fb17b974378fcf4b22a7d0642d08fb3c563c8bed8083273a076343604966f24b",
+      "summary": "If theme cues appear but the old place persists, remap its defining surfaces, boundaries and sightlines. Reassess input and realization when that mapping was already explicit and failed.",
+      "questions": [
+        "Why does the scene have theme cues but remain the old place?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-F004",
+        "EV-F005",
+        "EV-F006",
+        "EV-F007",
+        "EV-F001",
+        "EV-D-FS4-full"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-lighting-integration",
+      "title": "Design what the light does to the scene",
+      "path": "knowledge/experience/curated/entries/lighting-integration.md",
+      "version": "2",
+      "sha256": "0e9dd05f5d63c6c0eedd1808045b09157f71c1c735de706614938e562f535703",
+      "summary": "If lamps appear without atmosphere, describe receiving surfaces, fill and reflections. Separate facial illumination from the background cast when both matter.",
+      "questions": [
+        "Why are lamps and glows present without the intended atmosphere?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-F002",
+        "EV-F004",
+        "EV-F005",
+        "EV-F007",
+        "EV-H-D-benchmark__001__short"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-time-binding",
+      "title": "Inspect the transitions that can undo a convincing opening",
+      "path": "knowledge/experience/curated/entries/time-binding.md",
+      "version": "2",
+      "sha256": "0a3a0de895a8bab923322eb2d008f0b489cc667229d89cd5eab71fdfd3769702",
+      "summary": "Inspect the turns, occlusions and interactions that can undo an attractive opening. Favor delivery for incidental drift; give timing further attention when it carries the requested event.",
+      "questions": [
+        "Did the design persist, and did the original event persist?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-F006",
+        "EV-F005",
+        "EV-F001",
+        "EV-H-B-benchmark__001__long",
+        "EV-batch-facts",
+        "EV-visual-inspection"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-continuation-value",
+      "title": "Spend another attempt on a gap that can change the delivery",
+      "path": "knowledge/experience/curated/entries/continuation-value.md",
+      "version": "2",
+      "sha256": "4978aaa62285e24f4a382c7132241e4ff5f1aeba01335942cfc84702cbcdcda3",
+      "summary": "Favor delivery when the central request is met. Spend another attempt on an important gap with a concrete improvement basis, and compare with the best retained answer.",
+      "questions": [
+        "Is a repaired complaint enough to justify another attempt or a final choice?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "evidence_ids": [
+        "EV-historical-score-extract",
+        "EV-B-FS4-full",
+        "EV-H-B-027__short__full_knowledge",
+        "EV-F003",
+        "EV-F004",
+        "EV-F006",
+        "EV-F007",
+        "EV-batch-facts"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    }
+  ],
+  "resources": [
+    {
+      "id": "EV-B-003",
+      "title": "B 003",
+      "path": "knowledge/experience/curated/evidence/B-003.json",
+      "version": "1",
+      "sha256": "acbbb4b91e8a13aefaee0ad842dbba0b3862d6ed29811cbd2de7ba11f57d390d",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-B-024-full",
+      "title": "B 024 full",
+      "path": "knowledge/experience/curated/evidence/B-024-full.json",
+      "version": "1",
+      "sha256": "ccc295054f0a664af2ff90e30a635b57e64c0bcf04aee59ed402e7e3e945b9e3",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-B-FS4-full",
+      "title": "B FS4 full",
+      "path": "knowledge/experience/curated/evidence/B-FS4-full.json",
+      "version": "1",
+      "sha256": "9f924d28f8e478bb24e01a89785862b5f680a325c982edec63f3d60ffa2cde0d",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-D-027-full",
+      "title": "D 027 full",
+      "path": "knowledge/experience/curated/evidence/D-027-full.json",
+      "version": "1",
+      "sha256": "d6d3f2d849ebaa716b9ae5095ed44d0f1be6ef31dc128c7be59f03b9d2c7e69a",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-D-FS4-full",
+      "title": "D FS4 full",
+      "path": "knowledge/experience/curated/evidence/D-FS4-full.json",
+      "version": "1",
+      "sha256": "99c4bf717879e7bf21f6233498d031dcf9a10de25a03301211d50bab237f522f",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-D-FS4-no",
+      "title": "D FS4 no",
+      "path": "knowledge/experience/curated/evidence/D-FS4-no.json",
+      "version": "1",
+      "sha256": "fbf7d657dc82a4974df21cab8b41600ab76f4a4658fe6fa54985a7043ef8c4d9",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F001",
+      "title": "F001",
+      "path": "knowledge/experience/curated/evidence/F001.json",
+      "version": "1",
+      "sha256": "0fdfc892c177c747131e7a44f03640575d20d6eae11bf77975e0fd202e3c851c",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F002",
+      "title": "F002",
+      "path": "knowledge/experience/curated/evidence/F002.json",
+      "version": "1",
+      "sha256": "313321963a4eb289cdfdbbfdf9230e02e53b8a27d83ffec35aefe9bc12618f49",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F003",
+      "title": "F003",
+      "path": "knowledge/experience/curated/evidence/F003.json",
+      "version": "1",
+      "sha256": "78279ac2ef1cf77a3ad121e768c3ed85fdf287c1351b73dd52ede88133eafb4d",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F004",
+      "title": "F004",
+      "path": "knowledge/experience/curated/evidence/F004.json",
+      "version": "1",
+      "sha256": "a8d76d78739f66bd52ac790bacd145f99121df74bf5bfaff2fbdf5ce39acc6de",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F005",
+      "title": "F005",
+      "path": "knowledge/experience/curated/evidence/F005.json",
+      "version": "1",
+      "sha256": "4314a262283de9ccd6a55755359d2b7a76f5e4c5dfa8f43515a6baad12b6c128",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F006",
+      "title": "F006",
+      "path": "knowledge/experience/curated/evidence/F006.json",
+      "version": "1",
+      "sha256": "acc144ed42e515e8b706d9cc8f8a6d771e83d5ff24e4b050fe9c590f30c600fb",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F007",
+      "title": "F007",
+      "path": "knowledge/experience/curated/evidence/F007.json",
+      "version": "1",
+      "sha256": "0d4daa4109bc28d81e44092b39a8ac330fb9c5fb53185a61a0e2ec98d4885ca8",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-024__long__full_knowledge",
+      "title": "H B 024__long__full_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-B-024__long__full_knowledge.json",
+      "version": "1",
+      "sha256": "a1042ca1e7f3f735ae8d488fc45a2e25101f6025ce8f0d0aa007dfc5ad3f3e43",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-024__long__no_knowledge",
+      "title": "H B 024__long__no_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-B-024__long__no_knowledge.json",
+      "version": "1",
+      "sha256": "1335069873d63c27e3758ec5ac470c3257e2d068741975c589fb4098d9092c86",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-027__short__full_knowledge",
+      "title": "H B 027__short__full_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-B-027__short__full_knowledge.json",
+      "version": "1",
+      "sha256": "902ca5c399dc016a98a67efddaf546ec6324d4e4a73e380441196e4eff49d886",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-027__short__no_knowledge",
+      "title": "H B 027__short__no_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-B-027__short__no_knowledge.json",
+      "version": "1",
+      "sha256": "68b46789eb0153bd318f3a6e62e8db472aab5f9994223d8f1b5be2e17fbbbc2f",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-041__short__full_knowledge",
+      "title": "H B 041__short__full_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-B-041__short__full_knowledge.json",
+      "version": "1",
+      "sha256": "63133717726a742ce177768a31c9d9ac7e4ad68dad791dc522f44173161ce3f8",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-041__short__no_knowledge",
+      "title": "H B 041__short__no_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-B-041__short__no_knowledge.json",
+      "version": "1",
+      "sha256": "c035ca7565fcc29fe9f4afb318c7a88658b2a62649c6e16a9ecc887949a876bb",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-benchmark__001__long",
+      "title": "H B benchmark__001__long",
+      "path": "knowledge/experience/curated/evidence/H-B-benchmark__001__long.json",
+      "version": "1",
+      "sha256": "62f0db0e9bfc01ab9d76b500424c5d501090d1b8403b1e2b5c7a5e9712a34bad",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-benchmark__001__short",
+      "title": "H B benchmark__001__short",
+      "path": "knowledge/experience/curated/evidence/H-B-benchmark__001__short.json",
+      "version": "1",
+      "sha256": "f78dc825f190f96c72c0f47e618ce82a6251ab4de82cb3bd63008e8c273a17de",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-benchmark__003__short",
+      "title": "H B benchmark__003__short",
+      "path": "knowledge/experience/curated/evidence/H-B-benchmark__003__short.json",
+      "version": "1",
+      "sha256": "b176bb6c63a6bf23c65740203b3dbdd48456b1303b67109fa8bfb16525adc1ee",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-fewshot_004__long__full_knowledge",
+      "title": "H B fewshot_004__long__full_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-B-fewshot_004__long__full_knowledge.json",
+      "version": "1",
+      "sha256": "57c97186d3384c4f9f20be07bf5fb65af22c2e8b9fa504b31bfdd388f627790f",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-B-fewshot_004__long__no_knowledge",
+      "title": "H B fewshot_004__long__no_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-B-fewshot_004__long__no_knowledge.json",
+      "version": "1",
+      "sha256": "e28b999b1ba2657936836ab86e4624020cef85671f4ab11bf152096ccef50aa7",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-024__long__full_knowledge",
+      "title": "H D 024__long__full_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-D-024__long__full_knowledge.json",
+      "version": "1",
+      "sha256": "6815d7f16f212b9daad313859dc7ae4564543bf4a5424dbbd0ca14195cde52d8",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-024__long__no_knowledge",
+      "title": "H D 024__long__no_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-D-024__long__no_knowledge.json",
+      "version": "1",
+      "sha256": "7dbcb67db0deaae46ede209c74063bb8eb5851e0853262cfb4e76f0edbd8fd91",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-027__short__full_knowledge",
+      "title": "H D 027__short__full_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-D-027__short__full_knowledge.json",
+      "version": "1",
+      "sha256": "7ec9fa533e996a8f19c014ebc9dee414380fa569a16c4dfe7cc0c75d910c3b33",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-027__short__no_knowledge",
+      "title": "H D 027__short__no_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-D-027__short__no_knowledge.json",
+      "version": "1",
+      "sha256": "1777e9ebbd02d142434ccb1d035cd81792f23d9f2c48234501faf76b4030ba8e",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-041__short__full_knowledge",
+      "title": "H D 041__short__full_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-D-041__short__full_knowledge.json",
+      "version": "1",
+      "sha256": "6b7e8f9b784ba78f19e82ff62bf47ab36492ca655a77066b024814808f5440b1",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-041__short__no_knowledge",
+      "title": "H D 041__short__no_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-D-041__short__no_knowledge.json",
+      "version": "1",
+      "sha256": "06f8ef072e2036e58353fc2c20447525f2ad1653b0e8a9f0aef6a80ecee4f352",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-benchmark__001__long",
+      "title": "H D benchmark__001__long",
+      "path": "knowledge/experience/curated/evidence/H-D-benchmark__001__long.json",
+      "version": "1",
+      "sha256": "53b4414d60826c16c07cc72b039ba6560e95410edaa0db29e8a1a5dca8a8110f",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-benchmark__001__short",
+      "title": "H D benchmark__001__short",
+      "path": "knowledge/experience/curated/evidence/H-D-benchmark__001__short.json",
+      "version": "1",
+      "sha256": "6f67116b3cb0dfc217706a274b3d2e5cb7d5e5d1e12bcffdefcf7f9769325aa0",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-benchmark__003__long",
+      "title": "H D benchmark__003__long",
+      "path": "knowledge/experience/curated/evidence/H-D-benchmark__003__long.json",
+      "version": "1",
+      "sha256": "ef88cf75ca6a743eb0a0813d17125391b0ef82f5cb94ef902dc4d00863f0da5a",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-benchmark__003__short",
+      "title": "H D benchmark__003__short",
+      "path": "knowledge/experience/curated/evidence/H-D-benchmark__003__short.json",
+      "version": "1",
+      "sha256": "496e695e54e5f1eb0f1e6fd9938c1a2b54c50b4caf75a60500cc530603fa949b",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-fewshot_004__long__full_knowledge",
+      "title": "H D fewshot_004__long__full_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-D-fewshot_004__long__full_knowledge.json",
+      "version": "1",
+      "sha256": "93ebab5bb271fdb851587addcb4ac48ad21c257a9a5d64d28001b94de2970793",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-H-D-fewshot_004__long__no_knowledge",
+      "title": "H D fewshot_004__long__no_knowledge",
+      "path": "knowledge/experience/curated/evidence/H-D-fewshot_004__long__no_knowledge.json",
+      "version": "1",
+      "sha256": "0ece15af7e642f0c96137780fec3eda14646db1d535ec3b939c788fbfe1d18f1",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-README",
+      "title": "README",
+      "path": "knowledge/experience/curated/evidence/README.md",
+      "version": "1",
+      "sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-batch-facts",
+      "title": "batch facts",
+      "path": "knowledge/experience/curated/evidence/batch-facts.json",
+      "version": "1",
+      "sha256": "ccb16369a93c766e9f1810c88bf293c90854724b041a578fded1ce9333a4a00f",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-batch-manifest",
+      "title": "batch manifest",
+      "path": "knowledge/experience/curated/evidence/batch-manifest.json",
+      "version": "1",
+      "sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-fewshot-sources",
+      "title": "fewshot sources",
+      "path": "knowledge/experience/curated/evidence/fewshot-sources.json",
+      "version": "1",
+      "sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-frame-provenance",
+      "title": "frame provenance",
+      "path": "knowledge/experience/curated/evidence/frame-provenance.json",
+      "version": "1",
+      "sha256": "6b68b47f9313bbcc52e824795025e5f2cff82c492ea5ba0a9dba4abdd409a1f5",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F003-source-000000",
+      "title": "F003 source 000000",
+      "path": "knowledge/experience/curated/evidence/frames/F003-source-000000.jpg",
+      "version": "1",
+      "sha256": "1f23422b969edd34b30681e9c3a588aba229b3097e3e7055000bf9f357e27672",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F003-v1-000000",
+      "title": "F003 v1 000000",
+      "path": "knowledge/experience/curated/evidence/frames/F003-v1-000000.jpg",
+      "version": "1",
+      "sha256": "d75834a0720cd380868ecd2600a115e946c91785b1e8a451880b6a7d40313cc4",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F003-v2-000000",
+      "title": "F003 v2 000000",
+      "path": "knowledge/experience/curated/evidence/frames/F003-v2-000000.jpg",
+      "version": "1",
+      "sha256": "310def045adb338e41b0ed93cfa64dd97cbc3241c6dbf7b25569eec737b5f778",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F005-source-000000",
+      "title": "F005 source 000000",
+      "path": "knowledge/experience/curated/evidence/frames/F005-source-000000.jpg",
+      "version": "1",
+      "sha256": "ed47c6077ad795a3f43183de9350c4a4d08354bccffb9d6d7a16848cb54e523f",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F005-v1-000000",
+      "title": "F005 v1 000000",
+      "path": "knowledge/experience/curated/evidence/frames/F005-v1-000000.jpg",
+      "version": "1",
+      "sha256": "a4cc4217ec3dfb211e3e25bf665d5b127e838ca2379714d3ec5735050d493daa",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F005-v2-000000",
+      "title": "F005 v2 000000",
+      "path": "knowledge/experience/curated/evidence/frames/F005-v2-000000.jpg",
+      "version": "1",
+      "sha256": "bc21e7e67904b9d3d6a18b987e6d381140778140e4c83ccb672d28ac7c5e8fd7",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F006-v3-000000",
+      "title": "F006 v3 000000",
+      "path": "knowledge/experience/curated/evidence/frames/F006-v3-000000.jpg",
+      "version": "1",
+      "sha256": "296126a5fde6016931ed0dba9276d8cb3c4364c7d795afa6c1c0c2f51297c4b3",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-F006-v3-000112",
+      "title": "F006 v3 000112",
+      "path": "knowledge/experience/curated/evidence/frames/F006-v3-000112.jpg",
+      "version": "1",
+      "sha256": "904b385854ef871af4f8123fb3b3b7fd8e901f9411f5c76ed68f8947f3781f3a",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-historical-score-extract",
+      "title": "historical score extract",
+      "path": "knowledge/experience/curated/evidence/historical-score-extract.md",
+      "version": "1",
+      "sha256": "7ec3fa1e697c428606e5cd4c3f74924794043a38cfa44a28c3c8c93c557502ff",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-historical-sources",
+      "title": "historical sources",
+      "path": "knowledge/experience/curated/evidence/historical-sources.json",
+      "version": "1",
+      "sha256": "85d68766f1157ad97b836b4269a65197b83d4604c20a6970605f1a7defc5cb4d",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-usage-audit",
+      "title": "usage audit",
+      "path": "knowledge/experience/curated/evidence/usage-audit.json",
+      "version": "1",
+      "sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EV-visual-inspection",
+      "title": "visual inspection",
+      "path": "knowledge/experience/curated/evidence/visual-inspection.md",
+      "version": "1",
+      "sha256": "ab0f5fbf31a7508f4bf3002e02c9a13b71439364b2ff86ce8eb3c7d44b9dd9d0",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    },
+    {
+      "id": "EX-renderer-profiles",
+      "title": "Bernini and Ditto: starting preferences and recurring traps",
+      "path": "knowledge/experience/curated/renderers.md",
+      "version": "2",
+      "sha256": "d2c1ff3684074bf9561f9dfd80ebe7b3fef5d5db8a9c0c4080731dfb71128bcc",
+      "review_status": "approved",
+      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+    }
+  ]
 }

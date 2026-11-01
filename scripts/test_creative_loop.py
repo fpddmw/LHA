@@ -105,7 +105,10 @@ class CreativeTests(unittest.TestCase):
         self.assertEqual(len(k.overview()["classes"]), 4)
         self.assertEqual(k.manifest["totals"]["complete_entries"], 111)
         self.assertEqual(k.manifest["totals"]["domain_cards"], 5)
-        self.assertEqual(len(k.snapshot["asset_hashes"]), 98)
+        original_assets = {p: h for p, h in k.snapshot["asset_hashes"].items() if not p.startswith("knowledge/experience/curated/")}
+        self.assertEqual(len(original_assets), 98)
+        approved_images = {r["path"] for r in k.curated_catalog["resources"] if Path(r["path"]).suffix in {".png", ".jpg", ".jpeg", ".webp"}}
+        self.assertEqual(set(k.snapshot["asset_hashes"]) - set(original_assets), approved_images)
         for identity in ("manual", "meaning", "opuscar-053", "choose-editing-input"):
             self.assertIn("text", k.read(identity))
         for identity in ("wiki-map", "wiki-scene-identity", "case-bernini-027-after-v1",
@@ -114,7 +117,10 @@ class CreativeTests(unittest.TestCase):
             with self.assertRaises(ValueError): k.references(identity)
         self.assertEqual(k.search("evidencecarduniquenonsense")["matches"], [])
         for path, document in k.snapshot["documents"].items():
-            self.assertNotRegex(document["text"], r"\bRSI\b|\[\[wiki-|rsi_|evidence cards")
+            # Approved source extracts retain historical words verbatim; they do
+            # not grant access to the excluded historical workflow or Wiki IDs.
+            if not path.startswith("knowledge/experience/curated/evidence/"):
+                self.assertNotRegex(document["text"], r"\bRSI\b|\[\[wiki-|rsi_|evidence cards")
             if path.startswith(("knowledge/entries/", "knowledge/domain", "knowledge/guides/", "knowledge/experience/")):
                 self.assertEqual(document["sha256"], sha(ROOT / path))
         self.assertTrue(k.read("map")["links"])
@@ -253,7 +259,7 @@ class CreativeTests(unittest.TestCase):
         self.assertEqual(p["extra_checks"], [])
         self.assertNotIn("prompt", json.dumps(p["videos"]))
         body = ParateraJudge.build_payload(packet["system_prompt"], packet["user_text"], images[:1])
-        self.assertEqual(body["model"], "glm5.3flash")
+        self.assertEqual(body["model"], "GLM-5.3-Flash")
         self.assertNotIn("reasoning_effort", body)
         self.assertNotIn("max_completion_tokens", body)
         model = ScriptedCritic()
@@ -290,12 +296,13 @@ class CreativeTests(unittest.TestCase):
             client = ParateraJudge(base_url="https://llmapi.paratera.com/v1")
         with patch("evaluation.creative.urllib.request.build_opener") as opener:
             opener.return_value.open.return_value = io.BytesIO(json.dumps({
+                "model": "GLM-5.3-Flash",
                 "choices": [{"message": {"content": "{\"fixture\": true}"}}], "usage": {"total_tokens": 7}}).encode())
             self.assertEqual(client.predict_text(system_prompt="fixture", user_text="fixture", image_paths=[]), '{"fixture": true}')
             request = opener.return_value.open.call_args.args[0]
             body = json.loads(request.data)
             self.assertEqual(request.full_url, "https://llmapi.paratera.com/v1/chat/completions")
-            self.assertEqual(body["model"], "glm5.3flash")
+            self.assertEqual(body["model"], "GLM-5.3-Flash")
             self.assertEqual(set(body), {"model", "messages", "max_tokens"})
             self.assertNotIn("fixture-credential", request.data.decode())
 

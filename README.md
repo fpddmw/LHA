@@ -8,15 +8,16 @@
 |---|---|
 | Architecture and implementation status | [Creative-loop implementation](docs/creative-loop-implementation.md), [development specification](docs/creative-loop-development-plan.md) |
 | Planner knowledge | [Current knowledge map](knowledge/creative-loop/README.md), [reading manual](knowledge/creative-loop/READING.md), [complete source catalog](knowledge/README.md) |
-| Evaluation | [Frozen main score definitions](src/critic_harness/SCORE_DEFINITIONS.md); separate independent adapter configured for `glm5.3flash` at Paratera |
+| Evaluation | [Frozen main score definitions](src/critic_harness/SCORE_DEFINITIONS.md); independent `glm5.3flash` (Paratera) and `sonnet-5.5high` (Tu-Zi) reports |
 | Experience maintenance | [Writing standard](docs/experience-authoring-standard.md), [usage and batch interface](docs/experience-usage-interface.md), three maintenance Skills under `.agents/skills/` |
-| Pending content review | [Fourteen rewritten experience entries and proposed manuals](knowledge/staged/experience-full-maintenance-20261101/README.md), [revision comparison](knowledge/staged/experience-full-maintenance-20261101/revision-comparison.md) |
+| Active reviewed experience | [Fourteen entries, evidence and renderer profiles](knowledge/experience/curated/README.md), [historical revision comparison](knowledge/staged/experience-full-maintenance-20261101/revision-comparison.md) |
+| Three-arm experiment | [Preparation plan and current checks](docs/creative-fewshot-three-arm-plan.md), [execution and recovery](docs/creative-fewshot-execution.md) |
 | Current editorial work | [Knowledge-guidance alignment](docs/knowledge-guidance-alignment-20261101.md) |
 | Data and deployment reference | [Benchmark index](benchmark_data/README.md), [deployment instructions](scripts/deploy/README.md) |
 
-The style corpus retains 111 full entries and five domain references. Its seven guides support choice and application. The active curated experience catalog remains empty pending approval of the rewritten package; the five proposed Planner manuals remain staged. The old Wiki, E1 and RSI mechanisms are excluded from the current profile.
+The style corpus retains 111 full entries and five domain references. Its seven guides support choice and application. The user approved activation of fourteen curated entries, renderer profiles and the five Planner manuals. Full and no-experience scopes are frozen separately; both retain the same complete style corpus and general operating/semantic guidance. The old Wiki, E1 and RSI mechanisms are excluded from the current profile.
 
-Experiment execution is deferred. The intended comparisons use seven fewshot long requests: Direct versus Loop-first for the joint knowledge/Planner contribution, and Loop-final versus Loop-first for iteration and selection. Online Planner/Critic settings remain `gpt-6.1-sol` with `high`; independent evaluation remains `glm5.3flash`, with live API compatibility still to verify. New runtime regressions described in the implementation record have not yet been executed. Editorial checks do not establish experimental improvement.
+GPU experiment execution awaits the user's container startup. Each of seven long-request topics completes Direct, full-experience Loop and no-experience Loop, both independent final reports, and a verified archive before the next topic. Direct versus Loop-first measures the joint knowledge/Planner contribution; final versus first measures iteration/selection; full versus no-experience measures the experience package. Planner and online Critic remain `gpt-6.1-sol/high`. Delivery has no fixed generation or turn count. The cohort is a development regression: these tasks informed the experience package. Software and provider checks are reported separately in the preparation plan.
 
 The benchmark index retains 50 main tasks and seven separately indexed fewshot tasks from `2026-10-29-dest`. Saved runs and historical reports keep their original inputs, protocols and results. The material below documents earlier prototypes, rather than instructions for the current loop.
 

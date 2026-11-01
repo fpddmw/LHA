@@ -1,10 +1,9 @@
 # Creative loop implementation and validation status
 
 Approved scope: [implementation plan](creative-loop-refactor-and-fewshot-plan.md).
-Live experiments, model calls and deployment are deferred. Independent evaluation
-is configured for `glm5.3flash` at Paratera; its live API capabilities are unverified.
+Current preparation and capability results are maintained in the [three-arm plan](creative-fewshot-three-arm-plan.md). The user authorized activation, software tests and bounded provider checks; GPU experiments await container startup. Independent evaluation now preserves separate GLM and Sonnet reports. The chronology below records the earlier implementation states.
 
-Current status, 2026-11-01: repairs against the
+Earlier implementation status, 2026-11-01: repairs against the
 [architecture audit](creative-loop-design-audit-20261101.md) are implemented under the
 [detailed development specification](creative-loop-development-plan.md). The user
 requested GitHub synchronization before simulated workflows and validation runs.
@@ -13,7 +12,11 @@ result below describe the baseline only. No live experiment or model call occurr
 The repair code is synchronized on `codex/creative-loop-v1` at
 `6af64be677af876db78e0fbd23cdef4ea390eac0`, with the remote SHA independently checked.
 
-Content status, 2026-11-01: [editorial alignment](knowledge-guidance-alignment-20261101.md) updates current reading routes and guides. The [fourteen-entry experience package and five proposed manuals](../knowledge/staged/experience-full-maintenance-20261101/README.md) remain staged. The active curated catalog is empty; these content edits neither activate it nor change the validation status above.
+Earlier content status, before activation: [editorial alignment](knowledge-guidance-alignment-20261101.md) updates current reading routes and guides. The [fourteen-entry experience package and five proposed manuals](../knowledge/staged/experience-full-maintenance-20261101/README.md) remain staged. The active curated catalog is empty; these content edits neither activate it nor change the validation status above.
+
+## Current preparation extension
+
+Fourteen reviewed entries and five manuals are now active. `execution.experience_mode` selects frozen `full` or `none` access across every knowledge operation. The new coordinator holds a topic until Direct and both delivery Loops, two independent final judges and verified archival finish. Separate single-GPU workers can run the two Loops concurrently within this topic; later topics remain unadmitted. Completed receipts and scores are reused by identity. The current code and tests supersede older empty-catalog and deferred-validation statements in this history.
 
 ## What changed
 

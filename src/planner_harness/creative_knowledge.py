@@ -13,9 +13,15 @@ from .knowledge import Knowledge
 class CreativeKnowledge(Knowledge):
     NAV_ALIASES = {"knowledge/README.md": "map", "knowledge/READING.md": "manual",
                    "knowledge/experience/README.md": "experience-map"}
-    def __init__(self, root, snapshot=None):
+    def __init__(self, root, snapshot=None, *, experience_mode=None):
         root = Path(root).resolve()
         saved = copy.deepcopy(snapshot) if isinstance(snapshot, dict) else load(snapshot) if snapshot else None
+        recorded_mode = saved.get("experience_mode", "full") if saved else None
+        if experience_mode is not None and recorded_mode and experience_mode != recorded_mode:
+            raise ValueError("Resume must retain the frozen experience mode")
+        self.experience_mode = recorded_mode or experience_mode or "full"
+        if self.experience_mode not in {"full", "none"}:
+            raise ValueError("Experience mode must be full or none")
         if saved:
             if saved.get("profile") != "creative_loop_v1":
                 raise ValueError("Creative loop requires its own knowledge snapshot")
@@ -24,9 +30,25 @@ class CreativeKnowledge(Knowledge):
             curated = saved.get("curated_catalog", {"schema": "creative-experience-catalog-v1", "revision": "legacy-none", "entries": [], "resources": []})
         else:
             allow = load(root / "knowledge/creative-loop/manifest.json")
+            mode = allow.get("experience_modes", {}).get(self.experience_mode, {})
+            if self.experience_mode == "none" and not mode:
+                raise ValueError("No-experience scope is not configured")
+            allow = copy.deepcopy(allow)
+            allow["source_groups"] = [g for g in allow["source_groups"] if g not in mode.get("exclude_source_groups", [])]
+            for key in ("static_topics", "navigation", "operations_manual"):
+                if key in mode:
+                    allow[key] = copy.deepcopy(mode[key])
             source = load(root / allow["source_manifest"])
             manifest = {key: copy.deepcopy(source.get(key, [])) for key in allow["source_groups"]}
             manifest["totals"] = copy.deepcopy(source["totals"])
+            for group in allow["source_groups"]:
+                manifest[group] = [r for r in manifest[group] if r.get("id") not in mode.get("exclude_ids", [])]
+            for row in manifest.get("guides", []):
+                if row["id"] in mode.get("guide_overrides", {}):
+                    row["path"] = mode["guide_overrides"][row["id"]]
+            if self.experience_mode == "none":
+                manifest["totals"].update(guides=len(manifest.get("guides", [])), model_experience=0)
+
             topics = [{"id": identity, "path": path, "title": identity.replace("-", " ")}
                       for identity, path in allow["static_topics"].items()]
             # A constructed snapshot avoids reading the mutable experience catalog.
@@ -35,7 +57,7 @@ class CreativeKnowledge(Knowledge):
             catalog_path = allow.get("curated_catalog")
             if catalog_path and catalog_path != "knowledge/experience/curated/catalog.json":
                 raise ValueError("Creative experience uses the dedicated curated catalog")
-            curated = load(root / catalog_path) if catalog_path else {
+            curated = load(root / catalog_path) if catalog_path and self.experience_mode == "full" else {
                 "schema": "creative-experience-catalog-v1", "revision": "none", "entries": [], "resources": []}
         for identity in ("map", "manual", "integration"):
             row = self.items.pop(identity, None)
@@ -43,6 +65,14 @@ class CreativeKnowledge(Knowledge):
                 self.paths.pop(row["path"], None)
         for identity, path in allow["navigation"].items():
             self.add(identity, path, identity, "operational_guidance")
+        if self.experience_mode == "none":
+            prefixes = allow.get("experience_modes", {}).get("none", {}).get("exclude_path_prefixes", [])
+            for identity, row in list(self.items.items()):
+                if any(row["path"].startswith(prefix) for prefix in prefixes):
+                    self.items.pop(identity)
+                    self.paths.pop(row["path"], None)
+            if curated["entries"] or curated["resources"]:
+                raise ValueError("No-experience snapshot contains curated content")
         self.curated_catalog = copy.deepcopy(curated)
         self._add_curated(saved is not None)
         for path in self.paths:
@@ -116,7 +146,7 @@ class CreativeKnowledge(Knowledge):
         # No publication lock/journal: this profile has no learning/publication path.
         self._freeze(path)
         self.snapshot.update(profile="creative_loop_v1", allowlist=copy.deepcopy(self.allowlist),
-                             curated_catalog=copy.deepcopy(self.curated_catalog))
+                             curated_catalog=copy.deepcopy(self.curated_catalog), experience_mode=self.experience_mode)
         save(path, self.snapshot)
 
     def links(self, text, source_path=None):
@@ -147,7 +177,7 @@ class CreativeKnowledge(Knowledge):
         if not self.enabled:
             return {"entrances": [], "guidance": "Knowledge access disabled in this arm."}
         curated_ids = {r["id"] for r in self.curated_catalog["entries"] + self.curated_catalog["resources"]}
-        if target == "experience-map":
+        if target == "experience-map" and target in self.items:
             return {"material": self.items[target], "entries": [self.items[r["id"]] for r in self.curated_catalog["entries"]],
                     "static_resources": [r for r in self.items.values() if r["kind"] in {"experience", "model_experience"} and r["id"] not in curated_ids],
                     "catalog_revision": self.curated_catalog["revision"],

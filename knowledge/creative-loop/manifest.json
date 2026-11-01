@@ -1,7 +1,13 @@
 {
   "profile": "creative_loop_v1",
   "source_manifest": "knowledge/source-map.json",
-  "source_groups": ["entries", "domain_references", "guides", "model_experience", "supporting_sources"],
+  "source_groups": [
+    "entries",
+    "domain_references",
+    "guides",
+    "model_experience",
+    "supporting_sources"
+  ],
   "static_topics": {
     "experience-map": "knowledge/experience/curated/README.md",
     "choose-editing-input": "knowledge/experience/choose-editing-input.md",
@@ -17,5 +23,43 @@
     "understand-and-revise": "knowledge/creative-loop/UNDERSTAND_AND_REVISE.md"
   },
   "curated_catalog": "knowledge/experience/curated/catalog.json",
-  "classes": ["operating_manual", "semantic_understanding", "visual_style_and_design", "generation_and_iteration"]
+  "classes": [
+    "operating_manual",
+    "semantic_understanding",
+    "visual_style_and_design",
+    "generation_and_iteration"
+  ],
+  "experience_modes": {
+    "full": {},
+    "none": {
+      "exclude_source_groups": [
+        "model_experience",
+        "supporting_sources"
+      ],
+      "exclude_ids": [
+        "experience"
+      ],
+      "exclude_path_prefixes": [
+        "scripts/eval/",
+        "scripts/bench_",
+        "_deprecated/",
+        "LESSONS.md",
+        "out/"
+      ],
+      "static_topics": {},
+      "navigation": {
+        "map": "knowledge/creative-loop/no-experience/README.md",
+        "manual": "knowledge/creative-loop/no-experience/READING.md",
+        "understand-and-design": "knowledge/creative-loop/no-experience/UNDERSTAND_AND_DESIGN.md",
+        "understand-and-revise": "knowledge/creative-loop/no-experience/UNDERSTAND_AND_REVISE.md",
+        "score-definitions": "src/critic_harness/SCORE_DEFINITIONS.md"
+      },
+      "guide_overrides": {
+        "meaning": "knowledge/creative-loop/no-experience/meaning.md",
+        "media": "knowledge/creative-loop/no-experience/media.md",
+        "design-expression": "knowledge/creative-loop/no-experience/design-expression.md"
+      },
+      "operations_manual": "knowledge/creative-loop/no-experience/CREATIVE_LOOP.md"
+    }
+  }
 }

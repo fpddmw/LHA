@@ -1,0 +1,1208 @@
+[
+  {
+    "task": "F001",
+    "reads": [
+      {
+        "id": "choose-editing-input",
+        "path": "knowledge/experience/choose-editing-input.md",
+        "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+        "start_line": 1,
+        "end_line": 37,
+        "next_line": null,
+        "event_id": "event-0004"
+      }
+    ],
+    "snapshot_experience_ids": [
+      "experience-map",
+      "choose-editing-input",
+      "express-edits",
+      "inspect-and-compare",
+      "use-design-knowledge",
+      "case-bernini-027-after-v1",
+      "case-bernini-024-before-v3",
+      "case-ditto-024-before-v3",
+      "case-bernini-003-before-v3",
+      "wiki-scene-identity",
+      "wiki-realization",
+      "wiki-connected-change",
+      "wiki-map"
+    ],
+    "calls": [
+      {
+        "call": "event-0001",
+        "input_sha256": "bb6956c6970296b04c31388a2bf2178d6e0fdf32f65bee2dee065ba9b9b5ecea",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run/calls/event-0001/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0002",
+        "input_sha256": "3e24c763be5e5d57941c5b98f67924ddfe6a4fadc558a8690e1a0fd5353c5e7c",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run/calls/event-0002/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0003",
+        "input_sha256": "812e8b5336c70e3feac3b609b93681bc3a0c4a5355c78719c3660f6a45f2a4b0",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run/calls/event-0003/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0004",
+        "input_sha256": "b7bf24c39e0d1cc5393287ec2e374b566b3a816c99249e5c41ada84e07a1f6eb",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run/calls/event-0004/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0005",
+        "input_sha256": "04c603e62f2579c35b9bd888eaf0226558db72670df6674a29aeacd23b1790f6",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run/calls/event-0005/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0006",
+        "input_sha256": "a8a0220872a56e96a2020c0fc7df4044277a677f2e445f9787529a61cbd46402",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run/calls/event-0006/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      }
+    ],
+    "note": "Text presence does not establish attention or causal use; recorded Planner notes require semantic review."
+  },
+  {
+    "task": "F002",
+    "reads": [
+      {
+        "id": "wiki-connected-change",
+        "path": "knowledge/wiki/wiki-connected-change.md",
+        "sha256": "bdfcc914eaafb58bdcd33e8d5270d972fb20a93ad3323b69ea7155476cac5f67",
+        "start_line": 1,
+        "end_line": 13,
+        "next_line": null,
+        "event_id": "event-0005"
+      },
+      {
+        "id": "wiki-realization",
+        "path": "knowledge/wiki/wiki-realization.md",
+        "sha256": "4f7be64e18a8a07caeda4ab94c71eaf629be39ca0087747ee7f6c1a53540b553",
+        "start_line": 1,
+        "end_line": 15,
+        "next_line": null,
+        "event_id": "event-0005"
+      },
+      {
+        "id": "choose-editing-input",
+        "path": "knowledge/experience/choose-editing-input.md",
+        "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+        "start_line": 1,
+        "end_line": 37,
+        "next_line": null,
+        "event_id": "event-0006"
+      },
+      {
+        "id": "express-edits",
+        "path": "knowledge/experience/express-edits.md",
+        "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+        "start_line": 1,
+        "end_line": 27,
+        "next_line": null,
+        "event_id": "event-0006"
+      }
+    ],
+    "snapshot_experience_ids": [
+      "experience-map",
+      "choose-editing-input",
+      "express-edits",
+      "inspect-and-compare",
+      "use-design-knowledge",
+      "case-bernini-027-after-v1",
+      "case-bernini-024-before-v3",
+      "case-ditto-024-before-v3",
+      "case-bernini-003-before-v3",
+      "wiki-scene-identity",
+      "wiki-realization",
+      "wiki-connected-change",
+      "wiki-map"
+    ],
+    "calls": [
+      {
+        "call": "event-0001",
+        "input_sha256": "1a7660e3feb557d9a1c4927000cbdd5c42a6279b1ce3b6be99f551f885c7b643",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0001/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0002",
+        "input_sha256": "1913b8d4e5d6a724ccd1b1c03749d93ef88af86dc391aac8cbaf4758f59d1dc1",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0002/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0003",
+        "input_sha256": "83b59a1e73ec1b0d8082274f3a84e0c6363f56f5891a17cbdc1efc7c1b925c32",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0003/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0004",
+        "input_sha256": "09da3222cdc35a355b375cdebca2c67dccf9e8703af310c7175c726a2df19bed",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0004/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0005",
+        "input_sha256": "588b643cf0e468a84b9872b9cf02948a7e6e0e9b096fe4614d8c26e04c762c37",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0005/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0006",
+        "input_sha256": "ce55e2a6ad1bb4e2c8c4a7d5416eba5482642ef0d73cd10dc4588fb4bf1cf831",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0006/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "wiki-connected-change",
+            "sha256": "bdfcc914eaafb58bdcd33e8d5270d972fb20a93ad3323b69ea7155476cac5f67",
+            "text_characters": 2067,
+            "text_sha256": "628a96b8f655a56fb33929ce0bd68d25822e14d1b3f9d0f762b10337857d5b78"
+          },
+          {
+            "id": "wiki-realization",
+            "sha256": "4f7be64e18a8a07caeda4ab94c71eaf629be39ca0087747ee7f6c1a53540b553",
+            "text_characters": 2330,
+            "text_sha256": "52ef08ba5312da383423bc899312ffec23d3cbb011d15cd1e9c5aaefb1f906f1"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0007",
+        "input_sha256": "0a99869981f4c45a1256229ad1c2b2a205305f6662472806f6cb777684110ec1",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0007/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "wiki-connected-change",
+            "sha256": "bdfcc914eaafb58bdcd33e8d5270d972fb20a93ad3323b69ea7155476cac5f67",
+            "text_characters": 2067,
+            "text_sha256": "628a96b8f655a56fb33929ce0bd68d25822e14d1b3f9d0f762b10337857d5b78"
+          },
+          {
+            "id": "wiki-realization",
+            "sha256": "4f7be64e18a8a07caeda4ab94c71eaf629be39ca0087747ee7f6c1a53540b553",
+            "text_characters": 2330,
+            "text_sha256": "52ef08ba5312da383423bc899312ffec23d3cbb011d15cd1e9c5aaefb1f906f1"
+          },
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          },
+          {
+            "id": "express-edits",
+            "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+            "text_characters": 3391,
+            "text_sha256": "fbb5f096003a4c94cb1884ef82801e11ccf71ad651be54d74a91a6d15172dc76"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0008",
+        "input_sha256": "b61764ef7c79f5522678e249e797eac0cf8b3fdd4ebddbb910e8e74c89958ad9",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0008/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "wiki-connected-change",
+            "sha256": "bdfcc914eaafb58bdcd33e8d5270d972fb20a93ad3323b69ea7155476cac5f67",
+            "text_characters": 2067,
+            "text_sha256": "628a96b8f655a56fb33929ce0bd68d25822e14d1b3f9d0f762b10337857d5b78"
+          },
+          {
+            "id": "wiki-realization",
+            "sha256": "4f7be64e18a8a07caeda4ab94c71eaf629be39ca0087747ee7f6c1a53540b553",
+            "text_characters": 2330,
+            "text_sha256": "52ef08ba5312da383423bc899312ffec23d3cbb011d15cd1e9c5aaefb1f906f1"
+          },
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          },
+          {
+            "id": "express-edits",
+            "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+            "text_characters": 3391,
+            "text_sha256": "fbb5f096003a4c94cb1884ef82801e11ccf71ad651be54d74a91a6d15172dc76"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0009",
+        "input_sha256": "5972e5ec098ce12cdad59e117f4b94cf7e4050781002b8002749ddefb5a8a303",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/calls/event-0009/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "wiki-connected-change",
+            "sha256": "bdfcc914eaafb58bdcd33e8d5270d972fb20a93ad3323b69ea7155476cac5f67",
+            "text_characters": 2067,
+            "text_sha256": "628a96b8f655a56fb33929ce0bd68d25822e14d1b3f9d0f762b10337857d5b78"
+          },
+          {
+            "id": "wiki-realization",
+            "sha256": "4f7be64e18a8a07caeda4ab94c71eaf629be39ca0087747ee7f6c1a53540b553",
+            "text_characters": 2330,
+            "text_sha256": "52ef08ba5312da383423bc899312ffec23d3cbb011d15cd1e9c5aaefb1f906f1"
+          },
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          },
+          {
+            "id": "express-edits",
+            "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+            "text_characters": 3391,
+            "text_sha256": "fbb5f096003a4c94cb1884ef82801e11ccf71ad651be54d74a91a6d15172dc76"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      }
+    ],
+    "note": "Text presence does not establish attention or causal use; recorded Planner notes require semantic review."
+  },
+  {
+    "task": "F003",
+    "reads": [
+      {
+        "id": "experience-map",
+        "path": "knowledge/experience/README.md",
+        "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+        "start_line": 1,
+        "end_line": 16,
+        "next_line": null,
+        "event_id": "event-0004"
+      },
+      {
+        "id": "choose-editing-input",
+        "path": "knowledge/experience/choose-editing-input.md",
+        "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+        "start_line": 1,
+        "end_line": 37,
+        "next_line": null,
+        "event_id": "event-0005"
+      },
+      {
+        "id": "express-edits",
+        "path": "knowledge/experience/express-edits.md",
+        "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+        "start_line": 1,
+        "end_line": 27,
+        "next_line": null,
+        "event_id": "event-0005"
+      }
+    ],
+    "snapshot_experience_ids": [
+      "experience-map",
+      "choose-editing-input",
+      "express-edits",
+      "inspect-and-compare",
+      "use-design-knowledge",
+      "case-bernini-027-after-v1",
+      "case-bernini-024-before-v3",
+      "case-ditto-024-before-v3",
+      "case-bernini-003-before-v3",
+      "wiki-scene-identity",
+      "wiki-realization",
+      "wiki-connected-change",
+      "wiki-map"
+    ],
+    "calls": [
+      {
+        "call": "event-0001",
+        "input_sha256": "d7b7872c5b76d04b7841c6909d33fdc1bca9aa766c420dc2cf4fabec94163bb9",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/calls/event-0001/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0002",
+        "input_sha256": "e16a02d3f562708639f3ebeddefa0564bd7855730a663efa775f2b3de92630d3",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/calls/event-0002/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0003",
+        "input_sha256": "939d2e4ee8122338942a6e18c8e887657ed90bd80eb36aea8f3177845866a55c",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/calls/event-0003/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0004",
+        "input_sha256": "53f05ca04b6ea4a94c5f0cae10d3bd666f12d1da79e4545483d0d7c2bc141140",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/calls/event-0004/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0005",
+        "input_sha256": "89c01d4d9cb4a3df95fad16b2a1926b8cac765edbf177805013a07349f0ecbcc",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/calls/event-0005/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0006",
+        "input_sha256": "de66507827c9e0a473b252b836759d22b50e55dca3e0955fb195b2bac91cd15c",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/calls/event-0006/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          },
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          },
+          {
+            "id": "express-edits",
+            "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+            "text_characters": 3391,
+            "text_sha256": "fbb5f096003a4c94cb1884ef82801e11ccf71ad651be54d74a91a6d15172dc76"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0007",
+        "input_sha256": "10c1dfd72892497fef8b9574d42c9acd198f0f2eb1ab70dcb1aadeeebcc6e1f2",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/calls/event-0007/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          },
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          },
+          {
+            "id": "express-edits",
+            "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+            "text_characters": 3391,
+            "text_sha256": "fbb5f096003a4c94cb1884ef82801e11ccf71ad651be54d74a91a6d15172dc76"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0008",
+        "input_sha256": "3b2afa04faced89b7836c8a705ead8ce01f57706c86b7fad4eee35cd0309a973",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/calls/event-0008/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          },
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          },
+          {
+            "id": "express-edits",
+            "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+            "text_characters": 3391,
+            "text_sha256": "fbb5f096003a4c94cb1884ef82801e11ccf71ad651be54d74a91a6d15172dc76"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      }
+    ],
+    "note": "Text presence does not establish attention or causal use; recorded Planner notes require semantic review."
+  },
+  {
+    "task": "F004",
+    "reads": [],
+    "snapshot_experience_ids": [
+      "experience-map",
+      "choose-editing-input",
+      "express-edits",
+      "inspect-and-compare",
+      "use-design-knowledge",
+      "case-bernini-027-after-v1",
+      "case-bernini-024-before-v3",
+      "case-ditto-024-before-v3",
+      "case-bernini-003-before-v3",
+      "wiki-scene-identity",
+      "wiki-realization",
+      "wiki-connected-change",
+      "wiki-map"
+    ],
+    "calls": [
+      {
+        "call": "event-0001",
+        "input_sha256": "4f8ce8eb1ce72961a150fbbc274cef16e0b2fe8f676bf9be72bd317d68c1d73b",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run/calls/event-0001/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0002",
+        "input_sha256": "b4ed787e7fe5b88a3f70186cd48bc2991369f769b1de81aa8d8eeabedc750002",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run/calls/event-0002/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0003",
+        "input_sha256": "c67b9fbc0e25586439ccacdef978f97acc3b33d6e5e3a1418d807845b5df4752",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run/calls/event-0003/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0004",
+        "input_sha256": "f2b23a0def0927453641c4e4f98564150ad97a12f3366dda0b33b8e23139a972",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run/calls/event-0004/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0005",
+        "input_sha256": "0fff42b4a26f60d07b8539df02f74ab33566d9bedd8c48e0d28f33478a6f22f6",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run/calls/event-0005/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0006",
+        "input_sha256": "3cd7a5c008591d87e2ac5dd48b860d3ebdaa790a4a7ca76c97c6e782d31411af",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run/calls/event-0006/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      }
+    ],
+    "note": "Text presence does not establish attention or causal use; recorded Planner notes require semantic review."
+  },
+  {
+    "task": "F005",
+    "reads": [],
+    "snapshot_experience_ids": [
+      "experience-map",
+      "choose-editing-input",
+      "express-edits",
+      "inspect-and-compare",
+      "use-design-knowledge",
+      "case-bernini-027-after-v1",
+      "case-bernini-024-before-v3",
+      "case-ditto-024-before-v3",
+      "case-bernini-003-before-v3",
+      "wiki-scene-identity",
+      "wiki-realization",
+      "wiki-connected-change",
+      "wiki-map"
+    ],
+    "calls": [
+      {
+        "call": "event-0001",
+        "input_sha256": "4e18f17030c2b312ed863121b2a906fc8d9a85c61172b42fa891c8f6a8a65945",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/calls/event-0001/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0002",
+        "input_sha256": "605c8777403a02b2b7326fb9cf7db75e95c896cd14cccc5e9b17c8229be9a13d",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/calls/event-0002/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0003",
+        "input_sha256": "32e869f02041bab5ca9b493be3291f6b47f1085cd83c0b99e15b8c57dbfa99fb",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/calls/event-0003/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0004",
+        "input_sha256": "a88d4e55f5214c15965be914c7a46e539caac8919719f29e449a72ed5b01c04e",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/calls/event-0004/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0005",
+        "input_sha256": "e3ef26a71f4eab4e0754934d8b339158a5454b5514d09e65db1b7435ef4902b3",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/calls/event-0005/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0006",
+        "input_sha256": "c5fee6e67f5449faa79c3cb81cda630720982d462a8c562938d540e701e5586b",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/calls/event-0006/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      }
+    ],
+    "note": "Text presence does not establish attention or causal use; recorded Planner notes require semantic review."
+  },
+  {
+    "task": "F006",
+    "reads": [
+      {
+        "id": "domain-chinese_period",
+        "path": "knowledge/domain-references/chinese_period.md",
+        "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+        "start_line": 1,
+        "end_line": 148,
+        "next_line": 149,
+        "event_id": "event-0002"
+      },
+      {
+        "id": "base-xianxia",
+        "path": "knowledge/entries/base-xianxia.md",
+        "sha256": "3cdb82e0b37dbd59e760a8632d770aee646dcea6f652ede3c24e9a0e55325623",
+        "start_line": 1,
+        "end_line": 56,
+        "next_line": null,
+        "event_id": "event-0005"
+      },
+      {
+        "id": "experience-map",
+        "path": "knowledge/experience/README.md",
+        "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+        "start_line": 1,
+        "end_line": 16,
+        "next_line": null,
+        "event_id": "event-0005"
+      },
+      {
+        "id": "choose-editing-input",
+        "path": "knowledge/experience/choose-editing-input.md",
+        "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+        "start_line": 1,
+        "end_line": 37,
+        "next_line": null,
+        "event_id": "event-0007"
+      },
+      {
+        "id": "express-edits",
+        "path": "knowledge/experience/express-edits.md",
+        "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+        "start_line": 1,
+        "end_line": 27,
+        "next_line": null,
+        "event_id": "event-0007"
+      }
+    ],
+    "snapshot_experience_ids": [
+      "experience-map",
+      "choose-editing-input",
+      "express-edits",
+      "inspect-and-compare",
+      "use-design-knowledge",
+      "case-bernini-027-after-v1",
+      "case-bernini-024-before-v3",
+      "case-ditto-024-before-v3",
+      "case-bernini-003-before-v3",
+      "wiki-scene-identity",
+      "wiki-realization",
+      "wiki-connected-change",
+      "wiki-map"
+    ],
+    "calls": [
+      {
+        "call": "event-0001",
+        "input_sha256": "713aeca38d1fe12c0880f4c608ea43f96529221f3b06f2ab569f5351a7577d03",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0001/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0002",
+        "input_sha256": "edc0fa57dfefdc96f4edf3c29cbd3ccbd68f6ebf974aaefa54fd1875caf08225",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0002/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0003",
+        "input_sha256": "b2eba553d6099958d546dd9e3f4987943957313a792772a650a6f099f43256b1",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0003/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "domain-chinese_period",
+            "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+            "text_characters": 11967,
+            "text_sha256": "ba01ffeb6176099f34ee1d9db684625fdc36c7f6e03b11b437647cdfbf8adbee"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0004",
+        "input_sha256": "c75c98a0860d84f43f2fb1d535b5d5acb1a21a45c556ad3641d71067713d3101",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0004/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "domain-chinese_period",
+            "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+            "text_characters": 11967,
+            "text_sha256": "ba01ffeb6176099f34ee1d9db684625fdc36c7f6e03b11b437647cdfbf8adbee"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0005",
+        "input_sha256": "5e096144365b35b169b8797bfbdcab977673bbd8c915a37425fddcd753931643",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0005/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "domain-chinese_period",
+            "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+            "text_characters": 11967,
+            "text_sha256": "ba01ffeb6176099f34ee1d9db684625fdc36c7f6e03b11b437647cdfbf8adbee"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0006",
+        "input_sha256": "781b001d090e568b539330b0e9cb253a845f190d60f6d03e447b4d8435f9fc3f",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0006/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "domain-chinese_period",
+            "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+            "text_characters": 11967,
+            "text_sha256": "ba01ffeb6176099f34ee1d9db684625fdc36c7f6e03b11b437647cdfbf8adbee"
+          },
+          {
+            "id": "base-xianxia",
+            "sha256": "3cdb82e0b37dbd59e760a8632d770aee646dcea6f652ede3c24e9a0e55325623",
+            "text_characters": 4086,
+            "text_sha256": "d7fc4b94bcd64f5612018472427afe62bca0b3b4ebf6416dd7d25d5efa71e583"
+          },
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0007",
+        "input_sha256": "8e1b759dfdf5197d8b440eeb12c87f5fd8c4276c666e5ff34f15653675cb0998",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0007/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "domain-chinese_period",
+            "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+            "text_characters": 11967,
+            "text_sha256": "ba01ffeb6176099f34ee1d9db684625fdc36c7f6e03b11b437647cdfbf8adbee"
+          },
+          {
+            "id": "base-xianxia",
+            "sha256": "3cdb82e0b37dbd59e760a8632d770aee646dcea6f652ede3c24e9a0e55325623",
+            "text_characters": 4086,
+            "text_sha256": "d7fc4b94bcd64f5612018472427afe62bca0b3b4ebf6416dd7d25d5efa71e583"
+          },
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0008",
+        "input_sha256": "e3a1565c65c8fbc24a182c59ca0e12c364058dab5251b241c3785bc2dd72b0c1",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0008/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "domain-chinese_period",
+            "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+            "text_characters": 11967,
+            "text_sha256": "ba01ffeb6176099f34ee1d9db684625fdc36c7f6e03b11b437647cdfbf8adbee"
+          },
+          {
+            "id": "base-xianxia",
+            "sha256": "3cdb82e0b37dbd59e760a8632d770aee646dcea6f652ede3c24e9a0e55325623",
+            "text_characters": 4086,
+            "text_sha256": "d7fc4b94bcd64f5612018472427afe62bca0b3b4ebf6416dd7d25d5efa71e583"
+          },
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          },
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          },
+          {
+            "id": "express-edits",
+            "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+            "text_characters": 3391,
+            "text_sha256": "fbb5f096003a4c94cb1884ef82801e11ccf71ad651be54d74a91a6d15172dc76"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0009",
+        "input_sha256": "a37790c706671cc4994f0aa127f076023f41d3751bb6e45c32c62a4baa4bf6fe",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/calls/event-0009/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "base-xianxia",
+            "sha256": "3cdb82e0b37dbd59e760a8632d770aee646dcea6f652ede3c24e9a0e55325623",
+            "text_characters": 4086,
+            "text_sha256": "d7fc4b94bcd64f5612018472427afe62bca0b3b4ebf6416dd7d25d5efa71e583"
+          },
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          },
+          {
+            "id": "choose-editing-input",
+            "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+            "text_characters": 4301,
+            "text_sha256": "360f1e1b31a8a2a79f88c75c85614bac85ef47ed340811aa356d6088bc8f8e9c"
+          },
+          {
+            "id": "express-edits",
+            "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+            "text_characters": 3391,
+            "text_sha256": "fbb5f096003a4c94cb1884ef82801e11ccf71ad651be54d74a91a6d15172dc76"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      }
+    ],
+    "note": "Text presence does not establish attention or causal use; recorded Planner notes require semantic review."
+  },
+  {
+    "task": "F007",
+    "reads": [
+      {
+        "id": "experience-map",
+        "path": "knowledge/experience/README.md",
+        "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+        "start_line": 1,
+        "end_line": 16,
+        "next_line": null,
+        "event_id": "event-0003"
+      }
+    ],
+    "snapshot_experience_ids": [
+      "experience-map",
+      "choose-editing-input",
+      "express-edits",
+      "inspect-and-compare",
+      "use-design-knowledge",
+      "case-bernini-027-after-v1",
+      "case-bernini-024-before-v3",
+      "case-ditto-024-before-v3",
+      "case-bernini-003-before-v3",
+      "wiki-scene-identity",
+      "wiki-realization",
+      "wiki-connected-change",
+      "wiki-map"
+    ],
+    "calls": [
+      {
+        "call": "event-0001",
+        "input_sha256": "b103d5eb27a888867151677678dfc039e87ae7b5de6eaeaf4971a07de1e6b279",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run/calls/event-0001/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0002",
+        "input_sha256": "74f607e02f4e5da4ed7fe460d9ed690864c4e4c029ffa4fd0cbc31c2b269d321",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run/calls/event-0002/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0003",
+        "input_sha256": "7455af2fbc4165bbe0cc2b9700d16ea1d7be0da37da021898bfbaa93302f3697",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run/calls/event-0003/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0004",
+        "input_sha256": "0ca1396cb3e08c5751b2be143829fd8a9e95dbc35ff6135f5761c8774d68d7cb",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run/calls/event-0004/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0005",
+        "input_sha256": "38f82f47eefaaadaceabad2e81c7833c125afc19ce57e734493d9d777ce64655",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run/calls/event-0005/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0006",
+        "input_sha256": "4838307f0d5aa9458377aa5acfa9b4ce34e6d1e40d2009d1da0850971bf5ae57",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run/calls/event-0006/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      },
+      {
+        "call": "event-0007",
+        "input_sha256": "58b6783b89b972348885c564c6fb20827267f9bb84b9ee5c7d4f6d81e417144b",
+        "input_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run/calls/event-0007/input.json",
+        "digest_ids": [
+          "wiki-connected-change",
+          "wiki-realization",
+          "wiki-scene-identity"
+        ],
+        "returned_materials_in_actual_input": [
+          {
+            "id": "experience-map",
+            "sha256": "d3e410a2277e71aaa094f8bea234abbfefbe88ba553dacc2f6b8e57dc6c57deb",
+            "text_characters": 1942,
+            "text_sha256": "0296cb75a77b054a70dbe49febe51a1326c6fad00e5f3173e53ed8a0058f0918"
+          }
+        ],
+        "note": "Retrospective exact-input inspection, not a backfilled runtime exposure receipt."
+      }
+    ],
+    "note": "Text presence does not establish attention or causal use; recorded Planner notes require semantic review."
+  }
+]

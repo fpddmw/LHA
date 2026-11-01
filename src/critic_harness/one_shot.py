@@ -133,9 +133,18 @@ def validate_report(report, packet):
             if dimension == "content_preservation" and "source" not in {e["video_id"] for e in cited}:
                 raise ValueError("Preservation needs source and candidate evidence")
             if dimension == "temporal_consistency":
-                indices = sorted({e["frame_index"] for e in cited if e["kind"] == "consecutive_frames"
-                                  and e["video_id"] == visible["candidate_id"]})
-                if not any(b == a + 1 for a, b in zip(indices, indices[1:])):
+                dense = [e for e in cited if e["kind"] == "consecutive_frames" and e["video_id"] == visible["candidate_id"]]
+                # Window endpoints identify continuous evidence only when every
+                # intervening frame was supplied in that same dense window.
+                supported = False
+                for first in dense:
+                    window = first["id"].rsplit(":", 1)[0]
+                    available = {e["frame_index"] for e in refs.values() if e["kind"] == "consecutive_frames"
+                                 and e["video_id"] == visible["candidate_id"] and e["id"].rsplit(":", 1)[0] == window}
+                    for last in dense:
+                        if last["id"].rsplit(":", 1)[0] == window and last["frame_index"] > first["frame_index"]:
+                            supported |= set(range(first["frame_index"], last["frame_index"] + 1)) <= available
+                if not supported:
                     raise ValueError("Temporal scores need consecutive candidate evidence")
     if not isinstance(report["comparisons"], list) or not isinstance(report["extra_checks"], list):
         raise ValueError("Comparisons and supplemental checks must be lists")

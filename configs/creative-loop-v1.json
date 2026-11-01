@@ -1,17 +1,36 @@
 {
   "workflow": "creative_loop_v1",
-  "planner": {"model": "gpt-6.1-sol", "reasoning_effort": "high"},
-  "critic": {"protocol": "lha-creative-review-v1", "model": "gpt-6.1-sol", "reasoning_effort": "high"},
+  "planner": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "high"
+  },
+  "critic": {
+    "protocol": "lha-creative-review-v1",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "high"
+  },
   "completion_mode": "delivery",
   "max_generations": null,
   "max_turns": null,
-  "independent_judge": {
-    "provider": "paratera",
-    "model": "glm5.3flash",
-    "base_url_env": "LHA_PARATERA_BASE_URL",
-    "api_key_env": "LHA_PARATERA_API_KEY",
-    "reasoning_effort": null,
-    "live_capability_verification": "deferred"
-  },
-  "experiments": "deferred_until_user_resumes"
+  "experiments": "awaiting_user_opened_multi_gpu_host",
+  "independent_judges": [
+    {
+      "provider": "paratera",
+      "model": "glm5.3flash",
+      "provider_model": "GLM-5.3-Flash",
+      "base_url_env": "LHA_PARATERA_BASE_URL",
+      "api_key_env": "LHA_PARATERA_API_KEY",
+      "reasoning_effort": null,
+      "max_output_tokens": 16384
+    },
+    {
+      "provider": "tu-zi",
+      "model": "sonnet-5.5high",
+      "provider_model": "claude-sonnet-5-5",
+      "base_url_env": "LHA_SONNET_BASE_URL",
+      "api_key_env": "LHA_SONNET_API_KEY",
+      "reasoning_effort": "high",
+      "max_output_tokens": 7000
+    }
+  ]
 }

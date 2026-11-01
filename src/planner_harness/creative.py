@@ -36,6 +36,9 @@ def configure(harness, execution):
         raise ValueError("Creative loop excludes task cards, RSI and online independent evaluation")
     if profile.get("experiment_profile"):
         verify_experiment(profile["experiment_profile"], harness.root)
+    mode = profile.setdefault("experience_mode", "full")
+    if mode not in {"full", "none"}:
+        raise ValueError("Experience mode must be full or none")
     supplied = profile.get("critic")
     frozen = frozen_profile()
     if supplied:
@@ -48,7 +51,7 @@ def configure(harness, execution):
         if set(supplied) - {"model", "reasoning_effort", "frozen_profile", "protocol"}:
             raise ValueError("Legacy Critic configuration is not valid in creative loop")
     profile["critic"] = {"protocol": frozen["protocol_id"], "frozen_profile": frozen}
-    harness.knowledge = CreativeKnowledge(harness.root)
+    harness.knowledge = CreativeKnowledge(harness.root, experience_mode=profile.get("experience_mode", "full"))
     harness.state["config"]["execution"] = profile
     save(harness.output / "critic-profile.json", frozen)
 
@@ -59,14 +62,22 @@ def experiment_profile(root):
     from .execution import signature
     from .creative_knowledge import CreativeKnowledge
     from critic_harness.one_shot import frozen_profile
+    from evaluation.creative import JUDGES, judge_identity
     root = Path(root).resolve()
     files = {}
-    for package in ("planner_harness", "critic_harness", "server_runtime", "evaluation", "vlm"):
+    for package in ("planner_harness", "critic_harness", "server_runtime", "evaluation", "vlm", "experiments"):
         for path in sorted((root / "src" / package).rglob("*")):
             if path.is_file() and path.suffix in {".py", ".md"}:
                 files[path.relative_to(root).as_posix()] = sha(path)
-    knowledge = CreativeKnowledge(root)
-    for relative in sorted(knowledge.paths):
+    scopes = {}
+    paths = set()
+    for mode in ("full", "none"):
+        knowledge = CreativeKnowledge(root, experience_mode=mode)
+        scopes[mode] = {identity: {"path": row["path"], "sha256": sha(root / row["path"])}
+                        for identity, row in knowledge.items.items() if (root / row["path"]).is_file()}
+        paths.update(knowledge.paths)
+        paths.add(knowledge.allowlist.get("operations_manual", "src/planner_harness/CREATIVE_LOOP.md"))
+    for relative in sorted(paths):
         path = root / relative
         if path.is_file() and path.suffix.lower() in {".md", ".json", ".py", ".html", ".txt", ".jpg", ".jpeg", ".png", ".webp"}:
             files[relative] = sha(path)
@@ -74,8 +85,12 @@ def experiment_profile(root):
         if relative is None:
             continue
         files[relative] = sha(root / relative)
+    for relative in ("scripts/run_creative_fewshot.py", "scripts/run_creative_judge.py", "scripts/run_planner_worker.py",
+                     "scripts/manage_creative_run.py", "scripts/deploy/run_prompt_probe.py", "configs/creative-loop-v1.json"):
+        files[relative] = sha(root / relative)
     body = {"protocol": "creative-experiment-v1", "critic": frozen_profile(),
-            "planner": role_settings({}, "planner"), "independent_judge": "glm5.3flash", "files": files}
+            "planner": role_settings({}, "planner"), "independent_judges": [judge_identity(j) for j in JUDGES],
+            "files": files, "knowledge_scopes": scopes}
     return {**body, "sha256": signature(body)}
 
 
@@ -88,7 +103,7 @@ def verify_experiment(path, root):
 
 
 def system_prompt(harness):
-    operations = Path(__file__).with_name("CREATIVE_LOOP.md").read_text(encoding="utf-8")
+    operations = (harness.root / harness.knowledge.allowlist.get("operations_manual", "src/planner_harness/CREATIVE_LOOP.md")).read_text(encoding="utf-8")
     row = harness.knowledge.items["manual"]
     return operations + "\n\n" + harness.knowledge.document(row)["text"]
 

@@ -38,10 +38,12 @@ transcripts; concise decisions and evidence are sufficient.
 
 ## Work with actual results
 
-All candidates remain available. A new generation does not replace your delivery
-choice. Generate from source, an earlier candidate or the latest candidate according
+All candidates remain available. Your delivery candidate, next editing input and
+optional evaluation comparator are separate choices. A new generation does not
+replace your delivery choice. Generate from source, an earlier candidate or the latest candidate according
 to what can support the next proposal. The renderer receives only the selected video
-and exact prompt; it does not see notes, knowledge or other videos. Inspect the output
+and exact prompt; it does not see notes, knowledge or other videos. A phrase such
+as 'small repair' supplies no mask or protected image region. Inspect the output
 and its relevant relationships. Sampled frames have explicit coverage limits; matching
 timestamps do not establish aligned motion.
 
@@ -73,9 +75,9 @@ Only supplied pages count as read. Earlier bulky results become archive links;
 they remain available through history or another read. Notes and workspace
 organization remain optional and under your control.
 
-The optional `understand-and-design` and `understand-and-revise` manuals support
-task interpretation and result-based revision. Experience entries inform judgment;
-they do not impose retry limits, a ranking policy or a required reasoning sequence.
-If an entry changes or fails to fit your understanding, you may retain that concise
-judgment in an ordinary note. The harness records reading automatically; no citation
-or adoption form is required, and task notes never publish cross-task experience.
+The `understand-and-design` and `understand-and-revise` manuals support task
+interpretation and result-based revision. Experience entries provide conditional
+preferences and explanations; apply them to the actual request and visual evidence.
+A concise note can retain the condition you recognized or why another choice fits
+better. The harness records reading automatically. Task notes preserve current
+understanding; publishing cross-task knowledge is separate maintenance work.

@@ -6,8 +6,9 @@ from pathlib import Path
 from .common import load
 
 
-def report(output, state):
+def report(output, state, *, record_directory=None):
     output = Path(output)
+    records = Path(record_directory) if record_directory is not None else output
     def relative(path):
         try:
             return Path(os.path.relpath(path, output)).as_posix()
@@ -29,7 +30,7 @@ def report(output, state):
     section("Actual knowledge reads", state.get("reads", {}))
     from .experience_usage import project_run, write_json
     try:
-        usage = project_run(output)
+        usage = load(records / "experience-usage.json") if record_directory is not None and (records / "experience-usage.json").exists() else project_run(records)
         write_json(output / "experience-usage.json", usage)
         section("Experience use (factual provenance, not effectiveness)", {
             "record": "experience-usage.json", "calls": usage["calls"],
@@ -67,7 +68,7 @@ def report(output, state):
         ("recoveries", "resource_changes", "delivery_continuations", "interruption_history")})
     failures = []
     for identity in state["jobs"]:
-        path = output / "jobs" / identity / "response.json"
+        path = records / "jobs" / identity / "response.json"
         if path.exists():
             response = load(path)
             if response.get("status") == "failed":
@@ -79,16 +80,16 @@ def report(output, state):
         identity = event["event_id"]
         title = identity + ": " + str(event.get("request", {}).get("action", event["status"]))
         links = []
-        for path, label in ((output / "events" / (identity + ".json"), "Operation"),
-                            (output / "calls" / identity / "input.json", "Model input"),
-                            (output / "calls" / identity / "response.txt", "Model response")):
+        for path, label in ((records / "events" / (identity + ".json"), "Operation"),
+                            (records / "calls" / identity / "input.json", "Model input"),
+                            (records / "calls" / identity / "response.txt", "Model response")):
             if path.exists():
                 url = relative(path)
                 links.append(f'<a href="{html.escape(url, quote=True)}">{label}</a>')
                 md.append(f"- {title}: [{label}]({url})")
         body.append("<details><summary>" + html.escape(title) + "</summary>" + " | ".join(links)
                     + "<pre>" + html.escape(encoded(event.get("request", {}))) + "</pre></details>")
-    body.append('<p><a href="state.json">Complete checkpoint</a> | <a href="report.md">Markdown record</a></p>')
+    body.append('<p><a href="' + html.escape(relative(records / "state.json"), quote=True) + '">Complete checkpoint</a> | <a href="report.md">Markdown record</a></p>')
     (output / "report.md").write_text("\n".join(md) + "\n", encoding="utf-8")
     (output / "report.html").write_text('<!doctype html><html lang="en"><meta charset="utf-8"><title>Creative loop record</title>'
         '<style>body{font:16px system-ui;max-width:1150px;margin:32px auto;padding:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f6f8;padding:14px}video{max-width:650px;width:100%}img{max-width:450px;width:100%}details{margin:12px 0}figure{display:inline-block;margin:10px;max-width:450px}</style>'

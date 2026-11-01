@@ -1,0 +1,1003 @@
+{
+  "source_path": "out/agent_loop_live/20261030/phase2/completed-024-pair/tasks/024__long__no_knowledge/run/state.json",
+  "source_sha256": "0de9fb6e3a27846f45c3dde727e0cb836a62f6a94dbce36b47f958789238b03f",
+  "request": {
+    "text": "Transform the man’s phone call in the beige leather car interior into digital glitch art, with high-contrast shadows and RGB color separation across his navy suit, seats, and window reflections. Apply horizontal pixel shifts, fragmented blocks, and flickering scan-line textures across the entire frame, with distorted color highlights.",
+    "source": {
+      "path": "/output/LHA-loop-batch-20261030-v1/benchmark_data/main/024/024.mp4",
+      "sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "width": 1280,
+      "height": 720,
+      "timing_basis": "decoder frame index and reported FPS; sampled observations, not a continuous-motion verification"
+    },
+    "target_model": "bernini"
+  },
+  "videos": {
+    "source": {
+      "sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05
+    },
+    "v1": {
+      "sha256": "e955b51c21c548cf0ee2ae4188d41a25d2d352a210b229cc9bb2a05533c95fac",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "parent": "source",
+      "prompt": "Transform this entire shot into bold digital glitch art. Keep the recognizable man holding his phone to his ear, his natural speaking movements, the camera framing, navy suit, beige leather seats and passing city reflections. Render deep, high-contrast shadows and harsh luminous highlights, with strong displaced red, green and blue color channels tracing his face, hand, suit lapels, seat seams and window reflections. Across the entire frame, animate irregular horizontal pixel-shift bands, fragmented rectangular image blocks and fine flickering scan-line textures. Make the glitches visibly slice and offset portions of the actual image, including the man, upholstery and windows, with intermittent larger horizontal tears amid smaller digital fragments. Distort the highlights into saturated cyan, magenta, electric blue and red, while retaining enough beige leather and navy fabric to recognize the original setting. The glitch pattern should change rapidly throughout the shot, with bursts of channel separation and block displacement over a persistent scan-line texture. Create a cohesive, striking corrupted-video aesthetic with clear underlying photographic detail and continuous original action.",
+      "job_id": "event-0001-generate",
+      "execution": {
+        "backend": "bernini",
+        "requested_prompt": "Transform this entire shot into bold digital glitch art. Keep the recognizable man holding his phone to his ear, his natural speaking movements, the camera framing, navy suit, beige leather seats and passing city reflections. Render deep, high-contrast shadows and harsh luminous highlights, with strong displaced red, green and blue color channels tracing his face, hand, suit lapels, seat seams and window reflections. Across the entire frame, animate irregular horizontal pixel-shift bands, fragmented rectangular image blocks and fine flickering scan-line textures. Make the glitches visibly slice and offset portions of the actual image, including the man, upholstery and windows, with intermittent larger horizontal tears amid smaller digital fragments. Distort the highlights into saturated cyan, magenta, electric blue and red, while retaining enough beige leather and navy fabric to recognize the original setting. The glitch pattern should change rapidly throughout the shot, with bursts of channel separation and block displacement over a persistent scan-line texture. Create a cohesive, striking corrupted-video aesthetic with clear underlying photographic detail and continuous original action.",
+        "effective_prompt": "Transform this entire shot into bold digital glitch art. Keep the recognizable man holding his phone to his ear, his natural speaking movements, the camera framing, navy suit, beige leather seats and passing city reflections. Render deep, high-contrast shadows and harsh luminous highlights, with strong displaced red, green and blue color channels tracing his face, hand, suit lapels, seat seams and window reflections. Across the entire frame, animate irregular horizontal pixel-shift bands, fragmented rectangular image blocks and fine flickering scan-line textures. Make the glitches visibly slice and offset portions of the actual image, including the man, upholstery and windows, with intermittent larger horizontal tears amid smaller digital fragments. Distort the highlights into saturated cyan, magenta, electric blue and red, while retaining enough beige leather and navy fabric to recognize the original setting. The glitch pattern should change rapidly throughout the shot, with bursts of channel separation and block displacement over a persistent scan-line texture. Create a cohesive, striking corrupted-video aesthetic with clear underlying photographic detail and continuous original action.",
+        "encoded_text": "You are a helpful assistant specialized in video editing.Transform this entire shot into bold digital glitch art. Keep the recognizable man holding his phone to his ear, his natural speaking movements, the camera framing, navy suit, beige leather seats and passing city reflections. Render deep, high-contrast shadows and harsh luminous highlights, with strong displaced red, green and blue color channels tracing his face, hand, suit lapels, seat seams and window reflections. Across the entire frame, animate irregular horizontal pixel-shift bands, fragmented rectangular image blocks and fine flickering scan-line textures. Make the glitches visibly slice and offset portions of the actual image, including the man, upholstery and windows, with intermittent larger horizontal tears amid smaller digital fragments. Distort the highlights into saturated cyan, magenta, electric blue and red, while retaining enough beige leather and navy fabric to recognize the original setting. The glitch pattern should change rapidly throughout the shot, with bursts of channel separation and block displacement over a persistent scan-line texture. Create a cohesive, striking corrupted-video aesthetic with clear underlying photographic detail and continuous original action.",
+        "system_prompt": "You are a helpful assistant specialized in video editing.",
+        "prompt_transforms": [
+          "official Bernini prefix + _prompt_clean at encoder"
+        ],
+        "input_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 40,
+          "guidance_mode": "v2v_apg",
+          "max_image_size": 848,
+          "negative_prompt": "",
+          "prompt_enhancer": false
+        },
+        "seed": 42,
+        "model_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "code_revision": "sha256:e47c5171a4da112498b5cb889e396b5a4895ae182273c823b7002a924b450629",
+        "asset_manifest_sha256": "c15340122a48058d05dc1b08697377daa7e17bd1868f3c5446d486b078eb719b",
+        "tokenizer_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "token_count": 259,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 725.1842701435089
+      }
+    },
+    "v2": {
+      "sha256": "5745b62525d454ddc8327530a95cff9cfb9566a3550903f72ed88c7edfa6e50d",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "parent": "source",
+      "prompt": "Transform the phone-call shot into high-contrast digital glitch art while keeping the man, black phone against his ear, navy suit and beige leather car interior recognizable. Preserve the original composition and natural speaking action. Use deep black shadows, luminous distorted highlights and vivid red, green and blue channel separation.\n\nApply animated digital interference across the entire image, including the broad central rear window behind the man's head. Split the reflected buildings and window highlights into visibly displaced RGB copies, sliced rectangular fragments and horizontally shifted strips. Carry several horizontal tear bands across the full frame, cutting through the window reflections, face, suit and seats together. Vary their height and sideways displacement over time. Cover every region with fine horizontal scan lines that run left to right and flicker throughout the shot.\n\nUse small and medium fragments of the actual photographic image, with occasional larger displaced strips. Keep the man's facial structure, fingers and dark rectangular phone readable beneath the interference. Retain visible navy fabric, beige upholstery and seat seams between glitch fragments. Concentrate saturated cyan, magenta, electric blue, red and green in separated edges and flashing highlights. Let the glitch bands jump between different vertical positions and the fragmented highlights flicker, creating energetic corrupted-video motion throughout all five seconds. Balance strong frame-wide distortion with clear underlying photographic detail.",
+      "job_id": "event-0003-generate",
+      "execution": {
+        "backend": "bernini",
+        "requested_prompt": "Transform the phone-call shot into high-contrast digital glitch art while keeping the man, black phone against his ear, navy suit and beige leather car interior recognizable. Preserve the original composition and natural speaking action. Use deep black shadows, luminous distorted highlights and vivid red, green and blue channel separation.\n\nApply animated digital interference across the entire image, including the broad central rear window behind the man's head. Split the reflected buildings and window highlights into visibly displaced RGB copies, sliced rectangular fragments and horizontally shifted strips. Carry several horizontal tear bands across the full frame, cutting through the window reflections, face, suit and seats together. Vary their height and sideways displacement over time. Cover every region with fine horizontal scan lines that run left to right and flicker throughout the shot.\n\nUse small and medium fragments of the actual photographic image, with occasional larger displaced strips. Keep the man's facial structure, fingers and dark rectangular phone readable beneath the interference. Retain visible navy fabric, beige upholstery and seat seams between glitch fragments. Concentrate saturated cyan, magenta, electric blue, red and green in separated edges and flashing highlights. Let the glitch bands jump between different vertical positions and the fragmented highlights flicker, creating energetic corrupted-video motion throughout all five seconds. Balance strong frame-wide distortion with clear underlying photographic detail.",
+        "effective_prompt": "Transform the phone-call shot into high-contrast digital glitch art while keeping the man, black phone against his ear, navy suit and beige leather car interior recognizable. Preserve the original composition and natural speaking action. Use deep black shadows, luminous distorted highlights and vivid red, green and blue channel separation.\n\nApply animated digital interference across the entire image, including the broad central rear window behind the man's head. Split the reflected buildings and window highlights into visibly displaced RGB copies, sliced rectangular fragments and horizontally shifted strips. Carry several horizontal tear bands across the full frame, cutting through the window reflections, face, suit and seats together. Vary their height and sideways displacement over time. Cover every region with fine horizontal scan lines that run left to right and flicker throughout the shot.\n\nUse small and medium fragments of the actual photographic image, with occasional larger displaced strips. Keep the man's facial structure, fingers and dark rectangular phone readable beneath the interference. Retain visible navy fabric, beige upholstery and seat seams between glitch fragments. Concentrate saturated cyan, magenta, electric blue, red and green in separated edges and flashing highlights. Let the glitch bands jump between different vertical positions and the fragmented highlights flicker, creating energetic corrupted-video motion throughout all five seconds. Balance strong frame-wide distortion with clear underlying photographic detail.",
+        "encoded_text": "You are a helpful assistant specialized in video editing.Transform the phone-call shot into high-contrast digital glitch art while keeping the man, black phone against his ear, navy suit and beige leather car interior recognizable. Preserve the original composition and natural speaking action. Use deep black shadows, luminous distorted highlights and vivid red, green and blue channel separation. Apply animated digital interference across the entire image, including the broad central rear window behind the man's head. Split the reflected buildings and window highlights into visibly displaced RGB copies, sliced rectangular fragments and horizontally shifted strips. Carry several horizontal tear bands across the full frame, cutting through the window reflections, face, suit and seats together. Vary their height and sideways displacement over time. Cover every region with fine horizontal scan lines that run left to right and flicker throughout the shot. Use small and medium fragments of the actual photographic image, with occasional larger displaced strips. Keep the man's facial structure, fingers and dark rectangular phone readable beneath the interference. Retain visible navy fabric, beige upholstery and seat seams between glitch fragments. Concentrate saturated cyan, magenta, electric blue, red and green in separated edges and flashing highlights. Let the glitch bands jump between different vertical positions and the fragmented highlights flicker, creating energetic corrupted-video motion throughout all five seconds. Balance strong frame-wide distortion with clear underlying photographic detail.",
+        "system_prompt": "You are a helpful assistant specialized in video editing.",
+        "prompt_transforms": [
+          "official Bernini prefix + _prompt_clean at encoder"
+        ],
+        "input_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 40,
+          "guidance_mode": "v2v_apg",
+          "max_image_size": 848,
+          "negative_prompt": "",
+          "prompt_enhancer": false
+        },
+        "seed": 42,
+        "model_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "code_revision": "sha256:e47c5171a4da112498b5cb889e396b5a4895ae182273c823b7002a924b450629",
+        "asset_manifest_sha256": "c15340122a48058d05dc1b08697377daa7e17bd1868f3c5446d486b078eb719b",
+        "tokenizer_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "token_count": 320,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 751.5249428749084
+      }
+    },
+    "v3": {
+      "sha256": "75d233d28b30d910ca7547d2187505cad40f417a41ef766d55b85e0126d41275",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "parent": "source",
+      "prompt": "Turn the entire video into animated digital glitch art using a flat, screen-space corrupted-video treatment. Preserve the photographic composition and the man's speaking action in the beige leather car. Keep his face, raised fingers and black rectangular phone against his ear clearly recognizable.\n\nApply strong RGB channel separation and fine flickering horizontal scan lines uniformly from edge to edge. Give the broad window behind his head equally vivid treatment: reflected building edges split into displaced red, green and cyan copies, with magenta highlights, horizontal pixel shifts and rectangular fragments throughout the glass. Carry this same interference across his navy suit, skin, beige seats and headrests. Use deep high-contrast shadows and saturated distorted highlights while retaining visible fabric and leather detail.\n\nAnimate thin horizontal slices of the actual image shifting sideways by different amounts. Their positions, widths and offsets jump and reset repeatedly throughout the five seconds. Scatter small rectangular pixel fragments across all regions, including the middle and upper-right window. Alternate brief stronger bursts with lighter interference so the phone and fingers remain readable. Use narrow RGB fringes and small pixel shifts around the phone, hand and face; distribute stronger fragmentation across the suit, seats and window reflections. Keep fragments as flat displaced pieces of the original photograph. Fine horizontal scan lines flicker over every region continuously, while cyan, red, blue, green and magenta highlights pulse irregularly. The result should feel like a moving photographic signal undergoing energetic digital corruption.",
+      "job_id": "event-0005-generate",
+      "execution": {
+        "backend": "bernini",
+        "requested_prompt": "Turn the entire video into animated digital glitch art using a flat, screen-space corrupted-video treatment. Preserve the photographic composition and the man's speaking action in the beige leather car. Keep his face, raised fingers and black rectangular phone against his ear clearly recognizable.\n\nApply strong RGB channel separation and fine flickering horizontal scan lines uniformly from edge to edge. Give the broad window behind his head equally vivid treatment: reflected building edges split into displaced red, green and cyan copies, with magenta highlights, horizontal pixel shifts and rectangular fragments throughout the glass. Carry this same interference across his navy suit, skin, beige seats and headrests. Use deep high-contrast shadows and saturated distorted highlights while retaining visible fabric and leather detail.\n\nAnimate thin horizontal slices of the actual image shifting sideways by different amounts. Their positions, widths and offsets jump and reset repeatedly throughout the five seconds. Scatter small rectangular pixel fragments across all regions, including the middle and upper-right window. Alternate brief stronger bursts with lighter interference so the phone and fingers remain readable. Use narrow RGB fringes and small pixel shifts around the phone, hand and face; distribute stronger fragmentation across the suit, seats and window reflections. Keep fragments as flat displaced pieces of the original photograph. Fine horizontal scan lines flicker over every region continuously, while cyan, red, blue, green and magenta highlights pulse irregularly. The result should feel like a moving photographic signal undergoing energetic digital corruption.",
+        "effective_prompt": "Turn the entire video into animated digital glitch art using a flat, screen-space corrupted-video treatment. Preserve the photographic composition and the man's speaking action in the beige leather car. Keep his face, raised fingers and black rectangular phone against his ear clearly recognizable.\n\nApply strong RGB channel separation and fine flickering horizontal scan lines uniformly from edge to edge. Give the broad window behind his head equally vivid treatment: reflected building edges split into displaced red, green and cyan copies, with magenta highlights, horizontal pixel shifts and rectangular fragments throughout the glass. Carry this same interference across his navy suit, skin, beige seats and headrests. Use deep high-contrast shadows and saturated distorted highlights while retaining visible fabric and leather detail.\n\nAnimate thin horizontal slices of the actual image shifting sideways by different amounts. Their positions, widths and offsets jump and reset repeatedly throughout the five seconds. Scatter small rectangular pixel fragments across all regions, including the middle and upper-right window. Alternate brief stronger bursts with lighter interference so the phone and fingers remain readable. Use narrow RGB fringes and small pixel shifts around the phone, hand and face; distribute stronger fragmentation across the suit, seats and window reflections. Keep fragments as flat displaced pieces of the original photograph. Fine horizontal scan lines flicker over every region continuously, while cyan, red, blue, green and magenta highlights pulse irregularly. The result should feel like a moving photographic signal undergoing energetic digital corruption.",
+        "encoded_text": "You are a helpful assistant specialized in video editing.Turn the entire video into animated digital glitch art using a flat, screen-space corrupted-video treatment. Preserve the photographic composition and the man's speaking action in the beige leather car. Keep his face, raised fingers and black rectangular phone against his ear clearly recognizable. Apply strong RGB channel separation and fine flickering horizontal scan lines uniformly from edge to edge. Give the broad window behind his head equally vivid treatment: reflected building edges split into displaced red, green and cyan copies, with magenta highlights, horizontal pixel shifts and rectangular fragments throughout the glass. Carry this same interference across his navy suit, skin, beige seats and headrests. Use deep high-contrast shadows and saturated distorted highlights while retaining visible fabric and leather detail. Animate thin horizontal slices of the actual image shifting sideways by different amounts. Their positions, widths and offsets jump and reset repeatedly throughout the five seconds. Scatter small rectangular pixel fragments across all regions, including the middle and upper-right window. Alternate brief stronger bursts with lighter interference so the phone and fingers remain readable. Use narrow RGB fringes and small pixel shifts around the phone, hand and face; distribute stronger fragmentation across the suit, seats and window reflections. Keep fragments as flat displaced pieces of the original photograph. Fine horizontal scan lines flicker over every region continuously, while cyan, red, blue, green and magenta highlights pulse irregularly. The result should feel like a moving photographic signal undergoing energetic digital corruption.",
+        "system_prompt": "You are a helpful assistant specialized in video editing.",
+        "prompt_transforms": [
+          "official Bernini prefix + _prompt_clean at encoder"
+        ],
+        "input_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 40,
+          "guidance_mode": "v2v_apg",
+          "max_image_size": 848,
+          "negative_prompt": "",
+          "prompt_enhancer": false
+        },
+        "seed": 137,
+        "model_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "code_revision": "sha256:e47c5171a4da112498b5cb889e396b5a4895ae182273c823b7002a924b450629",
+        "asset_manifest_sha256": "c15340122a48058d05dc1b08697377daa7e17bd1868f3c5446d486b078eb719b",
+        "tokenizer_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "token_count": 346,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 713.0048480033875
+      }
+    }
+  },
+  "evaluations": {
+    "event-0002-critique": {
+      "video_id": "v1",
+      "candidate": "v1",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "The result convincingly delivers digital glitch art, with high-contrast shadows, saturated RGB separation, fragmented blocks and animated textures. Fulfillment is partial: the central window reflections receive substantially weaker treatment, and dense fragmentation makes the phone difficult to distinguish. These are the clearest reasons to consider another generation. Horizontal offsets are visible but less prominent than color flicker.",
+        "findings": [
+          {
+            "id": "glitch_appearance",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Deep black shadows, saturated RGB fringes, fragmented cyan/green/magenta blocks and distorted highlights strongly transform the man, navy suit and seats into digital glitch art.",
+            "scope": "Whole-frame overview samples, especially the man, suit and seats",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "window_and_frame_coverage",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Glitch textures reach the subject, seating and frame edges, but the large central rear-window reflection remains comparatively gray and receives weak RGB separation and fragmentation.",
+            "partial_boundary": "The suit and seats receive strong treatment; the explicitly requested window reflections receive substantially less.",
+            "scope": "Whole frame, particularly the central rear window",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "horizontal_offsets",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Horizontal streaks and stepped pixel offsets are visible around fragmented subject and seat contours. They are present, though visually secondary to the colored blocks and fine repeated lines.",
+            "scope": "Subject and seating regions in whole-frame samples",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "animated_glitch_textures",
+            "dimension": "temporal",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Continuous candidate inspection shows changing facial blocks, varying fine line textures and white/cyan/yellow highlight flicker on the right seat. Large contour patterns remain largely anchored, so temporal variation comes chiefly from local texture and color changes.",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              5.0
+            ],
+            "sequence_videos": [
+              "v1"
+            ],
+            "scope": "Whole frame",
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "scene_readability",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Compared with the source overview samples, the candidate retains the man's profile, raised hand at his ear, headrests, seating arrangement and window. Heavy fragmentation obscures the phone/hand boundary and leather detail, making the call inferable chiefly from the pose.",
+            "partial_boundary": "The phone-call composition and car setting remain recognizable in the sampled views, but device recognition and interior material cues are weakened.",
+            "scope": "Whole-frame overview samples; no claim about source-motion preservation",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              }
+            ]
+          }
+        ],
+        "strengths": [
+          "Strong high-contrast shadows, RGB separation and fragmented highlights.",
+          "Visible flicker and changing line textures across the inspected candidate interval.",
+          "Recognizable profile, hand-at-ear pose and car seating composition."
+        ],
+        "unresolved": [
+          "Exact preservation of source motion remains unassessed because source evidence consists of sparse overview samples."
+        ]
+      }
+    },
+    "event-0004-critique": {
+      "video_id": "v2",
+      "candidate": "v2",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "V2 makes horizontal fragmentation more explicit and restores clearer facial and beige-seat detail, but it only partially fulfills the requested whole-frame glitch treatment. The central window reflections remain comparatively untreated, major displacements change little, and dark slabs obscure the phone and raised hand. A focused final refinement would materially improve coverage and phone-call readability.",
+        "findings": [
+          {
+            "id": "glitch_visual_language",
+            "dimension": "style",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Deep black shadows, bright separated color edges, fragmented blocks and distorted cyan, green and magenta highlights establish a clear digital glitch style across the foreground suit and portions of the seats.",
+            "scope": "whole frame, particularly suit and seats",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "horizontal_fragmentation",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "V2 contains conspicuous horizontally displaced slabs across the head, raised-arm area, suit and seat. These make the requested horizontal pixel-shift treatment readily visible.",
+            "scope": "foreground subject and seats",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "central_window_coverage",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "The suit and seat receive strong fragmentation and colored highlights, and the upper-right window has fine texture. However, the large central window reflection retains muted building geometry with coarse blockiness and little conspicuous RGB separation, horizontal displacement or horizontal scan-line treatment.",
+            "partial_boundary": "Strong foreground treatment and some window-edge texture are present; the specifically requested central reflection and entire-frame distribution remain incomplete.",
+            "scope": "whole frame, especially central window reflection behind the head",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "changing_displacement_and_flicker",
+            "dimension": "temporal",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Changing colored highlights and fine line textures produce visible flicker throughout the inspected sequence. The large fragment boundaries remain mostly stable, so temporal variation comes mainly from highlight and texture changes rather than clearly changing displacement. Flickering horizontal scan lines are not consistently apparent across the central window and other comparatively intact regions.",
+            "partial_boundary": "Fine texture and color flicker succeed; changing large-scale displacement is limited and scan-line coverage remains uneven.",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              5.0
+            ],
+            "sequence_videos": [
+              "v2"
+            ],
+            "scope": "whole frame",
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "phone_call_readability",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "The seated man, facial profile and car setting remain recognizable, but broad dark fragments substantially obscure the black phone and fingers beside his face. The raised-arm silhouette survives more clearly than the phone-to-ear relationship, weakening recognition of the phone call in the sampled views.",
+            "partial_boundary": "Subject and setting survive; the defining phone and hand interaction is difficult to distinguish.",
+            "scope": "man, raised hand and phone",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "v1",
+            "gains": [
+              "V2 makes horizontal slicing more explicit through broad displaced bands.",
+              "More natural cheek, ear and beige-upholstery detail is visible, improving recognition of the man and car interior."
+            ],
+            "regressions": [
+              "Broad dark slabs further interrupt the phone and raised-hand area, which was already difficult to read in v1.",
+              "Larger gray and natural-color areas reduce the pervasive neon RGB impact visible in v1, particularly on the upholstery."
+            ],
+            "retained": [
+              "Both versions have strong high-contrast glitch fragmentation on the foreground.",
+              "Both leave the central window reflection comparatively muted and geometrically intact.",
+              "The inspected sequence in both versions has changing highlights and fine texture flicker, with mostly stable major fragment layouts."
+            ],
+            "unknowns": [
+              "Exact preservation of the source's continuous facial and hand motion is unassessed because the source was supplied only as sparse overview frames."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ],
+            "relationship": "alternative"
+          }
+        ],
+        "strengths": [
+          "Clear digital glitch identity with strong black shadows and distorted color highlights.",
+          "Explicit horizontal fragmentation in v2.",
+          "Improved visibility of facial and beige-seat detail compared with v1."
+        ],
+        "unresolved": [
+          "Continuous source-motion preservation remains unassessed; dense source evidence would be needed to establish it."
+        ]
+      }
+    },
+    "event-0007-critique": {
+      "video_id": "v3",
+      "candidate": "v3",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "Recommend v1 for final selection. Its broader RGB fragmentation, stronger black shadows and distorted highlights better match the requested digital glitch transformation. V3 preserves clearer facial structure but leaves much of the suit and seating photographic. Both show temporal variation and both obscure the handset.",
+        "findings": [
+          {
+            "id": "rgb_and_shadow_distribution",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "V3 provides saturated RGB separation and strong contrast around the hand/phone, facial edges and upper window regions. Much of the navy suit and beige seating retains natural color and photographic shading. V1 distributes neon fragmentation and deep black regions more broadly across the requested surfaces.",
+            "scope": "whole frame",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              }
+            ],
+            "partial_boundary": "The effect is prominent in selected regions, but V3 does not substantially transform the suit and seats as requested."
+          },
+          {
+            "id": "whole_frame_glitch_coverage",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "V3 has pronounced horizontal RGB ribbons, fragmented blocks and fine striped textures, concentrated near the raised hand, mouth and upper windows. Large lower-frame areas remain comparatively unaffected. V1 has substantially broader fragmentation across the suit and seats, although its central rear-window region remains subdued.",
+            "scope": "whole frame",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ],
+            "partial_boundary": "Both contain the requested glitch vocabulary; neither achieves equally convincing coverage across the entire frame. V1 comes closer."
+          },
+          {
+            "id": "temporal_variation",
+            "dimension": "temporal",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Continuous inspection shows animated effects in both candidates: V1 has shimmering fine stripes and pulsing cyan, green and yellow highlights; V3 has shifting horizontal RGB streaks. Their large effect regions remain similarly positioned, so temporal variation is mainly local.",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              5.0
+            ],
+            "sequence_videos": [
+              "v1",
+              "v3"
+            ],
+            "scope": "whole-frame inspection; variation observed within affected regions",
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "phone_call_readability",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "V3 preserves clearer facial structure and the recognizable seated, hand-to-ear pose. Its horizontal ribbons still obscure the handset, fingers and parts of the mouth. V1 retains the broad call pose but loses more facial and phone detail beneath fragmentation.",
+            "scope": "man, raised hand and handset",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v3"
+              }
+            ],
+            "partial_boundary": "The call remains inferable from the pose, but neither candidate preserves a clearly distinguishable phone and gripping hand."
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "v1",
+            "gains": [
+              "V3 preserves clearer facial structure and more legible car upholstery.",
+              "V3 gives horizontal displacement a conspicuous ribbon-like form around the hand and windows."
+            ],
+            "regressions": [
+              "V3 has materially weaker RGB transformation and high-contrast treatment across the suit and seats.",
+              "Its effects are more spatially concentrated, reducing compliance with the entire-frame requirement."
+            ],
+            "retained": [
+              "Saturated RGB highlights, fragmented regions and striped glitch textures.",
+              "A recognizable seated call pose, with compromised handset detail."
+            ],
+            "unknowns": [
+              "Exact preservation of source motion is unassessed because the source was inspected only through sparse overview frames."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v3"
+              }
+            ],
+            "relationship": "alternative"
+          }
+        ],
+        "strengths": [
+          "V1 delivers the stronger overall glitch-art treatment for the original request.",
+          "V3 offers clearer facial readability.",
+          "Both contain visibly animated glitch textures."
+        ],
+        "unresolved": [
+          "Neither combines broad requested coverage with clearly readable handset and fingers.",
+          "Continuous source-motion correspondence remains unassessed."
+        ]
+      }
+    }
+  },
+  "final": {
+    "video": "v1",
+    "message": "Selected v1 for its broad RGB fragmentation, deep shadows and flickering glitch textures. Window coverage remains uneven, and the effects partly obscure the phone and fingers.",
+    "outcome": "selected_video"
+  },
+  "notes": "",
+  "reads": {}
+}

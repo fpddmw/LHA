@@ -1,0 +1,19 @@
+{
+  "devices": [
+    0,
+    1
+  ],
+  "lock_directory": "/tmp",
+  "renderer": {
+    "asset_manifest": "REPLACE_WITH_VERIFIED_ASSET_MANIFEST.json",
+    "asset_manifest_sha256": "REPLACE_WITH_ACTUAL_SHA256",
+    "backend": "bernini",
+    "generation": {
+      "num_inference_steps": 40,
+      "guidance_mode": "v2v_apg",
+      "max_image_size": 848,
+      "negative_prompt": "",
+      "prompt_enhancer": false
+    }
+  }
+}

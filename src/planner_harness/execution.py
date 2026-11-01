@@ -74,6 +74,16 @@ def request_job(harness, kind, args, event_id, *, internal=False):
             if type(args["seed"]) is not int:
                 raise ValueError("seed must be an integer")
             payload["renderer"] = {**payload["renderer"], "seed": args["seed"]}
+        if creative and profile.get("seed_sequence") is not None:
+            sequence = profile["seed_sequence"]
+            if set(sequence) != {"start", "step"} or any(type(v) is not int for v in sequence.values()):
+                raise ValueError("Use an explicit integer seed start and step")
+            # Failed attempts do not advance the paired successful-generation index.
+            completed = sum(1 for v in state["videos"].values() if v.get("parent") and not v.get("imported"))
+            seed = sequence["start"] + sequence["step"] * completed
+            if "seed" in args and args["seed"] != seed:
+                raise ValueError("This experiment freezes the seed sequence; input and prompt remain your choices")
+            payload["renderer"] = {**payload["renderer"], "seed": seed}
         if state["config"].get("rsi"):
             from .ledger import intent, resolve_baseline
             if not state.get("requirements"):

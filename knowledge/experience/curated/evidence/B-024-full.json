@@ -1,0 +1,767 @@
+{
+  "id": "B-024-full",
+  "extraction": "Deterministic excerpts from saved state; no new model call or visual judgment. Historical online findings are attributed, not instructions.",
+  "source": {
+    "path": "out/agent_loop_live/20261030/phase2/completed-024-pair/tasks/024__long__full_knowledge/run/state.json",
+    "sha256": "4a028d06867b155f405d8c8dc30e9a6e1fe0e483a7b8740059cdc4458f5eee06"
+  },
+  "request": "Transform the man’s phone call in the beige leather car interior into digital glitch art, with high-contrast shadows and RGB color separation across his navy suit, seats, and window reflections. Apply horizontal pixel shifts, fragmented blocks, and flickering scan-line textures across the entire frame, with distorted color highlights.",
+  "generations": [
+    {
+      "event_id": "event-0004",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "source",
+          "prompt": "Transform the entire shot of the man making a phone call in the beige leather car into vivid digital glitch art. Use deep, high-contrast shadows and distorted electric red, green, blue, cyan, and magenta highlights. Visibly separate the RGB channels into offset colored contours across his face, navy suit, white shirt, phone, leather seats, and window reflections. Break the image into horizontal strips that intermittently shift sideways, displacing portions of the underlying scene. Add fragmented rectangular pixel blocks at varied scales across the foreground and background, including the empty right seat and windows. Fine horizontal scan lines cover the whole frame and flicker in intensity, while brief block glitches and channel offsets change position throughout the clip. Keep the same recognizable man holding the phone to his ear, the original phone-call movements, and the existing composition and car interior. The distortions should feel like a corrupted moving video signal."
+        }
+      }
+    },
+    {
+      "event_id": "event-0007",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "v1",
+          "prompt": "Extend the existing digital glitch art across the entire image, especially the broad navy jacket surfaces, empty beige seat and right headrest, and building reflections in the windows. Break these surfaces into horizontally displaced image strips and rectangular fragments. Repeat seat seams, jacket lapels, and reflected building edges as visibly offset red, green, and blue channel images. Several horizontal tearing bands cross the full frame from the man's sleeve through his torso into the empty seat; other bands slice through the windows and headrests. Fine flickering scan lines overlay every surface, including the flat beige panels and dark jacket. Rectangular fragments jump sideways and change position throughout the shot, with cyan, magenta, and electric blue highlights against deep shadows. Keep underlying leather, fabric, and reflection details visible within the displaced fragments. Retain the seated man's recognizable profile and phone-call movements. Reduce the large solid neon patches over his face and raised hand enough to distinguish his features and the dark rectangular phone held vertically against his ear. Preserve the existing composition and car interior."
+        },
+        "purpose": "Build on the established glitch appearance while addressing the Critic's evidence of weak seat, suit, and window coverage and an obscured handset."
+      }
+    },
+    {
+      "event_id": "event-0009",
+      "request": {
+        "action": "generate",
+        "arguments": {
+          "input_video": "source",
+          "prompt": "Transform this footage into digital glitch art using a corrupted full-screen video signal. Retain visible photographic detail in the man's face, dark vertical phone, navy suit, beige leather seats, and window reflections beneath the distortion. Split the entire image into overlapping color channels: red displaced left, green near the original position, and blue displaced right. Jacket lapels, leather seams, headrest edges, and reflected buildings appear as clearly separated colored duplicate contours. Slice the picture into horizontal bands spanning from the left edge to the right edge; alternating bands jump sideways, making seat seams and building edges visibly broken and staggered. Scatter rectangular fragments of displaced scene content throughout the jacket, empty right seat, headrests, and windows. A fine horizontal scan-line raster covers the entire picture and flickers, including the broad dark fabric and beige leather panels. The channel offsets, tearing bands, and rectangular fragments change abruptly throughout the clip. Use deep high-contrast shadows with electric cyan, magenta, red, green, and blue highlights along the displaced details. Keep the man's facial features, hand, and handset distinguishable between glitch bursts, preserving his phone-call action and the original framing."
+        },
+        "purpose": "Restart from the source to recover facial and handset detail lost in both candidates, and test a global raster-and-displacement treatment against the observed concentration of neon patches on the man."
+      }
+    }
+  ],
+  "videos": {
+    "source": {
+      "path": "/output/LHA-loop-batch-20261030-v1/benchmark_data/main/024/024.mp4",
+      "sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+      "duration_seconds": 5.05,
+      "fps": 20.0,
+      "frames": 101
+    },
+    "v1": {
+      "path": "/output/LHA-loop-batch-20261030-service/tasks/024__long__full_knowledge/run/videos/v1/video.mp4",
+      "sha256": "a30c70960205ff0465cd273475647550b40aff69272f904e00abf2a4223e6da4",
+      "parent": "source",
+      "prompt": "Transform the entire shot of the man making a phone call in the beige leather car into vivid digital glitch art. Use deep, high-contrast shadows and distorted electric red, green, blue, cyan, and magenta highlights. Visibly separate the RGB channels into offset colored contours across his face, navy suit, white shirt, phone, leather seats, and window reflections. Break the image into horizontal strips that intermittently shift sideways, displacing portions of the underlying scene. Add fragmented rectangular pixel blocks at varied scales across the foreground and background, including the empty right seat and windows. Fine horizontal scan lines cover the whole frame and flicker in intensity, while brief block glitches and channel offsets change position throughout the clip. Keep the same recognizable man holding the phone to his ear, the original phone-call movements, and the existing composition and car interior. The distortions should feel like a corrupted moving video signal.",
+      "job_id": "event-0004-generate",
+      "duration_seconds": 5.05,
+      "fps": 20.0,
+      "frames": 101
+    },
+    "v2": {
+      "path": "/output/LHA-loop-batch-20261030-service/tasks/024__long__full_knowledge/run/videos/v2/video.mp4",
+      "sha256": "b3cea3a7f5b4837169f25c23eaa2fc09898ad914a6dc35d395d38813aad655dc",
+      "parent": "v1",
+      "prompt": "Extend the existing digital glitch art across the entire image, especially the broad navy jacket surfaces, empty beige seat and right headrest, and building reflections in the windows. Break these surfaces into horizontally displaced image strips and rectangular fragments. Repeat seat seams, jacket lapels, and reflected building edges as visibly offset red, green, and blue channel images. Several horizontal tearing bands cross the full frame from the man's sleeve through his torso into the empty seat; other bands slice through the windows and headrests. Fine flickering scan lines overlay every surface, including the flat beige panels and dark jacket. Rectangular fragments jump sideways and change position throughout the shot, with cyan, magenta, and electric blue highlights against deep shadows. Keep underlying leather, fabric, and reflection details visible within the displaced fragments. Retain the seated man's recognizable profile and phone-call movements. Reduce the large solid neon patches over his face and raised hand enough to distinguish his features and the dark rectangular phone held vertically against his ear. Preserve the existing composition and car interior.",
+      "job_id": "event-0007-generate",
+      "duration_seconds": 5.05,
+      "fps": 20.0,
+      "frames": 101
+    },
+    "v3": {
+      "path": "/output/LHA-loop-batch-20261030-service/tasks/024__long__full_knowledge/run/videos/v3/video.mp4",
+      "sha256": "7cc7095e7bbe6a02968087489a438a7972da1a7409ec14aa23247512ff80d137",
+      "parent": "source",
+      "prompt": "Transform this footage into digital glitch art using a corrupted full-screen video signal. Retain visible photographic detail in the man's face, dark vertical phone, navy suit, beige leather seats, and window reflections beneath the distortion. Split the entire image into overlapping color channels: red displaced left, green near the original position, and blue displaced right. Jacket lapels, leather seams, headrest edges, and reflected buildings appear as clearly separated colored duplicate contours. Slice the picture into horizontal bands spanning from the left edge to the right edge; alternating bands jump sideways, making seat seams and building edges visibly broken and staggered. Scatter rectangular fragments of displaced scene content throughout the jacket, empty right seat, headrests, and windows. A fine horizontal scan-line raster covers the entire picture and flickers, including the broad dark fabric and beige leather panels. The channel offsets, tearing bands, and rectangular fragments change abruptly throughout the clip. Use deep high-contrast shadows with electric cyan, magenta, red, green, and blue highlights along the displaced details. Keep the man's facial features, hand, and handset distinguishable between glitch bursts, preserving his phone-call action and the original framing.",
+      "job_id": "event-0009-generate",
+      "duration_seconds": 5.05,
+      "fps": 20.0,
+      "frames": 101
+    }
+  },
+  "online_reviews": {
+    "event-0005-critique": {
+      "video_id": "v1",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "frame_coverage",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "scope": "Whole frame, especially navy jacket, empty right seat, and window reflections",
+          "claim": "The sampled views show strong effects on the man and nearby contours, but broad jacket areas remain dark and comparatively uniform. The empty seat has colored seam traces and a small inner-edge patch, while its beige panels and headrest remain largely photographic. Window/building reflections also retain their photographic appearance with little visible RGB separation or displacement.",
+          "partial_boundary": "Glitch treatment reaches several regions through outlines and small patches, but does not substantially transform the broad surfaces explicitly requested.",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "contrast_and_highlights",
+          "dimension": "style",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "scope": "Man's face, raised hand, neck, and collar",
+          "claim": "Deep black contours and dark shadow areas contrast strongly with electric green, red, blue, magenta, and yellow patches. These distorted highlights clearly establish the requested digital glitch aesthetic on the subject.",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "rgb_separation",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "scope": "Subject contours, suit, seats, and windows",
+          "claim": "Colored contour fringes and offset-looking edge traces are visible around the face, hand, collar, window pillar, and some seat seams. Much of the strongest color treatment consists of solid neon patches; clearly separated RGB contours are sparse across the broad suit, seat, and reflection surfaces.",
+          "partial_boundary": "Localized channel-like fringes are present, but vivid RGB coloring alone does not fulfill channel separation across the requested regions.",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "horizontal_fragmentation",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "scope": "Whole frame, with strongest effects on face, hand, and collar",
+          "claim": "Stacked horizontal fragments, streaked contours, and broken rectangular color patches visibly disrupt the face and raised hand. Comparable displacement bands and fragmented blocks are weak or absent across the broad right seat, headrest, and window reflections.",
+          "partial_boundary": "The requested displacement and fragmentation are recognizable locally, but their spatial distribution falls short of the entire-frame requirement.",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "temporal_glitch_behavior",
+          "dimension": "temporal",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "scope": "Whole frame",
+          "claim": "Small neon facial fragments, thin horizontal hand/neck/collar streaks, and a cyan/green patch near the inner right-seat edge change between native frames, establishing localized flicker. Larger color regions and the overall effect layout remain comparatively stable, particularly near the ending. The changing scan-line-like textures and fragments do not develop into a broadly distributed whole-frame treatment.",
+          "partial_boundary": "Temporal variation is present and sustained locally; the missing component is flickering scan-line and displacement activity across the broad suit, seat, and window regions.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            5.0
+          ],
+          "sequence_videos": [
+            "v1"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            }
+          ]
+        },
+        {
+          "id": "phone_call_readability",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "partial",
+          "importance": "core",
+          "scope": "Man, raised hand, and handset",
+          "claim": "The sampled source and candidate views retain the seated man's silhouette, suit, head position, and raised hand-to-ear pose. Heavy face/hand fragmentation obscures facial detail and merges the handset boundary into surrounding blocks, so the phone-call action is suggested more clearly than the phone itself.",
+          "partial_boundary": "The man and action remain recognizable at the pose level, while handset legibility and facial specificity are materially reduced.",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            }
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "source",
+          "gains": [
+            "Strong neon highlights, black shadows, horizontal fragmentation, and colored contour traces create a conspicuous digital glitch treatment.",
+            "Native candidate observations establish changing fragments and localized scan-line-like flicker."
+          ],
+          "regressions": [
+            "Facial detail and the distinct handset outline are heavily obscured."
+          ],
+          "retained": [
+            "The sampled composition remains recognizable: seated man on the left, raised hand at his ear, beige leather interior, empty right seat, and windows."
+          ],
+          "unknowns": [
+            "Exact preservation of the source's facial, hand, and background motion has not been established by dense source/candidate comparison."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            }
+          ],
+          "relationship": "actual_input"
+        }
+      ],
+      "unresolved": [
+        "Source motion preservation remains unassessed beyond sparse pose comparisons; dense source evidence would be needed for a continuous preservation claim."
+      ]
+    },
+    "event-0008-critique": {
+      "video_id": "v2",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "contrast_highlights",
+          "dimension": "style",
+          "origin": "user_requirement",
+          "verdict": "pass",
+          "importance": "core",
+          "claim": "Deep shadows and saturated green, red, blue and magenta highlights establish a strong digital-glitch appearance, especially on the face, hand and shirt.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "whole_frame_coverage",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "v2 adds coarse tonal blocks across the empty beige seat and headrest, window reflections and parts of the jacket. Broad navy jacket areas remain comparatively flat, and dense striping and neon fragmentation remain concentrated on the face and hand.",
+          "partial_boundary": "Background processing expands, but the requested combination of effects remains unevenly distributed across the major surfaces.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "displacement_and_blocks",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "Local horizontal streaks and comb-like fragmentation are visible around the face, hand and shirt. On the broad jacket, empty seat/headrest and window reflections, the added blocks mainly change tone: seat seams and reflected building contours remain largely aligned rather than visibly shifted into separate horizontal slices.",
+          "partial_boundary": "Block-shaped fragmentation and local streaking are present; convincing displaced image content across the requested background and jacket regions remains weak.",
+          "scope": "whole frame, particularly broad jacket, empty seat/headrest and window reflections",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "independent_rgb_offsets",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "unknown",
+          "importance": "core",
+          "claim": "Neon color segmentation and thin colored contours are visible, but they do not establish independently displaced RGB copies. Distinct channel-offset duplicates of recognizable jacket folds, seat seams or reflected architecture cannot be confirmed at the supplied resolution.",
+          "scope": "broad jacket, empty beige seat/headrest and window reflections",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "temporal_effect_distribution",
+          "dimension": "temporal",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "Tonal blocks and neon patches change between consecutive frames. Fine horizontal striping remains concentrated around the face, hand and shirt, with thin traces along some contours; the broad jacket, seat and window do not visibly gain a comparable flickering scan-line field.",
+          "partial_boundary": "Temporal variation is present, but whole-frame scan-line flicker remains incompletely realized.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            0.0,
+            5.0
+          ],
+          "sequence_videos": [
+            "v1",
+            "v2"
+          ],
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "event-0001",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            }
+          ]
+        },
+        {
+          "id": "phone_call_readability",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "The seated profile and raised hand-to-ear pose remain recognizable in both edits. Dense neon patches and striping obscure facial features and the handset boundary. The source's subtle mouth and eye movements are difficult to distinguish through the treatment, and v2 does not visibly improve that readability.",
+          "partial_boundary": "The overall phone-call pose survives, while the handset silhouette and facial performance lose clarity.",
+          "requires_sequence": true,
+          "interval_seconds": [
+            2.0,
+            5.0
+          ],
+          "sequence_videos": [
+            "source",
+            "v1",
+            "v2"
+          ],
+          "scope": "whole frame, particularly face, hand and handset",
+          "evidence": [
+            {
+              "observation_id": "event-0003",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0003",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0004",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            }
+          ]
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "v1",
+          "gains": [
+            "Blocky tonal processing extends farther into window reflections, the beige seat/headrest and parts of the jacket.",
+            "More background surfaces visibly participate in the treatment."
+          ],
+          "regressions": [
+            "Coarse posterization reduces leather shading and reflected-building detail without a comparably clear gain in displaced scene content."
+          ],
+          "retained": [
+            "Strong neon highlights, deep shadows and localized horizontal striping.",
+            "Recognizable seated profile and hand-to-ear pose.",
+            "Heavy obscuration of facial details and handset boundaries."
+          ],
+          "unknowns": [
+            "Independent RGB channel offsets remain unconfirmed.",
+            "Exact preservation of subtle mouth and eye motion remains unreadable."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v1"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v1"
+            },
+            {
+              "observation_id": "event-0005",
+              "video": "v2"
+            }
+          ],
+          "relationship": "actual_input"
+        }
+      ],
+      "unresolved": [
+        "Independent RGB displacement cannot be established from the visible colored contours.",
+        "Exact correspondence of subtle facial performance to the source remains unreadable."
+      ]
+    },
+    "event-0010-critique": {
+      "video_id": "v3",
+      "protocol": "lha-online-critic-v1",
+      "findings": [
+        {
+          "id": "rgb_separation",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "V3 has strong distorted color highlights, but mostly as solid green/red/blue fragments and cyan outlines. Distinct offset RGB copies of scene details are weak. V2 shows clearer multicolored contour offsets, although its broad neon fills also posterize the face and hand.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            }
+          ],
+          "partial_boundary": "Distorted highlights succeed; recognizable RGB channel separation across all named surfaces remains limited."
+        },
+        {
+          "id": "horizontal_displacement",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "V3 contains some horizontal contour repetitions, but its dominant angular shapes do not carry recognizable displaced scene detail. V2 more clearly repeats and offsets facial, finger, collar, and suit contours horizontally. Its seats and window reflections receive weaker displacement.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            }
+          ],
+          "partial_boundary": "Local horizontal distortion is present; convincing displaced image bands across the entire scene are incomplete."
+        },
+        {
+          "id": "fragmentation_and_shadows",
+          "dimension": "edit",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "V3 provides conspicuous fragmentation across the suit, seats, and frame edges, with deep dark regions against bright highlights. Much of this fragmentation consists of flat angular neon shapes and outlined shards rather than displaced image blocks. V2 has stronger posterized mosaic texture in the seats and reflections, with less sharply defined shards.",
+          "scope": "whole frame",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            }
+          ],
+          "partial_boundary": "High contrast and fragmentation are visible; scene-bearing fragmented blocks are less convincing."
+        },
+        {
+          "id": "scanline_behavior",
+          "dimension": "temporal",
+          "origin": "user_requirement",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "During 4.5–4.95 seconds, V3's green facial patch changes its boundary slightly and small fragments vary, but dense vertical striping remains prominent over the lower frame and seats. V2's narrow horizontal contour repetitions and color patches fluctuate more visibly. Neither inspected sequence demonstrates flickering horizontal scan-line texture across the entire frame.",
+          "scope": "whole frame",
+          "requires_sequence": true,
+          "interval_seconds": [
+            4.5,
+            4.95
+          ],
+          "sequence_videos": [
+            "v2",
+            "v3"
+          ],
+          "evidence": [
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            }
+          ],
+          "partial_boundary": "Temporal variation exists; the requested orientation and full-frame horizontal flicker are not convincingly realized in the inspected interval."
+        },
+        {
+          "id": "phone_call_readability",
+          "dimension": "preservation",
+          "origin": "preservation",
+          "verdict": "partial",
+          "importance": "core",
+          "claim": "Compared with the source, both candidates retain the seated composition and raised-arm phone-call pose. V3 exposes more natural eye, nose, and upper-cheek detail than V2, but a large solid green region obscures the lower cheek and mouth area, while shards cover the fingers and handset. V2 more heavily abstracts the face and hand; its handset boundary is also difficult to distinguish.",
+          "scope": "whole frame, with attention to face, hand, and handset",
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "source"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "source"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            }
+          ],
+          "partial_boundary": "The overall phone-call pose survives, but fingers, handset identity, and mouth detail lose substantial readability."
+        }
+      ],
+      "comparisons": [
+        {
+          "against": "v2",
+          "gains": [
+            "V3 preserves more natural visible facial detail.",
+            "V3 adds sharper angular fragmentation and extends conspicuous graphic texture across the seats and frame edges."
+          ],
+          "regressions": [
+            "V3 replaces much of V2's scene-derived horizontal repetition with solid neon shards and cyan outlines.",
+            "RGB separation is less legible as channel displacement.",
+            "Vertical striping dominates the scan-line treatment.",
+            "The large green cheek/mouth region and nearby shards obscure the hand–handset relationship."
+          ],
+          "retained": [
+            "Seated car composition, dark suit, recognizable seat arrangement, strong distorted highlights, and deep shadows.",
+            "Both candidates visibly transform the full frame, although the effect types vary by region."
+          ],
+          "unknowns": [
+            "Uninterrupted temporal behavior outside the inspected dense intervals.",
+            "Whether brief horizontal scan-line bursts occur between the supplied observations."
+          ],
+          "evidence": [
+            {
+              "observation_id": "overview",
+              "video": "v2"
+            },
+            {
+              "observation_id": "overview",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0001",
+              "video": "v3"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v2"
+            },
+            {
+              "observation_id": "event-0002",
+              "video": "v3"
+            }
+          ],
+          "relationship": "alternative"
+        }
+      ],
+      "unresolved": [
+        "Dense observations cover 1.9–2.35 and 4.5–5.0 seconds, rather than the full shot; no full-duration temporal rating is assigned.",
+        "Both candidates remain limited in clear RGB splitting and flickering horizontal scan lines across the seats and window reflections."
+      ]
+    }
+  },
+  "final": {
+    "video": "v2",
+    "message": "Selected v2 as the closest match, with strong neon contrast and horizontal fragmentation. RGB separation and horizontal scan-line flicker remain uneven across the seats and windows, and the handset is partly obscured. All three generation requests have been used.",
+    "outcome": "selected_video"
+  },
+  "limits": [
+    "Development-exposed historical task.",
+    "Media hashes are copied from recorded metadata; this extraction does not rehash or re-evaluate videos.",
+    "No independent evaluation is implied by an online verdict."
+  ]
+}

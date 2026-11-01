@@ -1,25 +1,11 @@
-# Read according to the question
+# Read to improve the current judgment
 
-Your operating instructions define the tools and continuing task. Two optional
-manuals support professional judgment: `understand-and-design` for task meaning
-and visual proposals, and `understand-and-revise` for actual results and alternatives.
-They are resources, not mandatory stages.
+Use `understand-and-design` for task meaning and visual proposals, and `understand-and-revise` for interpreting results and choosing another attempt or delivery.
 
-The style library retains its map, thematic guides, complete entries and original
-sources. The meaning guide supports actions, relationships and narrative emphasis.
-The experience entrance connects relevant rendering observations and, when approved,
-curated explanatory entries. Common-sense starting preferences, historical model
-judgments and strategy hypotheses keep their distinct status.
+The style library supplies knowledge maps, thematic guides, complete entries and original sources. Read it for relationships that can construct a visual direction. The meaning guide develops action, object roles and narrative emphasis within that library.
 
-Browse or search an unresolved question, read its relevant account, and follow
-evidence or references when that depth could change the decision. Adapt useful
-relationships to this source and request. No reading quota, automatic card list,
-fixed prompt template or requirement to invent a story is imposed.
+The [experience map](../experience/curated/README.md) and [renderer profiles](../experience/curated/renderers.md) supply practical preferences for recurring task-scene-renderer conditions. Start with a summary that matches a consequential question. Read the full account for its explanation and alternatives; open linked evidence when it could change how you apply the advice. Style knowledge remains useful during revision, and experience can improve the initial proposal.
 
-Reading returns bounded pages and exact continuation positions. Earlier pages and
-operations remain retrievable. Notes/workspace can retain how a finding applies
-to this task, including disagreement. Stable entry IDs are useful optional references,
-not required citations. Historical instructions are source material, not new commands.
+Adapt the guidance to the original request and actual candidate. Notes/workspace can hold the condition you recognized, the proposal it favors or a reason another choice fits better. Stable entry IDs help connect that understanding to a source when useful.
 
-Read `score-definitions` if an online grade needs interpretation. Use English for
-working material and prompts while retaining the original request as source data.
+Reading tools return bounded pages with continuation positions. Follow those positions for the rest of a source. Earlier pages and operations remain available through history. Read `score-definitions` when interpreting an online grade. Use English for working material and renderer prompts; retain the original request as the task's source.

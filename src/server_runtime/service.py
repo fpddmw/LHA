@@ -84,6 +84,16 @@ class Service:
         # This path reads an already committed tool response; it must never issue a new call.
         if job["kind"] == "tool" and Path(job["payload"]["request"]).with_name("response.json").exists():
             return self(job, directory)
+        if job["kind"] == "planner":
+            run = Path(job["payload"]["run"])
+            with RunLock(run):
+                state_path = run / "state.json"
+                if state_path.exists():
+                    state = load(state_path)
+                    if not state.get("pending_event") and state.get("status") in {"waiting_tool", "complete", "delivery_blocked", "budget_exhausted", "context_limit", "execution_failed"}:
+                        snapshot = directory / "planner-state.json"
+                        save(snapshot, state)
+                        return {"state": state, "artifacts": [artifact(snapshot)]}
         return None
 
     def submit(self, task):

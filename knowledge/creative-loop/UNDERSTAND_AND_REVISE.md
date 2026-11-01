@@ -1,17 +1,33 @@
 # Understand results and revise the proposal
 
-Use this manual when a result changes your understanding or a consequential choice remains unclear. Observation, reading, comparison, generating and finishing remain freely available actions.
+Use this manual to interpret a candidate, compare alternatives and decide whether another attempt can improve the delivery.
 
-Relate a finding to the original request, actual input and submitted prompt. An omitted relation differs from an explicit instruction that was not realized. A defect inherited from the chosen input differs from a new loss. An authored design can also obscure the very relationship the task depends on. These distinctions can overlap; use those that explain the present problem without filling a diagnostic form.
+## Explain the consequential gap
 
-Read [experience](../experience/curated/README.md) for a relevant question, then follow its conditions and evidence as far as the decision warrants. An explanation should clarify what would actually change in the next realization. Stronger adjectives or a longer description may request the same transformation again. A new input changes visual conditioning, while a new realization changes the intended transformation; understand their combination in this scene.
+Compare the candidate with the original request, actual editing input and exact submitted prompt. Locate the relation that failed. An omitted orientation, an explicit but unrealized shape, a transformation assigned to the wrong part and a costume that hides an action call for different changes.
 
-Compare the available inputs by the information and appearance they supply. Source and older candidates remain accessible. Keep the current delivery candidate distinct from the next editing input. Revisit [design sources](README.md) when a different realization could satisfy the same request; experience and design knowledge can both matter during revision.
+Check whether the problem was inherited from the input or introduced by the latest pass. Separate a convincing motif from the requested construction: a new lamp may leave the illumination unchanged; a futuristic prop may leave the old environment recognizable. Follow the [experience map](../experience/curated/README.md) to the relevant explanation and recommended alternatives.
 
-An optional Critic report supplies fixed-dimensional scores, observations and limits. Its verdict count does not determine the task's priorities. Inspect the cited source/candidate evidence yourself when a consequential claim is doubtful. Unknown identifies a measurement gap; it is not an observed defect. Other confirmed needs can still justify a generation. There is no need to repeat clear inspections as a ritual.
+When the relation was missing, direct specification can resolve the open choice. When it was already explicit, prioritize a changed visual realization, scope or input over stronger synonyms. Use the actual earlier prompt to decide what has changed in the proposal.
 
-When several candidates are plausible, use the candidate directory and multi-video observation to inspect relevant alternatives. A single Critic request accepts one optional comparator and returns one report; it does not rank every retained candidate or provide follow-up advice. Further interpretation belongs to you.
+## Choose the input and scope that fit the proposal
 
-Choose whether the remaining gap warrants another attempt in light of the user's priorities, existing achievements and the proposed change. No fixed retry count or universal preservation-first ranking is imposed by experience. Deliver when suitable; if no promising path remains for an unsuitable result, retain the provisional candidate and explain the blockage using the operating interface.
+Keep your intended delivery separate from the next editing input. A useful candidate is attractive when the remaining transformation can build on its appearance. An earlier candidate or source deserves priority when the current result has lost information central to the next proposal. Use the [input account](../experience/curated/entries/input-conditioning.md) for the scene conditions behind these preferences.
 
-Notes/workspace can retain the updated understanding, rejected hypotheses or an unresolved distinction. Refer to source events or entries when useful. The runtime records operations without requiring this explanation. A task-specific insight does not automatically become cross-task knowledge.
+Design the revision as a coherent visual change. Group elements that depend on each other: an opening, its view, frame and reflected light; an emitting perimeter and the dark supports beneath it. Reconsider unrelated additions that complicate the attempt without helping its main goal. A whole-image change can be coherent when the intended medium or lighting relationship spans the image.
+
+State the wanted arrangement and its important boundaries. If the new attempt is a resample rather than a changed realization, weigh it on that basis. Preserve useful branches so a later regression does not displace the best answer.
+
+## Understand Critic evidence and compare retained alternatives
+
+A Critic request returns one structured assessment for the candidate, with one optional comparator. It provides fixed-dimensional scores, reasons, evidence and uncertainty; it supplies no advice or candidate recommendation. Read the cited observations and inspect consequential disputed regions or intervals yourself. Use the [score definitions](../../src/critic_harness/SCORE_DEFINITIONS.md) when a numerical grade's meaning matters.
+
+Treat unknown as a coverage gap. A clear local observation can still inform the choice; a missing whole-clip judgment can motivate targeted observation when that issue is important. Inspect around relevant turns, contacts and occlusions rather than relying entirely on attractive opening frames.
+
+Compare plausible retained candidates, including the best earlier answer. Repairing the latest parent's defect may still leave a result worse for the user's task. Weigh the actual requested edits, preserved relations and visual quality together; verdict counts do not set those priorities.
+
+## Decide what another attempt is worth
+
+Favor delivery when the central request is met and remaining discrepancies are incidental. Continue when an important gap remains and the proposed attempt has a concrete basis for improving the answer. The [continuation account](../experience/curated/entries/continuation-value.md) explains how regressions and adequate earlier candidates affect this judgment.
+
+If no promising path remains for an unsuitable result, retain the best provisional candidate and explain the blockage through the operating interface. Use notes/workspace to carry forward the useful interpretation, alternative or rejected explanation. The recorded reads and operations preserve the underlying evidence.

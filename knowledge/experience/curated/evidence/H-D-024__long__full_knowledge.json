@@ -1,0 +1,1201 @@
+{
+  "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/024__long__full_knowledge/run/state.json",
+  "source_sha256": "eea6c563d9824b5b7f1f849e4a767eeff8d1338c86591e30eb8b81ef9dab0e66",
+  "request": {
+    "text": "Transform the man’s phone call in the beige leather car interior into digital glitch art, with high-contrast shadows and RGB color separation across his navy suit, seats, and window reflections. Apply horizontal pixel shifts, fragmented blocks, and flickering scan-line textures across the entire frame, with distorted color highlights.",
+    "source": {
+      "path": "/root/autodl-tmp/LHA-ditto-loop-batch-20261030-v1/benchmark_data/main/024/024.mp4",
+      "sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "width": 1280,
+      "height": 720,
+      "timing_basis": "decoder frame index and reported FPS; sampled observations, not a continuous-motion verification"
+    },
+    "target_model": "ditto"
+  },
+  "videos": {
+    "source": {
+      "sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05
+    },
+    "v1": {
+      "sha256": "b2d107325608681ad21e1abe462e9c4434fd34726c6d8a031a2d2048c8c11ea7",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "parent": "source",
+      "prompt": "Transform the entire phone-call shot into high-contrast digital glitch art. Keep the same man holding his black phone to his ear in the beige leather car, with his original speaking movements and framing recognizable beneath the distortion. Deepen shadows across his face, navy suit, seat seams, and window reflections. Split the red, green, and blue channels into visibly offset outlines and displaced color layers across the man, suit, leather seats, and reflected buildings. Tear horizontal strips of the actual image sideways at irregular heights, breaking contours into staggered pixel bands. Scatter fragmented rectangular blocks that repeat and displace nearby image details. Cover the entire frame with fine horizontal scan lines and intermittent flickering digital noise. Animate the interference throughout the shot: bands jump sideways, blocks briefly appear and dissolve, and channel offsets pulse with saturated red, cyan, green, and blue highlights. Keep the phone-call scene legible while making the glitch treatment bold and visible throughout all five seconds.",
+      "job_id": "event-0004-generate",
+      "execution": {
+        "backend": "ditto",
+        "requested_prompt": "Transform the entire phone-call shot into high-contrast digital glitch art. Keep the same man holding his black phone to his ear in the beige leather car, with his original speaking movements and framing recognizable beneath the distortion. Deepen shadows across his face, navy suit, seat seams, and window reflections. Split the red, green, and blue channels into visibly offset outlines and displaced color layers across the man, suit, leather seats, and reflected buildings. Tear horizontal strips of the actual image sideways at irregular heights, breaking contours into staggered pixel bands. Scatter fragmented rectangular blocks that repeat and displace nearby image details. Cover the entire frame with fine horizontal scan lines and intermittent flickering digital noise. Animate the interference throughout the shot: bands jump sideways, blocks briefly appear and dissolve, and channel offsets pulse with saturated red, cyan, green, and blue highlights. Keep the phone-call scene legible while making the glitch treatment bold and visible throughout all five seconds.",
+        "effective_prompt": "Transform the entire phone-call shot into high-contrast digital glitch art. Keep the same man holding his black phone to his ear in the beige leather car, with his original speaking movements and framing recognizable beneath the distortion. Deepen shadows across his face, navy suit, seat seams, and window reflections. Split the red, green, and blue channels into visibly offset outlines and displaced color layers across the man, suit, leather seats, and reflected buildings. Tear horizontal strips of the actual image sideways at irregular heights, breaking contours into staggered pixel bands. Scatter fragmented rectangular blocks that repeat and displace nearby image details. Cover the entire frame with fine horizontal scan lines and intermittent flickering digital noise. Animate the interference throughout the shot: bands jump sideways, blocks briefly appear and dissolve, and channel offsets pulse with saturated red, cyan, green, and blue highlights. Keep the phone-call scene legible while making the glitch treatment bold and visible throughout all five seconds.",
+        "encoded_text": "Transform the entire phone-call shot into high-contrast digital glitch art. Keep the same man holding his black phone to his ear in the beige leather car, with his original speaking movements and framing recognizable beneath the distortion. Deepen shadows across his face, navy suit, seat seams, and window reflections. Split the red, green, and blue channels into visibly offset outlines and displaced color layers across the man, suit, leather seats, and reflected buildings. Tear horizontal strips of the actual image sideways at irregular heights, breaking contours into staggered pixel bands. Scatter fragmented rectangular blocks that repeat and displace nearby image details. Cover the entire frame with fine horizontal scan lines and intermittent flickering digital noise. Animate the interference throughout the shot: bands jump sideways, blocks briefly appear and dissolve, and channel offsets pulse with saturated red, cyan, green, and blue highlights. Keep the phone-call scene legible while making the glitch treatment bold and visible throughout all five seconds.",
+        "system_prompt": "",
+        "prompt_transforms": [],
+        "input_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 50,
+          "cfg_scale": 5.0,
+          "lora_alpha": 1.0,
+          "negative_prompt": "",
+          "prompt_enhancer": false,
+          "tiled": true,
+          "precision": "bfloat16"
+        },
+        "seed": 42,
+        "model_revision": [
+          {
+            "repo_id": "Wan-AI/Wan2.1-VACE-14B",
+            "revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c"
+          },
+          {
+            "repo_id": "QingyanBai/Ditto_models",
+            "revision": "b0337f21b1660758e843206d7c94574edc75afc2"
+          }
+        ],
+        "code_revision": "4b1c86eee134d1f1e8c3db35a4eef750cec13f16",
+        "asset_manifest_sha256": "6bbaf94fcb9977824a01e43229fe5e06ad672a780084ff18e6756cdada1a6872",
+        "tokenizer_revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c",
+        "token_count": 226,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 1040.6255204677582,
+        "peak_gpu_allocated_gb": 44.26318848
+      }
+    },
+    "v2": {
+      "sha256": "12884d775dc813c022159bd28bd33ffccd9cf988beb89a30c22be1a84ecef677",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "parent": "v1",
+      "prompt": "Add conspicuous horizontal image tearing and rectangular block corruption to this RGB-separated phone-call footage. Cut several horizontal strips of the actual picture and shift them sideways in alternating directions, creating sharp stepped discontinuities through the window reflections, seat seams, navy lapels, and portions of the man's silhouette. Make the displaced strips visibly wider than the existing colored edge fringes, with offsets around 3–8 percent of the frame width. Add scattered hard-edged rectangular fragments containing duplicated, displaced pieces of the suit, leather upholstery, and reflected buildings. These patches visibly interrupt the underlying image and carry mismatched cyan, red, green, and blue color layers. Animate repeated irregular bursts throughout the clip: horizontal slices jump left and right, rectangular fragments flash into different positions and disappear, and scan-line brightness flickers across the entire frame. Retain the existing saturated highlights, deep shadows, RGB separation, and fine scan lines. Keep the man's face, raised hand, and black phone beside his ear recognizable, with his speaking action and the car composition still readable beneath the moving corruption.",
+      "job_id": "event-0007-generate",
+      "execution": {
+        "backend": "ditto",
+        "requested_prompt": "Add conspicuous horizontal image tearing and rectangular block corruption to this RGB-separated phone-call footage. Cut several horizontal strips of the actual picture and shift them sideways in alternating directions, creating sharp stepped discontinuities through the window reflections, seat seams, navy lapels, and portions of the man's silhouette. Make the displaced strips visibly wider than the existing colored edge fringes, with offsets around 3–8 percent of the frame width. Add scattered hard-edged rectangular fragments containing duplicated, displaced pieces of the suit, leather upholstery, and reflected buildings. These patches visibly interrupt the underlying image and carry mismatched cyan, red, green, and blue color layers. Animate repeated irregular bursts throughout the clip: horizontal slices jump left and right, rectangular fragments flash into different positions and disappear, and scan-line brightness flickers across the entire frame. Retain the existing saturated highlights, deep shadows, RGB separation, and fine scan lines. Keep the man's face, raised hand, and black phone beside his ear recognizable, with his speaking action and the car composition still readable beneath the moving corruption.",
+        "effective_prompt": "Add conspicuous horizontal image tearing and rectangular block corruption to this RGB-separated phone-call footage. Cut several horizontal strips of the actual picture and shift them sideways in alternating directions, creating sharp stepped discontinuities through the window reflections, seat seams, navy lapels, and portions of the man's silhouette. Make the displaced strips visibly wider than the existing colored edge fringes, with offsets around 3–8 percent of the frame width. Add scattered hard-edged rectangular fragments containing duplicated, displaced pieces of the suit, leather upholstery, and reflected buildings. These patches visibly interrupt the underlying image and carry mismatched cyan, red, green, and blue color layers. Animate repeated irregular bursts throughout the clip: horizontal slices jump left and right, rectangular fragments flash into different positions and disappear, and scan-line brightness flickers across the entire frame. Retain the existing saturated highlights, deep shadows, RGB separation, and fine scan lines. Keep the man's face, raised hand, and black phone beside his ear recognizable, with his speaking action and the car composition still readable beneath the moving corruption.",
+        "encoded_text": "Add conspicuous horizontal image tearing and rectangular block corruption to this RGB-separated phone-call footage. Cut several horizontal strips of the actual picture and shift them sideways in alternating directions, creating sharp stepped discontinuities through the window reflections, seat seams, navy lapels, and portions of the man's silhouette. Make the displaced strips visibly wider than the existing colored edge fringes, with offsets around 3–8 percent of the frame width. Add scattered hard-edged rectangular fragments containing duplicated, displaced pieces of the suit, leather upholstery, and reflected buildings. These patches visibly interrupt the underlying image and carry mismatched cyan, red, green, and blue color layers. Animate repeated irregular bursts throughout the clip: horizontal slices jump left and right, rectangular fragments flash into different positions and disappear, and scan-line brightness flickers across the entire frame. Retain the existing saturated highlights, deep shadows, RGB separation, and fine scan lines. Keep the man's face, raised hand, and black phone beside his ear recognizable, with his speaking action and the car composition still readable beneath the moving corruption.",
+        "system_prompt": "",
+        "prompt_transforms": [],
+        "input_sha256": "b2d107325608681ad21e1abe462e9c4434fd34726c6d8a031a2d2048c8c11ea7",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 50,
+          "cfg_scale": 5.0,
+          "lora_alpha": 1.0,
+          "negative_prompt": "",
+          "prompt_enhancer": false,
+          "tiled": true,
+          "precision": "bfloat16"
+        },
+        "seed": 42,
+        "model_revision": [
+          {
+            "repo_id": "Wan-AI/Wan2.1-VACE-14B",
+            "revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c"
+          },
+          {
+            "repo_id": "QingyanBai/Ditto_models",
+            "revision": "b0337f21b1660758e843206d7c94574edc75afc2"
+          }
+        ],
+        "code_revision": "4b1c86eee134d1f1e8c3db35a4eef750cec13f16",
+        "asset_manifest_sha256": "6bbaf94fcb9977824a01e43229fe5e06ad672a780084ff18e6756cdada1a6872",
+        "tokenizer_revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c",
+        "token_count": 263,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 1040.6842079162598,
+        "peak_gpu_allocated_gb": 44.262634496
+      }
+    },
+    "v3": {
+      "sha256": "a5c8cdc8e401aed627e3d3f8c541898b4b6f21c89390c49de4148da6f0095478",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "parent": "v1",
+      "prompt": "Reconstruct this RGB-separated phone-call footage as a datamoshed digital cut-up collage. Build the picture from misaligned horizontal strips and rectangular tiles containing actual pieces of the man, car upholstery, and window scenery. The image content inside each piece remains textured and recognizable. Stagger neighboring strips sideways so the man's jacket lapel, jaw contour, headrest edge, seat seams, and reflected building columns visibly break at straight horizontal boundaries and resume in a different horizontal position. Several broad strips span the frame, with conspicuous sideways offsets. Smaller rectangular tiles duplicate a nearby section of a lapel, leather seam, or window reflection and paste it into an offset position, creating broken, repeated picture details throughout foreground and background. Animate the cut-up arrangement in irregular bursts throughout the five seconds: strips snap left or right, tiles exchange positions, and intact regions briefly reassemble before breaking apart again. Fine scan lines flicker in brightness across the entire image. Retain the existing deep black shadows, saturated red, cyan, green, and blue channel separation, and distorted highlights. Keep the seated man, raised hand, and black phone at his ear identifiable through the fragmented image.",
+      "job_id": "event-0010-generate",
+      "execution": {
+        "backend": "ditto",
+        "requested_prompt": "Reconstruct this RGB-separated phone-call footage as a datamoshed digital cut-up collage. Build the picture from misaligned horizontal strips and rectangular tiles containing actual pieces of the man, car upholstery, and window scenery. The image content inside each piece remains textured and recognizable. Stagger neighboring strips sideways so the man's jacket lapel, jaw contour, headrest edge, seat seams, and reflected building columns visibly break at straight horizontal boundaries and resume in a different horizontal position. Several broad strips span the frame, with conspicuous sideways offsets. Smaller rectangular tiles duplicate a nearby section of a lapel, leather seam, or window reflection and paste it into an offset position, creating broken, repeated picture details throughout foreground and background. Animate the cut-up arrangement in irregular bursts throughout the five seconds: strips snap left or right, tiles exchange positions, and intact regions briefly reassemble before breaking apart again. Fine scan lines flicker in brightness across the entire image. Retain the existing deep black shadows, saturated red, cyan, green, and blue channel separation, and distorted highlights. Keep the seated man, raised hand, and black phone at his ear identifiable through the fragmented image.",
+        "effective_prompt": "Reconstruct this RGB-separated phone-call footage as a datamoshed digital cut-up collage. Build the picture from misaligned horizontal strips and rectangular tiles containing actual pieces of the man, car upholstery, and window scenery. The image content inside each piece remains textured and recognizable. Stagger neighboring strips sideways so the man's jacket lapel, jaw contour, headrest edge, seat seams, and reflected building columns visibly break at straight horizontal boundaries and resume in a different horizontal position. Several broad strips span the frame, with conspicuous sideways offsets. Smaller rectangular tiles duplicate a nearby section of a lapel, leather seam, or window reflection and paste it into an offset position, creating broken, repeated picture details throughout foreground and background. Animate the cut-up arrangement in irregular bursts throughout the five seconds: strips snap left or right, tiles exchange positions, and intact regions briefly reassemble before breaking apart again. Fine scan lines flicker in brightness across the entire image. Retain the existing deep black shadows, saturated red, cyan, green, and blue channel separation, and distorted highlights. Keep the seated man, raised hand, and black phone at his ear identifiable through the fragmented image.",
+        "encoded_text": "Reconstruct this RGB-separated phone-call footage as a datamoshed digital cut-up collage. Build the picture from misaligned horizontal strips and rectangular tiles containing actual pieces of the man, car upholstery, and window scenery. The image content inside each piece remains textured and recognizable. Stagger neighboring strips sideways so the man's jacket lapel, jaw contour, headrest edge, seat seams, and reflected building columns visibly break at straight horizontal boundaries and resume in a different horizontal position. Several broad strips span the frame, with conspicuous sideways offsets. Smaller rectangular tiles duplicate a nearby section of a lapel, leather seam, or window reflection and paste it into an offset position, creating broken, repeated picture details throughout foreground and background. Animate the cut-up arrangement in irregular bursts throughout the five seconds: strips snap left or right, tiles exchange positions, and intact regions briefly reassemble before breaking apart again. Fine scan lines flicker in brightness across the entire image. Retain the existing deep black shadows, saturated red, cyan, green, and blue channel separation, and distorted highlights. Keep the seated man, raised hand, and black phone at his ear identifiable through the fragmented image.",
+        "system_prompt": "",
+        "prompt_transforms": [],
+        "input_sha256": "b2d107325608681ad21e1abe462e9c4434fd34726c6d8a031a2d2048c8c11ea7",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 50,
+          "cfg_scale": 5.0,
+          "lora_alpha": 1.0,
+          "negative_prompt": "",
+          "prompt_enhancer": false,
+          "tiled": true,
+          "precision": "bfloat16"
+        },
+        "seed": 42,
+        "model_revision": [
+          {
+            "repo_id": "Wan-AI/Wan2.1-VACE-14B",
+            "revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c"
+          },
+          {
+            "repo_id": "QingyanBai/Ditto_models",
+            "revision": "b0337f21b1660758e843206d7c94574edc75afc2"
+          }
+        ],
+        "code_revision": "4b1c86eee134d1f1e8c3db35a4eef750cec13f16",
+        "asset_manifest_sha256": "6bbaf94fcb9977824a01e43229fe5e06ad672a780084ff18e6756cdada1a6872",
+        "tokenizer_revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c",
+        "token_count": 285,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 1041.3785910606384,
+        "peak_gpu_allocated_gb": 44.2625536
+      }
+    }
+  },
+  "evaluations": {
+    "event-0006-critique": {
+      "video_id": "v1",
+      "candidate": "v1",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "The candidate delivers strong RGB separation, high-contrast shadows, saturated highlights, and full-frame scan lines while keeping the phone call recognizable. It only partially fulfills the requested glitch treatment: distinct horizontal picture displacement and fragmented rectangular image blocks are not visibly established, and temporal interference is mostly subtle noise changes plus an opening band-intensity pulse.",
+        "findings": [
+          {
+            "id": "color_and_scanline_treatment",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Strong RGB fringes and distorted color highlights affect the man, navy suit, seats, and window imagery. Deep shadows and horizontal scan lines create a clear digital glitch aesthetic across the frame.",
+            "scope": "whole frame",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "horizontal_pixel_displacement",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "fail",
+            "importance": "core",
+            "claim": "Across the inspected sequence, contours remain coherent beneath the RGB fringes. Clearly displaced horizontal image slices or pixel bands are not visibly established; colored edge offsets do not adequately deliver the requested picture displacement.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0,
+              5
+            ],
+            "sequence_videos": [
+              "v1"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "rectangular_fragmentation",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "fail",
+            "importance": "core",
+            "claim": "No distinct fragmented rectangular picture blocks are clearly visible in the inspected sequence. Fine scan lines and isolated white noise specks supply texture, but do not visibly break the image into rectangular fragments.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0,
+              5
+            ],
+            "sequence_videos": [
+              "v1"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "flickering_and_jumping_interference",
+            "dimension": "temporal",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Broad gray interference bands diminish around 0.25 seconds, and small white noise specks change over dark areas later in the clip. Fine scan lines otherwise remain fairly steady, with no clearly readable abrupt spatial jumps.",
+            "partial_boundary": "Some flickering interference is present, but sustained scan-line flicker and conspicuous jumping image interference are weak or unestablished.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0,
+              5
+            ],
+            "sequence_videos": [
+              "v1"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "phone_call_recognizability",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "The man, raised hand, phone beside his face, suit, and car seating remain recognizable. The treatment preserves the scene's central phone-call situation despite strongly compressed tonal detail.",
+            "scope": "whole frame; scene and object recognizability",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          }
+        ],
+        "strengths": [
+          "Bold, coherent RGB separation and high-contrast color treatment.",
+          "Scan lines cover foreground and background while the phone-call scene stays readable."
+        ],
+        "unresolved": [
+          "Exact preservation of the source's facial and body motion was not established by dense source/candidate comparison."
+        ]
+      }
+    },
+    "event-0008-critique": {
+      "video_id": "v2",
+      "candidate": "v2",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "v2 retains the recognizable phone call and strong RGB treatment while adding changing rectangular graphics. The refinement provides more visible block activity, but the blue bars and white squares read as overlays rather than displaced image fragments. Clear abrupt horizontal jumps remain absent, and improved scan-line flicker over v1 is not established. These core gaps justify considering the final available generation; the main regression is local obstruction of seat and suit texture.",
+        "findings": [
+          {
+            "id": "rgb_treatment",
+            "dimension": "style",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Strong RGB separation, deep shadows, and saturated distorted highlights cover the man, suit, seats, and window scenery.",
+            "scope": "whole frame at overview samples",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "recognizable_phone_call",
+            "dimension": "preservation",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "At the five overview samples, the source scene remains recognizable: the seated man holds a dark phone beside his face, with his raised hand, suit, leather seats, and surrounding windows identifiable in v2.",
+            "scope": "whole frame at sampled times 0.0, 1.25, 2.5, 3.7, and 4.95 seconds; source motion preservation is unassessed",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "horizontal_image_shifts",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "fail",
+            "importance": "core",
+            "claim": "No clearly identifiable abrupt horizontal jumps or displaced strips of actual scene content are visible in the examined sequence. RGB edge separation and horizontal textures do not make image displacement perceptually clear.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              5.0
+            ],
+            "sequence_videos": [
+              "v2"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "changing_rectangular_blocks",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "White squares blink and change positions near the headrest and sleeve. Blue rectangles appear over the right seat from about 1.85 seconds and change size and position, including between the final consecutive frames. Their interiors lack recognizable scene detail and read as solid overlays rather than displaced image pieces.",
+            "partial_boundary": "Changing rectangular graphics are present, but recognizable fragmentation of the image is not demonstrated. The conspicuous additions are concentrated around the right seat, headrest, and sleeve.",
+            "scope": "whole frame; prominent blocks localized to right seat, headrest, and sleeve",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              5.0
+            ],
+            "sequence_videos": [
+              "v2"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "scan_line_texture",
+            "dimension": "temporal",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Horizontal scan-line textures extend across the frame. Broad opening bands diminish, while finer horizontal textures remain visible later. Temporal variation is present, but stronger scan-line flicker than v1 is not established; blinking white squares are a separate effect.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              5.0
+            ],
+            "sequence_videos": [
+              "v1",
+              "v2"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "v1",
+            "gains": [
+              "More conspicuous temporal activity from blinking white squares and blue rectangles that change size and position."
+            ],
+            "regressions": [
+              "Opaque graphics obscure small portions of seat and suit texture and add clutter without clearly delivering displaced image fragments."
+            ],
+            "retained": [
+              "Recognizable phone-call imagery, strong RGB separation, deep shadows, and horizontal line textures. No material loss of phone-call readability is evident in the examined sequences."
+            ],
+            "unknowns": [
+              "A meaningful improvement in horizontal image displacement or scan-line flicker is not established."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ],
+            "relationship": "actual_input"
+          }
+        ],
+        "strengths": [
+          "The phone-call scene remains readable under the strong RGB and high-contrast treatment.",
+          "Added rectangular graphics visibly change over time."
+        ],
+        "unresolved": [
+          "Exact preservation of original source motion was not assessed continuously; source evidence consists of sparse overview samples.",
+          "Subtle pixel displacement may be below visual readability, but prominent abrupt horizontal image jumps are not demonstrated."
+        ]
+      }
+    },
+    "event-0011-critique": {
+      "video_id": "v3",
+      "candidate": "v3",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "v3 strengthens the requested whole-frame glitch interference compared with v1, retaining recognizable subjects while reducing fine contour clarity. High-contrast shadows, RGB separation, distorted highlights, and scan-line flicker succeed. Clearly displaced picture strips and rectangular fragments containing recognizable scene details are not demonstrated. The supplied 5.05-second duration passes tolerance.",
+        "findings": [
+          {
+            "id": "contrast_rgb_treatment",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Deep black shadows, saturated RGB separation, and distorted highlights transform the man, navy suit, seats, and window reflections across the frame.",
+            "scope": "whole frame",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "scan_line_flicker",
+            "dimension": "temporal",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Broad pale horizontal scan lines persist through 0.20 seconds and disappear by 0.25 seconds. Small white noise squares also appear, disappear, and change positions, establishing temporal variation.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              1.0
+            ],
+            "sequence_videos": [
+              "v3"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0008",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "picture_displacement_and_fragments",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Horizontal color streaks interrupt the face, suit, seats, and reflections. However, the inspected sequences do not clearly resolve coherent picture strips displaced sideways. The small rectangular marks are solid white noise squares without recognizable scene content; they do not establish fragmentation of the picture itself.",
+            "partial_boundary": "Horizontal interference and block-shaped noise are visible; actual lateral picture displacement and scene-containing rectangular fragments remain unconfirmed.",
+            "scope": "whole frame, supplemented by face/hand/phone crop",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              5.0
+            ],
+            "sequence_videos": [
+              "v3"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "subject_recognizability",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "The supplied overview samples preserve an identifiable man, raised hand, black phone, suit, seats, and window scenery. Heavy posterization removes natural surface detail but leaves the scene composition readable.",
+            "scope": "whole frame at overview sample times; object recognizability only",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "initial_action_preservation",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "During the initial second, the raised hand and phone remain in the recognizable phone-to-ear configuration. Facial expression is altered: v3 starts with an open mouth while the source starts with closed lips, and the source’s brief early eyelid closure is not clearly reproduced.",
+            "partial_boundary": "The call configuration is retained; exact source facial expression and small facial movements are not fully preserved in the inspected initial second.",
+            "scope": "whole frame, focusing on face/hand/phone",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              1.0
+            ],
+            "sequence_videos": [
+              "source",
+              "v3"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0008",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0008",
+                "video": "v3"
+              }
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "v1",
+            "gains": [
+              "v3 produces longer and more conspicuous horizontal streaks across the face, clothing, seats, and window scenery.",
+              "Changing white squares and stronger scan-line interference make the glitch treatment more pronounced."
+            ],
+            "regressions": [
+              "Added streaking reduces fine contour clarity, especially in facial features, suit edges, and seat details.",
+              "The white squares add clutter without demonstrating rectangular fragments containing scene imagery."
+            ],
+            "retained": [
+              "Strong high-contrast RGB styling and distorted highlights.",
+              "Recognizable man, raised hand, phone, suit, seats, and window reflections."
+            ],
+            "unknowns": [
+              "No demonstrated improvement in actual displaced picture strips or scene-containing rectangular fragmentation.",
+              "The first-second expression differences cannot be attributed to this edit alone; v1 already differs visibly from the source in the overview.",
+              "Exact source motion preservation after the first second remains unassessed."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v3"
+              }
+            ],
+            "relationship": "actual_input"
+          }
+        ],
+        "strengths": [
+          "The requested contrast and RGB treatment reaches the entire frame.",
+          "The scene and principal objects remain recognizable.",
+          "Scan-line flicker is supported by continuous evidence."
+        ],
+        "unresolved": [
+          "Actual horizontal displacement remains difficult to distinguish from RGB fringes and horizontal smearing.",
+          "Recognizable scene-containing rectangular fragments are not demonstrated.",
+          "Source motion after the initial second has not been compared continuously."
+        ]
+      }
+    }
+  },
+  "final": {
+    "video": "v3",
+    "message": "Selected v3 for its pronounced RGB separation, deep shadows, distorted highlights, and scan-line flicker. The phone call remains recognizable. Clear horizontal picture displacement and rectangular image fragmentation remain unconfirmed after all three generation attempts.",
+    "outcome": "selected_video"
+  },
+  "notes": "",
+  "reads": {
+    "read-0001": {
+      "id": "bernini-r-20261029",
+      "path": "knowledge/model-experience/bernini-r.md",
+      "sha256": "e8f765a0aff981a5d706e1637e046f7db567e084188188d766150d2e822dea5b",
+      "start_line": 110,
+      "end_line": 152,
+      "next_line": null,
+      "event_id": "event-0002"
+    },
+    "read-0002": {
+      "id": "express-edits",
+      "path": "knowledge/experience/express-edits.md",
+      "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+      "start_line": 1,
+      "end_line": 27,
+      "next_line": null,
+      "event_id": "event-0002"
+    },
+    "read-0003": {
+      "id": "bernini-r-20261029",
+      "path": "knowledge/model-experience/bernini-r.md",
+      "sha256": "e8f765a0aff981a5d706e1637e046f7db567e084188188d766150d2e822dea5b",
+      "start_line": 1,
+      "end_line": 84,
+      "next_line": 85,
+      "event_id": "event-0003"
+    },
+    "read-0004": {
+      "id": "choose-editing-input",
+      "path": "knowledge/experience/choose-editing-input.md",
+      "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+      "start_line": 1,
+      "end_line": 37,
+      "next_line": null,
+      "event_id": "event-0009"
+    },
+    "read-0005": {
+      "id": "express-edits",
+      "path": "knowledge/experience/express-edits.md",
+      "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+      "start_line": 1,
+      "end_line": 27,
+      "next_line": null,
+      "event_id": "event-0009"
+    }
+  }
+}

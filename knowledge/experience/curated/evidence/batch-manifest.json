@@ -1,0 +1,41 @@
+{
+  "batch_id": "fewshot-20261031-maintenance",
+  "purpose": "development_maintenance",
+  "runs": [
+    {
+      "id": "fewshot_001",
+      "path": "/home/fpddmw/projects/LHA/out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run",
+      "data_role": "development"
+    },
+    {
+      "id": "fewshot_002",
+      "path": "/home/fpddmw/projects/LHA/out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run",
+      "data_role": "development"
+    },
+    {
+      "id": "fewshot_003",
+      "path": "/home/fpddmw/projects/LHA/out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run",
+      "data_role": "development"
+    },
+    {
+      "id": "fewshot_004",
+      "path": "/home/fpddmw/projects/LHA/out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run",
+      "data_role": "development"
+    },
+    {
+      "id": "fewshot_005",
+      "path": "/home/fpddmw/projects/LHA/out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run",
+      "data_role": "development"
+    },
+    {
+      "id": "fewshot_006",
+      "path": "/home/fpddmw/projects/LHA/out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run",
+      "data_role": "development"
+    },
+    {
+      "id": "fewshot_007",
+      "path": "/home/fpddmw/projects/LHA/out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run",
+      "data_role": "development"
+    }
+  ]
+}

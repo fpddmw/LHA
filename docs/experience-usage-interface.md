@@ -4,7 +4,7 @@ This interface extends `creative_loop_v1` only. It adds passive provenance and a
 
 ## Read-only curated catalog
 
-`knowledge/creative-loop/manifest.json` names the dedicated `knowledge/experience/curated/catalog.json`. Its schema is `creative-experience-catalog-v1`, with `revision`, `entries` and `resources`. The currently committed entries/resources are empty pending content review. Historical static resources remain readable.
+`knowledge/creative-loop/manifest.json` names the dedicated `knowledge/experience/curated/catalog.json`. Its schema is `creative-experience-catalog-v1`, with `revision`, `entries` and `resources`. The 2026-11-01 user authorization activated fourteen reviewed entries and 54 resources. Full scope includes their renderer profiles and evidence; no-experience scope removes these and historical experience routes while retaining shared style, semantic and operating guidance.
 
 Each approved entry requires:
 
@@ -79,4 +79,4 @@ Maintenance reads this package and follows source links. A retrospective interpr
 
 The maintainer analyzes, reviews use or curates according to the requested task. Exact proposed edits stay staged. The user reviews the wording and activation scope. Approved entries/resources can then be copied to the curated directory and listed with their actual hashes and review reference. Running snapshots do not change. Content acceptance does not establish an experimental benefit.
 
-The [full maintenance package](../knowledge/staged/experience-full-maintenance-20261101/README.md) maps all 45 old cards into fourteen rewritten entries, renderer profiles and five proposed Planner manuals. The writing standard and three maintenance Skills carry the revised judgment-bearing style; the experience entries and Planner manuals remain staged. New experiments, independent scoring, simulated Planner runs and automatic global knowledge changes remain deferred. Static source/provenance checks and deterministic inspection of saved development records are permitted by the current implementation plan.
+The [full maintenance package](../knowledge/staged/experience-full-maintenance-20261101/README.md) maps all 45 old cards into fourteen rewritten entries, renderer profiles and five proposed Planner manuals. The writing standard and three maintenance Skills carry the revised judgment-bearing style. The user subsequently authorized the full reviewed package and five manuals for active use. The staged package remains an immutable record of the review. See the [three-arm preparation plan](creative-fewshot-three-arm-plan.md) for current checks and execution status. Maintenance remains an explicitly requested offline activity; no experience changes occur during a batch.

@@ -1,0 +1,1466 @@
+{
+  "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-benchmark-001-long/tasks/benchmark__001__long/run/state.json",
+  "source_sha256": "0ca314970975a9119207e90318f4bbd2bc6542f5634c7bacfe8060270ff01e7b",
+  "request": {
+    "text": "Transform the interior into a lavish historical palace drama with carved rosewood lattice, painted silk partitions, and warm candlelight fading into deep shadows. Replace the women’s headwear with ornate liangbatou headdresses featuring kingfisher-blue filigree, jade hairpins, and silk tassels. Dress them in standing-collar chenyi robes with gold-thread embroidery, using a rich filmic palette.",
+    "source": {
+      "path": "/root/autodl-tmp/LHA-loop-benchmark-20261030-preparation/benchmark_data/main/001/001.mp4",
+      "sha256": "93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806",
+      "fps": 19.85,
+      "frames": 81,
+      "duration_seconds": 4.080604534005038,
+      "width": 832,
+      "height": 480,
+      "timing_basis": "decoder frame index and reported FPS; sampled observations, not a continuous-motion verification"
+    },
+    "target_model": "ditto"
+  },
+  "videos": {
+    "source": {
+      "sha256": "93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806",
+      "fps": 19.85,
+      "frames": 81,
+      "duration_seconds": 4.080604534005038
+    },
+    "v1": {
+      "sha256": "ee0e41f3af9df5fb0a4c2c4c4e175e9de54528711dce56039b9b395c0ba384c6",
+      "fps": 20.0,
+      "frames": 81,
+      "duration_seconds": 4.05,
+      "parent": "source",
+      "prompt": "Transform this shot into a lavish, photorealistic Qing palace drama. Replace the background with dark carved rosewood lattice and painted silk partitions depicting flowers and birds. Warm candlelight illuminates faces and catches polished wood and gold embroidery, falling off into deep shadows. Replace the women’s existing buns and ornaments with broad, horizontal black-silk liangbatou headdresses decorated with intricate kingfisher-blue filigree, pale jade hairpins, and hanging silk tassels. Apply matching headwear to the partially visible foreground woman, retaining her soft focus. Dress the principal woman in a deep peacock-blue silk chenyi robe and the woman behind her in burgundy silk, both with upright standing collars and delicate gold-thread floral embroidery. Use rich jewel tones, warm amber highlights, and cinematic contrast. Preserve facial identities, expressions, gaze, movement, and the original composition.",
+      "job_id": "event-0003-generate",
+      "execution": {
+        "backend": "ditto",
+        "requested_prompt": "Transform this shot into a lavish, photorealistic Qing palace drama. Replace the background with dark carved rosewood lattice and painted silk partitions depicting flowers and birds. Warm candlelight illuminates faces and catches polished wood and gold embroidery, falling off into deep shadows. Replace the women’s existing buns and ornaments with broad, horizontal black-silk liangbatou headdresses decorated with intricate kingfisher-blue filigree, pale jade hairpins, and hanging silk tassels. Apply matching headwear to the partially visible foreground woman, retaining her soft focus. Dress the principal woman in a deep peacock-blue silk chenyi robe and the woman behind her in burgundy silk, both with upright standing collars and delicate gold-thread floral embroidery. Use rich jewel tones, warm amber highlights, and cinematic contrast. Preserve facial identities, expressions, gaze, movement, and the original composition.",
+        "effective_prompt": "Transform this shot into a lavish, photorealistic Qing palace drama. Replace the background with dark carved rosewood lattice and painted silk partitions depicting flowers and birds. Warm candlelight illuminates faces and catches polished wood and gold embroidery, falling off into deep shadows. Replace the women’s existing buns and ornaments with broad, horizontal black-silk liangbatou headdresses decorated with intricate kingfisher-blue filigree, pale jade hairpins, and hanging silk tassels. Apply matching headwear to the partially visible foreground woman, retaining her soft focus. Dress the principal woman in a deep peacock-blue silk chenyi robe and the woman behind her in burgundy silk, both with upright standing collars and delicate gold-thread floral embroidery. Use rich jewel tones, warm amber highlights, and cinematic contrast. Preserve facial identities, expressions, gaze, movement, and the original composition.",
+        "encoded_text": "Transform this shot into a lavish, photorealistic Qing palace drama. Replace the background with dark carved rosewood lattice and painted silk partitions depicting flowers and birds. Warm candlelight illuminates faces and catches polished wood and gold embroidery, falling off into deep shadows. Replace the women’s existing buns and ornaments with broad, horizontal black-silk liangbatou headdresses decorated with intricate kingfisher-blue filigree, pale jade hairpins, and hanging silk tassels. Apply matching headwear to the partially visible foreground woman, retaining her soft focus. Dress the principal woman in a deep peacock-blue silk chenyi robe and the woman behind her in burgundy silk, both with upright standing collars and delicate gold-thread floral embroidery. Use rich jewel tones, warm amber highlights, and cinematic contrast. Preserve facial identities, expressions, gaze, movement, and the original composition.",
+        "system_prompt": "",
+        "prompt_transforms": [],
+        "input_sha256": "93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80
+        ],
+        "input_fps": 19.85,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 50,
+          "cfg_scale": 5.0,
+          "lora_alpha": 1.0,
+          "negative_prompt": "",
+          "prompt_enhancer": false,
+          "tiled": true,
+          "precision": "bfloat16"
+        },
+        "seed": 42,
+        "model_revision": [
+          {
+            "repo_id": "Wan-AI/Wan2.1-VACE-14B",
+            "revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c"
+          },
+          {
+            "repo_id": "QingyanBai/Ditto_models",
+            "revision": "b0337f21b1660758e843206d7c94574edc75afc2"
+          }
+        ],
+        "code_revision": "4b1c86eee134d1f1e8c3db35a4eef750cec13f16",
+        "asset_manifest_sha256": "6bbaf94fcb9977824a01e43229fe5e06ad672a780084ff18e6756cdada1a6872",
+        "tokenizer_revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c",
+        "token_count": 215,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 755.4055564403534,
+        "peak_gpu_allocated_gb": 42.439777792
+      }
+    },
+    "v2": {
+      "sha256": "9863c1a35f20a3dc4a2d2382b87bc586e35df1b23ebda9676e7ed0daba701eef",
+      "fps": 20.0,
+      "frames": 81,
+      "duration_seconds": 4.05,
+      "parent": "source",
+      "prompt": "Dress both women in lavish silk chenyi robes with high, upright standing collars that closely encircle their necks: peacock-blue for the principal woman and burgundy for the woman behind her, with fine gold-thread floral embroidery. Replace both women's updos with broad horizontal black-silk liangbatou headdresses. The rear woman's headdress must also visibly carry kingfisher-blue filigree, pale jade hairpins, and hanging tassels made of soft bundled silk threads. Give the principal woman similarly intricate ornamentation; coordinate the partially visible foreground woman's headwear while retaining her soft focus. Transform the interior with polished reddish rosewood frames, deeply carved openwork lattice, and painted silk partitions showing birds and flowers with a subtle woven sheen. Warm directional candlelight catches gold and silk, fading into deep brown shadows. Keep natural pale skin with gentle peach highlights and balanced facial illumination; concentrate the rich amber color in the candlelight and surroundings. Preserve the source faces and expressions: the rear woman raises her gaze and gradually develops a distinct closed-mouth smile, while the principal woman remains composed and serious. Retain the original framing, figure positions, and blink timing.",
+      "job_id": "event-0006-generate",
+      "execution": {
+        "backend": "ditto",
+        "requested_prompt": "Dress both women in lavish silk chenyi robes with high, upright standing collars that closely encircle their necks: peacock-blue for the principal woman and burgundy for the woman behind her, with fine gold-thread floral embroidery. Replace both women's updos with broad horizontal black-silk liangbatou headdresses. The rear woman's headdress must also visibly carry kingfisher-blue filigree, pale jade hairpins, and hanging tassels made of soft bundled silk threads. Give the principal woman similarly intricate ornamentation; coordinate the partially visible foreground woman's headwear while retaining her soft focus. Transform the interior with polished reddish rosewood frames, deeply carved openwork lattice, and painted silk partitions showing birds and flowers with a subtle woven sheen. Warm directional candlelight catches gold and silk, fading into deep brown shadows. Keep natural pale skin with gentle peach highlights and balanced facial illumination; concentrate the rich amber color in the candlelight and surroundings. Preserve the source faces and expressions: the rear woman raises her gaze and gradually develops a distinct closed-mouth smile, while the principal woman remains composed and serious. Retain the original framing, figure positions, and blink timing.",
+        "effective_prompt": "Dress both women in lavish silk chenyi robes with high, upright standing collars that closely encircle their necks: peacock-blue for the principal woman and burgundy for the woman behind her, with fine gold-thread floral embroidery. Replace both women's updos with broad horizontal black-silk liangbatou headdresses. The rear woman's headdress must also visibly carry kingfisher-blue filigree, pale jade hairpins, and hanging tassels made of soft bundled silk threads. Give the principal woman similarly intricate ornamentation; coordinate the partially visible foreground woman's headwear while retaining her soft focus. Transform the interior with polished reddish rosewood frames, deeply carved openwork lattice, and painted silk partitions showing birds and flowers with a subtle woven sheen. Warm directional candlelight catches gold and silk, fading into deep brown shadows. Keep natural pale skin with gentle peach highlights and balanced facial illumination; concentrate the rich amber color in the candlelight and surroundings. Preserve the source faces and expressions: the rear woman raises her gaze and gradually develops a distinct closed-mouth smile, while the principal woman remains composed and serious. Retain the original framing, figure positions, and blink timing.",
+        "encoded_text": "Dress both women in lavish silk chenyi robes with high, upright standing collars that closely encircle their necks: peacock-blue for the principal woman and burgundy for the woman behind her, with fine gold-thread floral embroidery. Replace both women's updos with broad horizontal black-silk liangbatou headdresses. The rear woman's headdress must also visibly carry kingfisher-blue filigree, pale jade hairpins, and hanging tassels made of soft bundled silk threads. Give the principal woman similarly intricate ornamentation; coordinate the partially visible foreground woman's headwear while retaining her soft focus. Transform the interior with polished reddish rosewood frames, deeply carved openwork lattice, and painted silk partitions showing birds and flowers with a subtle woven sheen. Warm directional candlelight catches gold and silk, fading into deep brown shadows. Keep natural pale skin with gentle peach highlights and balanced facial illumination; concentrate the rich amber color in the candlelight and surroundings. Preserve the source faces and expressions: the rear woman raises her gaze and gradually develops a distinct closed-mouth smile, while the principal woman remains composed and serious. Retain the original framing, figure positions, and blink timing.",
+        "system_prompt": "",
+        "prompt_transforms": [],
+        "input_sha256": "93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80
+        ],
+        "input_fps": 19.85,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 50,
+          "cfg_scale": 5.0,
+          "lora_alpha": 1.0,
+          "negative_prompt": "",
+          "prompt_enhancer": false,
+          "tiled": true,
+          "precision": "bfloat16"
+        },
+        "seed": 42,
+        "model_revision": [
+          {
+            "repo_id": "Wan-AI/Wan2.1-VACE-14B",
+            "revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c"
+          },
+          {
+            "repo_id": "QingyanBai/Ditto_models",
+            "revision": "b0337f21b1660758e843206d7c94574edc75afc2"
+          }
+        ],
+        "code_revision": "4b1c86eee134d1f1e8c3db35a4eef750cec13f16",
+        "asset_manifest_sha256": "6bbaf94fcb9977824a01e43229fe5e06ad672a780084ff18e6756cdada1a6872",
+        "tokenizer_revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c",
+        "token_count": 286,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 754.113981962204,
+        "peak_gpu_allocated_gb": 42.441642496
+      }
+    },
+    "v3": {
+      "sha256": "16e1cb6758ba5983832558fb00032afe45d3d656294e65e662ff49541a0d54bc",
+      "fps": 20.0,
+      "frames": 81,
+      "duration_seconds": 4.05,
+      "parent": "v2",
+      "prompt": "Raise both women's robe necklines into closed, upright standing collars, fastened directly below the throat and enclosing the base of each neck. Match the principal woman's collar to her turquoise silk and the rear woman's collar to her burgundy silk, with fine gold-thread edging. Replace both rounded hair crowns with broad horizontal liangbatou headdresses: rigid black-silk structures with low, flattened tops and lateral wings extending beyond the temples. Decorate each headdress with intricate kingfisher-blue openwork scrolls and distinct pale-green translucent jade hairpins. Retain the long bundled silk-thread tassels. Color-correct both faces and exposed necks to natural ivory-peach skin with neutral highlights and gentle warm shading. Keep rich amber illumination on the candles, wood and gold, fading into deep brown shadows. Give the visible rosewood partition borders clearly carved geometric openwork lattice; retain the painted silk bird-and-flower panels. Preserve the gold embroidery, recognizable faces, rear woman's developing closed-mouth smile, existing blinks, composition and soft foreground. Keep the principal woman's lips level and her expression composed.",
+      "job_id": "event-0008-generate",
+      "execution": {
+        "backend": "ditto",
+        "requested_prompt": "Raise both women's robe necklines into closed, upright standing collars, fastened directly below the throat and enclosing the base of each neck. Match the principal woman's collar to her turquoise silk and the rear woman's collar to her burgundy silk, with fine gold-thread edging. Replace both rounded hair crowns with broad horizontal liangbatou headdresses: rigid black-silk structures with low, flattened tops and lateral wings extending beyond the temples. Decorate each headdress with intricate kingfisher-blue openwork scrolls and distinct pale-green translucent jade hairpins. Retain the long bundled silk-thread tassels. Color-correct both faces and exposed necks to natural ivory-peach skin with neutral highlights and gentle warm shading. Keep rich amber illumination on the candles, wood and gold, fading into deep brown shadows. Give the visible rosewood partition borders clearly carved geometric openwork lattice; retain the painted silk bird-and-flower panels. Preserve the gold embroidery, recognizable faces, rear woman's developing closed-mouth smile, existing blinks, composition and soft foreground. Keep the principal woman's lips level and her expression composed.",
+        "effective_prompt": "Raise both women's robe necklines into closed, upright standing collars, fastened directly below the throat and enclosing the base of each neck. Match the principal woman's collar to her turquoise silk and the rear woman's collar to her burgundy silk, with fine gold-thread edging. Replace both rounded hair crowns with broad horizontal liangbatou headdresses: rigid black-silk structures with low, flattened tops and lateral wings extending beyond the temples. Decorate each headdress with intricate kingfisher-blue openwork scrolls and distinct pale-green translucent jade hairpins. Retain the long bundled silk-thread tassels. Color-correct both faces and exposed necks to natural ivory-peach skin with neutral highlights and gentle warm shading. Keep rich amber illumination on the candles, wood and gold, fading into deep brown shadows. Give the visible rosewood partition borders clearly carved geometric openwork lattice; retain the painted silk bird-and-flower panels. Preserve the gold embroidery, recognizable faces, rear woman's developing closed-mouth smile, existing blinks, composition and soft foreground. Keep the principal woman's lips level and her expression composed.",
+        "encoded_text": "Raise both women's robe necklines into closed, upright standing collars, fastened directly below the throat and enclosing the base of each neck. Match the principal woman's collar to her turquoise silk and the rear woman's collar to her burgundy silk, with fine gold-thread edging. Replace both rounded hair crowns with broad horizontal liangbatou headdresses: rigid black-silk structures with low, flattened tops and lateral wings extending beyond the temples. Decorate each headdress with intricate kingfisher-blue openwork scrolls and distinct pale-green translucent jade hairpins. Retain the long bundled silk-thread tassels. Color-correct both faces and exposed necks to natural ivory-peach skin with neutral highlights and gentle warm shading. Keep rich amber illumination on the candles, wood and gold, fading into deep brown shadows. Give the visible rosewood partition borders clearly carved geometric openwork lattice; retain the painted silk bird-and-flower panels. Preserve the gold embroidery, recognizable faces, rear woman's developing closed-mouth smile, existing blinks, composition and soft foreground. Keep the principal woman's lips level and her expression composed.",
+        "system_prompt": "",
+        "prompt_transforms": [],
+        "input_sha256": "9863c1a35f20a3dc4a2d2382b87bc586e35df1b23ebda9676e7ed0daba701eef",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 50,
+          "cfg_scale": 5.0,
+          "lora_alpha": 1.0,
+          "negative_prompt": "",
+          "prompt_enhancer": false,
+          "tiled": true,
+          "precision": "bfloat16"
+        },
+        "seed": 42,
+        "model_revision": [
+          {
+            "repo_id": "Wan-AI/Wan2.1-VACE-14B",
+            "revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c"
+          },
+          {
+            "repo_id": "QingyanBai/Ditto_models",
+            "revision": "b0337f21b1660758e843206d7c94574edc75afc2"
+          }
+        ],
+        "code_revision": "4b1c86eee134d1f1e8c3db35a4eef750cec13f16",
+        "asset_manifest_sha256": "6bbaf94fcb9977824a01e43229fe5e06ad672a780084ff18e6756cdada1a6872",
+        "tokenizer_revision": "539c162b1387eac9dc4c20bd3f74671309e76a4c",
+        "token_count": 281,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 762.0270206928253,
+        "peak_gpu_allocated_gb": 42.43871232
+      }
+    }
+  },
+  "evaluations": {
+    "event-0004-critique": {
+      "video_id": "v1",
+      "candidate": "v1",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "The edit establishes a convincing candlelit palace mood with painted screens, emerald and burgundy robes, gold ornament, and an elaborate front headdress. The concerns about strongly yellow-orange skin, low collars, and incomplete rear headwear are supported. Facial identities remain recognizable, but the rear woman's developing smile is substantially reduced. The final blink is retained, and the visible transformation remains stable.",
+        "findings": [
+          {
+            "id": "palace_interior",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Dark reddish wooden screen framing, geometric border details, and painted bird-and-flower panels create a richer palace interior. Clearly carved lattice openwork and a silk surface are not distinctly resolved.",
+            "scope": "visible background",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              }
+            ],
+            "partial_boundary": "The palace setting and painted partitions read clearly; the specific carved rosewood lattice and silk construction remain visually uncertain."
+          },
+          {
+            "id": "candlelight",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "A visible candle at the left accompanies warm illumination and deep background shadows, producing the requested dramatic lighting.",
+            "scope": "whole frame",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "filmic_color",
+            "dimension": "style",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Emerald, burgundy, gold, and dark wood provide a rich coordinated palette, but both women's skin has a pronounced yellow-orange cast that weakens facial color separation from the candlelight.",
+            "scope": "whole frame, especially both faces",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ],
+            "partial_boundary": "Rich costume and background color succeeds; skin rendering is excessively yellow-orange."
+          },
+          {
+            "id": "front_headwear",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "The front woman has a broad black liangbatou-like headdress with turquoise-blue scroll ornament, green jade-like pins, gold accents, and long pale hanging strands. Those strands look more like fine bead chains than clearly identifiable silk tassels.",
+            "scope": "front woman's headwear",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ],
+            "partial_boundary": "The broad ornate silhouette and blue-green decoration are established; silk tassel construction is not clearly conveyed."
+          },
+          {
+            "id": "rear_headwear",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "The rear woman's visible headwear remains a comparatively narrow black updo with small gold ornaments. It does not visibly match the front woman's broad liangbatou silhouette, blue filigree, green pins, and hanging tassels.",
+            "scope": "exposed portions of the rear woman's head; sides partly occluded",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ],
+            "partial_boundary": "Some ornamentation is present, but the requested headdress package is not established on the visible rear headwear. Occluded portions cannot be judged."
+          },
+          {
+            "id": "robes",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Both visible robes acquire gold embroidery-like motifs: fine branching patterns on the front emerald robe and floral clusters on the rear burgundy robe. Both necklines remain low and open with curved green edging, rather than standing collars.",
+            "scope": "both women's visible upper torsos",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ],
+            "partial_boundary": "Rich fabric colors and gold ornament succeed; standing collars are missing. The framing does not establish the robes' full chenyi silhouettes."
+          },
+          {
+            "id": "facial_identity",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Both women remain recognizable compared with the source. Stronger facial shading, lip color, and slightly more upturned lips on the front woman modify their presentation without an obvious identity substitution.",
+            "scope": "both faces",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "expression_timing",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "The source rear woman develops and holds a distinct closed-mouth smile; the candidate keeps her mouth comparatively neutral. The front woman's eyelid lowering around 1.7–1.8 seconds is less evident in the candidate, while her late blink around 3.8 seconds is visibly retained.",
+            "scope": "both faces",
+            "requires_sequence": true,
+            "interval_seconds": [
+              1.2,
+              4.05
+            ],
+            "sequence_videos": [
+              "source",
+              "v1"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0002",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ],
+            "partial_boundary": "Some facial movement and the final blink survive, but the rear woman's expressive change and some earlier eyelid motion are attenuated."
+          },
+          {
+            "id": "visual_stability",
+            "dimension": "temporal",
+            "origin": "design_quality",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Faces, headdress ornaments, hanging strands, robe motifs, and painted panels remain visually stable across the inspected shot. The candle flame changes shape without an evident disruptive jump in the surrounding scene.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              4.05
+            ],
+            "sequence_videos": [
+              "v1"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "source",
+            "gains": [
+              "Richer palace decoration and a clear candlelit atmosphere.",
+              "Coordinated emerald, burgundy, and gold costumes.",
+              "Substantially more elaborate front headwear."
+            ],
+            "regressions": [
+              "Pronounced yellow-orange skin coloration.",
+              "Substantial reduction of the rear woman's developing smile.",
+              "Less evident correspondence to some earlier eyelid movement."
+            ],
+            "retained": [
+              "Recognizable facial identities and the original arrangement of figures.",
+              "The front woman's late blink around 3.8 seconds."
+            ],
+            "unknowns": [
+              "Exact wood and partition materials.",
+              "Silk construction of the hanging strands.",
+              "Full robe silhouettes and occluded rear headwear."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              }
+            ],
+            "relationship": "actual_input"
+          }
+        ],
+        "strengths": [
+          "Strong palace atmosphere and coordinated costume colors.",
+          "Elaborate, stable front headdress and readable gold robe motifs.",
+          "Recognizable faces with no evident disruptive visual instability."
+        ],
+        "unresolved": [
+          "Carved rosewood lattice, silk partition texture, and silk tassel material are not conclusively identifiable at the supplied scale.",
+          "Only the upper portions of the robes and partially occluded rear headwear are visible."
+        ]
+      }
+    },
+    "event-0007-critique": {
+      "video_id": "v2",
+      "candidate": "v2",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "V2 improves the visibility of silk tassels and the rear woman's developing smile compared with v1, while retaining coherent palace decor and embroidered costumes. Important requirements remain unmet: both collars are low, both headdresses retain rounded updo silhouettes, and the requested blue filigree and jade-pin combination is not clearly supplied on each woman. Yellow-orange skin remains conspicuous. Continuous observations support good structural stability, with some loss of the principal woman's original facial performance.",
+        "findings": [
+          {
+            "id": "standing_collars",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "fail",
+            "importance": "core",
+            "claim": "Neither woman has a clear standing collar. The rear woman's turquoise neckline is a low rounded band; the principal woman's turquoise robe has an open, low neckline.",
+            "scope": "Both women's necklines and upper chest",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "gold_embroidery",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Both visible robe bodices have rich colors and prominent gold floral embroidery: turquoise on the principal woman and burgundy on the rear woman. Full chenyi garment construction is outside the framing.",
+            "scope": "Visible upper robes",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "liangbatou_silhouettes",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "fail",
+            "importance": "core",
+            "claim": "Both headdresses remain dominated by rounded hair masses. The principal has a tall rounded crown and the rear woman rounded side volumes; neither clearly forms the requested broad horizontal liangbatou silhouette.",
+            "scope": "Both women's headdresses",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "blue_filigree_and_jade",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "The principal has conspicuous turquoise leaf or petal ornaments and a gold branch-shaped pin. The rear woman has mainly gold and ivory floral ornaments with small green accents. Clear kingfisher-blue filigree and identifiable jade-pin designs are not established on both heads. V1's principal headdress has more legible curled blue ornamentation.",
+            "partial_boundary": "Turquoise and green ornamentation is present, especially on the principal; the requested combination on each headdress remains incomplete or visually ambiguous.",
+            "scope": "Both women's headdresses",
+            "evidence": [
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "silk_tassels",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Long pale bundles of fine threads clearly read as silk tassels on both women's headdresses. They are more convincing as textile tassels than v1's principal woman's bead-like hanging strands.",
+            "scope": "Both women's headdress pendants",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "palace_interior",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Painted bird-and-flower partition panels, red-brown decorative framing and three visible candles establish a lavish historical interior. An unmistakable carved lattice pattern is not clearly visible.",
+            "partial_boundary": "Painted partitions and candlelit palace decoration succeed; the specifically requested carved rosewood lattice remains weakly expressed.",
+            "scope": "Visible background",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "lighting_and_skin",
+            "dimension": "style",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Amber illumination, saturated turquoise and burgundy fabrics, gold embroidery and dark foreground areas create the requested rich atmosphere. Both faces have a persistent, strong yellow-orange cast. V2 is brighter and less shadow-heavy than v1, without resolving the skin-color issue.",
+            "partial_boundary": "Warm candlelight and rich costume color are effective; the excessive skin cast compromises the filmic palette.",
+            "scope": "Whole frame",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "rear_facial_performance",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "V2 retains the rear woman's initial downward gaze, subsequent eye lift and developing smile. The later upward mouth curl follows the source more clearly than v1's comparatively fixed mouth.",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              4.05
+            ],
+            "sequence_videos": [
+              "source",
+              "v1",
+              "v2"
+            ],
+            "scope": "Rear woman's face",
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "principal_expression_and_blinks",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "The principal woman's forward gaze remains, but her mouth appears softer and more upturned than the source's firm neutral expression. Source eyelid lowering and reopening around 1.6–1.95 seconds is substantially attenuated in v2. The final eyelid closure and reopening around 3.8–3.95 seconds is retained.",
+            "partial_boundary": "Forward attention and the final blink are preserved; the earlier eyelid event and original mouth expression are less faithful.",
+            "requires_sequence": true,
+            "interval_seconds": [
+              1.2,
+              4.05
+            ],
+            "sequence_videos": [
+              "source",
+              "v2"
+            ],
+            "scope": "Principal woman's face",
+            "evidence": [
+              {
+                "observation_id": "event-0002",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "structural_temporal_stability",
+            "dimension": "temporal",
+            "origin": "design_quality",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Across the continuous inspected shot, v2's headdresses, thread tassels, embroidered robes and painted partitions show no obvious structural jumps. Candle flames change shape without conspicuous disruption to the scene.",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              4.05
+            ],
+            "sequence_videos": [
+              "v2"
+            ],
+            "scope": "Whole frame",
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              }
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "v1",
+            "gains": [
+              "Clear textile tassels on both women.",
+              "Brighter, more legible painted partitions and gold embroidery.",
+              "More visible development of the rear woman's smile."
+            ],
+            "regressions": [
+              "The principal's distinctive curled blue filigree is replaced largely by solid turquoise leaf or petal forms.",
+              "The principal headdress reads as a taller rounded updo rather than a broad decorated horizontal form.",
+              "Brighter illumination reduces the depth of shadow relative to v1."
+            ],
+            "retained": [
+              "Rich turquoise, burgundy and gold palette.",
+              "Strong yellow-orange skin cast.",
+              "Low collars and incomplete historical headdress silhouettes."
+            ],
+            "unknowns": [
+              "Neither version establishes full chenyi construction below the cropped bodices."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              }
+            ],
+            "relationship": "alternative"
+          }
+        ],
+        "strengths": [
+          "Readable silk tassels and lavish gold embroidery on both women.",
+          "Coherent painted palace setting and candlelit atmosphere.",
+          "Preserved rear-smile development and stable scene structure."
+        ],
+        "unresolved": [
+          "The framing does not permit assessment of full chenyi robe construction.",
+          "A further generation's ability to correct collars, silhouettes and skin color while retaining facial performance cannot be established from these observations."
+        ]
+      }
+    },
+    "event-0009-critique": {
+      "video_id": "v3",
+      "candidate": "v3",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "Recommend v2 for final selection. V3 sharpens embroidery, ornaments and partition edges, but does not visibly correct the requested collars, horizontal liangbatou silhouettes, blue filigree, identifiable jade hairpins or carved lattice. Its harder facial shading and stronger yellow skin make it less natural than v2. Both deliver a lavish candlelit setting and remain visibly stable, with incomplete historical costume details and some altered facial performance.",
+        "findings": [
+          {
+            "id": "standing_collars",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "fail",
+            "importance": "core",
+            "claim": "Neither woman's neckline becomes a clear standing collar in v3. The principal woman's robe remains open below the neck; the rear woman's turquoise edging remains a low, rounded neckline. There is no visible improvement over v2.",
+            "scope": "Both women's visible necklines",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "liangbatou_silhouettes",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Both women have ornate hair arrangements and long pale tassels, but their crowns remain rounded. The principal woman's headdress is especially tall and vertically prominent rather than broadly horizontal. V3 retains v2's basic silhouettes.",
+            "partial_boundary": "Ornamentation and tassels are present; the requested horizontal liangbatou structure is not convincingly realized.",
+            "scope": "Both women's headwear",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "blue_filigr​ee",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Turquoise-blue ornaments are visible, especially on the principal woman, but read mainly as broad petals and floral pieces. V3's brighter edges do not establish finer kingfisher-blue filigree on either woman.",
+            "partial_boundary": "The blue color and decorative effect are achieved; intricate filigree is not clearly readable.",
+            "scope": "Visible headdress ornaments",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "jade_hairpins",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "unknown",
+            "importance": "detail",
+            "claim": "Small pale and colored hair ornaments are present, but distinct jade hairpins cannot be confidently identified at the supplied resolution. No visible improvement from v2 to v3 is established.",
+            "scope": "Both women's hair ornaments",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "palace_setting",
+            "dimension": "edit",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "V3 retains painted bird-and-flower partitions, reddish dark wood framing, visible candles and deep shadows. These successfully convey palace drama. The carved trim is more emphatic, but a recognizable rosewood lattice pattern remains absent from the visible setting.",
+            "partial_boundary": "Painted partitions and candlelit atmosphere succeed; carved rosewood lattice is not clearly delivered. The panels' exact silk material is not visually verifiable.",
+            "scope": "Visible background",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "embroidery_and_palette",
+            "dimension": "style",
+            "origin": "user_requirement",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Turquoise and burgundy robes with abundant gold floral embroidery provide the requested richness. V3 increases edge contrast and brilliance, but both women's skin remains strongly yellow, with harsher highlights, cheek shadows and darker facial contours than v2.",
+            "partial_boundary": "The rich costume palette and gold embroidery succeed; v3's facial color and contrast weaken the filmic finish.",
+            "scope": "Visible robes and faces",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "facial_identity",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Both women remain recognizable and retain their positions and general facial structure. Stronger makeup and facial modeling alter their appearance in both edits; v3's harder cheek, nose and jaw shading further reduces the source's softer facial likeness.",
+            "partial_boundary": "Recognition and composition survive; exact facial appearance is less faithfully retained, particularly in v3.",
+            "scope": "Both faces",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "facial_performance",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "Both edits retain the rear woman's raised gaze and eventual subtle closed-mouth smile, although the smile is less apparent during the middle-to-late interval than in the source. The principal woman stays composed and lowers and reopens her eyelids near the end. Her earlier source eyelid lowering around 1.66–1.86 seconds is not visibly reproduced in either edit.",
+            "partial_boundary": "The broad emotional progression and late blink remain; finer expression development and an earlier eyelid event are altered.",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              4.05
+            ],
+            "sequence_videos": [
+              "source",
+              "v2",
+              "v3"
+            ],
+            "scope": "Both faces in whole-frame sequences",
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v3"
+              }
+            ]
+          },
+          {
+            "id": "temporal_stability",
+            "dimension": "temporal",
+            "origin": "design_quality",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Both edits maintain stable facial features, headdresses, tassels, embroidery, partition geometry and candle placement throughout the inspected clip, without obvious jumps, warping or structural flicker. V3 establishes no meaningful stability advantage.",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              4.05
+            ],
+            "sequence_videos": [
+              "v2",
+              "v3"
+            ],
+            "scope": "Whole frame",
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v3"
+              }
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "v2",
+            "gains": "V3 gives gold embroidery, hair ornaments and partition edges greater definition.",
+            "regressions": "Facial skin is more strongly yellow and facial shading is harder, producing a more sculpted, less natural appearance.",
+            "retained": "Rich robe colors, gold embroidery, pale tassels, painted partitions, candlelight, deep shadows and visible temporal stability.",
+            "unknowns": "No verified improvement in jade hairpin readability. No substantive correction to collars, horizontal headdress silhouettes, blue filigree or lattice is visible.",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v3"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v3"
+              }
+            ],
+            "relationship": "actual_input"
+          }
+        ],
+        "strengths": [
+          "Both candidates convincingly enrich the setting with embroidered robes, painted partitions, tassels and candlelit shadows.",
+          "The principal woman's composure and the rear woman's eventual smile remain readable.",
+          "Both candidates show stable visible scene structure."
+        ],
+        "unresolved": [
+          "Jade material and silk panel material cannot be confirmed from these views.",
+          "The framing shows only the upper robes, limiting assessment of the complete chenyi garment construction."
+        ]
+      }
+    }
+  },
+  "final": {
+    "video": "v2",
+    "message": "Selected v2 as the strongest available result for its softer facial rendering, candlelit palace setting, gold embroidery and silk tassels. The transformation remains incomplete: standing collars and broad liangbatou silhouettes are missing; carved lattice, blue filigree and jade pins remain unclear. Skin is overly yellow, and some facial-expression timing differs from the source. All three generation requests have been used.",
+    "outcome": "selected_video"
+  },
+  "notes": "",
+  "reads": {
+    "read-0001": {
+      "id": "domain-chinese_period",
+      "path": "knowledge/domain-references/chinese_period.md",
+      "sha256": "7f750f268564e84e76eb1874791bc09af1dfce6c14755348cd6441583803461b",
+      "start_line": 1,
+      "end_line": 148,
+      "next_line": 149,
+      "event_id": "event-0002"
+    },
+    "read-0002": {
+      "id": "express-edits",
+      "path": "knowledge/experience/express-edits.md",
+      "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+      "start_line": 1,
+      "end_line": 27,
+      "next_line": null,
+      "event_id": "event-0002"
+    },
+    "read-0003": {
+      "id": "opuscar-057",
+      "path": "knowledge/entries/opuscar-057.md",
+      "sha256": "dd5a4fe785a1a194a0b0064c81edf3c4f37bdb662b2a7b1d7ea79c8563143bed",
+      "start_line": 1,
+      "end_line": 136,
+      "next_line": null,
+      "event_id": "event-0002"
+    },
+    "read-0004": {
+      "id": "choose-editing-input",
+      "path": "knowledge/experience/choose-editing-input.md",
+      "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+      "start_line": 1,
+      "end_line": 37,
+      "next_line": null,
+      "event_id": "event-0005"
+    }
+  }
+}
