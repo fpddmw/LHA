@@ -14,8 +14,13 @@ def main():
     parser.add_argument("--candidate", required=True)
     parser.add_argument("--request-file", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--experiment-profile", type=Path, help="Shared profile used by the comparison cohort")
     parser.add_argument("--execute", action="store_true", help="Live API call; use only after user resumes experiments")
     args = parser.parse_args()
+    if args.experiment_profile:
+        from planner_harness.creative import verify_experiment
+        from planner_harness.execution import immutable
+        immutable(Path(args.output) / "experiment-profile.json", verify_experiment(args.experiment_profile, ROOT))
     from planner_harness.video import Video
     from evaluation.creative import prepare_final_request, judge_candidate
     output = Path(args.output)

@@ -11,7 +11,8 @@
   },
   "navigation": {
     "map": "knowledge/creative-loop/README.md",
-    "manual": "knowledge/creative-loop/READING.md"
+    "manual": "knowledge/creative-loop/READING.md",
+    "score-definitions": "src/critic_harness/SCORE_DEFINITIONS.md"
   },
   "classes": ["operating_manual", "semantic_understanding", "visual_style_and_design", "generation_and_iteration"]
 }

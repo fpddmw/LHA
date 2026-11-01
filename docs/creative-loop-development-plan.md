@@ -184,7 +184,31 @@ Implementation baseline: commit `4e046d4af5bb85257d3c037e1c6217eeaad31b39`, bran
 
 ## 9. Authorized repair progress
 
-- P0: plan and baseline audit saved; prior pre-refactor backup retained.
-- P1-P6: implementation in progress.
-- P7: regression cases will be added; simulated integration, tests and demo regeneration are deferred by the latest user instruction. GitHub synchronization is required before that later validation stage.
-- Earlier 113/14-test results describe the baseline only; do not attribute them to this repair revision.
+- P0: plan and baseline audit committed as `cb30fe7` before code repair; prior pre-refactor backup retained.
+- P1: implemented shared role resolution, explicit constructor settings, creative service configuration and optional immutable experiment binding. CLI and service use the same gpt-6.1-sol/high settings; behavior awaits the deferred tests.
+- P2: implemented bounded source pages with exact line/character continuation, compact prior operation views, paginated archive catalogs and capacity recovery. Added a shared, readable score-definition source used by the frozen rubric. Original style/semantic/static iteration sources were not rewritten.
+- P3: implemented consistent creative delivered/blocked/paused meanings in both delivery and bounded modes; automatic budget continuation, finite transport reopening, uncertain-tool retention and same-job receipt reconciliation. Generic recovery has no RSI import and invokes no model or renderer.
+- P4: implemented neutral-focus checks, explicit comparison coverage, candidate/source/comparison evidence attribution for supplemental checks, and additional rejection of obvious action guidance. The single-response policy and five fixed axes remain intact. Semantic compliance still needs behavioral validation.
+- P5: retained the fixed glm5.3flash/Paratera adapter and anonymous final inputs; added optional shared profile binding to the separate judge entry. No scoring call was made.
+- P6: implemented a creative-specific report based on actual reads, prompts, observations, candidate ancestry, online reports, selection and recovery records. Existing demo artifacts have not been regenerated and describe the older revision.
+- P7: added focused audit-counterexample tests and a scripted service/queue integration case that uses the real model factory while mocking external execution. These tests, simulated integration and demo regeneration have **not been run**, as explicitly requested. Static Python/JSON parsing and Git whitespace/secret hygiene are publication checks only. GitHub synchronization is the remaining publication step.
+
+Earlier 113/14-test results describe the baseline only; they do not validate this repair revision. All P1-P6 statuses above mean code implementation and source inspection, not a demonstrated runtime outcome. The next authorized validation pass should run the focused regressions, then the relevant legacy suite and regenerate the walkthrough. Live experiments remain separately deferred.
+
+### Repair-to-audit mapping
+
+| Baseline finding | Implemented change | Deferred evidence |
+|---|---|---|
+| F01: legal reads exhausted context | Bounded fresh pages, compact history, exact archive reopening, explicit capacity adjustment | Multi-read context and pagination tests |
+| F02: biased input and advice leakage | Neutral focus validation; strengthened no-guidance output checks | Contract tests and later real-model compliance |
+| F03: missing comparison and wrong-video citations | Requested comparison must have a finding/unknown; supplemental evidence identity checks | Invalid-report regression cases |
+| F04: scoring definitions inaccessible | Shared SCORE_DEFINITIONS.md exposed through the creative manifest and incorporated verbatim into Critic rubric | Scoped read and profile checks |
+| F05: false complete in bounded mode | Creative completion uses delivery semantics regardless of explicit budget mode | Outcome and budget-continuation cases |
+| F06: retry/reconciliation gaps | Recorded finite call reopening; unresolved jobs block replacement; receipt reconciliation; service queue recovery | Exhaustion, uncertain render, resource and queue recovery cases |
+| F07: actual factory used wrong role settings | Shared configuration resolution, explicit constructor inputs, service example, shared profile binding | Actual factory/queue test; deployment remains deferred |
+| F08: legacy report placeholders | Creative report projects actual state and links raw artifacts | Report assertion and regenerated walkthrough |
+| F09: incomplete test boundaries | Added production-factory service trace and exact audit counterexamples | Execution explicitly deferred by user |
+
+No new task criteria, intent/check forms, prediction ledger, experience card, Wiki, learning loop or automatic review was introduced. Operators' resource/recovery records are persistence controls, not additional Planner reasoning requirements.
+
+Publication inspection: 22 Python files and 2 JSON files parsed successfully without importing application code; the 32-file repair set passed the credential-pattern scan and Git whitespace check (preserving existing CRLF files). New prose is English. No test, simulation or model invocation was executed. The user-owned staged knowledge demos, run lock and historical screening reports are outside this commit.

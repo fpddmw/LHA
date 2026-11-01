@@ -17,11 +17,11 @@ from vlm.litellm_vlm import _extract_json_object
 class CodexVisionModel:
     _lock = threading.Lock()
 
-    def __init__(self, *, role: str = "planner") -> None:
+    def __init__(self, *, role: str = "planner", model=None, reasoning_effort=None) -> None:
         self.role = role
         prefix = f"LOW_HIGH_AGENT_CODEX_{role.upper()}_"
-        self.model = os.environ.get(prefix + "MODEL") or os.environ.get("LOW_HIGH_AGENT_CODEX_MODEL", "gpt-6.1-sol")
-        self.reasoning_effort = os.environ.get(prefix + "REASONING_EFFORT") or os.environ.get("LOW_HIGH_AGENT_CODEX_REASONING_EFFORT", "xhigh")
+        self.model = model or os.environ.get(prefix + "MODEL") or os.environ.get("LOW_HIGH_AGENT_CODEX_MODEL", "gpt-6.1-sol")
+        self.reasoning_effort = reasoning_effort or os.environ.get(prefix + "REASONING_EFFORT") or os.environ.get("LOW_HIGH_AGENT_CODEX_REASONING_EFFORT", "xhigh")
         self.executable = os.environ.get("LOW_HIGH_CODEX_BIN") or shutil.which("codex")
         if not self.executable:
             raise RuntimeError("Codex CLI is missing; run scripts/deploy/setup_openbayes.sh")

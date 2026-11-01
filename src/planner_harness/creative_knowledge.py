@@ -60,11 +60,17 @@ class CreativeKnowledge(Knowledge):
                 links.append({"id": row["id"], "label": label, "path": row["path"], "available": True})
         return links
 
-    def read(self, target, start_line=1, section=None):
+    def read(self, target, start_line=1, section=None, *, max_chars=6000, start_char=0):
         target = self.NAV_ALIASES.get(target, target)
-        result = super().read(target, start_line, section)
+        if type(max_chars) is not int or not 256 <= max_chars <= 8000:
+            raise ValueError("Choose a page size between 256 and 8000 characters")
+        result = super().read(target, start_line, section, max_chars=max_chars,
+                              start_char=start_char, split_long_lines=True)
         row = self.items.get(target) or self.paths[target]
-        result["links"] = self.links(self.document(row)["text"], row["path"])
+        links = self.links(result["text"], row["path"])
+        result["links"] = links[:12]
+        result["link_count_on_page"] = len(links)
+        result["link_scope"] = "Up to twelve resolved navigation links; exact source-page text remains intact."
         result["profile"] = "creative_loop_v1"
         return result
 

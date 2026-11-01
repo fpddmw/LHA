@@ -18,10 +18,14 @@ POLICY = {"overview_frames": 8, "dense_windows": 3, "dense_frames": 6,
 
 
 def frozen_profile():
-    body = {"protocol_id": PROTOCOL, "rubric": Path(__file__).with_name("CREATIVE_RUBRIC.md").read_text(encoding="utf-8"),
+    definitions = Path(__file__).with_name("SCORE_DEFINITIONS.md")
+    rubric = Path(__file__).with_name("CREATIVE_RUBRIC.md").read_text(encoding="utf-8")
+    body = {"protocol_id": PROTOCOL, "rubric": rubric.replace("{{SCORE_DEFINITIONS}}", definitions.read_text(encoding="utf-8")),
+            "score_definitions_sha256": sha(definitions),
             "dimensions": list(DIMENSIONS), "evidence_policy": POLICY,
             "model": "gpt-6.1-sol", "reasoning_effort": "high", "schema_version": 1,
             "implementation_sha256": {"review": sha(__file__),
+                "model_adapter": sha(Path(__file__).parents[1] / "vlm/codex_vlm.py"),
                 "video": sha(Path(__file__).parents[1] / "planner_harness/video.py"),
                 "transport": sha(Path(__file__).parents[1] / "planner_harness/model_call.py")}}
     return {**body, "sha256": signature(body)}
@@ -40,6 +44,7 @@ def prepare_request(request, candidate_id, videos, directory, profile, *, compar
     if not isinstance(focus, str) or not isinstance(extra_checks or [], list) or any(
             not isinstance(c, str) or not c.strip() for c in (extra_checks or [])):
         raise ValueError("focus is text; extra_checks is a list of nonempty text")
+    validate_focus(focus, extra_checks or [])
     ids = list(dict.fromkeys(["source", candidate_id] + ([compare_to] if compare_to else [])))
     if candidate_id == "source" or any(i not in videos for i in ids):
         raise ValueError("Review a candidate with the original source and an available comparison")
@@ -77,6 +82,20 @@ def prepare_request(request, candidate_id, videos, directory, profile, *, compar
 def _keys(value, required):
     if not isinstance(value, dict) or set(value) != set(required):
         raise ValueError("Unexpected review fields; use the frozen descriptive schema")
+
+
+def validate_focus(focus, checks):
+    """Reject evident steering without rewriting questions or calling a model."""
+    text = " ".join([focus, *checks])
+    steering = (r"\b(?:I|we|Planner)\s+(?:prefer|expect|want|favor)s?\b|"
+                r"\b(?:scores?|grades?)\s+(?:should|must|need to)\s+be\b|"
+                r"\b(?:give|assign|award|set|rate|mark)\b.{0,55}\b(?:score|scores|grade|grades|pass|[0-4])\b|"
+                r"\b(?:ignore|override|replace|change)\b.{0,35}\b(?:rubric|scale|criteria|scores?|instructions)\b|"
+                r"\b(?:best|preferred|winning)\s+(?:candidate|version)|"
+                r"\b(?:whether|should|shall)\s+(?:we|I|the planner)\s+(?:stop|continue|generate|edit)|"
+                r"\b(?:because|so that)\b.{0,60}\b(?:generate|regenerate|continue editing)\b")
+    if re.search(steering, text, re.I):
+        raise ValueError("Critic focus/checks must ask neutral observable questions, without desired scores, preferences or next-action reasoning")
 
 
 def validate_report(report, packet):
@@ -129,14 +148,27 @@ def validate_report(report, packet):
         cited = evidence(row, row["change"] != "unknown")
         if row["change"] != "unknown" and not {visible["candidate_id"], row["against"]} <= {e["video_id"] for e in cited}:
             raise ValueError("Comparison needs evidence from both videos")
+    if visible["compare_to"] and not report["comparisons"]:
+        raise ValueError("A requested comparison needs descriptive findings or an explicit unknown comparison")
     expected = [c["id"] for c in visible["extra_checks"]]
+    if any(not isinstance(c, dict) for c in report["extra_checks"]):
+        raise ValueError("Each supplemental check must be an object")
     if [c.get("id") for c in report["extra_checks"]] != expected:
         raise ValueError("Supplemental checks must match the request")
     for row in report["extra_checks"]:
         _keys(row, ("id", "status", "reason", "evidence_refs", "limitations"))
         if row["status"] not in {"pass", "partial", "fail", "unknown"}:
             raise ValueError("Invalid supplemental check status")
-        evidence(row, row["status"] != "unknown")
+        cited = evidence(row, row["status"] != "unknown")
+        if row["status"] != "unknown":
+            identities = {e["video_id"] for e in cited}
+            if visible["candidate_id"] not in identities:
+                raise ValueError("A supplemental candidate finding must cite the candidate")
+            question = next(c["text"] for c in visible["extra_checks"] if c["id"] == row["id"])
+            if re.search(r"\b(source|original|preserv\w*|retain\w*|unchanged|same as)\b", question, re.I) and "source" not in identities:
+                raise ValueError("A supplemental source-relative finding must cite the source")
+            if visible["compare_to"] and re.search(r"\b(compare\w*|better|worse|improv\w*)\b", question, re.I) and visible["compare_to"] not in identities:
+                raise ValueError("A relative supplemental finding must cite the comparison")
     if not isinstance(report["unassessed"], list) or any(not isinstance(s, str) for s in report["unassessed"]):
         raise ValueError("unassessed must contain text limitations")
     # Fail obvious advice rather than forwarding it or asking a second model to repair it.
@@ -145,7 +177,12 @@ def validate_report(report, packet):
                      + report["unassessed"])
     if re.search(r"\b(should|recommend(?:ed|ation|ations)?|next (?:step|attempt|generation)|try (?:to|a|another)|"
                  r"(?:rewrite|revise|change) the prompt|(?:choose|select|deliver) (?:v\d+|candidate|the)|"
-                 r"(?:restart|regenerate|stop generating|continue editing))\b", prose, re.I):
+                 r"(?:restart|regenerate|stop generating|continue editing)|"
+                 r"(?:use|take|keep|retain)\s+(?:v\d+|source|the source|this candidate|the candidate)\s+(?:as|for)|"
+                 r"(?:further|another|new)\s+(?:render|generation|pass)\b.{0,100}\b(?:would|could|will|can)|"
+                 r"(?:edit|generate|render)\s+(?:again|from)|"
+                 r"(?:deliver|select|choose)\s+(?:this|that|it)|"
+                 r"(?:rewrite|revise|modify|strengthen|shorten)\s+(?:the|your)\s+prompt)\b", prose, re.I):
         raise ValueError("Critic output contains prohibited action guidance")
     return report
 
@@ -159,8 +196,7 @@ def run_review(payload, directory, model=None):
         extra_checks=payload.get("extra_checks", []))
     if model is None:
         from vlm.codex_vlm import CodexVisionModel
-        model = CodexVisionModel(role="online_critic")
-        model.model, model.reasoning_effort = profile["model"], profile["reasoning_effort"]
+        model = CodexVisionModel(role="online_critic", model=profile["model"], reasoning_effort=profile["reasoning_effort"])
     if model.model != profile["model"] or model.reasoning_effort != profile["reasoning_effort"]:
         raise ValueError("Critic model differs from frozen profile")
     try:

@@ -44,6 +44,8 @@ def request_job(harness, kind, args, event_id, *, internal=False):
     from .creative import active
     creative = active(state)
     if creative:
+        if state.get("unresolved_jobs"):
+            raise ValueError("An existing tool outcome needs reconciliation; no replacement job was submitted")
         allowed = {"generate": {"input_video", "prompt", "seed"},
                    "critique": {"video", "compare_to", "focus", "extra_checks"}}
         if kind not in allowed or set(args) - allowed[kind]:
@@ -187,6 +189,15 @@ def collect(harness):
         raise ValueError("Tool response does not match the pending job")
     if response.get("status") not in {"complete", "failed"}:
         raise ValueError("Only final worker responses can be collected")
+    if state["config"].get("workflow") == "creative_loop_v1" and response["status"] == "failed" and (response.get("outcome_unknown") or response.get("failure_kind") == "model_transport"):
+        detail = {"job_id": job["id"], "outcome_unknown": response.get("outcome_unknown", False),
+                  "failure_kind": response.get("failure_kind", "render_outcome"), "error": response.get("error")}
+        state.setdefault("unresolved_jobs", {})[job["id"]] = detail
+        state["status"] = "needs_reconciliation"
+        if job["kind"] == "generate":
+            state["renderer_submission"] = {"status": "outcome_unknown", **detail}
+        harness.checkpoint()
+        return False
     result = response
     if response["status"] == "complete" and job["kind"] == "generate":
         p = response["payload"]

@@ -141,7 +141,7 @@ def main():
                         raise ValueError("Ditto needs the deployment's verified model manifest")
                     started = request.with_name("render-started.json")
                     if started.exists():
-                        from planner_harness.rsi_remote import UncertainRender
+                        from planner_harness.recovery import UncertainRender
                         raise UncertainRender("Prior render dispatch needs receipt reconciliation")
                     save(started, {"request_sha256": job["sha256"], "seed": p["renderer"].get("seed")})
                     response["payload"] = ditto(job, request.parent, source, args.root.resolve(), args.verified_manifest.resolve())
@@ -158,6 +158,9 @@ def main():
             response.update(status="failed", error=f"{type(exc).__name__}: {exc}")
             if getattr(exc, "outcome_unknown", False):
                 response["outcome_unknown"] = True
+            if getattr(exc, "failure_kind", None) == "model_transport":
+                response["failure_kind"] = "model_transport"
+                response["retryable"] = exc.retryable
         save(response_path, response)
         print(json.dumps({"status": response["status"], "response": str(response_path), "error": response.get("error")}))
 

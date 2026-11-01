@@ -39,9 +39,9 @@ After later user authorization, use the existing two-RTX-5090 AutoDL container a
 
 ## Development specification and design audit
 
-The detailed development specification is [creative-loop-development-plan.md](creative-loop-development-plan.md). It expands the approved route into responsibilities, data boundaries, runtime behavior, file-level work packages and observable completion criteria. It introduces no RSI workflow or new mandatory Planner forms. The current assignment is to save that specification and audit the implementation, not to change executable code or start experiments.
+The detailed development specification is [creative-loop-development-plan.md](creative-loop-development-plan.md). It expands the approved route into responsibilities, data boundaries, runtime behavior, file-level work packages and observable completion criteria. It introduces no RSI workflow or new mandatory Planner forms. The latest authorization is to implement its repairs and synchronize GitHub first. Tests, simulated workflows, demo regeneration, live inference and experiments are deferred in this repair pass.
 
-The implementation checkpoints below are historical records of work and tests performed. They are not a claim that every architectural requirement is complete. The [2026-11-01 design audit](creative-loop-design-audit-20261101.md) classifies actual behavior separately, including gaps not exercised by the original tests. Context continuity, recovery/terminal states, Critic boundaries, server role configuration and reporting are partially complete; the audit has not implemented repairs.
+The implementation checkpoints below are historical records of work and tests performed. The [2026-11-01 design audit](creative-loop-design-audit-20261101.md) preserves the baseline findings. The detailed plan's repair checkpoint records the implemented response to F01-F09 and the deferred validation. Historical test counts apply only to their original revision.
 
 ## Implementation checkpoints recorded before the design audit
 

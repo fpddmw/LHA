@@ -29,3 +29,8 @@ Retain useful findings in optional notes or a workspace. The tool history preser
 exact reads and observations without requiring a citation form before generation.
 When enough material is available, form and test a coherent proposal. Later evidence
 can change the proposal or its interpretation.
+
+Reading returns bounded pages with explicit line/character continuation. Earlier
+pages remain in exact read/operation records and can be reopened. `score-definitions`
+is an optional shared reference for interpreting the fixed main evaluation scales;
+it does not introduce task-specific goals or a submission requirement.

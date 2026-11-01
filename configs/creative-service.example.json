@@ -1,0 +1,20 @@
+{
+  "workflow": "creative_loop_v1",
+  "planner": {"model": "gpt-6.1-sol", "reasoning_effort": "high"},
+  "critic": {"model": "gpt-6.1-sol", "reasoning_effort": "high"},
+  "limits": {"gpu": 1, "llm": 2, "cpu": 2},
+  "enable_final_evaluation": false,
+  "renderer": {
+    "backend": "bernini",
+    "asset_manifest": "REPLACE_WITH_VERIFIED_ASSET_MANIFEST.json",
+    "asset_manifest_sha256": "REPLACE_WITH_VERIFIED_SHA256",
+    "gpu_lock": "/tmp/lha-bernini-device-0",
+    "generation": {
+      "num_inference_steps": 40,
+      "guidance_mode": "v2v_apg",
+      "max_image_size": 848,
+      "negative_prompt": "",
+      "prompt_enhancer": false
+    }
+  }
+}

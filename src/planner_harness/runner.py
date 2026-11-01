@@ -121,7 +121,7 @@ class PlannerHarness:
         self.checkpoint()
         return self.run()
 
-    def resume(self, *, additional_turns=0, execution=None, continue_delivery=False):
+    def resume(self, *, additional_turns=0, execution=None, continue_delivery=False, max_context_chars=None):
         self.state = load(self.output / "state.json")
         from .creative import active
         if not active(self.state):
@@ -130,9 +130,20 @@ class PlannerHarness:
         else:
             from critic_harness.one_shot import verify_profile
             verify_profile(self.state["config"]["execution"]["critic"]["frozen_profile"])
+            if self.state["config"]["execution"].get("experiment_profile"):
+                from .creative import verify_experiment
+                verify_experiment(self.state["config"]["execution"]["experiment_profile"], self.root)
         if self.state["status"] == "complete" and not continue_delivery:
             return self.state
         config = self.state["config"]
+        if max_context_chars is not None:
+            if type(max_context_chars) is not int or max_context_chars < 8192:
+                raise ValueError("Context capacity must be at least 8192 characters")
+            if self.state.get("pending_event"):
+                raise ValueError("Resolve the existing model call before changing context capacity")
+            self.state.setdefault("resource_changes", []).append({"at": stamp(), "field": "max_context_chars",
+                "previous": config["max_context_chars"], "next": max_context_chars})
+            config["max_context_chars"] = max_context_chars
         if getattr(self.model, "model", "unknown") != config["model"] or getattr(self.model, "reasoning_effort", "unknown") != config["reasoning_effort"] or type(self.model).__name__ != config["backend"]:
             raise ValueError("Resume must use the recorded backend, model and reasoning effort")
         self.video = Video(self.state["request"]["source"]["path"], self.output)
@@ -158,7 +169,7 @@ class PlannerHarness:
             profile = prepare_profile(execution, self.root, self.state["request"])
             if profile != config.get("execution"):
                 if config.get("rsi") or active(self.state):
-                    raise ValueError("RSI execution profiles are frozen; start a new run to change them")
+                    raise ValueError("This workflow freezes execution profiles; start a new run to change them")
                 event = {"event_id": "runtime-config-" + str(len(self.state["events"]) + 1), "at": stamp(), "status": "ok",
                          "request": {"action": "configure_execution", "origin": "operator CLI"},
                          "result": {"previous": config.get("execution"), "next": profile,
@@ -191,6 +202,9 @@ class PlannerHarness:
         payload = present(json.loads(text), self.state, self.knowledge)
         images, mapping = attachments(self.state)
         payload["attached_images_in_order"] = mapping
+        if self.state["config"].get("workflow") == "creative_loop_v1":
+            from .context import fit_creative
+            payload = fit_creative(payload, self.state, len(self.system))
         if self.state["config"].get("rsi"):
             from .rsi_support import context
             payload = context(self, payload)
@@ -305,11 +319,13 @@ class PlannerHarness:
             results = []
             for target in targets:
                 try:
-                    result = self.knowledge.read(target["id"], target.get("start_line", 1), target.get("section"))
+                    options = {"start_char": target.get("start_char", 0), "max_chars": target.get("max_chars", 6000)} if active(self.state) else {}
+                    result = self.knowledge.read(target["id"], target.get("start_line", 1), target.get("section"), **options)
                     read_id = f"read-{len(self.state['reads']) + 1:04d}"
                     result["read_id"] = read_id
                     self.state["reads"][read_id] = {k: result[k] for k in ("id", "path", "sha256", "start_line", "end_line", "next_line")}
                     self.state["reads"][read_id]["event_id"] = event_id
+                    self.state["reads"][read_id].update({k: result[k] for k in ("start_char", "end_char", "next_char") if k in result})
                     results.append(result)
                 except (ValueError, KeyError, OSError) as exc:
                     results.append({"target": target, "error": str(exc)})
@@ -354,6 +370,8 @@ class PlannerHarness:
             from .execution import request_job
             return request_job(self, action, args, event_id)
         if action == "finish":
+            if active(self.state) and self.state.get("unresolved_jobs"):
+                raise ValueError("Resolve the outstanding tool outcome before finishing this task")
             if self.state["config"].get("mode", "plan") != "loop":
                 raise ValueError("Use submit with an English prompt to finish a planning-only run")
             identity = args.get("video")
@@ -383,17 +401,22 @@ class PlannerHarness:
             save(self.output / "final.json", self.state["final"])
             return self.state["final"]
         if action == "history":
+            options = {"max_chars": 8000, "start_char": args.get("start_char", 0), "split_long_lines": True} if active(self.state) else {}
+            if active(self.state) and "catalog" in args:
+                from .context import history_catalog
+                return page(json.dumps(history_catalog(self.state, args["catalog"]), ensure_ascii=False, indent=2), args.get("start_line", 1), **options)
             if "feedback" in args:
                 if "event_id" in args:
                     raise ValueError("Choose feedback or event_id")
                 feedback = self.state.get("evaluations", {}).get(args["feedback"])
                 if feedback is None:
                     raise ValueError("Unknown feedback ID")
-                return page(json.dumps(feedback, ensure_ascii=False, indent=2), args.get("start_line", 1))
+                return page(json.dumps(feedback, ensure_ascii=False, indent=2), args.get("start_line", 1), **options)
             matches = [e for e in self.state["events"] if e["event_id"] == args.get("event_id")]
             if not matches:
                 raise ValueError("Unknown event ID")
-            return page(json.dumps(matches[0], ensure_ascii=False, indent=2), args.get("start_line", 1))
+            value = matches[0].get("result", {}) if args.get("result_only") else matches[0]
+            return page(json.dumps(value, ensure_ascii=False, indent=2), args.get("start_line", 1), **options)
         if action == "submit":
             return self.submit(args)
         raise ValueError(f"Unknown operation: {action}")
@@ -479,7 +502,8 @@ class PlannerHarness:
             if self.state.get("pending_tool"):
                 from .execution import collect
                 if not collect(self):
-                    self.state["status"] = "waiting_tool"
+                    if self.state["status"] != "needs_reconciliation":
+                        self.state["status"] = "waiting_tool"
                     return self.state
             if self.state["config"].get("rsi"):
                 from .rsi_support import auto_review
@@ -498,7 +522,7 @@ class PlannerHarness:
                     user_text, images, mapping = self.context()
                     if len(self.system) + len(user_text) > self.state["config"]["max_context_chars"]:
                         self.state["status"] = "context_limit"
-                        self.state["last_error"] = "Context exceeds the configured character budget; no text was silently truncated."
+                        self.state["last_error"] = "Core context exceeds capacity after archive compaction. Resume with a larger --max-context-chars; exact records and notes remain intact."
                         break
                     self.state["attempts"] += 1
                     event_id = f"event-{self.state['attempts']:04d}"

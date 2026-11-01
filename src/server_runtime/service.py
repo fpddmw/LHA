@@ -23,10 +23,24 @@ class Service:
         if self.root != Path(__file__).resolve().parents[2]:
             raise ValueError("Run the service from the same checkout whose code is being fingerprinted")
         self.config = copy.deepcopy(config)
+        if self.config.get("workflow") == "creative_loop_v1":
+            from planner_harness.creative import role_settings
+            for role in ("planner", "online_critic"):
+                role_settings(self.config, role)
+            if "rsi" in self.config or "task_card" in self.config or self.config.get("enable_final_evaluation"):
+                raise ValueError("Creative services exclude RSI, task cards and the legacy final-evaluation queue")
         self.runtime_sources = self.source_inventory()
         with RunLock(self.directory / "configuration"):
             immutable(self.directory / "config.json", self.config)
             immutable(self.directory / "runtime-sources.json", self.runtime_sources)
+            if self.config.get("workflow") == "creative_loop_v1":
+                from planner_harness.creative import role_settings, verify_experiment
+                from critic_harness.one_shot import frozen_profile
+                for role in ("planner", "online_critic"):
+                    role_settings(self.config, role)
+                immutable(self.directory / "critic-profile.json", frozen_profile())
+                if self.config.get("experiment_profile"):
+                    immutable(self.directory / "experiment-profile.json", verify_experiment(self.config["experiment_profile"], self.root))
         self.model_factory = model_factory or self.client
         self.renderer = renderer
         self.decode = DecodeCache(config.get("decode_cache_bytes", 512 * 1024 * 1024))
@@ -46,10 +60,17 @@ class Service:
         spec = self.config.get("models", {}).get(role, {})
         factory = spec.get("factory", "vlm.codex_vlm:CodexVisionModel")
         module, name = factory.split(":")
-        client = getattr(importlib.import_module(module), name)(**{"role": role, **spec.get("options", {})})
-        if getattr(client, "model", None) != self.config.get("model", "gpt-6.1-sol"):
+        options = dict(spec.get("options", {}))
+        expected = {"model": self.config.get("model", "gpt-6.1-sol"),
+                    "reasoning_effort": self.config.get("reasoning_effort", "xhigh")}
+        if self.config.get("workflow") == "creative_loop_v1":
+            from planner_harness.creative import role_settings
+            expected = role_settings(self.config, role)
+            options.update(expected)
+        client = getattr(importlib.import_module(module), name)(**{"role": role, **options})
+        if getattr(client, "model", None) != expected["model"]:
             raise ValueError("Backend resolved a different model from the frozen service configuration")
-        if getattr(client, "reasoning_effort", None) != self.config.get("reasoning_effort", "xhigh"):
+        if getattr(client, "reasoning_effort", None) != expected["reasoning_effort"]:
             raise ValueError("Backend resolved a different reasoning effort")
         if not callable(getattr(client, "predict_json", None)) or (role != "benchmark_final" and not callable(getattr(client, "predict_text", None))):
             raise ValueError("Backend does not implement the required vision interface")
@@ -76,12 +97,25 @@ class Service:
             raise ValueError("Task request required")
         from planner_harness.delivery import completion_mode
         task["workflow"] = task.get("workflow", self.config.get("workflow", "legacy"))
+        if self.config.get("workflow") == "creative_loop_v1" and task["workflow"] != "creative_loop_v1":
+            raise ValueError("Keep legacy tasks on a separate legacy service")
         if task["workflow"] == "creative_loop_v1":
-            if task.get("rsi") is not None or task.get("final_evaluation"):
+            if self.config.get("workflow") != "creative_loop_v1":
+                raise ValueError("Creative tasks need an explicitly configured creative service")
+            from planner_harness.creative import role_settings
+            for role in ("planner", "online_critic"):
+                role_settings(self.config, role)
+            if task.get("rsi") is not None or "task_card" in task or task.get("final_evaluation"):
                 raise ValueError("Creative tasks exclude RSI and legacy final-evaluation cards")
             task.setdefault("completion_mode", "delivery")
         task["completion_mode"] = completion_mode(task.get("max_generations"), task.get("completion_mode"))
         execution = task.get("execution", {})
+        if self.config.get("experiment_profile"):
+            from planner_harness.creative import verify_experiment
+            verify_experiment(self.config["experiment_profile"], self.root)
+            if execution.get("experiment_profile", self.config["experiment_profile"]) != self.config["experiment_profile"]:
+                raise ValueError("Task experiment identity differs from the service")
+            execution["experiment_profile"] = self.config["experiment_profile"]
         if "renderer" not in execution:
             raise ValueError("Task requires an explicit renderer profile")
         if execution.get("mode", "live") != "live":
@@ -176,7 +210,7 @@ class Service:
                         if request["kind"] == "generate":
                             started = path.with_name("render-started.json")
                             if started.exists():
-                                from planner_harness.rsi_remote import UncertainRender
+                                from planner_harness.recovery import UncertainRender
                                 raise UncertainRender("A render was already dispatched; recover its receipt before retrying")
                             if self.renderer is None:
                                 from .renderers import PersistentRenderer
@@ -197,7 +231,17 @@ class Service:
                         response.update(status="failed", error=f"{type(exc).__name__}: {exc}")
                         if getattr(exc, "outcome_unknown", False):
                             response["outcome_unknown"] = True
+                        if getattr(exc, "failure_kind", None) == "model_transport":
+                            response["failure_kind"] = "model_transport"
+                            response["retryable"] = exc.retryable
                     save(response_path, response)
+            if self.config.get("workflow") == "creative_loop_v1":
+                if response.get("outcome_unknown"):
+                    from planner_harness.recovery import UncertainRender
+                    raise UncertainRender("Tool outcome is unknown; reconcile the same job before continuing")
+                if response.get("failure_kind") == "model_transport":
+                    from planner_harness.model_call import ModelTransportError
+                    raise ModelTransportError("Critic transport needs recovery of the same request", retryable=response.get("retryable", False))
             artifacts = [artifact(response_path)]
             if request["kind"] == "generate" and response["status"] == "complete":
                 video = response["payload"]["video"]

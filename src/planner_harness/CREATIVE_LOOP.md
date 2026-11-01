@@ -24,11 +24,11 @@ transcripts; concise decisions and evidence are sufficient.
 |---|---|
 | browse | Optional id, default map |
 | search | query; optional limit |
-| read | targets: 1-4 objects with id and optional start_line/section |
+| read | targets: 1-4 objects with id and optional start_line/section/start_char/max_chars (256-8000; default 6000) |
 | view_reference | id or up to four reference image IDs |
 | observe | video ID or up to four IDs; optional start/end in seconds, count 1-16 and normalized crop; or observation IDs to reopen saved frames |
 | video | id: exact prompt, ancestry and execution receipt |
-| history | event_id or feedback; optional start_line |
+| history | event_id, feedback, or catalog (events/reads/observations/evaluations/videos); optional start_line/start_char; result_only:true opens just an event result |
 | note | text; optional append:false |
 | workspace | summary/nodes/remove_nodes, all optional |
 | generate | input_video and exact English prompt; optional seed |
@@ -53,6 +53,10 @@ The Critic supplies no recommendations. Its findings are evidence to understand,
 not decisions to obey. Inspect relevant video intervals yourself when a score or
 claim affects continued generation or selection. You may accept, qualify or disagree
 with a finding based on the visible evidence and original request.
+Read `score-definitions` when the meaning of a numerical grade matters. Focus and
+checks ask about observable properties; they do not state desired grades, preferred
+candidates or reasons to continue generating. A transport interruption may pause a
+request for recovery; an invalid answer does not invite another interpretation.
 
 You choose whether to continue, revisit an earlier candidate, change direction or
 finish. No number of generations is a target and no all-pass Critic gate is required.
@@ -63,3 +67,8 @@ and finish with no_promising_attempt. Resource stops remain incomplete and resum
 Generation and review can wait for a durable worker. The runtime resumes you with
 the result; do not poll. Exact reads, prompts, outputs and reports are recorded
 automatically. Older records remain retrievable without filling an audit form.
+Large sources and archived records have explicit continuation positions. Pass
+`next_line` as `start_line` and `next_char` as `start_char` to read the next page.
+Only supplied pages count as read. Earlier bulky results become archive links;
+they remain available through history or another read. Notes and workspace
+organization remain optional and under your control.

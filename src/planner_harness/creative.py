@@ -9,6 +9,21 @@ from .common import save
 WORKFLOW = "creative_loop_v1"
 
 
+def role_settings(config, role):
+    """One explicit model policy for CLI, service and one-shot construction."""
+    if role not in {"planner", "online_critic"}:
+        raise ValueError("Creative service supports Planner and online Critic roles only")
+    key = "planner" if role == "planner" else "critic"
+    expected = {"model": "gpt-6.1-sol", "reasoning_effort": "high"}
+    nested = config.get(key, {})
+    options = config.get("models", {}).get(role, {}).get("options", {})
+    for setting, value in expected.items():
+        for supplied in (config, nested, options):
+            if setting in supplied and supplied[setting] != value:
+                raise ValueError(f"Creative {role} requires {setting}={value}")
+    return expected
+
+
 def active(state):
     return state.get("config", {}).get("workflow") == WORKFLOW
 
@@ -19,6 +34,8 @@ def configure(harness, execution):
     profile = copy.deepcopy(execution or {})
     if any(key in profile for key in ("evaluation", "rsi", "task_card")):
         raise ValueError("Creative loop excludes task cards, RSI and online independent evaluation")
+    if profile.get("experiment_profile"):
+        verify_experiment(profile["experiment_profile"], harness.root)
     supplied = profile.get("critic")
     frozen = frozen_profile()
     if supplied:
@@ -36,6 +53,38 @@ def configure(harness, execution):
     save(harness.output / "critic-profile.json", frozen)
 
 
+def experiment_profile(root):
+    """Optional shared cohort identity; no jobs, data splits or learning cycle."""
+    from .common import sha
+    from .execution import signature
+    from .creative_knowledge import CreativeKnowledge
+    from critic_harness.one_shot import frozen_profile
+    root = Path(root).resolve()
+    files = {}
+    for package in ("planner_harness", "critic_harness", "server_runtime", "evaluation", "vlm"):
+        for path in sorted((root / "src" / package).rglob("*")):
+            if path.is_file() and path.suffix in {".py", ".md"}:
+                files[path.relative_to(root).as_posix()] = sha(path)
+    knowledge = CreativeKnowledge(root)
+    for relative in sorted(knowledge.paths):
+        path = root / relative
+        if path.is_file() and path.suffix.lower() in {".md", ".json", ".py", ".html", ".txt", ".jpg", ".jpeg", ".png", ".webp"}:
+            files[relative] = sha(path)
+    for relative in ("knowledge/creative-loop/manifest.json", "knowledge/source-map.json"):
+        files[relative] = sha(root / relative)
+    body = {"protocol": "creative-experiment-v1", "critic": frozen_profile(),
+            "planner": role_settings({}, "planner"), "independent_judge": "glm5.3flash", "files": files}
+    return {**body, "sha256": signature(body)}
+
+
+def verify_experiment(path, root):
+    from .common import load
+    binding = load(path)
+    if binding != experiment_profile(root):
+        raise ValueError("This runtime/knowledge differs from the shared experimental profile")
+    return binding
+
+
 def system_prompt(harness):
     operations = Path(__file__).with_name("CREATIVE_LOOP.md").read_text(encoding="utf-8")
     row = harness.knowledge.items["manual"]
@@ -43,6 +92,7 @@ def system_prompt(harness):
 
 
 def review_payload(harness, args):
+    from critic_harness.one_shot import validate_focus
     state = harness.state
     if set(args) - {"video", "compare_to", "focus", "extra_checks"}:
         raise ValueError("Critique accepts video, compare_to, focus and extra_checks only")
@@ -54,6 +104,7 @@ def review_payload(harness, args):
     focus, checks = args.get("focus", ""), args.get("extra_checks", [])
     if not isinstance(focus, str) or not isinstance(checks, list) or any(not isinstance(c, str) or not c.strip() for c in checks):
         raise ValueError("focus is text; extra_checks is a list of nonempty text")
+    validate_focus(focus, checks)
     for key, feedback in state["evaluations"].items():
         if feedback.get("video_id") == identity:
             return None, {"status": "complete", "cached": True, "feedback_id": key, "feedback": feedback}

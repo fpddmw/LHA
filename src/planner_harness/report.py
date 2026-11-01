@@ -11,6 +11,9 @@ from .common import load
 def report(output):
     output = Path(output)
     state = load(output / "state.json")
+    if state["config"].get("workflow") == "creative_loop_v1":
+        from .creative_report import report as creative_report
+        return creative_report(output, state)
     continuous = state["config"].get("mode", "plan") == "loop"
     boundary = ("Continuous task: actual tool jobs, imported material and collected outputs are recorded. A selected result is not an independent quality measurement." if continuous else "Planning-only task. No video generation was requested or performed.")
     observations = state["observations"] + state.get("revision_context", {}).get("overviews", [])

@@ -187,3 +187,11 @@ The historical 113-test suite and 14 passing creative tests establish useful nor
 6. Keep experiments deferred. On resumption, bind the cohort/configuration, verify the specified provider and use the creative entry explicitly.
 
 These steps implement P1-P7 in the detailed specification. They complete the approved loop without new RSI infrastructure or aesthetic rules. This audit has not performed the repairs.
+
+## 7. Subsequent implementation checkpoint
+
+This document preserves the pre-repair findings and their original evidence. After the user authorized the detailed development plan, the implementation addressed F01-F08 and added F09 regression coverage. See [the repair-to-audit mapping](creative-loop-development-plan.md#repair-to-audit-mapping) and [current operation notes](creative-loop-implementation.md#current-repair-checkpoint).
+
+The latest user instruction postpones simulated workflows and validation runs until after GitHub synchronization. No new passing-test count or runtime result is asserted for these repairs. Static source inspection and Python/JSON syntax parsing support code publication only. The old 113/14-test evidence and historical demo remain attached to the old implementation. No live model, scoring, rendering or deployment work occurred.
+
+The generic recovery exception and commands now live outside RSI modules. The new report no longer uses the legacy proposal fields; role settings are shared across CLI and service; and archived context has exact paginated retrieval. These describe the new code path, pending execution of the saved regressions. Historical RSI modules and records remain for explicit legacy use, outside the creative knowledge and tool surface.

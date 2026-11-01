@@ -22,6 +22,8 @@ def main():
     parser.add_argument("--model", default="gpt-6.1-sol")
     parser.add_argument("--reasoning", default=None)
     parser.add_argument("--workflow", choices=["legacy", "creative_loop_v1"], default=None)
+    parser.add_argument("--profile", type=Path, help="Creative role/default configuration JSON")
+    parser.add_argument("--experiment-profile", type=Path, help="Optional shared frozen cohort profile")
     parser.add_argument("--target", default="unspecified")
     parser.add_argument("--mode", choices=["plan", "loop"], default="plan")
     parser.add_argument("--execution-config")
@@ -34,13 +36,24 @@ def main():
     parser.add_argument("--completion-mode", choices=["delivery", "bounded_experiment"], default="delivery")
     parser.add_argument("--label", default="")
     parser.add_argument("--max-turns", type=int, default=None, help="Optional safety ceiling; delivery runs otherwise have no fixed turn count")
-    parser.add_argument("--max-context-chars", type=int, default=180000)
+    parser.add_argument("--max-context-chars", type=int, default=None, help="New capacity or explicit resume capacity; default 180000 for new runs")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--continue-delivery", action="store_true", help="Explicitly reopen a resolved budget stop; preserve evidence and frozen Critic while removing the count ceiling")
     parser.add_argument("--additional-turns", type=int, default=0)
     parser.add_argument("--worker-command", nargs=argparse.REMAINDER,
                         help="Optional worker argv, last on the command line. {request} and {response} are substituted without a shell.")
     args = parser.parse_args()
+    import json
+    profile = json.loads(args.profile.read_text(encoding="utf-8")) if args.profile else {}
+    if profile:
+        if profile.get("workflow") != "creative_loop_v1" or (args.workflow and args.workflow != profile["workflow"]):
+            parser.error("Profile must identify the selected creative workflow")
+        args.workflow = profile["workflow"]
+        if not args.resume:
+            if args.max_generations is None:
+                args.max_generations = profile.get("max_generations")
+            if args.max_turns is None:
+                args.max_turns = profile.get("max_turns")
     if args.resume:
         import json
         recorded = json.loads((Path(args.output) / "state.json").read_text(encoding="utf-8"))["config"]
@@ -50,6 +63,12 @@ def main():
         args.reasoning = args.reasoning or recorded["reasoning_effort"]
     args.workflow = args.workflow or "legacy"
     args.reasoning = args.reasoning or ("high" if args.workflow == "creative_loop_v1" else "xhigh")
+    if args.workflow == "creative_loop_v1":
+        from planner_harness.creative import role_settings
+        settings = role_settings(profile, "planner")
+        role_settings(profile, "online_critic")
+        if args.model != settings["model"] or args.reasoning != settings["reasoning_effort"]:
+            parser.error("Creative roles are fixed to gpt-6.1-sol/high")
     if args.workflow == "creative_loop_v1" and (args.rsi or args.rsi_config or args.task_card or args.critic_feedback):
         parser.error("Creative loop excludes RSI, task cards and imported legacy feedback")
     if args.continue_delivery and not args.resume:
@@ -62,7 +81,7 @@ def main():
         os.environ["LOW_HIGH_AGENT_CODEX_PLANNER_MODEL"] = args.model
         os.environ["LOW_HIGH_AGENT_CODEX_PLANNER_REASONING_EFFORT"] = args.reasoning
         from vlm.codex_vlm import CodexVisionModel
-        model = CodexVisionModel(role="planner")
+        model = CodexVisionModel(role="planner", model=args.model, reasoning_effort=args.reasoning)
     else:
         from vlm.litellm_vlm import LiteLLMVisionModel
         model = LiteLLMVisionModel(model=args.model, reasoning_effort=args.reasoning, role="planner")
@@ -72,8 +91,16 @@ def main():
         harness = PlannerHarness(output, model)
         import json
         execution = json.loads(Path(args.execution_config).read_text(encoding="utf-8")) if args.execution_config else None
+        if args.experiment_profile and not args.resume:
+            execution = {**(execution or {}), "experiment_profile": str(args.experiment_profile.resolve())}
+        elif args.experiment_profile:
+            from planner_harness.creative import verify_experiment
+            verify_experiment(args.experiment_profile, ROOT)
+            if recorded["execution"].get("experiment_profile") != str(args.experiment_profile.resolve()):
+                parser.error("Resume must use its recorded shared profile")
         if args.resume:
-            state = harness.resume(additional_turns=args.additional_turns, execution=execution, continue_delivery=args.continue_delivery)
+            state = harness.resume(additional_turns=args.additional_turns, execution=execution, continue_delivery=args.continue_delivery,
+                                   max_context_chars=args.max_context_chars)
         else:
             request = Path(args.request_file).read_text(encoding="utf-8") if args.request_file else args.request
             rsi = json.loads(Path(args.rsi_config).read_text(encoding="utf-8")) if args.rsi_config else {} if args.rsi or args.task_card else None
@@ -81,7 +108,7 @@ def main():
                 rsi["task_card"] = str(Path(args.task_card).resolve())
             imported = json.loads(Path(args.import_videos).read_text(encoding="utf-8")) if args.import_videos else None
             state = harness.start(args.source, request, target=args.target, label=args.label, max_turns=args.max_turns,
-                                  max_context_chars=args.max_context_chars, mode=args.mode, execution=execution,
+                                  max_context_chars=args.max_context_chars or profile.get("max_context_chars", 180000), mode=args.mode, execution=execution,
                                   max_generations=args.max_generations, completion_mode=args.completion_mode,
                                   imported=imported, feedback_files=args.critic_feedback,
                                   rsi=rsi, workflow=args.workflow,

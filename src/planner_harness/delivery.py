@@ -18,7 +18,8 @@ def completion_mode(limit, mode=None):
 
 def is_delivery(state):
     # Existing immutable experiment snapshots retain their original semantics.
-    return state["config"].get("completion_mode") == "delivery"
+    return (state["config"].get("workflow") == "creative_loop_v1"
+            or state["config"].get("completion_mode") == "delivery")
 
 
 def finish_status(state, reason, video):
@@ -37,6 +38,15 @@ def finish_status(state, reason, video):
 
 def continue_budget_stop(state):
     """Explicit operator correction; preserve past calls, candidates and frozen Critic."""
+    if state["config"].get("workflow") == "creative_loop_v1":
+        if (state.get("status") != "budget_exhausted" and state.get("final", {}).get("stop_reason") != "budget") or state.get("pending_event") or state.get("pending_tool"):
+            raise ValueError("Continue a resource pause only after pending work is resolved")
+        previous = copy.deepcopy(state["config"])
+        state["config"].update(completion_mode="delivery", max_generations=None, max_turns=None)
+        state.setdefault("delivery_continuations", []).append({"previous_config": previous,
+            "next_config": copy.deepcopy(state["config"]), "reason": "Operator explicitly reopened the resource pause."})
+        state["status"] = "budget_exhausted"
+        return
     if state.get("final", {}).get("stop_reason") != "budget" or state.get("pending_event") or state.get("pending_tool"):
         raise ValueError("Continue only a resolved budget stop with no pending work")
     config = state["config"]

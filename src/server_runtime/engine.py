@@ -50,7 +50,8 @@ class Engine:
             save(receipt, {"signature": job["signature"], "result": result})
             self.queue.finish(job, result=result)
         except Exception as exc:
-            self.queue.finish(job, error=f"{type(exc).__name__}: {exc}")
+            self.queue.finish(job, error=f"{type(exc).__name__}: {exc}",
+                              state="needs_review" if getattr(exc, "outcome_unknown", False) or getattr(exc, "failure_kind", None) == "model_transport" else "failed")
         finally:
             self.wakeup.set()
 

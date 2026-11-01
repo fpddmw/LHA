@@ -40,8 +40,13 @@ def review_fixture(user_text):
     scores = {key: {"status": "scored", "score": 3, "reason": "Scripted software fixture; no visual finding is asserted.",
                    "evidence_refs": [source_ref, *refs[:2]], "limitations": ["Not a real evaluation."]}
               for key in DIMENSIONS}
+    comparisons = []
+    if p.get("compare_to"):
+        reference = next(e["id"] for e in p["evidence"] if e["video_id"] == p["compare_to"])
+        comparisons = [{"against": p["compare_to"], "dimension": "visual_integrity", "change": "same",
+                        "reason": "Scripted comparison only.", "evidence_refs": [reference, refs[0]]}]
     return {"protocol_id": p["protocol_id"], "candidate_id": candidate, "main_scores": scores,
-            "comparisons": [], "extra_checks": [{"id": c["id"], "status": "unknown", "reason": "Scripted unknown.",
+            "comparisons": comparisons, "extra_checks": [{"id": c["id"], "status": "unknown", "reason": "Scripted unknown.",
               "evidence_refs": [], "limitations": []} for c in p["extra_checks"]], "unassessed": ["Software fixture only."]}
 
 
