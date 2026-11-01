@@ -30,7 +30,7 @@ def scaffold(index):
     return result
 
 
-def annotate(entry, client, destination, root, duration=None):
+def annotate(entry, client, destination, root, duration=None, *, instruction=ANNOTATE):
     require(file_hash(root / entry["source_video"]) == entry["source_sha256"], "Source hash mismatch")
     decoded = decode(root / entry["source_video"])
     duration = min(5.0, decoded["duration"]) if duration is None else duration
@@ -43,7 +43,7 @@ def annotate(entry, client, destination, root, duration=None):
         path = destination / f"source_{i:05d}.jpg"
         decoded["frames"][i].save(path, quality=95)
         images.append(str(path.resolve()))
-    response = cached_call(client, ANNOTATE, {"requirement": entry["requirement"], "track": entry["track"],
+    response = cached_call(client, instruction, {"requirement": entry["requirement"], "track": entry["track"],
                            "source_times": [decoded["times"][i] for i in chosen]}, images, destination / "annotation.raw.json")
     card = {**response, **entry, "duration_seconds": duration, "source_start_seconds": 0,
             "status": "draft", "reviewed_by": None}

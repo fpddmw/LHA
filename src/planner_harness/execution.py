@@ -39,7 +39,7 @@ def immutable(path, value):
         save(path, value)
 
 
-def request_job(harness, kind, args, event_id):
+def request_job(harness, kind, args, event_id, *, internal=False):
     state = harness.state
     if state["config"].get("mode", "plan") != "loop":
         raise ValueError("This planning-only run has no execution tools")
@@ -48,8 +48,12 @@ def request_job(harness, kind, args, event_id):
         raise ValueError("Choose a video ID present in this task")
     profile = state["config"].get("execution", {})
     if kind == "generate":
-        if state["generation_requests"] >= state["config"]["max_generations"]:
-            return {"status": "limit_reached", "message": "Generation budget exhausted. Inspect existing results or finish with an accurate outcome."}
+        limit = state["config"].get("max_generations")
+        if limit is not None and state["generation_requests"] >= limit:
+            from .delivery import is_delivery
+            if is_delivery(state):
+                state["status"] = "budget_exhausted"
+            return {"status": "limit_reached", "message": "Generation resource limit reached. A resource stop leaves a delivery task incomplete; existing candidates remain available."}
         prompt = args.get("prompt")
         if not isinstance(prompt, str) or not prompt.strip():
             raise ValueError("generate needs a nonempty English prompt")
@@ -61,20 +65,64 @@ def request_job(harness, kind, args, event_id):
             if type(args["seed"]) is not int:
                 raise ValueError("seed must be an integer")
             payload["renderer"] = {**payload["renderer"], "seed": args["seed"]}
+        if state["config"].get("rsi"):
+            from .ledger import intent, resolve_baseline
+            if not state.get("requirements"):
+                raise ValueError("Define requirements before the first RSI generation")
+            wanted = intent(args.get("intent"), state["requirements"])
+            from .task_criteria import verify_state
+            verify_state(state)
+            known_cards = {c["id"] for topic in harness.knowledge.experiences for c in topic.get("cards", [])}
+            if not set(wanted.get("cards", [])) <= known_cards:
+                raise ValueError("Declared skill IDs must exist in this frozen knowledge version")
+            baseline = resolve_baseline(state, wanted)
+            contenders = args.get("contenders", [])
+            if not isinstance(contenders, list) or any(c not in state["videos"] for c in contenders) or len(set(contenders) | {"source", identity}) + 1 > 4:
+                raise ValueError("Source, generated output, input and contenders must fit four distinct videos")
+            payload.update(intent=intent(args.get("intent"), state["requirements"]),
+                           requirements=copy.deepcopy(state["requirements"]), contenders=contenders,
+                           comparison_baseline=baseline, logical_attempt=state["generation_requests"] + 1)
+            if len(set(contenders) | {"source", identity, baseline}) + 1 > 4:
+                raise ValueError("Source, output, input, baseline and contenders must fit four videos; choose fewer optional contenders")
+            seeds = state["config"]["rsi"].get("seed_schedule")
+            if seeds is not None:
+                seed = seeds[state["generation_requests"]]
+                if "seed" in args and args["seed"] != seed:
+                    raise ValueError("Paired seed schedule cannot be overridden")
+                payload["renderer"] = {**payload["renderer"], "seed": seed}
+            sequence = state["config"]["rsi"].get("seed_sequence")
+            if sequence is not None:
+                seed = sequence["start"] + sequence["step"] * state["generation_requests"]
+                if "seed" in args and args["seed"] != seed:
+                    raise ValueError("Recorded seed sequence cannot be overridden")
+                payload["renderer"] = {**payload["renderer"], "seed": seed}
     elif kind == "critique":
         if not profile.get("critic"):
             return {"status": "unavailable", "message": "The active Critic is not configured for this task."}
+        if state["config"].get("rsi"):
+            # A failed worker envelope can still hide an ambiguous provider outcome.
+            # Changing the job ID must not silently bypass that dispatch marker.
+            for prior_id, prior in state["jobs"].items():
+                if prior["kind"] != "critique" or prior["payload"]["video_id"] != identity:
+                    continue
+                calls = harness.output / "jobs" / prior_id / "active-critic/calls"
+                unresolved = [p for p in calls.glob("*/submitted.json") if not p.with_name("response.txt").exists()]
+                if unresolved:
+                    return {"status": "requires_reconciliation", "job_id": prior_id,
+                            "message": "An earlier review of this candidate has an uncertain model call. Reconcile it before requesting another review; no new call was dispatched."}
         comparison = args.get("compare_to")
-        if comparison is not None and comparison not in state["videos"]:
+        comparisons = comparison if isinstance(comparison, list) else [comparison] if comparison is not None else []
+        if any(c not in state["videos"] for c in comparisons):
             raise ValueError("Unknown comparison video")
         selected = {"source", identity}
-        if comparison:
-            selected.add(comparison)
+        selected.update(comparisons)
         # The immediate input, root and alternative are the relevant visual comparisons.
         # Distant ancestry stays provenance rather than growing every review's image set.
         parent = state["videos"][identity].get("parent")
         if parent:
             selected.add(parent)
+        if len(selected) > 4:
+            raise ValueError("Review at most four distinct videos including source and actual input")
         review_videos = {k: copy.deepcopy(v) for k, v in state["videos"].items() if k in selected}
         for video in review_videos.values():
             if video.get("parent") and video["parent"] not in selected:
@@ -83,6 +131,17 @@ def request_job(harness, kind, args, event_id):
                    "videos": review_videos,
                    "request": state["request"]["text"], "question": args.get("question", ""),
                    "compare_to": comparison, "critic": profile["critic"]}
+        if state["config"].get("rsi"):
+            from .ledger import digest
+            config = state["config"]["rsi"]
+            if digest(profile["critic"]) != config["critic_profile_sha256"]:
+                raise ValueError("Frozen RSI Critic profile changed")
+            if "requirements" in args and not internal:
+                raise ValueError("Use the requirements operation to revise the task; critique cannot replace its goal")
+            req = args.get("requirements") if internal else state.get("requirements")
+            if not req:
+                raise ValueError("Define requirements before RSI review")
+            payload.update(requirements=copy.deepcopy(req), frozen_critic=copy.deepcopy(config["critic_materials"]))
     else:
         if not profile.get("evaluation"):
             return {"status": "unavailable", "message": "No external evaluator is configured. You can inspect the videos directly; do not invent a metric result."}
@@ -171,6 +230,8 @@ def collect(harness):
         info = {**video.info, "path": str(target), "parent": job["payload"]["input_id"],
                 "prompt": job["payload"]["prompt"], "job_id": job["id"], "execution": receipt,
                 "replay_provenance": p.get("replay_provenance")}
+        if p.get("reuse_provenance"):
+            info["reuse_provenance"] = p["reuse_provenance"]
         # This records conditioning ancestry, not a claim that generated motion is aligned.
         indices = receipt.get("conditioning_source_indices")
         parent = state["videos"][info["parent"]]
@@ -192,6 +253,9 @@ def collect(harness):
                   "mode": job["mode"], "observation": observation}
     elif response["status"] == "complete":
         # Metric ownership stays in the configured evaluator. Preserve its complete response.
+        if job["kind"] == "critique" and job["payload"].get("requirements"):
+            if response["payload"].get("outcome", {}).get("requirements_sha256") != job["payload"]["requirements"]["sha256"]:
+                raise ValueError("Critic requirement version differs from signed job")
         state["evaluations"][job["id"]] = {"video_id": job["payload"]["video_id"], **response["payload"]}
     elif job["kind"] == "generate":
         state["renderer_submission"] = {"status": "failed", "job_id": job["id"], "error": response.get("error")}
@@ -201,5 +265,8 @@ def collect(harness):
     state["events"].append(event)
     save(harness.output / "events" / (event["event_id"] + ".json"), event)
     state.update(pending_tool=None, status="running")
+    if state["config"].get("rsi"):
+        from .ledger import build
+        state["task_memory"] = build(state)
     harness.checkpoint()
     return True

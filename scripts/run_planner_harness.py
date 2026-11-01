@@ -16,6 +16,7 @@ def main():
     parser.add_argument("--source")
     parser.add_argument("--request")
     parser.add_argument("--request-file")
+    parser.add_argument("--run-instructions-file", help="Optional operator instructions, separate from the original video requirement")
     parser.add_argument("--output", required=True)
     parser.add_argument("--backend", choices=["codex", "litellm"], default="codex")
     parser.add_argument("--model", default="gpt-6.1-sol")
@@ -23,17 +24,24 @@ def main():
     parser.add_argument("--target", default="unspecified")
     parser.add_argument("--mode", choices=["plan", "loop"], default="plan")
     parser.add_argument("--execution-config")
+    parser.add_argument("--rsi", action="store_true", help="Enable requirement-linked task learning and automatic Critic")
+    parser.add_argument("--rsi-config", help="Optional JSON RSI configuration, including candidate experience and fixed seeds")
+    parser.add_argument("--task-card", help="Reviewed independent v2 task card; required for new live RSI runs")
     parser.add_argument("--import-videos", help="JSON list of existing videos with truthful provenance")
     parser.add_argument("--critic-feedback", action="append", default=[], help="Verified online Critic feedback JSON to import")
-    parser.add_argument("--max-generations", type=int, default=3)
+    parser.add_argument("--max-generations", type=int, default=None, help="Optional explicit generation limit; omitted means no fixed generation count")
+    parser.add_argument("--completion-mode", choices=["delivery", "bounded_experiment"], default="delivery")
     parser.add_argument("--label", default="")
-    parser.add_argument("--max-turns", type=int, default=24)
+    parser.add_argument("--max-turns", type=int, default=None, help="Optional safety ceiling; delivery runs otherwise have no fixed turn count")
     parser.add_argument("--max-context-chars", type=int, default=180000)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--continue-delivery", action="store_true", help="Explicitly reopen a resolved budget stop; preserve evidence and frozen Critic while removing the count ceiling")
     parser.add_argument("--additional-turns", type=int, default=0)
     parser.add_argument("--worker-command", nargs=argparse.REMAINDER,
                         help="Optional worker argv, last on the command line. {request} and {response} are substituted without a shell.")
     args = parser.parse_args()
+    if args.continue_delivery and not args.resume:
+        parser.error("--continue-delivery requires --resume")
     if not args.resume and (not args.source or not (args.request or args.request_file)):
         parser.error("A new run requires --source and --request or --request-file")
     from planner_harness import PlannerHarness
@@ -53,13 +61,19 @@ def main():
         import json
         execution = json.loads(Path(args.execution_config).read_text(encoding="utf-8")) if args.execution_config else None
         if args.resume:
-            state = harness.resume(additional_turns=args.additional_turns, execution=execution)
+            state = harness.resume(additional_turns=args.additional_turns, execution=execution, continue_delivery=args.continue_delivery)
         else:
             request = Path(args.request_file).read_text(encoding="utf-8") if args.request_file else args.request
+            rsi = json.loads(Path(args.rsi_config).read_text(encoding="utf-8")) if args.rsi_config else {} if args.rsi or args.task_card else None
+            if args.task_card:
+                rsi["task_card"] = str(Path(args.task_card).resolve())
             imported = json.loads(Path(args.import_videos).read_text(encoding="utf-8")) if args.import_videos else None
             state = harness.start(args.source, request, target=args.target, label=args.label, max_turns=args.max_turns,
                                   max_context_chars=args.max_context_chars, mode=args.mode, execution=execution,
-                                  max_generations=args.max_generations, imported=imported, feedback_files=args.critic_feedback)
+                                  max_generations=args.max_generations, completion_mode=args.completion_mode,
+                                  imported=imported, feedback_files=args.critic_feedback,
+                                  rsi=rsi,
+                                  run_instructions=Path(args.run_instructions_file).read_text(encoding="utf-8") if args.run_instructions_file else "")
         while state["status"] == "waiting_tool" and args.worker_command:
             job = output / "jobs" / state["pending_tool"]
             substitutions = {"{request}": str(job / "request.json"), "{response}": str(job / "response.json")}

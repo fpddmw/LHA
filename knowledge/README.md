@@ -2,6 +2,8 @@
 
 ## Reading entrances
 
+- **Judgment concepts and experiments:** [Wiki](wiki/README.md) connects contextual distinctions, complete recorded cases, frame comparisons and revisable experience. Initial explanations are human-assisted and unvalidated.
+
 - **Meaning and requests:** [Video meaning](guides/meaning.md) connects visible events, relationships, uncertainty and the scope of an edit.
 - **Visual design:** the comparative guides and complete cases below explain media, settings, composition, time and combinations.
 - **Generation and iteration experience:** [experience topics](experience/README.md) give actionable common-sense starting preferences alongside scoped model evidence. They can improve through reviewed experience revisions.
@@ -13,7 +15,7 @@ This package organizes existing repository skill material into an explorable, co
 
 The working language is **English**. Working pages contain English editorial prose, navigation, guidance, and source material. Existing English source text is preserved; translations of Chinese-only template fields are identified explicitly. Original-language records remain unchanged at their source locations for provenance.
 
-This content supports the [independent Planner harness](../docs/planner-harness.md). The model organizes task questions, reading, and design decisions. Four [actual planning walkthroughs](../out/planner_harness/20261029/review.md) now connect this knowledge to observations, proposals, and exact English prompt handoffs. The generation feedback loop remains subsequent work.
+This content supports the [independent Planner harness](../docs/planner-harness.md). The model organizes task questions, reading, and design decisions. Four [actual planning walkthroughs](../out/planner_harness/20261029/review.md) now connect this knowledge to observations, proposals, and exact English prompt handoffs. The generation feedback loop is implemented in the [Planner runtime](../src/planner_harness/runner.py). Opt-in [two-level RSI](../docs/two-level-rsi-implementation.md) adds versioned requirements, automatic Critic review, task memory and staged experience revision; its implementation and live-validation status are recorded separately.
 
 [Reading manual](READING.md) · [Planner and harness integration](INTEGRATION.md) · [Source map](source-map.json) · [Validation and scope](VALIDATION.md) · [Approved plan](../docs/skill-reorganization-plan.md)
 

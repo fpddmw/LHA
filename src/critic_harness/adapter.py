@@ -29,7 +29,15 @@ def critique(job, directory, root, model=None):
             "compare_to": payload.get("compare_to"),
             "question": payload.get("question", ""), "videos": payload["videos"],
             "duration_seconds": payload["critic"].get("duration_seconds", payload["original"]["duration_seconds"])}
-    harness = CriticHarness(directory, model or CodexVisionModel(role="online_critic"), root=root)
+    for key in ("requirements", "frozen_critic"):
+        if key in payload:
+            spec[key] = payload[key]
+    if model is None:
+        model = CodexVisionModel(role="online_critic")
+        for key in ("model", "reasoning_effort"):
+            if key in payload["critic"]:
+                setattr(model, key, payload["critic"][key])
+    harness = CriticHarness(directory, model, root=root)
     if (directory / "state.json").exists():
         state = harness.resume()
     else:

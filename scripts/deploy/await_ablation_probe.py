@@ -35,6 +35,8 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--renderer',choices=['bernini','ditto'],required=True)
     p.add_argument('--wait-pid',type=int,required=True)
     p.add_argument('--priority-pair-after-yield',action='store_true')
+    p.add_argument('--after-user-paused-loop',action='store_true',
+                   help='Finish the existing ablation batch after the user pauses the separate legacy loop.')
     p.add_argument('--after-scheduler-pid',type=int);args=p.parse_args()
     if args.after_scheduler_pid:
         subprocess.run(['tail',f'--pid={args.after_scheduler_pid}','-f','/dev/null'],check=True)
@@ -49,7 +51,11 @@ def main():
     loop=ROOT/f'out/loop_probe/20261029_{args.renderer}'
     results=[json.loads(p.read_text(encoding='utf-8')) for p in loop.glob('*/result.json')]
     loop_complete=len(results)==16 and all(r['status']=='complete' for r in results)
-    if args.priority_pair_after_yield:
+    if args.after_user_paused_loop:
+        paused=json.loads((loop/'PAUSED.json').read_text(encoding='utf-8'))
+        assert paused['status']=='paused' and paused['do_not_resume_without_user_request']
+        assert all(r['status']=='complete' for r in results), 'Current loop candidate has not finished cleanly'
+    elif args.priority_pair_after_yield:
         schedule=json.loads((run/'priority-schedule.json').read_text(encoding='utf-8'))
         assert schedule['wait_loop_pid']==args.wait_pid
         assert not (loop/'PAUSED.json').exists() and (loop/'STOP').read_text()==schedule['stop_token']

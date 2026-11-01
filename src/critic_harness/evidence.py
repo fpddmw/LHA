@@ -3,9 +3,12 @@ from __future__ import annotations
 
 import bisect
 import math
+import hashlib
+import json
+import shutil
 from pathlib import Path
 
-from planner_harness.common import sha
+from planner_harness.common import sha, load, save
 
 
 def metadata(path):
@@ -43,8 +46,9 @@ def covered(ranges, interval, tolerance=1e-6):
 
 
 class Evidence:
-    def __init__(self, videos, output):
+    def __init__(self, videos, output, cache=None):
         self.videos, self.output = videos, Path(output)
+        self.cache = Path(cache) if cache else None
 
     def observe(self, identity, videos, start=0, end=None, count=6, dense=False, crop=None):
         import av
@@ -82,6 +86,22 @@ class Evidence:
             directory = self.output / "observations" / identity / video_id
             directory.mkdir(parents=True, exist_ok=True)
             wanted = set(indices)
+            cached = {}
+            if self.cache:
+                for i in indices:
+                    key = hashlib.sha256(json.dumps([info["sha256"], i, crop, "thumbnail-1024-jpeg95-v1"], sort_keys=True).encode()).hexdigest()
+                    cached[i] = self.cache / (key + ".jpg")
+                    receipt = cached[i].with_suffix(".json")
+                    if receipt.exists():
+                        if not cached[i].exists() or sha(cached[i]) != load(receipt)["sha256"]:
+                            raise ValueError("Cached observation changed")
+                        target = directory / f"{i:06d}.jpg"
+                        shutil.copyfile(cached[i], target)
+                        result["frames"].append({"video": video_id, "index": i, "time_seconds": times[i],
+                                                 "path": str(target.resolve()), "sha256": sha(target), "crop": crop})
+                        wanted.remove(i)
+            if not wanted:
+                continue
             with av.open(info["path"]) as container:
                 for i, frame in enumerate(container.decode(video=0)):
                     if i > indices[-1]:
@@ -95,8 +115,13 @@ class Evidence:
                     image.thumbnail((1024, 1024))
                     path = directory / f"{i:06d}.jpg"
                     image.save(path, quality=95)
+                    if self.cache:
+                        self.cache.mkdir(parents=True, exist_ok=True)
+                        shutil.copyfile(path, cached[i])
+                        save(cached[i].with_suffix(".json"), {"sha256": sha(path), "video_sha256": info["sha256"], "index": i, "crop": crop})
                     result["frames"].append({"video": video_id, "index": i, "time_seconds": times[i],
                                              "path": str(path.resolve()), "sha256": sha(path), "crop": crop})
+        result["frames"].sort(key=lambda f: (videos.index(f["video"]), f["index"]))
         result["scope"] += " Cropped evidence applies only to the inspected region." if crop else " Full-frame view."
         return result
 

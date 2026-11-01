@@ -20,6 +20,8 @@ Domain cards provide a thinner kind of knowledge: specialist terminology, the hi
 
 ## Choose reading depth from the question
 
+The [[wiki-map|judgment Wiki]] links contextual concepts, historical experiments and decision experience. Double-bracket references use stable IDs; read results resolve them into available targets. Follow a useful distinction to its full case and inspect linked frames with view_reference when appearance matters. Case images are historical references, distinct from the current task's observations. Definitions and mechanism explanations retain their evidence status and can be revised; recorded outcomes stay fixed. Reading order and depth remain your choice.
+
 If the differences between possible directions are unclear, begin with a guide's comparisons. If a relevant case is already known, open its complete page directly. If a specific usage, duration, or historical conclusion affects a decision, inspect the original record or experiment description. Cross-links state their comparison reasons, helping the reader expand or narrow a question.
 
 For example, “engineering blueprint” may raise a question about how a drawing forms space, or how it represents an activity. The first can lead through [070](entries/opuscar-070.md) into a transformation of visual form. The second can lead through [030](entries/opuscar-030.md) into events that remain on a drawing. Complete material also allows readers to notice relationships beyond the initial search question.
@@ -84,3 +86,28 @@ Reading depth depends on whether the current question has been answered. With a 
 The [experience map](experience/README.md) adds actionable topics for selecting an input, expressing edits, inspecting results and using design knowledge. Their initial common-sense preferences are usable advice, not measured route advantages. Scoped observations remain linked to actual experiments. The model can apply a preference, judge an exception or work beyond the recorded experience. These choices require no eligibility form or fixed workflow.
 
 The stable operating manual explains tools. Reference sources explain meaning and design. Experience topics recommend useful approaches under stated conditions and are the main target of reviewed RSI updates. Run records automatically retain material reads and tool results. A proposed experience change belongs to a separate review process, while the current task continues using its recorded material version.
+
+## Cases, claims and decision guidance
+
+The frozen task card describes what the user asked to achieve, including allowed
+variation and uncertain source relations. Your visual realization remains a design
+choice. If the card appears mistaken, record the source-grounded objection separately.
+
+An experience summary is an entrance to a judgment, not a mandatory action. Follow
+its Wiki links when a distinction matters: what relation carries an effect, what
+information an input still supplies, or how an authored choice obstructs another goal.
+L0 cases record what was actually attempted and observed. L1 evidence claims connect
+conditions and actions to outcomes, with counts, counterexamples and missing evidence.
+L2 skill cards suggest what to consider and link their claims. Definitions can explain
+a distinction without claiming that a particular intervention has proved effective.
+
+A new name for the same image operation may be a wording change; changing its carrier,
+its interaction with surrounding surfaces, a conflicting authored choice, or the input
+can make a different intervention. Resampling and rewording remain available options.
+Describe the actual opportunity rather than inventing a mechanism to justify continuing.
+The renderer's controls determine spatial guarantees; a connected visual field is a
+reasoning focus, not an implicit mask or a promise that other pixels remain unchanged.
+
+Optional card references record declared use. Outcome associations do not establish
+that a card caused success. New evidence produces reviewable revision suggestions;
+the current task keeps its frozen library and evaluation criteria.

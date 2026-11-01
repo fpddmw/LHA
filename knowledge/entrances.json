@@ -1,0 +1,15 @@
+{
+  "meaning": {"use_for": "Understand actions, relationships, object roles, and which aspects of the source a request concerns.", "scope": "Semantic interpretation guidance; it does not guarantee preservation by a renderer."},
+  "design-expression": {"use_for": "Connect a visual idea to concrete materials, regions, and relationships in a proposal.", "scope": "Design guidance and authored examples; example wording is not a validated recipe."},
+  "experience-map": {"use_for": "Find advice about editing inputs, expressing changes, inspecting results, and using design knowledge.", "scope": "Common-sense starting guidance with separately attributed experimental observations."},
+  "theme": {"use_for": "Explore why a visual language suits a subject or activity."},
+  "media": {"use_for": "Compare how line, pigment, paper, light, and other media form an image."},
+  "time": {"use_for": "Explore composition, lighting, camera, and changes over time."},
+  "combination": {"use_for": "Understand relationships that can connect several design directions."},
+  "experience": {"use_for": "Inspect conditions behind historical generation and planning outcomes.", "scope": "Historical systems and configurations; consult original records for applicability."},
+  "choose-editing-input": {"use_for": "Consider an original input, an earlier candidate, or continued editing for the current change.", "scope": "Initial common-sense route preferences; no controlled route advantage has been established."},
+  "express-edits": {"use_for": "Describe a change in relation to the video the renderer will actually receive.", "scope": "Initial expression guidance; text does not guarantee local editing or preservation."},
+  "inspect-and-compare": {"use_for": "Inspect consequential uncertainties and compare candidate tradeoffs.", "scope": "Initial inspection guidance with historical review limitations."},
+  "use-design-knowledge": {"use_for": "Find and adapt design relationships that help answer the current question.", "scope": "Reading and adaptation guidance; no reading quota or measured retrieval advantage."},
+  "bernini-r-20261029": {"use_for": "Inspect the October 29 style-prompt probe and its observed successes and failures.", "scope": "Bernini-R only: four source clips, ten single-generation conditions, seed 42, 40 steps. Transfer to Ditto and multi-round input choice is unverified."}
+}

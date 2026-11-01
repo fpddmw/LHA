@@ -80,6 +80,18 @@ class ContinuousTests(unittest.TestCase):
         self.assertEqual(state["generation_requests"], 1)
         self.assertEqual(self.model.inputs, [])
 
+    def test_run_instructions_survive_resume_without_changing_original_requirement(self):
+        instructions = "Complete three real generations with Critic feedback; choose the input and prompt yourself."
+        self.start([call("generate", input_video="source", prompt="Blue.")], run_instructions=instructions)
+        first = json.loads(self.model.inputs[0]["user_text"])
+        self.assertEqual(first["run_instructions"], instructions)
+        self.assertEqual(first["task"]["text"], "Make the scene blue.")
+        self.respond()
+        self.resume([call("finish", video="v1", message="Scripted fixture ends here.")])
+        resumed = json.loads(self.model.inputs[0]["user_text"])
+        self.assertEqual(resumed["run_instructions"], instructions)
+        self.assertEqual(resumed["task"]["text"], first["task"]["text"])
+
     def test_failed_generation_returns_to_same_planner(self):
         self.start([call("generate", input_video="source", prompt="Blue.")])
         self.respond(failed=True)
@@ -87,6 +99,26 @@ class ContinuousTests(unittest.TestCase):
         self.assertEqual(set(state["videos"]), {"source"})
         self.assertIn("Scripted worker failure", self.model.inputs[0]["user_text"])
         self.assertEqual(state["final"]["outcome"], "stopped_without_video")
+
+    def test_context_deduplicates_feedback_without_losing_findings_or_mutating_history(self):
+        self.start([call("finish", message="Fixture setup")])
+        payload = {"feedback": {"summary": "A unique retained observation.",
+                                "uncertainty": "Fine motion remains unknown."},
+                   "outcome": {"findings": [{"claim": "Visible defect", "evidence": ["frame-1"]}]}}
+        event = {"event_id": "review-result", "status": "ok",
+                 "request": call("tool_result", job_id="review"),
+                 "result": {"status": "complete", "payload": payload}}
+        self.h.state["events"].append(event)
+        self.h.state["evaluations"]["review"] = {"video_id": "v1", **payload}
+        original = json.dumps(self.h.state, sort_keys=True)
+        context = json.loads(self.h.context()[0])
+        reference = context["recent_operations"][-1]["result"]["payload_reference"]
+        restored = context[reference["context_field"]][reference["key"]]
+        self.assertEqual({k:v for k,v in restored.items() if k != "video_id"}, payload)
+        self.assertEqual(json.dumps(self.h.state, sort_keys=True), original)
+        # A similar but nonidentical result must not be discarded.
+        self.h.state["evaluations"]["review"]["extra"] = "Different record"
+        self.assertEqual(json.loads(self.h.context()[0])["recent_operations"][-1]["result"]["payload"], payload)
 
     def test_generation_budget_and_missing_evaluator_are_visible(self):
         state = self.start([call("generate", input_video="source", prompt="Blue."),

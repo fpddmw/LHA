@@ -23,18 +23,29 @@ class PlannerHarness:
         self.state["updated_at"] = stamp()
         save(self.output / "state.json", self.state)
 
-    def start(self, source, request, *, target="unspecified", max_turns=24, max_context_chars=180000, label="",
-              mode="plan", execution=None, max_generations=3, imported=None, feedback_files=None):
+    def start(self, source, request, *, target="unspecified", max_turns=None, max_context_chars=180000, label="",
+              mode="plan", execution=None, max_generations=None, imported=None, feedback_files=None,
+              run_instructions="", rsi=None, completion_mode=None):
         if (self.output / "state.json").exists():
             raise ValueError("Run already exists. Use resume or a new output directory.")
-        if mode not in {"plan", "loop"} or max_generations < 0:
-            raise ValueError("Use plan/loop mode and a nonnegative generation budget")
+        if mode not in {"plan", "loop"}:
+            raise ValueError("Use plan/loop mode")
+        from .delivery import completion_mode as resolve_completion_mode
+        completion_mode = resolve_completion_mode(max_generations, completion_mode)
+        if mode == "plan" and max_turns is None:
+            max_turns = 24
+        if max_turns is not None and (type(max_turns) is not int or max_turns < 0):
+            raise ValueError("Turn limit must be a nonnegative integer or null")
+        if not isinstance(run_instructions, str):
+            raise ValueError("Run instructions must be plain text")
         self.video = Video(source, self.output)
         self.state = {
             "schema_version": 1, "status": "running", "created_at": stamp(), "label": label,
             "request": {"text": request, "source": self.video.info, "target_model": target},
-            "config": {"max_turns": max_turns, "max_context_chars": max_context_chars,
+            "config": {"max_turns": max_turns, "max_context_chars": max_context_chars, "context_version": 2,
                        "mode": mode, "execution": execution or {}, "max_generations": max_generations,
+                       "completion_mode": completion_mode,
+                       "run_instructions": run_instructions,
                        "backend": type(self.model).__name__, "model": getattr(self.model, "model", "unknown"),
                        "reasoning_effort": getattr(self.model, "reasoning_effort", "unknown")},
             "knowledge_manifest_sha256": sha(self.root / "knowledge/source-map.json"),
@@ -48,6 +59,11 @@ class PlannerHarness:
         self.output.mkdir(parents=True, exist_ok=True)
         from .execution import prepare_profile
         self.state["config"]["execution"] = prepare_profile(execution, self.root, self.state["request"])
+        if rsi is not None and rsi is not False:
+            if mode != "loop":
+                raise ValueError("RSI is enabled only for continuous loop tasks")
+            from .rsi_support import configure
+            configure(self, rsi)
         self.knowledge.freeze(self.output / "knowledge-snapshot.json")
         self.state["knowledge_snapshot_sha256"] = sha(self.output / "knowledge-snapshot.json")
         operations = (Path(__file__).parent / "OPERATIONS.md").read_text(encoding="utf-8")
@@ -56,6 +72,8 @@ class PlannerHarness:
         if self.state["config"]["execution"].get("critic") or feedback_files:
             from critic_harness.adapter import PLANNER_MANUAL
             self.system += "\n\n" + PLANNER_MANUAL
+        if self.state["config"].get("rsi"):
+            self.system += "\n\n" + (Path(__file__).parent / "RSI.md").read_text(encoding="utf-8")
         (self.output / "system-prompt.txt").write_text(self.system, encoding="utf-8")
         self.state["system_prompt_sha256"] = sha(self.output / "system-prompt.txt")
         overview = self.video.observe("overview")
@@ -82,9 +100,11 @@ class PlannerHarness:
         self.checkpoint()
         return self.run()
 
-    def resume(self, *, additional_turns=0, execution=None):
+    def resume(self, *, additional_turns=0, execution=None, continue_delivery=False):
         self.state = load(self.output / "state.json")
-        if self.state["status"] == "complete":
+        from .task_criteria import verify_state
+        verify_state(self.state)
+        if self.state["status"] == "complete" and not continue_delivery:
             return self.state
         config = self.state["config"]
         if getattr(self.model, "model", "unknown") != config["model"] or getattr(self.model, "reasoning_effort", "unknown") != config["reasoning_effort"] or type(self.model).__name__ != config["backend"]:
@@ -105,6 +125,8 @@ class PlannerHarness:
             from .execution import prepare_profile
             profile = prepare_profile(execution, self.root, self.state["request"])
             if profile != config.get("execution"):
+                if config.get("rsi"):
+                    raise ValueError("RSI execution profiles are frozen; start a new run to change them")
                 event = {"event_id": "runtime-config-" + str(len(self.state["events"]) + 1), "at": stamp(), "status": "ok",
                          "request": {"action": "configure_execution", "origin": "operator CLI"},
                          "result": {"previous": config.get("execution"), "next": profile,
@@ -112,15 +134,54 @@ class PlannerHarness:
                 self.state["events"].append(event)
                 save(self.output / "events" / (event["event_id"] + ".json"), event)
                 config["execution"] = profile
-        self.state["config"]["max_turns"] += max(0, int(additional_turns))
+        if continue_delivery:
+            if (self.output / "validation-binding.json").exists():
+                raise ValueError("Keep a frozen validation run unchanged")
+            from .delivery import continue_budget_stop
+            continue_budget_stop(self.state)
+            self.state["delivery_continuations"][-1].update(at=stamp(), runtime_sources={
+                p.name: sha(p) for p in Path(__file__).parent.iterdir() if p.suffix in {".py", ".md"}})
+        if self.state["config"]["max_turns"] is not None:
+            self.state["config"]["max_turns"] += max(0, int(additional_turns))
+        if self.state.get("final") and self.state["status"] != "complete":
+            self.state.setdefault("interruption_history", []).append(self.state.pop("final"))
+            save(self.output / "interruptions" / f"{len(self.state['interruption_history']):04d}.json", self.state["interruption_history"][-1])
+            (self.output / "final.json").unlink(missing_ok=True)
         self.state["status"] = "running"
         self.checkpoint()
         return self.run()
 
     def context(self):
+        text, images, mapping = self._legacy_context()
+        if self.state["config"].get("context_version", 1) < 2:
+            return text, images, mapping
+        from .context import attachments, present
+        payload = present(json.loads(text), self.state, self.knowledge)
+        images, mapping = attachments(self.state)
+        payload["attached_images_in_order"] = mapping
+        if self.state["config"].get("rsi"):
+            from .rsi_support import context
+            payload = context(self, payload)
+        return json.dumps(payload, ensure_ascii=False, indent=2), images, mapping
+
+    def _legacy_context(self):
         events = self.state["events"]
         # Complete logs stay on disk. The archive index makes context selection explicit.
-        recent = events[-10:]
+        recent = copy.deepcopy(events[-10:])
+        evaluations = self.state.get("evaluations", {})
+        for event in recent:
+            request = event.get("request", {})
+            job_id = request.get("arguments", {}).get("job_id")
+            result = event.get("result", {})
+            evaluation = evaluations.get(job_id)
+            if request.get("action") == "tool_result" and result.get("status") == "complete" and evaluation is not None:
+                payload = result.get("payload")
+                # Inline every evaluation once, without shortening any finding.
+                # Only exact duplicates are replaced; unusual responses stay whole.
+                if isinstance(payload, dict) and evaluation == {"video_id": evaluation.get("video_id"), **payload}:
+                    result.pop("payload")
+                    result["payload_reference"] = {"context_field": "evaluations", "key": job_id,
+                        "note": "The complete returned payload is present there; video_id is added by collection."}
         archived = [{"event_id": e["event_id"], "action": e.get("request", {}).get("action"),
                      "purpose": e.get("request", {}).get("purpose"), "result_status": e["status"],
                      "restore": {"action": "history", "arguments": {"event_id": e["event_id"]}}} for e in events[:-10]]
@@ -132,24 +193,27 @@ class PlannerHarness:
                 if frame["path"] not in images:
                     images.append(frame["path"])
                     mapping.append({"attachment": len(images), "observation_id": observation["observation_id"], **frame})
-        if self.state.get("reference_image"):
-            reference = self.state["reference_image"]
+        for reference in self.state.get("reference_images", [self.state["reference_image"]] if self.state.get("reference_image") else []):
             images.append(reference["path"])
             mapping.append({"attachment": len(images), "kind": "knowledge reference, not source-video evidence", **reference})
         payload = {"task": self.state["request"], "workspace": self.state["workspace"],
                    "mode": self.state["config"].get("mode", "plan"), "notes": self.state.get("notes", ""),
                    "videos": {k: {key: value for key, value in v.items() if key not in {"execution"}}
                               for k, v in self.state.get("videos", {}).items()},
-                   "evaluations": self.state.get("evaluations", {}),
+                   "evaluations": evaluations,
                    "execution_profile": {key: ({k: v for k, v in value.items() if k != "card_data"} if key == "evaluation" else value)
                                          for key, value in self.state["config"].get("execution", {}).items()},
                    "knowledge_entrances": self.knowledge.browse(), "read_receipts": self.state["reads"],
                    "attached_images_in_order": mapping, "recent_operations": recent,
                    "archived_operation_index": archived,
-                   "context_policy": "Latest 10 operation results are present in full; older results can be restored with history. Initial overview and latest observation images are attached. All original exchanges are retained on disk.",
+                   "context_policy": "Latest 10 operation results are present. Exact duplicate evaluation payloads reference the complete evaluations entry in this same context; no feedback is shortened. Older results can be restored with history. Initial overview and latest observation images are attached. All original exchanges are retained on disk.",
                    "resource_status": {"turns_used": self.state["attempts"], "turn_limit": self.state["config"]["max_turns"],
                                        "generation_requests": self.state.get("generation_requests", 0),
-                                       "generation_limit": self.state["config"].get("max_generations", 0)}}
+                                       "generation_limit": self.state["config"].get("max_generations"),
+                                       "completion_mode": self.state["config"].get("completion_mode", "bounded_experiment"),
+                                       "limit_meaning": "A null limit has no fixed count. In delivery mode, resource exhaustion leaves the task incomplete."}}
+        if self.state["config"].get("run_instructions"):
+            payload["run_instructions"] = self.state["config"]["run_instructions"]
         video_labels = {o["observation_id"]: o.get("video_id", "source") for o in observations}
         for item in mapping:
             if "observation_id" in item:
@@ -190,6 +254,8 @@ class PlannerHarness:
         action, args = response.get("action", response.get("tool")), response.get("arguments", {})
         if not isinstance(args, dict):
             raise ValueError("arguments must be an object")
+        if "note" in response:
+            self.remember(response["note"])
         if "workspace" in response:
             self.update_workspace(response["workspace"])
         if action == "browse":
@@ -213,36 +279,39 @@ class PlannerHarness:
                     results.append({"target": target, "error": str(exc)})
             return {"materials": results}
         if action == "observe":
-            args = dict(args)
-            identity = args.pop("video", args.pop("video_id", "source"))
-            info = self.state.get("videos", {"source": self.video.info}).get(identity)
-            if info is None:
-                raise ValueError("Unknown video ID")
-            if sha(info["path"]) != info["sha256"]:
-                raise ValueError("Task video changed")
-            result = Video(info["path"], self.output).observe(event_id, **args)
-            result.update(video_id=identity, scope="Sampled frames from " + identity + "; precise motion needs suitable temporal evidence.")
-            self.state["observations"].append(result)
-            return result
+            return self.observe(args, event_id)
         if action == "view_reference":
-            row, path = self.knowledge.resolve(args["id"])
-            if path.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
-                raise ValueError("Reference must be an indexed image")
-            self.state["reference_image"] = {"id": row["id"], "path": str(path), "sha256": sha(path)}
-            return self.state["reference_image"]
+            references = self.knowledge.references(args["id"])
+            self.state["reference_images"] = references
+            self.state["reference_image"] = references[-1]
+            return references[0] if len(references) == 1 else {"images": references}
         if action == "workspace":
             return {"saved": True, "workspace": self.state["workspace"]}
         if action == "note":
-            text = args.get("text", "")
-            if not isinstance(text, str) or re.search(r"[\u3400-\u9fff]", text):
-                raise ValueError("Write notes in English")
-            self.state["notes"] = (self.state.get("notes", "") + "\n" + text).strip() if args.get("append", True) else text
+            self.remember(args.get("text", ""), append=args.get("append", True))
             return {"saved": True}
+        if action == "lesson":
+            self.remember(args.get("text", ""), append=args.get("append", True))
+            return {"saved": True, "scope": "Optional task-local working judgment"}
+        if action == "requirements":
+            if not self.state["config"].get("rsi"):
+                raise ValueError("Requirements operation needs an RSI run")
+            from .ledger import set_requirements
+            return set_requirements(self.state, args.get("items"), args.get("reason", ""))
         if action == "video":
             identity = args.get("id", "source")
             if identity not in self.state.get("videos", {}):
                 raise ValueError("Unknown video ID")
             return self.state["videos"][identity]
+        if action == "criteria_objection":
+            from .task_criteria import objection
+            return objection(self.state, args.get("text"), args.get("evidence"))
+        if action == "delivery_candidate":
+            identity = args.get("id", "source")
+            if identity not in self.state.get("videos", {}):
+                raise ValueError("Unknown video ID")
+            self.state["delivery_candidate"] = identity
+            return {"video": identity, "scope": "Current intended delivery; does not select render input or finish the task"}
         if action in {"generate", "evaluate", "critique"}:
             from .execution import request_job
             return request_job(self, action, args, event_id)
@@ -254,11 +323,35 @@ class PlannerHarness:
                 raise ValueError("Choose an existing video ID, or omit it when no result is ready")
             if re.search(r"[\u3400-\u9fff]", json.dumps(args, ensure_ascii=False)):
                 raise ValueError("Use English for working output")
-            self.state.update(status="complete", final={"video": identity, "message": args.get("message", ""),
-                                                       "outcome": "selected_video" if identity else "stopped_without_video"})
+            reason = args.get("stop_reason", "satisfied" if identity not in {None, "source"} else "no_promising_attempt")
+            extra = {"stop_reason": reason}
+            if self.state["config"].get("rsi"):
+                from .ledger import build
+                if args.get("stop_reason") not in {"satisfied", "no_promising_attempt", "budget", "execution_failure"}:
+                    raise ValueError("RSI finish needs stop_reason: satisfied/no_promising_attempt/budget/execution_failure")
+                memory = build(self.state)
+                rows = memory.get("candidates", {}).get(identity, {}).get("verdicts", {})
+                unmet = [r["id"] for r in self.state.get("requirements", {}).get("items", []) if rows.get(r["id"], "unknown") != "pass"]
+                extra = {"stop_reason": args["stop_reason"], "unmet": unmet,
+                         "delivery_status": "budget_limited" if args["stop_reason"] == "budget" else
+                            "execution_failed" if args["stop_reason"] == "execution_failure" else
+                            "selected_with_unresolved_requirements" if unmet else "criteria_satisfied",
+                         "added_requirement_suggestions": memory.get("candidates", {}).get(identity, {}).get("added_requirements", []),
+                         "scope": "Planner stop reason; measured unresolved items are retained separately."}
+            from .delivery import finish_status
+            status = finish_status(self.state, reason, identity)
+            self.state.update(status=status, final={"video": identity, "message": args.get("message", ""),
+                                                       "outcome": "selected_video" if identity else "stopped_without_video", **extra})
             save(self.output / "final.json", self.state["final"])
             return self.state["final"]
         if action == "history":
+            if "feedback" in args:
+                if "event_id" in args:
+                    raise ValueError("Choose feedback or event_id")
+                feedback = self.state.get("evaluations", {}).get(args["feedback"])
+                if feedback is None:
+                    raise ValueError("Unknown feedback ID")
+                return page(json.dumps(feedback, ensure_ascii=False, indent=2), args.get("start_line", 1))
             matches = [e for e in self.state["events"] if e["event_id"] == args.get("event_id")]
             if not matches:
                 raise ValueError("Unknown event ID")
@@ -266,6 +359,49 @@ class PlannerHarness:
         if action == "submit":
             return self.submit(args)
         raise ValueError(f"Unknown operation: {action}")
+
+    def remember(self, text, append=True):
+        if not isinstance(text, str) or re.search(r"[\u3400-\u9fff]", text):
+            raise ValueError("Write notes in English")
+        self.state["notes"] = (self.state.get("notes", "") + "\n" + text).strip() if append else text
+
+    def observe(self, arguments, event_id):
+        args = dict(arguments)
+        if "observation" in args:
+            requested = args.pop("observation")
+            if args:
+                raise ValueError("Reopen an observation without changing its sampling arguments")
+            ids = requested if isinstance(requested, list) else [requested]
+            lookup = {o["observation_id"]: o for o in self.state["observations"]}
+            if not 1 <= len(ids) <= 4 or any(not isinstance(i, str) or i not in lookup for i in ids):
+                raise ValueError("Choose 1 to 4 recorded observation IDs")
+            results = [lookup[i] for i in dict.fromkeys(ids)]
+            for result in results:
+                if any(sha(f["path"]) != f["sha256"] for f in result["frames"]):
+                    raise ValueError("Recorded observation changed")
+        else:
+            requested = args.pop("video", args.pop("video_id", "source"))
+            ids = requested if isinstance(requested, list) else [requested]
+            videos = self.state.get("videos", {"source": self.video.info})
+            if not 1 <= len(ids) <= 4 or any(not isinstance(i, str) or i not in videos for i in ids):
+                raise ValueError("Choose 1 to 4 available video IDs")
+            ids = list(dict.fromkeys(ids))
+            for identity in ids:
+                if sha(videos[identity]["path"]) != videos[identity]["sha256"]:
+                    raise ValueError("Task video changed")
+            results = []
+            for index, identity in enumerate(ids):
+                observation_id = event_id if len(ids) == 1 else f"{event_id}-{index + 1}"
+                result = Video(videos[identity]["path"], self.output).observe(observation_id, **args)
+                result.update(video_id=identity, scope="Sampled frames from " + identity + "; precise motion needs suitable temporal evidence.")
+                results.append(result)
+            self.state["observations"].extend(results)
+        self.state["observation_focus"] = {"ids": [r["observation_id"] for r in results],
+                                           "observations_count": len(self.state["observations"])}
+        if len(results) == 1:
+            return results[0]
+        return {"observations": results,
+                "scope": "Sampled comparisons at each video's own timestamps; matching times do not establish motion alignment."}
 
     def submit(self, proposal):
         proposal = {"understanding": "", "proposal": "", "self_review": "", "sources": [], "unresolved": [], **proposal}
@@ -307,7 +443,11 @@ class PlannerHarness:
                 if not collect(self):
                     self.state["status"] = "waiting_tool"
                     return self.state
-            while self.state["status"] == "running" and (self.state.get("pending_event") or self.state["attempts"] < self.state["config"]["max_turns"]):
+            if self.state["config"].get("rsi"):
+                from .rsi_support import auto_review
+                if auto_review(self):
+                    return self.state
+            while self.state["status"] == "running" and (self.state.get("pending_event") or self.state["config"]["max_turns"] is None or self.state["attempts"] < self.state["config"]["max_turns"]):
                 if self.state.get("pending_event"):
                     event_id = self.state["pending_event"]
                     call_dir = self.output / "calls" / event_id
@@ -326,6 +466,8 @@ class PlannerHarness:
                     event_id = f"event-{self.state['attempts']:04d}"
                     call_dir = self.output / "calls" / event_id
                     save(call_dir / "input.json", {"system_prompt": self.system, "user_text": user_text, "images": mapping, "created_at": stamp()})
+                    if self.state["config"].get("rsi"):
+                        save(call_dir / "decision-state.json", self.state)
                     self.state["pending_event"] = event_id
                     self.checkpoint()
                 print(f"[{self.output.name}] {event_id}: model call, {len(images)} images", flush=True)
@@ -334,7 +476,11 @@ class PlannerHarness:
                     if raw_path.exists():
                         raw = raw_path.read_text(encoding="utf-8")
                     else:
-                        raw = self.model.predict_text(system_prompt=self.system, user_text=user_text, image_paths=images, max_new_tokens=7000)
+                        if self.state["config"].get("rsi"):
+                            from .rsi_calls import call_once
+                            raw = call_once(call_dir, self.model, self.system, user_text, images)
+                        else:
+                            raw = self.model.predict_text(system_prompt=self.system, user_text=user_text, image_paths=images, max_new_tokens=7000)
                         raw_path.write_text(raw, encoding="utf-8")
                     # Strict response parsing keeps malformed actions visible for correction.
                     try:

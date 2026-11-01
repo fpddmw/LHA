@@ -1,3 +1,4 @@
 # Add to the existing model-client environment; no GPU evaluator is required.
 -r requirements.planner.txt
-av==19.0.2
+av==19.0.2; python_version >= "3.12"
+av==15.1.0; python_version < "3.12"

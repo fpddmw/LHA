@@ -90,6 +90,10 @@ def overview(base, results):
         elif result.get('final'):
             parts += ['<h3>Planner decision</h3><pre>'+esc(json.dumps(result['final'],ensure_ascii=False,indent=2))+'</pre>']
         parts += ['<details><summary>Complete continuation record</summary><pre>'+esc(json.dumps(result,ensure_ascii=False,indent=2))+'</pre></details>']
+    review=base/'review-notes.json'
+    if review.exists():
+        parts += ['<h2>Review and calibration limits</h2><p>The original model judgments remain intact. These notes identify boundaries for interpretation and further calibration.</p><pre>'+esc(json.dumps(load(review),ensure_ascii=False,indent=2))+'</pre>']
+    parts += ['<p><a href="verification.json">Implementation checks</a> · <a href="isolation-check.json">Formal-evaluation isolation check</a> · <a href="revision.json">Visual-memory repair and preserved initial run</a></p>']
     (base/'report.html').write_text('\n'.join(parts),encoding='utf-8')
 
 

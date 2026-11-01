@@ -46,7 +46,12 @@ def report(output):
     prompt_records = [{"job_id": job["id"], "input_video": job["payload"]["input_id"],
                        "prompt": job["payload"]["prompt"]} for job in state.get("jobs", {}).values() if job["kind"] == "generate"]
     if prompt_records:
+        if state["config"].get("rsi"):
+            for row in prompt_records:
+                row["intent"] = state["jobs"][row["job_id"]]["payload"].get("intent")
         lines += ["## Exact generation requests", "", "```json", json.dumps(prompt_records, ensure_ascii=False, indent=2), "```", ""]
+    if state["config"].get("rsi"):
+        lines += ["## Task learning ledger", "", "```json", json.dumps(state.get("task_memory", {}), ensure_ascii=False, indent=2), "```", ""]
     for field, title in [("understanding", "Final understanding"), ("proposal", "Selected visual proposal"), ("prompt", "Exact English prompt prepared for execution"), ("self_review", "Model's submission review")]:
         lines += ["## " + title, "", proposal.get(field, "No accepted submission yet."), ""]
     lines += ["## Knowledge used in the submitted proposal", "", "```json", json.dumps(proposal.get("sources", []), ensure_ascii=False, indent=2), "```", "",
@@ -68,6 +73,8 @@ def report(output):
     if continuous and not proposal:
         sections = ""
     sections += "<h2>Exact generation requests</h2><pre>" + html.escape(json.dumps(prompt_records, ensure_ascii=False, indent=2)) + "</pre>" if prompt_records else ""
+    if state["config"].get("rsi"):
+        sections += "<h2>Task learning ledger</h2><pre>" + html.escape(json.dumps(state.get("task_memory", {}), ensure_ascii=False, indent=2)) + "</pre>"
     body = f'''<!doctype html><html lang="en"><meta charset="utf-8"><title>Planner run</title>
 <style>body{{font:16px system-ui;max-width:1200px;margin:35px auto;padding:0 20px;background:#f6f7f9;color:#172331}}h1,h2{{color:#123b56}}pre{{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:16px;border-radius:8px}}.frames{{display:flex;flex-wrap:wrap;gap:12px}}figure{{margin:0;max-width:360px}}img{{width:100%;border-radius:6px}}figcaption{{font-size:13px}}details{{background:white;margin:10px 0;padding:14px;border-radius:8px}}summary{{cursor:pointer;font-weight:600}}</style>
 <h1>Planner run: {html.escape(output.name)}</h1><p>Status: <b>{html.escape(state['status'])}</b>. {html.escape(boundary)}</p>

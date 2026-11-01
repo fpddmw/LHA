@@ -44,3 +44,13 @@ Use existing 041 storybook and table-tennis station videos with exact original r
 - Record protected evaluation-file hashes before and after; attribute concurrent external changes rather than overwrite them.
 - Run real model reviews sequentially to limit contention with the separate formal evaluator. Preserve failed attempts and uncertainty. Review actual evidence for important claims; keep original model reports intact.
 - Deliver a combined report linking media, observation trace, guidance/knowledge reads, feedback and Planner decisions. State supported conclusions and remaining calibration limitations. No automatic publication of new empirical skill rules.
+
+## Implementation and validation outcome
+
+Implemented the independent Critic, PTS/crop/continuous observations, frozen guidance and knowledge, signed feedback, opt-in durable Planner integration and existing-feedback import. The frozen formal evaluator path remains unchanged. Thirty-four distinct automated checks passed across the Critic, existing Planner, continuous Planner and worker suites.
+
+An initial live run exposed loss of earlier visual observations between independent model calls. The revised harness retains original overviews and model-authored observation notes linked to their evidence. The original trace remains in `out/critic_harness/20261030`; the completed revised demonstrations are in `out/critic_harness/20261030_v2` with a frozen runtime snapshot.
+
+Real revised runs used 12 Critic calls and 3 Planner calls. 041 produced a localized refinement proposal using the second edit as input. Table tennis produced an original-source regeneration proposal after the Planner read input-selection and edit-expression experience. Both are saved proposals; zero new videos were generated. Twenty-one protected formal-evaluation files remained byte-identical.
+
+The demonstrations establish observation/feedback/decision integration, not improved next-round video quality. Full-clip motion remains unresolved where continuous inspection was local. Manual review also found calibration issues in grouping incidental notebook details with core preservation, and combining uncertain exact ball trajectory with a partial label. Raw model judgments remain intact; case review notes document these boundaries. Focused guideline clarifications were added after the frozen demonstration; their future behavioral effect has not been measured. Formal cards and scores were not changed.

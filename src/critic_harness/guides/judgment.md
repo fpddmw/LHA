@@ -10,7 +10,11 @@ Recognize entities, roles, relations and events before interpreting small drawin
 
 For 041, distinguish writing continuing, tool-to-page contact, tool category, binding structure and the relation between notebook and separate sheet. Incidental binding detail normally remains a detail; an explicit user demand can elevate it. If the notebook remains but its binding moves, describe that exact partial preservation. If a separate sheet becomes an attached page, describe the lost two-object relation. If the boundary cannot be established, use unknown. These examples define questions, not labels for unseen outputs.
 
+Split findings that mix a key activity with incidental prop geometry or markings. If writing and tool-to-page relations remain intact, altered binding or missing ink marks alone do not establish a core-action failure for a generic storybook request. Importance follows the component actually affected. Verify material categories from the source; when a loose light-colored surface could be paper or cloth, its separate-object relationship may be clearer than its material identity.
+
 For table tennis, distinguish player identity, sides, paddles, table/net relations and movement. A space-station setting does not compensate for a failed explicit face-preservation request. A ball missing in a sparse frame may be occluded, between samples or unresolved; inspect corresponding source/output intervals before diagnosing a disappearance or changed trajectory.
+
+Partial attainment needs a supported fulfilled component and a supported shortfall. An unresolved component alone does not establish partial failure. For example, visible candidate-to-input ball positions may correspond while exact source trajectory is unknown. Report those as separate claims; do not turn trajectory uncertainty into a half-failure. A clearly observed visibility loss can be reported separately with its time and scope.
 
 ## Style and aesthetic quality
 

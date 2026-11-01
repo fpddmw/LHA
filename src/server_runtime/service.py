@@ -72,8 +72,10 @@ class Service:
         source = (self.root / task["source"]).resolve()
         if sha(source) != task["source_sha256"]:
             raise ValueError("Source hash mismatch")
-        if not task.get("request") or task.get("max_generations", 3) < 0:
-            raise ValueError("Task request and generation budget required")
+        if not task.get("request"):
+            raise ValueError("Task request required")
+        from planner_harness.delivery import completion_mode
+        task["completion_mode"] = completion_mode(task.get("max_generations"), task.get("completion_mode"))
         execution = task.get("execution", {})
         if "renderer" not in execution:
             raise ValueError("Task requires an explicit renderer profile")
@@ -142,8 +144,10 @@ class Service:
                         raise ValueError("Task source changed before planning")
                     state = harness.start(task["source"], task["request"], mode="loop",
                         target=task["execution"].get("renderer", {}).get("backend", "unspecified"),
-                        execution=task["execution"], max_turns=task.get("max_turns", 24),
-                        max_context_chars=task.get("max_context_chars", 180000), max_generations=task.get("max_generations", 3))
+                        execution=task["execution"], max_turns=task.get("max_turns"),
+                        max_context_chars=task.get("max_context_chars", 180000), max_generations=task.get("max_generations"),
+                        completion_mode=task.get("completion_mode"),
+                        run_instructions=task.get("run_instructions", ""), rsi=task.get("rsi"))
             snapshot = directory / "planner-state.json"
             save(snapshot, state)
             return {"state": state, "artifacts": [artifact(snapshot)]}
@@ -164,9 +168,14 @@ class Service:
                     response = {"request_sha256": request["sha256"], "mode": request["mode"], "status": "complete"}
                     try:
                         if request["kind"] == "generate":
+                            started = path.with_name("render-started.json")
+                            if started.exists():
+                                from planner_harness.rsi_remote import UncertainRender
+                                raise UncertainRender("A render was already dispatched; recover its receipt before retrying")
                             if self.renderer is None:
                                 from .renderers import PersistentRenderer
                                 self.renderer = PersistentRenderer(self.root, self.config["renderer"], self.directory / "gpu")
+                            save(started, {"request_sha256": request["sha256"], "seed": request["payload"].get("renderer", {}).get("seed")})
                             response["payload"] = self.renderer(request, path.parent)
                         elif request["kind"] == "critique":
                             from critic_harness.adapter import critique
@@ -180,6 +189,8 @@ class Service:
                     except Exception as exc:
                         # A definite tool failure is evidence for the Planner, charged to its existing action.
                         response.update(status="failed", error=f"{type(exc).__name__}: {exc}")
+                        if getattr(exc, "outcome_unknown", False):
+                            response["outcome_unknown"] = True
                     save(response_path, response)
             artifacts = [artifact(response_path)]
             if request["kind"] == "generate" and response["status"] == "complete":

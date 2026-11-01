@@ -59,6 +59,14 @@ def main():
     baseline = {m:read(ROOT/f'out/prompt_probe/20261029_{m}/cases.json') for m in ['bernini','ditto']}
     mapping_bases = {c['sample_id']:c for c in baseline['ditto']['cases']}
     tasks, rows, process, cache = {}, [], [], {}
+    loop_states = {}
+    for model in ['bernini', 'ditto']:
+        run = ROOT/f'out/loop_probe/20261029_{model}'
+        loop_states[model] = {
+            'paused_by_user': (run/'PAUSED.json').exists(),
+            'online_control_complete': (run/'online-loop-complete.json').exists(),
+            'pause_record': rel(run/'PAUSED.json') if (run/'PAUSED.json').exists() else None,
+        }
 
     def task_for(sid, track):
         task_id = sid+'__'+track
@@ -85,12 +93,15 @@ def main():
         result=read(directory/'result.json') if (directory/'result.json').exists() else {}
         native=directory/'native.mp4'
         available=result.get('status')=='complete' and native.exists()
+        status = 'available' if available else result.get('status', 'pending_generation')
+        if stage == 'loop' and loop_states[model]['paused_by_user'] and status in ['pending_generation', 'pending', 'queued']:
+            status = 'paused_not_generated'
         row={'case_id':cid,'model':model,'stage':stage,'source_id':sid,'task_id':task['task_id'],
              'track':track,'method':model+'__'+(route if stage=='loop' else stage+'_'+name.split('__')[-1]),
              'seed':seed,'route':route,'round':round_n,'output_video':rel(native),
              'mapping':rel(dest/'mappings'/(cid+'.json')),
              'card':task['card'] or rel(dest/'cards'/(task['task_id']+'.card.json')),
-             'card_ready':bool(task['card']), 'status':'available' if available else result.get('status','pending_generation'),
+             'card_ready':bool(task['card']), 'status':status,
              'development_exposed':True}
         if available:
             info=media(native,cache)
@@ -153,18 +164,23 @@ def main():
     save(dest/'baseline-planner.manifest.template.json',{'cases':minimal([r for r in rows if r['stage'] in ['baseline','planner']])})
     save(dest/'loop.manifest.template.json',{'cases':minimal([r for r in rows if r['stage'].startswith('loop')])})
     save(dest/'process_records.DO_NOT_FEED_TO_FINAL_JUDGE.json',{'records':process})
+    generating_continues = any(
+        r['stage'] == 'loop' and r['status'] in ['pending_generation', 'pending', 'queued', 'running']
+        and not loop_states[r['model']]['paused_by_user'] for r in rows)
     summary={'snapshot_utc':stamp,'root_windows':str(ROOT),'root_wsl':'/home/fpddmw/projects/LHA',
         'protocol':'lha-evaluation-v1','planned_case_entries':len(rows),'available_case_entries':len(available),
         'unique_generated_videos_local':len(unique),'original_videos':4,'ready_with_frozen_cards':len(ready),
         'task_cards_missing':[t['task_id'] for t in tasks.values() if not t['card']],
         'loop_complete_local':{m:sum(r['status']=='available' and r['stage']=='loop' and r['model']==m for r in rows)
                                for m in ['bernini','ditto']},
-        'generating_continues':True,'final_judgments_created':False}
+        'loop_states':loop_states,
+        'paused_not_generated':sum(r['status']=='paused_not_generated' for r in rows),
+        'generating_continues':generating_continues,'final_judgments_created':False}
     save(dest/'summary.json',summary)
     lines=['# 本地视频评价交接','',
         f'快照 UTC：{stamp}。本目录只准备媒体与对应关系，没有调用正式评价器。',
         f'本地已有 **{len(unique)} 条不同的生成视频＋4 条原片**；可评价条目 {len(available)} 个，其中包含4个复用的 loop 首轮入口。',
-        '基线20条、Planner8条已完整；loop仍在生成。目录内清单是固定快照，后续新结果生成新快照。视频引用仓库内已有本地文件，无须再连服务器。','',
+        '基线20条、Planner8条已完整。旧loop状态见summary.json：用户暂停后未执行项保留为paused_not_generated；已完成输出继续保留。目录内清单是固定快照，视频引用仓库内已有本地文件，无须再连服务器。','',
         '## 直接接手','',
         '- `index.html`：查看所有已回传视频与生成状态。',
         '- `tasks.json`：6个原始任务入口、源视频和原始用户指令。',
@@ -172,7 +188,7 @@ def main():
         '- `evaluate.available-with-frozen-cards.json`：已有冻结卡且视频完整的条目，可交新版CLI评价；这是阶段性可用子集，不是最终全量统计清单。',
         '- `baseline-planner.manifest.template.json`：完整28条基线/Planner计划。',
         '- `loop.manifest.template.json`：完整36个loop条目，包括4个复用首轮和32条新生成计划。',
-        '- `all_cases.json`：上述完整64个计划条目及各自状态。未完成项保留pending/running，当前不可将它们记为生成失败。','',
+        '- `all_cases.json`：上述完整64个计划条目及各自状态。暂停而未执行的计划不记为生成失败。','',
         '## 评价接口和边界','',
         '路径全部相对仓库根目录。入口 `scripts/eval/evaluate_benchmark.py`，规范 `docs/evaluation-protocol.md`。',
         '现成冻结卡：041短、041长。其余任务卡尚需评价session基于原片和原始指令审阅并冻结：'+', '.join(summary['task_cards_missing'])+'。模板中的 cards 路径是明确占位，未虚构已审定标签。',
@@ -183,13 +199,13 @@ def main():
         'shared_r1是同一物理视频的复用入口；统计以源视频聚类，不能把复用、多帧或多个seed当独立视频样本。','',
         '## 过程诊断另存','',
         '`process_records.DO_NOT_FEED_TO_FINAL_JUDGE.json` 保存生成提示词、真实输入、参数、在线接受记录和耗时。独立最终judge仅使用原始要求、冻结卡与视频证据，不读取本文件、Planner扩写、旧评分或在线critic。',
-        'loop在线critic继续供后续生成使用；本会话自动最终复核已关闭，正式评价交给另一个session。',
+        '在线critic和选择记录仅供历史过程诊断；旧loop的后续生成与评价按用户安排暂停，正式评价交给另一个session。',
         '本目录没有预测质量分数、生成新的标准视频或改变评价协议。','']
     (dest/'README.md').write_text('\n'.join(lines),encoding='utf-8')
     import os
     link=lambda p:quote(os.path.relpath(p,dest).replace('\\','/'))
     page='<html lang="zh"><meta charset="utf-8"><title>本地评价交接</title><style>body{font:16px/1.6 system-ui;max-width:1200px;margin:24px auto;padding:0 16px}article{border:1px solid #ccc;padding:12px;margin:12px 0}video{width:440px;max-width:100%}code{word-break:break-all}</style>'
-    page+='<h1>本地评价交接</h1><p>固定快照 '+escape(stamp)+'；仅交接媒体，未打分。生成中的loop后续另出快照。</p><p><a href="README.md">交接说明</a> · <a href="available_cases.json">可用清单</a></p>'
+    page+='<h1>本地评价交接</h1><p>固定快照 '+escape(stamp)+'；仅交接媒体，未打分。已完成与暂停未执行条目分别保留。</p><p><a href="README.md">交接说明</a> · <a href="available_cases.json">可用清单</a></p>'
     for task in tasks.values():
         page+='<h2>'+escape(task['task_id'])+'</h2><p>'+escape(task['requirement'])+'</p>'
         page+='<details><summary>原视频</summary><video controls muted preload="metadata" src="'+link(ROOT/task['source_video'])+'"></video></details>'

@@ -51,12 +51,19 @@ class CriticHarness:
         self.output.mkdir(parents=True, exist_ok=True)
         package = Path(__file__).parent
         materials = {p.relative_to(package).as_posix(): p.read_text(encoding="utf-8") for p in package.rglob("*.md")}
+        frozen = spec.get("frozen_critic")
+        if frozen:
+            if sha(frozen["instructions"]) != frozen["instructions_sha256"] or sha(frozen["knowledge"]) != frozen["knowledge_sha256"]:
+                raise ValueError("Frozen task Critic material changed")
+            materials = load(frozen["instructions"])
         save(self.output / "instructions.json", materials)
         self.system = materials["OPERATIONS.md"]
-        self.knowledge = Knowledge(self.root)
+        if spec.get("requirements"):
+            self.system += "\n\n" + materials["RSI.md"]
+        self.knowledge = Knowledge(self.root, frozen["knowledge"] if frozen else None)
         self.knowledge.freeze(self.output / "knowledge-snapshot.json")
         self.knowledge = Knowledge(self.root, self.output / "knowledge-snapshot.json")
-        self.state = {"protocol": "lha-online-critic-v1", "status": "running", "created_at": stamp(), "spec": spec,
+        self.state = {"protocol": "lha-online-critic-rsi-v1" if spec.get("requirements") else "lha-online-critic-v1", "status": "running", "created_at": stamp(), "spec": spec,
                       "spec_sha256": signature(spec), "instructions_sha256": sha(self.output / "instructions.json"),
                       "knowledge_sha256": sha(self.output / "knowledge-snapshot.json"),
                       "runtime": {p.name: sha(p) for p in package.glob("*.py")},
@@ -65,7 +72,7 @@ class CriticHarness:
                       "backend": type(self.model).__name__, "max_turns": max_turns, "attempts": 0,
                       "observations": {}, "events": [], "notes": [], "process_opened": False,
                       "assessment": None, "pending": None}
-        self.evidence = Evidence(spec["videos"], self.output)
+        self.evidence = Evidence(spec["videos"], self.output, cache=frozen.get("evidence_cache") if frozen else None)
         overview = self.evidence.observe("overview", list(spec["videos"]), count=5,
                                          end=min(duration, *(v["duration_seconds"] for v in spec["videos"].values())))
         self.state["observations"]["overview"] = overview
@@ -85,8 +92,10 @@ class CriticHarness:
             if sha(v["path"]) != v["sha256"]:
                 raise ValueError("Review video changed")
         self.system = load(self.output / "instructions.json")["OPERATIONS.md"]
+        if self.state["spec"].get("requirements"):
+            self.system += "\n\n" + load(self.output / "instructions.json")["RSI.md"]
         self.knowledge = Knowledge(self.root, self.output / "knowledge-snapshot.json")
-        self.evidence = Evidence(self.state["spec"]["videos"], self.output)
+        self.evidence = Evidence(self.state["spec"]["videos"], self.output, cache=self.state["spec"].get("frozen_critic", {}).get("evidence_cache"))
         if self.state["status"] != "complete":
             self.state["max_turns"] += additional_turns
             self.state["status"] = "running"
@@ -99,6 +108,8 @@ class CriticHarness:
         task = {k: spec[k] for k in ("request", "candidate", "duration_seconds")}
         task["question"] = spec.get("question", "")
         task["compare_to"] = spec.get("compare_to")
+        if spec.get("requirements"):
+            task["requirements"] = spec["requirements"]
         actual_duration = spec["videos"][spec["candidate"]]["duration_seconds"]
         task["delivery"] = {"actual_seconds": actual_duration, "expected_seconds": spec["duration_seconds"],
                             "tolerance_seconds": 0.08, "duration_valid": abs(actual_duration - spec["duration_seconds"]) <= .08,
@@ -159,7 +170,12 @@ class CriticHarness:
         if action == "assess":
             if self.state["assessment"] is not None:
                 raise ValueError("Outcome assessment is already recorded; explain later diagnostic qualifications in finish")
-            report = validate_assessment(copy.deepcopy(args), self.state["observations"], self.state["spec"]["videos"], self.state["spec"]["candidate"], self.state["spec"]["duration_seconds"])
+            report = copy.deepcopy(args)
+            if self.state["spec"].get("requirements"):
+                from planner_harness.ledger import validate_review, project_findings
+                report = validate_review(report, self.state["spec"]["requirements"], self.state["spec"]["candidate"], self.state["spec"]["videos"], self.state["observations"])
+                report = project_findings(report, self.state["spec"]["requirements"], self.state["spec"]["candidate"], self.state["observations"], self.state["spec"]["duration_seconds"])
+            report = validate_assessment(report, self.state["observations"], self.state["spec"]["videos"], self.state["spec"]["candidate"], self.state["spec"]["duration_seconds"])
             self.state["assessment"] = report
             save(self.output / "outcome.json", report)
             return {"saved": True, "scope": "Outcome assessment recorded before execution-prompt access"}
@@ -175,6 +191,17 @@ class CriticHarness:
                 raise ValueError("Finish needs a recorded assessment and an English summary")
             if args.get("process_diagnostics") and not self.state["process_opened"]:
                 raise ValueError("Read actual process context before diagnosing prompt coverage")
+            if args.get("failure_types") and not self.state["process_opened"]:
+                raise ValueError("Read process context before assigning failure hypotheses")
+            if args.get("failure_types") and self.state["spec"].get("requirements"):
+                from planner_harness.ledger import TYPES
+                ids = {r["id"] for r in self.state["spec"]["requirements"]["items"]}
+                if not isinstance(args["failure_types"], dict):
+                    raise ValueError("Failure hypotheses map requirement IDs to tags")
+                for k, values in args["failure_types"].items():
+                    values = values if isinstance(values, list) else [values]
+                    if k not in ids or any(v not in TYPES for v in values):
+                        raise ValueError("Unknown failure hypothesis or requirement ID")
             spec = self.state["spec"]
             result = {"protocol": self.state["protocol"], "usage": "online_feedback; not independent formal benchmark scoring",
                       "original_request": spec["request"], "source_sha256": spec["videos"]["source"]["sha256"],
@@ -215,7 +242,11 @@ class CriticHarness:
                 if raw_path.exists():
                     raw = raw_path.read_text(encoding="utf-8")
                 else:
-                    raw = self.model.predict_text(system_prompt=self.system, user_text=saved["user_text"], image_paths=[f["path"] for f in saved["images"]], max_new_tokens=8000)
+                    if self.state["spec"].get("requirements"):
+                        from planner_harness.rsi_calls import call_once
+                        raw = call_once(directory, self.model, self.system, saved["user_text"], [f["path"] for f in saved["images"]], 8000)
+                    else:
+                        raw = self.model.predict_text(system_prompt=self.system, user_text=saved["user_text"], image_paths=[f["path"] for f in saved["images"]], max_new_tokens=8000)
                     raw_path.write_text(raw, encoding="utf-8")
                 event = {"event_id": identity, "at": stamp()}
                 try:
@@ -246,7 +277,7 @@ class CriticHarness:
 def load_feedback(path, request, videos):
     """Verify a review before exposing it to a Planner; no prior score injection."""
     data = load(path)
-    if data.get("protocol") != "lha-online-critic-v1" or signature({k: v for k, v in data.items() if k != "sha256"}) != data.get("sha256"):
+    if data.get("protocol") not in {"lha-online-critic-v1", "lha-online-critic-rsi-v1"} or signature({k: v for k, v in data.items() if k != "sha256"}) != data.get("sha256"):
         raise ValueError("Critic feedback signature mismatch")
     if data["original_request"] != request or data["source_sha256"] != videos["source"]["sha256"]:
         raise ValueError("Critic feedback does not match original task")

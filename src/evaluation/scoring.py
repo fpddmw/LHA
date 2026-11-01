@@ -29,15 +29,17 @@ def semantic_score(card, judgment, kinds, temporal_only=False):
             "upper": sum(1 if v is None else v for v in values) / len(values),
             "complete": sum(v == 1 for v in values) / len(values),
             "coverage": sum(v is not None for v in values) / len(values),
-            "items": len(values), "unknown": values.count(None)})
+            "items": len(values), "unknown": values.count(None),
+            "weight": group.get("weight", 1) if card.get("criteria_contract") else 1})
     if not groups:
         return dict(score=None, lower=None, upper=None, complete_rate=None, coverage=None,
                     items=0, unknown=0, status="not_applicable")
-    lower, upper = mean(g["lower"] for g in groups), mean(g["upper"] for g in groups)
+    weighted = lambda field: sum(g["weight"]*g[field] for g in groups)/sum(g["weight"] for g in groups)
+    lower, upper = weighted("lower"), weighted("upper")
     unknown = sum(g["unknown"] for g in groups)
     return {"score": lower if not unknown else None, "lower": lower, "upper": upper,
-            "complete_rate": 100 * mean(g["complete"] for g in groups) if not unknown else None,
-            "coverage": 100 * mean(g["coverage"] for g in groups), "items": sum(g["items"] for g in groups),
+            "complete_rate": 100 * weighted("complete") if not unknown else None,
+            "coverage": 100 * weighted("coverage"), "items": sum(g["items"] for g in groups),
             "unknown": unknown, "status": "scored" if not unknown else "unknown"}
 
 

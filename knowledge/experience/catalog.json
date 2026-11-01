@@ -33,5 +33,253 @@
     "title": "Use design knowledge where it changes the work",
     "version": 1,
     "origin": "common-sense starting guidance with separately attributed experimental observations"
+  },
+  {
+    "id": "case-bernini-027-after-v1",
+    "title": "Etching and architectural identity",
+    "path": "knowledge/wiki/cases/bernini_027_after_v1.md",
+    "kind": "experiment_case",
+    "version": 1,
+    "origin": "human_assisted_historical_case",
+    "assets": [
+      {
+        "id": "case-bernini-027-after-v1-record",
+        "path": "knowledge/wiki/cases/bernini_027_after_v1.json",
+        "sha256": "6c09d7a252ef99cc397828dda08e43da2f130267354e0b520dcf201e8bc038f6",
+        "title": "Etching and architectural identity: complete task, prompts, reviews and decisions"
+      },
+      {
+        "id": "case-bernini-027-after-v1-source-0",
+        "path": "knowledge/wiki/assets/case-bernini-027-after-v1-source-0.jpg",
+        "sha256": "0459320be4d187e7dd41271ccc5d76fa5733e24022d8217234c7105485277b38",
+        "title": "source at 0.0 seconds",
+        "video_id": "source",
+        "timestamp_seconds": 0.0
+      },
+      {
+        "id": "case-bernini-027-after-v1-source-5",
+        "path": "knowledge/wiki/assets/case-bernini-027-after-v1-source-5.jpg",
+        "sha256": "7b3ad6bc2d0fb1c95fbfcd41cde79ebed5d3ca2cb66149bef487774c8fa6dc12",
+        "title": "source at 5.0 seconds",
+        "video_id": "source",
+        "timestamp_seconds": 5.0
+      },
+      {
+        "id": "case-bernini-027-after-v1-v1-0",
+        "path": "knowledge/wiki/assets/case-bernini-027-after-v1-v1-0.jpg",
+        "sha256": "4d7b9a4d531c17c2a1266ba97db9d3106c90c4345ded69c20da3668368a93543",
+        "title": "v1 at 0.0 seconds",
+        "video_id": "v1",
+        "timestamp_seconds": 0.0
+      },
+      {
+        "id": "case-bernini-027-after-v1-v1-5",
+        "path": "knowledge/wiki/assets/case-bernini-027-after-v1-v1-5.jpg",
+        "sha256": "44399e3c6e821d85600d57030f763141b55c36e9b3d3442200af64c3ef279668",
+        "title": "v1 at 5.0 seconds",
+        "video_id": "v1",
+        "timestamp_seconds": 5.0
+      }
+    ]
+  },
+  {
+    "id": "case-bernini-024-before-v3",
+    "title": "Glitch: source restart and overlapping realizations",
+    "path": "knowledge/wiki/cases/bernini_024_before_v3.md",
+    "kind": "experiment_case",
+    "version": 1,
+    "origin": "human_assisted_historical_case",
+    "assets": [
+      {
+        "id": "case-bernini-024-before-v3-record",
+        "path": "knowledge/wiki/cases/bernini_024_before_v3.json",
+        "sha256": "0a756d2877976259754637181e544b542583e338b37b68fcff8cc476007aaf59",
+        "title": "Glitch: source restart and overlapping realizations: complete task, prompts, reviews and decisions"
+      },
+      {
+        "id": "case-bernini-024-before-v3-source-0",
+        "path": "knowledge/wiki/assets/case-bernini-024-before-v3-source-0.jpg",
+        "sha256": "669293d071c50c9d57546964a690b1d2c3c8c1cf7b95bcc89fc83c6f761591ea",
+        "title": "source at 0.0 seconds",
+        "video_id": "source",
+        "timestamp_seconds": 0.0
+      },
+      {
+        "id": "case-bernini-024-before-v3-source-5",
+        "path": "knowledge/wiki/assets/case-bernini-024-before-v3-source-5.jpg",
+        "sha256": "9d3e8be1f4d9cbb36b153626423d7271434bbd798d7a205e377672fd1858805d",
+        "title": "source at 5.0 seconds",
+        "video_id": "source",
+        "timestamp_seconds": 5.0
+      },
+      {
+        "id": "case-bernini-024-before-v3-v2-0",
+        "path": "knowledge/wiki/assets/case-bernini-024-before-v3-v2-0.jpg",
+        "sha256": "7372a041f1d6332425ada24788303621443e73292c28ea801276e4cc8423808c",
+        "title": "v2 at 0.0 seconds",
+        "video_id": "v2",
+        "timestamp_seconds": 0.0
+      },
+      {
+        "id": "case-bernini-024-before-v3-v2-5",
+        "path": "knowledge/wiki/assets/case-bernini-024-before-v3-v2-5.jpg",
+        "sha256": "12814031c41ba1a2a37c525c326986e32fea09a67cfbac592a7347820f88fbb9",
+        "title": "v2 at 5.0 seconds",
+        "video_id": "v2",
+        "timestamp_seconds": 5.0
+      }
+    ]
+  },
+  {
+    "id": "case-ditto-024-before-v3",
+    "title": "Glitch: earlier candidate and the retry exception",
+    "path": "knowledge/wiki/cases/ditto_024_before_v3.md",
+    "kind": "experiment_case",
+    "version": 1,
+    "origin": "human_assisted_historical_case",
+    "assets": [
+      {
+        "id": "case-ditto-024-before-v3-record",
+        "path": "knowledge/wiki/cases/ditto_024_before_v3.json",
+        "sha256": "8cce70bb8a9fe43e41b9a2432696361800e2475009a24b45285779c4f36a523d",
+        "title": "Glitch: earlier candidate and the retry exception: complete task, prompts, reviews and decisions"
+      },
+      {
+        "id": "case-ditto-024-before-v3-source-0",
+        "path": "knowledge/wiki/assets/case-ditto-024-before-v3-source-0.jpg",
+        "sha256": "669293d071c50c9d57546964a690b1d2c3c8c1cf7b95bcc89fc83c6f761591ea",
+        "title": "source at 0.0 seconds",
+        "video_id": "source",
+        "timestamp_seconds": 0.0
+      },
+      {
+        "id": "case-ditto-024-before-v3-source-5",
+        "path": "knowledge/wiki/assets/case-ditto-024-before-v3-source-5.jpg",
+        "sha256": "9d3e8be1f4d9cbb36b153626423d7271434bbd798d7a205e377672fd1858805d",
+        "title": "source at 5.0 seconds",
+        "video_id": "source",
+        "timestamp_seconds": 5.0
+      },
+      {
+        "id": "case-ditto-024-before-v3-v2-0",
+        "path": "knowledge/wiki/assets/case-ditto-024-before-v3-v2-0.jpg",
+        "sha256": "fb09232307adf96f61c14fa1869c91e534202809e00e4fdbd6f6f2114566e737",
+        "title": "v2 at 0.0 seconds",
+        "video_id": "v2",
+        "timestamp_seconds": 0.0
+      },
+      {
+        "id": "case-ditto-024-before-v3-v2-5",
+        "path": "knowledge/wiki/assets/case-ditto-024-before-v3-v2-5.jpg",
+        "sha256": "e6294f063073dc8383947bf8bee9d624506ead723ffc5929dc2569ccf5de37af",
+        "title": "v2 at 5.0 seconds",
+        "video_id": "v2",
+        "timestamp_seconds": 5.0
+      }
+    ]
+  },
+  {
+    "id": "case-bernini-003-before-v3",
+    "title": "Fantasy study: authored occlusion and a concrete revision",
+    "path": "knowledge/wiki/cases/bernini_003_before_v3.md",
+    "kind": "experiment_case",
+    "version": 1,
+    "origin": "human_assisted_historical_case",
+    "assets": [
+      {
+        "id": "case-bernini-003-before-v3-record",
+        "path": "knowledge/wiki/cases/bernini_003_before_v3.json",
+        "sha256": "cfc28f2e04d9f506b62cfbce2c29d4d298247b3fb0aacfd53e89f06d433c3629",
+        "title": "Fantasy study: authored occlusion and a concrete revision: complete task, prompts, reviews and decisions"
+      },
+      {
+        "id": "case-bernini-003-before-v3-source-0",
+        "path": "knowledge/wiki/assets/case-bernini-003-before-v3-source-0.jpg",
+        "sha256": "fc98e45db9757a79aca6f1113accbe5f4dc40385f3cb7e0f2044be5b668d563d",
+        "title": "source at 0.0 seconds",
+        "video_id": "source",
+        "timestamp_seconds": 0.0
+      },
+      {
+        "id": "case-bernini-003-before-v3-source-5",
+        "path": "knowledge/wiki/assets/case-bernini-003-before-v3-source-5.jpg",
+        "sha256": "8025b2a3c660884309af71dc52bb1755f02e9bc4dc34ce16c98d96fd55d69a47",
+        "title": "source at 4.326663 seconds",
+        "video_id": "source",
+        "timestamp_seconds": 4.326663
+      },
+      {
+        "id": "case-bernini-003-before-v3-v2-0",
+        "path": "knowledge/wiki/assets/case-bernini-003-before-v3-v2-0.jpg",
+        "sha256": "d48029002e96666bd03030fd934521d9d38c67bee1c665b3db16bc570b520b4f",
+        "title": "v2 at 0.0 seconds",
+        "video_id": "v2",
+        "timestamp_seconds": 0.0
+      },
+      {
+        "id": "case-bernini-003-before-v3-v2-5",
+        "path": "knowledge/wiki/assets/case-bernini-003-before-v3-v2-5.jpg",
+        "sha256": "a74a13da7b2e0b07cd5450b54b53a9f13ceedcd2272e9b7a61365cab88c13165",
+        "title": "v2 at 4.363636 seconds",
+        "video_id": "v2",
+        "timestamp_seconds": 4.363636
+      }
+    ]
+  },
+  {
+    "id": "wiki-scene-identity",
+    "title": "Scene identity and stylization",
+    "path": "knowledge/wiki/wiki-scene-identity.md",
+    "kind": "concept",
+    "version": 1,
+    "origin": "human_assisted_interpretation_unvalidated",
+    "cards": [
+      {
+        "id": "wiki-scene-identity",
+        "summary": "When geometry differs, relate its consequence to this task's identity, action and spatial relationships; inspect the disputed cases.",
+        "status": "interpretation_unvalidated",
+        "renderer_scope": "any"
+      }
+    ]
+  },
+  {
+    "id": "wiki-realization",
+    "title": "Rewording and changed visual realization",
+    "path": "knowledge/wiki/wiki-realization.md",
+    "kind": "concept",
+    "version": 1,
+    "origin": "human_assisted_interpretation_unvalidated",
+    "cards": [
+      {
+        "id": "wiki-realization",
+        "summary": "When another attempt depends on a new realization, compare the actual earlier prompt and changed visual relationships; a new label alone leaves the hypothesis unresolved.",
+        "status": "interpretation_unvalidated",
+        "renderer_scope": "any"
+      }
+    ]
+  },
+  {
+    "id": "wiki-connected-change",
+    "title": "Connected visual changes and local repair",
+    "path": "knowledge/wiki/wiki-connected-change.md",
+    "kind": "concept",
+    "version": 1,
+    "origin": "human_assisted_interpretation_unvalidated",
+    "cards": [
+      {
+        "id": "wiki-connected-change",
+        "summary": "When a proposed repair affects interacting surfaces, light or occlusion, examine those relationships and the renderer's actual controls before predicting locality.",
+        "status": "interpretation_unvalidated",
+        "renderer_scope": "any"
+      }
+    ]
+  },
+  {
+    "id": "wiki-map",
+    "title": "Judgment concepts and experimental cases",
+    "path": "knowledge/wiki/README.md",
+    "kind": "knowledge_map",
+    "version": 1,
+    "origin": "human_assisted_navigation"
   }
 ]

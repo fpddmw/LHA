@@ -1,0 +1,446 @@
+[
+  {
+    "id": "decide-to-continue-or-stop",
+    "path": "knowledge/staged/e1-20261030/decide-to-continue-or-stop.md",
+    "title": "Decide whether another generation is worth it",
+    "version": 2,
+    "kind": "decision_rules",
+    "renderer_scope": "any",
+    "replaces": null,
+    "cards": [
+      {
+        "id": "S1",
+        "summary": "When the first candidate meets the user request and only incidental or unverifiable details remain, finish with it; named user details are not incidental.",
+        "status": "observed on Bernini; transfer unvalidated",
+        "renderer_scope": "bernini",
+        "priority": 10,
+        "section": "S1 · Finish when the first candidate already meets the core request"
+      },
+      {
+        "id": "S2",
+        "summary": "Before another Bernini attempt, weigh the specific gain against already-passing requirements; finish when the remaining gain is only incidental.",
+        "status": "observed on Bernini; transfer unvalidated",
+        "renderer_scope": "bernini",
+        "priority": 50,
+        "section": "S2 · A later attempt is a risk, not a free retry"
+      },
+      {
+        "id": "S3",
+        "summary": "If a core requirement is unmet, try an omitted instruction, a different realization or a better-supported input; stop when no consequential new hypothesis remains.",
+        "status": "observed · any renderer",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "S3 · Continue only with a concrete, untried reason"
+      },
+      {
+        "id": "S4",
+        "summary": "When a review lists many partial findings, distinguish user requirements and major damage from incidental details before deciding to generate again.",
+        "status": "observed (2) · applies to the current online Critic version",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "S4 · Read online reviews by importance, not by verdict count"
+      },
+      {
+        "id": "S5",
+        "summary": "After two targeted attempts leave an explicit requirement unrealized, stop repeating that realization; try again only for a materially different mechanism.",
+        "status": "observed triggers; stopping policy unvalidated",
+        "renderer_scope": "any",
+        "priority": 26,
+        "section": "S5 · Stop repeating a method with low expected benefit"
+      },
+      {
+        "id": "S6",
+        "summary": "When finishing, state the stop reason and consequential unresolved issues; unused budget does not require another attempt.",
+        "status": "operating convention",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "S6 · Finish honestly"
+      }
+    ],
+    "origin": "human-assisted E1; calibrated candidate, unvalidated"
+  },
+  {
+    "id": "respond-to-unmet-requirements",
+    "path": "knowledge/staged/e1-20261030/respond-to-unmet-requirements.md",
+    "title": "Respond to an unmet requirement by its failure type",
+    "version": 2,
+    "kind": "decision_rules",
+    "renderer_scope": "any",
+    "replaces": null,
+    "cards": [
+      {
+        "id": "R1",
+        "summary": "When a failure diagnosis changes the proposed action, distinguish omission, binding failure, inherited loss and introduced damage; overlapping causes are allowed.",
+        "status": "operating convention",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "R1 · Use failure distinctions when they clarify the action"
+      },
+      {
+        "id": "R2",
+        "summary": "If the prompt omitted a requested visible relation, state that relation explicitly in the next realization.",
+        "status": "observed (2 renderers)",
+        "renderer_scope": "any",
+        "priority": 22,
+        "section": "R2 · Omitted → state the wanted visible state explicitly"
+      },
+      {
+        "id": "R3",
+        "summary": "If an explicit request was not realized, change how the visual result is produced instead of merely increasing verbal emphasis.",
+        "status": "mixed · recurring observations across two renderers; the stopping policy is unvalidated",
+        "renderer_scope": "any",
+        "priority": 12,
+        "section": "R3 · Prefer a different realization over stronger emphasis after explicit failure"
+      },
+      {
+        "id": "R4",
+        "summary": "When correcting an unwanted attribute, describe the desired visible state rather than repeating a list of unwanted attributes.",
+        "status": "mixed → treat as a strong default",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "R4 · Prefer wanted states over lists of unwanted attributes"
+      },
+      {
+        "id": "R5",
+        "summary": "If the latest attempt introduced consequential damage, consider an earlier input without that damage before asking the damaged candidate to undo it.",
+        "status": "observed (3)",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "R5 · Introduced regression → go back to an input without it"
+      },
+      {
+        "id": "R6",
+        "summary": "If identity information disappeared, return to conditioning that retains it or reduce the conflicting transformation; naming facial details did not reliably restore it.",
+        "status": "observed (2 renderers)",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "R6 · Naming lost identity is a weak reconstruction strategy"
+      },
+      {
+        "id": "R7",
+        "summary": "If an authored addition occludes or contradicts preserved structure, remove or redesign that addition rather than adding preservation clauses.",
+        "status": "observed (2)",
+        "renderer_scope": "any",
+        "priority": 14,
+        "section": "R7 · Drop authored additions that collide with preserved structure"
+      }
+    ],
+    "origin": "human-assisted E1; calibrated candidate, unvalidated"
+  },
+  {
+    "id": "choose-editing-input",
+    "path": "knowledge/staged/e1-20261030/choose-editing-input.md",
+    "title": "Choose an editing input",
+    "version": 2,
+    "kind": "decision_rules",
+    "renderer_scope": "any",
+    "replaces": "knowledge/experience/choose-editing-input.md",
+    "cards": [
+      {
+        "id": "I1",
+        "summary": "For a compatible environmental addition or texture extension, build on a candidate that already supplies the desired treatment and necessary scene information.",
+        "status": "observed (2 runs) · Bernini; transfer unvalidated",
+        "renderer_scope": "bernini",
+        "priority": 16,
+        "section": "I1 · Continue a candidate for additive or texture changes"
+      },
+      {
+        "id": "I2",
+        "summary": "For precise Ditto shape correction on a candidate, prefer a usable approximation or source-based alternative; recorded edits added or retained the wrong geometry.",
+        "status": "observed (2) · Ditto; Bernini untested",
+        "renderer_scope": "ditto",
+        "priority": 18,
+        "section": "I2 · Lower expectations for precise geometry repair on a candidate"
+      },
+      {
+        "id": "I3",
+        "summary": "Restart from source when it contains information the proposed fix needs, and change the realization that lost it; reusing the same design repeats the risk.",
+        "status": "mixed; route and realization changed together",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "I3 · Restart from the source only when the source has what the fix needs"
+      },
+      {
+        "id": "I4",
+        "summary": "If a later candidate gained a defect absent from an earlier useful candidate, branch from the earlier candidate.",
+        "status": "single",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "I4 · Branch from an earlier candidate to escape a regression"
+      },
+      {
+        "id": "I5",
+        "summary": "Choose an editing input for the information the next change needs; keep the best delivery candidate separately available.",
+        "status": "operating convention",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "I5 · The best delivery and the best input can differ"
+      }
+    ],
+    "origin": "human-assisted E1; calibrated candidate, unvalidated"
+  },
+  {
+    "id": "express-edits",
+    "path": "knowledge/staged/e1-20261030/express-edits.md",
+    "title": "Express an edit for its actual input",
+    "version": 2,
+    "kind": "phrasing_rules",
+    "renderer_scope": "any",
+    "replaces": "knowledge/experience/express-edits.md",
+    "cards": [
+      {
+        "id": "X1",
+        "summary": "When specifying an edit, describe the desired visible state; negative attribute lists may reintroduce the unwanted appearance.",
+        "status": "mixed → strong default",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "X1 · Describe wanted states, not prohibitions"
+      },
+      {
+        "id": "X2",
+        "summary": "For a broad short style request, express its visible medium, surface and lighting relations without inventing new narrative requirements.",
+        "status": "observed · any renderer",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "X2 · Make a short style request concrete"
+      },
+      {
+        "id": "X3",
+        "summary": "When an effect belongs to a part, bind it to that part and its surrounding contrast; a named property can otherwise land on a neighboring structure.",
+        "status": "mixed",
+        "renderer_scope": "any",
+        "priority": 24,
+        "section": "X3 · Bind local effects to the part, and say what stays unlit"
+      },
+      {
+        "id": "X4",
+        "summary": "When preserving a person, reduce transformations that conflict with identity-bearing regions; more facial description is not a reliable identity lock.",
+        "status": "observed (2 renderers); mechanism unvalidated",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "X4 · Do not try to preserve a person by describing them"
+      },
+      {
+        "id": "X5",
+        "summary": "When specifying a small landmark, bind its position and scale to the scene; a strong object noun may invite a new enlarged instance.",
+        "status": "mixed",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "X5 · Refer to small landmarks by place and size, not by a strong noun"
+      },
+      {
+        "id": "X6",
+        "summary": "When revising a scene, describe a coherent visual field and realization; verbal smallness does not create a spatial mask.",
+        "status": "single; connected-field strategy unvalidated",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "X6 · Keep each revision's scope coherent"
+      },
+      {
+        "id": "X7",
+        "summary": "When extending a prompt, add useful visual relations or resolve ambiguity; added length alone did not ensure semantic preservation.",
+        "status": "observed",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "X7 · Longer is not better on its own"
+      }
+    ],
+    "origin": "human-assisted E1; calibrated candidate, unvalidated"
+  },
+  {
+    "id": "inspect-and-compare",
+    "path": "knowledge/staged/e1-20261030/inspect-and-compare.md",
+    "title": "Inspect and compare results",
+    "version": 2,
+    "kind": "selection_rules",
+    "renderer_scope": "any",
+    "replaces": "knowledge/experience/inspect-and-compare.md",
+    "cards": [
+      {
+        "id": "C1",
+        "summary": "When selecting delivery, prioritize the user requirements and consequential damage, then compare the remaining appearance tradeoffs.",
+        "status": "observed · any renderer",
+        "renderer_scope": "any",
+        "priority": 20,
+        "section": "C1 · Select by core requirements and major damage first"
+      },
+      {
+        "id": "C2",
+        "summary": "Before selecting among plausible contenders, compare their actual evidence, including an earlier candidate that still has a relevant advantage.",
+        "status": "observed",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "C2 · Compare every real contender before finishing"
+      },
+      {
+        "id": "C3",
+        "summary": "Before spending a generation on a consequential but uncertain review claim, inspect the relevant video evidence when it could change the decision.",
+        "status": "operating convention",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "C3 · Check a consequential claim yourself before spending a generation"
+      },
+      {
+        "id": "C4",
+        "summary": "When a judgment is unknown, retain the uncertainty and seek relevant evidence if worthwhile; do not treat it as a confirmed defect.",
+        "status": "operating convention",
+        "renderer_scope": "any",
+        "priority": 50,
+        "section": "C4 · Unknown is not failure"
+      }
+    ],
+    "origin": "human-assisted E1; calibrated candidate, unvalidated"
+  },
+  {
+    "id": "renderer-bernini-r",
+    "path": "knowledge/staged/e1-20261030/renderer-bernini-r.md",
+    "title": "Renderer profile: Bernini-R",
+    "version": 2,
+    "kind": "renderer_profile",
+    "renderer_scope": "bernini",
+    "replaces": null,
+    "cards": [
+      {
+        "id": "B1",
+        "summary": "If a Bernini short-style candidate already meets the request, finish rather than spend another sample repairing incidental structure.",
+        "status": "observed",
+        "renderer_scope": "bernini",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "B2",
+        "summary": "If Bernini leaves the environment partly unchanged, consider a compatible addition from a useful candidate; complete replacement was unreliable on the recorded source.",
+        "status": "observed",
+        "renderer_scope": "bernini",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "B3",
+        "summary": "If Bernini places an effect on the wrong part, try a different binding or realization once; repeating emphasis has weak support.",
+        "status": "mixed",
+        "renderer_scope": "bernini",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "B4",
+        "summary": "If a Bernini transformation damages identity, reduce the conflicting treatment near identity-bearing regions; extra identity descriptions did not reliably repair it.",
+        "status": "observed",
+        "renderer_scope": "bernini",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "B5",
+        "summary": "If Bernini leaves explicit displacement unrealized, stop wording-only retries after repeated failure; a different visible realization remains testable.",
+        "status": "observed",
+        "renderer_scope": "bernini",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "B6",
+        "summary": "When orientation or pose matters in Bernini, state that relation in the initial prompt; correcting an omitted orientation succeeded in the recorded task.",
+        "status": "single (same on Ditto)",
+        "renderer_scope": "bernini",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "B7",
+        "summary": "If a Bernini close-up shows expression drift, weigh it against the actual request before another generation; descriptive preservation may not fix it.",
+        "status": "observed",
+        "renderer_scope": "bernini",
+        "priority": 25,
+        "section": null
+      }
+    ],
+    "origin": "human-assisted E1; calibrated candidate, unvalidated"
+  },
+  {
+    "id": "renderer-ditto",
+    "path": "knowledge/staged/e1-20261030/renderer-ditto.md",
+    "title": "Renderer profile: Ditto",
+    "version": 2,
+    "kind": "renderer_profile",
+    "renderer_scope": "ditto",
+    "replaces": null,
+    "cards": [
+      {
+        "id": "D1",
+        "summary": "If a Ditto candidate already meets the core request without consequential damage, finish instead of chasing incidental detail.",
+        "status": "observed",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "D2",
+        "summary": "If Ditto already replaces the environment strongly, focus the next decision on preservation tradeoffs instead of strengthening the replacement again.",
+        "status": "observed",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "D3",
+        "summary": "If Ditto changes faces, age or glasses during a strong edit, reconsider the conflicting transformation and input; descriptive identity constraints were insufficient.",
+        "status": "observed",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "D4",
+        "summary": "If Ditto ignores a requested silhouette change, prefer another realization over wording-only repair; one failed example does not establish incapability.",
+        "status": "observed (one task)",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "D5",
+        "summary": "For neutral face lighting in Ditto, describe neutral illumination positively; repeating the unwanted color during correction increased it in the recorded case.",
+        "status": "observed",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "D6",
+        "summary": "If a Ditto candidate has wrong object geometry, consider another input or retain a useful approximation; candidate-based correction created a second dome in the recorded case.",
+        "status": "observed",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "D7",
+        "summary": "When Ditto applies an etching style, inspect landmark scale and added architectural elements before accepting the result.",
+        "status": "observed",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "D8",
+        "summary": "If Ditto leaves an explicit effect unrealized repeatedly, stop repeating the same wording and report the remaining gap or test a new realization.",
+        "status": "observed",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      },
+      {
+        "id": "D9",
+        "summary": "When subject orientation matters in Ditto, state it explicitly; adding the omitted back-facing relation corrected the recorded task.",
+        "status": "single",
+        "renderer_scope": "ditto",
+        "priority": 25,
+        "section": null
+      }
+    ],
+    "origin": "human-assisted E1; calibrated candidate, unvalidated"
+  }
+]

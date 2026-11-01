@@ -36,7 +36,7 @@ python scripts/run_critic_harness.py --spec review.json --output out/critic/run0
 python scripts/run_critic_harness.py --output out/critic/run01 --resume --additional-turns 4
 ```
 
-Use the existing model-client environment and install `requirements.critic.txt`, which adds the tested PyAV 19.0.2 runtime to the Planner's media dependencies. No GPU evaluator or renderer is required. The backend is the existing `CodexVisionModel`, configured with role `online_critic`; default model is GPT-6.1-sol with xhigh reasoning. Environment overrides use the existing VLM configuration. Exact inputs, raw responses, observation records, frozen instructions and knowledge snapshot are saved. `report.html` links videos, images and every operation. `feedback.json` is signed and explicitly labeled online feedback.
+Use the existing model-client environment and install `requirements.critic.txt`. It selects PyAV 19.0.2 on Python 3.12 or later, and PyAV 15.1.0 for the existing Python 3.11 Bernini deployment. The exact runtime version is retained with each deployment and its validation results. No GPU evaluator or renderer is required. The backend is the existing `CodexVisionModel`, configured with role `online_critic`; default model is GPT-6.1-sol with xhigh reasoning. Environment overrides use the existing VLM configuration. Exact inputs, raw responses, observation records, frozen instructions and knowledge snapshot are saved. `report.html` links videos, images and every operation. `feedback.json` is signed and explicitly labeled online feedback.
 
 ## Planner integration
 

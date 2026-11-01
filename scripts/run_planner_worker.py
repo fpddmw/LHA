@@ -139,6 +139,11 @@ def main():
                 elif p["renderer"].get("backend") == "ditto":
                     if not args.verified_manifest:
                         raise ValueError("Ditto needs the deployment's verified model manifest")
+                    started = request.with_name("render-started.json")
+                    if started.exists():
+                        from planner_harness.rsi_remote import UncertainRender
+                        raise UncertainRender("Prior render dispatch needs receipt reconciliation")
+                    save(started, {"request_sha256": job["sha256"], "seed": p["renderer"].get("seed")})
                     response["payload"] = ditto(job, request.parent, source, args.root.resolve(), args.verified_manifest.resolve())
                 else:
                     raise ValueError("No worker for this renderer; configure the pinned Ditto deployment")
@@ -151,6 +156,8 @@ def main():
                 raise ValueError("Unknown tool job")
         except Exception as exc:
             response.update(status="failed", error=f"{type(exc).__name__}: {exc}")
+            if getattr(exc, "outcome_unknown", False):
+                response["outcome_unknown"] = True
         save(response_path, response)
         print(json.dumps({"status": response["status"], "response": str(response_path), "error": response.get("error")}))
 
