@@ -67,11 +67,14 @@ intermediates and the adapter hash. Every original video and complete trace is
 still copied and hash verified. Five-position comparisons and judge disagreement
 remain separate per judge.
 
-Twelve focused offline checks passed: eight existing coordinator/recovery checks
-and four adapter checks covering early receipt/hash rejection, five-position
+Thirteen focused offline checks passed: eight existing coordinator/recovery checks
+and five adapter checks covering early receipt/hash rejection, five-position
 deduplication, unscored intermediate archival and restart reuse, provider
 serialization, and a judge failure blocking the next topic while current-topic
-generation finishes. These are software fixtures, not benchmark results.
+generation finishes, and confirmed-stop/active-job safety at the legacy migration
+boundary. These are software fixtures, not benchmark results. A waiting adapter
+was replaced before it owned any generation to add that confirmed-stop check;
+both adapter revisions and the replacement record are retained.
 
 The original execution owner remains responsible for retrieving and verifying
 each completed topic archive locally, the complete seven-topic comparison and

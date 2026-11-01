@@ -156,14 +156,14 @@ def archive_topic(root, output, topic, arms, positions):
     return seal_topic(root, output, topic, arms, judgments)
 
 
-def retire_legacy(root, output, parent_pid, worker_pid):
+def retire_legacy(root, output, parent_pid, worker_pid, *, proc_root=Path('/proc')):
     """Retire only a stopped parent and an idle/returning worker at a durable boundary."""
     root, output = Path(root), Path(output)
     complete = output/'scheduling'/'legacy-retired.json'
     if complete.exists():
         return True
-    parent = Path('/proc')/str(parent_pid)
-    worker = Path('/proc')/str(worker_pid)
+    parent = Path(proc_root)/str(parent_pid)
+    worker = Path(proc_root)/str(worker_pid)
     cmd = (parent/'cmdline').read_bytes().replace(b'\0',b' ').decode()
     if '/creative-20261101/run_batch.py' not in cmd:
         raise RuntimeError('Legacy parent PID identity differs')
@@ -176,6 +176,14 @@ def retire_legacy(root, output, parent_pid, worker_pid):
     os.kill(worker_pid,signal.SIGSTOP)
     safe = False
     try:
+        deadline = time.monotonic()+2
+        while True:
+            status = next(x for x in (worker/'status').read_text().splitlines() if x.startswith('State:'))
+            if status.split(':',1)[1].strip().split()[0]=='T':
+                break
+            if time.monotonic()>=deadline:
+                raise RuntimeError('Worker stop was not confirmed; no retirement is permitted')
+            time.sleep(.01)
         with sqlite3.connect('file:'+str(output/'workers/0/queue.sqlite3')+'?mode=ro',uri=True) as db:
             active = db.execute("SELECT id,key,kind,state FROM jobs WHERE state='running'").fetchall()
         states = []
@@ -264,7 +272,7 @@ def run(root, output, host, *, legacy_parent=None, legacy_worker=None):
     batch = verify_batch(root,output)
     if host.get('devices') != [0]:
         raise ValueError('This deployment is authorized for the existing single device 0 only')
-    immutable(output/'scheduling'/'amendment.json',{
+    immutable(output/'scheduling'/'amendments'/(sha(Path(__file__))+'.json'),{
         'authorization':'2026-11-01 explicit execution handoff and five-position schedule',
         'adapter_sha256':sha(Path(__file__)),'frozen_profile_sha256':batch['profile_sha256'],
         'frozen_files_modified':False,'reporting_positions':['direct','full_first','full_final','none_first','none_final'],

@@ -2,6 +2,8 @@
 import copy
 from pathlib import Path
 import sys
+import signal
+import sqlite3
 import threading
 import unittest
 from unittest.mock import patch
@@ -103,6 +105,33 @@ class ScheduleTests(unittest.TestCase):
         self.assertEqual(peak,{n:1 for n in schedule.JUDGES})
         self.assertEqual(mocked.call_count,6)
         self.assertEqual(result['glm5.3flash']['direct'],result['glm5.3flash']['full_final'])
+
+    def test_legacy_retirement_requires_confirmed_stop_and_no_active_job(self):
+        output=self.root/'retire';topic=self.spec();self.prepare(output)
+        proc=self.root/'proc';parent=proc/'1';worker=proc/'2'
+        parent.mkdir(parents=True);worker.mkdir()
+        (parent/'cmdline').write_bytes(b'python\0/root/lha-runtime/creative-20261101/run_batch.py\0')
+        (parent/'status').write_text('State:\tT (stopped)\n')
+        (worker/'status').write_text('State:\tS (sleeping)\n')
+        (worker/'wchan').write_text('anon_pipe_write')
+        save(output/'workers/0/tasks/first__full/run/state.json',{'status':'complete'})
+        save(output/'topics/first/full.json',self.receipt(topic,'full'))
+        with sqlite3.connect(output/'workers/0/queue.sqlite3') as db:
+            db.execute('CREATE TABLE jobs(id INTEGER,key TEXT,kind TEXT,state TEXT)')
+            db.execute("INSERT INTO jobs VALUES(1,'render','tool','running')")
+        signals=[]
+        def send(pid,sig):
+            signals.append((pid,sig))
+            if sig==signal.SIGSTOP:(worker/'status').write_text('State:\tT (stopped)\n')
+            elif sig==signal.SIGCONT:(worker/'status').write_text('State:\tS (sleeping)\n')
+        with patch.object(schedule.os,'kill',side_effect=send),patch.object(schedule,'verify_batch',return_value={'topics':[topic],'profile_sha256':'fixture'}):
+            self.assertFalse(schedule.retire_legacy(ROOT,output,1,2,proc_root=proc))
+            self.assertIn((2,signal.SIGCONT),signals)
+            self.assertFalse(any(sig==signal.SIGKILL for _,sig in signals))
+            with sqlite3.connect(output/'workers/0/queue.sqlite3') as db:db.execute('DELETE FROM jobs')
+            self.assertTrue(schedule.retire_legacy(ROOT,output,1,2,proc_root=proc))
+        self.assertEqual(signals[-2:],[(2,signal.SIGKILL),(1,signal.SIGKILL)])
+        self.assertTrue((output/'scheduling/legacy-retired.json').exists())
 
 
 if __name__=='__main__':unittest.main()
