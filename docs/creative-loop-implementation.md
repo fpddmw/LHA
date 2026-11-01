@@ -10,6 +10,8 @@ Current status, 2026-11-01: repairs against the
 requested GitHub synchronization before simulated workflows and validation runs.
 The new regressions have been written but not executed; the old demo and 113-test
 result below describe the baseline only. No live experiment or model call occurred.
+The repair code is synchronized on `codex/creative-loop-v1` at
+`6af64be677af876db78e0fbd23cdef4ea390eac0`, with the remote SHA independently checked.
 
 ## What changed
 
