@@ -4,6 +4,9 @@ TLS remains end-to-end. This forwards CONNECT streams for OpenAI domains only;
 it does not inspect prompts, tokens or credentials and does not listen publicly.
 """
 import argparse
+import base64
+import hashlib
+import importlib.util
 from datetime import datetime, timezone
 import json
 import os
@@ -17,7 +20,12 @@ import time
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path[:0]=[str(ROOT/'src'),str(ROOT/'scripts/deploy')]
-from planner_harness.lock import RunLock
+# A network relay needs no video/model packages. Load the standalone OS lock
+# without importing planner_harness.__init__ and its media dependencies.
+spec=importlib.util.spec_from_file_location('lha_route_lock',ROOT/'src/planner_harness/lock.py')
+lock_module=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(lock_module)
+RunLock=lock_module.RunLock
 
 p=argparse.ArgumentParser()
 p.add_argument('--private-config',type=Path,required=True)
@@ -28,8 +36,20 @@ p.add_argument('--host-fingerprint', help='Verified SSH SHA256 fingerprint (base
 p.add_argument('--owner-name', default='model-network-route-owner', help='Distinct lock for a separately authorized host')
 a=p.parse_args()
 sys.path.insert(0,str(a.dependencies))
-import control_bernini_loop
 import paramiko
+
+def connect(config, fingerprint):
+    cfg=json.loads(config.read_text(encoding='utf-8-sig'))
+    class Pinned(paramiko.MissingHostKeyPolicy):
+        def missing_host_key(self,client,hostname,key):
+            actual=base64.b64encode(hashlib.sha256(key.asbytes()).digest()).decode().rstrip('=')
+            if actual!=fingerprint.removeprefix('SHA256:').rstrip('='):
+                raise RuntimeError('SSH host key differs from the verified route pin')
+            client.get_host_keys().add(hostname,key.get_name(),key)
+    client=paramiko.SSHClient();client.set_missing_host_key_policy(Pinned())
+    client.connect(hostname=cfg.get('host',cfg.get('hostname')),port=cfg['port'],username=cfg['username'],
+                   password=cfg['password'],timeout=45,banner_timeout=60,auth_timeout=60)
+    return client
 
 def relay(channel):
     target=None
@@ -79,15 +99,13 @@ def record(status,**fields):
 if not re.fullmatch(r'[A-Za-z0-9_-]+',a.owner_name):
     raise ValueError('Owner name must be a safe basename')
 with RunLock(a.state.parent/a.owner_name):
-    control_bernini_loop.configure_renderer('bernini')
-    if a.host_fingerprint:
-        control_bernini_loop.HOST_FINGERPRINT=a.host_fingerprint.removeprefix('SHA256:').rstrip('=')+'='
+    fingerprint=a.host_fingerprint or '6VjGL2qtwWCTbIIEZLVQaq4vrhRn4T59dd3XMN9WMec='
     failures=0
     while True:
         connection=None
         connected_at=None
         try:
-            connection=control_bernini_loop.connect(a.private_config)
+            connection=connect(a.private_config,fingerprint)
             transport=connection.get_transport()
             transport.set_keepalive(30)
             transport.request_port_forward('127.0.0.1',a.port,handler=accept)
