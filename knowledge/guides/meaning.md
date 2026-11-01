@@ -2,19 +2,19 @@
 
 [Knowledge map](../README.md) · [Subject and visual language](theme.md) · [Composition, light, and time](time.md)
 
-This editorial synthesis compares repository cases to explain connected design questions within a video and the meanings a request actually touches. The examples offer possibilities; the model working on the task determines its proposal.
+Understand the event before deciding how to redesign it. The cases below explain how actions, object roles, viewpoint and visual form carry meaning. Use these distinctions to identify which relationships a proposal needs to keep intelligible and where the request opens room for invention.
 
 ## From things in the image to what is happening
 
 In [The Deer Hunter](../entries/opuscar-051.md), forest, deer, and gun establish the possibility of a shot, but the figure lowers the gun. The sequence lands on an interrupted action. Treating it as three nouns to visually enhance would lose that decision. [One Flew Over the Cuckoo's Nest](../entries/opuscar-048.md) first establishes a still, divided ward, then breaks its state through a thrown object and shattered window. Quiet space can serve different events. Whether a change occurs, and when, contributes to meaning.
 
-An object's role also changes with relationships. In [Kramer vs. Kramer](../entries/opuscar-052.md), one pan connects failed and successful breakfasts, expressing a developing father-son relationship. Its material is only one design aspect. [Driving Miss Daisy](../entries/opuscar-062.md) uses a rear-view mirror to narrow spatial relationships toward an expression. The mirror is also an apparatus through which people see one another. Complete cases explain these functions before a model decides what applies to its video.
+An object's role also changes with relationships. In [Kramer vs. Kramer](../entries/opuscar-052.md), one pan connects failed and successful breakfasts, expressing a developing father-son relationship. Its material is only one design aspect. [Driving Miss Daisy](../entries/opuscar-062.md) uses a rear-view mirror to narrow spatial relationships toward an expression. The mirror is also an apparatus through which people see one another. For a new task, identify the role that gives an object its importance. A writing implement matters through contact with the writing surface; a mirror can matter through the view it affords. Protecting that role may call for a different design decision from retaining the object's exact finish or contour.
 
 ## Who sees and how they see
 
 [Mrs. Miniver](../entries/opuscar-015.md) connects a raised gaze to aircraft overhead, motivating the following view. [Out of Africa](../entries/opuscar-058.md) establishes flight through a landscape before narrowing to a cockpit handshake. Environmental scale and closeness support each other. [Amadeus](../entries/opuscar-057.md) alternates between stage and a watcher in darkness, adding a relationship to the same performance.
 
-These cases provide knowledge about action, relationships, viewpoint, mood, and the order in which information appears. Object form, space, expression, light, and editing can carry them together. [Parasite](../entries/opuscar-092.md) makes upper and lower spaces simultaneously readable in an architectural section; a person's route then turns structure into a temporal experience. Design concerns both appearance and the relationships through which viewers understand it.
+These cases provide knowledge about action, relationships, viewpoint, mood, and the order in which information appears. Object form, space, expression, light, and editing can carry them together. [Parasite](../entries/opuscar-092.md) makes upper and lower spaces simultaneously readable in an architectural section; a person's route then turns structure into a temporal experience. Use this distinction when a scene looks attractive but its event is hard to read. A change in contrast, occlusion or viewing emphasis can alter which person or action commands attention even when all the objects remain present.
 
 ## Subject and medium can change interpretation
 
@@ -28,7 +28,15 @@ A request for the appearance of an old family home video primarily specifies a w
 
 A request for cyber-xianxia introduces a composite setting to interpret. The model can investigate relationships among technology, cultivation, social order, and visual expression. It can compare the assumptions in [xianxia](../entries/base-xianxia.md), [cyberpunk city](../entries/base-cyberpunk_dystopia.md), and [biomechanics](../entries/base-alien_biomech.md). Explicit local changes supplied by the user then calibrate the exploration. The library provides resources for understanding; the model develops the setting it will propose.
 
-Both long and short requests can be precise or ambiguous. Reading depth follows the unresolved question: an object's role may need checking, or an entire direction may need comparison. The future harness should preserve the original request and evidence for observations, identify the origins of additions, and allow interpretations to change. See [INTEGRATION](../INTEGRATION.md).
+## Choose what carries the task's meaning
+
+For an appearance edit, keep the activity legible while developing how it is represented. For an object replacement, examine the object's contact, use and place in the activity. For a requested change of activity, the new causal relationship may require coordinated changes to people and objects. These are different design problems even when they share the same nouns.
+
+In a writing scene, a pen touching a writing surface helps establish writing; the exact pen finish usually contributes less to that event. A supplied request can make either detail essential. In a performance, an elaborate costume can obscure the contact that makes playing recognizable. In that situation, prefer a costume arrangement that exposes the working contact while realizing the requested style. This is a scene-based design judgment, not a measured renderer guarantee.
+
+Separate what the video shows from the story you infer. A hand on a shoulder establishes contact; a family relationship needs further support. Inspect a consequential contact or interval when its interpretation changes the proposal. Record uncertainty only where it affects the choice, and develop the rest of the design from what is clear.
+
+Instruction length is a poor guide to creative freedom. A one-sentence recoloring request can be precise; a long description can leave the visual medium open. Let the requested change determine the scope of invention. Optional additions deserve their place when they strengthen that change without competing with its central event. The [design manual](../creative-loop/UNDERSTAND_AND_DESIGN.md) connects these judgments to the current Planner workflow.
 
 ## Read further
 
@@ -88,12 +96,3 @@ These entries extend the comparisons above. Each provides a complete reading edi
 | [Wuxia: action, historical materials, and poetic space](../entries/base-wuxia.md) | A martial-arts film direction built around heroic figures, flowing cloth, and layered landscapes. |
 | [Chinese period settings: vocabulary, visible evidence, and historical card scope](../domain-references/chinese_period.md) | The original card supplies terms for headwear, clothing, sets, and light sources, while recording visible-region restrictions and their trade-offs. |
 | [Nature and landscape: space, light, and human experience](../domain-references/nature_landscape.md) | The original card organizes sky, vegetation, distance, and aerial perspective; other cases add different times and viewing relationships. |
-
-
-## Read the request in relation to the actual scene
-
-An appearance edit, an object replacement and a change to an activity can affect different relationships. A writing scene includes a person using an implement on a surface; the implement's exact material and the activity's identity are distinct questions. A request to recolor a robe can be precise in one sentence, while a request for a cyber-xianxia world leaves substantial interpretation open. A long instruction may already specify the design and several localized changes. Instruction length does not determine creative freedom.
-
-Read explicit requirements, visible evidence and proposed additions in their own roles. A hand on a shoulder is visible contact; a family relationship may remain unknown. A sampled pose suggests part of an activity; a complete trajectory requires evidence across time. A partial crop or an obscured object can leave a useful question open without forcing an invented answer.
-
-These distinctions can support a proposal or a later revision. They require no fixed scene graph, inventory, narrative template or semantic form. Ordinary activities can remain ordinary. The current model may organize notes or questions in whatever way helps the task. [Inspection experience](../experience/inspect-and-compare.md) discusses when a closer observation can change the next action.

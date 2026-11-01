@@ -1,15 +1,21 @@
-# EX-part-binding: Getting the attribute right can still modify the wrong referent
+# EX-part-binding: Bind the effect to the intended part and distinguish its neighbor
 
-Revision 1. Draft for review. Reworks X3/X5/I2/B3 and the dome part of D6. Bernini/Ditto observations; relational wording is a clarity strategy with mixed outcomes.
+Revision 2. Draft for review. Bernini and Ditto; X3/X5/I2/B3 and D6 geometry observations.
 
-**A correct attribute on the wrong part is a binding failure. Asking for more of the attribute can strengthen the wrong realization rather than move it to the intended place.**
+**When the right attribute appears on the wrong part, clarify the target's relation to its neighbor before increasing the attribute's strength. For an existing object's shape, anchor that specific instance to surrounding geometry so the proposal calls for reshaping it rather than introducing another one.**
 
-The table-tennis outputs repeatedly supplied bright blue emission on curved supports while leaving the tabletop perimeter gray. The missing element was not blue light in general. F004 v2 described all four edges of the purple tabletop, its rectangular perspective, and the red arches as unchanged and unlit. The review then passed the tabletop glow and geometry. Older prompts also explicitly named the rim and failed, including capitalized wording. The evidence supports distinguishing the part; it does not establish a reliable sentence formula.
+## Contrast identifies the intended carrier
 
-A similar problem occurs at the instance level. In Ditto 027, an instruction to make a compact dome at a specified location produced an additional dome rather than correcting the existing one. The noun successfully evoked the object category while its intended correspondence failed. This is why adding dimensions can still elaborate a new object instead of editing the old one.
+Table-tennis outputs repeatedly put blue emission on curved supports instead of the tabletop perimeter. More blue light would amplify an existing success in the wrong place. F004 v2 described the four edges of the purple tabletop in perspective and explicitly left the red arches unlit. The saved review then passed the glow and table geometry.
 
-Describe the relation that distinguishes the intended referent when ambiguity matters: an emitting horizontal boundary above matte curved supports; an existing landmark bounded by neighboring roofs. Inspect the actual output at that relation. If the correct part is already clearly specified, stronger category naming alone offers little new explanatory leverage. Input selection and the requested geometric reorganization deserve attention instead.
+Prefer a compact relational contrast, such as the tabletop's thin rectangular edge glowing above matte, unlit curved supports. This example expresses which surface emits and which nearby surface remains a different material. Combine the distinction in the same local description when that makes the referent clear. Repeated capitalization of 'rim' supplies less useful information than the boundary's orientation, attachment and contrast.
 
-Two tempting generalizations are retired. The old 'avoid strong landmark nouns' claim has a counterexample: a Bernini dome prompt did not inflate the landmark. The new successful tabletop attempt also changed prompt order, preservation wording and input; its isolated linguistic cause is unknown. Geometry edits can succeed, as F004's source-based table comparison suggests, while precise correction on a particular candidate can still fail.
+## Reshape the existing instance
 
-Evidence: [F004](../evidence/F004.json), v1/v2; [older B fewshot no-knowledge](../evidence/H-B-fewshot_004__long__no_knowledge.json), three attempts; [D dome](../evidence/D-027-full.json), v3; [B etching no-knowledge](../evidence/H-B-027__short__no_knowledge.json), v1. Related: [instance identity](instance-identity.md), [connected scope](connected-scope.md).
+In Ditto 027, a request for a compact dome produced an additional dome. The category was rendered while correspondence to the existing landmark failed. For a similar correction, describe the existing dome relative to its base, neighboring roofs and occupied footprint. Prefer an earlier input where the intended instance is intact if the current result already contains a duplicated or substantially restructured landmark.
+
+For Ditto candidate geometry repairs, use the observed duplication as a strong reason to compare that earlier-input route with continued sculpting. Continuing is more attractive when the actual error is a surface treatment on an intact shape. A source or earlier candidate can still need a clearer geometric proposal.
+
+When an effect is already accurately located in the prompt and still binds elsewhere, move to the competing shapes, materials and conditioning. Another louder category name is a low-value default. Keep a structurally sound candidate available if further attempts trade geometry for stronger decoration.
+
+**Evidence.** [F004](../evidence/F004.json), v1/v2; [older Bernini fewshot](../evidence/H-B-fewshot_004__long__no_knowledge.json), explicit rim failures; [Ditto dome](../evidence/D-027-full.json), v3. [Bernini etching](../evidence/H-B-027__short__no_knowledge.json), v1, shows that naming a dome can also work. The relational contrast is a recommended expression strategy; the successful prompt changed other clauses too. Related: [input choice](input-conditioning.md), [connected scope](connected-scope.md).

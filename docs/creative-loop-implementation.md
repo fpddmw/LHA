@@ -13,6 +13,8 @@ result below describe the baseline only. No live experiment or model call occurr
 The repair code is synchronized on `codex/creative-loop-v1` at
 `6af64be677af876db78e0fbd23cdef4ea390eac0`, with the remote SHA independently checked.
 
+Content status, 2026-11-01: [editorial alignment](knowledge-guidance-alignment-20261101.md) updates current reading routes and guides. The [fourteen-entry experience package and five proposed manuals](../knowledge/staged/experience-full-maintenance-20261101/README.md) remain staged. The active curated catalog is empty; these content edits neither activate it nor change the validation status above.
+
 ## What changed
 
 `creative_loop_v1` is an explicit Planner workflow. The existing default is `legacy`,

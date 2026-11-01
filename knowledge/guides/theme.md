@@ -2,7 +2,7 @@
 
 [Knowledge map](../README.md) · [Video meaning](meaning.md) · [Media](media.md) · [Combination](combination.md)
 
-This editorial comparison examines reasons behind the repository's proposals. The original style choices are interpretations with particular motivations; other interpretations can also work. The useful knowledge lies in those motivations, the relationships they engage, and the directions they open.
+Choose a visual language for what it makes the viewer notice. The cases below connect subjects to materials, viewing traditions and ways of organizing information. Their differences help select a direction that serves the current request.
 
 ## How form connects to a subject
 
@@ -26,7 +26,13 @@ Technical images have different information roles. [Mutiny on the Bounty](../ent
 
 The 13 base templates contain world proposals to develop, but most lack OPUSCAR's fuller connection between narrative and form. [Xianxia](../entries/base-xianxia.md) emphasizes spiritual space, dress, and ritual; [wuxia](../entries/base-wuxia.md) emphasizes martial life and action. [Cyberpunk city](../entries/base-cyberpunk_dystopia.md), [clean laboratory](../entries/base-clean_lab.md), and [industrial wasteland](../entries/base-industrial_wasteland.md) make different assumptions about technology and living conditions.
 
-For cyber-xianxia, a model can compare technology as cultivation infrastructure, urban conditions, bodily relationships, or a way of seeing. These remain open questions. The model may also identify a coverage gap and propose an idea with its basis made clear. Topic organization makes existing ideas easier to understand, compare, and extend.
+For cyber-xianxia, choose the relationship technology has to cultivation before accumulating motifs. Technology as ritual infrastructure suggests a different setting from technology as bodily augmentation or oppressive urban control. Use the source activity and the user's specified changes to select a relationship, then develop the materials and spatial organization that make it visible. The base settings supply vocabulary and world assumptions for that choice, rather than assigning a replacement to every object.
+
+## Prefer the form that serves the intended attention
+
+Choose diagrammatic form when exposing structure or connections is central. Choose a situated sketch or tactile mark when presence and human gesture should dominate. Choose ordered portrait or ceremonial arrangements when social position and viewing distance matter. The war and historical-figure comparisons above show why a shared topic can justify different treatments.
+
+A useful transfer preserves the source's expressive relationship while adapting its setting. A blueprint can reveal how an arena is organized; it need not import a bridge. When the user already specifies a medium or world, develop the relevant relationships within that choice. These are design preferences supported by comparison of authored cases, not rankings of renderer performance.
 
 ## Carry an interpretation into a proposal
 

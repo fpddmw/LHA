@@ -1,15 +1,23 @@
-# EX-lighting-integration: A visible lamp, an emissive accent and illumination of the scene are separate
+# EX-lighting-integration: Design what the light does to the scene
 
-Revision 1. Draft for review. New synthesis from F002/F004/F005/F007; carries forward D5's color-interaction evidence. Bernini/Ditto historical observations.
+Revision 2. Draft for review. Bernini and Ditto; F002/F004/F005/F007 and D5.
 
-**Lighting style depends on relationships among sources, receivers, shadows and reflections. Adding a lamp or a glowing edge can satisfy a local cue while leaving the scene under its original illumination.**
+**When lamps or glowing accents appear without the requested atmosphere, specify their effect on the visible scene. Prioritize the receiving surfaces, facial fill and reflections that carry the lighting change over adding more luminous objects.**
 
-F002 displayed chandeliers and warm highlights but retained cool window-side daylight. F004 supplied cyan table and suit accents while the gym remained neutrally lit. F005's fixtures and gold materials did not consistently produce the requested warm room atmosphere. F007 combined reflective titanium with smeared highlights and incomplete station integration. In each case, a recognizable lighting vocabulary coexisted with a missing lighting relationship.
+## A lamp and its illumination are different achievements
 
-This helps explain why 'more cinematic light' can produce additional decoration. A lamp is an object; illumination is its relationship to other visible surfaces. Warm material can look golden without changing the color or direction of incident light. A reflective body is convincing partly through what its highlights imply about the surrounding world.
+F002 had chandeliers and warm highlights while window-side daylight stayed cool. F004 showed cyan accents in a neutrally lit gym. F005 fixtures and gold finishes did not consistently create the desired room atmosphere. A model can render the vocabulary of lighting as objects and materials while leaving the original light distribution largely intact.
 
-Develop the relationship that the proposed scene needs: where light originates, which surfaces it reaches, how shadow and fill separate faces, and what nearby material reflects. These are design choices available in the style knowledge, not required clauses in every prompt. In F007 v3, station construction and cooler canopy shading improved the scene together, while smeared reflections remained. Improving the place and improving its reflection geometry are separable outcomes.
+Develop the relationship that matters: where the light comes from, what it reaches, how shadows and fill shape subjects, and what adjacent materials reflect. Use these as design lenses. A request for one glowing edge may need only the edge/support contrast; a full atmosphere change usually needs a broader account of receivers and ambient light.
 
-The Ditto palace color problem supplies a counter-pressure: warm surroundings and neutral faces need not share one global cast. A correction that names natural skin but retains an overwhelming golden treatment can leave that conflict unresolved. The historical correction worsened the cast; this does not establish that candidate-based color correction is inherently ineffective.
+For an illustrative warm lounge, amber practicals can graze wood panels while softer neutral fill keeps faces readable. For a cool station, canopy shading and broad architectural illumination can connect a reflective vehicle to its surroundings. Specify the dominant relationship before a list of fixtures.
 
-Evidence: [F002](../evidence/F002.json), lighting v2/v3; [F004](../evidence/F004.json), v2/v3; [F005](../evidence/F005.json), all lighting judgments; [F007](../evidence/F007.json), v2/v3; [D palace short](../evidence/H-D-benchmark__001__short.json), v2/v3. These are attributed judgments, not new physical-light measurements. Related: [wanted state](wanted-state.md), [environment replacement](environment-replacement.md).
+## Keep illumination compatible with the people and materials
+
+The Ditto palace correction strengthened a yellow-orange facial cast even though it requested natural skin. Prefer an explicit separation between the light on faces and the warmth of background practicals when both are important. Merely asking for a globally golden scene and normal skin leaves the competing goals unresolved.
+
+Reflective surfaces deserve the same relational treatment. A titanium body implies something about what surrounds it through its highlights. F007's improved station did not fully resolve smeared reflections. Judge the material, the environment and their correspondence separately; choose whether the remaining reflection defect materially harms the desired appearance before risking another whole-scene pass.
+
+A lighting correction can legitimately alter several connected surfaces. Plan it as that coherent field, and inspect both the desired atmosphere and any identity or geometry cost.
+
+**Evidence.** [F002](../evidence/F002.json), v2/v3; [F004](../evidence/F004.json), v2/v3; [F005](../evidence/F005.json); [F007](../evidence/F007.json), v2/v3; [Ditto palace](../evidence/H-D-benchmark__001__short.json), v2/v3. Saved reviews, not physical-light measurements. Receiver/fill descriptions above are design recommendations motivated by the observed separation. Related: [wanted state](wanted-state.md), [connected scope](connected-scope.md).

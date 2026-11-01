@@ -1,15 +1,23 @@
-# EX-time-binding: An attribute appearing in a clip is different from an attribute persisting through it
+# EX-time-binding: Inspect the transitions that can undo a convincing opening
 
-Revision 1. Draft for review. Expands B7 with Bernini F001/F005/F006 and historical palace performance. New sampled inspection of F006, no new continuous-motion score.
+Revision 2. Draft for review. Bernini; B7 and F001/F005/F006.
 
-**Appearance, persistence and event timing answer different questions. A convincing opening can conceal a later loss; a stable-looking face can still perform a different emotional action.**
+**Check whether the designed appearance survives the shot's important turns, occlusions and interactions. Inspect performance timing separately when the user cares about the original action or expression; a stable-looking image can still depict a different event.**
 
-F006 v3 displayed gold embroidery early and a largely plain exposed torso and shoulders later. F005 v3 began with formal jackets but the historical review recorded the foreground jacket becoming a light shirt. F001's golden light weakened after the opening. In the older palace footage, visually stable faces could suppress a developing smile or introduce concern at the wrong time. Temporal coherence therefore includes both retaining a property and retaining the source event, where requested.
+## Match the inspection to what must persist
 
-This changes interpretation of a successful style frame. An entry should not count 'embroidered hanfu present' as equivalent to 'embroidered hanfu throughout the visible costume', nor infer exact playing motion from plausible playing poses. Consider what must survive a view change, occlusion, body turn or interaction. Those transitions are where a visually plausible replacement may cease to correspond to the same source state.
+F006 v3 showed embroidery early and a largely plain exposed costume later. F005 v3 began with formal jackets, then the saved review found a foreground jacket becoming a light shirt. F001's golden light weakened after the opening. A striking first frame can therefore overstate how much of the clip delivers the proposal.
 
-For planning, express the intended persistent design where it matters, but recognize that the phrase 'throughout' is not a tracking constraint. For comparison, inspect the places in time that distinguish the claims. A local failure can refute full preservation; sparse matching frames can only support their observed interval. When the historical review leaves a whole-clip verdict unknown despite positive sampled observations, preserve both the positive evidence and its coverage limit.
+Choose a few informative transition regions: before and after a body turn reveals fabric, as a hand retrieves an object, around ball release, or when a face changes expression. Compare what becomes visible, what stays attached to the same subject, and what the source action is doing at those moments. If a transition raises a consequential question, inspect that interval more densely.
 
-The seven-run protocol marked 40 of 54 temporal requirement judgments unknown, 13 fail and one partial, with none pass. These counts expose the protocol's conservative whole-clip boundary and the difficulty of the tasks. They do not establish 54 failures or an inability to preserve time. The old recommendation to merely report expression drift and stop is retired; its significance depends on the actual requested performance and available alternative.
+## Express persistence through the design's attachment
 
-Evidence: [F006](../evidence/F006.json), v3; [F005](../evidence/F005.json), v3; [F001](../evidence/F001.json), v3; [B palace long](../evidence/H-B-benchmark__001__long.json); [batch facts](../evidence/batch-facts.json); [sampled F006 inspection](../evidence/visual-inspection.md), frames 0 and 112. Related: [object continuity](object-continuity.md), [continuation value](continuation-value.md).
+Tie intended appearance to its carrier through the shot: a garment panel, an existing wall surface, or an object's role in an ongoing interaction. A simple persistence phrase can clarify the request, but a design that depends on a short-lived pose or an occluded patch needs more attention to where it remains visible. Favor a realization legible across the relevant views instead of concentrating every distinctive feature in the opening.
+
+A disappearing embroidery pattern, duplicated phone and altered smile are different failures. The first concerns an attribute's persistence, the second an object's continuity, and the third performance correspondence. Choose the next proposal according to the actual failure rather than treating all three as generic flicker.
+
+## Make timing matter in proportion to the task
+
+If the central activity and requested style are delivered and only a small incidental expression mismatch remains, favor a clear disclosure and delivery over a broad regeneration with no specific repair basis. If the close-up emotion, playing action or ball contact is the point of the request, that mismatch deserves further attention. An unknown whole-clip judgment is a reason to inspect a decisive interval when useful, rather than an automatic instruction to regenerate.
+
+**Evidence.** [F006](../evidence/F006.json), v3; [F005](../evidence/F005.json), v3; [F001](../evidence/F001.json), v3; [historical palace](../evidence/H-B-benchmark__001__long.json); [F006 frame inspection](../evidence/visual-inspection.md). Saved local observations and sampled frames; whole-clip temporal counts and coverage limits remain in the [maintenance report](../maintenance-report.md). Related: [object continuity](object-continuity.md), [continuation value](continuation-value.md).

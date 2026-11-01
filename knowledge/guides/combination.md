@@ -2,7 +2,7 @@
 
 [Knowledge map](../README.md) · [Subject relationships](theme.md) · [Media](media.md) · [Time](time.md)
 
-This guide compares combinations within the existing complete cases. The perspectives below support exploration: they can overlap and suggest further possibilities. They remain open reading perspectives, with the model responsible for developing a design suited to its task.
+Give each component a role and a relation to the others. A combined style becomes understandable through a shared subject, a boundary, a transition or a common way of forming the image. The cases below help choose among these constructions.
 
 ## Transforming the same subject between forms of expression
 
@@ -34,6 +34,14 @@ The corpus includes proposals for [xianxia](../entries/base-xianxia.md), [a cybe
 
 If the model is interested in two systems coexisting in one space, it can explore screen interiors and paper worlds. If it is interested in a subject changing state, it can read the blueprint and album cases. Multiple viewpoints may lead it toward DV or multiverse cases. Reading can also lead it to abandon any of these directions. These are differentiated knowledge entrances; creative choices, object changes, stylistic intensity, and final wording belong to the model's task-specific design.
 
+## Choose how the components coexist
+
+Use a shared material or lighting logic when the scene should read as one world. Use a visible boundary when different treatments belong to different image layers, such as a screen within a room. Use a transition or recurring subject when the point is a change between states. Preserve strong contrast when it conveys a meaningful difference in viewpoint or world.
+
+When components compete, settle the viewing priority. A technical section exposes spaces simultaneously; shallow photographic focus hides some of them. If both ideas matter, assign them distinct moments or regions. If the task needs one clear view, choose the construction that serves it. Combining more labels does not resolve this conflict.
+
+For a composite setting, develop the relationship through the scene's actual activity. A technological cultivation world needs a readable account of how its materials, bodies or spaces belong together. Its expressive details follow that account and the user's request; they need not follow a predetermined object-conversion scheme.
+
 ## Express what each component contributes
 
 After choosing a combination, develop its visible relationship. Pencil and watercolor may share the same figures through lines visible beneath washes. A technical world may connect metallic panels, athletic fabric, and local illumination through a common design purpose. A model can also preserve a purposeful contrast, as the nested-space cases do. The explanation helps select details that work together, with the task determining which relationship to use.
@@ -49,7 +57,7 @@ The [two application walkthroughs](design-expression.md) show selective adaptati
 | Nested spaces | [028 Television](../entries/opuscar-028.md) ↔ [067 Pop-up book](../entries/opuscar-067.md) ↔ [069 Scrapbook](../entries/opuscar-069.md) | How boundaries, light, and physical carriers explain coexistence |
 | Alternating viewpoints and worlds | [072 DV](../entries/opuscar-072.md) ↔ [081 Studio](../entries/opuscar-081.md) ↔ [095 Universes](../entries/opuscar-095.md) | How differences acquire narrative identities and continuity |
 
-Each complete entry links back to these guides and onward to related cases. A model can use these relationships to organize a temporary question tree for a task. The long-term corpus retains multiple entrances and cross-links; see the [integration design](../INTEGRATION.md).
+Each complete entry links back to these guides and onward to related cases. A model can use these relationships to organize a temporary question tree for a task. The long-term corpus retains multiple entrances and cross-links; the [current reading manual](../creative-loop/READING.md) explains how to use them.
 
 ## More complete material to explore
 

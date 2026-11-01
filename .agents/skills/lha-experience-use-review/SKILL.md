@@ -1,18 +1,26 @@
 ---
 name: lha-experience-use-review
-description: Review how LHA Planner actually encountered and used experience in saved runs, and whether the wording clarified judgment, was misapplied or added noise. Separates factual exposure, explicit model references and retrospective interpretation; does not assign automatic causal credit.
+description: Review how LHA Planner encountered, interpreted and acted on experience in saved runs. Diagnose discovery, wording, applicability and execution problems, and propose precise improvements to the guidance.
 ---
 
-# Review experience in use
+# Review experience in actual use
 
-Determine what the usage record supports about a particular experience and its wording. Start with the [shared standard](../../../docs/experience-authoring-standard.md) and [usage interface](../../../docs/experience-usage-interface.md). Use an explicitly selected batch or set of runs, retaining incomplete and failed cases.
+Determine what a piece of guidance contributed to a real decision and how its wording or discovery could improve. Use the [shared standard](../../../docs/experience-authoring-standard.md) and [usage interface](../../../docs/experience-usage-interface.md).
 
-Distinguish a directory title from a returned summary and a full read. A prepared request may never have received a response. The receipt proves which content was in a recorded input, not that the model attended to or accepted it. A raw ID mention proves a reference, not adoption. Read the actual note, workspace update or operation before assigning meaning.
+Read the saved entry version and actual call inputs alongside Planner's notes, chosen input, prompt and resulting video or attributed review. Distinguish an entrance title, a summary and a full-page read. Follow the interpretation into the submitted action: a claim to change realization matters when the requested visual relationship or conditioning actually changes.
 
-Relate any explicit interpretation to the prior plan, subsequent actual action and result. Check whether the proposed intervention really differs: two prompts can use different words for the same geometric operation. A rejection may show that the model understood a boundary. An adverse result can occur after appropriate application; successful outputs can occur without the card's help.
+Look for a specific point of leverage:
 
-When useful, explain whether the difficulty lies in discovery, scope matching, misleading wording, a weak underlying claim, or uncertain execution. Keep model-authored statements separate from your retrospective inference and cite their exact event locations. Leave use unknown when the record cannot resolve it. Do not solicit missing reasoning from the historical Planner or add a citation form to future tasks.
+- **Discovery:** a known renderer problem occurred, but the available title or summary hid the relevant distinction.
+- **Weak guidance:** an entry named competing risks without explaining which condition should favor which action.
+- **Misapplication:** Planner adopted a recommendation whose scene condition did not fit, or changed wording while retaining the failed operation.
+- **Useful adoption or rejection:** the model used the distinction to form a better-scoped proposal, retain an earlier candidate, or explain why another route better served the user.
+- **Execution or explanation failure:** a well-targeted proposal still failed, or a counterexample challenged the entry's account of the renderer.
 
-Recommend a concrete change only when the analysis supports it: a clearer condition, merged duplicate, narrower renderer scope, better entrance, or a separately authorized comparison. Report exposure/read counts with denominators, not as utility scores. Independent scoring protocols and knowledge versions remain distinct. Held-out outcomes do not become library-writing material.
+Assess the content of the decision. Calling an attempt a hypothesis can accurately express uncertainty while supporting decisive action. In F002 v3, explicit tuxedo instructions remained in the prompt; guidance review should examine the proposed scope and input rather than infer that caution caused the wardrobe requirement to be dropped. The historical seven-task batch did not contain the new 14-entry library, so it provides prospective writing lessons rather than a test of those entries.
 
-Produce a readable review linked to source events and specific proposed wording changes if warranted. All edits and activation follow the approved scope; analysis alone does not modify the active library.
+Give a qualitative conclusion tied to exact events: what the model encountered, how it interpreted it, what changed in the action, and what the outcome suggests. Preserve cases where the guidance was useful despite a failed render, or added nothing to a decision the model already knew how to make. Explicit model statements and the maintainer's interpretation should be distinguishable in ordinary prose.
+
+Recommend the exact passage, summary or entrance to change when the record exposes a fix. If the issue is execution rather than guidance, keep sound text and identify the remaining renderer question. Report exposure/read counts as supporting context, with denominators; use them to explain discovery, not to assign automatic causal credit.
+
+Use authorized development runs, retaining incomplete cases. Stage proposed edits for review; no citation form, retrospective model interview or automatic knowledge update is added to Planner.

@@ -1,17 +1,27 @@
-# EX-realization-change: More explicit wording can still request the same failed operation
+# EX-realization-change: Change the failed proposition, not just its emphasis
 
-Revision 1. Draft for review. Reworks R2/R3/S3/S5/B5/B6/D4/D8/D9 and X7. Bernini/Ditto observations; no fixed retry policy.
+Revision 2. Draft for review. Bernini and Ditto; R2/R3/S3/S5/B5/B6/D4/D8/D9/X7.
 
-**A new prompt is a new hypothesis only to the extent that it changes something relevant to the failure. Specifying a missing relation, relocating an effect and restating an already explicit operation test different propositions.**
+**When an explicit operation repeatedly fails, lower the priority of wording-only retries. Prefer a different visual realization, a resolved design conflict or a better-conditioned input. Use direct specification first when the important relation was genuinely missing.**
 
-The older study prompts preserved reading without naming its back-facing orientation; later explicit orientation coincided with recovery in both renderers. By contrast, the Ditto glitch v1 already requested horizontal strips containing actual scene content displaced sideways. V2 added offsets, examples and stronger emphasis; v3 called it a broken arrangement of strips and tiles. The reports found overlays, color streaks and noise rather than confirmed displacement of scene-bearing pieces. The text changed substantially while the intended image operation remained substantially the same.
+## Locate what was actually missing
 
-That matters because the visible vocabulary and the operation can separate. Colored blocks can make an image look glitchy without moving the scene inside them. Embroidery can make clothing look historical without raising a collar. A more forceful request for the same transformation can generate additional genre cues while leaving its geometric condition unmet.
+In the study runs, the original prompts retained reading but omitted the source's back-facing orientation. Later explicit orientation coincided with recovery in both renderers. A short clarification addressed an open choice.
 
-To understand a proposed alternative, compare the visible relationship it asks for and the input information it uses with what was already tried. A changed material construction, removed design conflict, different spatial placement or input with needed evidence can be a substantive change. A seed-only retry tests variability. Each can be reasonable; calling a restatement a different mechanism obscures what was learned.
+Scope conflict is different. F005 v1 already specified the green playing surface, central mechanism and blue tiles; v2 more distinctly allocated changes to clothing, room finishes and the outer table frame. Its improved apparatus supports investigating how the proposal assigns change, rather than assuming a forgotten object was added.
 
-The new batch sharpens the omission boundary. F003 v1 did not spell out the microphone's recipient. V2 did, yet worsened guitar and pose preservation. Once the relation is explicit, another increasingly detailed recital is not supported by the earlier orientation success. F001's elaborate choreography also failed; its shorter third prompt improved the action verdict to partial while preserving serious defects. Neither example establishes a universal length rule.
+Read the submitted prompt before choosing either explanation. Once F003's microphone recipient was explicit and still failed, adding an increasingly detailed performance recital no longer tested simple omission repair.
 
-There is no established two-failure ceiling. Bernini's older long costume task eventually realized standing collars and horizontal headwear that earlier versions missed, though identity still failed. Treat repeated failure as evidence about a particular proposal and setup, and evaluate a further attempt against that evidence and the remaining user need.
+## Distinguish the style cue from the operation
 
-Evidence: [B study](../evidence/B-003.json); [D study](../evidence/H-D-benchmark__003__short.json); [D glitch](../evidence/H-D-024__long__full_knowledge.json), all three exact prompts; [D collars](../evidence/H-D-benchmark__001__long.json); [B collars](../evidence/H-B-benchmark__001__long.json), v3; [F001](../evidence/F001.json), [F003](../evidence/F003.json). Historical reviews sometimes contain next-step advice; only their observations are used here.
+Glitch outputs supplied color fringes, scan lines and opaque blocks without confirmed displacement of the actual scene inside the blocks. Ditto costume outputs supplied silk and embroidery while requested collar and headwear shapes remained absent. More words for the genre can strengthen a surface treatment while leaving its structural operation untouched.
+
+A different realization changes the relationship the model is asked to construct: a new location or contrast for an effect, a garment cut that clears the action, a different medium interpretation acceptable to the user, or an input with the needed structure. Explain that difference in the proposal itself. Replacing 'offset strips' with 'broken strips and tiles' still requests much the same operation.
+
+## Let repeated failure change the preference
+
+After clear failures of the same operation, favor an alternative with a concrete basis over another stronger restatement. If no promising alternative remains, retain the best result and explain the unresolved requirement. When the operation is central to the user, reconsider the broader design rather than quietly replacing it with an easier decorative cue.
+
+A seed-only attempt tests variability and can be a reasonable choice when the result suggests a sampling failure. Repeated failure is a reason to spend attempts more selectively, not a numerical stopping law: the older Bernini costume trace achieved requested collar/headwear features on a later attempt, although identity still failed. Consider what success would change about the delivery and why this attempt deserves priority.
+
+**Evidence.** [Bernini study](../evidence/B-003.json), [Ditto study](../evidence/H-D-benchmark__003__short.json); [Ditto glitch](../evidence/H-D-024__long__full_knowledge.json); [Ditto costume](../evidence/H-D-benchmark__001__long.json), [Bernini costume](../evidence/H-B-benchmark__001__long.json); [F001](../evidence/F001.json), [F003](../evidence/F003.json), [F005](../evidence/F005.json). Saved online findings; historical independent comparisons remain separately attributed in the [score extract](../evidence/historical-score-extract.md). Related: [part binding](part-binding.md), [continuation value](continuation-value.md).

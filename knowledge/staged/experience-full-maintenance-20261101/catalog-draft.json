@@ -1,14 +1,14 @@
 {
   "schema": "creative-experience-catalog-v1",
-  "revision": "20261101-full-maintenance-draft",
+  "revision": "20261101-gemini-led-draft",
   "entries": [
     {
       "id": "EX-design-conflict",
-      "title": "A design can conceal the evidence that makes an activity readable",
+      "title": "Change the design that hides the action",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/design-conflict.md",
-      "version": 2,
-      "sha256": "35efa21875f98a1e46e00fa887d7d74bc47bc3115299f1ad251bc16c6190747a",
-      "summary": "A successful costume, prop or lighting design can undermine the original activity by covering its support and contact relations. Repeating the preservation request leaves that design conflict in place.",
+      "version": 3,
+      "sha256": "93ece171472df08de35914390bb1e43751cb1ea117e7e1d877fc691d0e7c43ac",
+      "summary": "When a design hides the contacts that make the action readable, reshape or relocate that design before adding preservation clauses. Realize user-required features around the action.",
       "questions": [
         "Why did a visually successful addition make the action unreadable?"
       ],
@@ -25,11 +25,11 @@
     },
     {
       "id": "EX-activity-relations",
-      "title": "A coherent genre can reorganize who does what",
+      "title": "Give the new style a place without reassigning the activity",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/activity-relations.md",
-      "version": 1,
-      "sha256": "7b0c154f1ab1c6484e35a8deaac0dae51802751d12f9fa93e192b21ae48a56a3",
-      "summary": "A video can retain the right people and objects while changing the activity. Genre-compatible staging can replace the particular relationships that made the source event intelligible.",
+      "version": 2,
+      "sha256": "3c1af6284941201fff34553fb822cb8b572c53f1eb22a40262ed8c01a177fab4",
+      "summary": "When retaining an event under a new genre, anchor who acts on whom and give the genre concrete visual scope. A preserved object inventory can still permit the wrong activity.",
       "questions": [
         "Why do the right people and objects still perform a different event?"
       ],
@@ -47,11 +47,11 @@
     },
     {
       "id": "EX-instance-identity",
-      "title": "Appearance categories do not establish correspondence to an individual",
+      "title": "Protect the individual by reducing competing reconstruction",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/instance-identity.md",
-      "version": 2,
-      "sha256": "29db333850e2a74454562b30b6a8787fd56759d7546f2b065252163691064492",
-      "summary": "An appearance description can faithfully specify a type of person while failing to retain this person. More identity adjectives add attributes; they do not add a correspondence constraint between source and output.",
+      "version": 3,
+      "sha256": "4a7b2b76cbdf9c51526b6034b7b0137e92a36cd9b42e265554b42ea670528a9b",
+      "summary": "For identity-sensitive edits, favor an input with the right individual and reduce competing reconstruction around the person. Keep identity wording concise while preserving explicit costume requirements.",
       "questions": [
         "Why did more accurate person descriptions fail to preserve identity?"
       ],
@@ -74,11 +74,11 @@
     },
     {
       "id": "EX-object-continuity",
-      "title": "A moving prop must remain the same participant across interaction states",
+      "title": "Preserve a moving prop's role across state changes",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/object-continuity.md",
-      "version": 1,
-      "sha256": "d586a4c6f288fd51d32185fe8fce70ae897f17690c36d8bbccd649473966b71f",
-      "summary": "A prop can be recognizable in every local view while failing to be one continuous object in the action. Counting nouns in the prompt does not establish continuity of possession, visibility and release.",
+      "version": 2,
+      "sha256": "4a0ce150162bdc57b0f2467cd9471af994e44cbaa9b034e08d5440f6f7980b6d",
+      "summary": "For existing motion, favor concise source-linked object roles over unnecessary choreography. Inspect retrieval, occlusion and release before responding to duplication with more repetitions of one.",
       "questions": [
         "Why did a correctly named object multiply during an action?"
       ],
@@ -94,11 +94,11 @@
     },
     {
       "id": "EX-connected-scope",
-      "title": "Revision scope follows visual dependencies",
+      "title": "Revise a coherent visual field",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/connected-scope.md",
-      "version": 2,
-      "sha256": "43a6138d6ff31f7f18314c4538e3672e239f6f4fb597f3d2fa64a13bb6d79663",
-      "summary": "A revision's scope is determined by the visual relationships it changes. Calling it small supplies no spatial control; grouping everything under one background label does not make those changes coherent.",
+      "version": 3,
+      "sha256": "fcbda798561052e1d35e1cea3c6738d1adec422dad8b18dfbd7a5b742a01714e",
+      "summary": "Group changes by visual dependency: a window, view and reflections can be one coherent edit. Separate unrelated repairs when they need different inputs or explanations.",
       "questions": [
         "What does a focused revision actually need to change?"
       ],
@@ -116,11 +116,11 @@
     },
     {
       "id": "EX-input-conditioning",
-      "title": "Choose an input for the information the proposed change needs",
+      "title": "Select the input that supports the next transformation",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/input-conditioning.md",
-      "version": 2,
-      "sha256": "f2de1300db73ae5e62bde799bba50b9da8bccf0be3d531c6a93a7f98b1252302",
-      "summary": "An input supplies achievements and losses together. A candidate's useful appearance can support continuation, while a source restart restores original evidence and requires the appearance to be generated again. The proposed change determines which information matters.",
+      "version": 3,
+      "sha256": "d03207abf9e82ec21471efe5cbcc4cadeb939af859dd576f2a5f13e3fcedd013",
+      "summary": "Continue a useful candidate when the next transformation builds on its achievements. If a central relationship is lost, favor the source or an earlier intact candidate and reconsider the transformation.",
       "questions": [
         "Which source or candidate supplies what the next proposal needs?"
       ],
@@ -145,11 +145,11 @@
     },
     {
       "id": "EX-realization-change",
-      "title": "More explicit wording can still request the same failed operation",
+      "title": "Change the failed proposition, not just its emphasis",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/realization-change.md",
-      "version": 1,
-      "sha256": "3264718a666309c6b9506907a0b15774d300def5719a25015120a8a42231e1e6",
-      "summary": "A new prompt is a new hypothesis only to the extent that it changes something relevant to the failure. Specifying a missing relation, relocating an effect and restating an already explicit operation test different propositions.",
+      "version": 2,
+      "sha256": "b7bd7615be8c7948b9d624d6a731344877d9acd6674ff68ac3cbe297a5a8df4a",
+      "summary": "After repeated explicit failure, prioritize changed realization or conditioning over stronger synonyms. Direct specification is more promising when the decisive relation was genuinely missing.",
       "questions": [
         "Did the proposed alternative actually change the failed operation?"
       ],
@@ -164,18 +164,20 @@
         "EV-H-D-benchmark__001__long",
         "EV-H-B-benchmark__001__long",
         "EV-F001",
-        "EV-F003"
+        "EV-F003",
+        "EV-F005",
+        "EV-historical-score-extract"
       ],
       "review_status": "draft",
       "review_reference": "pending_user_content_review"
     },
     {
       "id": "EX-part-binding",
-      "title": "Getting the attribute right can still modify the wrong referent",
+      "title": "Bind the effect to the intended part and distinguish its neighbor",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/part-binding.md",
-      "version": 1,
-      "sha256": "ab6a45951c20a8d26f76004835924ba5c07d1677705534dc34ccca988826c7a2",
-      "summary": "A correct attribute on the wrong part is a binding failure. Asking for more of the attribute can strengthen the wrong realization rather than move it to the intended place.",
+      "version": 2,
+      "sha256": "2bb33e27e2d8b0b858157851191d9ed3acb77fa414b9f3a8f9c57e02b964865a",
+      "summary": "For an effect on the wrong part, describe the intended carrier in contrast to its neighbor. Anchor shape repair to the existing instance; consider an earlier intact input when duplication appears.",
       "questions": [
         "Why did the correct effect appear on the wrong part?"
       ],
@@ -194,11 +196,11 @@
     },
     {
       "id": "EX-wanted-state",
-      "title": "A correction needs a positive visual account of the replacement",
+      "title": "Replace an unwanted effect with a coherent visual alternative",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/wanted-state.md",
-      "version": 1,
-      "sha256": "225c319c105a402aca2cacc4c69588fa6bd3629a17d4e2d1e9dc6dc05d7c228f",
-      "summary": "A removal request identifies dissatisfaction, but may leave the replacement appearance underspecified or in conflict with the surrounding design. Describe how the wanted state fits that design.",
+      "version": 2,
+      "sha256": "5f9915b03b2e4e5efe3ccab4bce21f7d63ae5a7bcca8e3030efb759562aa6352",
+      "summary": "Lead correction with a positive visual replacement and resolve conflicts with the surrounding design. Use short exclusions to disambiguate that arrangement.",
       "questions": [
         "What visual state replaces the unwanted artifact?"
       ],
@@ -217,11 +219,11 @@
     },
     {
       "id": "EX-style-realization",
-      "title": "Style specificity is a system of visible relationships",
+      "title": "Choose a visible system that makes the style legible",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/style-realization.md",
-      "version": 1,
-      "sha256": "dee95f5f052aa2cd093f83d3b4adff3d80cf2de7d8ecc34dd6b99eef79a9a268",
-      "summary": "Concrete style knowledge is useful when it explains how visible elements produce the effect: how marks construct tone, material responds to light, or ornament fits a silhouette. A longer inventory can still miss the defining relationship.",
+      "version": 2,
+      "sha256": "2048ed005c2cbf452c692793e762e5b9805d816c21d3000d2ff569d94ac9d3c0",
+      "summary": "Choose a coherent visible system for broad style requests. For detailed requests, check required construction separately from convincing ornament and atmosphere.",
       "questions": [
         "What does style knowledge add beyond a genre label?"
       ],
@@ -238,11 +240,11 @@
     },
     {
       "id": "EX-environment-replacement",
-      "title": "Theme cues and a reconstructed place are different achievements",
+      "title": "Transform the structures that make the place recognizable",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/environment-replacement.md",
-      "version": 1,
-      "sha256": "56b666f1d14ad148f6b2da0f4a59f2b69c8a568d433b262301618ce8cd106904",
-      "summary": "A few highly recognizable motifs can establish a theme while the source environment still determines most of the place. Judge what carries the scene, not just whether the requested nouns appear.",
+      "version": 2,
+      "sha256": "fb17b974378fcf4b22a7d0642d08fb3c563c8bed8083273a076343604966f24b",
+      "summary": "If theme cues appear but the old place persists, remap its defining surfaces, boundaries and sightlines. Reassess input and realization when that mapping was already explicit and failed.",
       "questions": [
         "Why does the scene have theme cues but remain the old place?"
       ],
@@ -263,11 +265,11 @@
     },
     {
       "id": "EX-lighting-integration",
-      "title": "A visible lamp, an emissive accent and illumination of the scene are separate",
+      "title": "Design what the light does to the scene",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/lighting-integration.md",
-      "version": 1,
-      "sha256": "c839526fafec19aee4f5855277d272dea0d1ece632df8749bd1ce8c88af96096",
-      "summary": "Lighting style depends on relationships among sources, receivers, shadows and reflections. Adding a lamp or a glowing edge can satisfy a local cue while leaving the scene under its original illumination.",
+      "version": 2,
+      "sha256": "0e9dd05f5d63c6c0eedd1808045b09157f71c1c735de706614938e562f535703",
+      "summary": "If lamps appear without atmosphere, describe receiving surfaces, fill and reflections. Separate facial illumination from the background cast when both matter.",
       "questions": [
         "Why are lamps and glows present without the intended atmosphere?"
       ],
@@ -287,11 +289,11 @@
     },
     {
       "id": "EX-time-binding",
-      "title": "An attribute appearing in a clip is different from an attribute persisting through it",
+      "title": "Inspect the transitions that can undo a convincing opening",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/time-binding.md",
-      "version": 1,
-      "sha256": "121501acec56f9f6f56ef8947c41d9b779b7d4c526442dd1ed54e1eda898c194",
-      "summary": "Appearance, persistence and event timing answer different questions. A convincing opening can conceal a later loss; a stable-looking face can still perform a different emotional action.",
+      "version": 2,
+      "sha256": "a50c5fbdba2d496164b569b7bfab2632504d435f3d4295961537c0a8606f16fa",
+      "summary": "Inspect the turns, occlusions and interactions that can undo an attractive opening. Favor delivery for incidental drift; give timing further attention when it carries the requested event.",
       "questions": [
         "Did the design persist, and did the original event persist?"
       ],
@@ -312,11 +314,11 @@
     },
     {
       "id": "EX-continuation-value",
-      "title": "The value of a revision depends on the gap it closes and the alternative already available",
+      "title": "Spend another attempt on a gap that can change the delivery",
       "path": "knowledge/staged/experience-full-maintenance-20261101/entries/continuation-value.md",
-      "version": 1,
-      "sha256": "48171911b195062943debea5defb906482d92f4eedc64c3cec196700714d0c99",
-      "summary": "A new result may fix the latest complaint yet be a worse answer to the original request. Evaluate the consequential gap and the retained alternatives, rather than counting verdicts or following the most recent comparison.",
+      "version": 2,
+      "sha256": "4978aaa62285e24f4a382c7132241e4ff5f1aeba01335942cfc84702cbcdcda3",
+      "summary": "Favor delivery when the central request is met. Spend another attempt on an important gap with a concrete improvement basis, and compare with the best retained answer.",
       "questions": [
         "Is a repaired complaint enough to justify another attempt or a final choice?"
       ],
@@ -331,7 +333,8 @@
         "EV-F003",
         "EV-F004",
         "EV-F006",
-        "EV-F007"
+        "EV-F007",
+        "EV-batch-facts"
       ],
       "review_status": "draft",
       "review_reference": "pending_user_content_review"
@@ -812,6 +815,15 @@
       "path": "knowledge/staged/experience-full-maintenance-20261101/evidence/visual-inspection.md",
       "version": 1,
       "sha256": "ab0f5fbf31a7508f4bf3002e02c9a13b71439364b2ff86ce8eb3c7d44b9dd9d0",
+      "review_status": "draft",
+      "review_reference": "pending_user_content_review"
+    },
+    {
+      "id": "EX-renderer-profiles",
+      "title": "Bernini and Ditto: starting preferences and recurring traps",
+      "path": "knowledge/staged/experience-full-maintenance-20261101/renderers.md",
+      "version": 2,
+      "sha256": "a0276d78a5b9c3febc0b2d292cafc312a0edbcea77b939a017fed8b423f84512",
       "review_status": "draft",
       "review_reference": "pending_user_content_review"
     }

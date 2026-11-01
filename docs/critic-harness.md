@@ -1,5 +1,7 @@
 # Active online Critic
 
+> Historical scope — 2026-11-01: This document describes the earlier multi-turn Critic. The creative_loop_v1 Critic uses a single request/report under [fixed main score definitions](../src/critic_harness/SCORE_DEFINITIONS.md), with no internal observation loop or recommendations. See [current implementation](creative-loop-implementation.md).
+
 The implementation is `src/critic_harness/`. It is explicitly enabled and does not replace `src/evaluation/` or the legacy Critic. Formal benchmark cards, scores and running evaluation jobs retain their own protocol. The online Critic uses English, observes existing media and returns grounded feedback to a model-led Planner.
 
 ## Responsibilities

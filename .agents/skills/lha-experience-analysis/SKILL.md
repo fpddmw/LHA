@@ -1,18 +1,26 @@
 ---
 name: lha-experience-analysis
-description: Derive or revise explanatory video-editing experience from an explicitly requested review of LHA development runs. Use actual prompts, candidate ancestry and outcome evidence to identify transferable distinctions. Does not run experiments or publish knowledge.
+description: Derive judgment-bearing video-editing experience from requested reviews of LHA development runs. Explain consequential contrasts and propose concrete conditional guidance using actual prompts, inputs and outcomes.
 ---
 
-# Understand what the experiments teach
+# Discover what the experiments teach
 
-Produce experience that helps Planner understand a condition or make a better-informed choice. The output can be a new entry, a concrete revision, or a finding that the available evidence does not yet justify either. Work on the requested batch; do not start a new experiment or expand into automatic RSI.
+Produce an explanation that changes a design or revision judgment. Read the [shared writing standard](../../../docs/experience-authoring-standard.md) and consult the [current complete library](../../../knowledge/staged/experience-full-maintenance-20261101/README.md) for existing accounts.
 
-Read the [shared writing standard](../../../docs/experience-authoring-standard.md) and the batch's scope/missing-record summary. Follow links into the original runs for comparisons that matter. Confirm what was actually submitted and what the selected input already contained. Old Critic judgments are attributed observations, not authoritative diagnoses or present-day operating instructions.
+## Find the consequential contrast
 
-Seek a useful explanatory contrast: an omitted relation versus a clearly stated failure; category reconstruction versus instance preservation; a design choice that obscures activity versus an unrelated artifact; a new realization versus stronger wording. Compare cases and counterexamples when they clarify that distinction. These examples guide inquiry without imposing a classification form.
+Follow the batch summary into the requests, input candidates, exact prompts and outcome evidence that matter. Ask why a plausible proposal led to this result and why a neighboring case differed. Useful contrasts include a genre-compatible scene that changed the activity, ornament that succeeded while silhouette failed, or an added effect that covered necessary contact evidence.
 
-Connect the explanation to a possible change in interpretation or action. Explain the causal status: observed sequence, mechanism hypothesis, or controlled evidence. Use the exporter for counts and retain the unit of counting. Inspect actual video evidence before making new visual claims; otherwise quote the saved finding and its limitations.
+Locate the actual intervention. A later prompt can change scope or priority while repeating requirements already present. Check those earlier clauses before explaining success as omission repair. Inspect both useful and failed continuations; ask what each input made available and what the next transformation required.
 
-Consult existing entries before adding another. Use the [four examples](../../../knowledge/staged/experience-curation-20261101/README.md) for writing quality and their audit for old-ID relationships. New content should carry its own evidence rather than inherit a renderer-wide claim from one example.
+Develop an explanatory account and a working preference. Explain what Planner should notice, which realization or route deserves priority, and which plausible response is likely to repeat the trap. When evidence leaves several explanations open, recommend a discriminating inspection or a design that addresses their shared conflict. Mechanistic speculation should lead to a useful, visibly provisional proposal rather than a claim about inaccessible model internals.
 
-Stage exact prose and evidence links for user review. Identify which existing understanding would change and any remaining disagreement. No fixed number of cards, mandatory output schema or periodic model call is required. No approval to analyze implies permission to render, score, alter the active catalog or overwrite historical results.
+Use counterexamples to refine the condition. A preserved face during a heavy scene edit suggests examining the spatial interaction with the person; it does not erase the multi-person identity problem. A failed spatial remapping helps separate a coherent proposal from an executable one.
+
+## Turn understanding into usable prose
+
+Lead with the practical judgment, then explain its scene-level basis. Keep recommendations decisive and conditional. Preserve requested design features by finding compatible realizations; reconsider assistant-added flourishes when they compete with the task. Include successful designs and informative failures, not just warnings.
+
+Verify consequential source claims and exact counts using saved records and the existing exporter. New visual claims require viewing the relevant media; saved observations can be used with clear attribution. Put detailed evidence qualifications in the footer, keeping action-changing conditions in the main text.
+
+Deliver exact new or revised entry text and explain the judgment it adds to the existing library. A stronger explanation, useful boundary or retirement of a misleading claim can be the whole result. Stage content for review. This Skill does not authorize new experiments, scoring or runtime activation.

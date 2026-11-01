@@ -1,15 +1,23 @@
-# EX-style-realization: Style specificity is a system of visible relationships
+# EX-style-realization: Choose a visible system that makes the style legible
 
-Revision 1. Draft for review. Reworks X2/B1/D1 and the ornament/shape distinction in D4. Bernini direct probe plus historical loops; prompt length was not isolated.
+Revision 2. Draft for review. Bernini direct probe and Bernini/Ditto loops; X2/B1/D1/D4.
 
-**Concrete style knowledge is useful when it explains how visible elements produce the effect: how marks construct tone, material responds to light, or ornament fits a silhouette. A longer inventory can still miss the defining relationship.**
+**For a broad style request, choose a coherent visual interpretation and express its defining relationships. For a detailed request, separate the specified structures from their surface decoration so a convincing atmosphere does not conceal a missing requirement.**
 
-In the Bernini probe, 'children's storybook' remained largely photographic. A watercolor-and-pencil interpretation produced illustration through soft contours, transparent washes, softened shadows and paper texture. A short etching label already worked, while elaboration better specified the ink, hatching, paper and sky. The value was a more determinate visual interpretation, not word count alone.
+## Turn a broad label into a design
 
-The costume records show why specificity also requires structure. Ditto realized silk, color and embroidery while leaving the requested standing collars and horizontal headwear unrealized. F003's palace setting and ornament could be convincing while the garment only partly read as hanfu. Surface detail and structural type are separable. The style library can explain which relationships are characteristic; Planner then chooses a realization appropriate to the source rather than multiplying decorative adjectives.
+The Bernini storybook probe remained largely photographic with a bare label. A watercolor-and-pencil interpretation made the illustration legible through contours, transparent washes, softened shadows and paper texture. A short etching label already produced an etched appearance, while a more specific description better directed hatching, paper and sky.
 
-For a broad request, several interpretations may be valid. Warm pastel watercolor is one storybook direction, not the definition of storybook. For an explicit long request, named structural details remain part of the task even if another plausible style has already appeared. Knowledge should help distinguish these cases and articulate the chosen direction.
+Use the style library to choose the relationships that distinguish the desired result: how marks build shadow, how pigment meets the paper, how materials receive light, or how shapes are simplified. Write a compact set of mutually supporting features. The purpose is to resolve the creative direction; prompt length is a consequence of what needs expressing.
 
-Successful initial style conversion does not establish preservation. The probe's detailed preservation clauses did not reliably recover pen/notebook structure. The new batch likewise produced strong palace or Wuxia appearance while changing activities. Inspect style, requested construction and source relationships as related but different outcomes.
+Watercolor and pencil are one storybook option. A cut-paper or ink-and-flat-color direction may serve another source or user intention better. Retain the breadth of the request while making your selected proposal concrete. If a concise label already yields the intended visual language, use subsequent attention on the remaining task rather than elaborating it for its own sake.
 
-Evidence: [Bernini probe record](../../../model-experience/bernini-r.md), with exact prompts and original result links; [D costume](../evidence/H-D-benchmark__001__long.json), three attempts; [F003](../evidence/F003.json), v1–v3. The old first-pass expectations are retained as scoped observations, with no compulsory stop rule. Related: [activity relations](activity-relations.md), [continuation value](continuation-value.md).
+## Distinguish construction from ornament
+
+Ditto costume attempts supplied silk, palette and gold embroidery while standing collars and horizontal headwear stayed unrealized. Treat garment silhouette and ornament as separate design questions. If the user explicitly requested the collar, more embroidery does not close that gap. Consider a clearer structural realization or another compatible cut before adding decorative detail.
+
+The same distinction applies to architectural identity, geometric displacement in glitch art, or the difference between a lamp and scene illumination. Read complete knowledge entries for how the visual effect is constructed, then inspect that construction in the candidate.
+
+An impressive style can coexist with changed roles or missing props. Judge it alongside the user's retained activity and required details. When the actual request is already met, strong first-pass style is a reason to favor delivery rather than introduce decorative changes without a task-level benefit.
+
+**Evidence.** [Bernini probe](../../../model-experience/bernini-r.md), exact storybook/etching prompts and outcomes; [Ditto costume](../evidence/H-D-benchmark__001__long.json); [F003](../evidence/F003.json). Length and specificity changed together in the probe; preservation wording had uneven results. Related: [activity](activity-relations.md), [continuation value](continuation-value.md).

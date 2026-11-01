@@ -1,0 +1,62 @@
+# Gemini-led revision: content and comparison
+
+Status: full draft complete, pending content review and activation. This pass updates the maintenance writing standard and three maintenance Skills, completes all 14 entry replacements, restores actionable renderer profiles, and prepares five complete Planner-manual replacements. Runtime knowledge access and current manuals remain unchanged.
+
+## What changed in the writing
+
+The opening and discovery summary now favor a concrete response under a recognizable condition. The body explains the visual or semantic distinction and develops the response. Action-changing exceptions sit beside the advice; detailed protocol and counting qualifications sit in the evidence footer. The three maintenance Skills focus on explanatory judgment, actual interpretation/action, and substantive editorial quality.
+
+The current taxonomy remains 14 entries covering all 45 old cards. Gemini supplied complete rewrites of three entries and the renderer profile; all other eleven entries now also have complete new prose. They are not remaining outlines.
+
+## Entry-by-entry before and after
+
+| Entry | Earlier opening | Revised judgment |
+|---|---|---|
+| [EX-design-conflict](entries/design-conflict.md) | A successful costume, prop or lighting design can undermine the original activity by covering its support and contact relations. Repeating the preservation request leaves that design conflict in place. | When a design hides the contacts that make the action readable, reshape or relocate that design before adding preservation clauses. Realize user-required features around the action. |
+| [EX-activity-relations](entries/activity-relations.md) | A video can retain the right people and objects while changing the activity. Genre-compatible staging can replace the particular relationships that made the source event intelligible. | When retaining an event under a new genre, anchor who acts on whom and give the genre concrete visual scope. A preserved object inventory can still permit the wrong activity. |
+| [EX-instance-identity](entries/instance-identity.md) | An appearance description can faithfully specify a type of person while failing to retain this person. More identity adjectives add attributes; they do not add a correspondence constraint between source and output. | For identity-sensitive edits, favor an input with the right individual and reduce competing reconstruction around the person. Keep identity wording concise while preserving explicit costume requirements. |
+| [EX-object-continuity](entries/object-continuity.md) | A prop can be recognizable in every local view while failing to be one continuous object in the action. Counting nouns in the prompt does not establish continuity of possession, visibility and release. | For existing motion, favor concise source-linked object roles over unnecessary choreography. Inspect retrieval, occlusion and release before responding to duplication with more repetitions of one. |
+| [EX-connected-scope](entries/connected-scope.md) | A revision's scope is determined by the visual relationships it changes. Calling it small supplies no spatial control; grouping everything under one background label does not make those changes coherent. | Group changes by visual dependency: a window, view and reflections can be one coherent edit. Separate unrelated repairs when they need different inputs or explanations. |
+| [EX-input-conditioning](entries/input-conditioning.md) | An input supplies achievements and losses together. A candidate's useful appearance can support continuation, while a source restart restores original evidence and requires the appearance to be generated again. The proposed change determines which information matters. | Continue a useful candidate when the next transformation builds on its achievements. If a central relationship is lost, favor the source or an earlier intact candidate and reconsider the transformation. |
+| [EX-realization-change](entries/realization-change.md) | A new prompt is a new hypothesis only to the extent that it changes something relevant to the failure. Specifying a missing relation, relocating an effect and restating an already explicit operation test different propositions. | After repeated explicit failure, prioritize changed realization or conditioning over stronger synonyms. Direct specification is more promising when the decisive relation was genuinely missing. |
+| [EX-part-binding](entries/part-binding.md) | A correct attribute on the wrong part is a binding failure. Asking for more of the attribute can strengthen the wrong realization rather than move it to the intended place. | For an effect on the wrong part, describe the intended carrier in contrast to its neighbor. Anchor shape repair to the existing instance; consider an earlier intact input when duplication appears. |
+| [EX-wanted-state](entries/wanted-state.md) | A removal request identifies dissatisfaction, but may leave the replacement appearance underspecified or in conflict with the surrounding design. Describe how the wanted state fits that design. | Lead correction with a positive visual replacement and resolve conflicts with the surrounding design. Use short exclusions to disambiguate that arrangement. |
+| [EX-style-realization](entries/style-realization.md) | Concrete style knowledge is useful when it explains how visible elements produce the effect: how marks construct tone, material responds to light, or ornament fits a silhouette. A longer inventory can still miss the defining relationship. | Choose a coherent visible system for broad style requests. For detailed requests, check required construction separately from convincing ornament and atmosphere. |
+| [EX-environment-replacement](entries/environment-replacement.md) | A few highly recognizable motifs can establish a theme while the source environment still determines most of the place. Judge what carries the scene, not just whether the requested nouns appear. | If theme cues appear but the old place persists, remap its defining surfaces, boundaries and sightlines. Reassess input and realization when that mapping was already explicit and failed. |
+| [EX-lighting-integration](entries/lighting-integration.md) | Lighting style depends on relationships among sources, receivers, shadows and reflections. Adding a lamp or a glowing edge can satisfy a local cue while leaving the scene under its original illumination. | If lamps appear without atmosphere, describe receiving surfaces, fill and reflections. Separate facial illumination from the background cast when both matter. |
+| [EX-time-binding](entries/time-binding.md) | Appearance, persistence and event timing answer different questions. A convincing opening can conceal a later loss; a stable-looking face can still perform a different emotional action. | Inspect the turns, occlusions and interactions that can undo an attractive opening. Favor delivery for incidental drift; give timing further attention when it carries the requested event. |
+| [EX-continuation-value](entries/continuation-value.md) | A new result may fix the latest complaint yet be a worse answer to the original request. Evaluate the consequential gap and the retained alternatives, rather than counting verdicts or following the most recent comparison. | Favor delivery when the central request is met. Spend another attempt on an important gap with a concrete improvement basis, and compare with the best retained answer. |
+
+## Factual corrections that improve the explanation
+
+- **F005: already-explicit apparatus, clearer scope later.** V1 already requested green felt, the central mechanism and blue tiles. The revised account investigates allocation between the playing system and outer table frame. It describes recognizable apparatus recovery in v2, while retaining the failed action verdict. [Exact record](evidence/F005.json).
+- **F002: retained outfit instructions, failed realization.** V3 still specified the tuxedo jacket, shirt, bow tie and trousers. The usage-review Skill examines the proposed scope and result rather than explaining the loss as deletion caused by hesitant guidance. [Exact record](evidence/F002.json).
+- **F004: spatial remapping was already attempted.** V3 explicitly targeted walls, barriers, columns, equipment, windows and light. Its failed arena completion is retained as a boundary for spatial-remapping guidance, not an example of omitting that guidance. [Exact record](evidence/F004.json).
+- **F006: sequence descriptions remain usable.** V2 described concealed/retrieved/raised phone states without an observed duplicate; precise motion remained unknown. The object-continuity entry favors concise source-linked roles and selective transition detail rather than banning sequence language. [Exact record](evidence/F006.json).
+- **Quotations and visual claims.** New prose uses actual source relationships and attributed saved observations. Proposed phrasing is marked illustrative. The phone/ball explanation is a working model; the text does not present internal diffusion behavior as measured fact.
+
+## Strong preferences with usable boundaries
+
+| Gemini proposal | Implemented treatment |
+|---|---|
+| Continue only after all three integrity/addition/space conditions pass | These conditions provide positive reasons to continue. Inspect unresolved central issues; an unknown whole-clip verdict does not act as an admission gate. |
+| Never restart unless realization changes | Favor a reconsidered realization when the failure repeats. Permit a reasoned resample when variability is the actual hypothesis. |
+| Stop after two failures | Deprioritize the repeated operation and favor a credible alternative or adequate delivery; keep user priorities and promising alternatives in the decision. |
+| Always specify four lighting components | Use source, receiver, fill and reflection as design lenses, expressing the relationships the task actually needs. |
+| Accept minor expression drift and finish | Favor delivery for incidental drift; give performance timing further attention when it carries the user request. |
+| All caveats go to a footer | Put protocol details in the footer; keep conditions that change the action beside the advice. |
+
+## Skills and manuals
+
+| Document | Substantive revision | State |
+|---|---|---|
+| [Shared standard](../../../docs/experience-authoring-standard.md) | A conditional preference is a required contribution of experience; explanations and counterexamples develop the judgment. | Updated maintenance instruction |
+| [Analysis Skill](../../../.agents/skills/lha-experience-analysis/SKILL.md) | Compare actual interventions, discover a consequential contrast and propose useful guidance. | Updated maintenance Skill |
+| [Use-review Skill](../../../.agents/skills/lha-experience-use-review/SKILL.md) | Diagnose discovery, interpretation, action and outcome; distinguish text problems from execution failure. | Updated maintenance Skill |
+| [Curation Skill](../../../.agents/skills/lha-experience-curation/SKILL.md) | Sharpen recommendations and summaries, preserve concrete renderer distinctions, consolidate each empirical account. | Updated maintenance Skill |
+| [Operating manual](planner-manuals/CREATIVE_LOOP.md) | Delivery/input/comparator separation, renderer input facts and direct experience-use guidance; existing tools and Critic unchanged. | Staged only |
+| [Design manual](planner-manuals/UNDERSTAND_AND_DESIGN.md) | Develop task relations and visible constructions, consult experience for consequential choices. | Staged only |
+| [Revision manual](planner-manuals/UNDERSTAND_AND_REVISE.md) | Diagnose the actual gap, choose useful conditioning, verify consequential Critic claims and compare retained answers. | Staged only |
+| [Reading](planner-manuals/READING.md) and [navigation](planner-manuals/README.md) | Connect questions to actionable summaries, full accounts, renderer profiles and design knowledge. | Staged only |
+
+The [draft catalog](catalog-draft.json) includes the renderer profile as a readable resource as well as the 14 entry summaries. A future activation must explicitly install reviewed content, rebase staged manual links, and pin final hashes. The current curated catalog is still empty. Original evidence, historical reports, style knowledge, Critic, runtime code and saved tasks are unchanged. No new model behavior or performance improvement is claimed by this editorial revision.

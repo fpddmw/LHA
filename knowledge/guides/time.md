@@ -2,7 +2,7 @@
 
 [Knowledge map](../README.md) · [Video meaning](meaning.md) · [Media](media.md) · [Combination](combination.md)
 
-This guide reads spatial arrangement, light, and event order together within each case. The comparisons concern relationships in the original designs. Their shot durations and production instructions remain available in the complete entries.
+Organize time around what the viewer should understand and when. Composition, light and movement can reveal a relationship, sustain attention or mark an event. The cases below explain these choices; their original shot plans retain the specific production timings.
 
 ## Composition can determine when information becomes understandable
 
@@ -27,6 +27,14 @@ Light can also primarily organize form. [The Godfather](../entries/opuscar-045.m
 [Forrest Gump](../entries/opuscar-067.md) uses page turns in a pop-up book as scene changes. The paper mechanism explains how spaces appear and disappear. [Spotlight](../entries/opuscar-088.md) makes movement through a microfilm reader part of information retrieval. [The Artist](../entries/opuscar-084.md) places intertitles within the performance rhythm. Temporal organization can develop from objects, media, and viewing processes already present in a story.
 
 The original OPUSCAR anthology also uses graphic matches and handovers between segments. For example, [Lawrence of Arabia](../entries/opuscar-035.md) connects fire and sun on the way into a desert. Reusing a segment independently calls for a fresh understanding of that transition in its new context. The complete entry retains the original director's explanation so its purpose remains visible.
+
+## Adapt temporal ideas to the existing event
+
+For an appearance edit that keeps the source action, develop emphasis within its existing event: use readable contact, contrast or background separation where the action matters. Importing a new camera move, cut or climax can displace the event the user wanted restyled. Use such changes when the request calls for temporal redesign and the execution path supports it.
+
+If a visible transformation is requested, give its development a relation to the event: a reveal can establish space before action, a material change can follow an object's motion, and a shift in light can mark a new state. Select the relation that serves this clip rather than compressing an entire source sequence into its duration.
+
+Review time at consequential transitions as well as attractive stills. Approach, contact, separation and occlusion can distinguish a continuous activity from a set of plausible poses. Sparse frames may leave fast motion unresolved; inspect the relevant interval when that uncertainty affects the decision.
 
 ## Read original durations in their production context
 

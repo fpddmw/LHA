@@ -1,15 +1,21 @@
-# EX-object-continuity: A moving prop must remain the same participant across interaction states
+# EX-object-continuity: Preserve a moving prop's role across state changes
 
-Revision 1. Draft for review. New Bernini hypothesis from F001/F006. Based on saved sequence observations; no new motion tracking or causal test.
+Revision 2. Draft for review. Bernini; F001/F006.
 
-**A prop can be recognizable in every local view while failing to be one continuous object in the action. Counting nouns in the prompt does not establish continuity of possession, visibility and release.**
+**For an existing action, prefer a concise account of the prop's continuous role over rewriting its choreography. Inspect retrieval, occlusion and release, where a recognizable object can become an extra instance or disappear from the action.**
 
-F001's first result showed an extra basketball beside the shooter while the released ball was airborne. Its second prompt explicitly described one moving basketball and empty hands after release, yet the result introduced an extra person and a shot without the ball. The third kept a recognizable jump shot but still had an additional opening ball. In F006 v1, the review found a second phone-like object during retrieval, although the ending retained one prominent phone.
+## The vulnerable relationship is continuity of participation
 
-These failures concentrate around state transitions: concealed to visible, held to released, one hand to another. A plausible explanation is that local visual plausibility is being reconstructed without consistently binding all those states to one participant. This is more specific than 'the model duplicates objects': it identifies the relationship that a source action supplies and a new rendition can lose.
+F001 showed an extra ball while another was airborne. A later detailed shot description still produced broken possession and an extra player. F006 v1 showed a second phone-like object during retrieval even though the ending had one prominent phone. A correct endpoint or a correct object category therefore misses the critical question: did the same object stay involved through the transition?
 
-The useful question is which transitions establish that the ball or phone is the same object. Inspect hand-object contact, occlusion, possession and the post-release state when they are consequential. A general scene summary or endpoint frame can miss the break. If the relationship was omitted, stating it clarifies the target; if it was already explicit, repeating 'one' does not materially change the proposed solution.
+A useful working model is that locally plausible states can be rendered without consistently binding possession, visibility and release. Long prose describing several states adds more conditions to realize. Temporal descriptions becoming simultaneous instances is one possible explanation to investigate; the practical priority is to avoid unnecessary re-choreography of motion already supplied by the source.
 
-F006 v2 restarted with a more explicit concealed-then-retrieved phone description and no duplicate was observed. However, precise phone and hand preservation remained unknown, the costume disappeared, and multiple changes were simultaneous. This is a partial counterexample to inevitable duplication, not proof of a reliable wording fix. The novel value is a better failure interpretation and inspection target; an effective control strategy remains open.
+## Describe the binding that matters
 
-Evidence: [F001](../evidence/F001.json), v1 late-interval and v2/v3 findings; [F006](../evidence/F006.json), v1 retrieval and v2/v3 outcomes. These are two source scenes, with different actions, not replicated tests of one duplication mechanism. Related: [activity relations](activity-relations.md), [time binding](time-binding.md), [realization change](realization-change.md).
+For a preserved action, make the existing ball or phone the participant and tie it to the relevant source interaction. An illustrative direction is: preserve the source ball's possession and release during the existing shot. Add transition detail when it resolves a particular ambiguity, such as whether the hands remain occupied after release. Stop adding repetitions of 'one' once the singular object and relation are already explicit; revise the competing transformation or select an input with clearer continuity instead.
+
+Sequence wording can be useful. F006 v2 explicitly described the phone as concealed, retrieved and raised, and the saved review observed no duplicate. That result favors using needed sequence information selectively. It does not support a blanket ban on temporal language or a general short-prompt cure.
+
+Inspect just before and after the relevant contact or occlusion, not only the opening and final frame. When a duplicate is already part of a candidate, favor an earlier input with the original interaction for a fresh realization. If other useful edits depend on continuing the candidate, treat continuity as the specific uncertain repair and inspect that transition after generation.
+
+**Evidence.** [F001](../evidence/F001.json), v1-v3; [F006](../evidence/F006.json), v1 retrieval and v2/v3. Saved online observations across two source scenes; precise phone/hand motion remained unknown after the observed duplicate disappeared. Concise source-linked phrasing is a proposed working default. Related: [activity](activity-relations.md), [time](time-binding.md).

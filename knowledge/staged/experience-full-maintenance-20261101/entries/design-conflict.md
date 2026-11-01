@@ -1,15 +1,21 @@
-# EX-design-conflict: A design can conceal the evidence that makes an activity readable
+# EX-design-conflict: Change the design that hides the action
 
-Revision 2. Draft for review. Bernini observations; explanatory interpretation. Reworks R7 and part of I3. Updated against F001/F003; no new generation.
+Revision 3. Draft for review. Bernini; R7 and I3, extended by F001/F003.
 
-**A successful costume, prop or lighting design can undermine the original activity by covering its support and contact relations. Repeating the preservation request leaves that design conflict in place.**
+**When a costume, prop or lighting treatment covers the contact or support that makes an activity readable, revise that treatment before adding more preservation clauses. Keep the style's expressive contribution while relocating or reshaping the part that competes with the action.**
 
-In the magical-study case, the authored long robe and the requested visible chair competed for the same image area. The second prompt named both, but the historical review reported the robe concealing the chair back, seat and legs. The loss concerned the visible person-chair-desk relationship through which sitting and reading were understood. The next proposal retained a fitted jacket and trousers, changed color and embroidery, and described the chair. The review found seating readable again. Fantasy appearance did not depend on the long robe.
+## Find the competition inside the proposal
 
-This distinction changes the design question. Ask what carries the requested style, and what visual evidence the source activity needs. A robe's fabric and ornament, its silhouette and its occlusion are different contributions. Altering one of these can preserve the direction while changing the conflict. The same reasoning applies to glow crossing a face, or scenery covering a working surface.
+A long robe can deliver a convincing magical identity while hiding the chair that explains a seated reader's posture. In the study trace, naming the chair again alongside the robe left the conflict in place. A later fitted-jacket realization made seating readable. The useful distinction is between the style contribution of fabric, ornament and color, and the silhouette's occupation of the image. A design can succeed visually and still make the requested event harder to understand.
 
-The new batch establishes an important boundary. F003's third prompt explicitly fitted narrow sleeves to existing arms and kept the guitar unobstructed. The guitar became recognizable again relative to v2, but the microphone interaction and identities remained altered. Removing an occlusion conflict does not by itself recover a relational or temporal failure. F001 also explicitly required flowing wide sleeves: here the garment is a user requirement, unlike the optional robe in the study. It needs a compatible realization, not silent removal.
+Look at what the action needs viewers to see: the body supported by the seat, fingers meeting strings, a hand releasing an object, or a face receiving another person's attention. Then locate what the proposed appearance puts across that evidence. This gives a concrete revision target instead of an expanding list of preservation demands.
 
-The practical contribution is to locate a conflict within the proposal rather than interpret every loss as insufficient emphasis. When the conflicting feature is optional, its realization can change. When it is requested, the tradeoff remains part of the task.
+## Preserve the ambition; change the conflicting realization
 
-Evidence: [B-003](../evidence/B-003.json), generations `event-0005` and `event-0008`, reviews `event-0006-critique` and `event-0009-critique`; [F003](../evidence/F003.json), v2/v3; [F001](../evidence/F001.json), original request. All study attempts used source input; several prompt details changed together. This supports a design interpretation, not an isolated costume effect. Related: [activity relations](activity-relations.md), [connected scope](connected-scope.md).
+For an optional flourish, favor a different cut, placement or lighting treatment that leaves the decisive relation visible. Fantasy clothing can use fabric and embroidery while its silhouette clears the seat and hands. A luminous effect can move behind a subject or concentrate on an edge rather than wash out the contact region. Use the style library to develop alternatives with comparable visual intent.
+
+A user-required feature deserves a compatible realization. F001 explicitly requested flowing wide sleeves; silently substituting fitted sleeves would lose part of the task. Explore drape behind the active arms, openings that expose the working hands, or a silhouette whose flow remains visible away from the ball. These are design options to develop against the actual shot, not a prescribed costume.
+
+After the obstruction changes, inspect the relationship itself. F003's narrower-sleeve proposal coincided with a more recognizable guitar, while microphone roles and identities remained wrong. Continue the diagnosis at that relational level instead of treating visible instrument recovery as complete action recovery.
+
+**Evidence.** [Study](../evidence/B-003.json), source-based generations and their online reviews; [F003](../evidence/F003.json), v2/v3; [F001](../evidence/F001.json), requested wide sleeves. Several descriptions changed together. These records motivate a design-conflict account; the drape and placement alternatives above are proposed applications. Related: [activity relations](activity-relations.md), [connected scope](connected-scope.md).

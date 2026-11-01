@@ -1,15 +1,21 @@
-# EX-wanted-state: A correction needs a positive visual account of the replacement
+# EX-wanted-state: Replace an unwanted effect with a coherent visual alternative
 
-Revision 1. Draft for review. Merges R4/X1 and the expression component of D5. Primarily Ditto observations, with Bernini counterexamples.
+Revision 2. Draft for review. Primarily Ditto; R4/X1/D5 with Bernini F004.
 
-**A removal request identifies dissatisfaction, but may leave the replacement appearance underspecified or in conflict with the surrounding design. Describe how the wanted state fits that design.**
+**Lead corrections with the appearance and relationships you want to construct. If the unwanted effect follows from the surrounding design, change that relationship as well; asking to suppress its symptom leaves the competing instruction in place.**
 
-The Ditto palace correction asked to neutralize yellow-orange skin while retaining rich candlelight, gold and warm surroundings. The result intensified yellow skin and hard highlights. The prompt already included natural tones and rosy undertones, so this is not evidence that a particular negative word caused the failure. The unresolved issue includes the relationship between facial illumination and the scene's dominant palette.
+## Resolve the visual conflict
 
-In the etching case, a list excluding yellow wash, folds and faded edges did not remove all of them. A later source attempt described white paper and neutral grayscale and was judged stronger, but also changed seed and other wording and retained some negatives. A positive description can give a more useful target than an absence alone; the record does not isolate a negation effect.
+A golden candlelit room can push faces toward the same warm cast. 'Natural skin' added to an otherwise globally golden treatment leaves the intended lighting separation unclear. The historical Ditto correction asked to neutralize yellow-orange skin while retaining rich warm surroundings and obtained an even stronger cast.
 
-The implication is to specify the replacement at the level that matters. Paper whiteness, unmarked margins and ink shadow construction together describe an alternative print surface. Neutral facial fill and warm practical lights describe a lighting relationship. Merely suppressing yellow while requesting a globally golden image can preserve the underlying conflict. Likewise, removing cyan from a support is different from giving the tabletop the emitting role.
+For a similar proposal, prefer describing how faces receive neutral or cooler fill while warm practical lights remain in the background. If the image should stay warmly lit overall, choose the intended amount and location of warmth rather than treating every warm skin tone as an artifact. The correction is a lighting design decision with a specific target, not an instruction to erase a color word.
 
-Short exclusions remain useful for disambiguation. F004's successful prompt explicitly kept supports unlit, and the older successful etching prompt retained exclusions. No ban on negatives or candidate color correction follows from these cases. When the desired replacement was already explicit, [realization change](realization-change.md) becomes the more useful question.
+For an etching, define the replacement print surface: clean off-white or white paper, intentional blank margins, and dark ink constructing form. This offers the model something to render where stains, fading or unwanted washes appeared. Use the user's desired medium to choose the appropriate surface; aged paper can be intentional in another request.
 
-Evidence: [D palace short](../evidence/H-D-benchmark__001__short.json), v2/v3; [D etching no-knowledge](../evidence/H-D-027__short__no_knowledge.json), all prompts and reviews; [F004](../evidence/F004.json), v2; [B fewshot no-knowledge](../evidence/H-B-fewshot_004__long__no_knowledge.json), support-glow persistence. New seven-task records add boundaries, not a controlled test of negation. Related: [lighting integration](lighting-integration.md).
+## Use exclusions to clarify the positive arrangement
+
+Short exclusions are useful when a nearby interpretation would otherwise compete. A glowing tabletop above unlit supports specifies both roles. Clean margins with no printed marks can distinguish intentional blank paper from faded drawing. Put the positive construction first and use exclusion to settle the ambiguity.
+
+If that replacement was already explicit and failed, change the realization or conditioning. For a face cast already baked into a candidate, an earlier candidate or source with usable skin information deserves priority when identity is central; targeted candidate correction remains an option when the rest of the appearance is valuable and the lighting change is plausible. Compare the whole result rather than judging only whether the prohibited color weakened.
+
+**Evidence.** [Ditto palace](../evidence/H-D-benchmark__001__short.json), v2/v3; [Ditto etching](../evidence/H-D-027__short__no_knowledge.json), prompts containing both positive descriptions and exclusions; [F004](../evidence/F004.json), v2. Wording, seed and input changes were not isolated. Lighting separation is a proposed application of the observed conflict. Related: [lighting](lighting-integration.md), [realization change](realization-change.md).

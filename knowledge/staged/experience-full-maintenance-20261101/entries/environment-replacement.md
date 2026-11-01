@@ -1,17 +1,25 @@
-# EX-environment-replacement: Theme cues and a reconstructed place are different achievements
+# EX-environment-replacement: Transform the structures that make the place recognizable
 
-Revision 1. Draft for review. Expands B2/D2 with Bernini F002/F004/F005/F006/F007. Environment persistence is observed; allocation and visibility explanations are hypotheses.
+Revision 2. Draft for review. Bernini and Ditto; B2/D2 plus F001/F004/F005/F006/F007.
 
-**A few highly recognizable motifs can establish a theme while the source environment still determines most of the place. Judge what carries the scene, not just whether the requested nouns appear.**
+**When a scene has the requested theme but still reads as the old location, target the surfaces, openings and sightlines carrying that location. Prefer concrete spatial remapping over adding more thematic objects around an unchanged setting.**
 
-Earth views, suits and cyan table lights made F004 v2 futuristic, yet cream walls, barriers and exercise equipment retained the gym. Lanterns and wood accents partly upgraded F005 while utilitarian walls and wiring persisted. F007 v1 transformed the train but left the street crossing ordinary. These results were visually on-theme in some regions and incomplete as environment replacements.
+## Separate motifs from the place they inhabit
 
-Two distinct difficulties matter. First, an existing boundary can be reskinned without rebuilding what it encloses. Second, a requested addition needs visible space. F006's first floating-mountain prompt had no visible mountains; v3 placed them above the pavilion and opened foliage gaps. F007 v3 assigned specific source structures new station roles and achieved a stronger setting. Those changes supplied spatial relationships as well as more nouns.
+A space view, futuristic suit and cyan accents can coexist with a recognizable gym. Lanterns and polished wood can coexist with utilitarian walls and wiring. F007's metallic train initially sat in an ordinary street crossing. In each case, the successful motif leaves an identifiable carrier of the old scene.
 
-This leads to a more useful design question: which source surfaces, openings, silhouettes and sightlines make the location read as the old place, and which must change to make it read as the requested place? Keeping layout, geometry and camera motion does not require keeping the original wall material or equipment identity. Conversely, replacing walls may require a coherent light and reflection change elsewhere. Broad preservation wording can leave these distinctions unclear, but wording alone is not proven to cause persistence.
+Look for the broad planes and boundaries that dominate recognition: wall spans, barriers, shop fronts, roof silhouettes, exposed equipment and the route through the setting. Assign those structures new roles compatible with the requested environment and the source perspective. For a station, an existing shop front can become an entrance and a pitched roof can become a glazed concourse. These are illustrative correspondences, selected according to the actual shot.
 
-Continuation can build on a useful scene, as in F006/F007. F004 v3 explicitly targeted remaining walls, equipment and lighting and still failed. Do not interpret a coherent proposal as evidence that execution is now easy. An unchanged background after explicit instructions is different from a missing background instruction.
+## Give additions a visible place
 
-The old 'Bernini under-applies environments, Ditto completes them' contrast is narrowed. It described one table-tennis source under historical settings. New Bernini F004 v1 and F001 already achieved strong environment transformation; F004's preservation-oriented v2 lost some of it. Scene, input and simultaneous requirements matter more than a renderer-wide binary label.
+A floating mountain requires an exposed silhouette and air beneath it, not only its name. F006 v3 described mountains above an established pavilion and foliage gaps through which they could be seen; the resulting mountains were reported visible. F007 v3 used explicit streetside-to-station correspondences and achieved a stronger setting.
 
-Evidence: [F004](../evidence/F004.json), [F005](../evidence/F005.json), [F006](../evidence/F006.json), [F007](../evidence/F007.json), all prompts/reviews; [F001](../evidence/F001.json), v1; [old Ditto fewshot](../evidence/D-FS4-full.json). Related: [connected scope](connected-scope.md), [input conditioning](input-conditioning.md).
+Prefer continuing a useful candidate when this spatial construction builds on its existing appearance. Include the nearby lighting and reflection changes that make the new place coherent. Keeping the camera path and perspective need not preserve every material or the original function of background equipment.
+
+## Recognize when explicit remapping has already failed
+
+F004 v3 specified replacement walls, columns, equipment and lighting and still failed to complete the arena. Repeating the same mapping with stronger adjectives then offers little new direction. Reconsider the editing input, the scale or visual realization of the environment, and whether the likely gain justifies risking the useful foreground.
+
+Bernini's first-pass F001 and F004 environments show that strong replacement is possible. In the historical shared table-tennis task, Ditto replaced the room more aggressively while changing people. Use that contrast as a starting attention allocation: inspect Bernini's persistent location carriers and Ditto's foreground reconstruction, then adjust from the actual result.
+
+**Evidence.** [F001](../evidence/F001.json), v1; [F004](../evidence/F004.json), v1-v3; [F005](../evidence/F005.json); [F006](../evidence/F006.json); [F007](../evidence/F007.json); [historical Ditto fewshot](../evidence/D-FS4-full.json). Online observations across tasks; spatial formulation, input and other edits changed together. Related: [connected scope](connected-scope.md), [input choice](input-conditioning.md).

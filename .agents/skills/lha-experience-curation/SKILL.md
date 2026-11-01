@@ -1,18 +1,26 @@
 ---
 name: lha-experience-curation
-description: "Edit and organize LHA experience entries during a requested library maintenance pass: merge duplicates, split distinct claims, retain counterexamples, revise scope and maintain navigation/provenance. Produces reviewable changes without automatic publication."
+description: Sharpen and organize LHA experience entries and renderer profiles during requested maintenance. Strengthen conditional recommendations, merge overlapping explanations, preserve useful boundaries and improve discovery.
 ---
 
-# Maintain a small, coherent experience library
+# Curate a library that improves judgment
 
-Use the [shared writing standard](../../../docs/experience-authoring-standard.md). Work from the specific analysis/use review or content problem supplied by the user. Maintenance may be entirely editorial; it need not invoke the other Skills in sequence or create new entries.
+Use the [shared writing standard](../../../docs/experience-authoring-standard.md) and the [complete maintenance package](../../../knowledge/staged/experience-full-maintenance-20261101/README.md). Work from the requested content problem or supplied analysis; editorial maintenance can stand on its own.
 
-Keep each explanation in one place. Question entrances and renderer profiles link to it and state applicability; they do not duplicate its instructions. Split a mixed claim when its evidence or decision implication differs. Move stable operation conventions into the relevant manual. Preserve useful uncertainty in a hypothesis entry; remove generic cautions and unsupported policy claims from reader-facing summaries.
+## Strengthen the decision value
 
-Revise the precise wording that affects interpretation. The summary must retain the insight, condition and scope found in the body. Check that linked cases support the revision, counterexamples remain reachable, and original evidence has not been rewritten to fit it. Keep old IDs, replaced versions and reasons traceable in the review record.
+Find the choice each entry helps a capable Planner make. State the relevant condition and preferred response in its opening and discovery summary. Replace generic caution with a useful discriminator: what makes this candidate a good editing input, which parts of a design conflict, or why another wording-only retry has low value.
 
-Propose merges, splits, archival or navigation changes as a bounded diff. The [45-card audit](../../../knowledge/staged/experience-curation-20261101/audit.md) illustrates specific dispositions; it is not a requirement to preserve its taxonomy. Read the [catalog contract](../../../docs/experience-usage-interface.md) before changing runtime access.
+Preserve the explanatory relationship, not just its example objects. A robe/chair case can teach reasoning about silhouette and activity evidence without prescribing jackets for every scene. Keep recommendations strong enough to favor a course of action. Replace universal bans and numerical retry budgets with the underlying reason and the conditions for a different choice.
 
-Drafts stay staged until their wording and activation scope are approved. Approved content is copied into the curated directory and listed with exact hashes and a review reference. Existing task snapshots stay intact. Never enable the old Wiki/E1/RSI catalog or change Critic/final-judge inputs as part of an experience edit. Do not infer approval from a statistical status or a successful file validation.
+Keep action-changing boundaries beside the advice. Move repeated protocol limitations and counting details into the evidence footer. Verify that a striking explanation still matches the actual prompts and outcomes; repair its factual basis without draining its practical consequence.
 
-Finish with the concrete changes, their reasons, what remains unresolved and whether the active library changed. Content quality matters more than the number of entries retained.
+## Organize for reading and revision
+
+Keep one primary account per mechanism. Merge duplicated advice; split conditions that call for different actions. Restore concrete renderer differences in actionable profile summaries and link to their full accounts. Put broadly useful interpretation methods in the professional manuals and tool/interface facts in the operating manual; empirical claims remain in versioned entries.
+
+Make summaries useful on their own. Prefer a condition plus a practical preference over a topic label or a reference such as 'apply S1'. Question entrances and renderer profiles can point to the same explanation. Keep full provenance reachable without filling the first screen with audit details.
+
+Maintain all [old-card destinations](../../../knowledge/staged/experience-full-maintenance-20261101/old-card-map.md), counterexamples and original records. The 14-entry organization is an editorial structure that can evolve with substantive needs. Review the [catalog contract](../../../docs/experience-usage-interface.md) before preparing discovery metadata or changing access.
+
+Stage library, catalog and Planner-manual revisions until content and activation are approved. Existing snapshots and historical evidence stay intact. Finish with a concise before/after account of the changed judgments, factual corrections and activation status. No automatic RSI workflow is part of this Skill.

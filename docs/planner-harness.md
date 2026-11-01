@@ -1,5 +1,7 @@
 # Model-led Planner harness
 
+> Historical scope — 2026-11-01: This document describes the earlier Planner harness. Use [creative-loop implementation](creative-loop-implementation.md) and [the current reading manual](../knowledge/creative-loop/READING.md) for the creative_loop_v1 profile. Commands and workflow assumptions below remain historical reference.
+
 [Approved implementation plan](planner-harness-plan.md) · [Knowledge integration](../knowledge/INTEGRATION.md) · [Operating guidance](../src/planner_harness/OPERATIONS.md)
 
 The independent `planner_harness` package runs a continuing planning conversation over the source video, user request, and existing knowledge package. The model chooses observation and reading operations, maintains its own working notes, develops a visual proposal, and writes an English execution prompt. The default `plan` mode ends at a prompt handoff. The [continuous loop](agent-loop.md) adds generation, candidate observation and evaluation to this same task using `--mode loop`.

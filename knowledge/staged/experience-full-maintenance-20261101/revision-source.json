@@ -1,0 +1,14 @@
+{
+  "status": "draft_not_activated",
+  "source": "User-supplied Gemini review and rewrites; calibrated against exact saved prompts on 2026-11-01",
+  "source_sha256": "922987cb7a6cde75488a261ac1fe4696a080237ef6ac86f2dcad256db684b71d",
+  "original_repository_commit": "997d1f57e79430a03905ae46c1756ce61fc26c8f",
+  "manual_installation_targets": {
+    "knowledge/staged/experience-full-maintenance-20261101/planner-manuals/UNDERSTAND_AND_REVISE.md": "knowledge/creative-loop/UNDERSTAND_AND_REVISE.md",
+    "knowledge/staged/experience-full-maintenance-20261101/planner-manuals/CREATIVE_LOOP.md": "src/planner_harness/CREATIVE_LOOP.md",
+    "knowledge/staged/experience-full-maintenance-20261101/planner-manuals/README.md": "knowledge/creative-loop/README.md",
+    "knowledge/staged/experience-full-maintenance-20261101/planner-manuals/UNDERSTAND_AND_DESIGN.md": "knowledge/creative-loop/UNDERSTAND_AND_DESIGN.md",
+    "knowledge/staged/experience-full-maintenance-20261101/planner-manuals/READING.md": "knowledge/creative-loop/READING.md"
+  },
+  "activation_requires": "Explicit approval; install reviewed files and rebase package-relative manual links before computing final runtime hashes."
+}

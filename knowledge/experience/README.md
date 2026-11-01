@@ -1,5 +1,7 @@
 # Generation and iteration experience
 
+> Historical scope — 2026-11-01: This is the legacy experience catalog entrance. Current creative_loop_v1 tasks resolve experience-map to [the curated entrance](curated/README.md). The four stable topic paths now serve as concise routes to current manuals and guides; old saved snapshots retain their recorded content.
+
 [Knowledge map](../README.md) · [Reading manual](../READING.md) · [Recorded model experience](../model-experience/bernini-r.md)
 
 These readable skill topics help choose a useful next action. Their initial recommendations are **common-sense starting preferences**, available for immediate use. They are not demonstrated route advantages. Individual experimental findings are labeled and linked to their conditions. The Planner decides whether an experience applies to the current task; these pages do not drive a programmatic router.

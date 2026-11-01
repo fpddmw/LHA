@@ -1,25 +1,27 @@
-# Low-High New
+# LHA: knowledge-guided video editing
 
-## 当前实现与实验入口（2026-10-30）
+## Current implementation — 2026-11-01
 
-- **Skill 与共享知识库**：[知识地图](knowledge/README.md)、[阅读说明](knowledge/READING.md)。三类 Skill 共用 111 个完整条目；语义与任务理解、风格与视觉方案、生成与迭代决策按需读取。
-- **Planner 与 agent loop**：[当前架构](docs/agent-loop.md)、[Planner 使用说明](docs/planner-harness.md)。入口为 `scripts/run_agent_loop.py`，实现位于 `src/planner_harness/`；Planner 选择输入、调用工具、根据反馈继续或结束。
-- **在线 Critic**：[实现与验证状态](docs/critic-harness.md)。通过执行配置显式启用，提供主动取证和比较反馈；其验证与正式终评分开记录。
-- **独立评价**：[评价协议](docs/evaluation-protocol.md)、[首批执行说明](docs/evaluation-first-wave.md)。保持冻结任务卡、盲评输入和分项指标。
-- **代码、视频与报告快照**：[2026-10-30 同步包](reports/20261030-sync/README.md)。包含已完成视频、实际提示词、逐项评分、阶段报告与版本记录；实验继续运行，快照时间和待完成项见包内状态。
-- **经验更新**：[实施方案](docs/planner-loop-experience-plan.md)。已有提议、审阅后发布与回退接口；经验选择和效果验证机制仍在完善。
+`creative_loop_v1` is the current development path. One continuing Planner interprets the request, reads knowledge, observes videos, chooses generation inputs and selects delivery. A thin harness keeps the work and candidate history available. An optional one-shot Critic returns structured judgments under an experiment-wide fixed rubric; it provides no editing or selection advice.
 
-下文第 1 节起保留早期原型说明，其 Planner、Critic、memory 与固定分支描述对应历史实现；当前运行以本节链接的文档和入口为准。
+| Area | Current entrance |
+|---|---|
+| Architecture and implementation status | [Creative-loop implementation](docs/creative-loop-implementation.md), [development specification](docs/creative-loop-development-plan.md) |
+| Planner knowledge | [Current knowledge map](knowledge/creative-loop/README.md), [reading manual](knowledge/creative-loop/READING.md), [complete source catalog](knowledge/README.md) |
+| Evaluation | [Frozen main score definitions](src/critic_harness/SCORE_DEFINITIONS.md); separate independent adapter configured for `glm5.3flash` at Paratera |
+| Experience maintenance | [Writing standard](docs/experience-authoring-standard.md), [usage and batch interface](docs/experience-usage-interface.md), three maintenance Skills under `.agents/skills/` |
+| Pending content review | [Fourteen rewritten experience entries and proposed manuals](knowledge/staged/experience-full-maintenance-20261101/README.md), [revision comparison](knowledge/staged/experience-full-maintenance-20261101/revision-comparison.md) |
+| Current editorial work | [Knowledge-guidance alignment](docs/knowledge-guidance-alignment-20261101.md) |
+| Data and deployment reference | [Benchmark index](benchmark_data/README.md), [deployment instructions](scripts/deploy/README.md) |
 
-当前 benchmark 已更新为 `dest.zip` 的 **50 条正式题目＋7 条示例**，版本
-`2026-10-29-dest`。完整视频、原始提示词、长短提示词索引与旧 ID 映射见
-[当前 benchmark](benchmark_data/README.md)。正式数据入口为
-`benchmark_data/sample_index.json`，7 条示例单列在 `benchmark_data/fewshot_index.json`。
-下文及 `bench_v3/v4/v5` 中的旧实验记录保留其原始输入与结果。
+The style corpus retains 111 full entries and five domain references. Its seven guides support choice and application. The active curated experience catalog remains empty pending approval of the rewritten package; the five proposed Planner manuals remain staged. The old Wiki, E1 and RSI mechanisms are excluded from the current profile.
 
-OpenBayes 4090 / RTX PRO 6000 部署、Bernini 直接提示词测试与 Ditto 环境准备：见
-[安装、重启恢复与端到端运行说明](scripts/deploy/README.md)。该入口使用
-`requirements.openbayes.txt` 和 `scripts/deploy/setup_openbayes.sh`。
+Experiment execution is deferred. The intended comparisons use seven fewshot long requests: Direct versus Loop-first for the joint knowledge/Planner contribution, and Loop-final versus Loop-first for iteration and selection. Online Planner/Critic settings remain `gpt-6.1-sol` with `high`; independent evaluation remains `glm5.3flash`, with live API compatibility still to verify. New runtime regressions described in the implementation record have not yet been executed. Editorial checks do not establish experimental improvement.
+
+The benchmark index retains 50 main tasks and seven separately indexed fewshot tasks from `2026-10-29-dest`. Saved runs and historical reports keep their original inputs, protocols and results. The material below documents earlier prototypes, rather than instructions for the current loop.
+
+<details>
+<summary>Archived prototype description and historical project plan</summary>
 
 ## 1. 项目概述
 
@@ -949,3 +951,5 @@ HF_TOKEN="${HF_TOKEN}" hf download Ouzhang/low-high-reference \
 - memory
 
 当前仓库已经具备这一思路的有效原型。下一阶段的重点，是把原型逐步推进成一个可训练、可扩展、可验证的研究系统。
+
+</details>

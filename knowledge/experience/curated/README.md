@@ -1,20 +1,15 @@
 # Experience entrance
 
-Use experience to clarify a condition or a choice, then compare it with what this
-task actually shows. Historical observations, common-sense preferences and proposed
-strategies have different evidential status.
+Experience helps decide what to do under a recognizable scene and renderer condition. Read an entry for its explanation, preferred action and action-changing exceptions, then inspect the linked case when its evidence matters to the current choice.
 
-The curated-entry list is currently empty pending review of the new wording.
-The following existing resources remain available:
+The approved curated catalog is currently empty. The full rewritten experience package is awaiting activation approval. The following static routes and historical record are available now:
 
-| Question | Resource and status |
+| Question | Route and contribution |
 |---|---|
-| What does the next input supply? | [Choose input](../choose-editing-input.md): common-sense starting preferences |
-| How does a prompt relate to its actual input? | [Express edits](../express-edits.md): static guidance and scoped observations |
-| What evidence could change a comparison? | [Inspect and compare](../inspect-and-compare.md): operating preferences |
-| How can a design source inform this proposal? | [Use design knowledge](../use-design-knowledge.md): reading guidance |
-| What has been observed on Bernini? | [Prompt probe](../../model-experience/bernini-r.md): four source clips, ten single-pass conditions; not controlled multi-round evidence |
+| Which input supplies what the next proposal needs? | [Choose input](../choose-editing-input.md) connects candidate information to revision and comparison guidance |
+| What should the renderer understand from this prompt? | [Express edits](../express-edits.md) connects the actual input to a concrete visual proposal |
+| Which difference should affect the decision? | [Inspect and compare](../inspect-and-compare.md) connects observation and fixed Critic scores to the Planner's judgment |
+| What knowledge could improve this design? | [Use design knowledge](../use-design-knowledge.md) connects open design questions to comparative guides and complete sources |
+| What was observed in the direct Bernini probe? | [October 29 record](../../model-experience/bernini-r.md) retains four source clips, ten prompt conditions and their outcomes |
 
-New curated entries will appear through the same browse/search/read tools only after
-their content is approved and explicitly listed. No staged draft, maintenance Skill,
-old learning catalog or automatic experience summary is loaded by this entrance.
+The four routes organize existing manual and design guidance. Curated experience will add specific explanatory judgments through these same browse/search/read tools after approval. Its recommendations and evidence belong to the entries; tool use belongs to the [operating and reading manuals](../../creative-loop/READING.md). Staged material and maintenance instructions are outside the active reading scope.

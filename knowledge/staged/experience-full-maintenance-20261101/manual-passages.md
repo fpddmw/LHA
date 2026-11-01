@@ -1,31 +1,31 @@
-# Proposed manual integration
+# Complete Planner-manual replacements: staged only
 
-Draft wording for user review. These passages are not active Planner instructions. Stable operations remain in the operating manual; reading and judgment support belongs in the two professional manuals. No requirement list, intent form, ledger, reading quota or automatic Critic call is introduced.
+The previous integration excerpts are superseded by complete replacement documents. They remain outside runtime access. Links in these drafts resolve within this review package; a future authorized installation must rebase those links to the approved destinations and pin the resulting hashes.
+
+| Complete proposed text | Future installation target | Main change |
+|---|---|---|
+| [Operating manual](planner-manuals/CREATIVE_LOOP.md) | `src/planner_harness/CREATIVE_LOOP.md` | Keep tool contracts and one-shot Critic; distinguish delivery/input/comparator and explain that verbal locality supplies no mask. |
+| [Task and design manual](planner-manuals/UNDERSTAND_AND_DESIGN.md) | `knowledge/creative-loop/UNDERSTAND_AND_DESIGN.md` | Develop event relations and visible design systems; use experience to favor promising proposals. |
+| [Result and revision manual](planner-manuals/UNDERSTAND_AND_REVISE.md) | `knowledge/creative-loop/UNDERSTAND_AND_REVISE.md` | Diagnose the actual intervention, compare retained alternatives and judge continuation value. |
+| [Reading guide](planner-manuals/READING.md) | `knowledge/creative-loop/READING.md` | Route from a consequential question to actionable summaries, explanation and evidence. |
+| [Knowledge navigation](planner-manuals/README.md) | `knowledge/creative-loop/README.md` | Connect manuals, style knowledge, renderer profiles and experience without duplicating empirical claims. |
 
 ## Operating manual: retained candidates and completion
 
-Your current delivery candidate, the next editing input and the optional evaluation comparator are separate choices. Keep useful alternatives accessible through the candidate directory. Choose an older candidate as input or delivery when its contents better support the task. Describe remaining consequential limitations in the finish message. A technical interruption or exhausted resource is recorded as a pause or blocked state; it does not establish successful delivery.
-
-The renderer receives the chosen video and actual submitted prompt. Working notes, other candidates and Critic reports do not accompany that input. Use the recorded execution receipt for prompt transformations and interface limits. A phrase such as 'small repair' supplies no mask or invariant region in the current interface.
+The full [operating replacement](planner-manuals/CREATIVE_LOOP.md) preserves existing actions and their arguments. Delivery candidate, editing input and optional comparator are separate. The renderer receives only the chosen video and prompt. Successful delivery, an unsuitable provisional result and resource interruption retain distinct meanings. No runtime or Critic protocol changes are proposed.
 
 ## Understanding and design: reading an experience
 
-Read experience when a distinction would change the proposal: activity roles versus object presence, identity versus appearance category, material versus silhouette, or theme cues versus a reconstructed place. Start from the question entrance or renderer profile, open the relevant entry, and follow evidence when its scope or interpretation matters. Its explanation can inform your own design; it does not supply a compulsory solution. The style library remains the source for developing visual relationships and alternatives.
-
-Distinguish user requirements, source relationships and authored additions. A detail's significance follows this task. A requested costume or structural change remains a requirement even when it complicates preservation; an optional design addition can be reconsidered when it obscures the activity. Broad genre labels leave creative choices open without prescribing a new role for every source object.
+The [complete design manual](planner-manuals/UNDERSTAND_AND_DESIGN.md) teaches interpretation and construction. Renderer-specific advice stays in the linked experience entries and profiles, where it can be revised once without conflicting copies in stable manuals.
 
 ## Understanding and revision: interpreting a result
 
-Use distinctions that clarify the current failure. A missing instruction differs from an explicit but unrealized relation. A new loss differs from a defect already present in the input. A successful appearance can also obscure a necessary contact, support or action relation. These can overlap. Compare the proposed visual change with the actual earlier prompt and input, rather than treating changed wording as proof of a different realization.
-
-The optional Critic supplies fixed-dimensional scores, observations and limitations. It does not decide which discrepancy matters most to the user. Inspect its consequential evidence yourself when it could change the next action or selection. Unknown identifies a measurement limit; use available local evidence without turning the unknown into a known defect. A separate confirmed need can still justify an edit.
-
-When selection is close, inspect the relevant retained alternatives. A single Critic report with one comparator does not rank every candidate. The latest improvement may only repair a regression relative to a weak intermediate version. Relate the candidate to the best available answer and the original request.
+The [complete revision manual](planner-manuals/UNDERSTAND_AND_REVISE.md) favors concrete alternatives after clear failure and delivery when the request is adequately met. Planner interprets Critic evidence and checks consequential claims; Critic remains an optional single structured report with no suggestions or follow-up dialogue.
 
 ## Notes, evidence and maintenance
 
-Use optional notes/workspace for the current understanding, a rejected explanation, or a useful source reference. Source reads and operations are recorded separately. A visible entry, a model reference and an effective intervention are different observations. Task notes do not automatically update cross-task experience. Library maintenance remains explicitly initiated work with reviewed content changes.
+Notes/workspace retain current understanding. Existing passive records preserve actual reads and operations. The three maintenance Skills analyze, review use and curate during requested maintenance; they do not add forms or automatic publication to Planner.
 
 ## Archived policy fragments
 
-The following old clauses remain only in the historical E1 archive: S1's categorical first-pass stopping, S5/R3's fixed retry allowances, B3's one-rephrase limit, I2/D6's broad avoidance of candidate geometry repair, D5's ban on candidate color correction, C1's universal preservation-first order, C2's all-contender Critic request, and R1/S6's intent/process-context/ledger instructions. Their useful distinctions now have entry/manual destinations in the [mapping](old-card-map.md). No fixed numerical policy is inferred from these small observational cohorts.
+The useful preferences behind S1/S5/R3/B3/I2/D5/C1 are carried into scoped experience: favor adequate delivery, lower the priority of repeated explicit failures, choose inputs that preserve needed information, and compare user-relevant tradeoffs. Fixed attempt allowances, blanket route bans, universal preservation-first rankings, multi-contender Critic requests and the old intent/ledger workflow stay in the historical archive.

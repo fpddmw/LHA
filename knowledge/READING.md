@@ -1,5 +1,7 @@
 # Reading and using this knowledge
 
+> Historical scope — 2026-11-01: This is the legacy reading manual, retained for historical runs. Current creative_loop_v1 tasks use [the creative-loop reading manual](creative-loop/READING.md) and its scoped map. Wiki and RSI references below describe the earlier reading surface.
+
 [Knowledge map](README.md) · [Integration design](INTEGRATION.md) · [Generation experience](guides/experience.md)
 
 This manual supports finding, understanding, and tracing material. The model decides which relationships to investigate, how deeply to read, which directions to compare, and what knowledge to use in its proposal.

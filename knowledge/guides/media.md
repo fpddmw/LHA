@@ -2,7 +2,7 @@
 
 [Knowledge map](../README.md) · [Subject relationships](theme.md) · [Time](time.md) · [Combination](combination.md)
 
-This comparison explains image construction in the existing proposals and retains their authors' artistic references. The technical accounts have not all been independently checked against art-historical or production literature.
+Choose a medium by how it forms the image: what carries the marks, how edges and values develop, and how light belongs to the depicted scene or its physical support. The source cases below make these alternatives concrete.
 
 ## Paper and pigment participate in form
 
@@ -32,7 +32,13 @@ Mosaic can also be compared with the pixel art of [Million Dollar Baby](../entri
 
 [Grand Hotel](../entries/opuscar-005.md) establishes a lobby through a concentric overhead view, then moves to human height. [The French Connection](../entries/opuscar-044.md) uses repeated columns, camera placement, and forward speed for pursuit. Space and movement contribute substantially to the effect. [Around the World in 80 Days](../entries/opuscar-029.md) compresses a journey through geometry, shallow parallax, and limited animation. [It Happened One Night](../entries/opuscar-007.md) instead depends on elastic bodies and timed gags.
 
-The original 2D, 2.5D, and 3D labels describe production methods. Whether a video model can sustain a viewpoint, geometry, or motion depends on its execution capabilities. Complete production ideas remain creative and analytical resources; prompt expression will be informed by subsequent experiments.
+The original 2D, 2.5D, and 3D labels describe production methods. Whether a video model can sustain a viewpoint, geometry, or motion depends on its execution capabilities. Use the production idea to choose a visible effect, then express that effect for the available renderer. For example, shallow parallax and graphic shapes imply different spatial treatment from elastic bodies and timed gags.
+
+## Select the construction that matters to this task
+
+For light, open forms, compare transparent wash with visible paper and line. For graphic weight, compare opaque masses, cut marks and separated print colors. For a granular surface, choose whether units follow contours, transmit light or stay on a fixed grid. These choices distinguish watercolor, woodcut, mosaic, glass and pixel treatments more usefully than a shared texture label.
+
+Decide where the medium exists. A CRT inside a photographed room calls for a bounded treatment; turning the whole image into a CRT program changes the viewer's relationship to the entire scene. Likewise, painted light on paper and colored light cast by glass imply different surface and illumination relationships. Name that relationship in the proposal.
 
 ## Develop a visible interpretation
 
@@ -49,7 +55,7 @@ The [application guide](design-expression.md) develops a storybook interpretatio
 | Discrete units | [017 Stained glass](../entries/opuscar-017.md), [073 Mosaic](../entries/opuscar-073.md), [077 Pixels](../entries/opuscar-077.md) | Unit geometry, material, illumination, and time |
 | Different designs under one label | [001 Silent print](../entries/opuscar-001.md), [084 Silent-film tribute](../entries/opuscar-084.md) | Wear, photography, titles, and retrospective context |
 
-For using two methods within one proposal, continue to [combination](combination.md): the cases relate them through space, time, or a shared object.
+For using two methods within one proposal, continue to [combination](combination.md): the cases relate them through space, time, or a shared object. The production descriptions and artistic references remain attributed to their original authors; this guide compares those accounts rather than adding an independent technical or art-historical verification.
 
 ## More complete material to explore
 

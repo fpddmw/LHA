@@ -1,15 +1,25 @@
-# EX-continuation-value: The value of a revision depends on the gap it closes and the alternative already available
+# EX-continuation-value: Spend another attempt on a gap that can change the delivery
 
-Revision 1. Draft for review. Reworks S1/S2/S4/C1/C2/D7 and parts of S3/S5. Historical independent and online cohorts kept separate; no numeric stopping policy.
+Revision 2. Draft for review. Bernini and Ditto; S1/S2/S4/C1/C2/D7 with S3/S5.
 
-**A new result may fix the latest complaint yet be a worse answer to the original request. Evaluate the consequential gap and the retained alternatives, rather than counting verdicts or following the most recent comparison.**
+**Favor delivery when a candidate satisfies the user's central request and the remaining discrepancy is incidental. Favor another attempt when an important gap remains and there is a concrete reason the next realization could improve the answer. Compare against the best retained candidate, not only the latest parent.**
 
-The old Bernini fewshot full-knowledge loop selected v2 after later comparisons centered on v2/v3; historical independent scores gave v1 stronger editing and style but weaker preservation. The choice was a tradeoff, not a straightforward refinement. In the new batch, F004 v2 recovered tabletop placement and recognizable faces while losing much of the arena; F003 v3 recovered a guitar relative to v2 but remained inferior to v1 for the selected costume-and-performance compromise. A repaired subproblem does not define the best delivery.
+## Keep the original task in the comparison
 
-The significance of a discrepancy follows the user's task. Architectural elaboration can be compatible with a broad etching interpretation, yet matter greatly when a specific building's identity is requested. In historical 027, online and independent judgments disagreed about architectural severity. This disagreement motivates checking the task and image evidence, not automatically preferring either judge. A structurally valid score does not resolve the creative tradeoff by itself.
+A restored guitar can improve on a broken v2 while still losing to v1 as an overall performance. A correct tabletop glow can accompany a weaker space arena. F003 and F004 illustrate why repairing the newest complaint is not enough to choose the newest result.
 
-The new batch also separates stable continuation from useful continuation: F004 v3 kept the successful foreground without a clear arena gain, while F006/F007 made visible requested gains. Across seven tasks, four final selections returned to earlier candidates. All seven stopped because of budget, so their choices inform comparison but provide no test of autonomous stopping.
+Bring retained alternatives back into view. Compare the differences that matter to the request: required environment, identity, activity, construction and visual coherence. Let the user's emphasis determine the tradeoff. An architectural flourish can fit a broad etching task while being unacceptable in an exact building-preservation task. A Critic's severity label helps locate evidence; it does not define that priority.
 
-Another attempt is meaningful when its proposed outcome would change the delivery choice or resolve an important remaining need, and its realization has a reason to differ from failed attempts. When a usable result already answers the request, incidental or unmeasured detail may have little value to pursue. When a required activity or named edit still fails, 'best available' remains qualified. No universal preservation-first ranking or fixed retry count follows.
+## Use an adequacy default, not a perfection chase
 
-Evidence: [historical score table](../evidence/historical-score-extract.md); [old B fewshot full](../evidence/B-FS4-full.json); [old B 027](../evidence/H-B-027__short__full_knowledge.json); [F003](../evidence/F003.json), [F004](../evidence/F004.json), [F006](../evidence/F006.json), [F007](../evidence/F007.json). Earlier totals such as 'two preferred later attempts' depend on preservation-prioritized interpretation, not strict multi-objective dominance. Related: [realization change](realization-change.md).
+Strong first-pass style and a recognizable requested event can already be a good answer. If remaining defects are minor incidental geometry or unconfirmed fine motion, favor retaining that result unless inspection exposes a consequential failure. Another generation places achieved qualities at risk and consumes time; the proposed benefit should be worth that risk.
+
+This is a positive delivery preference for adequate work. If a named structural edit or the central action still fails, call that gap what it is. Develop a genuinely different proposal, inspect an uncertain but important claim, or retain the best provisional result and explain why no promising attempt remains. Do not substitute budget exhaustion for successful completion.
+
+## Value a changed attempt by its expected contribution
+
+A new input can restore missing information; a new visual construction can resolve an authored conflict; a justified resample can test variability. Give those attempts priority over stronger restatements of a repeatedly unrealized operation. If the most recent continuation preserved the foreground but added no requested gain, ask what makes another pass more promising before spending it.
+
+Four of seven fewshot selections returned to earlier candidates. Keeping those alternatives accessible therefore has immediate practical value. Autonomous stopping was not tested in that batch because all runs reached their configured budget; the delivery preference here draws on the observed cost of regressions and the task-relative value of the remaining gap.
+
+**Evidence.** [Historical independent comparisons](../evidence/historical-score-extract.md); [older Bernini fewshot](../evidence/B-FS4-full.json); [027](../evidence/H-B-027__short__full_knowledge.json), where severity remains disputed; [F003](../evidence/F003.json), [F004](../evidence/F004.json), [F006](../evidence/F006.json), [F007](../evidence/F007.json); [batch facts](../evidence/batch-facts.json). Later-attempt preference depends on the task's tradeoff; online and independent cohorts remain separate. Related: [realization change](realization-change.md), [input choice](input-conditioning.md).

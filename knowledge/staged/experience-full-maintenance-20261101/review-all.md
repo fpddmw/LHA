@@ -1,277 +1,378 @@
 # Complete experience entries for review
 
-Fourteen proposed entries. Status: draft, not active. See [navigation](README.md), [old-card mapping](old-card-map.md), [maintenance findings](maintenance-report.md), and [proposed manual text](manual-passages.md).
+Gemini-led revision, 2026-11-01. Fourteen complete drafts; not active. See [navigation](README.md), [renderer profiles](renderers.md), [change comparison](revision-comparison.md), [old-card destinations](old-card-map.md), and [staged manuals](manual-passages.md).
+
+---
+
+## EX-design-conflict: Change the design that hides the action
+
+Revision 3. Draft for review. Bernini; R7 and I3, extended by F001/F003.
+
+**When a costume, prop or lighting treatment covers the contact or support that makes an activity readable, revise that treatment before adding more preservation clauses. Keep the style's expressive contribution while relocating or reshaping the part that competes with the action.**
+
+### Find the competition inside the proposal
+
+A long robe can deliver a convincing magical identity while hiding the chair that explains a seated reader's posture. In the study trace, naming the chair again alongside the robe left the conflict in place. A later fitted-jacket realization made seating readable. The useful distinction is between the style contribution of fabric, ornament and color, and the silhouette's occupation of the image. A design can succeed visually and still make the requested event harder to understand.
+
+Look at what the action needs viewers to see: the body supported by the seat, fingers meeting strings, a hand releasing an object, or a face receiving another person's attention. Then locate what the proposed appearance puts across that evidence. This gives a concrete revision target instead of an expanding list of preservation demands.
+
+### Preserve the ambition; change the conflicting realization
+
+For an optional flourish, favor a different cut, placement or lighting treatment that leaves the decisive relation visible. Fantasy clothing can use fabric and embroidery while its silhouette clears the seat and hands. A luminous effect can move behind a subject or concentrate on an edge rather than wash out the contact region. Use the style library to develop alternatives with comparable visual intent.
+
+A user-required feature deserves a compatible realization. F001 explicitly requested flowing wide sleeves; silently substituting fitted sleeves would lose part of the task. Explore drape behind the active arms, openings that expose the working hands, or a silhouette whose flow remains visible away from the ball. These are design options to develop against the actual shot, not a prescribed costume.
+
+After the obstruction changes, inspect the relationship itself. F003's narrower-sleeve proposal coincided with a more recognizable guitar, while microphone roles and identities remained wrong. Continue the diagnosis at that relational level instead of treating visible instrument recovery as complete action recovery.
+
+**Evidence.** [Study](evidence/B-003.json), source-based generations and their online reviews; [F003](evidence/F003.json), v2/v3; [F001](evidence/F001.json), requested wide sleeves. Several descriptions changed together. These records motivate a design-conflict account; the drape and placement alternatives above are proposed applications. Related: [activity relations](entries/activity-relations.md), [connected scope](entries/connected-scope.md).
 
 
 ---
 
-## EX-design-conflict: A design can conceal the evidence that makes an activity readable
+## EX-activity-relations: Give the new style a place without reassigning the activity
 
-Revision 2. Draft for review. Bernini observations; explanatory interpretation. Reworks R7 and part of I3. Updated against F001/F003; no new generation.
+Revision 2. Draft for review. Bernini; synthesis from F001/F003/F005.
 
-**A successful costume, prop or lighting design can undermine the original activity by covering its support and contact relations. Repeating the preservation request leaves that design conflict in place.**
+**For a style or setting change that retains the event, anchor who acts on whom and what the action uses. Give the new genre concrete expression through the appropriate surfaces, clothing, architecture and light, so its familiar scene conventions do not silently redefine the activity.**
 
-In the magical-study case, the authored long robe and the requested visible chair competed for the same image area. The second prompt named both, but the historical review reported the robe concealing the chair back, seat and legs. The loss concerned the visible person-chair-desk relationship through which sitting and reading were understood. The next proposal retained a fitted jacket and trousers, changed color and embroidery, and described the chair. The review found seating readable again. Fantasy appearance did not depend on the long robe.
+### An object inventory leaves the event open
 
-This distinction changes the design question. Ask what carries the requested style, and what visual evidence the source activity needs. A robe's fabric and ornament, its silhouette and its occlusion are different contributions. Altering one of these can preserve the direction while changing the conflict. The same reasoning applies to glow crossing a face, or scenery covering a working surface.
+F003 retained a standing person, microphone and seated guitarist in a palace setting, but the microphone moved to the standing person's own mouth. Those objects supported a plausible singer-and-accompanist scene instead of the source interaction. F005 produced casino-like materials while reorganizing the mahjong apparatus. Both outcomes made visual sense as new scenes; their failure lay in which event the scene expressed.
 
-The new batch establishes an important boundary. F003's third prompt explicitly fitted narrow sleeves to existing arms and kept the guitar unobstructed. The guitar became recognizable again relative to v2, but the microphone interaction and identities remained altered. Removing an occlusion conflict does not by itself recover a relational or temporal failure. F001 also explicitly required flowing wide sleeves: here the garment is a user requirement, unlike the optional robe in the study. It needs a compatible realization, not silent removal.
+A useful working explanation is that a broad venue or genre invites a familiar arrangement of roles as well as an appearance. To preserve an unusual interaction, describe its discriminating relation: the standing person holds the microphone toward the seated guitarist; players reach toward the existing mahjong tile walls. Give the venue a separate visual realization. This helps Planner design around the source activity instead of assuming that retaining the nouns retains the scene.
 
-The practical contribution is to locate a conflict within the proposal rather than interpret every loss as insufficient emphasis. When the conflicting feature is optional, its realization can change. When it is requested, the tradeoff remains part of the task.
+### Allocate the transformation to the right parts
 
-Evidence: [B-003](evidence/B-003.json), generations `event-0005` and `event-0008`, reviews `event-0006-critique` and `event-0009-critique`; [F003](evidence/F003.json), v2/v3; [F001](evidence/F001.json), original request. All study attempts used source input; several prompt details changed together. This supports a design interpretation, not an isolated costume effect. Related: [activity relations](entries/activity-relations.md), [connected scope](entries/connected-scope.md).
+F005 v1 already requested green felt, the central mechanism, blue tiles and their original positions. Its failure was not a missing inventory. V2 more sharply separated the playing system from the outer frame and sides, alongside changes to room finishes and clothing. The saved review found a more recognizable mahjong setup, while gameplay motion still failed. This supports prioritizing **scope and relational organization**, not merely adding more names.
 
+For a similar task, make the game's working surface and player-apparatus relations explicit, then realize the luxury setting in the table frame, walls, upholstery and lighting. For a performance, distinguish the microphone recipient and instrument contact from the materials and setting of the performance. If the user requests a different activity, develop that new relationship deliberately rather than protecting the original by default.
 
----
+### Respond when the relation is already explicit
 
-## EX-activity-relations: A coherent genre can reorganize who does what
+F003 v2 specified the microphone recipient and still damaged the performance further. Once the intended relationship is clear, a longer recital has little new leverage. Reconsider the competing staging or costume, and prefer an input that still carries the needed relation over a candidate that has reconstructed it. Earlier usable candidates remain options alongside the source.
 
-Revision 1. Draft for review. New synthesis from Bernini F001/F003/F005; sampled visual corroboration for F003/F005. Mechanism interpretation.
-
-**A video can retain the right people and objects while changing the activity. Genre-compatible staging can replace the particular relationships that made the source event intelligible.**
-
-F003's source shows a standing person holding a microphone toward a seated guitarist. V1 retained a standing person, microphone and seated guitarist in a convincing palace salon, but gave the standing person the microphone at her own mouth. The scene became a plausible singer-and-accompanist arrangement. F005 similarly realized casino materials while replacing the mahjong tile walls and mechanism with a red playing surface and scattered objects. These were organized alternatives to the source scene, not simply missing decorative details.
-
-An explanatory hypothesis is that a strong scene concept supplies a familiar activity arrangement as well as a visual style. Asking for a casino lounge or palace performance can leave the renderer free to reconstruct a plausible game or performance. An object inventory does not disambiguate this: microphone presence says little about who it serves; a table and players say little about what game their reaches address.
-
-This changes how to interpret the source and proposal. Identify the relations that distinguish this event from another plausible event: microphone directed toward the guitarist; a hand reaching toward a particular tile wall; a defender responding to the shooter. Let style be realized through materials, architecture, costume and light around those relations when the user requests the original activity. This is a way to develop and compare proposals, not a promise that relational wording controls motion.
-
-F005 v2 explicitly separated the mahjong playing system from the outer table frame and retained a recognizable setup, with other changes and a source restart. F003 v2 explicitly described the correct microphone relation yet damaged the performance further. Naming the distinction can remove ambiguity; once it is named and still fails, the problem has moved beyond omission. F001 also shows that narrating the shot sequence in detail can coexist with duplicated players and broken possession.
-
-Evidence: [F003](evidence/F003.json), v1/v2 and source; [F005](evidence/F005.json), v1/v2; [F001](evidence/F001.json), v2. [Opening-frame comparisons](evidence/visual-inspection.md) corroborate the changed microphone role and mahjong layout, not complete motion. Related: [actual realization change](entries/realization-change.md), [object continuity](entries/object-continuity.md).
+**Evidence.** [F003](evidence/F003.json), v1/v2; [F005](evidence/F005.json), exact v1/v2 prompts and reviews; [F001](evidence/F001.json), interaction failures. [Saved frame inspection](evidence/visual-inspection.md) corroborates microphone placement and mahjong layout at sampled frames. Genre-schema competition is an explanatory hypothesis; the observed apparatus recovery is distinct from motion recovery. Related: [realization change](entries/realization-change.md), [object continuity](entries/object-continuity.md).
 
 
 ---
 
-## EX-instance-identity: Appearance categories do not establish correspondence to an individual
+## EX-instance-identity: Protect the individual by reducing competing reconstruction
 
-Revision 2. Draft for review. Bernini and Ditto, historical online judgments and explanatory hypothesis. Reworks R6/X4/B4/D3; expanded with F002/F003/F004/F005/F006.
+Revision 3. Draft for review. Bernini and Ditto; R6/X4/B4/D3 plus the seven-task batch.
 
-**An appearance description can faithfully specify a type of person while failing to retain this person. More identity adjectives add attributes; they do not add a correspondence constraint between source and output.**
+**When identity matters, favor an input that still shows the right individual and reduce unnecessary reconstruction around that person. Keep identity wording concise and direct; spend design effort on the surrounding transformations instead of building an increasingly detailed substitute face.**
 
-The older Ditto table-tennis runs make the distinction visible: rectangular glasses could return while the face remained different. Other prompts naming age, hair and glasses produced older faces or opaque eyewear. The seven-task Bernini batch repeats the problem across different activities. In F002 v2, the pianist's resemblance improved while a guest's identity worsened. F003 v2 introduced glasses to the standing performer. F005 v3 enumerated each person's hair and eyewear, yet the review still found changed identities. Whole-scene descriptions can redistribute appearance among people as well as replace it.
+### Describing a type can reconstruct a different person
 
-One explanatory hypothesis is that the new social or visual context encourages reconstruction of a plausible participant. A tuxedoed lounge pianist or a palace performer can fit the new scene while failing the instance-preservation requirement. This hypothesis directs attention to what has changed around a head: clothing cut, headwear, light, nearby hands and pose. Merely describing a youthful face more precisely may continue to specify a replacement rather than recover the source individual.
+Age, hairstyle and glasses describe appearance categories. A renderer can satisfy those words while replacing the individual. Historical Ditto table-tennis attempts recovered glasses in one result without recovering the face; other descriptions produced older faces or opaque eyewear. Bernini F002 v2 improved the pianist's resemblance while worsening a guest, and F005 v3 enumerated hair and glasses without recovering the original identities.
 
-The useful planning question is which input still carries recognizable individual evidence, and which proposed transformations compete with it. A person-specific source observation helps diagnose loss; converting that observation into a long prompt is a separate, unvalidated intervention. Keep identity, accessory category and accessory shape distinguishable when comparing candidates.
+The practical consequence is to examine what invites a new person into the scene. A new social setting, collar, headwear, pose or facial illumination can interact with the face. For preservation tasks, prefer a realization that keeps those unnecessary structural changes small while delivering style through clothing surfaces, architecture and light elsewhere. Keep required costume changes explicit, and describe their extent where it helps separate them from the face.
 
-Counterexamples matter. F006 retained a recognizable single person's face throughout its reviews despite major costume and setting changes. F004 v2 passed the historical face judgment after a below-neck instruction and other prompt changes; F002 v3 also used a below-neck boundary and still failed. These records do not establish a reliable boundary phrase, a short-prompt cure, or a near-person prohibition. Crowding, scale, occlusion and requested transformation are plausible conditions to examine, not independently measured causes.
+### Choose evidence-rich inputs and scoped designs
 
-Evidence: [D-FS4-no](evidence/D-FS4-no.json), glasses recovery without face recovery; [D-FS4-full](evidence/D-FS4-full.json); [F002](evidence/F002.json), v2/v3; [F003](evidence/F003.json), v2; [F004](evidence/F004.json), v2; [F005](evidence/F005.json), v3; [F006](evidence/F006.json), all reviews. New inspection of F003/F005 opening frames corroborates visible appearance substitutions at those frames only; see [inspection record](evidence/visual-inspection.md). Related: [input conditioning](entries/input-conditioning.md).
+If a candidate has already replaced a face, prefer the source or an earlier recognizable candidate for another identity-sensitive attempt. That choice restores useful evidence; pair it with a reconsideration of the competing transformation. Reusing the same whole-scene reconstruction leaves the same identity problem in play.
 
+A below-neck boundary is a useful way to express clothing scope when the request permits it. F004 v2 accompanied that boundary with a better face judgment. F002 v3 also used it, retained explicit tuxedo instructions, and still lost identity and clothing quality. Accordingly, use the boundary to clarify a coherent design rather than as a magic phrase, and keep the target garment fully specified.
 
----
+In multi-person scenes, inspect each individual and their accessories separately: better resemblance in the main subject can conceal a substitution elsewhere. F006's single prominent subject retained a recognizable face despite major surrounding changes. Use that contrast to look for concrete person-scene conflicts rather than abandoning ambitious environment edits. Close facial performance or user-required headwear can justify a different tradeoff than a distant incidental person.
 
-## EX-object-continuity: A moving prop must remain the same participant across interaction states
-
-Revision 1. Draft for review. New Bernini hypothesis from F001/F006. Based on saved sequence observations; no new motion tracking or causal test.
-
-**A prop can be recognizable in every local view while failing to be one continuous object in the action. Counting nouns in the prompt does not establish continuity of possession, visibility and release.**
-
-F001's first result showed an extra basketball beside the shooter while the released ball was airborne. Its second prompt explicitly described one moving basketball and empty hands after release, yet the result introduced an extra person and a shot without the ball. The third kept a recognizable jump shot but still had an additional opening ball. In F006 v1, the review found a second phone-like object during retrieval, although the ending retained one prominent phone.
-
-These failures concentrate around state transitions: concealed to visible, held to released, one hand to another. A plausible explanation is that local visual plausibility is being reconstructed without consistently binding all those states to one participant. This is more specific than 'the model duplicates objects': it identifies the relationship that a source action supplies and a new rendition can lose.
-
-The useful question is which transitions establish that the ball or phone is the same object. Inspect hand-object contact, occlusion, possession and the post-release state when they are consequential. A general scene summary or endpoint frame can miss the break. If the relationship was omitted, stating it clarifies the target; if it was already explicit, repeating 'one' does not materially change the proposed solution.
-
-F006 v2 restarted with a more explicit concealed-then-retrieved phone description and no duplicate was observed. However, precise phone and hand preservation remained unknown, the costume disappeared, and multiple changes were simultaneous. This is a partial counterexample to inevitable duplication, not proof of a reliable wording fix. The novel value is a better failure interpretation and inspection target; an effective control strategy remains open.
-
-Evidence: [F001](evidence/F001.json), v1 late-interval and v2/v3 findings; [F006](evidence/F006.json), v1 retrieval and v2/v3 outcomes. These are two source scenes, with different actions, not replicated tests of one duplication mechanism. Related: [activity relations](entries/activity-relations.md), [time binding](entries/time-binding.md), [realization change](entries/realization-change.md).
+**Evidence.** [Ditto full](evidence/D-FS4-full.json), [Ditto no-knowledge](evidence/D-FS4-no.json); [F002](evidence/F002.json), v2/v3; [F003](evidence/F003.json), v2; [F004](evidence/F004.json), v2; [F005](evidence/F005.json), v3; [F006](evidence/F006.json). Online judgments with sampled [visual corroboration](evidence/visual-inspection.md); scene density and head-region interaction are diagnostic conditions to examine, not isolated measured causes. Related: [input choice](entries/input-conditioning.md), [lighting](entries/lighting-integration.md).
 
 
 ---
 
-## EX-connected-scope: Revision scope follows visual dependencies
+## EX-object-continuity: Preserve a moving prop's role across state changes
 
-Revision 2. Draft for review. Interface fact plus Bernini traces; connected-scope strategy remains a hypothesis. Reworks X6 and relates to X3. Updated with F004/F006/F007.
+Revision 2. Draft for review. Bernini; F001/F006.
 
-**A revision's scope is determined by the visual relationships it changes. Calling it small supplies no spatial control; grouping everything under one background label does not make those changes coherent.**
+**For an existing action, prefer a concise account of the prop's continuous role over rewriting its choreography. Inspect retrieval, occlusion and release, where a recognizable object can become an extra instance or disappear from the action.**
 
-The older table-tennis refinement changed walls, windows, lights, floor, table glow and glasses. Its description as focused hid several distinct problems. In the current video-plus-text interface, no mask or invariant region accompanies that word. A plausible planning unit is the connected set of elements that must change together for a result to make sense.
+### The vulnerable relationship is continuity of participation
 
-For a window, that set can include the opening, frame, exterior view, glass and nearby light. For a floating mountain, it includes an exposed sky region, a separable underside, surrounding air and its relation to foreground foliage. F006 v3 explicitly opened gaps in foliage and placed mountains above the already present pavilion. Its review reported visible mountains. The input route and costume instructions changed too, so the contribution of this spatial formulation is not isolated.
+F001 showed an extra ball while another was airborne. A later detailed shot description still produced broken possession and an extra player. F006 v1 showed a second phone-like object during retrieval even though the ending had one prominent phone. A correct endpoint or a correct object category therefore misses the critical question: did the same object stay involved through the transition?
 
-F007 continued a useful titanium-train candidate with specific correspondences: shops became an entrance, pitched rooftops became a glass concourse, utility infrastructure became transit structures. The review found a stronger station setting. F004 used similarly concrete wall/column descriptions but failed to complete the arena. A connected proposal supplies an intelligible target; the renderer can still retain the old scene.
+A useful working model is that locally plausible states can be rendered without consistently binding possession, visibility and release. Long prose describing several states adds more conditions to realize. Temporal descriptions becoming simultaneous instances is one possible explanation to investigate; the practical priority is to avoid unnecessary re-choreography of motion already supplied by the source.
 
-This suggests judging revision scope by dependency rather than object count. A background replacement may legitimately require relighting reflective foreground surfaces. An unrelated eyewear restoration has a different dependency and deserves a distinct reason for joining that attempt. Whole-image media conversion can also be coherent. There is no one-object-per-attempt rule.
+### Describe the binding that matters
 
-The alternative to a locality promise is an explicit account of what the desired visual arrangement requires. It remains a creative choice, not a mandatory planning form or a guarantee of unchanged regions.
+For a preserved action, make the existing ball or phone the participant and tie it to the relevant source interaction. An illustrative direction is: preserve the source ball's possession and release during the existing shot. Add transition detail when it resolves a particular ambiguity, such as whether the hands remain occupied after release. Stop adding repetitions of 'one' once the singular object and relation are already explicit; revise the competing transformation or select an input with clearer continuity instead.
 
-Evidence: [B-FS4-full](evidence/B-FS4-full.json), v3 `event-0008`; [F006](evidence/F006.json), v2/v3 `event-0006`/`event-0008`; [F007](evidence/F007.json), v3 `event-0006`; [F004](evidence/F004.json), v3 `event-0005`. Related: [environment replacement](entries/environment-replacement.md), [lighting integration](entries/lighting-integration.md).
+Sequence wording can be useful. F006 v2 explicitly described the phone as concealed, retrieved and raised, and the saved review observed no duplicate. That result favors using needed sequence information selectively. It does not support a blanket ban on temporal language or a general short-prompt cure.
 
+Inspect just before and after the relevant contact or occlusion, not only the opening and final frame. When a duplicate is already part of a candidate, favor an earlier input with the original interaction for a fresh realization. If other useful edits depend on continuing the candidate, treat continuity as the specific uncertain repair and inspect that transition after generation.
 
----
-
-## EX-input-conditioning: Choose an input for the information the proposed change needs
-
-Revision 2. Draft for review. Bernini/Ditto observational evidence; no randomized route comparison. Reworks I1/I2/I3/I4/R5. Updated with all seven fewshot runs.
-
-**An input supplies achievements and losses together. A candidate's useful appearance can support continuation, while a source restart restores original evidence and requires the appearance to be generated again. The proposed change determines which information matters.**
-
-In the new batch, all seven second attempts restarted from source. Before the third attempt, F004/F006/F007 had candidates with no reported major damage; Planner continued those candidates. F001/F002/F003/F005 still had major damage, and Planner restarted. All three continuations remained free of reported major damage; all four restarts still had major damage. This association starts with different candidate states and different tasks. It describes a state-dependent choice, not a causal advantage of continuation.
-
-The distinction inside the continuation group is instructive. F006 gained mountains and a costume while retaining its pavilion; F007 gained a station around its metallic train; F004 preserved foreground achievements but gained no clear arena improvement. Keeping usable information and successfully producing the remaining transformation are separate benefits. A stable candidate is a valuable platform, not evidence that another attempt will achieve its goal.
-
-Source-based repair is equally conditional. F002 returned to original faces but lost the tuxedo; F003 restored a recognizable guitar relative to v2 without recovering the original performance. The original pixels were available in both cases, yet the requested full transformation still reorganized them. A source restart can recover access to information; it does not remove the conflicting transformation that previously lost it.
-
-An earlier candidate can be a better starting point than either source or latest. The older Ditto glitch run used v1 to avoid v2's opaque overlays and obtained stronger flicker, while the desired scene displacement remained unconfirmed. Conversely, editing an existing Ditto dome added another dome. Evaluate what a particular candidate enables, including whether the next change complements its appearance or contradicts its geometry.
-
-Retain the best delivery separately from the next editing input. The operational distinction belongs in the manual; the experience here explains why it matters: useful conditioning can be distributed across candidates, and no route monotonically accumulates quality.
-
-Evidence: [batch facts](evidence/batch-facts.json); [F002](evidence/F002.json), [F003](evidence/F003.json), [F004](evidence/F004.json), [F006](evidence/F006.json), [F007](evidence/F007.json); [D glitch branch](evidence/H-D-024__long__full_knowledge.json), v1→v2 and v1→v3; [D dome](evidence/D-027-full.json), v2→v3; [B glitch](evidence/B-024-full.json), with [historical independent scores](evidence/historical-score-extract.md). Scores and online observations remain separate cohorts.
+**Evidence.** [F001](evidence/F001.json), v1-v3; [F006](evidence/F006.json), v1 retrieval and v2/v3. Saved online observations across two source scenes; precise phone/hand motion remained unknown after the observed duplicate disappeared. Concise source-linked phrasing is a proposed working default. Related: [activity](entries/activity-relations.md), [time](entries/time-binding.md).
 
 
 ---
 
-## EX-realization-change: More explicit wording can still request the same failed operation
+## EX-connected-scope: Revise a coherent visual field
 
-Revision 1. Draft for review. Reworks R2/R3/S3/S5/B5/B6/D4/D8/D9 and X7. Bernini/Ditto observations; no fixed retry policy.
+Revision 3. Draft for review. Bernini; X6/X3, F004/F006/F007.
 
-**A new prompt is a new hypothesis only to the extent that it changes something relevant to the failure. Specifying a missing relation, relocating an effect and restating an already explicit operation test different propositions.**
+**Choose a revision scope by the relationships that must change together. A window, its frame, exterior view and nearby reflections can form one coherent edit; an unrelated face repair usually has a different cause and deserves separate consideration.**
 
-The older study prompts preserved reading without naming its back-facing orientation; later explicit orientation coincided with recovery in both renderers. By contrast, the Ditto glitch v1 already requested horizontal strips containing actual scene content displaced sideways. V2 added offsets, examples and stronger emphasis; v3 called it a broken arrangement of strips and tiles. The reports found overlays, color streaks and noise rather than confirmed displacement of scene-bearing pieces. The text changed substantially while the intended image operation remained substantially the same.
+### Replace the promise of locality with a visual proposal
 
-That matters because the visible vocabulary and the operation can separate. Colored blocks can make an image look glitchy without moving the scene inside them. Embroidery can make clothing look historical without raising a collar. A more forceful request for the same transformation can generate additional genre cues while leaving its geometric condition unmet.
+The current renderer receives a video and text. Calling an edit small supplies no mask or protected region. The useful planning move is to describe the visual field that would make the change coherent, including the nearby effects it needs. This can involve several objects or the entire image.
 
-To understand a proposed alternative, compare the visible relationship it asks for and the input information it uses with what was already tried. A changed material construction, removed design conflict, different spatial placement or input with needed evidence can be a substantive change. A seed-only retry tests variability. Each can be reasonable; calling a restatement a different mechanism obscures what was learned.
+For a floating mountain, the field includes visible sky, a separated underside, surrounding air and foreground foliage that leaves a sightline. For tabletop emission, it includes the bright perimeter, the dark supports beneath it and the surfaces receiving the glow. For a new window, changing only the view can leave the old frame and illumination visually inconsistent.
 
-The new batch sharpens the omission boundary. F003 v1 did not spell out the microphone's recipient. V2 did, yet worsened guitar and pose preservation. Once the relation is explicit, another increasingly detailed recital is not supported by the earlier orientation success. F001's elaborate choreography also failed; its shorter third prompt improved the action verdict to partial while preserving serious defects. Neither example establishes a universal length rule.
+F006 v3 placed mountains above an existing pavilion with foliage gaps and gained visible mountains. F007 remapped streetside structures into station architecture around its metallic train. These proposals used the candidate's geometry to locate the new construction rather than collecting unrelated additions under a label such as background polish.
 
-There is no established two-failure ceiling. Bernini's older long costume task eventually realized standing collars and horizontal headwear that earlier versions missed, though identity still failed. Treat repeated failure as evidence about a particular proposal and setup, and evaluate a further attempt against that evidence and the remaining user need.
+### Choose scope for coherence, not minimum object count
 
-Evidence: [B study](evidence/B-003.json); [D study](evidence/H-D-benchmark__003__short.json); [D glitch](evidence/H-D-024__long__full_knowledge.json), all three exact prompts; [D collars](evidence/H-D-benchmark__001__long.json); [B collars](evidence/H-B-benchmark__001__long.json), v3; [F001](evidence/F001.json), [F003](evidence/F003.json). Historical reviews sometimes contain next-step advice; only their observations are used here.
+Prefer grouping edits that share a structural, optical or semantic dependency. Split unrelated complaints when combining them would obscure what the next realization is trying to achieve. A face restoration and a wall finish may require different inputs; a new luminous window and its reflection may require the same pass. A whole-image etching treatment is also coherent because its marks, tones and materials operate together.
 
+A clearly scoped proposal can still fail. F004 v3 already specified walls, columns, equipment, floor and lighting, yet did not complete the arena. If that connected change has already been made explicit, move to the input and realization question rather than expanding the same list. Keep the successful foreground as a candidate for delivery while judging whether a stronger environment attempt is worthwhile.
 
----
-
-## EX-part-binding: Getting the attribute right can still modify the wrong referent
-
-Revision 1. Draft for review. Reworks X3/X5/I2/B3 and the dome part of D6. Bernini/Ditto observations; relational wording is a clarity strategy with mixed outcomes.
-
-**A correct attribute on the wrong part is a binding failure. Asking for more of the attribute can strengthen the wrong realization rather than move it to the intended place.**
-
-The table-tennis outputs repeatedly supplied bright blue emission on curved supports while leaving the tabletop perimeter gray. The missing element was not blue light in general. F004 v2 described all four edges of the purple tabletop, its rectangular perspective, and the red arches as unchanged and unlit. The review then passed the tabletop glow and geometry. Older prompts also explicitly named the rim and failed, including capitalized wording. The evidence supports distinguishing the part; it does not establish a reliable sentence formula.
-
-A similar problem occurs at the instance level. In Ditto 027, an instruction to make a compact dome at a specified location produced an additional dome rather than correcting the existing one. The noun successfully evoked the object category while its intended correspondence failed. This is why adding dimensions can still elaborate a new object instead of editing the old one.
-
-Describe the relation that distinguishes the intended referent when ambiguity matters: an emitting horizontal boundary above matte curved supports; an existing landmark bounded by neighboring roofs. Inspect the actual output at that relation. If the correct part is already clearly specified, stronger category naming alone offers little new explanatory leverage. Input selection and the requested geometric reorganization deserve attention instead.
-
-Two tempting generalizations are retired. The old 'avoid strong landmark nouns' claim has a counterexample: a Bernini dome prompt did not inflate the landmark. The new successful tabletop attempt also changed prompt order, preservation wording and input; its isolated linguistic cause is unknown. Geometry edits can succeed, as F004's source-based table comparison suggests, while precise correction on a particular candidate can still fail.
-
-Evidence: [F004](evidence/F004.json), v1/v2; [older B fewshot no-knowledge](evidence/H-B-fewshot_004__long__no_knowledge.json), three attempts; [D dome](evidence/D-027-full.json), v3; [B etching no-knowledge](evidence/H-B-027__short__no_knowledge.json), v1. Related: [instance identity](entries/instance-identity.md), [connected scope](entries/connected-scope.md).
+**Evidence.** [Older Bernini fewshot](evidence/B-FS4-full.json), v3; [F006](evidence/F006.json), v2/v3; [F007](evidence/F007.json), v3; [F004](evidence/F004.json), v3. Working scope strategy based on saved prompts and outcomes; source/candidate choice and other descriptions also changed. Related: [environment](entries/environment-replacement.md), [input choice](entries/input-conditioning.md), [lighting](entries/lighting-integration.md).
 
 
 ---
 
-## EX-wanted-state: A correction needs a positive visual account of the replacement
+## EX-input-conditioning: Select the input that supports the next transformation
 
-Revision 1. Draft for review. Merges R4/X1 and the expression component of D5. Primarily Ditto observations, with Bernini counterexamples.
+Revision 3. Draft for review. Bernini and Ditto; I1-I4/R5 plus seven-task maintenance.
 
-**A removal request identifies dissatisfaction, but may leave the replacement appearance underspecified or in conflict with the surrounding design. Describe how the wanted state fits that design.**
+**Prefer continuing a useful candidate when the remaining change builds on its intact achievements. When a face, activity or important structure has been reconstructed incorrectly, favor the source or an earlier candidate that still carries the needed relationship, and reconsider the transformation that lost it.**
 
-The Ditto palace correction asked to neutralize yellow-orange skin while retaining rich candlelight, gold and warm surroundings. The result intensified yellow skin and hard highlights. The prompt already included natural tones and rosy undertones, so this is not evidence that a particular negative word caused the failure. The unresolved issue includes the relationship between facial illumination and the scene's dominant palette.
+### Continue a usable foundation
 
-In the etching case, a list excluding yellow wash, folds and faded edges did not remove all of them. A later source attempt described white paper and neutral grayscale and was judged stronger, but also changed seed and other wording and retained some negatives. A positive description can give a more useful target than an absence alone; the record does not isolate a negation effect.
+A candidate with useful identity, action relationships and geometry is a valuable starting point for additional environment, material or lighting work. Examine whether the new construction has a compatible place in that image: sky above a pavilion, existing structures that can become a station, or surfaces that can carry the new illumination. These cues favor continuation; they are not an exhaustive admission checklist or a requirement to certify every frame first.
 
-The implication is to specify the replacement at the level that matters. Paper whiteness, unmarked margins and ink shadow construction together describe an alternative print surface. Neutral facial fill and warm practical lights describe a lighting relationship. Merely suppressing yellow while requesting a globally golden image can preserve the underlying conflict. Likewise, removing cyan from a support is different from giving the tabletop the emitting role.
+F006 v3 added mountains to an established pavilion scene; F007 v3 developed a station around a metallic train. F004 v3 retained a useful foreground but did not complete the arena. Its prompt already remapped walls, columns and equipment, so that failure calls for reassessing execution and input constraints, not claiming that spatial remapping was omitted. Stable conditioning makes continuation attractive, but the remaining edit must still offer enough value.
 
-Short exclusions remain useful for disambiguation. F004's successful prompt explicitly kept supports unlit, and the older successful etching prompt retained exclusions. No ban on negatives or candidate color correction follows from these cases. When the desired replacement was already explicit, [realization change](entries/realization-change.md) becomes the more useful question.
+### Return to information the candidate has lost
 
-Evidence: [D palace short](evidence/H-D-benchmark__001__short.json), v2/v3; [D etching no-knowledge](evidence/H-D-027__short__no_knowledge.json), all prompts and reviews; [F004](evidence/F004.json), v2; [B fewshot no-knowledge](evidence/H-B-fewshot_004__long__no_knowledge.json), support-glow persistence. New seven-task records add boundaries, not a controlled test of negation. Related: [lighting integration](entries/lighting-integration.md).
+When a candidate has replaced the person, reassigned the activity, duplicated a central prop or deformed a required landmark, start by considering an earlier input where that evidence remains available. Prefer the source when original identity or motion is the critical missing information; prefer an earlier candidate when it retains both that information and useful style.
 
+Accompany a restart with a concrete reason it could fare better: remove an optional conflicting silhouette, clarify the effect's actual target, separate game apparatus from room decoration, or change the realization. If the evidence instead points to sampling variability, a source retry can test that possibility without a different prompt. Recognize it as resampling and weigh its cost against existing alternatives.
 
----
+The historical Ditto glitch branch used v1 to escape v2's opaque overlays while retaining part of the treatment. This illustrates a useful middle route between editing the latest damaged result and rebuilding everything from source.
 
-## EX-style-realization: Style specificity is a system of visible relationships
+### Keep delivery and editing choices distinct
 
-Revision 1. Draft for review. Reworks X2/B1/D1 and the ornament/shape distinction in D4. Bernini direct probe plus historical loops; prompt length was not isolated.
+The candidate most suitable for another transformation need not be the best current answer. Retain the best delivery while exploring a different branch. Compare the new result with that retained answer, especially when a local repair sacrifices an already successful environment or costume.
 
-**Concrete style knowledge is useful when it explains how visible elements produce the effect: how marks construct tone, material responds to light, or ornament fits a silhouette. A longer inventory can still miss the defining relationship.**
-
-In the Bernini probe, 'children's storybook' remained largely photographic. A watercolor-and-pencil interpretation produced illustration through soft contours, transparent washes, softened shadows and paper texture. A short etching label already worked, while elaboration better specified the ink, hatching, paper and sky. The value was a more determinate visual interpretation, not word count alone.
-
-The costume records show why specificity also requires structure. Ditto realized silk, color and embroidery while leaving the requested standing collars and horizontal headwear unrealized. F003's palace setting and ornament could be convincing while the garment only partly read as hanfu. Surface detail and structural type are separable. The style library can explain which relationships are characteristic; Planner then chooses a realization appropriate to the source rather than multiplying decorative adjectives.
-
-For a broad request, several interpretations may be valid. Warm pastel watercolor is one storybook direction, not the definition of storybook. For an explicit long request, named structural details remain part of the task even if another plausible style has already appeared. Knowledge should help distinguish these cases and articulate the chosen direction.
-
-Successful initial style conversion does not establish preservation. The probe's detailed preservation clauses did not reliably recover pen/notebook structure. The new batch likewise produced strong palace or Wuxia appearance while changing activities. Inspect style, requested construction and source relationships as related but different outcomes.
-
-Evidence: [Bernini probe record](../../model-experience/bernini-r.md), with exact prompts and original result links; [D costume](evidence/H-D-benchmark__001__long.json), three attempts; [F003](evidence/F003.json), v1–v3. The old first-pass expectations are retained as scoped observations, with no compulsory stop rule. Related: [activity relations](entries/activity-relations.md), [continuation value](entries/continuation-value.md).
+**Evidence.** [Batch facts](evidence/batch-facts.json): three third-attempt continuations started from candidates with no reported major damage; four source restarts followed damaged candidates. Exact motion was sometimes unknown, so no-major-damage is not certified preservation. [F002](evidence/F002.json), [F003](evidence/F003.json), [F004](evidence/F004.json), [F006](evidence/F006.json), [F007](evidence/F007.json); [Ditto branch](evidence/H-D-024__long__full_knowledge.json); [dome](evidence/D-027-full.json); [historical independent outcomes](evidence/historical-score-extract.md). The route recommendation is state-dependent; routes were not randomized.
 
 
 ---
 
-## EX-environment-replacement: Theme cues and a reconstructed place are different achievements
+## EX-realization-change: Change the failed proposition, not just its emphasis
 
-Revision 1. Draft for review. Expands B2/D2 with Bernini F002/F004/F005/F006/F007. Environment persistence is observed; allocation and visibility explanations are hypotheses.
+Revision 2. Draft for review. Bernini and Ditto; R2/R3/S3/S5/B5/B6/D4/D8/D9/X7.
 
-**A few highly recognizable motifs can establish a theme while the source environment still determines most of the place. Judge what carries the scene, not just whether the requested nouns appear.**
+**When an explicit operation repeatedly fails, lower the priority of wording-only retries. Prefer a different visual realization, a resolved design conflict or a better-conditioned input. Use direct specification first when the important relation was genuinely missing.**
 
-Earth views, suits and cyan table lights made F004 v2 futuristic, yet cream walls, barriers and exercise equipment retained the gym. Lanterns and wood accents partly upgraded F005 while utilitarian walls and wiring persisted. F007 v1 transformed the train but left the street crossing ordinary. These results were visually on-theme in some regions and incomplete as environment replacements.
+### Locate what was actually missing
 
-Two distinct difficulties matter. First, an existing boundary can be reskinned without rebuilding what it encloses. Second, a requested addition needs visible space. F006's first floating-mountain prompt had no visible mountains; v3 placed them above the pavilion and opened foliage gaps. F007 v3 assigned specific source structures new station roles and achieved a stronger setting. Those changes supplied spatial relationships as well as more nouns.
+In the study runs, the original prompts retained reading but omitted the source's back-facing orientation. Later explicit orientation coincided with recovery in both renderers. A short clarification addressed an open choice.
 
-This leads to a more useful design question: which source surfaces, openings, silhouettes and sightlines make the location read as the old place, and which must change to make it read as the requested place? Keeping layout, geometry and camera motion does not require keeping the original wall material or equipment identity. Conversely, replacing walls may require a coherent light and reflection change elsewhere. Broad preservation wording can leave these distinctions unclear, but wording alone is not proven to cause persistence.
+Scope conflict is different. F005 v1 already specified the green playing surface, central mechanism and blue tiles; v2 more distinctly allocated changes to clothing, room finishes and the outer table frame. Its improved apparatus supports investigating how the proposal assigns change, rather than assuming a forgotten object was added.
 
-Continuation can build on a useful scene, as in F006/F007. F004 v3 explicitly targeted remaining walls, equipment and lighting and still failed. Do not interpret a coherent proposal as evidence that execution is now easy. An unchanged background after explicit instructions is different from a missing background instruction.
+Read the submitted prompt before choosing either explanation. Once F003's microphone recipient was explicit and still failed, adding an increasingly detailed performance recital no longer tested simple omission repair.
 
-The old 'Bernini under-applies environments, Ditto completes them' contrast is narrowed. It described one table-tennis source under historical settings. New Bernini F004 v1 and F001 already achieved strong environment transformation; F004's preservation-oriented v2 lost some of it. Scene, input and simultaneous requirements matter more than a renderer-wide binary label.
+### Distinguish the style cue from the operation
 
-Evidence: [F004](evidence/F004.json), [F005](evidence/F005.json), [F006](evidence/F006.json), [F007](evidence/F007.json), all prompts/reviews; [F001](evidence/F001.json), v1; [old Ditto fewshot](evidence/D-FS4-full.json). Related: [connected scope](entries/connected-scope.md), [input conditioning](entries/input-conditioning.md).
+Glitch outputs supplied color fringes, scan lines and opaque blocks without confirmed displacement of the actual scene inside the blocks. Ditto costume outputs supplied silk and embroidery while requested collar and headwear shapes remained absent. More words for the genre can strengthen a surface treatment while leaving its structural operation untouched.
 
+A different realization changes the relationship the model is asked to construct: a new location or contrast for an effect, a garment cut that clears the action, a different medium interpretation acceptable to the user, or an input with the needed structure. Explain that difference in the proposal itself. Replacing 'offset strips' with 'broken strips and tiles' still requests much the same operation.
 
----
+### Let repeated failure change the preference
 
-## EX-lighting-integration: A visible lamp, an emissive accent and illumination of the scene are separate
+After clear failures of the same operation, favor an alternative with a concrete basis over another stronger restatement. If no promising alternative remains, retain the best result and explain the unresolved requirement. When the operation is central to the user, reconsider the broader design rather than quietly replacing it with an easier decorative cue.
 
-Revision 1. Draft for review. New synthesis from F002/F004/F005/F007; carries forward D5's color-interaction evidence. Bernini/Ditto historical observations.
+A seed-only attempt tests variability and can be a reasonable choice when the result suggests a sampling failure. Repeated failure is a reason to spend attempts more selectively, not a numerical stopping law: the older Bernini costume trace achieved requested collar/headwear features on a later attempt, although identity still failed. Consider what success would change about the delivery and why this attempt deserves priority.
 
-**Lighting style depends on relationships among sources, receivers, shadows and reflections. Adding a lamp or a glowing edge can satisfy a local cue while leaving the scene under its original illumination.**
-
-F002 displayed chandeliers and warm highlights but retained cool window-side daylight. F004 supplied cyan table and suit accents while the gym remained neutrally lit. F005's fixtures and gold materials did not consistently produce the requested warm room atmosphere. F007 combined reflective titanium with smeared highlights and incomplete station integration. In each case, a recognizable lighting vocabulary coexisted with a missing lighting relationship.
-
-This helps explain why 'more cinematic light' can produce additional decoration. A lamp is an object; illumination is its relationship to other visible surfaces. Warm material can look golden without changing the color or direction of incident light. A reflective body is convincing partly through what its highlights imply about the surrounding world.
-
-Develop the relationship that the proposed scene needs: where light originates, which surfaces it reaches, how shadow and fill separate faces, and what nearby material reflects. These are design choices available in the style knowledge, not required clauses in every prompt. In F007 v3, station construction and cooler canopy shading improved the scene together, while smeared reflections remained. Improving the place and improving its reflection geometry are separable outcomes.
-
-The Ditto palace color problem supplies a counter-pressure: warm surroundings and neutral faces need not share one global cast. A correction that names natural skin but retains an overwhelming golden treatment can leave that conflict unresolved. The historical correction worsened the cast; this does not establish that candidate-based color correction is inherently ineffective.
-
-Evidence: [F002](evidence/F002.json), lighting v2/v3; [F004](evidence/F004.json), v2/v3; [F005](evidence/F005.json), all lighting judgments; [F007](evidence/F007.json), v2/v3; [D palace short](evidence/H-D-benchmark__001__short.json), v2/v3. These are attributed judgments, not new physical-light measurements. Related: [wanted state](entries/wanted-state.md), [environment replacement](entries/environment-replacement.md).
+**Evidence.** [Bernini study](evidence/B-003.json), [Ditto study](evidence/H-D-benchmark__003__short.json); [Ditto glitch](evidence/H-D-024__long__full_knowledge.json); [Ditto costume](evidence/H-D-benchmark__001__long.json), [Bernini costume](evidence/H-B-benchmark__001__long.json); [F001](evidence/F001.json), [F003](evidence/F003.json), [F005](evidence/F005.json). Saved online findings; historical independent comparisons remain separately attributed in the [score extract](evidence/historical-score-extract.md). Related: [part binding](entries/part-binding.md), [continuation value](entries/continuation-value.md).
 
 
 ---
 
-## EX-time-binding: An attribute appearing in a clip is different from an attribute persisting through it
+## EX-part-binding: Bind the effect to the intended part and distinguish its neighbor
 
-Revision 1. Draft for review. Expands B7 with Bernini F001/F005/F006 and historical palace performance. New sampled inspection of F006, no new continuous-motion score.
+Revision 2. Draft for review. Bernini and Ditto; X3/X5/I2/B3 and D6 geometry observations.
 
-**Appearance, persistence and event timing answer different questions. A convincing opening can conceal a later loss; a stable-looking face can still perform a different emotional action.**
+**When the right attribute appears on the wrong part, clarify the target's relation to its neighbor before increasing the attribute's strength. For an existing object's shape, anchor that specific instance to surrounding geometry so the proposal calls for reshaping it rather than introducing another one.**
 
-F006 v3 displayed gold embroidery early and a largely plain exposed torso and shoulders later. F005 v3 began with formal jackets but the historical review recorded the foreground jacket becoming a light shirt. F001's golden light weakened after the opening. In the older palace footage, visually stable faces could suppress a developing smile or introduce concern at the wrong time. Temporal coherence therefore includes both retaining a property and retaining the source event, where requested.
+### Contrast identifies the intended carrier
 
-This changes interpretation of a successful style frame. An entry should not count 'embroidered hanfu present' as equivalent to 'embroidered hanfu throughout the visible costume', nor infer exact playing motion from plausible playing poses. Consider what must survive a view change, occlusion, body turn or interaction. Those transitions are where a visually plausible replacement may cease to correspond to the same source state.
+Table-tennis outputs repeatedly put blue emission on curved supports instead of the tabletop perimeter. More blue light would amplify an existing success in the wrong place. F004 v2 described the four edges of the purple tabletop in perspective and explicitly left the red arches unlit. The saved review then passed the glow and table geometry.
 
-For planning, express the intended persistent design where it matters, but recognize that the phrase 'throughout' is not a tracking constraint. For comparison, inspect the places in time that distinguish the claims. A local failure can refute full preservation; sparse matching frames can only support their observed interval. When the historical review leaves a whole-clip verdict unknown despite positive sampled observations, preserve both the positive evidence and its coverage limit.
+Prefer a compact relational contrast, such as the tabletop's thin rectangular edge glowing above matte, unlit curved supports. This example expresses which surface emits and which nearby surface remains a different material. Combine the distinction in the same local description when that makes the referent clear. Repeated capitalization of 'rim' supplies less useful information than the boundary's orientation, attachment and contrast.
 
-The seven-run protocol marked 40 of 54 temporal requirement judgments unknown, 13 fail and one partial, with none pass. These counts expose the protocol's conservative whole-clip boundary and the difficulty of the tasks. They do not establish 54 failures or an inability to preserve time. The old recommendation to merely report expression drift and stop is retired; its significance depends on the actual requested performance and available alternative.
+### Reshape the existing instance
 
-Evidence: [F006](evidence/F006.json), v3; [F005](evidence/F005.json), v3; [F001](evidence/F001.json), v3; [B palace long](evidence/H-B-benchmark__001__long.json); [batch facts](evidence/batch-facts.json); [sampled F006 inspection](evidence/visual-inspection.md), frames 0 and 112. Related: [object continuity](entries/object-continuity.md), [continuation value](entries/continuation-value.md).
+In Ditto 027, a request for a compact dome produced an additional dome. The category was rendered while correspondence to the existing landmark failed. For a similar correction, describe the existing dome relative to its base, neighboring roofs and occupied footprint. Prefer an earlier input where the intended instance is intact if the current result already contains a duplicated or substantially restructured landmark.
+
+For Ditto candidate geometry repairs, use the observed duplication as a strong reason to compare that earlier-input route with continued sculpting. Continuing is more attractive when the actual error is a surface treatment on an intact shape. A source or earlier candidate can still need a clearer geometric proposal.
+
+When an effect is already accurately located in the prompt and still binds elsewhere, move to the competing shapes, materials and conditioning. Another louder category name is a low-value default. Keep a structurally sound candidate available if further attempts trade geometry for stronger decoration.
+
+**Evidence.** [F004](evidence/F004.json), v1/v2; [older Bernini fewshot](evidence/H-B-fewshot_004__long__no_knowledge.json), explicit rim failures; [Ditto dome](evidence/D-027-full.json), v3. [Bernini etching](evidence/H-B-027__short__no_knowledge.json), v1, shows that naming a dome can also work. The relational contrast is a recommended expression strategy; the successful prompt changed other clauses too. Related: [input choice](entries/input-conditioning.md), [connected scope](entries/connected-scope.md).
 
 
 ---
 
-## EX-continuation-value: The value of a revision depends on the gap it closes and the alternative already available
+## EX-wanted-state: Replace an unwanted effect with a coherent visual alternative
 
-Revision 1. Draft for review. Reworks S1/S2/S4/C1/C2/D7 and parts of S3/S5. Historical independent and online cohorts kept separate; no numeric stopping policy.
+Revision 2. Draft for review. Primarily Ditto; R4/X1/D5 with Bernini F004.
 
-**A new result may fix the latest complaint yet be a worse answer to the original request. Evaluate the consequential gap and the retained alternatives, rather than counting verdicts or following the most recent comparison.**
+**Lead corrections with the appearance and relationships you want to construct. If the unwanted effect follows from the surrounding design, change that relationship as well; asking to suppress its symptom leaves the competing instruction in place.**
 
-The old Bernini fewshot full-knowledge loop selected v2 after later comparisons centered on v2/v3; historical independent scores gave v1 stronger editing and style but weaker preservation. The choice was a tradeoff, not a straightforward refinement. In the new batch, F004 v2 recovered tabletop placement and recognizable faces while losing much of the arena; F003 v3 recovered a guitar relative to v2 but remained inferior to v1 for the selected costume-and-performance compromise. A repaired subproblem does not define the best delivery.
+### Resolve the visual conflict
 
-The significance of a discrepancy follows the user's task. Architectural elaboration can be compatible with a broad etching interpretation, yet matter greatly when a specific building's identity is requested. In historical 027, online and independent judgments disagreed about architectural severity. This disagreement motivates checking the task and image evidence, not automatically preferring either judge. A structurally valid score does not resolve the creative tradeoff by itself.
+A golden candlelit room can push faces toward the same warm cast. 'Natural skin' added to an otherwise globally golden treatment leaves the intended lighting separation unclear. The historical Ditto correction asked to neutralize yellow-orange skin while retaining rich warm surroundings and obtained an even stronger cast.
 
-The new batch also separates stable continuation from useful continuation: F004 v3 kept the successful foreground without a clear arena gain, while F006/F007 made visible requested gains. Across seven tasks, four final selections returned to earlier candidates. All seven stopped because of budget, so their choices inform comparison but provide no test of autonomous stopping.
+For a similar proposal, prefer describing how faces receive neutral or cooler fill while warm practical lights remain in the background. If the image should stay warmly lit overall, choose the intended amount and location of warmth rather than treating every warm skin tone as an artifact. The correction is a lighting design decision with a specific target, not an instruction to erase a color word.
 
-Another attempt is meaningful when its proposed outcome would change the delivery choice or resolve an important remaining need, and its realization has a reason to differ from failed attempts. When a usable result already answers the request, incidental or unmeasured detail may have little value to pursue. When a required activity or named edit still fails, 'best available' remains qualified. No universal preservation-first ranking or fixed retry count follows.
+For an etching, define the replacement print surface: clean off-white or white paper, intentional blank margins, and dark ink constructing form. This offers the model something to render where stains, fading or unwanted washes appeared. Use the user's desired medium to choose the appropriate surface; aged paper can be intentional in another request.
 
-Evidence: [historical score table](evidence/historical-score-extract.md); [old B fewshot full](evidence/B-FS4-full.json); [old B 027](evidence/H-B-027__short__full_knowledge.json); [F003](evidence/F003.json), [F004](evidence/F004.json), [F006](evidence/F006.json), [F007](evidence/F007.json). Earlier totals such as 'two preferred later attempts' depend on preservation-prioritized interpretation, not strict multi-objective dominance. Related: [realization change](entries/realization-change.md).
+### Use exclusions to clarify the positive arrangement
+
+Short exclusions are useful when a nearby interpretation would otherwise compete. A glowing tabletop above unlit supports specifies both roles. Clean margins with no printed marks can distinguish intentional blank paper from faded drawing. Put the positive construction first and use exclusion to settle the ambiguity.
+
+If that replacement was already explicit and failed, change the realization or conditioning. For a face cast already baked into a candidate, an earlier candidate or source with usable skin information deserves priority when identity is central; targeted candidate correction remains an option when the rest of the appearance is valuable and the lighting change is plausible. Compare the whole result rather than judging only whether the prohibited color weakened.
+
+**Evidence.** [Ditto palace](evidence/H-D-benchmark__001__short.json), v2/v3; [Ditto etching](evidence/H-D-027__short__no_knowledge.json), prompts containing both positive descriptions and exclusions; [F004](evidence/F004.json), v2. Wording, seed and input changes were not isolated. Lighting separation is a proposed application of the observed conflict. Related: [lighting](entries/lighting-integration.md), [realization change](entries/realization-change.md).
+
+
+---
+
+## EX-style-realization: Choose a visible system that makes the style legible
+
+Revision 2. Draft for review. Bernini direct probe and Bernini/Ditto loops; X2/B1/D1/D4.
+
+**For a broad style request, choose a coherent visual interpretation and express its defining relationships. For a detailed request, separate the specified structures from their surface decoration so a convincing atmosphere does not conceal a missing requirement.**
+
+### Turn a broad label into a design
+
+The Bernini storybook probe remained largely photographic with a bare label. A watercolor-and-pencil interpretation made the illustration legible through contours, transparent washes, softened shadows and paper texture. A short etching label already produced an etched appearance, while a more specific description better directed hatching, paper and sky.
+
+Use the style library to choose the relationships that distinguish the desired result: how marks build shadow, how pigment meets the paper, how materials receive light, or how shapes are simplified. Write a compact set of mutually supporting features. The purpose is to resolve the creative direction; prompt length is a consequence of what needs expressing.
+
+Watercolor and pencil are one storybook option. A cut-paper or ink-and-flat-color direction may serve another source or user intention better. Retain the breadth of the request while making your selected proposal concrete. If a concise label already yields the intended visual language, use subsequent attention on the remaining task rather than elaborating it for its own sake.
+
+### Distinguish construction from ornament
+
+Ditto costume attempts supplied silk, palette and gold embroidery while standing collars and horizontal headwear stayed unrealized. Treat garment silhouette and ornament as separate design questions. If the user explicitly requested the collar, more embroidery does not close that gap. Consider a clearer structural realization or another compatible cut before adding decorative detail.
+
+The same distinction applies to architectural identity, geometric displacement in glitch art, or the difference between a lamp and scene illumination. Read complete knowledge entries for how the visual effect is constructed, then inspect that construction in the candidate.
+
+An impressive style can coexist with changed roles or missing props. Judge it alongside the user's retained activity and required details. When the actual request is already met, strong first-pass style is a reason to favor delivery rather than introduce decorative changes without a task-level benefit.
+
+**Evidence.** [Bernini probe](../../model-experience/bernini-r.md), exact storybook/etching prompts and outcomes; [Ditto costume](evidence/H-D-benchmark__001__long.json); [F003](evidence/F003.json). Length and specificity changed together in the probe; preservation wording had uneven results. Related: [activity](entries/activity-relations.md), [continuation value](entries/continuation-value.md).
+
+
+---
+
+## EX-environment-replacement: Transform the structures that make the place recognizable
+
+Revision 2. Draft for review. Bernini and Ditto; B2/D2 plus F001/F004/F005/F006/F007.
+
+**When a scene has the requested theme but still reads as the old location, target the surfaces, openings and sightlines carrying that location. Prefer concrete spatial remapping over adding more thematic objects around an unchanged setting.**
+
+### Separate motifs from the place they inhabit
+
+A space view, futuristic suit and cyan accents can coexist with a recognizable gym. Lanterns and polished wood can coexist with utilitarian walls and wiring. F007's metallic train initially sat in an ordinary street crossing. In each case, the successful motif leaves an identifiable carrier of the old scene.
+
+Look for the broad planes and boundaries that dominate recognition: wall spans, barriers, shop fronts, roof silhouettes, exposed equipment and the route through the setting. Assign those structures new roles compatible with the requested environment and the source perspective. For a station, an existing shop front can become an entrance and a pitched roof can become a glazed concourse. These are illustrative correspondences, selected according to the actual shot.
+
+### Give additions a visible place
+
+A floating mountain requires an exposed silhouette and air beneath it, not only its name. F006 v3 described mountains above an established pavilion and foliage gaps through which they could be seen; the resulting mountains were reported visible. F007 v3 used explicit streetside-to-station correspondences and achieved a stronger setting.
+
+Prefer continuing a useful candidate when this spatial construction builds on its existing appearance. Include the nearby lighting and reflection changes that make the new place coherent. Keeping the camera path and perspective need not preserve every material or the original function of background equipment.
+
+### Recognize when explicit remapping has already failed
+
+F004 v3 specified replacement walls, columns, equipment and lighting and still failed to complete the arena. Repeating the same mapping with stronger adjectives then offers little new direction. Reconsider the editing input, the scale or visual realization of the environment, and whether the likely gain justifies risking the useful foreground.
+
+Bernini's first-pass F001 and F004 environments show that strong replacement is possible. In the historical shared table-tennis task, Ditto replaced the room more aggressively while changing people. Use that contrast as a starting attention allocation: inspect Bernini's persistent location carriers and Ditto's foreground reconstruction, then adjust from the actual result.
+
+**Evidence.** [F001](evidence/F001.json), v1; [F004](evidence/F004.json), v1-v3; [F005](evidence/F005.json); [F006](evidence/F006.json); [F007](evidence/F007.json); [historical Ditto fewshot](evidence/D-FS4-full.json). Online observations across tasks; spatial formulation, input and other edits changed together. Related: [connected scope](entries/connected-scope.md), [input choice](entries/input-conditioning.md).
+
+
+---
+
+## EX-lighting-integration: Design what the light does to the scene
+
+Revision 2. Draft for review. Bernini and Ditto; F002/F004/F005/F007 and D5.
+
+**When lamps or glowing accents appear without the requested atmosphere, specify their effect on the visible scene. Prioritize the receiving surfaces, facial fill and reflections that carry the lighting change over adding more luminous objects.**
+
+### A lamp and its illumination are different achievements
+
+F002 had chandeliers and warm highlights while window-side daylight stayed cool. F004 showed cyan accents in a neutrally lit gym. F005 fixtures and gold finishes did not consistently create the desired room atmosphere. A model can render the vocabulary of lighting as objects and materials while leaving the original light distribution largely intact.
+
+Develop the relationship that matters: where the light comes from, what it reaches, how shadows and fill shape subjects, and what adjacent materials reflect. Use these as design lenses. A request for one glowing edge may need only the edge/support contrast; a full atmosphere change usually needs a broader account of receivers and ambient light.
+
+For an illustrative warm lounge, amber practicals can graze wood panels while softer neutral fill keeps faces readable. For a cool station, canopy shading and broad architectural illumination can connect a reflective vehicle to its surroundings. Specify the dominant relationship before a list of fixtures.
+
+### Keep illumination compatible with the people and materials
+
+The Ditto palace correction strengthened a yellow-orange facial cast even though it requested natural skin. Prefer an explicit separation between the light on faces and the warmth of background practicals when both are important. Merely asking for a globally golden scene and normal skin leaves the competing goals unresolved.
+
+Reflective surfaces deserve the same relational treatment. A titanium body implies something about what surrounds it through its highlights. F007's improved station did not fully resolve smeared reflections. Judge the material, the environment and their correspondence separately; choose whether the remaining reflection defect materially harms the desired appearance before risking another whole-scene pass.
+
+A lighting correction can legitimately alter several connected surfaces. Plan it as that coherent field, and inspect both the desired atmosphere and any identity or geometry cost.
+
+**Evidence.** [F002](evidence/F002.json), v2/v3; [F004](evidence/F004.json), v2/v3; [F005](evidence/F005.json); [F007](evidence/F007.json), v2/v3; [Ditto palace](evidence/H-D-benchmark__001__short.json), v2/v3. Saved reviews, not physical-light measurements. Receiver/fill descriptions above are design recommendations motivated by the observed separation. Related: [wanted state](entries/wanted-state.md), [connected scope](entries/connected-scope.md).
+
+
+---
+
+## EX-time-binding: Inspect the transitions that can undo a convincing opening
+
+Revision 2. Draft for review. Bernini; B7 and F001/F005/F006.
+
+**Check whether the designed appearance survives the shot's important turns, occlusions and interactions. Inspect performance timing separately when the user cares about the original action or expression; a stable-looking image can still depict a different event.**
+
+### Match the inspection to what must persist
+
+F006 v3 showed embroidery early and a largely plain exposed costume later. F005 v3 began with formal jackets, then the saved review found a foreground jacket becoming a light shirt. F001's golden light weakened after the opening. A striking first frame can therefore overstate how much of the clip delivers the proposal.
+
+Choose a few informative transition regions: before and after a body turn reveals fabric, as a hand retrieves an object, around ball release, or when a face changes expression. Compare what becomes visible, what stays attached to the same subject, and what the source action is doing at those moments. If a transition raises a consequential question, inspect that interval more densely.
+
+### Express persistence through the design's attachment
+
+Tie intended appearance to its carrier through the shot: a garment panel, an existing wall surface, or an object's role in an ongoing interaction. A simple persistence phrase can clarify the request, but a design that depends on a short-lived pose or an occluded patch needs more attention to where it remains visible. Favor a realization legible across the relevant views instead of concentrating every distinctive feature in the opening.
+
+A disappearing embroidery pattern, duplicated phone and altered smile are different failures. The first concerns an attribute's persistence, the second an object's continuity, and the third performance correspondence. Choose the next proposal according to the actual failure rather than treating all three as generic flicker.
+
+### Make timing matter in proportion to the task
+
+If the central activity and requested style are delivered and only a small incidental expression mismatch remains, favor a clear disclosure and delivery over a broad regeneration with no specific repair basis. If the close-up emotion, playing action or ball contact is the point of the request, that mismatch deserves further attention. An unknown whole-clip judgment is a reason to inspect a decisive interval when useful, rather than an automatic instruction to regenerate.
+
+**Evidence.** [F006](evidence/F006.json), v3; [F005](evidence/F005.json), v3; [F001](evidence/F001.json), v3; [historical palace](evidence/H-B-benchmark__001__long.json); [F006 frame inspection](evidence/visual-inspection.md). Saved local observations and sampled frames; whole-clip temporal counts and coverage limits remain in the [maintenance report](maintenance-report.md). Related: [object continuity](entries/object-continuity.md), [continuation value](entries/continuation-value.md).
+
+
+---
+
+## EX-continuation-value: Spend another attempt on a gap that can change the delivery
+
+Revision 2. Draft for review. Bernini and Ditto; S1/S2/S4/C1/C2/D7 with S3/S5.
+
+**Favor delivery when a candidate satisfies the user's central request and the remaining discrepancy is incidental. Favor another attempt when an important gap remains and there is a concrete reason the next realization could improve the answer. Compare against the best retained candidate, not only the latest parent.**
+
+### Keep the original task in the comparison
+
+A restored guitar can improve on a broken v2 while still losing to v1 as an overall performance. A correct tabletop glow can accompany a weaker space arena. F003 and F004 illustrate why repairing the newest complaint is not enough to choose the newest result.
+
+Bring retained alternatives back into view. Compare the differences that matter to the request: required environment, identity, activity, construction and visual coherence. Let the user's emphasis determine the tradeoff. An architectural flourish can fit a broad etching task while being unacceptable in an exact building-preservation task. A Critic's severity label helps locate evidence; it does not define that priority.
+
+### Use an adequacy default, not a perfection chase
+
+Strong first-pass style and a recognizable requested event can already be a good answer. If remaining defects are minor incidental geometry or unconfirmed fine motion, favor retaining that result unless inspection exposes a consequential failure. Another generation places achieved qualities at risk and consumes time; the proposed benefit should be worth that risk.
+
+This is a positive delivery preference for adequate work. If a named structural edit or the central action still fails, call that gap what it is. Develop a genuinely different proposal, inspect an uncertain but important claim, or retain the best provisional result and explain why no promising attempt remains. Do not substitute budget exhaustion for successful completion.
+
+### Value a changed attempt by its expected contribution
+
+A new input can restore missing information; a new visual construction can resolve an authored conflict; a justified resample can test variability. Give those attempts priority over stronger restatements of a repeatedly unrealized operation. If the most recent continuation preserved the foreground but added no requested gain, ask what makes another pass more promising before spending it.
+
+Four of seven fewshot selections returned to earlier candidates. Keeping those alternatives accessible therefore has immediate practical value. Autonomous stopping was not tested in that batch because all runs reached their configured budget; the delivery preference here draws on the observed cost of regressions and the task-relative value of the remaining gap.
+
+**Evidence.** [Historical independent comparisons](evidence/historical-score-extract.md); [older Bernini fewshot](evidence/B-FS4-full.json); [027](evidence/H-B-027__short__full_knowledge.json), where severity remains disputed; [F003](evidence/F003.json), [F004](evidence/F004.json), [F006](evidence/F006.json), [F007](evidence/F007.json); [batch facts](evidence/batch-facts.json). Later-attempt preference depends on the task's tradeoff; online and independent cohorts remain separate. Related: [realization change](entries/realization-change.md), [input choice](entries/input-conditioning.md).

@@ -1,23 +1,19 @@
 # LHA knowledge map
 
-## Reading entrances
+## Current reading entrances
 
-- **Judgment concepts and experiments:** [Wiki](wiki/README.md) connects contextual distinctions, complete recorded cases, frame comparisons and revisable experience. Initial explanations are human-assisted and unvalidated.
+Use the [creative-loop map](creative-loop/README.md) and [reading manual](creative-loop/READING.md) for the active Planner profile. The full source catalog below contains **111 complete entries, five domain references, seven guides and one model-experience record**.
 
-- **Meaning and requests:** [Video meaning](guides/meaning.md) connects visible events, relationships, uncertainty and the scope of an edit.
-- **Visual design:** the comparative guides and complete cases below explain media, settings, composition, time and combinations.
-- **Generation and iteration experience:** [experience topics](experience/README.md) give actionable common-sense starting preferences alongside scoped model evidence. They can improve through reviewed experience revisions.
+- **Understand and design:** the [professional manual](creative-loop/UNDERSTAND_AND_DESIGN.md) and [meaning guide](guides/meaning.md) connect the requested change to activities, object roles and narrative emphasis.
+- **Visual construction:** [theme](guides/theme.md), [media](guides/media.md), [time](guides/time.md), [combination](guides/combination.md) and [design expression](guides/design-expression.md) help choose and develop a coherent proposal.
+- **Understand and revise:** the [professional manual](creative-loop/UNDERSTAND_AND_REVISE.md) and [experience entrance](experience/curated/README.md) connect observed results to comparison and revision. Approved curated experience is currently empty; its rewritten content awaits activation review.
+- **Trace a claim:** complete entries link original designs and references; [generation history](guides/experience.md) and the [Bernini probe](model-experience/bernini-r.md) retain the conditions behind observed outcomes.
 
-The [reading manual](READING.md) explains access and provenance. These entrances are a bookshelf, not a required workflow. The model chooses what to read and how to organize its task.
+The working language is English. Editorial guidance and translations identify their sources; original-language records remain available for provenance. Task exploration follows the unresolved question. The full catalog is an inventory, while the guides explain useful differences and reading paths.
 
+The current runtime is documented in [creative-loop implementation](../docs/creative-loop-implementation.md). It keeps the Planner in charge of the proposal, tools and delivery, with an optional one-shot structured Critic. Knowledge maintenance is separately requested work. Legacy Wiki and RSI assets remain historical and are outside this profile's reading scope.
 
-This package organizes existing repository skill material into an explorable, comparable, traceable knowledge base. It contains **111 complete entries, 5 domain references, 7 guides, and 1 model-experience record**. Entries retain the relationships within an original proposal; guides explain differences across proposals; source links lead to original records, legacy templates, and reference images.
-
-The working language is **English**. Working pages contain English editorial prose, navigation, guidance, and source material. Existing English source text is preserved; translations of Chinese-only template fields are identified explicitly. Original-language records remain unchanged at their source locations for provenance.
-
-This content supports the [independent Planner harness](../docs/planner-harness.md). The model organizes task questions, reading, and design decisions. Four [actual planning walkthroughs](../out/planner_harness/20261029/review.md) now connect this knowledge to observations, proposals, and exact English prompt handoffs. The generation feedback loop is implemented in the [Planner runtime](../src/planner_harness/runner.py). Opt-in [two-level RSI](../docs/two-level-rsi-implementation.md) adds versioned requirements, automatic Critic review, task memory and staged experience revision; its implementation and live-validation status are recorded separately.
-
-[Reading manual](READING.md) · [Planner and harness integration](INTEGRATION.md) · [Source map](source-map.json) · [Validation and scope](VALIDATION.md) · [Approved plan](../docs/skill-reorganization-plan.md)
+[Source map](source-map.json) · [Original corpus validation](VALIDATION.md) · [Current editorial alignment](../docs/knowledge-guidance-alignment-20261101.md)
 
 ## Enter through a relationship you want to understand
 
@@ -29,7 +25,7 @@ This content supports the [independent Planner harness](../docs/planner-harness.
 | [Composition, light, and time](guides/time.md) | Gradual spatial revelation, change within stability, sustained actions, daylight transitions, and editing through a medium | What does the viewer see, and when? How do camera, light, and events support one another? |
 | [Combining styles and methods](guides/combination.md) | Transforming the same subject, nested spaces, alternating viewpoints, and combinations within a visual language | What does each component contribute? What connects them? Where does difference carry meaning? |
 | [From knowledge to a visual proposal](guides/design-expression.md) | Two authored walkthroughs from benchmark requests through source reading, design choices, and English style expression | How does a visual relationship become part of a new proposal? |
-| [The conditions behind generation experience](guides/experience.md) | Earlier Planners, domain cards, compilation paths, semantic drift, conflicting instructions, truncation, implicit inputs, and evaluation limits | Under what conditions does an observation apply? Which part of the process could a change improve? |
+| [What earlier generation experiments teach](guides/experience.md) | Earlier Planners, domain cards, compilation paths, semantic drift, conflicting instructions, truncation, implicit inputs, and evaluation limits | Under what conditions does an observation apply? Which part of the process could a change improve? |
 
 These entrances connect across topics. The Last Emperor participates in discussions of subject, medium, and combination; Titanic participates in combination and temporal organization. Complete cases preserve their meaning, while guides supply reasons to take particular reading paths.
 

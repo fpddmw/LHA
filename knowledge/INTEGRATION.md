@@ -1,5 +1,7 @@
 # Connecting a new Planner and harness
 
+> Historical scope — 2026-11-01: This is the historical integration design. Current behavior and remaining validation are documented in [creative-loop implementation](../docs/creative-loop-implementation.md); current reading starts at [the creative-loop map](creative-loop/README.md).
+
 [Knowledge map](README.md) · [Reading manual](READING.md) · [Approved scope](../docs/skill-reorganization-plan.md)
 
 The independent Planner has completed four actual planning walkthroughs under the [earlier runtime plan](../docs/planner-harness-plan.md). The [continuous Planner implementation](../docs/agent-loop.md), authorized by the [current plan](../docs/planner-loop-experience-plan.md), extends the same task with generation, observation of any retained candidate, configured evaluation and final selection. Existing model transports, reading tools and detailed records are reused. The [earlier walkthrough review](../out/planner_harness/20261029/review.md) remains historical evidence of actual planning, not evidence of generated-video improvement. Live integration records and their limitations are kept separately from software checks.

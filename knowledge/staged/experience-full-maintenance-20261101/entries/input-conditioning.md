@@ -1,17 +1,25 @@
-# EX-input-conditioning: Choose an input for the information the proposed change needs
+# EX-input-conditioning: Select the input that supports the next transformation
 
-Revision 2. Draft for review. Bernini/Ditto observational evidence; no randomized route comparison. Reworks I1/I2/I3/I4/R5. Updated with all seven fewshot runs.
+Revision 3. Draft for review. Bernini and Ditto; I1-I4/R5 plus seven-task maintenance.
 
-**An input supplies achievements and losses together. A candidate's useful appearance can support continuation, while a source restart restores original evidence and requires the appearance to be generated again. The proposed change determines which information matters.**
+**Prefer continuing a useful candidate when the remaining change builds on its intact achievements. When a face, activity or important structure has been reconstructed incorrectly, favor the source or an earlier candidate that still carries the needed relationship, and reconsider the transformation that lost it.**
 
-In the new batch, all seven second attempts restarted from source. Before the third attempt, F004/F006/F007 had candidates with no reported major damage; Planner continued those candidates. F001/F002/F003/F005 still had major damage, and Planner restarted. All three continuations remained free of reported major damage; all four restarts still had major damage. This association starts with different candidate states and different tasks. It describes a state-dependent choice, not a causal advantage of continuation.
+## Continue a usable foundation
 
-The distinction inside the continuation group is instructive. F006 gained mountains and a costume while retaining its pavilion; F007 gained a station around its metallic train; F004 preserved foreground achievements but gained no clear arena improvement. Keeping usable information and successfully producing the remaining transformation are separate benefits. A stable candidate is a valuable platform, not evidence that another attempt will achieve its goal.
+A candidate with useful identity, action relationships and geometry is a valuable starting point for additional environment, material or lighting work. Examine whether the new construction has a compatible place in that image: sky above a pavilion, existing structures that can become a station, or surfaces that can carry the new illumination. These cues favor continuation; they are not an exhaustive admission checklist or a requirement to certify every frame first.
 
-Source-based repair is equally conditional. F002 returned to original faces but lost the tuxedo; F003 restored a recognizable guitar relative to v2 without recovering the original performance. The original pixels were available in both cases, yet the requested full transformation still reorganized them. A source restart can recover access to information; it does not remove the conflicting transformation that previously lost it.
+F006 v3 added mountains to an established pavilion scene; F007 v3 developed a station around a metallic train. F004 v3 retained a useful foreground but did not complete the arena. Its prompt already remapped walls, columns and equipment, so that failure calls for reassessing execution and input constraints, not claiming that spatial remapping was omitted. Stable conditioning makes continuation attractive, but the remaining edit must still offer enough value.
 
-An earlier candidate can be a better starting point than either source or latest. The older Ditto glitch run used v1 to avoid v2's opaque overlays and obtained stronger flicker, while the desired scene displacement remained unconfirmed. Conversely, editing an existing Ditto dome added another dome. Evaluate what a particular candidate enables, including whether the next change complements its appearance or contradicts its geometry.
+## Return to information the candidate has lost
 
-Retain the best delivery separately from the next editing input. The operational distinction belongs in the manual; the experience here explains why it matters: useful conditioning can be distributed across candidates, and no route monotonically accumulates quality.
+When a candidate has replaced the person, reassigned the activity, duplicated a central prop or deformed a required landmark, start by considering an earlier input where that evidence remains available. Prefer the source when original identity or motion is the critical missing information; prefer an earlier candidate when it retains both that information and useful style.
 
-Evidence: [batch facts](../evidence/batch-facts.json); [F002](../evidence/F002.json), [F003](../evidence/F003.json), [F004](../evidence/F004.json), [F006](../evidence/F006.json), [F007](../evidence/F007.json); [D glitch branch](../evidence/H-D-024__long__full_knowledge.json), v1→v2 and v1→v3; [D dome](../evidence/D-027-full.json), v2→v3; [B glitch](../evidence/B-024-full.json), with [historical independent scores](../evidence/historical-score-extract.md). Scores and online observations remain separate cohorts.
+Accompany a restart with a concrete reason it could fare better: remove an optional conflicting silhouette, clarify the effect's actual target, separate game apparatus from room decoration, or change the realization. If the evidence instead points to sampling variability, a source retry can test that possibility without a different prompt. Recognize it as resampling and weigh its cost against existing alternatives.
+
+The historical Ditto glitch branch used v1 to escape v2's opaque overlays while retaining part of the treatment. This illustrates a useful middle route between editing the latest damaged result and rebuilding everything from source.
+
+## Keep delivery and editing choices distinct
+
+The candidate most suitable for another transformation need not be the best current answer. Retain the best delivery while exploring a different branch. Compare the new result with that retained answer, especially when a local repair sacrifices an already successful environment or costume.
+
+**Evidence.** [Batch facts](../evidence/batch-facts.json): three third-attempt continuations started from candidates with no reported major damage; four source restarts followed damaged candidates. Exact motion was sometimes unknown, so no-major-damage is not certified preservation. [F002](../evidence/F002.json), [F003](../evidence/F003.json), [F004](../evidence/F004.json), [F006](../evidence/F006.json), [F007](../evidence/F007.json); [Ditto branch](../evidence/H-D-024__long__full_knowledge.json); [dome](../evidence/D-027-full.json); [historical independent outcomes](../evidence/historical-score-extract.md). The route recommendation is state-dependent; routes were not randomized.

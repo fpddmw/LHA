@@ -1,10 +1,10 @@
 # From knowledge to a visual proposal
 
-[Knowledge map](../README.md) · [Reading manual](../READING.md) · [Media](media.md) · [Combination](combination.md) · [Bernini experience](../model-experience/bernini-r.md)
+[Knowledge map](../README.md) · [Reading manual](../creative-loop/READING.md) · [Media](media.md) · [Combination](combination.md) · [Bernini experience](../model-experience/bernini-r.md)
 
 Knowledge becomes useful when it helps the model explain what a proposed image will look like and why its elements belong together. Complete cases supply relationships among subject, material, form, light, and time. The model selects and adapts those relationships to the current request, developing its own proposal where the request leaves choices open.
 
-This guide contains two authored walkthroughs using real tasks from the October 29 Bernini probe. The reading paths and new draft prompts below were written during knowledge curation; they are not records of an autonomous Planner run. The actual probe used direct prompts without this knowledge package. Its results provide conditional experience about style expression. Semantic-preservation strategies are deferred in this revision.
+The two walkthroughs adapt real October 29 Bernini tasks. They demonstrate authored reasoning from source reading to a prompt. The probe itself used direct prompts; the new drafts below have not been rendered. Each walkthrough separates the recorded result from the new design judgment.
 
 ## Make a visual direction concrete
 
@@ -12,7 +12,7 @@ A style name locates a field of possibilities. A proposal develops a particular 
 
 Useful specificity explains the result. It can describe how a mark follows a form, how a surface receives light, where a color or texture belongs, or how an effect develops over time. Names, production vocabulary, and numerical settings are worth carrying into a proposal when they clarify that appearance. Source-specific palettes, plot events, timing, and proportions remain choices to interpret in the new task.
 
-The [Bernini record](../model-experience/bernini-r.md) supports trying concrete visual elaboration: the detailed storybook prompt produced a clear illustration where the short label remained largely photographic. The etching label already produced a recognizable medium, while elaboration more closely specified its line work, paper, and sky. Prompt length and information content changed together. The practical direction is to develop useful visual content; a universal word count, sentence order, or named-style formula remains unestablished.
+The [Bernini record](../model-experience/bernini-r.md) supports trying concrete visual elaboration: the detailed storybook prompt produced a clear illustration where the short label remained largely photographic. The etching label already produced a recognizable medium, while elaboration more closely specified its line work, paper, and sky. Prompt length and information content changed together. Prioritize details that settle the visual construction: the relation between line and color, the light-bearing surface, or the part receiving an effect. Use enough text to explain those choices. The probe establishes no universal word count or sentence order.
 
 ## Benchmark main/041: an open storybook request
 
@@ -49,9 +49,9 @@ An illustrative English expression of that proposal is:
 Render the man writing beside the woman as a children's storybook illustration. Use transparent warm pastel watercolor washes over fine, pressure-varied pencil lines, with pale textured paper showing through the light areas. Apply the same pencil-and-wash treatment to his blue striped shirt, her white blouse, the notebook, and the tabletop, with gentle color variation and softened shadows.
 ```
 
-This is a new, untested draft. It adapts knowledge to the probe's successful direction; no additional gain over the actual long prompt has been measured. The actual [041 long input](../../out/prompt_probe/20261029_bernini/041__long/input.json) and [generated result](../../out/prompt_probe/20261029_bernini/041__long/edited.mp4) remain separately accessible.
+For comparison, the actual [041 long input](../../out/prompt_probe/20261029_bernini/041__long/input.json) and [generated result](../../out/prompt_probe/20261029_bernini/041__long/edited.mp4) remain separately accessible.
 
-The relevant content check is whether the proposal conveys a coherent visible treatment and whether its added choices fit the open request. A different storybook interpretation should be considered on its own merits. Watercolor and pastel are not mandatory answers to the short request.
+Choose this treatment when a light, hand-drawn intimacy suits the request. Ink with displaced color offers a livelier alternative; opaque color masses would give the figures more graphic weight. The value of reading is being able to choose among these constructions and express the chosen one consistently.
 
 ## Benchmark fewshot/004: develop a specified space-station design
 
@@ -67,13 +67,13 @@ The [subject guide](theme.md#what-the-base-settings-offer) compares technical wo
 
 The [science-fiction domain reference](../domain-references/sci_fi_modern.md) supplies ribbed fabric, matte shells, panels, and practical light. In this task, the model can develop those into athletic fabric and restrained technical seams. Implants and communications accessories are further possibilities in the source card, not required consequences of reading it.
 
-For luminous surfaces, [097](../entries/opuscar-097.md) distinguishes a light's physical source from spill, reflected color, and bright cores. Its wet street, signs, snow, and night palette belong to that original proposal. The source-to-surface relationship can help the model describe a local luminous table rim in an otherwise clean sports environment. Whether a small reflected glow would improve the design is an open creative choice.
+For luminous surfaces, [097](../entries/opuscar-097.md) distinguishes a light's physical source from spill, reflected color, and bright cores. Its wet street, signs, snow, and night palette belong to that original proposal. The source-to-surface relationship can help the model describe a local luminous table rim in an otherwise clean sports environment. Include reflected glow when the emitting rim should read as a light source in the room; keep it restrained when the design calls for a thin graphic accent. That choice changes the visual role of the rim.
 
 ### Develop the proposal
 
 The requested Earth window anchors the space-station setting. Matte metal wall panels and broad blue-white illumination give the room a common material and light logic. The suits use technical athletic fabric, allowing clothing and arena to belong to the same design. The table's upper playing-surface perimeter is the intended blue-emitting part in this interpretation.
 
-The probe exposes a useful distinction here: both outputs showed substantial blue glow on the lower supports, while the request concerned table edges. A design description should name the intended part when the distinction matters. Whether revised wording actually improves placement remains a generation question.
+The probe exposes a useful distinction here: both outputs showed substantial blue glow on the lower supports, while the request concerned table edges. Name the emitting perimeter and its relation to the playing surface when placement defines success. This addresses an ambiguity in the desired construction; the probe did not test the revised wording.
 
 | Design element | Basis | Use in this proposal |
 |---|---|---|
@@ -88,13 +88,15 @@ An illustrative English expression of the visual portion is:
 Turn the room into a futuristic space-station sports arena with matte metallic wall panels, broad blue-white illumination, and Earth visible through large windows. Dress the players in streamlined athletic suits made of ribbed technical fabric with subtle panel seams. Add a thin blue luminous strip along the perimeter of the table's upper playing surface, tracing the tabletop rim.
 ```
 
-This is a new, untested style-only draft. It is available for subsequent prompt experiments; the specific rim wording has no demonstrated success advantage yet. Compare it with the [actual long result](../../out/prompt_probe/20261029_bernini/fewshot_004__long/edited.mp4) through the [experiment record](../model-experience/bernini-r.md).
+This draft expresses the visual portion of the task. Compare its construction with the [actual long result](../../out/prompt_probe/20261029_bernini/fewshot_004__long/edited.mp4) through the [experiment record](../model-experience/bernini-r.md).
 
-## How these paths enter a future Planner
+## Carry a design judgment through the current loop
 
-The reading manual supplies guidance; the map, guides, complete entries, and experience record provide material the model can inspect. A task workspace can retain a question such as “which illustration method suits this request?” or “which part is supposed to emit blue light?”, the passages read, and the resulting decision. The model decides which questions are useful and when it has enough information to write a proposal.
+The [current reading manual](../creative-loop/READING.md) provides map, search and full-source access. Open a guide to compare directions, then inspect the complete source when its material relationship or reference image can settle the proposal. Keep a useful question or decision in the workspace so the next result can be read against the same idea.
 
-A source citation explains why a design choice was considered. The final video prompt can express the resulting appearance in ordinary English without carrying research notes, source IDs, or every fact read. The harness will need to retain the complete proposal and actual submitted text for later inspection. Its implementation remains a subsequent phase; [INTEGRATION](../INTEGRATION.md) records the existing interface direction.
+Decide which details do the work. In 041, transparent wash and visible pencil jointly establish a medium. In fewshot/004, windows, wall materials and illumination establish the room, while the emitting rim is a separate part-placement decision. Develop the connected elements together and give each distinct effect an identifiable subject and location. A list of attractive materials is less informative than this account of their relationships.
+
+The final prompt should describe the wanted appearance for the selected input. Source IDs and research notes remain in the workspace and read receipts. After rendering, inspect whether the intended relationship appeared: a pencil-and-wash image rather than a photograph with paper texture, or light on the tabletop rim rather than its supports. Use that distinction to revise the realization, scope or input when needed. The [revision manual](../creative-loop/UNDERSTAND_AND_REVISE.md) supports that decision; a Critic report supplies evidence under its fixed rubric.
 
 ## More complete material to explore
 

@@ -1,27 +1,11 @@
 # Inspect and compare results
 
-[Experience map](README.md) · [Meaning](../guides/meaning.md) · [Generation history](../guides/experience.md)
+[Experience entrance](curated/README.md) · [Understand and revise](../creative-loop/UNDERSTAND_AND_REVISE.md) · [Score definitions](../../src/critic_harness/SCORE_DEFINITIONS.md)
 
-Version 1. The inspection recommendations are common-sense starting guidance. Historical review disagreements and sampling limits have linked evidence. These pages do not define a replacement evaluation metric or a compulsory review phase.
+Inspect the relation that could change the next decision. A crop helps distinguish an intended tabletop rim from lower supports; a sequence around contact or occlusion helps establish an action. Compare candidates at corresponding moments, using the original request to decide which differences matter.
 
-## Look where an uncertainty can change the next action
+Use [Understand and revise](../creative-loop/UNDERSTAND_AND_REVISE.md) for interpreting a gap, weighing alternatives and selecting a useful next observation. Use [Video meaning](../guides/meaning.md) for action and identity questions and [Composition, light and time](../guides/time.md) for changes in attention and temporal structure.
 
-When a potentially important defect is unclear, inspect the relevant region or time interval before spending another generation on it. Use the original to understand the user's source, and generated candidates to understand their current states. A crop can clarify object structure; observations across time can clarify progression. Neither a single still nor sparse samples establish an exact fast trajectory.
+An optional Critic call supplies one structured report under the [fixed score definitions](../../src/critic_harness/SCORE_DEFINITIONS.md). Read its evidence and limitations. Check a consequential disputed judgment directly in the video; the Planner owns input, revision and delivery decisions. Unknown records insufficient evidence, while a visible defect can support a negative judgment within the inspected scope.
 
-Video identity and timing matter. Different frame rates, cropping or resampling can make equally numbered frames depict different moments. Use recorded mappings when available. If alignment or motion evidence is insufficient, retain uncertainty rather than inventing a precise difference.
-
-## Compare alternatives around the same question
-
-When two candidates trade advantages, compare them against the original request using consistent observations. The user's requirements, the Planner's optional additions and the evaluator's observations are different kinds of information. Failure to realize an optional design flourish may justify dropping it; a missed user requirement deserves a different response.
-
-Keep useful alternatives available. Stronger style may conceal changes that remain difficult to inspect. A plausible explanation of a defect is a hypothesis until the available evidence distinguishes it from alternatives. Seeing a failure does not by itself locate its cause in wording, sampling or model capability.
-
-## Use external evaluation with its evidence scope
-
-An evaluator can supply observations and measurements the Planner should consider. Preserve its identity, protocol and uncertainty. A score summarizes its particular questions and evidence; the next action can require looking at the underlying finding. The separately maintained evaluation implementation determines its metrics. The Planner need not fill an evaluation card or decide a universal score threshold before acting.
-
-The [041 paired review](../../out/prompt_probe/20261029_bernini/041-paired-review.json) did not confirm an earlier apparent preservation improvement. Both illustrated versions weakened the implement/notebook construction. The [Bernini record](../model-experience/bernini-r.md) also explains why sampled frames did not establish precise motion. These observations motivate comparison with consistent evidence and explicit unknowns; they do not prove that every generated result needs an identical evaluation sequence.
-
-## Decide whether another observation is worth it
-
-Inspect more when a plausible answer would change the plan, input or final selection. Finish an observation when it has answered that question sufficiently for the task. A simple local edit may need little investigation. A consequential ambiguity may justify a closer look or external evaluation. There is no fixed frame or reading quota in this advice.
+A useful historical example is the [041 comparison in the Bernini record](../model-experience/bernini-r.md): a paired review did not confirm an earlier apparent preservation improvement. Both illustrated results weakened the implement/notebook construction. Consistent comparison can therefore change which candidate seems better. The evidence needed follows the decision, rather than a fixed inspection quota.

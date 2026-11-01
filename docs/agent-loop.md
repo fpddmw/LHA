@@ -1,5 +1,7 @@
 # Continuous Planner loop
 
+> Historical scope — 2026-11-01: This document describes the earlier loop, retained for historical runs. For creative_loop_v1 use [current implementation](creative-loop-implementation.md) and [the detailed specification](creative-loop-development-plan.md). Requirements, automatic evaluation and RSI paths described below are not part of the current creative profile.
+
 [Approved plan](planner-loop-experience-plan.md) · [Planner setup](planner-harness.md) · [Operating manual](../src/planner_harness/OPERATIONS.md) · [Experience map](../knowledge/experience/README.md)
 
 One application-owned task carries the original request, observations, reading receipts, optional notes, all videos and all feedback. GPT-6.1-sol chooses what to inspect, read, generate and finish. Every inference receives the current context; continuity does not depend on a hidden provider conversation. A model-selected result is recorded as a selection, with its stated limitations, rather than converted into a measured quality pass.
