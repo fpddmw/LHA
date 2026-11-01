@@ -2,6 +2,8 @@
 
 Status: draft for user review, 2026-11-01. Runtime access is disabled. No strategy here has received a new rendering test or visual re-evaluation in this pass.
 
+This earlier four-example revision is preserved. The subsequent [complete maintenance package](../experience-full-maintenance-20261101/README.md) supplies rewritten destinations for all 45 old cards, revised versions of these four entries, and the seven-task maintenance findings. It also remains staged for content review.
+
 This collection applies the agreed writing standard to four complete demonstrations and reviews the destinations of all 45 historical E1 cards. It preserves useful explanations without carrying forward old intent, ledger, automatic review or publication instructions.
 
 ## Start from a question

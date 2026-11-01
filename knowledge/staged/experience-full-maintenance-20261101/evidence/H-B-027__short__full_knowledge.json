@@ -1,0 +1,789 @@
+{
+  "source_path": "out/agent_loop_live/20261030/phase2/completed-027-pair/tasks/027__short__full_knowledge/run/state.json",
+  "source_sha256": "554b83fda658d8d01100c96e6dc761b93e1808aed671be425faf765786d01e6d",
+  "request": {
+    "text": "Make it look like a 19th-century etching.",
+    "source": {
+      "path": "/output/LHA-loop-batch-20261030-v1/benchmark_data/main/027/027.mp4",
+      "sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "width": 1280,
+      "height": 720,
+      "timing_basis": "decoder frame index and reported FPS; sampled observations, not a continuous-motion verification"
+    },
+    "target_model": "bernini"
+  },
+  "videos": {
+    "source": {
+      "sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05
+    },
+    "v1": {
+      "sha256": "48fd3a5069e0701c2ff58bfa483cd6d709ca915aec7a789fa5974deff8d5d45c",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "parent": "source",
+      "prompt": "Render this tree-lined town panorama as a 19th-century architectural etching, printed in black ink on lightly aged ivory paper. Describe rooftops, the central dome, distant towers, and foreground walls with delicate, slightly irregular etched contours. Build shadows from fine parallel hatching and layered crosshatching, with intricate broken strokes in the foliage and small paper highlights keeping the dark trees readable. Use lighter, more widely spaced marks for distant buildings. Replace photographic color and smooth shading with ink lines and exposed paper. Keep the broad clear sky mostly unmarked. Preserve the original skyline, building shapes and positions, tree masses, framing, and camera movement throughout. Keep the printed linework coherent over time, without adding buildings, clouds, celestial objects, text, or decorative borders.",
+      "job_id": "event-0003-generate",
+      "execution": {
+        "backend": "bernini",
+        "requested_prompt": "Render this tree-lined town panorama as a 19th-century architectural etching, printed in black ink on lightly aged ivory paper. Describe rooftops, the central dome, distant towers, and foreground walls with delicate, slightly irregular etched contours. Build shadows from fine parallel hatching and layered crosshatching, with intricate broken strokes in the foliage and small paper highlights keeping the dark trees readable. Use lighter, more widely spaced marks for distant buildings. Replace photographic color and smooth shading with ink lines and exposed paper. Keep the broad clear sky mostly unmarked. Preserve the original skyline, building shapes and positions, tree masses, framing, and camera movement throughout. Keep the printed linework coherent over time, without adding buildings, clouds, celestial objects, text, or decorative borders.",
+        "effective_prompt": "Render this tree-lined town panorama as a 19th-century architectural etching, printed in black ink on lightly aged ivory paper. Describe rooftops, the central dome, distant towers, and foreground walls with delicate, slightly irregular etched contours. Build shadows from fine parallel hatching and layered crosshatching, with intricate broken strokes in the foliage and small paper highlights keeping the dark trees readable. Use lighter, more widely spaced marks for distant buildings. Replace photographic color and smooth shading with ink lines and exposed paper. Keep the broad clear sky mostly unmarked. Preserve the original skyline, building shapes and positions, tree masses, framing, and camera movement throughout. Keep the printed linework coherent over time, without adding buildings, clouds, celestial objects, text, or decorative borders.",
+        "encoded_text": "You are a helpful assistant specialized in video editing.Render this tree-lined town panorama as a 19th-century architectural etching, printed in black ink on lightly aged ivory paper. Describe rooftops, the central dome, distant towers, and foreground walls with delicate, slightly irregular etched contours. Build shadows from fine parallel hatching and layered crosshatching, with intricate broken strokes in the foliage and small paper highlights keeping the dark trees readable. Use lighter, more widely spaced marks for distant buildings. Replace photographic color and smooth shading with ink lines and exposed paper. Keep the broad clear sky mostly unmarked. Preserve the original skyline, building shapes and positions, tree masses, framing, and camera movement throughout. Keep the printed linework coherent over time, without adding buildings, clouds, celestial objects, text, or decorative borders.",
+        "system_prompt": "You are a helpful assistant specialized in video editing.",
+        "prompt_transforms": [
+          "official Bernini prefix + _prompt_clean at encoder"
+        ],
+        "input_sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 40,
+          "guidance_mode": "v2v_apg",
+          "max_image_size": 848,
+          "negative_prompt": "",
+          "prompt_enhancer": false
+        },
+        "seed": 42,
+        "model_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "code_revision": "sha256:e47c5171a4da112498b5cb889e396b5a4895ae182273c823b7002a924b450629",
+        "asset_manifest_sha256": "c15340122a48058d05dc1b08697377daa7e17bd1868f3c5446d486b078eb719b",
+        "tokenizer_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "token_count": 200,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 714.6359667778015
+      }
+    },
+    "v2": {
+      "sha256": "2905776b0fc2dce3f59caf01cc9c9c7c91c36bb1e6f067732490cb10fd19359b",
+      "fps": 20.0,
+      "frames": 101,
+      "duration_seconds": 5.05,
+      "parent": "source",
+      "prompt": "Transform the existing town view into a 19th-century etching in black ink on subtly textured ivory paper. Trace the architecture visible in the footage: the large middle-distance buildings have angular pitched roofs, straight ridges, sloping roof planes, and triangular gables. Preserve these roof silhouettes and their overlaps. The small distant dome sits behind this roof cluster, slightly left of center; keep it confined to that landmark. Retain the tall, narrow bell tower near the far-right skyline, including its elongated shaft and small rounded crown. Express the existing structures through delicate etched contours and fine parallel hatching that follows each roof plane. Build tree shadows from layered crosshatching and broken leaf marks, leaving ivory gaps for highlights. Keep distant details lighter and the broad sky mostly bare paper. Preserve the town layout, foreground walls and roofs, tree masses, perspective, and original camera movement. Keep lines coherent across frames. The image fills the frame without a decorative paper border.",
+      "job_id": "event-0006-generate",
+      "execution": {
+        "backend": "bernini",
+        "requested_prompt": "Transform the existing town view into a 19th-century etching in black ink on subtly textured ivory paper. Trace the architecture visible in the footage: the large middle-distance buildings have angular pitched roofs, straight ridges, sloping roof planes, and triangular gables. Preserve these roof silhouettes and their overlaps. The small distant dome sits behind this roof cluster, slightly left of center; keep it confined to that landmark. Retain the tall, narrow bell tower near the far-right skyline, including its elongated shaft and small rounded crown. Express the existing structures through delicate etched contours and fine parallel hatching that follows each roof plane. Build tree shadows from layered crosshatching and broken leaf marks, leaving ivory gaps for highlights. Keep distant details lighter and the broad sky mostly bare paper. Preserve the town layout, foreground walls and roofs, tree masses, perspective, and original camera movement. Keep lines coherent across frames. The image fills the frame without a decorative paper border.",
+        "effective_prompt": "Transform the existing town view into a 19th-century etching in black ink on subtly textured ivory paper. Trace the architecture visible in the footage: the large middle-distance buildings have angular pitched roofs, straight ridges, sloping roof planes, and triangular gables. Preserve these roof silhouettes and their overlaps. The small distant dome sits behind this roof cluster, slightly left of center; keep it confined to that landmark. Retain the tall, narrow bell tower near the far-right skyline, including its elongated shaft and small rounded crown. Express the existing structures through delicate etched contours and fine parallel hatching that follows each roof plane. Build tree shadows from layered crosshatching and broken leaf marks, leaving ivory gaps for highlights. Keep distant details lighter and the broad sky mostly bare paper. Preserve the town layout, foreground walls and roofs, tree masses, perspective, and original camera movement. Keep lines coherent across frames. The image fills the frame without a decorative paper border.",
+        "encoded_text": "You are a helpful assistant specialized in video editing.Transform the existing town view into a 19th-century etching in black ink on subtly textured ivory paper. Trace the architecture visible in the footage: the large middle-distance buildings have angular pitched roofs, straight ridges, sloping roof planes, and triangular gables. Preserve these roof silhouettes and their overlaps. The small distant dome sits behind this roof cluster, slightly left of center; keep it confined to that landmark. Retain the tall, narrow bell tower near the far-right skyline, including its elongated shaft and small rounded crown. Express the existing structures through delicate etched contours and fine parallel hatching that follows each roof plane. Build tree shadows from layered crosshatching and broken leaf marks, leaving ivory gaps for highlights. Keep distant details lighter and the broad sky mostly bare paper. Preserve the town layout, foreground walls and roofs, tree masses, perspective, and original camera movement. Keep lines coherent across frames. The image fills the frame without a decorative paper border.",
+        "system_prompt": "You are a helpful assistant specialized in video editing.",
+        "prompt_transforms": [
+          "official Bernini prefix + _prompt_clean at encoder"
+        ],
+        "input_sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+        "conditioning_source_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "input_fps": 20.0,
+        "output_fps": 20,
+        "settings": {
+          "num_inference_steps": 40,
+          "guidance_mode": "v2v_apg",
+          "max_image_size": 848,
+          "negative_prompt": "",
+          "prompt_enhancer": false
+        },
+        "seed": 42,
+        "model_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "code_revision": "sha256:e47c5171a4da112498b5cb889e396b5a4895ae182273c823b7002a924b450629",
+        "asset_manifest_sha256": "c15340122a48058d05dc1b08697377daa7e17bd1868f3c5446d486b078eb719b",
+        "tokenizer_revision": "ff4c5d4d2d31365c2ffeb30e9753065ee18f58ce",
+        "token_count": 245,
+        "token_limit": 512,
+        "preflight": "passed",
+        "generation_seconds": 728.0083220005035
+      }
+    }
+  },
+  "evaluations": {
+    "event-0004-critique": {
+      "video_id": "v1",
+      "candidate": "v1",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "The antique etching treatment is convincing, and the camera movement appears well retained without conspicuous flicker. Architectural fidelity is materially reduced: prominent central pitched roofs become domes, and the far-right tower changes silhouette. These substitutions justify another generation focused on preserving the town's architecture.",
+        "findings": [
+          {
+            "id": "etching_style",
+            "dimension": "style",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Dense directional hatching, stippled foliage, dark ink, and warm textured paper convincingly evoke a 19th-century architectural print. The worn border reinforces the antique presentation.",
+            "scope": "whole frame",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "architectural_fidelity",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "The broad town panorama, tree masses, foreground roofs, and distant central dome remain recognizable. However, several prominent central pitched roof volumes become rounded domes, while the far-right slender tower becomes a shorter square tower with a pointed cap. These are substantial changes to architectural identity.",
+            "partial_boundary": "The panorama's arrangement survives, but important roof forms and a distant landmark silhouette do not.",
+            "scope": "central roof cluster and far-right skyline tower",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              }
+            ]
+          },
+          {
+            "id": "camera_and_line_stability",
+            "dimension": "temporal",
+            "origin": "preservation",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Both videos show gradual upward-left displacement of town features, with greater movement in foreground roofs than distant landmarks. Across the inspected sequence, candidate contours remain stable without conspicuous jumps, brightness pulses, or hatching flicker at the displayed resolution.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              5.0
+            ],
+            "sequence_videos": [
+              "source",
+              "v1"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              }
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "source",
+            "gains": [
+              "A coherent antique print appearance with detailed hatch marks and textured paper.",
+              "Previously dark foliage and roof areas gain readable graphic structure."
+            ],
+            "regressions": [
+              "Central pitched roofs are replaced by prominent rounded domes.",
+              "The far-right tower loses its original slender silhouette."
+            ],
+            "retained": [
+              "Broad panoramic composition and placement of major tree masses and landmarks.",
+              "Foreground roof arrangement remains recognizable."
+            ],
+            "unknowns": [
+              "Exact architectural details obscured in the source shadows cannot be verified."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              }
+            ],
+            "relationship": "actual_input"
+          }
+        ],
+        "strengths": [
+          "Convincing, consistent etching vocabulary.",
+          "Camera movement and visible linework remain stable."
+        ],
+        "unresolved": [
+          "Very subtle hatch shimmer below the displayed resolution remains unverified; no conspicuous instability was observed."
+        ]
+      }
+    },
+    "event-0007-critique": {
+      "video_id": "v2",
+      "candidate": "v2",
+      "protocol": "lha-online-critic-v1",
+      "outcome": {
+        "summary": "V2 convincingly achieves a 19th-century etched townscape and improves architectural fidelity over v1. It is suitable for delivery for the original broad style request. Remaining architectural substitutions and prominent sky cracks offer specific refinement opportunities, but the inspected motion reveals no conspicuous defect requiring another edit.",
+        "findings": [
+          {
+            "id": "etching_style",
+            "dimension": "style",
+            "origin": "user_requirement",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "Dark directional hatching, stippled foliage, strong ink silhouettes, warm paper, and worn edges convincingly evoke an antique etching. The transformation extends through buildings, vegetation, and sky.",
+            "scope": "whole frame",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "central_roof_fidelity",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "V2 restores angular pitched and hipped roofs where v1 introduced conspicuous rounded domes. This is a meaningful improvement against the source, although the roof grouping, ridge heights, and foreground roof shapes remain reconstructed rather than faithfully traced.",
+            "partial_boundary": "The pitched-roof character is recovered; the source's specific arrangement and silhouettes are only partly preserved.",
+            "scope": "central architectural group",
+            "evidence": [
+              {
+                "observation_id": "event-0006",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v2"
+              },
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "right_tower_fidelity",
+            "dimension": "preservation",
+            "origin": "preservation",
+            "verdict": "partial",
+            "importance": "core",
+            "claim": "V2 gives the far-right tower a clearer slender shaft than v1. Its pointed, flared cap and articulated rectangular body still differ from the source's narrow tower with a rounded upper silhouette; the adjacent dark vertical element is also not faithfully retained.",
+            "partial_boundary": "Slenderness and landmark placement improve, while the cap, proportions, and neighboring vertical detail remain stylized substitutions.",
+            "scope": "far-right tower and immediately adjacent skyline",
+            "evidence": [
+              {
+                "observation_id": "event-0006",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "visible_temporal_stability",
+            "dimension": "temporal",
+            "origin": "preservation",
+            "verdict": "pass",
+            "importance": "core",
+            "claim": "The recorded continuous inspections show gradual camera-linked movement without conspicuous roof or tower contour jumps, hatching flashes, or abrupt paper-texture replacement. V2's angular roofs and slender tower remain recognizable. This supports stability at the inspected display scale, without establishing the absence of subtle line shimmer.",
+            "scope": "whole frame",
+            "requires_sequence": true,
+            "interval_seconds": [
+              0.0,
+              4.95
+            ],
+            "sequence_videos": [
+              "source",
+              "v2"
+            ],
+            "evidence": [
+              {
+                "observation_id": "event-0001",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ]
+          },
+          {
+            "id": "paper_treatment",
+            "dimension": "design",
+            "origin": "design_quality",
+            "verdict": "partial",
+            "importance": "design",
+            "claim": "The aged sheet supports the antique-print appearance, but v2 adds an extensive hairline crack network across the large blank sky. This makes surface distress more visually prominent than in v1 and competes somewhat with the architectural linework.",
+            "partial_boundary": "The paper remains stylistically coherent; the conspicuous crack network is an optional aesthetic refinement rather than a failure of the requested etching style.",
+            "scope": "sky paper and sheet edges",
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              }
+            ]
+          }
+        ],
+        "comparisons": [
+          {
+            "against": "v1",
+            "gains": [
+              "Angular central roofs are substantially closer to the source than v1's invented rounded domes.",
+              "The far-right tower has a clearer slender shaft and reads more distinctly as the source landmark."
+            ],
+            "regressions": [
+              "The sky carries substantially more conspicuous cracking; v1 has quieter paper."
+            ],
+            "retained": [
+              "Convincing ink hatching, textured foliage, warm antique paper, and worn sheet edges.",
+              "Recorded continuous inspections of both candidates found no conspicuous contour jumps, hatching flashes, or abrupt texture replacements."
+            ],
+            "unknowns": [
+              "Subtle hatching shimmer remains unresolved at the inspected display scale."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "v1"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0001",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0002",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0003",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0004",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v1"
+              },
+              {
+                "observation_id": "event-0005",
+                "video": "v2"
+              }
+            ],
+            "relationship": "alternative"
+          },
+          {
+            "against": "source",
+            "gains": [
+              "The photographic townscape becomes a cohesive antique etched illustration."
+            ],
+            "regressions": [
+              "Specific central roof geometry and the far-right tower cap remain altered.",
+              "Small architectural details are simplified or invented."
+            ],
+            "retained": [
+              "The broad skyline arrangement, layered trees and roofs, and recognizable landmark locations."
+            ],
+            "unknowns": [
+              "Exact geometric correspondence throughout the reconstructed townscape was not established."
+            ],
+            "evidence": [
+              {
+                "observation_id": "overview",
+                "video": "source"
+              },
+              {
+                "observation_id": "overview",
+                "video": "v2"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "source"
+              },
+              {
+                "observation_id": "event-0006",
+                "video": "v2"
+              }
+            ],
+            "relationship": "actual_input"
+          }
+        ],
+        "strengths": [
+          "The requested etching effect is immediately legible and coherent.",
+          "V2 corrects v1's most conspicuous central roof substitution.",
+          "No material temporal disruption was identified in the recorded continuous inspections."
+        ],
+        "unresolved": [
+          "Fine hatching shimmer remains difficult to resolve at the supplied display scale.",
+          "The duration check passes at 5.05 seconds; this is supplied decoded metadata, separate from the visual assessment.",
+          "A focused edit restoring the source's tower cap and central roof arrangement has plausible value if stricter architectural fidelity is desired. Softening sky cracks is optional; another broad restyling pass is not supported by an observed need."
+        ]
+      }
+    }
+  },
+  "final": {
+    "video": "v2",
+    "message": "Created a 19th-century etching treatment with fine black hatching and aged ivory paper. Some roof and tower details remain stylized.",
+    "outcome": "selected_video"
+  },
+  "notes": "",
+  "reads": {
+    "read-0001": {
+      "id": "bernini-r-20261029",
+      "path": "knowledge/model-experience/bernini-r.md",
+      "sha256": "e8f765a0aff981a5d706e1637e046f7db567e084188188d766150d2e822dea5b",
+      "start_line": 1,
+      "end_line": 84,
+      "next_line": 85,
+      "event_id": "event-0002"
+    },
+    "read-0002": {
+      "id": "opuscar-008",
+      "path": "knowledge/entries/opuscar-008.md",
+      "sha256": "0d93bd351e028d2b01e1004861f98cec27761e4652a9239e92615f1573b4093c",
+      "start_line": 1,
+      "end_line": 134,
+      "next_line": null,
+      "event_id": "event-0002"
+    },
+    "read-0003": {
+      "id": "choose-editing-input",
+      "path": "knowledge/experience/choose-editing-input.md",
+      "sha256": "bfa89cebf0bb62c9d2ca6bd18d40aff50461503618215fadf85c0d6d9377b50e",
+      "start_line": 1,
+      "end_line": 37,
+      "next_line": null,
+      "event_id": "event-0005"
+    },
+    "read-0004": {
+      "id": "express-edits",
+      "path": "knowledge/experience/express-edits.md",
+      "sha256": "24c3b00a191974b6764a03b15ef6553ee6df45021ac425f2c207381184b795fe",
+      "start_line": 1,
+      "end_line": 27,
+      "next_line": null,
+      "event_id": "event-0005"
+    }
+  }
+}

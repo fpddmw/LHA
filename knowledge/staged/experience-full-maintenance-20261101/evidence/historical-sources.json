@@ -1,0 +1,163 @@
+[
+  {
+    "id": "H-B-041__short__full_knowledge",
+    "path": "H-B-041__short__full_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-041-pair/tasks/041__short__full_knowledge/run/state.json",
+    "source_sha256": "e1380111d7ecbac1d882dae431a1ea521faf9ee1517e473917b57b02c6c070ca",
+    "sha256": "63133717726a742ce177768a31c9d9ac7e4ad68dad791dc522f44173161ce3f8"
+  },
+  {
+    "id": "H-B-041__short__no_knowledge",
+    "path": "H-B-041__short__no_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-041-pair/tasks/041__short__no_knowledge/run/state.json",
+    "source_sha256": "4e234595c7a113b892d1ad5070379d0c440cc232e57985e419a62faf45111573",
+    "sha256": "c035ca7565fcc29fe9f4afb318c7a88658b2a62649c6e16a9ecc887949a876bb"
+  },
+  {
+    "id": "H-B-027__short__full_knowledge",
+    "path": "H-B-027__short__full_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-027-pair/tasks/027__short__full_knowledge/run/state.json",
+    "source_sha256": "554b83fda658d8d01100c96e6dc761b93e1808aed671be425faf765786d01e6d",
+    "sha256": "902ca5c399dc016a98a67efddaf546ec6324d4e4a73e380441196e4eff49d886"
+  },
+  {
+    "id": "H-B-027__short__no_knowledge",
+    "path": "H-B-027__short__no_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-027-pair/tasks/027__short__no_knowledge/run/state.json",
+    "source_sha256": "4c747e50db2979b73d0473ba79fd08b8a82dd56f0629cb44d619117655d75930",
+    "sha256": "68b46789eb0153bd318f3a6e62e8db472aab5f9994223d8f1b5be2e17fbbbc2f"
+  },
+  {
+    "id": "H-B-024__long__full_knowledge",
+    "path": "H-B-024__long__full_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-024-pair/tasks/024__long__full_knowledge/run/state.json",
+    "source_sha256": "4a028d06867b155f405d8c8dc30e9a6e1fe0e483a7b8740059cdc4458f5eee06",
+    "sha256": "a1042ca1e7f3f735ae8d488fc45a2e25101f6025ce8f0d0aa007dfc5ad3f3e43"
+  },
+  {
+    "id": "H-B-024__long__no_knowledge",
+    "path": "H-B-024__long__no_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-024-pair/tasks/024__long__no_knowledge/run/state.json",
+    "source_sha256": "0de9fb6e3a27846f45c3dde727e0cb836a62f6a94dbce36b47f958789238b03f",
+    "sha256": "1335069873d63c27e3758ec5ac470c3257e2d068741975c589fb4098d9092c86"
+  },
+  {
+    "id": "H-B-fewshot_004__long__full_knowledge",
+    "path": "H-B-fewshot_004__long__full_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-fewshot-004-pair/tasks/fewshot_004__long__full_knowledge/run/state.json",
+    "source_sha256": "974f90f7bb32ee47024bee5aee44bf69d9d38b4f0af19a70638336333b789f12",
+    "sha256": "57c97186d3384c4f9f20be07bf5fb65af22c2e8b9fa504b31bfdd388f627790f"
+  },
+  {
+    "id": "H-B-fewshot_004__long__no_knowledge",
+    "path": "H-B-fewshot_004__long__no_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-fewshot-004-pair/tasks/fewshot_004__long__no_knowledge/run/state.json",
+    "source_sha256": "7910e9714f6a34fa606e81016a7af3fb5f74b48f926d2f584f18b83a1558360a",
+    "sha256": "e28b999b1ba2657936836ab86e4624020cef85671f4ab11bf152096ccef50aa7"
+  },
+  {
+    "id": "H-B-benchmark__001__long",
+    "path": "H-B-benchmark__001__long.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-benchmark-001-tracks/tasks/benchmark__001__long/run/state.json",
+    "source_sha256": "0a5ac4c0292e9ba7a75647f6e3412a8c8b3af604a6aa045fe05885fe595602d5",
+    "sha256": "62f0db0e9bfc01ab9d76b500424c5d501090d1b8403b1e2b5c7a5e9712a34bad"
+  },
+  {
+    "id": "H-B-benchmark__001__short",
+    "path": "H-B-benchmark__001__short.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-benchmark-001-tracks/tasks/benchmark__001__short/run/state.json",
+    "source_sha256": "bf944bf1b65c4646925a2245267dbd1c13fd24ba133cc5ad78ac1817c0719013",
+    "sha256": "f78dc825f190f96c72c0f47e618ce82a6251ab4de82cb3bd63008e8c273a17de"
+  },
+  {
+    "id": "H-B-benchmark__003__short",
+    "path": "H-B-benchmark__003__short.json",
+    "source_path": "out/agent_loop_live/20261030/phase2/completed-benchmark-003-short/tasks/benchmark__003__short/run/state.json",
+    "source_sha256": "496a6935d8cfc7428599fb4065aab1ad4f547d89c0595b213938a4432487d88d",
+    "sha256": "b176bb6c63a6bf23c65740203b3dbdd48456b1303b67109fa8bfb16525adc1ee"
+  },
+  {
+    "id": "H-D-041__short__full_knowledge",
+    "path": "H-D-041__short__full_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-041-pair/tasks/041__short__full_knowledge/run/state.json",
+    "source_sha256": "c439159aa76f36fcc2550e7eefabbb9e9f5ecce64e29f1372665b671fd080759",
+    "sha256": "6b7e8f9b784ba78f19e82ff62bf47ab36492ca655a77066b024814808f5440b1"
+  },
+  {
+    "id": "H-D-041__short__no_knowledge",
+    "path": "H-D-041__short__no_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-041-pair/tasks/041__short__no_knowledge/run/state.json",
+    "source_sha256": "90bcdcc1071708ff8eb59385b95d5be38d70f34c891e026ec9ffaea1999b67b9",
+    "sha256": "06f8ef072e2036e58353fc2c20447525f2ad1653b0e8a9f0aef6a80ecee4f352"
+  },
+  {
+    "id": "H-D-024__long__full_knowledge",
+    "path": "H-D-024__long__full_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/024__long__full_knowledge/run/state.json",
+    "source_sha256": "eea6c563d9824b5b7f1f849e4a767eeff8d1338c86591e30eb8b81ef9dab0e66",
+    "sha256": "6815d7f16f212b9daad313859dc7ae4564543bf4a5424dbbd0ca14195cde52d8"
+  },
+  {
+    "id": "H-D-024__long__no_knowledge",
+    "path": "H-D-024__long__no_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/024__long__no_knowledge/run/state.json",
+    "source_sha256": "73d8d5ba3c24fc96cc8d9cdde446f987d3a65435854908760f8c909e22ab2e32",
+    "sha256": "7dbcb67db0deaae46ede209c74063bb8eb5851e0853262cfb4e76f0edbd8fd91"
+  },
+  {
+    "id": "H-D-027__short__full_knowledge",
+    "path": "H-D-027__short__full_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/027__short__full_knowledge/run/state.json",
+    "source_sha256": "232f290ed7180da361dd9b3a3e6302a6ad6bbc992e268ab91d01b792ce635826",
+    "sha256": "7ec9fa533e996a8f19c014ebc9dee414380fa569a16c4dfe7cc0c75d910c3b33"
+  },
+  {
+    "id": "H-D-027__short__no_knowledge",
+    "path": "H-D-027__short__no_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/027__short__no_knowledge/run/state.json",
+    "source_sha256": "59f66ab3913d785cf9232e828621e6ee11add2e08d93b72e44e6fec54def31e9",
+    "sha256": "1777e9ebbd02d142434ccb1d035cd81792f23d9f2c48234501faf76b4030ba8e"
+  },
+  {
+    "id": "H-D-benchmark__001__short",
+    "path": "H-D-benchmark__001__short.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/benchmark__001__short/run/state.json",
+    "source_sha256": "56ce36676f8173f81bad7cc7f8b6ea08554d40b83ec04cccfe912380e40ef013",
+    "sha256": "6f67116b3cb0dfc217706a274b3d2e5cb7d5e5d1e12bcffdefcf7f9769325aa0"
+  },
+  {
+    "id": "H-D-benchmark__003__short",
+    "path": "H-D-benchmark__003__short.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/benchmark__003__short/run/state.json",
+    "source_sha256": "c985da2cc3c9c36f06625b77d491bcfb29f72903ade37bf55ded85f54477ea3b",
+    "sha256": "496e695e54e5f1eb0f1e6fd9938c1a2b54c50b4caf75a60500cc530603fa949b"
+  },
+  {
+    "id": "H-D-fewshot_004__long__full_knowledge",
+    "path": "H-D-fewshot_004__long__full_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-fewshot004-full/tasks/fewshot_004__long__full_knowledge/run/state.json",
+    "source_sha256": "43285b0ed2ae0ad27f803bda2de06e9c6fbf695f29385000f93525cc912242d7",
+    "sha256": "93ebab5bb271fdb851587addcb4ac48ad21c257a9a5d64d28001b94de2970793"
+  },
+  {
+    "id": "H-D-fewshot_004__long__no_knowledge",
+    "path": "H-D-fewshot_004__long__no_knowledge.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-fewshot004-no/tasks/fewshot_004__long__no_knowledge/run/state.json",
+    "source_sha256": "81e8f7ad0967441b8d310f8e1bf09e9546dd11083cf91d4e4b66b999610b5eb9",
+    "sha256": "0ece15af7e642f0c96137780fec3eda14646db1d535ec3b939c788fbfe1d18f1"
+  },
+  {
+    "id": "H-D-benchmark__001__long",
+    "path": "H-D-benchmark__001__long.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-benchmark-001-long/tasks/benchmark__001__long/run/state.json",
+    "source_sha256": "0ca314970975a9119207e90318f4bbd2bc6542f5634c7bacfe8060270ff01e7b",
+    "sha256": "53b4414d60826c16c07cc72b039ba6560e95410edaa0db29e8a1a5dca8a8110f"
+  },
+  {
+    "id": "H-D-benchmark__003__long",
+    "path": "H-D-benchmark__003__long.json",
+    "source_path": "out/agent_loop_live/20261030/ditto-phase2/completed-benchmark-003-long/tasks/benchmark__003__long/run/state.json",
+    "source_sha256": "c7b2d9226c6901d9c33eafefe69e4a1a1084eba2ad2dffc9556da1c81520b6e1",
+    "sha256": "ef88cf75ca6a743eb0a0813d17125391b0ef82f5cb94ef902dc4d00863f0da5a"
+  }
+]

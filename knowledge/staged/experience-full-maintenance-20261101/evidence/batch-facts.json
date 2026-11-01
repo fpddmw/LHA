@@ -1,0 +1,359 @@
+{
+  "basis": "Saved online RSI protocol; descriptive ordinal gains are not overall improvement.",
+  "tasks": 7,
+  "candidates": 21,
+  "online_reviews": 21,
+  "all_requirements_targeted": 21,
+  "temporal_requirement_verdicts": {
+    "fail": 13,
+    "partial": 1,
+    "unknown": 40
+  },
+  "item_prediction_checks": {
+    "miss": 66,
+    "hit": 64,
+    "unknown": 24
+  },
+  "later_attempts_with_collateral_regressions": [
+    [
+      "F002",
+      "v2",
+      [
+        "lighting"
+      ]
+    ],
+    [
+      "F002",
+      "v3",
+      [
+        "tuxedo",
+        "piano"
+      ]
+    ],
+    [
+      "F003",
+      "v2",
+      [
+        "hanfu",
+        "guitar"
+      ]
+    ],
+    [
+      "F003",
+      "v3",
+      [
+        "hanfu"
+      ]
+    ],
+    [
+      "F004",
+      "v2",
+      [
+        "arena",
+        "lighting"
+      ]
+    ],
+    [
+      "F004",
+      "v3",
+      [
+        "arena"
+      ]
+    ],
+    [
+      "F005",
+      "v2",
+      [
+        "lighting",
+        "suits"
+      ]
+    ],
+    [
+      "F006",
+      "v2",
+      [
+        "hanfu"
+      ]
+    ],
+    [
+      "F007",
+      "v2",
+      [
+        "roof_modules"
+      ]
+    ]
+  ],
+  "third_attempt_routes": {
+    "source": {
+      "attempts": 4,
+      "no_major_damage": 0,
+      "at_least_one_known_ordinal_gain": 2,
+      "tasks": [
+        "F001",
+        "F002",
+        "F003",
+        "F005"
+      ]
+    },
+    "v2": {
+      "attempts": 3,
+      "no_major_damage": 3,
+      "at_least_one_known_ordinal_gain": 2,
+      "tasks": [
+        "F004",
+        "F006",
+        "F007"
+      ]
+    }
+  },
+  "earlier_candidate_selected_tasks": [
+    "F002",
+    "F003",
+    "F004",
+    "F005"
+  ],
+  "known_generation_seconds": 14571.661028623581,
+  "known_generation_count": 21,
+  "rows": [
+    {
+      "task": "F001",
+      "video": "v1",
+      "input": "source",
+      "job": "event-0002-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 885.9323444366455,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F001",
+      "video": "v2",
+      "input": "source",
+      "job": "event-0003-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 878.8517229557037,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F001",
+      "video": "v3",
+      "input": "source",
+      "job": "event-0005-generate",
+      "major_damage": true,
+      "selected": true,
+      "stop_reason": "budget",
+      "generation_seconds": 878.0466296672821,
+      "ordinal_gains_vs_v2": [
+        "action"
+      ]
+    },
+    {
+      "task": "F002",
+      "video": "v1",
+      "input": "source",
+      "job": "event-0002-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 784.0152115821838,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F002",
+      "video": "v2",
+      "input": "source",
+      "job": "event-0004-generate",
+      "major_damage": true,
+      "selected": true,
+      "stop_reason": "budget",
+      "generation_seconds": 782.7806096076965,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F002",
+      "video": "v3",
+      "input": "source",
+      "job": "event-0007-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 781.0677647590637,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F003",
+      "video": "v1",
+      "input": "source",
+      "job": "event-0002-generate",
+      "major_damage": true,
+      "selected": true,
+      "stop_reason": "budget",
+      "generation_seconds": 719.2720527648926,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F003",
+      "video": "v2",
+      "input": "source",
+      "job": "event-0003-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 716.1325998306274,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F003",
+      "video": "v3",
+      "input": "source",
+      "job": "event-0006-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 718.5305068492889,
+      "ordinal_gains_vs_v2": [
+        "guitar"
+      ]
+    },
+    {
+      "task": "F004",
+      "video": "v1",
+      "input": "source",
+      "job": "event-0002-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 597.9505491256714,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F004",
+      "video": "v2",
+      "input": "source",
+      "job": "event-0004-generate",
+      "major_damage": false,
+      "selected": true,
+      "stop_reason": "budget",
+      "generation_seconds": 598.4029364585876,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F004",
+      "video": "v3",
+      "input": "v2",
+      "job": "event-0005-generate",
+      "major_damage": false,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 595.2438209056854,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F005",
+      "video": "v1",
+      "input": "source",
+      "job": "event-0002-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 750.1105930805206,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F005",
+      "video": "v2",
+      "input": "source",
+      "job": "event-0003-generate",
+      "major_damage": true,
+      "selected": true,
+      "stop_reason": "budget",
+      "generation_seconds": 746.1564643383026,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F005",
+      "video": "v3",
+      "input": "source",
+      "job": "event-0004-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 748.6937277317047,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F006",
+      "video": "v1",
+      "input": "source",
+      "job": "event-0004-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 456.0824975967407,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F006",
+      "video": "v2",
+      "input": "source",
+      "job": "event-0006-generate",
+      "major_damage": false,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 458.0572807788849,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F006",
+      "video": "v3",
+      "input": "v2",
+      "job": "event-0008-generate",
+      "major_damage": false,
+      "selected": true,
+      "stop_reason": "budget",
+      "generation_seconds": 456.09078216552734,
+      "ordinal_gains_vs_v2": [
+        "mountains",
+        "hanfu"
+      ]
+    },
+    {
+      "task": "F007",
+      "video": "v1",
+      "input": "source",
+      "job": "event-0002-generate",
+      "major_damage": true,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 675.3038990497589,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F007",
+      "video": "v2",
+      "input": "source",
+      "job": "event-0005-generate",
+      "major_damage": false,
+      "selected": false,
+      "stop_reason": "budget",
+      "generation_seconds": 672.893993139267,
+      "ordinal_gains_vs_v2": []
+    },
+    {
+      "task": "F007",
+      "video": "v3",
+      "input": "v2",
+      "job": "event-0006-generate",
+      "major_damage": false,
+      "selected": true,
+      "stop_reason": "budget",
+      "generation_seconds": 672.0450417995453,
+      "ordinal_gains_vs_v2": [
+        "transit_hub"
+      ]
+    }
+  ]
+}

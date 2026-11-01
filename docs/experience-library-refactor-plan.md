@@ -2,6 +2,8 @@
 
 Date: 2026-11-01. Status: bounded implementation complete; static/historical checks recorded below. Four authored entries await the planned content review before activation. Simulated and live workflows remain deferred.
 
+Follow-up: the user subsequently authorized complete rewriting and seven-task maintenance. That work is recorded in [the full maintenance plan](experience-full-maintenance-20261101.md) and [complete review package](../knowledge/staged/experience-full-maintenance-20261101/README.md). The bounded scope below remains the historical implementation record; its four-entry boundary no longer describes the current content work. Runtime activation still awaits content review.
+
 ## Purpose and boundaries
 
 Curate useful experience, provide separately maintained Skills for human-initiated batch maintenance, and expose factual experience-use records. Planner retains creative ownership and optional reading/notes. The one-shot Critic, frozen rubric, renderer and independent judge keep their established roles. No RSI, automatic proposer/adoption, scheduler, mandatory reasoning forms, live inference, GPU runs, independent scoring or simulated workflows are introduced.

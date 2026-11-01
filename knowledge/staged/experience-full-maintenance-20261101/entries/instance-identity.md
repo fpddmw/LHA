@@ -1,0 +1,15 @@
+# EX-instance-identity: Appearance categories do not establish correspondence to an individual
+
+Revision 2. Draft for review. Bernini and Ditto, historical online judgments and explanatory hypothesis. Reworks R6/X4/B4/D3; expanded with F002/F003/F004/F005/F006.
+
+**An appearance description can faithfully specify a type of person while failing to retain this person. More identity adjectives add attributes; they do not add a correspondence constraint between source and output.**
+
+The older Ditto table-tennis runs make the distinction visible: rectangular glasses could return while the face remained different. Other prompts naming age, hair and glasses produced older faces or opaque eyewear. The seven-task Bernini batch repeats the problem across different activities. In F002 v2, the pianist's resemblance improved while a guest's identity worsened. F003 v2 introduced glasses to the standing performer. F005 v3 enumerated each person's hair and eyewear, yet the review still found changed identities. Whole-scene descriptions can redistribute appearance among people as well as replace it.
+
+One explanatory hypothesis is that the new social or visual context encourages reconstruction of a plausible participant. A tuxedoed lounge pianist or a palace performer can fit the new scene while failing the instance-preservation requirement. This hypothesis directs attention to what has changed around a head: clothing cut, headwear, light, nearby hands and pose. Merely describing a youthful face more precisely may continue to specify a replacement rather than recover the source individual.
+
+The useful planning question is which input still carries recognizable individual evidence, and which proposed transformations compete with it. A person-specific source observation helps diagnose loss; converting that observation into a long prompt is a separate, unvalidated intervention. Keep identity, accessory category and accessory shape distinguishable when comparing candidates.
+
+Counterexamples matter. F006 retained a recognizable single person's face throughout its reviews despite major costume and setting changes. F004 v2 passed the historical face judgment after a below-neck instruction and other prompt changes; F002 v3 also used a below-neck boundary and still failed. These records do not establish a reliable boundary phrase, a short-prompt cure, or a near-person prohibition. Crowding, scale, occlusion and requested transformation are plausible conditions to examine, not independently measured causes.
+
+Evidence: [D-FS4-no](../evidence/D-FS4-no.json), glasses recovery without face recovery; [D-FS4-full](../evidence/D-FS4-full.json); [F002](../evidence/F002.json), v2/v3; [F003](../evidence/F003.json), v2; [F004](../evidence/F004.json), v2; [F005](../evidence/F005.json), v3; [F006](../evidence/F006.json), all reviews. New inspection of F003/F005 opening frames corroborates visible appearance substitutions at those frames only; see [inspection record](../evidence/visual-inspection.md). Related: [input conditioning](input-conditioning.md).

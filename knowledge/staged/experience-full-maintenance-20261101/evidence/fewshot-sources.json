@@ -1,0 +1,51 @@
+[
+  {
+    "id": "F001",
+    "path": "evidence/F001.json",
+    "source_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run/state.json",
+    "source_sha256": "b71eb8bfff60889967a1b8f7732d6d47395e0ecf0d30d4be2f8713ab66eb6a78",
+    "extract_sha256": "0fdfc892c177c747131e7a44f03640575d20d6eae11bf77975e0fd202e3c851c"
+  },
+  {
+    "id": "F002",
+    "path": "evidence/F002.json",
+    "source_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_002/run/state.json",
+    "source_sha256": "7098594ca795ac7ce2204cdbb910ffd25580735a4ff45814ecab84f884f323e9",
+    "extract_sha256": "313321963a4eb289cdfdbbfdf9230e02e53b8a27d83ffec35aefe9bc12618f49"
+  },
+  {
+    "id": "F003",
+    "path": "evidence/F003.json",
+    "source_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/state.json",
+    "source_sha256": "9281c849f254b4388bc09c92a27f6d1d60a8378f7a5dbea76636c8d2107153e9",
+    "extract_sha256": "78279ac2ef1cf77a3ad121e768c3ed85fdf287c1351b73dd52ede88133eafb4d"
+  },
+  {
+    "id": "F004",
+    "path": "evidence/F004.json",
+    "source_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run/state.json",
+    "source_sha256": "20cd3bd80b5ac6ab2ac72dafb2b38853d90736512b5544cbe9703b85e28c64a9",
+    "extract_sha256": "a8d76d78739f66bd52ac790bacd145f99121df74bf5bfaff2fbdf5ce39acc6de"
+  },
+  {
+    "id": "F005",
+    "path": "evidence/F005.json",
+    "source_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/state.json",
+    "source_sha256": "f965c62ecdfc75d1979b0e9ac3a2824b83a67d8b34a59ce23c3d108e6cb8080f",
+    "extract_sha256": "4314a262283de9ccd6a55755359d2b7a76f5e4c5dfa8f43515a6baad12b6c128"
+  },
+  {
+    "id": "F006",
+    "path": "evidence/F006.json",
+    "source_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/state.json",
+    "source_sha256": "a95fad4e8a60d14b83fa5846951bf9217cf12ef2c22967e3b5b113441c4b3efe",
+    "extract_sha256": "acc144ed42e515e8b706d9cc8f8a6d771e83d5ff24e4b050fe9c590f30c600fb"
+  },
+  {
+    "id": "F007",
+    "path": "evidence/F007.json",
+    "source_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run/state.json",
+    "source_sha256": "7e45bc6b8c21713385336e3d8da120cb04a5b443e5c9d5f86093cf0e6b32deaf",
+    "extract_sha256": "0d4daa4109bc28d81e44092b39a8ac330fb9c5fb53185a61a0e2ec98d4885ca8"
+  }
+]

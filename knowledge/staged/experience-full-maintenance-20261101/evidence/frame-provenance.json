@@ -1,0 +1,90 @@
+[
+  {
+    "id": "F003-source-000000",
+    "path": "evidence/frames/F003-source-000000.jpg",
+    "original_frame_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/jobs/event-0002-generate-auto-critique/active-critic/observations/overview/source/000000.jpg",
+    "sha256": "1f23422b969edd34b30681e9c3a588aba229b3097e3e7055000bf9f357e27672",
+    "video_id": "source",
+    "video_sha256": "641fd5ea806609b881a303eb4f1216e791a028848bb01362118d6eac11ada5fd",
+    "frame_index": 0,
+    "timestamp_seconds": 0.0,
+    "scope": "Read-only sampled-frame inspection; no whole-clip or exact-motion judgment"
+  },
+  {
+    "id": "F003-v1-000000",
+    "path": "evidence/frames/F003-v1-000000.jpg",
+    "original_frame_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/jobs/event-0002-generate-auto-critique/active-critic/observations/overview/v1/000000.jpg",
+    "sha256": "d75834a0720cd380868ecd2600a115e946c91785b1e8a451880b6a7d40313cc4",
+    "video_id": "v1",
+    "video_sha256": "d26711a1569539b2dab5367254d66f608f80aea4cd3dfa5bf84483c0613f2380",
+    "frame_index": 0,
+    "timestamp_seconds": 0.0,
+    "scope": "Read-only sampled-frame inspection; no whole-clip or exact-motion judgment"
+  },
+  {
+    "id": "F003-v2-000000",
+    "path": "evidence/frames/F003-v2-000000.jpg",
+    "original_frame_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_003/run/jobs/event-0003-generate-auto-critique/active-critic/observations/overview/v2/000000.jpg",
+    "sha256": "310def045adb338e41b0ed93cfa64dd97cbc3241c6dbf7b25569eec737b5f778",
+    "video_id": "v2",
+    "video_sha256": "cf583fa6c48d685c32138531268506d27dd4cc9828e0e0977cb40f4d82677ca4",
+    "frame_index": 0,
+    "timestamp_seconds": 0.0,
+    "scope": "Read-only sampled-frame inspection; no whole-clip or exact-motion judgment"
+  },
+  {
+    "id": "F005-source-000000",
+    "path": "evidence/frames/F005-source-000000.jpg",
+    "original_frame_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/jobs/event-0002-generate-auto-critique/active-critic/observations/overview/source/000000.jpg",
+    "sha256": "ed47c6077ad795a3f43183de9350c4a4d08354bccffb9d6d7a16848cb54e523f",
+    "video_id": "source",
+    "video_sha256": "836a89177f2e1c36cf22d12cc2338cede761ab6a96782e621d91724b429dd5da",
+    "frame_index": 0,
+    "timestamp_seconds": 0.0,
+    "scope": "Read-only sampled-frame inspection; no whole-clip or exact-motion judgment"
+  },
+  {
+    "id": "F005-v1-000000",
+    "path": "evidence/frames/F005-v1-000000.jpg",
+    "original_frame_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/jobs/event-0002-generate-auto-critique/active-critic/observations/overview/v1/000000.jpg",
+    "sha256": "a4cc4217ec3dfb211e3e25bf665d5b127e838ca2379714d3ec5735050d493daa",
+    "video_id": "v1",
+    "video_sha256": "b7d639b9a695fdef3f4ca566d191b1d4b99d4cc5544a1cff1a49c3072c5df998",
+    "frame_index": 0,
+    "timestamp_seconds": 0.0,
+    "scope": "Read-only sampled-frame inspection; no whole-clip or exact-motion judgment"
+  },
+  {
+    "id": "F005-v2-000000",
+    "path": "evidence/frames/F005-v2-000000.jpg",
+    "original_frame_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_005/run/jobs/event-0003-generate-auto-critique/active-critic/observations/overview/v2/000000.jpg",
+    "sha256": "bc21e7e67904b9d3d6a18b987e6d381140778140e4c83ccb672d28ac7c5e8fd7",
+    "video_id": "v2",
+    "video_sha256": "3272d3275d9e8414d2f92bcef97f179c0b5cd4f86d3ad7abd66a1775ed3baac5",
+    "frame_index": 0,
+    "timestamp_seconds": 0.0,
+    "scope": "Read-only sampled-frame inspection; no whole-clip or exact-motion judgment"
+  },
+  {
+    "id": "F006-v3-000000",
+    "path": "evidence/frames/F006-v3-000000.jpg",
+    "original_frame_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/jobs/event-0008-generate-auto-critique/active-critic/observations/overview/v3/000000.jpg",
+    "sha256": "296126a5fde6016931ed0dba9276d8cb3c4364c7d795afa6c1c0c2f51297c4b3",
+    "video_id": "v3",
+    "video_sha256": "ce57fb7bd4fc19726da4c076cd0c2aa68e7f05c02856f746edc8122cf691a553",
+    "frame_index": 0,
+    "timestamp_seconds": 0.0,
+    "scope": "Read-only sampled-frame inspection; no whole-clip or exact-motion judgment"
+  },
+  {
+    "id": "F006-v3-000112",
+    "path": "evidence/frames/F006-v3-000112.jpg",
+    "original_frame_path": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run/jobs/event-0008-generate-auto-critique/active-critic/observations/overview/v3/000112.jpg",
+    "sha256": "904b385854ef871af4f8123fb3b3b7fd8e901f9411f5c76ed68f8947f3781f3a",
+    "video_id": "v3",
+    "video_sha256": "ce57fb7bd4fc19726da4c076cd0c2aa68e7f05c02856f746edc8122cf691a553",
+    "frame_index": 112,
+    "timestamp_seconds": 3.7333333333333334,
+    "scope": "Read-only sampled-frame inspection; no whole-clip or exact-motion judgment"
+  }
+]
