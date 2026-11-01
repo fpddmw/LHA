@@ -18,7 +18,7 @@ Direct runs once using the exact original long prompt. Full and no-experience Lo
 
 Both Loops must reach a generated delivery candidate with `stop_reason=satisfied`. A context/resource pause, execution failure or lack of a promising next attempt remains incomplete. The coordinator keeps the current topic and records its state; it never advances by labelling a failed task delivered. Resource adjustments remain separately recorded through the existing recovery tools.
 
-The two final judges run in parallel with at most one call per provider at a time. Each evaluates all distinct candidates from the completed topic using the same original request and deterministic visual evidence. Reports do not contain arm, iteration, Planner notes, online Critic scores or the other judge's findings. A source/request/output/protocol/model/adapter match allows reuse of a prior score. Invalid output is retained and blocks this topic; it is not repaired by a follow-up model conversation.
+The two final judges run in parallel with at most one call per provider at a time. Each evaluates the Direct output and each Loop arm's first and final selected output using the same original request and deterministic visual evidence. Start each eligible judgment as soon as its completed video and receipt are verified, independently of generation. First/final identity matches reuse a score. Other intermediate candidates remain archived without independent final scoring. Use server-side scoring when reachable; otherwise retrieve the required media/evidence and score locally under the same frozen protocol. Reports do not contain arm, iteration, Planner notes, online Critic scores or the other judge's findings. A source/request/output/protocol/model/adapter match allows reuse of a prior score. Invalid output is retained and blocks this topic; it is not repaired by a follow-up model conversation.
 
 Only after both judges finish does the coordinator copy videos and complete traces, construct the comparison page, verify every archived file hash and admit the next topic. Restart uses existing receipts and scores. It does not regenerate completed arms. The archive, rather than an in-memory completion flag, is the next-topic gate.
 
@@ -40,3 +40,7 @@ Inspect `checkpoint.json`, the current topic's arm receipts, and `workers/<devic
 - A context/resource pause uses `manage_creative_run.py resources`. Preserve the original task, knowledge and model identity; record any technical capacity increase. Then resume the same batch command.
 
 Check long-running work normally every 10–15 minutes, or respond sooner to a failure/completion event. No cross-topic generation is prefetched. Experience maintenance and automatic adoption remain outside this experiment.
+
+## Execution ownership amendment
+
+The GPT-6.1-sol/xhigh execution process owns monitoring, early eligible-video judging and archival. Follow [the explicit handoff](creative-fewshot-sol-handoff.md) when migrating the already-running coordinator. The original conversation no longer performs routine experiment polling.
