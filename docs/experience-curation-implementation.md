@@ -43,4 +43,4 @@ The user still reviews the four new explanations before any content activation. 
 
 ## GitHub synchronization
 
-Plan commit `b3c76b4` was pushed and the pre-change remote commit verified. Implementation synchronization is pending the final repository checks; update this paragraph with the verified implementation commit before delivery.
+Plan commit `b3c76b4` was pushed and the pre-change remote commit verified. Implementation commit `5621f0e4907d80ee510f84401888d2d66f86ce64` was pushed to `codex/experience-curation-v1`; `ls-remote` matched the local commit exactly. Staged syntax/configuration parsing, local Markdown links, whitespace and credential-pattern checks passed. This final documentation update records that verification; it changes no runtime or evidence content.

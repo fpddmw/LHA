@@ -45,7 +45,7 @@ All 45 IDs have a disposition. Demonstrations distinguish recorded judgments, ex
 | Three maintenance Skills and shared standard | Complete | Three Skill metadata validations passed; no model-based Skill effectiveness test |
 | Planner manuals and scoped catalog | Implemented | Two optional professional manuals, compact operating/reading guidance; 111 design entries retained; approved curated list intentionally empty |
 | Passive usage records and batch export | Implemented | Call provenance hook, per-run projection and explicit development batch exporter; no model interpretation/publication |
-| Static/historical checks and GitHub sync | Checks complete; synchronization recorded in implementation report | Seven changed/new Python files parsed; real corpus navigation inspected; six saved runs exported. Six regression cases written but not executed. Model/simulation runs remain deferred |
+| Static/historical checks and GitHub sync | Complete | Implementation `5621f0e4907d80ee510f84401888d2d66f86ce64` verified on GitHub. Seven changed/new Python files parsed; real corpus navigation inspected; six saved runs exported. Six regression cases written but not executed. Model/simulation runs remain deferred |
 
 Implementation details and remaining limits: [implementation report](experience-curation-implementation.md). Content review entry point: [four demonstrations and audit](../knowledge/staged/experience-curation-20261101/README.md). Historical inspection output: `out/experience_curation/20261101/historical-six-source-final/` (local, not committed).
 
