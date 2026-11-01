@@ -1,6 +1,6 @@
 # Seven-fewshot three-arm experiment preparation
 
-Date: 2026-11-01. Status: code and local/provider preflight complete; deployment to the user-authorized single RTX 4090 D is in progress. The user authorized this plan, the complete preflight repairs, activation of the reviewed experience/manual package, software checks and Git publication. The user subsequently supplied a new host and authorized startup after checks. The supplied endpoint exposes one RTX 4090 D (24GB). The user explicitly confirmed using it because the 5090 capacity was unavailable. All three arms will run sequentially on this one GPU with the same generation settings.
+Date: 2026-11-01. Status: code and local/provider preflight complete; host preflight passed and the batch was launched on the user-authorized single RTX 4090 D. The first render is being checked before claiming GPU readiness. The user authorized this plan, the complete preflight repairs, activation of the reviewed experience/manual package, software checks and Git publication. The user subsequently supplied a new host and authorized startup after checks. The supplied endpoint exposes one RTX 4090 D (24GB). The user explicitly confirmed using it because the 5090 capacity was unavailable. All three arms will run sequentially on this one GPU with the same generation settings.
 
 ## Experimental contract
 
@@ -56,3 +56,11 @@ A synthetic provider contract check establishes image/request/report compatibili
 Protocol references for provider-specific request controls: [Claude effort](https://platform.claude.com/docs/en/build-with-claude/effort) and [GLM reasoning/output capacity](https://docs.nvidia.com/nim/large-language-models/2.1.4/get-started/advanced/get-started-glm-5.3-flash.html). Actual endpoint compatibility is established by the retained preflight responses.
 
 Host inspection found the previous 27GB pinned Bernini model directory, the official Bernini code and a working Python environment (PyTorch 2.7.1+cu128, Transformers 4.57.3, PyAV and OpenCV). Reuse these through an isolated checkout; preserve all old runs. GitHub is reachable directly from the server, so no model files pass through the local VPN. Host asset/tokenizer/authentication preflight and the first actual render still precede a claim of GPU readiness.
+
+## Live deployment start
+
+The isolated remote runtime is commit `42e18b363ca43986440af07ae1018e4f81550956` at `/root/autodl-tmp/LHA-creative-20261101`; results are at `/root/autodl-tmp/LHA-creative-results-20261101`. Host checks passed for the pinned asset hashes, all seven exact prompt token counts, GPU mapping, Codex authentication and both independent provider receipts/model identities. The host experiment profile is `e0f7709309e41556dd02b951e6e0c890597dc6ad3fc653f2374c70485618dc72`.
+
+The host subscription connection required the existing loopback-only OpenAI HTTPS relay through the local machine. A tools-disabled `gpt-6.1-sol/high` probe returned `READY` through that route. TLS remains end-to-end; model files and video generation stay on the remote host. The local relay must remain online. Commit `86dc3fd8cb3868c3649ad4195b309165fb940f79` makes that deployment helper independent of video-processing dependencies; it does not change the frozen remote experiment runtime.
+
+The batch launcher was started once after these checks. Actual process IDs, private-config locations and recovery state are recorded outside Git in `out/creative_fewshot_live/20261101/checkpoint.json`. The existing heartbeat is active at 15-minute intervals. No shutdown of this newly supplied instance has been authorized.
