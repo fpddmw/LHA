@@ -13,7 +13,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'src'))
+sys.path[:0] = [str(ROOT / 'src'), str(ROOT / 'scripts')]
 from planner_harness.common import load, save, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.lock import RunLock
