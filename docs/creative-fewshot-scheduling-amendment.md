@@ -80,3 +80,13 @@ The original execution owner remains responsible for retrieving and verifying
 each completed topic archive locally, the complete seven-topic comparison and
 the final readable overview. Runtime PIDs, current progress and private paths
 belong in the ignored live checkpoint, not credentials or public documentation.
+
+## Supplemental validation disposition
+
+The main chat independently reviewed one descriptive-word false positive after
+early GLM judging. The outer cache adapter now recognizes its exact hash-bound
+supplemental review while preserving the frozen validator, original answer,
+original rejection and all scores. Native and supplemental validation statuses
+remain distinct in position summaries and archive scope records. See
+[the complete case and bounded checks](creative-fewshot-supplemental-validation.md).
+Three additional validation checks passed alongside the thirteen checks above.

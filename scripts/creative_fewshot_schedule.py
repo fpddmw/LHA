@@ -17,10 +17,11 @@ sys.path.insert(0, str(ROOT / 'src'))
 from planner_harness.common import load, save, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.lock import RunLock
-from experiments.creative_fewshot import (ARMS, cache_judgment, verify_arm,
+from experiments.creative_fewshot import (ARMS, verify_arm,
                                          verify_batch, copy_verified, init_worker,
                                          run_arm, seal_topic, verify_archive, PAIRS)
 from evaluation.creative import JUDGES
+from creative_final_validation import cache_judgment
 
 
 def eligible(root, output, topic):
@@ -151,6 +152,8 @@ def archive_topic(root, output, topic, arms, positions):
              'positions':{arm:{'first':r['first'],'final':r['selected']} for arm,r in arms.items()},
              'unscored_intermediates':{arm:[v for v in r['videos'] if v not in {r['first'],r['selected']}] for arm,r in arms.items()},
              'deduplication':'Frozen source/request/candidate/protocol/model/adapter identity',
+             'validation_status':{name:{p:r.get('validation_status','native_passed') for p,r in rows.items()} for name,rows in positions.items()},
+             'supplemental_validator_sha256':sha(Path(__file__).with_name('creative_final_validation.py')),
              'schedule_adapter_sha256':sha(Path(__file__))}
     immutable(Path(output)/'topics'/topic['id']/'archive'/'scoring-scope.json',scope)
     return seal_topic(root, output, topic, arms, judgments)
@@ -275,6 +278,7 @@ def run(root, output, host, *, legacy_parent=None, legacy_worker=None):
     immutable(output/'scheduling'/'amendments'/(sha(Path(__file__))+'.json'),{
         'authorization':'2026-11-01 explicit execution handoff and five-position schedule',
         'adapter_sha256':sha(Path(__file__)),'frozen_profile_sha256':batch['profile_sha256'],
+        'supplemental_validator_sha256':sha(Path(__file__).with_name('creative_final_validation.py')),
         'frozen_files_modified':False,'reporting_positions':['direct','full_first','full_final','none_first','none_final'],
         'intermediate_candidates':'Retain videos and complete traces without final scores',
         'generation_limits':None,'judge_feedback_to_planner':False})
