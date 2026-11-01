@@ -1,0 +1,14 @@
+{
+  "protocol": "creative-delivery-review-v2",
+  "proposal_id": "event-0005-delivery",
+  "proposal_event_id": "event-0005",
+  "review_job": "event-0004-critique",
+  "review_response_sha256": "47e82b25b274a1394e4c3ec34138d8256732f2c354bada913e2a9453d122b236",
+  "review_origin": "reused",
+  "feedback_sha256": "5899546fdc384632541e82fa49c5754073786586bb0c7f17c8d31ce08bd1fedf",
+  "planner_event_id": "event-0006",
+  "planner_input_sha256": "aade83bd8c7cbd11701b2758bc4252863cd67222994fa1d593f93b0209209594",
+  "planner_response_sha256": "a643fa7c390a7eb7a35fd10389045814fecd45c8ba2fb63a9e2239f0b5004978",
+  "candidate_sha256": "063e85dd3583a9490251dbc48fbacdd1c4c87ae937aade13cc1e5d7d2e53251c",
+  "message": "Confirm this software-example delivery after the complete reused report; retain its uncertainty."
+}

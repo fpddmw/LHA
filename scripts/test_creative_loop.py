@@ -98,6 +98,16 @@ class CreativeTests(unittest.TestCase):
         self.resume([action("critique", video="v1", focus="Inspect visible geometry.", extra_checks=["Is the rim visibly blue?"])])
         return self.h.state["jobs"][self.h.state["pending_tool"]]
 
+    def complete_delivery(self):
+        proposal=self.h.state['delivery_reviews'][self.h.state['active_delivery_proposal']]
+        job=self.h.state['jobs'][self.h.state['pending_tool']]
+        folder=self.h.output/'jobs'/job['id']
+        feedback=critique(job,folder,ROOT,model=ScriptedCritic())
+        save(folder/'response.json',{'status':'complete','mode':job['mode'],'request_sha256':job['sha256'],'payload':feedback})
+        self.model=Scripted([action('finish',video=proposal['binding']['candidate_id'],message='Confirm this fixture after the complete report.')])
+        self.h=PlannerHarness(self.h.output,self.model)
+        return self.h.resume()
+
     def test_four_classes_complete_material_and_no_excluded_sources(self):
         k = CreativeKnowledge(ROOT)
         k.freeze(self.root / "knowledge.json")
@@ -126,13 +136,13 @@ class CreativeTests(unittest.TestCase):
         self.assertTrue(k.read("map")["links"])
         self.assertEqual(k.read("knowledge/README.md")["id"], "map")
 
-    def test_no_forms_no_automatic_review_four_generations_and_earlier_delivery(self):
+    def test_no_forms_no_automatic_work_review_four_generations_and_earlier_delivery(self):
         self.start([action("read", targets=[{"id": "meaning"}, {"id": "opuscar-053"}]),
                     action("workspace", summary="A visual direction remains open."),
                     action("generate", input_video="source", prompt="Make the scene blue.")])
         for number in range(1, 4):
             self.respond()
-            commands = [action("generate", input_video="v1" if number > 1 else "source", prompt=f"Blue treatment {number}.")]
+            commands = [action("generate", input_video="v1" if number > 1 else "source", prompt=f"Blue treatment {number}.",justification='A software-fixture continuation.')]
             if number == 1:
                 commands.insert(0, action("delivery_candidate", video="v1"))
             self.resume(commands)
@@ -140,6 +150,8 @@ class CreativeTests(unittest.TestCase):
         self.assertFalse(any(j["kind"] == "critique" for j in self.h.state["jobs"].values()))
         self.respond()
         state = self.resume([action("finish", video="v1", message="Retain the earlier candidate in this scripted test.")])
+        self.assertEqual(state['status'],'waiting_tool')
+        state = self.complete_delivery()
         self.assertEqual(state["status"], "complete")
         self.assertEqual(state["final"]["video"], "v1")
         self.assertEqual(state["videos"]["v4"]["parent"], "v1")
@@ -190,9 +202,10 @@ class CreativeTests(unittest.TestCase):
         self.assertEqual(len(critic.inputs), 1)
         save(folder / "response.json", {"status": "complete", "mode": "replay", "request_sha256": job["sha256"], "payload": result})
         state = self.resume([action("critique", video="v1", focus="A different question."),
-                             action("finish", video="v1", message="Scripted delivery.")])
+                             action("finish", video="v1", message="Scripted delivery proposal."),
+                             action("finish", video="v1", message="Confirm after the reused complete report.")])
         self.assertEqual(sum(j["kind"] == "critique" for j in state["jobs"].values()), 1)
-        self.assertTrue(state["events"][-2]["result"]["cached"])
+        self.assertTrue(any(e.get('result',{}).get('cached') for e in state['events']))
         context = json.loads(self.model.inputs[0]["user_text"])
         self.assertNotIn("rubric", context["execution_profile"]["critic"])
         self.assertIn("main_scores", next(iter(context["evaluations"].values()))["report"])
@@ -225,9 +238,10 @@ class CreativeTests(unittest.TestCase):
     def test_profile_freeze_and_resource_stop_remain_incomplete(self):
         self.start(max_generations=1)
         self.respond()
-        state = self.resume([action("generate", input_video="v1", prompt="Blue again.")])
+        state = self.resume([action("generate", input_video="v1", prompt="Blue again."),
+                             action('finish',video='v1',stop_reason='budget',message='Explicit fixture resource pause.')])
         self.assertEqual(state["status"], "budget_exhausted")
-        self.assertNotIn("final", state)
+        self.assertEqual(state['final']['stop_reason'],'budget')
         self.h.state["config"]["execution"]["critic"]["frozen_profile"]["rubric"] += "changed"
         self.h.checkpoint()
         with self.assertRaises(ValueError): self.resume([])

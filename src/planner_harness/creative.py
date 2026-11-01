@@ -32,6 +32,8 @@ def configure(harness, execution):
     from critic_harness.one_shot import frozen_profile, verify_profile
     from .creative_knowledge import CreativeKnowledge
     profile = copy.deepcopy(execution or {})
+    from .continuation import configure as configure_continuation
+    configure_continuation(harness.state, profile.pop('continuation_policy', None))
     if any(key in profile for key in ("evaluation", "rsi", "task_card")):
         raise ValueError("Creative loop excludes task cards, RSI and online independent evaluation")
     if profile.get("experiment_profile"):
@@ -53,6 +55,8 @@ def configure(harness, execution):
     profile["critic"] = {"protocol": frozen["protocol_id"], "frozen_profile": frozen}
     harness.knowledge = CreativeKnowledge(harness.root, experience_mode=profile.get("experience_mode", "full"))
     harness.state["config"]["execution"] = profile
+    from .delivery_review import PROTOCOL as DELIVERY_REVIEW
+    harness.state["config"]["delivery_review_protocol"] = DELIVERY_REVIEW
     save(harness.output / "critic-profile.json", frozen)
 
 
@@ -88,7 +92,9 @@ def experiment_profile(root):
     for relative in ("scripts/run_creative_fewshot.py", "scripts/run_creative_judge.py", "scripts/run_planner_worker.py",
                      "scripts/manage_creative_run.py", "scripts/deploy/run_prompt_probe.py", "configs/creative-loop-v1.json"):
         files[relative] = sha(root / relative)
-    body = {"protocol": "creative-experiment-v1", "critic": frozen_profile(),
+    from .continuation import VERSION as CONTINUATION
+    from .delivery_review import PROTOCOL as DELIVERY_REVIEW
+    body = {"protocol": "creative-experiment-v1", "runtime_policy":{'continuation':CONTINUATION,'delivery_review':DELIVERY_REVIEW}, "critic": frozen_profile(),
             "planner": role_settings({}, "planner"), "independent_judges": [judge_identity(j) for j in JUDGES],
             "files": files, "knowledge_scopes": scopes}
     return {**body, "sha256": signature(body)}

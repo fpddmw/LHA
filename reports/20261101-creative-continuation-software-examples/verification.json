@@ -1,0 +1,71 @@
+{
+  "scope": "Offline mocked-model/CPU-media software verification, not observed quality improvement",
+  "generated_at": "2026-11-01T13:57:30.571382+00:00",
+  "checks": [
+    {
+      "suite": "creative regression",
+      "test_executions": [
+        101
+      ],
+      "passed": true,
+      "log_path": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/checks-final.log"
+    },
+    {
+      "suite": "delivery boundary",
+      "test_executions": [
+        11,
+        3
+      ],
+      "passed": true,
+      "log_path": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/final-boundary-checks.log"
+    },
+    {
+      "suite": "continuation final",
+      "test_executions": [
+        8
+      ],
+      "passed": true,
+      "log_path": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/continuation-final.log"
+    },
+    {
+      "suite": "migration final",
+      "test_executions": [
+        4
+      ],
+      "passed": true,
+      "log_path": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/migration-final.log"
+    },
+    {
+      "suite": "legacy delivery/service/Planner",
+      "test_executions": [
+        36,
+        18,
+        11
+      ],
+      "passed": true,
+      "log_path": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/legacy-checks.log"
+    }
+  ],
+  "all_recorded_checks_passed": true,
+  "discovery_note": "Creative discovery includes repeated imported fixture classes; counts are executions, not distinct new cases.",
+  "real_model_calls": 0,
+  "real_gpu_renders": 0,
+  "live_deployment_performed": false,
+  "heartbeat_restarted": false,
+  "example_delivery_added_critic_calls": 0,
+  "migration_preparation": {
+    "status": "prepared_requires_environment_reconciliation",
+    "previous_profile_sha256": "e0f7709309e41556dd02b951e6e0c890597dc6ad3fc653f2374c70485618dc72",
+    "local_preview_profile_sha256": "cf1fc586894c4c0cf71d8c92da645264d3244366ff817bcb9defd516dcb446e9",
+    "local_extra_scope_items": {
+      "full": 150,
+      "none": 99
+    },
+    "all_baseline_scope_items_unchanged": true,
+    "ready_for_live_apply": false
+  },
+  "remaining_limits": [
+    "Prompt pressure and explanation usefulness are not semantically graded or behaviorally established.",
+    "Actual host status remains uninspected during the explicit pause; live migration/resume needs separate authorization and a profile frozen in the original layout."
+  ]
+}

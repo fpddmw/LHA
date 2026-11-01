@@ -85,8 +85,10 @@ def task_spec(topic, arm, batch, profile_path):
             "max_context_chars": 180000,
             "execution": {"mode": "live", "experience_mode": arm, "experiment_profile": str(profile_path),
                 "seed_sequence": batch["seed_sequence"], "renderer": renderer_spec(topic, batch)},
-            "run_instructions": "Complete the user's video task. There is no generation or turn-count target. "
+            "run_instructions": "Complete the user's video task using the limited budget deliberately. "
                 "Choose prompts, input candidates, optional independent review and delivery yourself. "
+                "Answer continuation questions in the generate justification when requested. "
+                "A satisfied finish proposes delivery; inspect the complete reused or newly requested report in the next input, then confirm or continue. "
                 "Bernini accepts 512 encoder tokens including its official prefix; use concrete English that fits. "
                 "The rendering seed sequence is fixed by the experiment. A blocked or interrupted task remains incomplete."}
 
@@ -170,6 +172,7 @@ def run_arm(topic, arm):
         state = load(run / "state.json")
         videos = {k: v for k, v in state["videos"].items() if k != "source" and not v.get("imported")}
         result = {"arm": arm, "selected": delivery["selected"], "first": next(iter(videos)),
+                  "delivery_review":state['final']['delivery_review'],
                   "record_directory": str(run), "videos": videos}
         completion_record = run / "state.json"
     result["queue_jobs"] = [r for r in queue.rows() if r["key"].startswith(topic["id"])]
@@ -194,6 +197,15 @@ def verify_arm(topic, arm, result, profile_hash):
     record = result["completion_record"]
     if sha(record["path"]) != record["sha256"]:
         raise ValueError("Delivery record changed after completion")
+    if arm != 'direct':
+        from planner_harness.delivery import verify_delivery
+        run = Path(result['record_directory'])
+        state = load(run/'state.json')
+        if state['config'].get('workflow')!='creative_loop_v1' or state['request']['text']!=topic['request'] or state['videos']['source']['sha256']!=topic['source_sha256']:
+            raise ValueError('Loop receipt does not have the matching creative task state')
+        delivery = verify_delivery(run)
+        if delivery['selected']!=result['selected'] or result.get('delivery_review')!=state['final'].get('delivery_review'):
+            raise ValueError('Loop receipt lacks the verified report-informed confirmation')
     for video in result["videos"].values():
         if sha(video["path"]) != video["sha256"]:
             raise ValueError("Arm video changed")
@@ -351,6 +363,7 @@ def seal_topic(root, output, topic, arms, judgments):
         body.append(f'<a href="{arm}-record.json">Exact candidate identities and runtime record location</a>')
         if (archive / "views" / arm / "report.html").exists():
             body.append(f'<p><a href="views/{arm}/report.html">Complete prompts, reads, observations, online reviews and decisions</a></p>')
+            body.append(f'<p><a href="views/{arm}/continuation-index.json">Continuation explanations, pressure, actual inputs/prompts and outcomes</a></p>')
     body.append('<p><a href="summary.json">All paired deltas, unknowns and generation costs</a></p>')
     (archive / "index.html").write_text("\n".join(body), encoding="utf-8")
     files = {p.relative_to(archive).as_posix(): sha(p) for p in sorted(archive.rglob("*")) if p.is_file()}

@@ -27,6 +27,15 @@ def report(output, state, *, record_directory=None):
     section("Outcome", {k: state.get(k) for k in ("status", "delivery_candidate", "final", "pending_tool", "unresolved_jobs", "last_error")})
     section("Original request", state["request"]["text"])
     section("Working notes and workspace", {k: state.get(k) for k in ("notes", "workspace")})
+    from .continuation import index as continuation_index
+    if state['config'].get('continuation_policy'):
+        continuation = continuation_index(records, state)
+        save_path = output/'continuation-index.json'
+        from .common import save
+        save(save_path, continuation)
+        section('Continuation decisions (raw explanations, not usefulness grades)', continuation)
+        body.append('<p><a href="continuation-index.json">Generation explanations, exact prompts/inputs and receipts</a></p>')
+    section('Delivery proposals and report exposure', state.get('delivery_reviews', {}))
     section("Actual knowledge reads", state.get("reads", {}))
     from .experience_usage import project_run, write_json
     try:

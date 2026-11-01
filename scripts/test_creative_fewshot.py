@@ -121,15 +121,15 @@ class LoopTests(unittest.TestCase):
                 execution={'mode':'replay','experience_mode':mode,'seed_sequence':{'start':42,'step':1}},max_generations=None,max_turns=None)
             for n in range(4):
                 self.respond()
-                operation = action('generate', input_video='source', prompt='Blue again.') if n < 3 else action('finish', video='v2', message='Selected delivery.', stop_reason='satisfied')
+                operation = action('generate', input_video='source', prompt='Blue again.', justification='Software-fixture continuation.') if n < 3 else action('finish', video='v2', message='Selected delivery.', stop_reason='satisfied')
                 self.h.model = Scripted([operation]); self.h.resume()
-            state = self.h.state
+            state = CreativeTests.complete_delivery(self)
             self.assertEqual(state['status'],'complete')
             self.assertEqual(state['final']['video'],'v2')
             seeds = [j['payload']['renderer']['seed'] for j in state['jobs'].values() if j['kind']=='generate']
             self.assertEqual(seeds,[42,43,44,45])
             self.assertFalse(state.get('requirements'))
-            self.assertFalse(state['evaluations'])
+            self.assertEqual(len(state['evaluations']),1)
             self.assertEqual(self.h.knowledge.experience_mode,mode)
             if mode=='none':self.assertNotIn('EX-design-conflict',json.dumps(self.h.knowledge.overview()))
 
@@ -157,10 +157,27 @@ class BatchTests(unittest.TestCase):
         info=Video(self.source,self.root/'info').info
         record=self.root/'records'/topic['id']/arm;record.mkdir(parents=True,exist_ok=True)
         save(record/'trace.json',{'topic':topic['id'],'arm':arm,'software_fixture':True})
+        if arm!='direct':
+            harness=PlannerHarness(record,Scripted([action('generate',input_video='source',prompt='Fixture blue.')]))
+            harness.start(self.source,topic['request'],mode='loop',workflow='creative_loop_v1',execution={'mode':'replay'})
+            job=harness.state['jobs'][harness.state['pending_tool']]
+            save(record/'jobs'/job['id']/'response.json',{'request_sha256':job['sha256'],'mode':'replay','status':'complete',
+                'payload':{'video':info,'replay_provenance':'Synthetic batch fixture, no rendering.',
+                    'execution':{'requested_prompt':job['payload']['prompt'],'effective_prompt':job['payload']['prompt'],
+                                 'input_sha256':info['sha256'],'generation_seconds':1}}})
+            harness.model=Scripted([action('finish',video='v1',message='Propose this software-fixture delivery.')]);harness.resume()
+            review=harness.state['jobs'][harness.state['pending_tool']]
+            from critic_harness.adapter import critique
+            from test_creative_loop import ScriptedCritic
+            folder=record/'jobs'/review['id'];feedback=critique(review,folder,ROOT,model=ScriptedCritic())
+            save(folder/'response.json',{'request_sha256':review['sha256'],'mode':'replay','status':'complete','payload':feedback})
+            harness.model=Scripted([action('finish',video='v1',message='Confirm the software fixture after its full report.')]);harness.resume()
         result = {'arm':arm,'first':'v1','selected':'v1','record_directory':str(record),
-                'videos':{'v1':{**info,'execution':{'generation_seconds':1}}}}
+                'videos':{'v1':{**info,'execution':{'generation_seconds':1}}} if arm=='direct' else {'v1':harness.state['videos']['v1']}}
+        if arm!='direct':result['delivery_review']=harness.state['final']['delivery_review']
         result['binding']={'topic':topic['id'],'source':topic['source_sha256'],'request':batch.signature({'text':topic['request']}),'profile':'fixture'}
-        result['completion_record']={'path':str(record/'trace.json'),'sha256':sha(record/'trace.json')}
+        completed=record/('trace.json' if arm=='direct' else 'state.json')
+        result['completion_record']={'path':str(completed),'sha256':sha(completed)}
         result['sha256']=batch.signature(result)
         return result
 

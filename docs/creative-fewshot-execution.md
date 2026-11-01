@@ -1,5 +1,7 @@
 # Running the seven-topic comparison
 
+Current status: the user paused live execution, real model calls and polling. The approved code-only replacement is [continuation questions and informed delivery](creative-continuation-and-delivery-plan.md); see [implementation and migration preparation](creative-continuation-implementation.md). Do not run the old batch against changed code or overwrite a frozen profile. Resume requires separate authorization and explicit versioned batch/service/run migration.
+
 The user opens the host before execution. Use the reviewed commit in an isolated checkout and a host-local output directory. This entry never rents, starts or stops an instance. Keep credentials outside the checkout and use server-side downloads for large assets.
 
 ## Preparation and startup

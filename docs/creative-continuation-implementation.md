@@ -1,0 +1,51 @@
+# Continuation questions and report-informed delivery: implementation
+
+Date: 2026-11-01. Implements [the approved replacement plan](creative-continuation-and-delivery-plan.md). The withdrawn fresh-review-only partial implementation was reworked before deployment. Live experiment execution, real model calls, reruns and the existing heartbeat remain paused. Software examples and migration tests use mocked models and CPU synthetic media.
+
+## Continuation and factual resource use
+
+`src/planner_harness/continuation.py` owns the operator policy, receipt-based spending projection and passive decision records. Two successful generated candidates precede required continuation justification. Failed and uncertain attempts are recorded separately and count toward an optional actual request cap; an unchanged recovered signed job consumes no second slot. Imported historical media does not consume the exploration allowance or paired successful seed index.
+
+`generate` accepts `justification`. Once requested, any nonempty string passes, including a weak or repeated string. Missing/blank text returns the three stable questions and creates no job, request charge or seed use. A compliant response includes actual input, prompt and explanation together. No semantic evaluator, additional approval model, usefulness grade, keyword requirement or regression scoreboard is used. The explanation is recorded beside the signed request, and is absent from the renderer payload and neutral Critic packet.
+
+The operator-only `continuation_policy` defaults to version `creative-continuation-v1`, `free_successes=2`, `deliberate_after_successes=6` and `hard_generation_limit=null`. The latter two settings are independently configurable: wording escalation does not mean actual exhaustion. This is a prompt-pressure intervention, not a measured quality result. Actual locking refuses only new `generate` requests and leaves inspection, reading, Critic and the entire delivery-confirmation sequence usable. An explicit existing resource-continuation command also records removal of the actual cap.
+
+The model projection supplies generated/submitted counts, definite failures, uncertain/pending attempts, cumulative known rendering wall time, missing cost records, current generation availability, the visible pressure text and whether the explanation is required. It does not include policy version/stage, thresholds, total/remaining allowances, ratios or disabled-limit facts. Creative context always goes through the projection, including an old context-version marker; renderer/role settings are explicitly selected rather than dumped. Historical visual content and model-authored evidence are retained verbatim.
+
+`calls/<event>/continuation-policy.json` stores the exact saved model-input hash, operator policy, stage, trigger state and visible text. `jobs/<job>/continuation.json` binds the exact explanation to actual input/prompt and signed job. `render_outcomes` records returned statuses. `continuation-index.json` and the existing per-arm/batch archive pages provide passive navigation to explanations, prompts, receipts and candidate outcomes without causal attribution.
+
+## Review reuse and actual Planner confirmation
+
+`src/planner_harness/delivery_review.py` implements `creative-delivery-review-v2`.
+
+The first satisfied `finish` always creates a proposal. A previously collected, valid online report can be reused only after checking the original signed job, candidate/source/request identities, frozen Critic profile/model, original model input and answer, evidence bytes and fixed report validation. Its legitimate focus, comparisons and supplemental checks remain unchanged. Independent GLM/Sonnet final reports are outside this lookup. If no usable report matches, a dedicated existing one-shot Critic job is created with neutral source/candidate inputs, without Planner rationale or justification.
+
+Both paths put the complete report and current proposal identity in a subsequent saved Planner input. Runtime exposure records bind that input to the exact report. Confirmation checks the real transport input and returned Planner response, a distinct post-proposal event, selected media, report and input hashes. It retains the existing nonempty `message`; no keyword-based tradeoff detector or additional acknowledgment form is applied. Low/unknown scores impose no grade threshold.
+
+Read/observe/note can continue. A changed delivery choice or submitted generation supersedes the proposal. A later proposal may reuse the same unchanged valid report, but receives a new post-proposal exposure and decision. An unanswered or failed review remains incomplete and retains its original job/attempts. Same-proposal interruption recovery does not create another scoring call.
+
+The shared verifier in `delivery.py` rechecks this chain. `experiments/creative_fewshot.py::verify_arm` requires the matching creative task and verified confirmation before the topic/archive gate accepts a Loop receipt. Direct remains unchanged. The original five independent-scoring positions, blinded input/rubric/model identities, cache identity and unscored-intermediate archive behavior remain in force.
+
+## Entry points and offline examples
+
+Both full/no-experience operation manuals contain the same continuation and two-stage delivery instructions. CLI profile configuration, external execution configuration and server/task configuration use the same private continuation-policy preparation. Style assets, curated experience bodies, role identities, renderer settings and the Critic rubric are unchanged.
+
+Run `scripts/export_creative_policy_examples.py` with a new `--work` directory and an `--output` directory to reproduce [the exported software examples](../reports/20261101-creative-continuation-software-examples/README.md). They contain exact initial and continuation inputs, a single accepted generate response with its explanation, and the full cached-report confirmation input. One mocked ordinary Critic report is reused with zero added delivery-scoring calls. Synthetic elapsed-time values are explicitly labeled and are not measured GPU costs or quality evidence.
+
+## Versioned migration preparation; live pause retained
+
+`scripts/prepare_creative_protocol.py` writes plans and never applies state, calls a model, dispatches a render or restarts polling. `--run` prepares a settled-run transition; `--baseline-batch` plus `--baseline-profile` prepares a distinct target-profile/diff package from saved snapshots without inspecting the host.
+
+The local apply primitive in `protocol_migration.py` requires explicit separate authorization and unchanged plan/prefix hashes. It rejects unsettled Planner calls and unresolved tool outcomes. An existing final tool receipt can stay pending collection; its signed request/response and seed remain unchanged. Old state, system instructions, final and mutable report files are snapshotted; old immutable calls/events/jobs/videos and the exact knowledge snapshot retain their hashes. New runtime/profile/manual identities and a migration event are recorded. A completed Loop reopens its prior selected video as a proposal, retaining the old final and obtaining a new actual Planner decision; rerendering is conditional on Planner's later choice.
+
+The paused real batch has not been migrated or re-inspected. Its original runtime/profile fingerprints remain intact. Actual resumption still needs explicit user authorization, settled-receipt/ownership inspection, preservation of the frozen checkout, and versioned batch/service bindings to the new profile. Existing strict fingerprints intentionally reject simply running changed code against the old profile. Per-run migration plans are a preparation capability, not an automatic deployment or new scheduler. Superseded completed archives must retain their old manifest before a new selection is summarized.
+
+Preparation against the saved real baseline identified a pre-existing physical-availability difference: the frozen remote profile has 327/238 full/none items, while the local checkout has 477/337. The prior local release snapshot already has those same local totals. Every baseline item retains its exact hash; local extras are available style images and historical files. The package records those extras and labels the target `local_preview_only` / `prepared_requires_environment_reconciliation`. It does not silently approve extra knowledge or synthesize a matching fingerprint. Per-run application remains strict about scope equality; the formal target must be frozen in the original host layout after separate authorization.
+
+## Verification scope and limits
+
+Focused offline checks cover successful-exploration counting; missing/weak/repeated explanations; one-response dispatch; unchanged job/seed accounting; private-policy projection; a real generation-only cap with full delivery still available; valid report reuse including comparison/focus/supplemental checks; absent/invalid report paths; actual post-proposal model-input/response linkage; low/unknown confirmation; supersession and tamper rejection; active/completed prefix migration; and the existing topic gate, independent judges, recovery and portable archives.
+
+These checks establish software behavior over mocks/saved media. They do not establish that pressure improves model choices or that a free-text explanation is useful. Explanations receive no semantic runtime assessment. Sampled Critic evidence retains its original coverage limitations. No live model or GPU validation was performed in this implementation pass.
+
+Recorded checks: 101 creative regression executions passed (discovery includes imported fixture classes); the final boundary checks passed 11 delivery tests and 4 migration tests, and 8 continuation tests passed after the availability guard. Legacy delivery, durable-service and Planner suites passed 36, 18 and 11 executions respectively. The exact software-example inputs/proof and [verification metadata](../reports/20261101-creative-continuation-software-examples/verification.json) are retained. The final resume guard also rejects an old protocol or a fabricated completed flag instead of returning it as a current delivery.

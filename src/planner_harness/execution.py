@@ -39,14 +39,14 @@ def immutable(path, value):
         save(path, value)
 
 
-def request_job(harness, kind, args, event_id, *, internal=False):
+def request_job(harness, kind, args, event_id, *, internal=False, delivery_proposal=None):
     state = harness.state
     from .creative import active
     creative = active(state)
     if creative:
         if state.get("unresolved_jobs"):
             raise ValueError("An existing tool outcome needs reconciliation; no replacement job was submitted")
-        allowed = {"generate": {"input_video", "prompt", "seed"},
+        allowed = {"generate": {"input_video", "prompt", "seed", "justification"},
                    "critique": {"video", "compare_to", "focus", "extra_checks"}}
         if kind not in allowed or set(args) - allowed[kind]:
             raise ValueError("Unsupported creative-loop execution arguments")
@@ -57,7 +57,12 @@ def request_job(harness, kind, args, event_id, *, internal=False):
         raise ValueError("Choose a video ID present in this task")
     profile = state["config"].get("execution", {})
     if kind == "generate":
-        limit = state["config"].get("max_generations")
+        if creative:
+            from .continuation import authorize
+            refused = authorize(state, args, event_id)
+            if refused is not None:
+                return refused
+        limit = state["config"].get("max_generations") if not creative else None
         if limit is not None and state["generation_requests"] >= limit:
             from .delivery import is_delivery
             if is_delivery(state):
@@ -116,10 +121,16 @@ def request_job(harness, kind, args, event_id, *, internal=False):
                     raise ValueError("Recorded seed sequence cannot be overridden")
                 payload["renderer"] = {**payload["renderer"], "seed": seed}
     elif kind == "critique" and creative:
-        from .creative import review_payload
-        payload, cached = review_payload(harness, args)
-        if cached is not None:
-            return cached
+        if delivery_proposal:
+            if not internal:
+                raise ValueError('Delivery review is an internal job for a Planner finish proposal')
+            from .delivery_review import review_payload
+            payload = review_payload(harness, identity, delivery_proposal)
+        else:
+            from .creative import review_payload
+            payload, cached = review_payload(harness, args)
+            if cached is not None:
+                return cached
     elif kind == "critique":
         if not profile.get("critic"):
             return {"status": "unavailable", "message": "The active Critic is not configured for this task."}
@@ -171,21 +182,31 @@ def request_job(harness, kind, args, event_id, *, internal=False):
             return {"status": "unavailable", "message": "No external evaluator is configured. You can inspect the videos directly; do not invent a metric result."}
         payload = {"video_id": identity, "video": state["videos"][identity], "original": state["videos"]["source"],
                    "request": state["request"]["text"], "question": args.get("question", ""), "evaluation": profile["evaluation"]}
-    body = {"id": event_id + "-" + kind, "kind": kind,
+    body = {"id": event_id + ("-delivery-review" if delivery_proposal else "-" + kind), "kind": kind,
             "mode": profile.get("mode", "live"), "payload": payload}
     job = {**body, "sha256": signature(body)}
     # Same event after interruption reuses the same identity and budget charge.
     directory = harness.output / "jobs" / job["id"]
     immutable(directory / "request.json", job)
+    if creative and kind == 'generate':
+        from .continuation import record_dispatch
+        record_dispatch(harness, job, args, event_id)
     if job["id"] not in state["jobs"]:
         state["jobs"][job["id"]] = job
         if kind == "generate":
             state["generation_requests"] += 1
+    if creative and kind == 'generate':
+        from .delivery_review import invalidate
+        invalidate(state, 'new generation submitted', event_id)
     state.update(status="waiting_tool", pending_tool=job["id"])
     if kind == "generate":
         state["renderer_submission"] = {"status": "pending", "job_id": job["id"]}
-    return {"status": "pending", "job_id": job["id"], "input_video": identity,
-            "message": "The runtime will return the tool result here; no polling action is needed."}
+    result = {"status": "pending", "job_id": job["id"], "input_video": identity,
+              "message": "The runtime will return the tool result here; no polling action is needed."}
+    if creative and kind == 'generate':
+        from .continuation import view
+        result['continuation'] = view(state)
+    return result
 
 
 def collect(harness):
@@ -199,6 +220,18 @@ def collect(harness):
         raise ValueError("Tool response does not match the pending job")
     if response.get("status") not in {"complete", "failed"}:
         raise ValueError("Only final worker responses can be collected")
+    if state['config'].get('workflow') == 'creative_loop_v1' and job['kind']=='generate':
+        from .continuation import record_outcome
+        record_outcome(state, job, response)
+    if job['payload'].get('delivery_review') and response['status']=='failed':
+        marker = job['payload']['delivery_review']
+        state['delivery_reviews'][marker['proposal_id']]['status'] = 'failed'
+        state.setdefault('unresolved_jobs', {})[job['id']] = {
+            'job_id':job['id'], 'failure_kind':response.get('failure_kind', 'delivery_review_failed'),
+            'error':response.get('error'), 'scope':'No confirmed delivery; retain this dedicated request and its attempts.'}
+        state['status'] = 'needs_reconciliation'
+        harness.checkpoint()
+        return False
     if state["config"].get("workflow") == "creative_loop_v1" and response["status"] == "failed" and (response.get("outcome_unknown") or response.get("failure_kind") == "model_transport"):
         detail = {"job_id": job["id"], "outcome_unknown": response.get("outcome_unknown", False),
                   "failure_kind": response.get("failure_kind", "render_outcome"), "error": response.get("error")}
@@ -309,8 +342,14 @@ def collect(harness):
             if response["payload"].get("outcome", {}).get("requirements_sha256") != job["payload"]["requirements"]["sha256"]:
                 raise ValueError("Critic requirement version differs from signed job")
         state["evaluations"][job["id"]] = {"video_id": job["payload"]["video_id"], **response["payload"]}
+        if job['payload'].get('delivery_review'):
+            from .delivery_review import collected
+            collected(harness, job, response)
     elif job["kind"] == "generate":
         state["renderer_submission"] = {"status": "failed", "job_id": job["id"], "error": response.get("error")}
+    if state['config'].get('workflow') == 'creative_loop_v1':
+        from .continuation import view
+        result = {**result, 'continuation':view(state)}
     immutable(path.with_name("collected.json"), response)
     event = {"event_id": job["id"] + "-result", "at": stamp(), "status": "ok",
              "request": {"action": "tool_result", "arguments": {"job_id": job["id"]}}, "result": result}

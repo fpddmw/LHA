@@ -12,6 +12,10 @@
   "completion_mode": "delivery",
   "max_generations": null,
   "max_turns": null,
+  "continuation_policy": {
+    "version": "creative-continuation-v1",
+    "hard_generation_limit": null
+  },
   "experiments": "awaiting_user_opened_multi_gpu_host",
   "independent_judges": [
     {

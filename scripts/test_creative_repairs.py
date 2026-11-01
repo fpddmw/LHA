@@ -60,8 +60,9 @@ class Repairs(unittest.TestCase):
 
     def test_program_budget_pause_can_continue(self):
         self.start(max_generations=1); self.respond()
-        self.resume([action('generate', input_video='v1', prompt='Blue again.')])
-        self.assertNotIn('final', self.h.state)
+        self.resume([action('generate', input_video='v1', prompt='Blue again.'),
+                     action('finish',video='v1',stop_reason='budget',message='Explicit fixture resource pause.')])
+        self.assertEqual(self.h.state['final']['stop_reason'],'budget')
         self.h.model = Scripted([action('generate', input_video='v1', prompt='Continue blue.')])
         state = self.h.resume(continue_delivery=True)
         self.assertEqual(state['status'], 'waiting_tool')
@@ -101,7 +102,8 @@ class Repairs(unittest.TestCase):
         recover_tool(self.h.output, identity, 'not-executed', 'Operator verified fixture dispatch did not execute.')
         self.respond()
         state = self.resume([action('finish', video='v1', message='Fixture delivery.')])
-        self.assertEqual(len(state['jobs']), 1)
+        self.assertEqual(sum(j['kind']=='generate' for j in state['jobs'].values()), 1)
+        state = CreativeTests.complete_delivery(self)
         self.assertEqual(state['final']['video'], 'v1')
 
     def test_critic_neutrality_and_evidence_completeness(self):
@@ -130,7 +132,8 @@ class Repairs(unittest.TestCase):
             action('critique', video='v1', compare_to='source'),
             action('delivery_candidate', video='v1'),
             action('generate', input_video='v1', prompt='Blue texture.'),
-            action('finish', video='v1', message='Scripted earlier choice.')])
+            action('finish', video='v1', message='Scripted earlier choice.'),
+            action('finish', video='v1', message='Confirm the earlier choice after its reused report.')])
         calls, renders = [], []
         def inference(client, **kwargs):
             calls.append((client.role, client.model, client.reasoning_effort))

@@ -91,6 +91,9 @@ def main():
         harness = PlannerHarness(output, model)
         import json
         execution = json.loads(Path(args.execution_config).read_text(encoding="utf-8")) if args.execution_config else None
+        if not args.resume and args.workflow=='creative_loop_v1' and profile.get('continuation_policy'):
+            execution = dict(execution or {})
+            execution.setdefault('continuation_policy', profile['continuation_policy'])
         if args.experiment_profile and not args.resume:
             execution = {**(execution or {}), "experiment_profile": str(args.experiment_profile.resolve())}
         elif args.experiment_profile:

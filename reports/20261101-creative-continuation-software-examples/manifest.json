@@ -1,0 +1,26 @@
+{
+  "scope": "Software examples using CPU-made media and mocked models. No real model, GPU render or observed quality improvement.",
+  "real_external_model_calls": 0,
+  "real_gpu_renders": 0,
+  "mocked_critic_calls": 1,
+  "extra_critic_calls_for_delivery": 0,
+  "fixture_run": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/software-example-v1/run",
+  "files": {
+    "initial-model-input.json": {
+      "sha256": "a9c14ae97a54c08ec4ed3610cb749f759b63333690c3cb8b7d88bef881d20050",
+      "exact_saved_source": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/software-example-v1/run/calls/event-0001/input.json"
+    },
+    "continuation-model-input.json": {
+      "sha256": "215c0e9ad04487271c8d503924f7d8764d029f60ee67ed0aa38bf4d168997c73",
+      "exact_saved_source": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/software-example-v1/run/calls/event-0003/input.json"
+    },
+    "accepted-generate.json": {
+      "sha256": "780e342b579fc90301a75f72d2fa22d86f01275478751b213afa1711c4404d4f",
+      "exact_saved_source": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/software-example-v1/run/calls/event-0003/response.txt"
+    },
+    "cached-report-confirmation-input.json": {
+      "sha256": "aade83bd8c7cbd11701b2758bc4252863cd67222994fa1d593f93b0209209594",
+      "exact_saved_source": "/home/fpddmw/projects/LHA/out/creative_continuation_implementation/software-example-v1/run/calls/event-0006/input.json"
+    }
+  }
+}

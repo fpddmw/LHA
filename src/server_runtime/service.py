@@ -120,6 +120,9 @@ class Service:
             task.setdefault("completion_mode", "delivery")
         task["completion_mode"] = completion_mode(task.get("max_generations"), task.get("completion_mode"))
         execution = task.get("execution", {})
+        if task['workflow']=='creative_loop_v1' and self.config.get('continuation_policy') and 'continuation_policy' not in execution:
+            execution['continuation_policy'] = copy.deepcopy(self.config['continuation_policy'])
+        task['execution'] = execution
         if self.config.get("experiment_profile"):
             from planner_harness.creative import verify_experiment
             verify_experiment(self.config["experiment_profile"], self.root)

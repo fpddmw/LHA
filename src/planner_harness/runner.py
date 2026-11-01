@@ -133,7 +133,14 @@ class PlannerHarness:
             if self.state["config"]["execution"].get("experiment_profile"):
                 from .creative import verify_experiment
                 verify_experiment(self.state["config"]["execution"]["experiment_profile"], self.root)
+            from .delivery_review import PROTOCOL as DELIVERY_REVIEW
+            from .continuation import VERSION as CONTINUATION
+            if self.state['config'].get('delivery_review_protocol')!=DELIVERY_REVIEW or self.state['config'].get('continuation_policy',{}).get('version')!=CONTINUATION:
+                raise ValueError('Record an explicit creative protocol migration before resuming this run')
         if self.state["status"] == "complete" and not continue_delivery:
+            if active(self.state):
+                from .delivery import verify_delivery
+                verify_delivery(self.output)
             return self.state
         config = self.state["config"]
         if max_context_chars is not None:
@@ -196,7 +203,7 @@ class PlannerHarness:
 
     def context(self):
         text, images, mapping = self._legacy_context()
-        if self.state["config"].get("context_version", 1) < 2:
+        if self.state["config"].get("context_version", 1) < 2 and self.state['config'].get('workflow')!='creative_loop_v1':
             return text, images, mapping
         from .context import attachments, present
         payload = present(json.loads(text), self.state, self.knowledge)
@@ -364,6 +371,11 @@ class PlannerHarness:
             identity = args.get("video", args.get("id", "source"))
             if identity not in self.state.get("videos", {}):
                 raise ValueError("Unknown video ID")
+            if active(self.state) and self.state.get('active_delivery_proposal'):
+                from .delivery_review import invalidate
+                proposal = self.state['delivery_reviews'][self.state['active_delivery_proposal']]
+                if identity != proposal['binding']['candidate_id']:
+                    invalidate(self.state, 'delivery candidate changed', event_id)
             self.state["delivery_candidate"] = identity
             return {"video": identity, "scope": "Current intended delivery; does not select render input or finish the task"}
         if action in {"generate", "evaluate", "critique"}:
@@ -381,6 +393,15 @@ class PlannerHarness:
                 raise ValueError("Use English for working output")
             reason = args.get("stop_reason", "satisfied" if identity not in {None, "source"} else "no_promising_attempt")
             extra = {"stop_reason": reason}
+            if active(self.state):
+                from .delivery_review import before_finish, invalidate
+                if reason == 'satisfied':
+                    result = before_finish(self, args, event_id)
+                    if result['status'] != 'confirmed':
+                        return result
+                    extra['delivery_review'] = result['proof']
+                else:
+                    invalidate(self.state, 'incomplete stop', event_id)
             if self.state["config"].get("rsi"):
                 from .ledger import build
                 if args.get("stop_reason") not in {"satisfied", "no_promising_attempt", "budget", "execution_failure"}:
@@ -533,6 +554,10 @@ class PlannerHarness:
                     self.state["pending_event"] = event_id
                     self.checkpoint()
                 if self.state["config"].get("workflow") == "creative_loop_v1":
+                    from .continuation import record_input as record_continuation_input
+                    record_continuation_input(self, event_id, call_dir)
+                    from .delivery_review import record_input
+                    record_input(self, event_id, call_dir)
                     from .experience_usage import record_exposure
                     try:
                         record_exposure(call_dir, self.knowledge.usage_index(), self.state.get("knowledge_snapshot_sha256"))

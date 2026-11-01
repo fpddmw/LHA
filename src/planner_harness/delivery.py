@@ -43,6 +43,8 @@ def continue_budget_stop(state):
             raise ValueError("Continue a resource pause only after pending work is resolved")
         previous = copy.deepcopy(state["config"])
         state["config"].update(completion_mode="delivery", max_generations=None, max_turns=None)
+        if state['config'].get('continuation_policy'):
+            state['config']['continuation_policy']['hard_generation_limit'] = None
         state.setdefault("delivery_continuations", []).append({"previous_config": previous,
             "next_config": copy.deepcopy(state["config"]), "reason": "Operator explicitly reopened the resource pause."})
         state["status"] = "budget_exhausted"
@@ -91,6 +93,9 @@ def verify_delivery(run):
     videos = state.get("videos", {})
     if selected not in videos or selected == "source":
         raise ValueError("Delivery needs a selected generated candidate")
+    if state['config'].get('workflow') == 'creative_loop_v1':
+        from .delivery_review import verify
+        verify(run, state)
     candidates = {k: v for k, v in videos.items() if k != "source"}
     for video in candidates.values():
         if sha(video["path"]) != video["sha256"]:

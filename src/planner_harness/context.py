@@ -66,6 +66,16 @@ def present(payload, state, knowledge):
         for o in state.get("observations", [])
     ]
     if state["config"].get("workflow") == "creative_loop_v1":
+        from .continuation import view as continuation_view
+        payload['continuation'] = continuation_view(state)
+        payload.pop('resource_status', None)
+        execution = state['config']['execution']
+        renderer = execution.get('renderer', {})
+        # Explicit operational projection: never dump operator limits or pressure settings.
+        payload['execution_profile'] = {k: copy.deepcopy(execution[k]) for k in ('mode','experience_mode','seed_sequence') if k in execution}
+        payload['execution_profile']['renderer'] = {k:copy.deepcopy(renderer[k]) for k in ('backend','seed','output') if k in renderer}
+        payload['execution_profile']['renderer']['generation'] = {k:copy.deepcopy(v) for k,v in renderer.get('generation',{}).items()
+            if k in {'num_inference_steps','guidance_mode','max_image_size','negative_prompt','prompt_enhancer'}}
         payload["workflow"] = "creative_loop_v1"
         payload["delivery_candidate"] = state.get("delivery_candidate")
         profile = state["config"]["execution"]["critic"]["frozen_profile"]
@@ -73,7 +83,9 @@ def present(payload, state, knowledge):
             "protocol": profile["protocol_id"], "profile_sha256": profile["sha256"],
             "dimensions": profile["dimensions"], "scale": "0-4 integers; unknown is null",
             "definitions": {"action": "read", "arguments": {"targets": [{"id": "score-definitions"}]}},
-            "use": "Optional single report per candidate; inspect video evidence yourself for further questions."}
+            "use": "Optional work review. A satisfied finish proposes delivery with a reused valid matching report, or one review if absent. A later Planner finish after the full report for that proposal confirms without a grade threshold."}
+        from .delivery_review import context as delivery_context
+        payload['delivery_review'] = delivery_context(state)
         for identity, value in payload["evaluations"].items():
             if value.get("protocol") != "lha-creative-review-v1":
                 raise ValueError("Non-creative evaluation in creative-loop context")
