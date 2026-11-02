@@ -188,7 +188,7 @@ def settle_pe_selection(output, topic, device, *, execute=False):
             raise ValueError("Original PE task clock is unavailable")
         unknown = [r["id"] for r in ledger["operations"].values()
                    if r["topic"] == topic and r["lane"] == "pe-loop" and r["kind"] == "model"
-                   and r["status"] != "not_submitted" and not r.get("completion")
+                   and r["status"] in {"in_flight_unknown", "failed_unknown_cost"}
                    and Path(r["id"]).is_relative_to(folder / "selection/call/attempts")]
         if not unknown:
             raise ValueError("Original selection has no unresolved model operation")

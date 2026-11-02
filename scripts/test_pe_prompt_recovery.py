@@ -24,9 +24,12 @@ class RecoveryTests(Fixture):
         directory = self.output / 'methods' / task['id'] / 'pe-loop'
         def choose(topic, candidates, reviews, folder, scope):
             operation = str(folder / 'call/attempts/01')
-            accounting.reserve(scope, operation, 'model', 'model:gpt-6.1-sol/high')
-            accounting.transition(scope, operation, 'in_flight_unknown')
-            raise RuntimeError('Pre-fix interrupted selector')
+            def interrupted():
+                raise accounting.ExternalExecutionUnknown('Remote end closed without response')
+            try:
+                accounting.invoke(scope, operation, 'model', 'model:gpt-6.1-sol/high', interrupted)
+            except accounting.ExternalExecutionUnknown:
+                raise RuntimeError('Pre-fix interrupted selector') from None
         runtime.choose = choose
         with self.assertRaisesRegex(RuntimeError, 'Pre-fix'):
             self.run_loop(batch, runtime)
@@ -35,6 +38,9 @@ class RecoveryTests(Fixture):
         save(directory / 'settlement.json', {'status': 'failed'})
         original = {p: sha(p) for p in directory.glob('rounds/*/*.json')}
         ledger = accounting.load_ledger(self.output / 'accounting')
+        failed = next(iter(ledger['operations'].values()))
+        self.assertEqual(failed['status'], 'failed_unknown_cost')
+        self.assertEqual(load(failed['completion']['path'])['status'], 'failed')
         plan = recovery.settle_pe_selection(self.output, task['id'], '0')
         self.assertEqual((plan['status'], plan['round'], plan['model_calls'], plan['renders']),
                          ('settlement_ready', 2, 0, 0))
