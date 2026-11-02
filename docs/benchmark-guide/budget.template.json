@@ -1,0 +1,66 @@
+{
+  "version": "lha-unified-budget-v1",
+  "mode": "live",
+  "cost_control": "quoted_allowance",
+  "currency": "FILL_ISO_CURRENCY",
+  "max_call_seconds": "FILL_POSITIVE_NUMBER",
+  "batch": {
+    "model_calls": "FILL_NONNEGATIVE_INTEGER",
+    "render_requests": "FILL_NONNEGATIVE_INTEGER",
+    "compute_requests": "FILL_NONNEGATIVE_INTEGER",
+    "tokens": "FILL_NONNEGATIVE_INTEGER",
+    "wall_seconds": "FILL_POSITIVE_INTEGER",
+    "amount": "FILL_DECIMAL_STRING"
+  },
+  "topic": {
+    "model_calls": "FILL_NONNEGATIVE_INTEGER",
+    "render_requests": "FILL_NONNEGATIVE_INTEGER",
+    "compute_requests": "FILL_NONNEGATIVE_INTEGER",
+    "tokens": "FILL_NONNEGATIVE_INTEGER",
+    "wall_seconds": "FILL_POSITIVE_INTEGER",
+    "amount": "FILL_DECIMAL_STRING"
+  },
+  "lanes": [
+    "independent"
+  ],
+  "allocations": {
+    "independent": {
+      "model_calls": "FILL_NONNEGATIVE_INTEGER",
+      "render_requests": "FILL_NONNEGATIVE_INTEGER",
+      "compute_requests": "FILL_NONNEGATIVE_INTEGER",
+      "tokens": "FILL_NONNEGATIVE_INTEGER",
+      "wall_seconds": "FILL_POSITIVE_INTEGER",
+      "amount": "FILL_DECIMAL_STRING"
+    }
+  },
+  "quotes": {
+    "model:glm5.3flash/none": {
+      "unit": "request",
+      "max_amount": "FILL_DECIMAL_STRING",
+      "currency": "FILL_ISO_CURRENCY",
+      "source": "FILL_VERIFIED_PRICE_SOURCE",
+      "quoted_at": "FILL_QUOTATION_DATE"
+    },
+    "model:sonnet-5.5high/high": {
+      "unit": "request",
+      "max_amount": "FILL_DECIMAL_STRING",
+      "currency": "FILL_ISO_CURRENCY",
+      "source": "FILL_VERIFIED_PRICE_SOURCE",
+      "quoted_at": "FILL_QUOTATION_DATE"
+    },
+    "compute:features": {
+      "unit": "request",
+      "max_amount": "FILL_DECIMAL_STRING",
+      "currency": "FILL_ISO_CURRENCY",
+      "source": "FILL_VERIFIED_PRICE_SOURCE",
+      "quoted_at": "FILL_QUOTATION_DATE"
+    },
+    "compute:temporal": {
+      "unit": "request",
+      "max_amount": "FILL_DECIMAL_STRING",
+      "currency": "FILL_ISO_CURRENCY",
+      "source": "FILL_VERIFIED_PRICE_SOURCE",
+      "quoted_at": "FILL_QUOTATION_DATE"
+    }
+  }
+}
