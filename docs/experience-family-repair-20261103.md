@@ -1,6 +1,6 @@
 # Seeded experience and self-review family repair
 
-Status: implementation in progress. No model calls, GPU work or experiment launch.
+Status: implemented and verified offline. No model calls, GPU work or experiment launch.
 
 ## Agreed behavior
 
@@ -25,17 +25,17 @@ remains a separate explicit operation; there is no automatic RSI adoption.
 
 ## Implementation
 
-- [ ] Split the self-review campaign into ordered accumulation and frozen-use
+- [x] Split the self-review campaign into ordered accumulation and frozen-use
   stages; keep `self-review` as a convenience command for both.
-- [ ] Bind each private library to its owning batch, review mode, renderer and
+- [x] Bind each private library to its owning batch, review mode, renderer and
   seed. Verify ownership at initialization/resume, maintenance read, contribution
   ingestion and family freeze. Identical initial content is not shared ownership.
-- [ ] Require full, nonempty maintenance snapshots at all entry points. Remove
+- [x] Require full, nonempty maintenance snapshots at all entry points. Remove
   the fallback to an online `none` snapshot. Keep online exposure independently
   frozen and exclude maintenance traces from the online task.
-- [ ] Enforce the seed invariant in batch preparation, including read-only arms;
+- [x] Enforce the seed invariant in batch preparation, including read-only arms;
   retain immutable snapshots and explicit errors for incompatible old runs.
-- [ ] Update CLI, campaign documentation and meaningful offline tests covering
+- [x] Update CLI, campaign documentation and meaningful offline tests covering
   positive behavior, cross-family rejection, resume and 40/27 maintenance scope.
 
 ## Verification and delivery
@@ -51,3 +51,30 @@ backup and patch under `out/experience_family_fix/20261103`.
 - Baseline captured before edits. The existing top-level campaign seed guard is
   retained. The missing protections are in lower-level batch/maintenance paths
   and the self-review campaign dependency.
+
+## Implemented result
+
+- `self-review` now executes `self-review-zero` followed by
+  `self-review-knowledge`. Each covers 134 conditions and at most 536 renders.
+  Only the 80 training conditions in the first stage enable maintenance.
+- Critic and self-review libraries start with the same fifteen reviewed entries.
+  Renderer and review-family libraries have separate owners, histories and frozen
+  receipts. New contributions retain their family through exported snapshots.
+- Lower-level initialization and read-only batch preparation reject empty full
+  libraries. Missing maintenance bindings no longer fall back to online exposure;
+  eligible standalone maintenance initializes a full owned seed. Read-only batches
+  cannot enqueue maintenance, even for a row labelled training.
+- Owner checks cover original job admission, maintenance reading, cached recovery,
+  ingestion, frozen-copy preparation and batch verification. A copied owner label
+  does not authorize a foreign revision. Existing unbound legacy runs are retained
+  as historical records; prepare a new output directory for this protocol.
+- Knowledge content and Skill authority remain unchanged. Maintenance uses the
+  existing map and append-only contributions; canonical curation remains explicit.
+
+The broad offline regression run passed 134 tests. It covered campaign routing,
+renderer separation, contribution/case discovery, explicit curation, actual
+simulated Planner continuation, final review, resource accounting and the unified
+result runner. A final focused family suite passed all 13 tests, including the last read-only
+admission change. Exact logs and the scoped source patch are in
+`out/experience_family_fix/20261103`. These are software tests, not evidence of
+model quality or learned experience effectiveness.

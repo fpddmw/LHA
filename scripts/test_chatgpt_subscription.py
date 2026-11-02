@@ -195,7 +195,7 @@ class SubscriptionTests(unittest.TestCase):
 
     def test_non_sse_body_and_malformed_sse_remain_diagnosable(self):
         for content_type, raw, stage in [
-            ("application/json", b'{"unexpected": "body"}', "unexpected_content_type"),
+            ("application/json", b'{"unexpected": "body"}', "eof_without_terminal"),
             ("text/event-stream", b"data: {invalid}\n\n", "read_stream"),
         ]:
             with self.subTest(content_type=content_type):
@@ -214,6 +214,39 @@ class SubscriptionTests(unittest.TestCase):
                 self.assertEqual(client.last_client_audit["stage"], stage)
                 self.assertEqual((self.root / "non-sse/stream.bin").read_bytes(), raw)
                 self.assertNotIn("private-test-token", json.dumps(client.last_client_audit))
+
+    def test_mislabeled_sse_requires_complete_framed_response(self):
+        completed = complete()
+        invalid = complete()
+        invalid["response"]["status"] = "in_progress"
+        cases = [
+            (stream(completed).getvalue(), True),
+            (
+                stream({"type": "response.output_text.delta", "delta": '{"ok":true}'}).getvalue(),
+                False,
+            ),
+            (json.dumps(completed["response"]).encode(), False),
+            (stream(invalid).getvalue(), False),
+        ]
+        for body, success in cases:
+            with self.subTest(body=body):
+                response = io.BytesIO(body)
+                response.status = 200
+                response.headers = {"Content-Type": "application/json"}
+                client = ChatGPTSubscriptionVisionModel()
+                with patch.object(client, "_open", return_value=response):
+                    if success:
+                        self.assertEqual(
+                            client.predict_json(system_prompt="s", user_text="u", image_paths=[]),
+                            {"ok": True},
+                        )
+                    else:
+                        with self.assertRaises(ExternalExecutionUnknown):
+                            client.predict_text(system_prompt="s", user_text="u", image_paths=[])
+                self.assertTrue(client.last_client_audit["content_type_mismatch"])
+                self.assertEqual(
+                    client.last_client_audit["headers"]["Content-Type"], "application/json"
+                )
 
     def test_split_utf8_crlf_and_final_event_without_trailing_blank(self):
         from vlm.responses_stream import EventDecoder
@@ -468,7 +501,7 @@ class SubscriptionTests(unittest.TestCase):
 
         response = stream(complete())
         response.status = 200
-        response.headers = {"Content-Type": "text/event-stream"}
+        response.headers = {"Content-Type": "application/json"}
         with make_server(0, str(self.path)) as server:
             worker = threading.Thread(target=server.serve_forever, daemon=True)
             worker.start()

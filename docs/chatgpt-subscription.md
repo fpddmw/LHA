@@ -42,6 +42,8 @@ python scripts/run_creative_benchmark.py prepare \
 
 客户端从 `response.completed.output` 中选择最后一条 `phase: final_answer` 助手消息；同一次响应中的 `commentary` 不进入 Planner 动作解析。未提供 phase 的兼容响应使用最后一条未标注消息；只有 commentary 时返回空文本，走已有输出校验。原始输出项与所有中间消息完整保存在调用证据中。
 
+完成依据是实际 SSE 帧中的 `response.completed` 和响应对象的 `status: completed`。部分中转会把真实 SSE 标成 `application/json`，客户端保留这个头部差异并按实际流解析；普通 JSON 正文和没有终态的残缺流仍不视为完成。
+
 只有 `response.completed` 才保存为成功回答。明确失败和截断保留原因及实际 usage；连接中断保留未确认状态，由原运行的恢复入口处理。原请求已经保存完整回答时直接收取，不重复提交。模型调用沿用在线任务的一小时期限以及原有账本。
 
 多卡同机进程共享同一受保护凭证文件，串行续期。跨主机部署时，先指定一个运行宿主为凭证续期负责人；不要复制同一可旋转 refresh token 后让多台主机独立续期。官方支持在本机完成授权后转移到自托管主机，该主机接管后续续期并保留独立宿主标识；使用多个独立运行宿主时应各自完成授权或通过单一凭证负责人转发调用。

@@ -161,13 +161,12 @@ class ChatGPTSubscriptionVisionModel:
                     headers=response_headers(response),
                 )
                 content_type = self.last_client_audit["headers"].get("Content-Type", "")
-                if content_type and "text/event-stream" not in content_type.lower():
-                    stage = "unexpected_content_type"
-                    while chunk := response.read(65536):
-                        audit.received(chunk)
-                    raise ExternalExecutionUnknown(
-                        "ChatGPT returned a non-SSE body; see client-audit/stream.bin"
-                    )
+                # Some gateways label a genuine SSE body as application/json.
+                # The event framing and terminal response determine completion;
+                # retain the header discrepancy as evidence, not a rejection gate.
+                self.last_client_audit["content_type_mismatch"] = bool(
+                    content_type and "text/event-stream" not in content_type.lower()
+                )
                 for event in events(response, audit):
                     kind = event.get("type")
                     value = event.get("response") or {}
@@ -188,6 +187,11 @@ class ChatGPTSubscriptionVisionModel:
                             detail = value.get("error") or value.get("incomplete_details") or {}
                             raise SubscriptionAPIError(
                                 422, detail.get("code") or detail.get("reason") or kind
+                            )
+                        if value.get("status") != "completed":
+                            stage = "invalid_terminal"
+                            raise ExternalExecutionUnknown(
+                                "ChatGPT completion event has no completed response status"
                             )
                         answer, selection = final_answer(value)
                         self.last_client_audit.update(selection)
