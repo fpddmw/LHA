@@ -156,6 +156,89 @@ def recover_pe_prompt(output, topic, device, reason, *, execute=False):
             runtime.close()
 
 
+def settle_pe_selection(output, topic, device, *, execute=False):
+    """Register cached PE videos after an interrupted selector, without calls."""
+    from planner_harness import accounting
+    from . import unified_benchmark as unified
+
+    output = Path(output).resolve()
+    directory = output / "methods" / topic / "pe-loop"
+    worker = output / "workers" / str(device)
+    if not directory.resolve().is_relative_to(output) or not worker.resolve().is_relative_to(output):
+        raise ValueError("Settlement paths must belong to the original run")
+    with RunLock(output / "unified-owner"), RunLock(output / "batch-owner"):
+        batch = load(output / "batch.json")
+        if batch.get("sha256") != signature({k: v for k, v in batch.items() if k != "sha256"}):
+            raise ValueError("Frozen batch changed")
+        path = directory / "settlement.json"
+        if path.exists() and load(path).get("status") == "ready":
+            return {"status": "complete", "topic": topic}
+        task = next(t for t in batch["topics"] if t["id"] == topic)
+        progress = load(directory / "progress.json")
+        if (progress.get("phase") != "select" or progress.get("status") != "awaiting_recovery"
+                or progress.get("error_type") != "ExternalExecutionUnknown"
+                or not 2 <= progress.get("round", 0) <= batch["max_generations"]):
+            raise ValueError("Settlement requires a recorded interrupted PE selection")
+        number = progress["round"]
+        folder = directory / "rounds" / f"{number:04d}"
+        scope = accounting.scope(output / "accounting", topic, lane="pe-loop")
+        ledger = accounting.load_ledger(scope["root"])
+        clock = ledger["topics"].get(topic, {}).get("lanes", {}).get("pe-loop", {})
+        if not all(isinstance(clock.get(k), (int, float)) for k in ("started_unix", "deadline_unix")):
+            raise ValueError("Original PE task clock is unavailable")
+        unknown = [r["id"] for r in ledger["operations"].values()
+                   if r["topic"] == topic and r["lane"] == "pe-loop" and r["kind"] == "model"
+                   and r["status"] != "not_submitted" and not r.get("completion")
+                   and Path(r["id"]).is_relative_to(folder / "selection/call/attempts")]
+        if not unknown:
+            raise ValueError("Original selection has no unresolved model operation")
+        for i in range(1, number + 1):
+            current = directory / "rounds" / f"{i:04d}"
+            names = ["prompt", "candidate", "feedback"] + (["choice"] if i < number else [])
+            for name in names:
+                receipt = load(current / (name + ".json"))
+                if receipt.get("sha256") != signature(receipt["value"]):
+                    raise ValueError("Saved PE phase changed: " + str(current / name))
+        if (folder / "choice.json").exists():
+            raise ValueError("A completed selection is available; collect that original choice")
+        plan = {"status": "settlement_ready", "topic": topic, "round": number,
+                "batch_sha256": batch["sha256"], "loop_sha256": sha(directory / "loop.json"),
+                "progress_sha256": sha(directory / "progress.json"), "scope": scope,
+                "clock": clock, "unknown_operations": unknown, "model_calls": 0, "renders": 0}
+        if not execute:
+            return plan
+        repair = directory / "selection-settlement"
+        immutable(repair / "execution.json", {**plan, "reason": progress["reason"]})
+        renderer = load(directory / "loop.json")["renderer"]
+        if renderer is not None:
+            batch = {**batch, "renderer_identity": renderer}
+        host_path = worker / "host.json"
+        if host_path.exists() and load(host_path).get("local_results_root"):
+            batch["results_root"] = load(host_path)["local_results_root"]
+
+        class CachedRuntime:
+            def unavailable(self, *args, **kwargs):
+                raise ValueError("Settlement requires already completed enhancement, render and review")
+
+            refine = render = review = unavailable
+
+            def choose(self, *args, **kwargs):
+                raise accounting.ExternalExecutionUnknown(progress["reason"])
+
+        root = Path(__file__).resolve().parents[2]
+        result = unified.execute_method(root, output, task, "pe-loop", batch, CachedRuntime())
+        if path.exists():
+            previous = load(path)
+            immutable(directory / "settlement-history" / (signature(previous) + ".json"), previous)
+        row = {"topic": topic, "method": "pe-loop", "review_mode": "shared",
+               "batch_sha256": batch["sha256"], **result,
+               "recovery_execution": str(repair / "execution.json")}
+        save(path, row)
+        save(repair / "result.json", row)
+        accounting.close_topic(scope)
+        return row
+
+
 def recover_pe_loop(output, topic, reason):
     """Reopen settlement/dispatch only; reuse all original PE phase receipts."""
     import sqlite3

@@ -101,15 +101,21 @@ def retry_render(output, topic, device, failed_slot, reason, *, execute=False):
 
 
 def main():
-    from experiments.recovery import recover_pe_prompt
+    from experiments.recovery import recover_pe_prompt, settle_pe_selection
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--topic", required=True)
     parser.add_argument("--device", required=True, help="Original worker directory ID")
     parser.add_argument("--reason", default="Inspected tokenizer refusal before GPU generation")
     parser.add_argument("--execute", action="store_true")
-    parser.add_argument("--retry-render", help="Inspected unsubmitted revision render, e.g. 1-prompt-1")
+    action = parser.add_mutually_exclusive_group()
+    action.add_argument("--retry-render", help="Inspected unsubmitted revision render, e.g. 1-prompt-1")
+    action.add_argument("--settle-last-choice", action="store_true", help="Register cached videos after interrupted selection; no calls")
     args = parser.parse_args()
+    if args.settle_last_choice:
+        print(json.dumps(settle_pe_selection(args.output, args.topic, args.device,
+                                            execute=args.execute), ensure_ascii=False, indent=2))
+        return
     if args.retry_render:
         from planner_harness.common import load
         result = retry_render(args.output, args.topic, args.device, args.retry_render, args.reason, execute=args.execute)

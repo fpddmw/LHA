@@ -18,6 +18,51 @@ from planner_harness.resources import ResourceExhausted
 class RecoveryTests(Fixture):
     setup_loop, run_loop = pe_fixtures.PELoopTests.setup_loop, pe_fixtures.PELoopTests.run_loop
 
+    def test_selection_settlement_uses_cached_phases_and_preserves_unknown_operation(self):
+        batch, runtime = self.setup_loop(n=3)
+        task = batch['topics'][0]
+        directory = self.output / 'methods' / task['id'] / 'pe-loop'
+        def choose(topic, candidates, reviews, folder, scope):
+            operation = str(folder / 'call/attempts/01')
+            accounting.reserve(scope, operation, 'model', 'model:gpt-6.1-sol/high')
+            accounting.transition(scope, operation, 'in_flight_unknown')
+            raise RuntimeError('Pre-fix interrupted selector')
+        runtime.choose = choose
+        with self.assertRaisesRegex(RuntimeError, 'Pre-fix'):
+            self.run_loop(batch, runtime)
+        save(directory / 'progress.json', {**load(directory / 'progress.json'),
+             'error_type': 'ExternalExecutionUnknown'})
+        save(directory / 'settlement.json', {'status': 'failed'})
+        original = {p: sha(p) for p in directory.glob('rounds/*/*.json')}
+        ledger = accounting.load_ledger(self.output / 'accounting')
+        plan = recovery.settle_pe_selection(self.output, task['id'], '0')
+        self.assertEqual((plan['status'], plan['round'], plan['model_calls'], plan['renders']),
+                         ('settlement_ready', 2, 0, 0))
+        self.assertEqual(accounting.load_ledger(self.output / 'accounting'), ledger)
+        execute_method = unified.execute_method
+        def execute(root, *args):
+            return execute_method(self.repo, *args)
+        with patch.object(unified, 'execute_method', side_effect=execute):
+            result = recovery.settle_pe_selection(self.output, task['id'], '0', execute=True)
+        self.assertEqual((result['status'], result['delivery_kind'], result['partial']),
+                         ('ready', 'selection_unavailable_delivery', True))
+        self.assertEqual({p: sha(p) for p in original}, original)
+        now = accounting.load_ledger(self.output / 'accounting')
+        self.assertEqual(now['operations'], ledger['operations'])
+        self.assertEqual(now['topics'][task['id']]['lanes'], ledger['topics'][task['id']]['lanes'])
+        self.assertEqual(recovery.settle_pe_selection(self.output, task['id'], '0', execute=True)['status'], 'complete')
+        complete = load(directory / 'complete.json')['value']
+        self.assertEqual(complete['candidate']['id'], 'v1')
+        self.assertEqual(len(complete['candidates']), 2)
+
+    def test_selection_settlement_requires_selector_failure(self):
+        batch, runtime = self.setup_loop(n=2)
+        runtime.fail_review = True
+        with self.assertRaises(RuntimeError):
+            self.run_loop(batch, runtime)
+        with self.assertRaisesRegex(ValueError, 'interrupted PE selection'):
+            recovery.settle_pe_selection(self.output, batch['topics'][0]['id'], '0', execute=True)
+
     def failed_round(self):
         batch, runtime = self.setup_loop(n=2)
         task = batch["topics"][0]

@@ -141,6 +141,34 @@ class PELoopTests(Fixture):
         self.assertEqual(row['evidence']['actual_generations'], 2)
         self.assertEqual(row['candidates'][-1]['roles'], ['last'])
 
+    def test_unknown_selection_keeps_last_choice_and_registers_new_candidate(self):
+        batch, runtime = self.setup_loop(n=4)
+        def choose(topic, candidates, reviews, directory, scope):
+            if len(candidates) == 2:
+                return 1, {'policy': u.SELECTOR, 'selected_index': 1,
+                           'reason': 'Second candidate has the preferred design.', 'model_called': True}
+            raise accounting.ExternalExecutionUnknown('Interrupted selection stream')
+        runtime.choose = choose
+        self.assertTrue(self.run_loop(batch, runtime)['partial'])
+        row = results.find(self.registry, '001', 'short', 'pe-loop', 42)
+        self.assertEqual(row['evidence']['delivery_kind'], 'selection_unavailable_delivery')
+        self.assertEqual(row['evidence']['actual_generations'], 3)
+        self.assertEqual([c['roles'] for c in row['candidates']], [['first'], ['selected'], ['last']])
+        before = list(runtime.calls)
+        self.run_loop(batch, runtime)
+        self.assertEqual(runtime.calls, before)
+
+    def test_unknown_review_remains_recoverable(self):
+        batch, runtime = self.setup_loop(n=2)
+        def review(*args):
+            raise accounting.ExternalExecutionUnknown('Interrupted review')
+        runtime.review = review
+        with self.assertRaises(accounting.ExternalExecutionUnknown):
+            self.run_loop(batch, runtime)
+        directory = self.output / 'methods' / batch['topics'][0]['id'] / 'pe-loop'
+        self.assertEqual(load(directory / 'progress.json')['phase'], 'review')
+        self.assertFalse((directory / 'complete.json').exists())
+
     def test_changed_budget_cannot_reuse_a_pe_result(self):
         batch, runtime = self.setup_loop(n=1)
         self.run_loop(batch, runtime)
