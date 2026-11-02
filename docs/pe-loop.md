@@ -68,11 +68,13 @@ python scripts/recover_pe_prompt.py --output /path/original-run \
 
 如果压缩答卷已保存，但修订渲染在派发前因环境问题失败，可在排除环境问题后指定 `--retry-render 1-prompt-1`（替换成实际失败目录名），再加 `--execute`。入口复用已保存的提示词、种子和生成参数，创建独立的 `1-prompt-1-retry-1` 请求；成功后保存该轮候选，接续原 PE 的评审和后续阶段。原失败回执保持完整。重复执行会复用已保存结果，超过原期限则转入已有候选结算。GPU 独占锁由 resident renderer 持有，外层调度器等待设备可用后启动进程。
 
-### 选片中断后的结算
+### 模型调用中断后的缓存结算
 
 候选和 Critic 评审已完成、选片调用结果未知时，PE 按最近一次已完成的选择结算，登记所有已生成版本，并记录 `selection_unavailable_delivery`。原选片调用继续保留其未知状态和用量记录。
 
-旧版本停在这一步的任务可用以下入口检查；加 `--execute` 后只读取保存的阶段结果并登记视频，模型和 GPU 调用均为零。`--device` 对应原 worker 编号。若原期限已经结束，结算类型为 `deadline_delivery`，选片中断原因保存在恢复记录中。
+已完成至少一次选择、随后在提示词改写、Critic 评审或选片阶段遇到结果未知的任务，可用以下入口检查；加 `--execute` 后读取保存的阶段结果，按最近一次已完成的选择登记全部视频。模型和 GPU 调用均为零。评审未完成的新视频仍登记为 `last`，已完成评审数单独保留。改写或评审中断的显式结算记录为 `interrupted_delivery`；正常运行的这两个阶段仍可等待原调用结果再恢复。
+
+`--device` 对应原 worker 编号。若原期限已经结束，结算类型为 `deadline_delivery`，原中断阶段、原因和未知调用保存在恢复记录中。
 
 ```bash
 python scripts/recover_pe_prompt.py --output /path/original-run \

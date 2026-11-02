@@ -156,10 +156,11 @@ def recover_pe_prompt(output, topic, device, reason, *, execute=False):
             runtime.close()
 
 
-def settle_pe_selection(output, topic, device, *, execute=False):
-    """Register cached PE videos after an interrupted selector, without calls."""
+def settle_pe_interruption(output, topic, device, *, execute=False):
+    """Register cached PE videos after an interrupted model call, without calls."""
     from planner_harness import accounting
     from . import unified_benchmark as unified
+    from .pe_loop import RecordedInterruption
 
     output = Path(output).resolve()
     directory = output / "methods" / topic / "pe-loop"
@@ -175,12 +176,13 @@ def settle_pe_selection(output, topic, device, *, execute=False):
             return {"status": "complete", "topic": topic}
         task = next(t for t in batch["topics"] if t["id"] == topic)
         progress = load(directory / "progress.json")
-        if (progress.get("phase") != "select" or progress.get("status") != "awaiting_recovery"
+        if (progress.get("phase") not in {"enhance", "review", "select"} or progress.get("status") != "awaiting_recovery"
                 or progress.get("error_type") != "ExternalExecutionUnknown"
                 or not 2 <= progress.get("round", 0) <= batch["max_generations"]):
-            raise ValueError("Settlement requires a recorded interrupted PE selection")
-        number = progress["round"]
+            raise ValueError("Settlement requires a recorded interrupted PE model call after a completed choice")
+        number, phase = progress["round"], progress["phase"]
         folder = directory / "rounds" / f"{number:04d}"
+        phase_folder = folder / {"enhance": "enhance", "review": "review", "select": "selection"}[phase]
         scope = accounting.scope(output / "accounting", topic, lane="pe-loop")
         ledger = accounting.load_ledger(scope["root"])
         clock = ledger["topics"].get(topic, {}).get("lanes", {}).get("pe-loop", {})
@@ -189,19 +191,21 @@ def settle_pe_selection(output, topic, device, *, execute=False):
         unknown = [r["id"] for r in ledger["operations"].values()
                    if r["topic"] == topic and r["lane"] == "pe-loop" and r["kind"] == "model"
                    and r["status"] in {"in_flight_unknown", "failed_unknown_cost"}
-                   and Path(r["id"]).is_relative_to(folder / "selection/call/attempts")]
+                   and Path(r["id"]).is_relative_to(phase_folder)]
         if not unknown:
-            raise ValueError("Original selection has no unresolved model operation")
+            raise ValueError("Original phase has no unresolved model operation")
+        phase_names = ["prompt", "candidate", "feedback", "choice"]
+        current_names = {"enhance": [], "review": phase_names[:2], "select": phase_names[:3]}[phase]
         for i in range(1, number + 1):
             current = directory / "rounds" / f"{i:04d}"
-            names = ["prompt", "candidate", "feedback"] + (["choice"] if i < number else [])
+            names = phase_names if i < number else current_names
             for name in names:
                 receipt = load(current / (name + ".json"))
                 if receipt.get("sha256") != signature(receipt["value"]):
                     raise ValueError("Saved PE phase changed: " + str(current / name))
-        if (folder / "choice.json").exists():
-            raise ValueError("A completed selection is available; collect that original choice")
-        plan = {"status": "settlement_ready", "topic": topic, "round": number,
+        if any((folder / (name + ".json")).exists() for name in phase_names[len(current_names):]):
+            raise ValueError("A later completed phase is available; collect its original result")
+        plan = {"status": "settlement_ready", "topic": topic, "round": number, "phase": phase,
                 "batch_sha256": batch["sha256"], "loop_sha256": sha(directory / "loop.json"),
                 "progress_sha256": sha(directory / "progress.json"), "scope": scope,
                 "clock": clock, "unknown_operations": unknown, "model_calls": 0, "renders": 0}
@@ -218,9 +222,14 @@ def settle_pe_selection(output, topic, device, *, execute=False):
 
         class CachedRuntime:
             def unavailable(self, *args, **kwargs):
-                raise ValueError("Settlement requires already completed enhancement, render and review")
+                raise ValueError("An earlier PE phase receipt is missing")
 
-            refine = render = review = unavailable
+            def settle(self, *args, **kwargs):
+                raise RecordedInterruption(progress["reason"])
+
+            render = unavailable
+            refine = settle if phase == "enhance" else unavailable
+            review = settle if phase == "review" else unavailable
 
             def choose(self, *args, **kwargs):
                 raise accounting.ExternalExecutionUnknown(progress["reason"])

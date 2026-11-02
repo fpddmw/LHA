@@ -33,6 +33,10 @@ class PromptLengthRefused(RuntimeError):
         super().__init__("Rendering prompt exceeds the text encoder capacity")
 
 
+class RecordedInterruption(RuntimeError):
+    """Explicit cached settlement of an already recorded interrupted phase."""
+
+
 def compact_prompt(topic, prompt, details, directory, model, scope, *, backend="bernini"):
     from planner_harness.model_call import call_text
     from planner_harness.json_output import decode_object
@@ -227,6 +231,11 @@ def execute(topic, batch, runtime, directory, scope):
             save(directory / "selection-stop.json", {"round": number + 1,
                  "reason": stop, "retained_candidate": candidates[selected]["id"],
                  "call": str(folder / "selection/call")})
+        except RecordedInterruption as exc:
+            if decision is None:
+                raise
+            stop = str(exc)
+            stop_kind = "interrupted_delivery"
         except Exception as exc:
             save(directory / "progress.json", {"round": number + 1, "phase": phase,
                  "status": "awaiting_recovery", "error_type": type(exc).__name__, "reason": str(exc)})

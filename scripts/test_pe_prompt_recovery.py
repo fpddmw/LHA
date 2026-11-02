@@ -41,7 +41,7 @@ class RecoveryTests(Fixture):
         failed = next(iter(ledger['operations'].values()))
         self.assertEqual(failed['status'], 'failed_unknown_cost')
         self.assertEqual(load(failed['completion']['path'])['status'], 'failed')
-        plan = recovery.settle_pe_selection(self.output, task['id'], '0')
+        plan = recovery.settle_pe_interruption(self.output, task['id'], '0')
         self.assertEqual((plan['status'], plan['round'], plan['model_calls'], plan['renders']),
                          ('settlement_ready', 2, 0, 0))
         self.assertEqual(accounting.load_ledger(self.output / 'accounting'), ledger)
@@ -49,25 +49,84 @@ class RecoveryTests(Fixture):
         def execute(root, *args):
             return execute_method(self.repo, *args)
         with patch.object(unified, 'execute_method', side_effect=execute):
-            result = recovery.settle_pe_selection(self.output, task['id'], '0', execute=True)
+            result = recovery.settle_pe_interruption(self.output, task['id'], '0', execute=True)
         self.assertEqual((result['status'], result['delivery_kind'], result['partial']),
                          ('ready', 'selection_unavailable_delivery', True))
         self.assertEqual({p: sha(p) for p in original}, original)
         now = accounting.load_ledger(self.output / 'accounting')
         self.assertEqual(now['operations'], ledger['operations'])
         self.assertEqual(now['topics'][task['id']]['lanes'], ledger['topics'][task['id']]['lanes'])
-        self.assertEqual(recovery.settle_pe_selection(self.output, task['id'], '0', execute=True)['status'], 'complete')
+        self.assertEqual(recovery.settle_pe_interruption(self.output, task['id'], '0', execute=True)['status'], 'complete')
         complete = load(directory / 'complete.json')['value']
         self.assertEqual(complete['candidate']['id'], 'v1')
         self.assertEqual(len(complete['candidates']), 2)
 
-    def test_selection_settlement_requires_selector_failure(self):
+    def test_settlement_requires_recorded_unknown_after_a_choice(self):
         batch, runtime = self.setup_loop(n=2)
         runtime.fail_review = True
         with self.assertRaises(RuntimeError):
             self.run_loop(batch, runtime)
-        with self.assertRaisesRegex(ValueError, 'interrupted PE selection'):
-            recovery.settle_pe_selection(self.output, batch['topics'][0]['id'], '0', execute=True)
+        with self.assertRaisesRegex(ValueError, 'interrupted PE model call'):
+            recovery.settle_pe_interruption(self.output, batch['topics'][0]['id'], '0', execute=True)
+
+    def interrupted_phase(self, phase, number):
+        batch, runtime = self.setup_loop(n=4)
+        task = batch['topics'][0]
+        directory = self.output / 'methods' / task['id'] / 'pe-loop'
+        original_refine, original_review = runtime.refine, runtime.review
+
+        def interrupt(folder, scope):
+            call = 'call/attempts/01' if phase == 'enhance' else 'one-shot-critic/calls/review-0001/call/attempts/01'
+            def fail():
+                raise accounting.ExternalExecutionUnknown('Remote end closed without response')
+            accounting.invoke(scope, str(folder / call), 'model', 'model:gpt-6.1-sol/high', fail)
+
+        def refine(topic, folder, scope, history):
+            if phase == 'enhance' and len(history) + 1 == number:
+                interrupt(folder, scope)
+            return original_refine(topic, folder, scope, history)
+
+        def review(topic, candidate, folder, scope):
+            if phase == 'review' and candidate['id'] == 'v' + str(number):
+                interrupt(folder, scope)
+            return original_review(topic, candidate, folder, scope)
+
+        runtime.refine, runtime.review = refine, review
+        runtime.choose = lambda topic, candidates, *args: (len(candidates) - 1,
+            {'policy': unified.SELECTOR, 'selected_index': len(candidates) - 1,
+             'reason': 'Prefer this completed design.', 'model_called': True})
+        with self.assertRaises(accounting.ExternalExecutionUnknown):
+            self.run_loop(batch, runtime)
+        originals = {p: sha(p) for p in directory.glob('rounds/*/*.json')}
+        ledger = accounting.load_ledger(self.output / 'accounting')
+        plan = recovery.settle_pe_interruption(self.output, task['id'], '0')
+        self.assertEqual((plan['phase'], plan['model_calls'], plan['renders']), (phase, 0, 0))
+        execute_method = unified.execute_method
+        def execute(root, *args):
+            return execute_method(self.repo, *args)
+        with patch.object(unified, 'execute_method', side_effect=execute):
+            result = recovery.settle_pe_interruption(self.output, task['id'], '0', execute=True)
+        self.assertEqual((result['status'], result['delivery_kind'], result['partial']),
+                         ('ready', 'interrupted_delivery', True))
+        complete = load(directory / 'complete.json')['value']
+        self.assertEqual(complete['candidate']['id'], 'v' + str(number - 1))
+        count = number - (phase == 'enhance')
+        self.assertEqual(len(complete['candidates']), count)
+        self.assertEqual(complete['candidate']['actual_generations'], count)
+        self.assertEqual(load(directory / 'selection.json')['reviewed'], number - 1)
+        self.assertEqual({p: sha(p) for p in originals}, originals)
+        now = accounting.load_ledger(self.output / 'accounting')
+        self.assertEqual(now['operations'], ledger['operations'])
+        self.assertEqual(now['topics'][task['id']]['lanes'], ledger['topics'][task['id']]['lanes'])
+
+    def test_enhancement_interruption_retains_first_completed_round(self):
+        self.interrupted_phase('enhance', 2)
+
+    def test_review_interruption_registers_new_unreviewed_candidate(self):
+        self.interrupted_phase('review', 2)
+
+    def test_third_round_review_interruption_retains_second_choice(self):
+        self.interrupted_phase('review', 3)
 
     def failed_round(self):
         batch, runtime = self.setup_loop(n=2)
