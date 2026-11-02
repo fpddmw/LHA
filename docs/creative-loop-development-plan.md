@@ -1,6 +1,10 @@
+> 历史设计记录。当前自动评审与评分接口以 [creative loop 实现](creative-loop-implementation.md) 和 [Low→High v2](low-high-evaluation-v2.md) 为准；文中的可选 critique／交付时新建评审不再是默认路径。
+
 # Creative loop: detailed development specification
 
-Date: 2026-11-01. Authority: the user's approved lightweight-loop plan and subsequent request for a plan-first, architecture-level audit. This is the technical expansion of [the approved scope](creative-loop-refactor-and-fewshot-plan.md), not a replacement research direction.
+> Historical plan — 2026-11-01. The implementation and authorizations below describe that checkpoint. For current operation use [current implementation](creative-loop-implementation.md), [event observation](online-event-observation.md) and [Low→High evaluation](low-high-evaluation-v1.md). The v4 reviewer selects events and observes consecutive segments before one main report; a report is not one model call. Fixed short-window and earlier delivery assumptions below remain historical.
+
+Date: 2026-11-01. Authority: the user's approved lightweight-loop plan and subsequent request for a plan-first, architecture-level audit. This is the technical expansion of [the approved scope](creative-loop-refactor-and-benchmark-plan.md), not a replacement research direction.
 
 Current authorization: implement the full bounded repair plan and synchronize code/documentation to GitHub. The user explicitly deferred simulated workflows and validation runs until after synchronization. Add regression coverage but do not execute it in this pass. Static source inspection, syntax parsing and repository hygiene checks support publication; they are not behavioral validation. No GPU, AutoDL, live model invocation, evaluation, deployment or experiment automation is authorized. Repository prose is English; communication with the user is Chinese.
 

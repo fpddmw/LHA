@@ -11,7 +11,7 @@ import test_creative_loop as fixtures
 from planner_harness import PlannerHarness
 from planner_harness.common import load,save
 from planner_harness.execution import collect
-from planner_harness.continuation import view,usage
+from planner_harness.continuation import view,usage,phase
 from planner_harness.delivery import verify_delivery
 from critic_harness.adapter import critique
 
@@ -31,11 +31,12 @@ class ContinuationTests(unittest.TestCase):
 
     def collect_render(self,seconds=None):
         self.h.checkpoint()
-        self.respond()
+        self.respond(review=False)
         if seconds is not None:
             path=self.h.output/'jobs'/self.h.state['pending_tool']/'response.json';data=load(path)
             data['payload']['execution']['generation_seconds']=seconds;save(path,data)
         collect(self.h)
+        fixtures.drain_review(self.h)
 
     def test_two_successes_then_missing_blank_and_weak_explanations(self):
         self.start();self.collect_render(1.5)
@@ -70,45 +71,63 @@ class ContinuationTests(unittest.TestCase):
         self.assertEqual(load(self.h.output/'jobs'/job_id/'request.json'),request)
         self.assertEqual(self.h.model.inputs,[])
 
-    def test_null_cap_accepts_later_repeated_explanations_without_semantic_judging(self):
+    def test_five_request_budget_escalates_and_locks_without_semantic_judging(self):
         self.start()
-        for n in range(1,8):
+        notices=[]
+        for n,expected in enumerate(('exploration','continuation','deliberate','strong'),1):
             self.collect_render()
+            self.assertEqual(phase(self.h.state),expected)
+            visible=view(self.h.state);notices.append(visible['budget_awareness'])
+            self.assertEqual(visible['justification_required'],n>=2)
             self.h.operate(action('generate',input_video='source',prompt='Blue again.',justification='x'),'repeat-'+str(n))
-        self.assertEqual(self.h.state['generation_requests'],8)
-        self.assertIn('deliberate choice',view(self.h.state)['budget_awareness'])
-        self.assertFalse(any(j['kind']=='critique' for j in self.h.state['jobs'].values()))
+        self.collect_render()
+        self.assertEqual(self.h.state['generation_requests'],5)
+        self.assertEqual(len(set(notices)),4)
+        self.assertEqual(phase(self.h.state),'frozen')
+        result=self.h.operate(action('generate',input_video='source',prompt='Sixth.',justification='x'),'refused-sixth')
+        self.assertEqual(result['status'],'generation_unavailable')
+        self.assertEqual(self.h.state['generation_requests'],5)
+        self.assertFalse(view(self.h.state)['justification_required'])
+        self.assertEqual(view(self.h.state)['continuation_questions'],[])
+        for notice in notices+[view(self.h.state)['budget_awareness']]:
+            for leak in ('five','six','half','remaining','last attempt','%'):
+                self.assertNotIn(leak,notice.lower())
+        self.assertEqual(sum(j['kind']=='critique' for j in self.h.state['jobs'].values()),5)
         self.assertEqual({r['justification'] for r in self.h.state['generation_decisions'].values() if r['justification'] is not None},{'x'})
 
     def test_actual_cap_locks_only_generate_and_keeps_full_confirmation_available(self):
         self.start(cap=1);self.collect_render();self.h.checkpoint()
         model=fixtures.Scripted([action('generate',input_video='source',prompt='Another.',justification='x'),
             action('observe',video='v1',count=2),action('note',text='Retain the candidate with its visible limitations.'),
-            action('observe',video='source',count=2),action('finish',video='v1',message='Propose the retained candidate.')])
+            action('observe',video='source',count=2),action('finish',video='v1',message='Propose the retained candidate.'),
+            action('finish',video='v1',message='Confirm the retained result with the reported limitations.')])
         self.h=PlannerHarness(self.h.output,model);state=self.h.resume()
-        self.assertEqual(state['status'],'waiting_tool');self.assertEqual(state['generation_requests'],1)
+        self.assertEqual(state['status'],'complete');self.assertEqual(state['generation_requests'],1)
         self.assertTrue(any(e.get('result',{}).get('status')=='generation_unavailable' for e in state['events']))
-        job=state['jobs'][state['pending_tool']];folder=self.h.output/'jobs'/job['id']
-        critic=fixtures.ScriptedCritic();feedback=critique(job,folder,ROOT,model=critic)
-        save(folder/'response.json',{'request_sha256':job['sha256'],'mode':'replay','status':'complete','payload':feedback})
-        self.h=PlannerHarness(self.h.output,fixtures.Scripted([action('finish',video='v1',message='Confirm the retained result with the reported limitations.')]))
-        self.h.resume();self.assertEqual(verify_delivery(self.h.output)['selected'],'v1')
+        self.assertEqual(sum(j['kind']=='critique' for j in state['jobs'].values()),1)
+        self.assertEqual(verify_delivery(self.h.output)['selected'],'v1')
 
-    def test_failures_consume_actual_requests_but_not_successful_exploration(self):
-        self.start(cap=2);job=self.h.state['jobs'][self.h.state['pending_tool']]
+    def test_failures_count_for_the_cap_and_request_based_reminders_without_advancing_seed(self):
+        self.start();job=self.h.state['jobs'][self.h.state['pending_tool']]
         save(self.h.output/'jobs'/job['id']/'response.json',{'request_sha256':job['sha256'],'mode':'replay','status':'failed','error':'Definite synthetic failure.'})
+        self.h.state['submitted_generation_ids']=[job['id']];self.h.state['generation_requests']=1
         collect(self.h)
         self.assertEqual(usage(self.h.state)['failed_render_attempts'],1)
         self.assertFalse(view(self.h.state)['justification_required'])
         self.h.operate(action('generate',input_video='source',prompt='Retry a new definite attempt.'),'after-failure')
         self.assertEqual(self.h.state['jobs'][self.h.state['pending_tool']]['payload']['renderer']['seed'],42)
-        self.collect_render();self.assertFalse(view(self.h.state)['generation_available'])
+        self.collect_render()
+        self.assertTrue(view(self.h.state)['generation_available'])
+        self.assertTrue(view(self.h.state)['justification_required'])
+        self.assertEqual(phase(self.h.state),'continuation')
+        self.assertEqual(usage(self.h.state)['generated_candidates'],1)
         self.assertEqual(usage(self.h.state)['submitted_render_requests'],2)
 
     def test_uncertain_outcome_is_unavailable_and_no_replacement_is_submitted(self):
         self.start();job=self.h.state['jobs'][self.h.state['pending_tool']]
         save(self.h.output/'jobs'/job['id']/'response.json',{'request_sha256':job['sha256'],'mode':'replay','status':'failed',
                                                           'outcome_unknown':True,'error':'Synthetic uncertain dispatch.'})
+        self.h.state['submitted_generation_ids']=[job['id']];self.h.state['generation_requests']=1
         self.assertFalse(collect(self.h));self.assertFalse(view(self.h.state)['generation_available'])
         self.assertEqual(usage(self.h.state)['uncertain_render_attempts'],1)
         self.assertEqual(usage(self.h.state)['failed_render_attempts'],0)
@@ -117,6 +136,7 @@ class ContinuationTests(unittest.TestCase):
 
     def test_visible_manual_context_errors_and_receipts_hide_operator_policy(self):
         forbidden=['max_generations','generation_limit','hard_generation_limit','free_successes','deliberate_after_successes',
+                   'free_requests','deliberate_after_requests','strong_after_requests',
                    'limit_meaning','near exhaustion','last attempt','half consumed','remaining budget','unlimited generation']
         for mode in ['full','none']:
             with self.subTest(mode=mode):
@@ -127,7 +147,7 @@ class ContinuationTests(unittest.TestCase):
                 self.assertNotIn('resource_status',context)
                 self.assertNotIn('continuation_policy',context['execution_profile'])
                 audit=load(self.h.output/'calls/event-0001/continuation-policy.json')
-                self.assertIsNone(audit['policy']['hard_generation_limit'])
+                self.assertEqual(audit['policy']['hard_generation_limit'],5)
                 self.h.state['config']['context_version']=1
                 self.assertNotIn('generation_limit',self.h.context()[0])
                 self.h.state['config']['context_version']=2
@@ -136,6 +156,26 @@ class ContinuationTests(unittest.TestCase):
                 visible=self.h.system+'\n'+self.h.context()[0]+'\n'+json.dumps(result)
                 for token in forbidden:self.assertNotIn(token,visible)
                 self.assertTrue(result['continuation']['justification_required'])
+
+    def test_model_resource_recovery_keeps_generation_frozen(self):
+        from planner_harness.delivery import continue_budget_stop
+        self.start(cap=1);self.collect_render()
+        self.h.state['status']='budget_exhausted'
+        self.h.state['final']={'stop_reason':'budget'}
+        turns=self.h.state['config']['resource_policy']['max_turns']
+        continue_budget_stop(self.h.state)
+        self.assertEqual(self.h.state['config']['resource_policy']['max_turns'],turns)
+        self.assertEqual(self.h.state['config']['resource_policy']['max_generations'],1)
+        self.assertEqual(self.h.state['config']['continuation_policy']['hard_generation_limit'],1)
+        self.assertFalse(view(self.h.state)['generation_available'])
+        self.assertEqual(self.h.operate(action('generate',input_video='source',prompt='More.'),'after-recovery')['status'],'generation_unavailable')
+
+    def test_operator_configuration_cannot_raise_the_approved_cap(self):
+        from planner_harness.resources import configure
+        from planner_harness.continuation import configure as continuation_configure
+        state={'config':{}}
+        self.assertEqual(configure(state,{'max_generations':6})['max_generations'],6)
+        self.assertEqual(continuation_configure(state,{'hard_generation_limit':6})['hard_generation_limit'],6)
 
     def test_server_configuration_uses_the_same_private_policy_without_rendering(self):
         from server_runtime.queue import Queue

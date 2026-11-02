@@ -1,0 +1,6 @@
+{
+  "hosts": {
+    "bernini": "bernini-campaign-host.local.json",
+    "ditto": "ditto-campaign-host.local.json"
+  }
+}

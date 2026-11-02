@@ -1,0 +1,48 @@
+{
+  "version": "observed-active-subset-20261102",
+  "counts": {
+    "main": 24,
+    "fewshot": 7,
+    "all": 31,
+    "short_requests": 24,
+    "long_requests": 24
+  },
+  "main_ids": [
+    "002",
+    "003",
+    "007",
+    "008",
+    "010",
+    "011",
+    "012",
+    "015",
+    "018",
+    "019",
+    "020",
+    "021",
+    "024",
+    "025",
+    "026",
+    "027",
+    "030",
+    "031",
+    "036",
+    "039",
+    "040",
+    "041",
+    "046",
+    "048"
+  ],
+  "index_sha256": {
+    "sample_index.json": "7fa1d9f943870d447e0a757cc5990408ab09a910290983909d5e673ec8958a5f",
+    "fewshot_index.json": "7ccec95c82ca134c304a3715cd41f252f7219161b4a84825617e89cff0ae7788",
+    "all_samples.json": "845474d82828947b76e50d66a5726bdd17cb1999740473593c53647ffba8b4e7"
+  },
+  "import_provenance": {
+    "main": 50,
+    "fewshot": 7,
+    "archive_sha256": "cd7871ffd03f0818a212b43f81a77386db41f936a6bb5084a0ea75bead398478"
+  },
+  "selection_authorization": "Current index is recorded as observed. Selection rationale/approval is not established by these files; untracked screening proposals are not adopted.",
+  "subset_sha256": "69757998d7864f033fe6c68238e01d0648daf13a5a307cf2a4b05902f090e87e"
+}

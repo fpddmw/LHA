@@ -46,6 +46,27 @@ def file_hash(path):
     return result.hexdigest()
 
 
+def resolve_card_source(card, root):
+    """Resolve a historical frozen path through an exact, hash-bound migration."""
+    root = Path(root).resolve()
+    original = (root / card["source_video"]).resolve()
+    if original.is_file():
+        require(file_hash(original) == card["source_sha256"], "Original card source hash mismatch")
+        return original
+    require(original.is_relative_to(root), "Historical card source escapes the repository")
+    manifest = root / "examples/evaluation/source-migrations.json"
+    require(manifest.is_file(), "Historical source needs a recorded migration")
+    migrations = read(manifest)
+    require(migrations.get("schema") == "lha-frozen-card-source-migrations-v1", "Unsupported card migration manifest")
+    matches = [m for m in migrations["migrations"] if m["card_sha256"] == card["card_sha256"]
+               and m["from"] == card["source_video"] and m["source_sha256"] == card["source_sha256"]]
+    require(len(matches) == 1, "Historical card has no unique exact source migration")
+    target = (root / matches[0]["to"]).resolve()
+    require(target.is_relative_to(root) and target.is_file(), "Migrated card source unavailable")
+    require(file_hash(target) == card["source_sha256"], "Migrated card source hash mismatch")
+    return target
+
+
 def items(card):
     return {item["id"]: (group, item) for group in card["groups"] for item in group["items"]}
 
@@ -56,7 +77,7 @@ def validate_card(card, *, frozen=True):
         require(isinstance(card.get(key), str) and card[key].strip(), f"Missing card {key}")
     require(len(card["source_sha256"]) == 64, "source_sha256 must be SHA-256")
     require(card.get("track") in {"short", "long"}, "track must be short or long")
-    require(card.get("split") in {"main", "fewshot", "development"}, "Invalid split")
+    require(card.get("split") in {"train", "validation", "test", "main", "fewshot", "development"}, "Invalid split")
     require(card.get("creativity") in {"open", "bounded", "none"}, "Invalid creativity scope")
     require(isinstance(card.get("allowed_changes"), list), "allowed_changes must be explicit")
     require(isinstance(card.get("style_required"), bool), "style_required must be boolean")

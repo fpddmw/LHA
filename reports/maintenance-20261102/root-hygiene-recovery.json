@@ -1,0 +1,82 @@
+{
+  "recorded_at": "2026-11-02T02:49:40.761459+08:00",
+  "scope": "Reversible removal of named root hygiene leftovers; no benchmark/media deletion",
+  "entries": [
+    {
+      "source": "_wtest",
+      "destination": "out/maintenance-recovery/20261102-root-hygiene/_wtest",
+      "kind": "file",
+      "files": [
+        {
+          "path": "_wtest",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "source": "_wtest2",
+      "destination": "out/maintenance-recovery/20261102-root-hygiene/_wtest2",
+      "kind": "file",
+      "files": [
+        {
+          "path": "_wtest2",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "source": "_wtest3",
+      "destination": "out/maintenance-recovery/20261102-root-hygiene/_wtest3",
+      "kind": "file",
+      "files": [
+        {
+          "path": "_wtest3",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "source": "_trash",
+      "destination": "out/maintenance-recovery/20261102-root-hygiene/_trash",
+      "kind": "directory",
+      "files": [
+        {
+          "path": "_trash/tmp_g2_test.jsonl",
+          "bytes": 39471,
+          "sha256": "5a48826468bd0eaa47b2dad0ffb785d3e646b078acdc2d31b5e47a13894ecff4"
+        },
+        {
+          "path": "_trash/report_ive_missing.md",
+          "bytes": 6915,
+          "sha256": "d34dcc8e4d878052cfb5f9c453bf7638388beed12d0412925d3c19fa8f9a0f10"
+        },
+        {
+          "path": "_trash/smoke_g0_1792918685/scores_g0_smoke.jsonl.meta.json",
+          "bytes": 308,
+          "sha256": "20a3af9c1d670db5785e794c832a41c15e834ab15d30409ada6b252c69d14341"
+        },
+        {
+          "path": "_trash/smoke_g0_1792918685/scores_g0_smoke.jsonl",
+          "bytes": 49677,
+          "sha256": "e5dc9fd9a3c9d35f57a4bef913b0ca689e9cd18857165d2301121d23cb1fd3ae"
+        },
+        {
+          "path": "_trash/smoke_g0_1792918685/job_g0.json",
+          "bytes": 111,
+          "sha256": "2dd8ba72ee2ce2de98f4fa6c01509ae27da3d280c6bcad92e97e2a443bd04ab9"
+        }
+      ]
+    },
+    {
+      "source": "_deprecated",
+      "destination": "out/maintenance-recovery/20261102-root-hygiene/_deprecated",
+      "kind": "directory",
+      "files": []
+    }
+  ],
+  "status": "moved_and_verified",
+  "restore": "For each entry, rename destination back to source only if source does not exist; verify recorded hashes first."
+}

@@ -1,0 +1,55 @@
+{
+  "scope": "Descriptive reanalysis of existing archived online feedback, not new visual scoring",
+  "depth_counts": {
+    "1": 22,
+    "2": 14
+  },
+  "requirement_transitions": [
+    {
+      "left": "fail",
+      "right": "partial",
+      "n": 1
+    },
+    {
+      "left": "fail",
+      "right": "pass",
+      "n": 1
+    },
+    {
+      "left": "partial",
+      "right": "fail",
+      "n": 1
+    },
+    {
+      "left": "partial",
+      "right": "partial",
+      "n": 4
+    },
+    {
+      "left": "partial",
+      "right": "pass",
+      "n": 1
+    },
+    {
+      "left": "pass",
+      "right": "pass",
+      "n": 9
+    },
+    {
+      "left": "unknown",
+      "right": "unknown",
+      "n": 10
+    }
+  ],
+  "totals": {
+    "candidates": 36,
+    "chain_edges": 14,
+    "matched_controls": 0,
+    "verified_candidate_media": 36,
+    "verified_sources": 12,
+    "control_plans": 14,
+    "known_generation_seconds": 27370.788984537125,
+    "unknown_generation_costs": 0
+  },
+  "remaining": "No matched source-restart control exists; historical qualitative protocols differ from current scoring and observed depth reaches only two."
+}

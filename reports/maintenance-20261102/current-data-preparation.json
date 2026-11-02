@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "benchmark_version": "lha-benchmark-20261102-v5",
+  "topics": 7,
+  "batch_schema": "creative-fewshot-three-arm-v2",
+  "max_turns": 64,
+  "max_generations": 8,
+  "task_specs": 14,
+  "profile_protocol": "creative-experiment-v2",
+  "critic_protocol": "lha-creative-review-v3-low-high",
+  "independent_final_protocol": "lha-low-high-final-v1",
+  "source_before_sha256": "ea5730dffba66758ad7c9b27a5706428af8e1c7987e3bf2a3d3e1a630501f201",
+  "source_after_sha256": "ea5730dffba66758ad7c9b27a5706428af8e1c7987e3bf2a3d3e1a630501f201",
+  "real_model_calls": 0,
+  "gpu_jobs": 0,
+  "scope": "Current seven training fewshot inputs/prompt hashes, native decode metadata, frozen profile and both arm specs verified; no actual experiment launched."
+}

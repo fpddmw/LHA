@@ -1,0 +1,13 @@
+{
+  "command": [
+    "git",
+    "fsck",
+    "--full",
+    "--no-dangling"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "",
+  "elapsed_seconds": 8.65,
+  "repair_or_prune_performed": false
+}

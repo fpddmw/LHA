@@ -1,0 +1,30 @@
+{
+  "modules": [
+    "test_experiment_engineering",
+    "test_experiment_campaign",
+    "test_review_experiments",
+    "test_unified_results",
+    "test_pe_loop"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 24.36,
+  "files_before": {
+    "src/experiments/campaign.py": "e0c7b37edd1ea24a67062c9c0dcced97c1c6d90d1b2329e476dc34af0a1f589d",
+    "src/experiments/device_scheduler.py": "de846e5559ba515bfde6f6dac109070117baaec7844f1f6a1e3bc410e0c6ea62",
+    "src/experiments/preflight.py": "487d66393d4be47bdb99712b33756d977a463ea44c8834d56b55c714cc3f26f8",
+    "src/experiments/recovery.py": "ef94d24d3303cd557ce8d844b5544cd5fe96ab1896295b4ac083ae064fe668dc",
+    "src/experiments/creative_benchmark.py": "6222d8f31ad9d293f5cc82d86d3a7313588b5b6fa65add8855dace101b5ab065",
+    "src/experiments/unified_benchmark.py": "93bdc95d39f50f1b48bfc2d39819d15029d934e9c7cda16874b754e25c1a5bf9",
+    "src/experiments/__init__.py": "9dba5a4a7ce39a4df30d277749cbc21c3ef1a50e9036b927799221a26c9f5a0f",
+    "src/experiments/pe_loop.py": "265cc5402d7773b043700b3f0ce38cbeefcb930b0e9e7edf834eb140682e0eb8",
+    "src/experiments/results.py": "7f5d5e84068c27a085d32e0566a212d8932894d8d760bf17b049efcfbda0165a",
+    "scripts/test_experiment_engineering.py": "9188f3f1f4ab09a5b298548068b6a0b569fd804b3be0c4ee956aec4ac0cb8c5f",
+    "scripts/test_experiment_campaign.py": "60ad30c8e43f5297648c906ca69f5406f147ffd3d59c5e652927f3c2d9e3d865",
+    "scripts/test_review_experiments.py": "aa2ac7a632f73e5ba56861b042d938c3134973e6a91225366f543d2ac5e77ccd",
+    "scripts/test_unified_results.py": "d3df3b7422873410e3226c9efb680411881de055063dda609d930a432df21197",
+    "scripts/test_pe_loop.py": "6ca92cde0a6085624fa8867cf0f6252a8f51ac0377358fb2cbcccabeb14ebd97"
+  },
+  "changed": [],
+  "model_calls": 0,
+  "gpu_renders": 0
+}

@@ -1,0 +1,35 @@
+{
+  "status": "prepared_not_executed",
+  "evaluation_id": "current-20261102",
+  "manifest": "out/benchmark_results/evaluations/current-20261102/evaluation-current.json",
+  "positions": 121,
+  "protocol_sha256": "8f92f78254b0b2e6114343fe846e85bcfe2d7e878d64a6a352b537a3df16165c",
+  "protocol_stable": true,
+  "new_model_calls": 0,
+  "gpu_jobs": 0,
+  "score_files": 0,
+  "ready": 121,
+  "planned": 152,
+  "counts": [
+    {
+      "method": "direct",
+      "status": "missing",
+      "count": 31
+    },
+    {
+      "method": "direct",
+      "status": "ready",
+      "count": 119
+    },
+    {
+      "method": "lineage-chain",
+      "status": "ready",
+      "count": 1
+    },
+    {
+      "method": "lineage-source-restart",
+      "status": "ready",
+      "count": 1
+    }
+  ]
+}

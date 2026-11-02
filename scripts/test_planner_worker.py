@@ -59,9 +59,14 @@ class WorkerTests(unittest.TestCase):
         self.assertFalse(request.with_name("response.json").exists())
 
     def test_existing_evaluator_contract_is_frozen_and_passed_through(self):
-        card = load(ROOT / "examples/evaluation/041_short.card.json")
+        from test_evaluation import card_fixture
+        from evaluation.protocol import freeze
+        card = freeze({**card_fixture(),"source_video":str(self.source),"source_sha256":sha(self.source)},
+                      "synthetic worker contract fixture")
+        card_path=self.root/"synthetic-worker.card.json"
+        save(card_path,card)
         task = {"text": card["requirement"], "source": {"sha256": card["source_sha256"]}}
-        cfg = prepare_profile({"evaluation": {"card": "examples/evaluation/041_short.card.json"}}, ROOT, task)
+        cfg = prepare_profile({"evaluation": {"card": str(card_path)}}, ROOT, task)
         self.assertEqual(cfg["evaluation"]["card_data"], card)
         with self.assertRaisesRegex(ValueError, "exact user request"):
             prepare_profile(cfg, ROOT, {**task, "text": "Changed task"})
@@ -70,7 +75,7 @@ class WorkerTests(unittest.TestCase):
         with patch("evaluation.media.prepare", return_value={"synthetic": True}) as prepare, \
              patch("evaluation.judges.judge", return_value={"synthetic": "judgment"}), \
              patch("evaluation.scoring.score", return_value={"synthetic": "scores"}), \
-             patch("vlm.codex_vlm.CodexVisionModel"):
+             patch("vlm.openrouter.OpenRouterVisionModel"):
             result = worker.evaluate({"payload": p}, self.root, ROOT)
         self.assertEqual(result["protocol"]["version"], card["card_sha256"])
         self.assertEqual(result["scores"], {"synthetic": "scores"})

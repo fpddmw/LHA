@@ -1,5 +1,7 @@
 # Continuous Planner and experience implementation
 
+> 阶段记录：本文保留当时的设计、数据版本或执行状态。当前开发版以 [文档入口](README.md)、[当前状态](current-status.md) 和 [实验运行安排](experiment-campaign.md) 为准。
+
 Approved by the user on 2026-10-29: proceed with the immediately preceding reviewed design. This plan supersedes the unreviewed outer-loop strategy choices in `agent-loop-plan.md`. It preserves the working independent Planner and the complete knowledge corpus.
 
 ## Intended behavior

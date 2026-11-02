@@ -55,7 +55,7 @@ def main():
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     dest = ROOT/'out/evaluation_handoff'/stamp
     dest.mkdir(parents=True, exist_ok=False)
-    samples = {s['sample_id']:s for s in read(ROOT/'benchmark_data/all_samples.json')}
+    samples = {s['legacy_id']:{**s, 'prompt_long':s['instruction']} for s in read(ROOT/'benchmark_data/benchmark.json')}
     baseline = {m:read(ROOT/f'out/prompt_probe/20261029_{m}/cases.json') for m in ['bernini','ditto']}
     mapping_bases = {c['sample_id']:c for c in baseline['ditto']['cases']}
     tasks, rows, process, cache = {}, [], [], {}

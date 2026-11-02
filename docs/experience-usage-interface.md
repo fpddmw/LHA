@@ -1,10 +1,10 @@
 # Experience access, usage records and batch maintenance
 
-This interface extends `creative_loop_v1` only. It adds passive provenance and an offline export, with no model client, evaluator, scheduler or publication process. It preserves existing Planner operations and candidate/stop semantics.
+This interface extends `creative_loop_v1` only. It adds passive provenance and an offline export. The existing separately budgeted post-task hook collects contributions when the frozen campaign profile authorizes it. It preserves existing Planner operations and candidate/stop semantics.
 
 ## Read-only curated catalog
 
-`knowledge/creative-loop/manifest.json` names the dedicated `knowledge/experience/curated/catalog.json`. Its schema is `creative-experience-catalog-v1`, with `revision`, `entries` and `resources`. The 2026-11-01 user authorization activated fourteen reviewed entries and 54 resources. Full scope includes their renderer profiles and evidence; no-experience scope removes these and historical experience routes while retaining shared style, semantic and operating guidance.
+`knowledge/creative-loop/manifest.json` names the dedicated `knowledge/experience/curated/catalog.json`. Its schema is `creative-experience-catalog-v1`, with `revision`, `entries` and `resources`. The 2026-11-01 user authorization activated fourteen reviewed entries and 54 resources. The 2026-11-02 authorized goal-directed revision expands the active source library to fifteen entries and 56 resources, with the new case interpretation and exact decision extract; historical snapshots retain their original membership. The 2026-11-03 refactor retains all fifteen entry bodies, adds the prior renderer profile as an immutable source (57 resources), and derives current map/profile recommendations from catalog metadata. Full scope includes their renderer profiles and evidence; no-experience scope removes these and historical experience routes while retaining shared style, semantic and operating guidance.
 
 Each approved entry requires:
 
@@ -19,7 +19,7 @@ Each approved entry requires:
 
 Resources require the same identity/hash/review fields and a text/image file in the curated directory. Linked prose does not grant access to new files. Duplicate IDs/paths, draft approval status, escaping paths, missing files or changed hashes are rejected. Drafts, old E1, Wiki and maintenance Skills remain excluded. `browse`, `search`, `read`, links and reference images use this same scope.
 
-The catalog and its texts/assets are pinned in the task's knowledge snapshot. Old snapshots without a curated catalog retain their own static resources. Loading a saved snapshot does not consult today's catalog. The shared experiment profile includes the catalog file. Activating approved content is an ordinary reviewed file/catalog change; no learning hooks or publication lock are added.
+The catalog and its texts/assets are pinned in the task's knowledge snapshot. Old snapshots without a curated catalog retain their own static resources. Loading a saved snapshot does not consult today's catalog. The shared experiment profile includes the catalog file. Activating approved content is an ordinary reviewed file/catalog change; task snapshots remain read-only; candidate maintenance is isolated from active publication.
 
 ## Planner-facing operations
 
@@ -82,10 +82,79 @@ Output: `README.md`, `batch.json` (`experience-batch-v2`), and `runs/<id>.json` 
 
 `topic_archive` is optional, explicit offline authorization to read a completed development topic. The exporter verifies the archive manifest and the saved summary, arm record, judgment and identity hashes and checks task/source/candidate bindings. `independent_outcomes` preserves Direct and both Loop-first/final positions, separate GLM/Sonnet reports, disagreements and saved costs. Each run's candidates link to applicable positions by output hash. Unscored intermediates have no invented grade. Without this option no independent evaluator output is read. The exporter makes no provider calls and does not scan other evaluator directories. Archive source-video fallback is accepted only at its recorded hash. A failed archive check leaves independent outcomes unavailable and records the reason while retaining the task decision material.
 
-Maintenance reads this package and follows source links. Analysis examines the judgment behind the attempt and its actual outcome. Use review identifies where guidance was found, interpreted, applied or rejected. Curation changes the entry, discovery summary or professional manual where the improvement belongs. A retrospective interpretation identifies the run, source events, relevant experience version, and whether it quotes a model statement or is the maintainer's inference. Ordinary prose with exact links is sufficient; no mandatory interpretation schema is needed.
+Maintenance reads this package and follows source links. Analysis examines the judgment behind the attempt and its actual outcome. Use review identifies where guidance was found, interpreted, applied or rejected. Curation proposes or, when explicitly authorized, applies changes to entries and discovery metadata. Manual and Skill changes are separate development work. A retrospective interpretation identifies the run, source events, relevant experience version, and whether it quotes a model statement or is the maintainer's inference. Ordinary prose with exact links is sufficient; no mandatory interpretation schema is needed.
 
-## Content lifecycle
+## Authority and lifecycle
 
-The maintainer analyzes, reviews use or curates according to the requested task. Exact proposed edits stay staged. The user reviews the wording and activation scope. Approved entries/resources can then be copied to the curated directory and listed with their actual hashes and review reference. Running snapshots do not change. Content acceptance does not establish an experimental benefit.
+| Actor | Available work | Persistent effect |
+|---|---|---|
+| Online Planner | Read experience and cases, keep task notes, cite or question guidance | Current task only |
+| Post-task contributor | New judgment, recommendation, clarification, comment, exact proposed revision | Append-only private contribution layer where the campaign authorizes ingestion |
+| Explicit library curator | Accept, merge, supersede or decline contributions; revise entry and metadata together | New private canonical snapshot and recorded decisions |
+| Authorized developer | Revise Skills, professional/operating manuals, tools and protocols | Explicitly scoped repository changes |
 
-The [full maintenance package](../knowledge/staged/experience-full-maintenance-20261101/README.md) maps all 45 old cards into fourteen rewritten entries, renderer profiles and five proposed Planner manuals. The writing standard and three maintenance Skills carry the revised judgment-bearing style. The user subsequently authorized the full reviewed package and five manuals for active use. The staged package remains an immutable record of the review. See the [three-arm preparation plan](creative-fewshot-three-arm-plan.md) for current checks and execution status. Maintenance remains an explicitly requested offline activity; no experience changes occur during a batch.
+The current task's snapshot stays fixed. Ingestion validates provenance and structure; its receipt states that canonical entries are unchanged. Contributions are immediately readable in an authorized full library, with their source cases and target versions. A contribution can make a clear practical recommendation without impersonating reviewed canonical guidance. No-experience snapshots exclude this layer as well as canonical experience.
+
+Campaign configuration determines when the post-task hook is enabled and which snapshot each arm reads. Skills carry no dataset counts, arm ordering or scheduling rules. Existing formal admission verifies training membership and a settled real Planner trajectory; validation/test do not automatically contribute. The explicit development exporter above remains available. Original online exposure and post-task library access remain separate.
+
+## Seeded libraries and review families
+
+Every batch binds a nonempty full seed before execution, including batches whose
+online mode is `none`. After an eligible task settles, the maintenance Skills read
+its family's full private library. The online task retains its original restricted
+snapshot and never receives its later maintenance conversation.
+
+A private library records its owning batch, review mode (`critic` or `planner`),
+renderer and seed hash. The same canonical seed and knowledge-map shape can serve
+several families; each family's contributions, cases and revisions remain separate.
+Maintenance reads, ingestion, resume and frozen copies verify that ownership.
+Accumulated snapshots carry their owner with their revision, so importing a frozen
+library cannot silently switch review families. Historical unbound runs retain
+their original records and require a new output directory for this policy.
+
+Full read-only batches browse their frozen entries and contribution/case links
+through the existing map. Family separation changes which snapshot is loaded,
+not the writing standard or the meaning of an experience entry. Campaign rules,
+not the maintenance Skills, set the training/heldout split and hook eligibility.
+
+## Post-task actions
+
+`skill`, `browse`, `search`, `read`, `view_image` and `note` reuse saved knowledge and records. `observe(video_id, start?, end?, count?, crop?)` inspects one of the task's saved source/candidate videos. It verifies the recorded video hash and extracts at most eight sampled frames per call using native timestamps. Inspection metadata and image hashes are retained as post-task evidence. Reading a source case also registers that case's bound videos under case-prefixed IDs, so an authorized batch maintainer can inspect a cross-task comparison. This opens useful intervals the original Planner never viewed without generating or independently scoring a video.
+
+`contribute(text, changes?)` records the author's account and optional concrete additions:
+
+- `create`: `id`, `title`, `text`, `summary`, optional `questions` and `renderers`.
+- `comment`, `clarify`, `recommend`, `propose_revision`: `id` identifies an existing entry or contribution; `text` is the actual account; optional `summary`, `title`, `questions`, `renderers` improve discovery.
+
+A comment can carry a counterexample, a recommendation can favor an action under a stated condition, and a proposed revision can contain exact replacement wording. None overwrites its target. `replace`, missing operation names and manual/Skill mutation targets are rejected. Suggestions about manuals belong in report prose for separately authorized development.
+
+The runtime binds each addition to a source case and the target's version/hash. Cases include original request, actual video/event records, settlement, exact-source references and new maintenance observations. Source cases remain immutable. `contribution.json` also retains the actual model input/response hashes. A no-increment result preserves the current library.
+
+## Discovery
+
+`browse('experience-map')` exposes current canonical summaries plus related contributions. `browse('contributions')` lists the contribution layer; `read(id)` opens the actual text and source case. `search(query)` searches both kinds of material. Reading an entry presents linked contributions as metadata on the first returned page, rather than appending objections to the end of its body. Curation status and target version remain visible. Adopted or declined records keep their history.
+
+Experience map and renderer entrance recommendations are derived from canonical catalog metadata. Detailed historical profiles remain source material. A curation change updates text and metadata together and regenerates those entrances. Professional manuals point to entries for revisable empirical claims; their general reading methods remain stable.
+
+Usage receipts include experience contributions and cases by identity/version/hash. They continue to record exposure rather than infer attention or causal benefit. The use-review Skill interprets the linked decisions and outcomes.
+
+## Explicit curation
+
+The task action set has no curation or activation action. An authorized maintainer prepares a decision list, then invokes:
+
+```sh
+python scripts/curate_experience.py --output /path/to/batch \
+  --decisions /path/to/decisions.json \
+  --expected-snapshot-sha256 <current-snapshot-hash> \
+  --authorization <instruction-or-review-reference>
+```
+
+Each decision identifies `contribution_ids`, `disposition` and `reason`. `accept`/`merge` also supplies `entry` with `id`, `title`, `text`, `summary`, `questions`, `renderers`, plus `expected_entry_sha256` (null for a new entry). `supersede` names `successor_ids`; `decline` retains the account and its rejection reason. A stale parent or entry hash prevents applying an outdated edit. Entry IDs use the EX- namespace; manuals, Skills and runtime policies are outside this command's authority.
+
+The command records authorization and decisions, preserves previous canonical text, creates an immutable snapshot and moves only the private current pointer. Existing task snapshots and the repository corpus remain unchanged. Publication into the shared repository is separate authorized work. The command does no model call and starts no experiment.
+
+Draining contributions produces a batch bundle without automatically invoking a second curator. An explicitly requested batch drafting pass remains available as a proposal-only helper. It has the same read/observe/contribute boundary and cannot apply its own proposals.
+
+## Compatibility
+
+Historical snapshots and receipts retain their original content and protocol. Previously ingested `training_validated` entries can still be read; that historical label does not upgrade new contributions. New post-task profiles advertise append-only operations. Old frozen jobs that request replacement fail with an explicit operation error rather than silently rewriting canonical guidance. Resume such jobs only through an explicit protocol migration or retain their old frozen runtime.

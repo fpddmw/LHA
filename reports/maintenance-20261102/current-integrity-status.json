@@ -1,0 +1,78 @@
+{
+  "checked_at": "2026-11-01T18:25:06.992891+00:00",
+  "runtime_source_sha256": "b56fac857dadb67a655e28fc4b545daac06316ac4d1085996d5465d560474b5a",
+  "catalog_sha256": "034bf60c6e6ef73fdb680a135485ff66561a9483428114d0cc68b1ed10f23c9d",
+  "mismatches": [
+    {
+      "path": "knowledge/experience/curated/entries/design-conflict.md",
+      "expected": "fd5316879f4354e7649e7de04241c7a0dea956d4e252d48bef34fc5399ff1a15",
+      "actual": "4ad9030e23f79540fb1895d869b91fdbf6e41b2b51cfe3a7b5711f8745e0c9f4"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/activity-relations.md",
+      "expected": "1e9dda804633b986fa43cbb4cf07dd5c64ce33a43a11da5776cb8f3cf8ea8731",
+      "actual": "3e2fa087598b0b7d20488b8c9c4ca995680e4e98f875adfab523ab873207500c"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/instance-identity.md",
+      "expected": "7dbeb7da71821764389fe70785047b008611929b46355bd569946532196667fd",
+      "actual": "1af021017212f2c85e03a77d7a6f04931b2f195e412004f25bb3dd145e7ee7dd"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/object-continuity.md",
+      "expected": "3ee3ae014e853f9b7fdf680d77547e6aca6bbd05079088f93e298a41a180e51e",
+      "actual": "05ee8f2f7d582760407a7dc74c5090a12966934c1bfd92d07b5445e82e99d0a6"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/connected-scope.md",
+      "expected": "58aaaf127851cc234079649230c300ca42dae7e80b9e4ada2f663b3603ea3f05",
+      "actual": "bd5d271f4dd86dba6f3ff96b62816013b38a458a2cb93ad04c0224da2709e4a5"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/input-conditioning.md",
+      "expected": "febe86913fac9993436be38499c29b1442be88c122fbc391782d1d05c07a926b",
+      "actual": "0f8c505840507ec3a48d599bcb645994c7017ee1b3fb174c74476407b2b10c97"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/realization-change.md",
+      "expected": "c426636e7d4472b2bfefd132d27a5710f8aca03edcec6bdcb9fa36a211b0bacc",
+      "actual": "5cb1e3c8060bdf6ea8f4835bec2086d9979ce5871457061d7c8e4f3ec700534d"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/part-binding.md",
+      "expected": "86141aee9944153507152218c9dbcef73c0015b170d26ea911f4d9debae0c972",
+      "actual": "9f7c49df4a1e358a72f7cebfd61c9d2f574ba5fb0c40c1e4347d998691c293fa"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/wanted-state.md",
+      "expected": "a48a5a6eb853468fbfa490ea13962180f7a52a36476093107387b2892494c1dd",
+      "actual": "2121849dda25d3ca0d7e85034b51b636a080c7d89e8ae6b750efa758b185d558"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/style-realization.md",
+      "expected": "86615f06765bcc642f9798f3138f309160be79176b00583ce9a397446d94cb12",
+      "actual": "25d452125899a53c9ec5ac6de54a4a5061e8d5d46d4edd5ead2a3cafe7c92df6"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/environment-replacement.md",
+      "expected": "e6b9115a371075cb80a1d5736f905d2929b6eaa850ec7a3288d6da52f0dae7c3",
+      "actual": "cfcce32521aa233650035089a1fccce7ad93bb473b6bb4dc913df6990082df7a"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/lighting-integration.md",
+      "expected": "13ec1903e43c882c29a71b62a627ff8fc3632f9c2931bc5ccb73f141dc90eff5",
+      "actual": "59609e0bf50489c0d5af3fb12ee8aec9af91e2a47d9470d5e778e6d1c38d6f57"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/time-binding.md",
+      "expected": "01626329a0fd3fd63363bb4ed70f10b52d53ea1a37d5a34c0bc73f4b6b380d05",
+      "actual": "bf20f71b7fa158b0eb2ed9e5516722e166be77f000d020d615a9e0897f9f8942"
+    },
+    {
+      "path": "knowledge/experience/curated/entries/continuation-value.md",
+      "expected": "fff47a0f8ae0b8a73d5954f5b00d215136e7406c5c3ff3be493e11b69446f40d",
+      "actual": "3377d34a3a4ea0ce27147d77727ff0180a610713a5dc0fc779ccef6f69424ce9"
+    }
+  ],
+  "scope": "Read-only diagnosis of concurrently edited reviewed knowledge; this execution process did not edit knowledge/catalog or adopt new content."
+}

@@ -1,0 +1,571 @@
+{
+  "scope": "Local live-mode saved states with non-imported chained candidates; media availability reported separately. No inference performed.",
+  "runs": [
+    {
+      "run": "out/agent_loop_live/20261030/completed-evidence/LHA-agent-loop-20261030-service/tasks/002-long-three-round-integration/run",
+      "chain": [
+        "v2",
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 698.2663726806641,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "v1",
+          "seed": 42,
+          "seconds": 715.9517414569855,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v1",
+          "seed": 42,
+          "seconds": 696.337010383606,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/agent_loop_live/20261030/ditto-phase2/completed-benchmark-001-long/tasks/benchmark__001__long/run",
+      "chain": [
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 755.4055564403534,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 754.113981962204,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v2",
+          "seed": 42,
+          "seconds": 762.0270206928253,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/024__long__full_knowledge/run",
+      "chain": [
+        "v2",
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 1040.6255204677582,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "v1",
+          "seed": 42,
+          "seconds": 1040.6842079162598,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v1",
+          "seed": 42,
+          "seconds": 1041.3785910606384,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/benchmark__001__short/run",
+      "chain": [
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 754.3699932098389,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 756.4136779308319,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v2",
+          "seed": 42,
+          "seconds": 754.5766155719757,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/027__short__full_knowledge/run",
+      "chain": [
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 1038.9734525680542,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 1041.9755132198334,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v2",
+          "seed": 42,
+          "seconds": 1040.608959197998,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/024__long__no_knowledge/run",
+      "chain": [
+        "v2"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 1048.9093074798584,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "v1",
+          "seed": 42,
+          "seconds": 1041.7139751911163,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 1040.167576789856,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/agent_loop_live/20261030/phase2/completed-024-pair/tasks/024__long__full_knowledge/run",
+      "chain": [
+        "v2"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 760.529718875885,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "v1",
+          "seed": 42,
+          "seconds": 732.3978328704834,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 745.2723789215088,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/agent_loop_live/20261030/phase2/completed-fewshot-004-pair/tasks/fewshot_004__long__no_knowledge/run",
+      "chain": [
+        "v2"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 662.7148399353027,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "v1",
+          "seed": 42,
+          "seconds": 666.1349999904633,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 655.737583398819,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/agent_loop_live/20261030/phase2/completed-fewshot-004-pair/tasks/fewshot_004__long__full_knowledge/run",
+      "chain": [
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 662.3461806774139,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 644.9251551628113,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v2",
+          "seed": 42,
+          "seconds": 636.1604194641113,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        },
+        {
+          "protocol": "lha-online-critic-v1",
+          "has_report": false,
+          "verdicts": 0
+        }
+      ]
+    },
+    {
+      "run": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_004/run",
+      "chain": [
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 597.9505491256714,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "source",
+          "seed": 43,
+          "seconds": 598.4029364585876,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v2",
+          "seed": 44,
+          "seconds": 595.2438209056854,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 10
+        },
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 10
+        },
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 10
+        }
+      ]
+    },
+    {
+      "run": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_006/run",
+      "chain": [
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 456.0824975967407,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "source",
+          "seed": 43,
+          "seconds": 458.0572807788849,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v2",
+          "seed": 44,
+          "seconds": 456.09078216552734,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 9
+        },
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 9
+        },
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 9
+        }
+      ]
+    },
+    {
+      "run": "out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_007/run",
+      "chain": [
+        "v3"
+      ],
+      "controls": [],
+      "candidates": [
+        {
+          "id": "v1",
+          "parent": "source",
+          "seed": 42,
+          "seconds": 675.3038990497589,
+          "local_media_exists": true
+        },
+        {
+          "id": "v2",
+          "parent": "source",
+          "seed": 43,
+          "seconds": 672.893993139267,
+          "local_media_exists": true
+        },
+        {
+          "id": "v3",
+          "parent": "v2",
+          "seed": 44,
+          "seconds": 672.0450417995453,
+          "local_media_exists": true
+        }
+      ],
+      "schemas": [
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 8
+        },
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 8
+        },
+        {
+          "protocol": "lha-online-critic-rsi-v1",
+          "has_report": false,
+          "verdicts": 8
+        }
+      ]
+    }
+  ]
+}

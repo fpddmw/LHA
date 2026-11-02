@@ -31,9 +31,9 @@ def main():
     p.add_argument("--only", nargs="*")
     args = p.parse_args()
     spec = json.loads(args.manifest.read_text(encoding="utf-8"))
-    samples = {r["sample_id"]: r for r in json.loads((ROOT/"benchmark_data/all_samples.json").read_text(encoding="utf-8"))}
-    from vlm.codex_vlm import CodexVisionModel
-    model = CodexVisionModel(role="probe_evaluator")
+    samples = {r["legacy_id"]: {**r, "prompt_long": r["instruction"]} for r in json.loads((ROOT/"benchmark_data/benchmark.json").read_text(encoding="utf-8"))}
+    from vlm.openrouter import OpenRouterVisionModel
+    model = OpenRouterVisionModel(role="probe_evaluator")
     for case in spec["cases"]:
         if args.only and case["case_id"] not in args.only:
             continue

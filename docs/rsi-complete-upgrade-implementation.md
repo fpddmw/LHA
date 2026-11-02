@@ -1,5 +1,7 @@
 # Complete RSI upgrade: implementation and execution scope
 
+> Historical RSI workflow — 2026-10-30/31. This document preserves the opt-in legacy design and its implementation checkpoint. Current creative_loop_v1 excludes RSI and uses [current Planner/Critic implementation](creative-loop-implementation.md), [event observation](online-event-observation.md) and separately requested [experience maintenance](experience-usage-interface.md). Old authorization and execution statements below describe their recorded session.
+
 This implements `rsi-complete-upgrade-plan.md` on the existing Planner, Critic, queue,
 evaluation and knowledge interfaces. The running seven-task Bernini batch retains its
 remote frozen snapshot. This work changes the local implementation, not that batch.

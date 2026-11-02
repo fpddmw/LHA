@@ -1,5 +1,7 @@
 # Two-level RSI implementation
 
+> Historical RSI workflow — 2026-10-30/31. This document preserves the opt-in legacy design and its implementation checkpoint. Current creative_loop_v1 excludes RSI and uses [current Planner/Critic implementation](creative-loop-implementation.md), [event observation](online-event-observation.md) and separately requested [experience maintenance](experience-usage-interface.md). Old authorization and execution statements below describe their recorded session.
+
 2026-10-31 Wiki/proposer extension: see [the approved upgrade and implementation](wiki-proposer-upgrade-plan.md). The authorized human-assisted starting library now links three contextual concepts and four archived cases. The proposer can inspect linked references and recorded development frame comparisons, revise concepts as well as experience, and consume actual failed-replay feedback in a bounded revision series. The exact model-facing interface is demonstrated locally with scripted replies. Real model-led knowledge improvement and the seven Bernini delivery loops await the user's review; no live experiment or automatic adoption occurred in this extension.
 
 This implements the calibrated architecture in `two-level-rsi-design.md`. It is an opt-in runtime and a set of executable experience-revision tools. New video quality, automatic experience gains, and cross-renderer transfer have not been established by this implementation.

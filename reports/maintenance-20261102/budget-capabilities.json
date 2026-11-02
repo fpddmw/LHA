@@ -1,0 +1,16 @@
+{
+  "observed_executable": "Windows local Codex CLI",
+  "version": "codex-cli 0.166.0-alpha.5.1",
+  "exec_help_sha256": "ff5a00d7f3926a45d9b58ec703a45d6972b1664c0fa465156c48577bb4ceeaf4",
+  "hard_output_tokens_verified": false,
+  "hard_invoice_verified": false,
+  "request_mode": "reservation_only with explicit capability metadata and warning; hard requirement refused before request",
+  "cost_controls": [
+    "quoted_allowance",
+    "explicit count_limits_only with unknown amounts retained as null"
+  ],
+  "official_cli_reference": "https://learn.chatgpt.com/docs/developer-commands?surface=cli",
+  "official_config_reference": "https://learn.chatgpt.com/docs/config-file/config-reference",
+  "real_model_calls": 0,
+  "remote_cli_behavior_verified": false
+}

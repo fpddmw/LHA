@@ -18,11 +18,12 @@ def main():
     parser.add_argument("--request-file")
     parser.add_argument("--run-instructions-file", help="Optional operator instructions, separate from the original video requirement")
     parser.add_argument("--output", required=True)
-    parser.add_argument("--backend", choices=["codex", "litellm"], default="codex")
-    parser.add_argument("--model", default="gpt-6.1-sol")
+    parser.add_argument("--backend", choices=["openrouter", "litellm"], default="openrouter")
+    parser.add_argument("--model", default=None)
     parser.add_argument("--reasoning", default=None)
     parser.add_argument("--workflow", choices=["legacy", "creative_loop_v1"], default=None)
     parser.add_argument("--profile", type=Path, help="Creative role/default configuration JSON")
+    parser.add_argument("--review-mode", choices=["critic", "planner"], help="Reviewer after every successful generation")
     parser.add_argument("--experiment-profile", type=Path, help="Optional shared frozen cohort profile")
     parser.add_argument("--target", default="unspecified")
     parser.add_argument("--mode", choices=["plan", "loop"], default="plan")
@@ -32,13 +33,13 @@ def main():
     parser.add_argument("--task-card", help="Reviewed independent v2 task card; required for new live RSI runs")
     parser.add_argument("--import-videos", help="JSON list of existing videos with truthful provenance")
     parser.add_argument("--critic-feedback", action="append", default=[], help="Verified online Critic feedback JSON to import")
-    parser.add_argument("--max-generations", type=int, default=None, help="Optional explicit generation limit; omitted means no fixed generation count")
+    parser.add_argument("--max-generations", type=int, default=None, help="Generation limit; creative tasks default to five")
     parser.add_argument("--completion-mode", choices=["delivery", "bounded_experiment"], default="delivery")
     parser.add_argument("--label", default="")
-    parser.add_argument("--max-turns", type=int, default=None, help="Optional safety ceiling; delivery runs otherwise have no fixed turn count")
+    parser.add_argument("--max-turns", type=int, default=None, help="Optional explicit turn limit")
     parser.add_argument("--max-context-chars", type=int, default=None, help="New capacity or explicit resume capacity; default 180000 for new runs")
     parser.add_argument("--resume", action="store_true")
-    parser.add_argument("--continue-delivery", action="store_true", help="Explicitly reopen a resolved budget stop; preserve evidence and frozen Critic while removing the count ceiling")
+    parser.add_argument("--continue-delivery", action="store_true", help="Continue an eligible stopped delivery with its recorded generation and time policy")
     parser.add_argument("--additional-turns", type=int, default=0)
     parser.add_argument("--worker-command", nargs=argparse.REMAINDER,
                         help="Optional worker argv, last on the command line. {request} and {response} are substituted without a shell.")
@@ -61,14 +62,20 @@ def main():
             parser.error("Resume must retain the recorded workflow")
         args.workflow = recorded.get("workflow", "legacy")
         args.reasoning = args.reasoning or recorded["reasoning_effort"]
+        args.model = args.model or recorded['model']
     args.workflow = args.workflow or "legacy"
-    args.reasoning = args.reasoning or ("high" if args.workflow == "creative_loop_v1" else "xhigh")
     if args.workflow == "creative_loop_v1":
         from planner_harness.creative import role_settings
+        options = profile.setdefault('models', {}).setdefault('planner', {}).setdefault('options', {})
+        if args.model is not None: options['model'] = args.model
+        if args.reasoning is not None: options['reasoning_effort'] = args.reasoning
+        elif args.resume: options['reasoning_effort'] = recorded['reasoning_effort']
         settings = role_settings(profile, "planner")
         role_settings(profile, "online_critic")
-        if args.model != settings["model"] or args.reasoning != settings["reasoning_effort"]:
-            parser.error("Creative roles are fixed to gpt-6.1-sol/high")
+        args.model, args.reasoning = settings['model'], settings['reasoning_effort']
+    from vlm.openrouter import DEFAULT_MODEL
+    args.model = args.model or DEFAULT_MODEL
+    if args.workflow != 'creative_loop_v1': args.reasoning = args.reasoning or 'xhigh'
     if args.workflow == "creative_loop_v1" and (args.rsi or args.rsi_config or args.task_card or args.critic_feedback):
         parser.error("Creative loop excludes RSI, task cards and imported legacy feedback")
     if args.continue_delivery and not args.resume:
@@ -77,11 +84,11 @@ def main():
         parser.error("A new run requires --source and --request or --request-file")
     from planner_harness import PlannerHarness
     from planner_harness.lock import RunLock
-    if args.backend == "codex":
-        os.environ["LOW_HIGH_AGENT_CODEX_PLANNER_MODEL"] = args.model
-        os.environ["LOW_HIGH_AGENT_CODEX_PLANNER_REASONING_EFFORT"] = args.reasoning
-        from vlm.codex_vlm import CodexVisionModel
-        model = CodexVisionModel(role="planner", model=args.model, reasoning_effort=args.reasoning)
+    if args.backend == "openrouter":
+        os.environ["LHA_API_PLANNER_MODEL"] = args.model
+        os.environ["LHA_API_PLANNER_REASONING_EFFORT"] = args.reasoning
+        from vlm.openrouter import OpenRouterVisionModel
+        model = OpenRouterVisionModel(role="planner", model=args.model, reasoning_effort=args.reasoning)
     else:
         from vlm.litellm_vlm import LiteLLMVisionModel
         model = LiteLLMVisionModel(model=args.model, reasoning_effort=args.reasoning, role="planner")
@@ -91,6 +98,15 @@ def main():
         harness = PlannerHarness(output, model)
         import json
         execution = json.loads(Path(args.execution_config).read_text(encoding="utf-8")) if args.execution_config else None
+        if not args.resume and args.workflow == 'creative_loop_v1':
+            execution = dict(execution or {})
+            for field in ('review', 'planner', 'critic', 'models'):
+                if field in profile: execution.setdefault(field, profile[field])
+            execution['planner'] = {'model':args.model,'reasoning_effort':args.reasoning}
+            if args.review_mode: execution['review'] = {'mode': args.review_mode}
+            execution.setdefault('review', {'mode': 'critic'})
+        elif args.resume and args.review_mode and args.review_mode != recorded['execution'].get('review', {}).get('mode', 'critic'):
+            parser.error('Resume retains its original review mode')
         if not args.resume and args.workflow=='creative_loop_v1' and profile.get('continuation_policy'):
             execution = dict(execution or {})
             execution.setdefault('continuation_policy', profile['continuation_policy'])

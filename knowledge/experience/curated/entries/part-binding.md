@@ -1,8 +1,8 @@
 # EX-part-binding: Bind the effect to the intended part and distinguish its neighbor
 
-Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; X3/X5/I2/B3 and D6 geometry observations.
+Revision 4. Approved for use; goal-directed semantic revision authorized on 2026-11-02. Bernini and Ditto; X3/X5/I2/B3 and D6 geometry observations.
 
-**When the right attribute appears on the wrong part, clarify the target's relation to its neighbor before increasing the attribute's strength. For an existing object's shape, anchor that specific instance to surrounding geometry so the proposal calls for reshaping it rather than introducing another one.**
+**When the right attribute appears on the wrong part, clarify the target's relation to its neighbor before increasing the attribute's strength. For a required existing object's shape, anchor that instance to surrounding geometry. For a replacement or a new function, describe the target construction without preserving a source part whose role the task is changing.**
 
 ## Contrast identifies the intended carrier
 
@@ -10,11 +10,13 @@ Table-tennis outputs repeatedly put blue emission on curved supports instead of 
 
 Prefer a compact relational contrast, such as the tabletop's thin rectangular edge glowing above matte, unlit curved supports. This example expresses which surface emits and which nearby surface remains a different material. Combine the distinction in the same local description when that makes the referent clear. Repeated capitalization of 'rim' supplies less useful information than the boundary's orientation, attachment and contrast.
 
-## Reshape the existing instance
+## Preserve instance correspondence where the task requires it
 
-In Ditto 027, a request for a compact dome produced an additional dome. The category was rendered while correspondence to the existing landmark failed. For a similar correction, describe the existing dome relative to its base, neighboring roofs and occupied footprint. Prefer an earlier input where the intended instance is intact if the current result already contains a duplicated or substantially restructured landmark.
+For an identity-sensitive landmark repair, exact instance correspondence matters. In Ditto 027, a request for a compact dome produced an additional dome. The category was rendered while correspondence to the existing landmark failed. For a similar correction, describe the existing dome relative to its base, neighboring roofs and occupied footprint. Prefer an earlier input where the intended instance is intact if the current result already contains a duplicated or substantially restructured landmark.
 
 For Ditto candidate geometry repairs, use the observed duplication as a strong reason to compare that earlier-input route with continued sculpting. Continuing is more attractive when the actual error is a surface treatment on an intact shape. A source or earlier candidate can still need a clearer geometric proposal.
+
+A world reconstruction can deliberately remove or repurpose a source structure. Select the target role before applying an existing-instance repair strategy; restoring an obsolete structure can recreate the old scene.
 
 When an effect is already accurately located in the prompt and still binds elsewhere, move to the competing shapes, materials and conditioning. Another louder category name is a low-value default. Keep a structurally sound candidate available if further attempts trade geometry for stronger decoration.
 

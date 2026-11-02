@@ -128,7 +128,9 @@ def overview():
 
 
 def markdown():
-    lines = ["# 统一评价指标定义（自动生成）", "", f"定义版本：`{VERSION}`；计算版本：`{SCORE_VERSION}`。", "",
+    lines = ["# 历史评价卡指标定义（自动生成）", "",
+             "> 适用范围：旧版评价卡与 lha-score-v3 管线。当前 creative_loop_v1 使用 [Low→High 评分标准](low-high-evaluation-v1.md)；各版本分别解释和汇总。", "",
+             f"定义版本：`{VERSION}`；计算版本：`{SCORE_VERSION}`。", "",
              "原始判断 → 确定性计算分 → seed/任务/源三级统计。" + overview(), "",
              "unknown 仅表示证据不足；not_applicable 由冻结卡决定并从适用分母排除；执行失败、缺视频、待测和旧状态缺失分别计数。", "",
              "| 指标 ID | 名称与定义 | 尺度／单位 | 小数位 | 计算方式 | 适用性 |", "|---|---|---|---:|---|---|"]
@@ -139,3 +141,34 @@ def markdown():
               f"整题成功：有效交付、mandatory 及核心项全部 pass、无重大非预期损伤；风格任务另需 style ≥ {SUCCESS['style_threshold']:.1f}。成功未知保留上下界，不以视觉均分补偿语义硬失败。", "",
               "本文件由 `python scripts/eval/export_metric_definitions.py` 生成；修改源为 `src/evaluation/registry.py`。", ""]
     return "\n".join(lines)
+
+
+# Current creative metrics are versioned independently of the historical card contract.
+LOW_HIGH_VERSION = "lha-low-high-metrics-v3"
+LOW_HIGH_AESTHETICS = AESTHETICS
+LOW_HIGH_SPECIALTIES = ("style_realization", "scene_specific_design", "effective_creativity", "relative_originality")
+LOW_HIGH_METRICS = {
+    **{k:{"scale":[0,4],"unit":"ordinal","track":"all","direction":"higher"} for k in
+       ("instruction_adherence","content_preservation","temporal_consistency","visual_integrity","aesthetic_coherence")},
+    **{k:{"scale":[0,4],"unit":"ordinal","track":"short","direction":"higher"} for k in LOW_HIGH_SPECIALTIES},
+    **{k:{"scale":[0,4],"unit":"ordinal","track":"all","direction":"higher"} for k in LOW_HIGH_AESTHETICS},
+    **{k:{"scale":[0,1],"unit":"score","track":"all","direction":"higher"} for k in
+       ("edit_completion","required_correspondence")},
+    "binding_accuracy":{"scale":[0,1],"unit":"score","track":"long","direction":"higher"},
+    "joint_satisfaction":{"scale":[0,1],"unit":"indicator","track":"long","direction":"higher"},
+    "unrequested_damage":{"scale":[0,1],"unit":"indicator","track":"all","direction":"lower"},
+    "major_damage":{"scale":[0,1],"unit":"indicator","track":"all","direction":"lower"},
+    "aesthetic_mean":{"scale":[0,4],"unit":"computed_mean","track":"all","direction":"higher"},
+    **{k:{"scale":[-1,1],"unit":"cosine","track":"all","direction":"higher"} for k in ("clip_f","dino_f")},
+    "flow_warp_l1":{"scale":[0,1],"unit":"normalized_pixel_error","track":"all","direction":"lower"},
+    "motion_diagonals_per_second":{"scale":None,"unit":"diagonals/second","track":"all","direction":"context"},
+    "low_motion_duration_fraction":{"scale":[0,1],"unit":"fraction","track":"all","direction":"context"},
+    "flow_velocity_error":{"scale":None,"unit":"diagonals/second","track":"conditional_motion","direction":"lower"},
+}
+
+LOW_HIGH_ANCHORS = {
+ "style_realization":["No requested style", "Isolated style cues", "Recognizable but incomplete expression", "Clear integrated style with minor issues", "Fully integrated, task-specific expression"],
+ "scene_specific_design":["No useful adaptation", "Generic overlay with isolated choices", "Some useful scene-based choices", "Coherent adaptation of subjects/space/interactions", "Distinctive integrated design with clear scene-specific value"],
+ "effective_creativity":["No coherent useful design choice", "Routine or fragmented choices", "Some useful invention, partly integrated", "Coherent valuable choices within allowed freedom", "Strongly distinctive and effective integrated solution"],
+ "relative_originality":["No effective distinction within fixed references", "Routine within reference set", "Small useful variation", "Identifiably distinctive coherent solution", "Strong effective distinction from fixed references"],
+}

@@ -1,9 +1,19 @@
 __pycache__/
 .env.openbayes
+.env
+.env.*
+!.env.example
+.ruff_cache/
 .venv/
 *.py[cod]
 
 .DS_Store
+
+# Root-local smoke checks and retired scratch output.
+/_wtest*
+/_trash/
+/_deprecated/
+/*.log
 
 model/
 
@@ -32,3 +42,7 @@ models/*
 
 reference/*
 !reference/README.md
+
+# Machine-specific campaign devices, asset locations and model credentials
+/configs/*-host.local.json
+/configs/experiment-hosts.local.json

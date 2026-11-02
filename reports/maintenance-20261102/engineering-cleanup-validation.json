@@ -1,0 +1,289 @@
+{
+  "completed_utc": "2026-11-02T15:46:15.892588+00:00",
+  "scope": "Current API creative loop engineering cleanup; offline only",
+  "tests": 325,
+  "modules": [
+    {
+      "module": "test_api_backend",
+      "tests": 12,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.29
+    },
+    {
+      "module": "test_configuration_boundaries",
+      "tests": 4,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.32
+    },
+    {
+      "module": "test_review_modes",
+      "tests": 11,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 10.33
+    },
+    {
+      "module": "test_review_experiments",
+      "tests": 9,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 5.35
+    },
+    {
+      "module": "test_loop_protocol_upgrade",
+      "tests": 17,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 27.05
+    },
+    {
+      "module": "test_loop_engineering",
+      "tests": 10,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 30.05
+    },
+    {
+      "module": "test_engineering_cleanup",
+      "tests": 7,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 6.47
+    },
+    {
+      "module": "test_creative_loop",
+      "tests": 14,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 12.84
+    },
+    {
+      "module": "test_creative_repairs",
+      "tests": 9,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 7.91
+    },
+    {
+      "module": "test_resource_accounting",
+      "tests": 27,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 6.29
+    },
+    {
+      "module": "test_server_runtime",
+      "tests": 18,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 7.02
+    },
+    {
+      "module": "test_planner_worker",
+      "tests": 6,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.59
+    },
+    {
+      "module": "test_experiment_engineering",
+      "tests": 10,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 1.5
+    },
+    {
+      "module": "test_experiment_campaign",
+      "tests": 13,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 8.38
+    },
+    {
+      "module": "test_pe_loop",
+      "tests": 17,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 12.39
+    },
+    {
+      "module": "test_unified_results",
+      "tests": 22,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 5.23
+    },
+    {
+      "module": "test_creative_benchmark",
+      "tests": 15,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 29.79
+    },
+    {
+      "module": "test_creative_benchmark_schedule",
+      "tests": 5,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 35.52
+    },
+    {
+      "module": "test_final_review_remediation",
+      "tests": 18,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 11.41
+    },
+    {
+      "module": "test_low_high",
+      "tests": 11,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 10.01
+    },
+    {
+      "module": "test_evaluation_v2",
+      "tests": 12,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 10.23
+    },
+    {
+      "module": "test_evaluation_reporting",
+      "tests": 11,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.56
+    },
+    {
+      "module": "test_metric_registry",
+      "tests": 16,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.23
+    },
+    {
+      "module": "test_lineage_analysis",
+      "tests": 8,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.03
+    },
+    {
+      "module": "test_continuation_maintenance",
+      "tests": 5,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 11.44
+    },
+    {
+      "module": "test_experience_curation",
+      "tests": 6,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.97
+    },
+    {
+      "module": "test_renderer_import",
+      "tests": 3,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.5
+    },
+    {
+      "module": "test_ditto_service",
+      "tests": 4,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.02
+    },
+    {
+      "module": "test_legacy_boundary",
+      "tests": 5,
+      "skipped": 0,
+      "ok": true,
+      "seconds": 0.38
+    }
+  ],
+  "all_passed": true,
+  "changed_during_checks": [],
+  "source_manifest_sha256": "6cd87098dd078287f60840795257bb05ab5ce11d58ed9b10d6c31d5d313e7648",
+  "source_manifest": "out/engineering_cleanup_20261102/final/summary.json",
+  "static": {
+    "parsed_python_files": 471,
+    "parsed_configs": [
+      "configs/creative-service.example.json",
+      "configs/evaluation.json",
+      "configs/experience-maintenance-six-sources.json",
+      "configs/creative-fewshot-host.example.json",
+      "configs/ditto_models.json",
+      "configs/creative-loop-v1.json",
+      "configs/base_skills.json",
+      "configs/memory.json",
+      "configs/experiment-campaign.json",
+      "configs/planner_qwen.json"
+    ],
+    "current_docs_checked": [
+      "README.md",
+      "docs/README.md",
+      "docs/current-status.md",
+      "docs/creative-loop-implementation.md",
+      "docs/benchmark-guide/configuration.md",
+      "docs/planner-harness.md",
+      "docs/critic-harness.md",
+      "docs/server-runtime.md",
+      "docs/online-event-observation.md",
+      "docs/low-high-evaluation-v2.md",
+      "docs/experiment-campaign.md"
+    ],
+    "missing_links": [],
+    "ruff_rules": [
+      "F821",
+      "F822",
+      "F823",
+      "E9"
+    ],
+    "ruff_passed": true
+  },
+  "entrypoints": [
+    {
+      "entry": "scripts/check_repository.py",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "entry": "scripts/run_experiment_campaign.py",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "entry": "scripts/run_creative_benchmark.py",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "entry": "scripts/run_server_pipeline.py",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "entry": "scripts/benchmark_results.py",
+      "exit_code": 0,
+      "error": null
+    },
+    {
+      "entry": "scripts/run_low_high_eval.py",
+      "exit_code": 0,
+      "error": null
+    }
+  ],
+  "real_model_calls": 0,
+  "gpu_renders": 0,
+  "remaining": [
+    "Real API/GPU integration awaits user start; previous GPT/Sonnet region errors have not been rechecked.",
+    "Historical protocol tests remain separate from current acceptance.",
+    "Modern Direct recovery consumes the original completed receipt; a new replacement attempt after confirmed non-execution is not implemented."
+  ]
+}

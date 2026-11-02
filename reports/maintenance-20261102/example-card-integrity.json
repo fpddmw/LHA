@@ -1,0 +1,25 @@
+{
+  "scope": "Frozen historical cards with explicit hash-bound path migration",
+  "cards": [
+    {
+      "path": "examples/evaluation/041_short.card.json",
+      "status": "valid",
+      "card_sha256": "1e4c6b921807e3b22a55cae2af0c0637404b23716e5f534aca058b08470e1e05",
+      "historical_source_video": "benchmark_data/main/041/041.mp4",
+      "resolved_source_video": "benchmark_data/train/020/video.mp4",
+      "source_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+      "historical_signature_rewritten": false,
+      "original_git_blob": "45fc045c7ab5d8aff24de093e2be161be08e7d4e"
+    },
+    {
+      "path": "examples/evaluation/041_long.card.json",
+      "status": "valid",
+      "card_sha256": "b9928ba20e80f088e08c2e1379aa36a45994f886924dde7c32004cdebd8b77b1",
+      "historical_source_video": "benchmark_data/main/041/041.mp4",
+      "resolved_source_video": "benchmark_data/train/020/video.mp4",
+      "source_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+      "historical_signature_rewritten": false,
+      "original_git_blob": "26cbbbdbbc85012f5dba014624694378756caa76"
+    }
+  ]
+}

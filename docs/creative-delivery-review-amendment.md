@@ -1,3 +1,7 @@
+> 历史设计记录。当前自动评审与评分接口以 [creative loop 实现](creative-loop-implementation.md) 和 [Low→High v2](low-high-evaluation-v2.md) 为准；文中的可选 critique／交付时新建评审不再是默认路径。
+
+> 阶段记录：本文保留当时的设计、数据版本或执行状态。当前开发版以 [文档入口](README.md)、[当前状态](current-status.md) 和 [实验运行安排](experiment-campaign.md) 为准。
+
 # Mandatory delivery review and Planner confirmation
 
 Date: 2026-11-01. Status: withdrawn before deployment and superseded by [continuation questions and informed delivery](creative-continuation-and-delivery-plan.md). The fresh-review-only proposal below is retained as history. Current delivery reuses a valid matching report and requires a new post-proposal Planner input and decision. Live experiments and polling remain paused.

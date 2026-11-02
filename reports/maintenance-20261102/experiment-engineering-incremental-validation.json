@@ -1,0 +1,27 @@
+{
+  "modules": [
+    "test_experiment_engineering",
+    "test_experiment_campaign"
+  ],
+  "returncode": 1,
+  "elapsed_seconds": 7.07,
+  "files_before": {
+    "src/experiments/campaign.py": "1b71f8d01ababa20bcf371da3fb4c61b2c11b297c1ddc928d0a1d1fb313cd711",
+    "src/experiments/device_scheduler.py": "66746b86f66adca28440894227bcfb158ec50b6c187e5cfa29edaa0b67c49488",
+    "src/experiments/preflight.py": "487d66393d4be47bdb99712b33756d977a463ea44c8834d56b55c714cc3f26f8",
+    "src/experiments/recovery.py": "ef94d24d3303cd557ce8d844b5544cd5fe96ab1896295b4ac083ae064fe668dc",
+    "src/experiments/creative_benchmark.py": "6222d8f31ad9d293f5cc82d86d3a7313588b5b6fa65add8855dace101b5ab065",
+    "src/experiments/unified_benchmark.py": "5135b9285d80e2e7c22c16b4fb5990a841a8d835efd59713b53b3c9b47a1bcff",
+    "src/experiments/__init__.py": "9dba5a4a7ce39a4df30d277749cbc21c3ef1a50e9036b927799221a26c9f5a0f",
+    "src/experiments/pe_loop.py": "265cc5402d7773b043700b3f0ce38cbeefcb930b0e9e7edf834eb140682e0eb8",
+    "src/experiments/results.py": "c95d82b73bf93a336b51d75dde0e334fd44a3bf7369030b77a7cd3aa169855f4",
+    "scripts/test_experiment_engineering.py": "7808321e65af1d5b3091363bf69e10f97cbeba5312ea0fa26980a5ae54e8e13d",
+    "scripts/test_experiment_campaign.py": "60ad30c8e43f5297648c906ca69f5406f147ffd3d59c5e652927f3c2d9e3d865",
+    "scripts/run_creative_benchmark.py": "545177c73bb5cb995497d5c4b12cc02d7cdf222685458737bf14e02c3ae358ab",
+    "configs/experiment-campaign.json": "76d2f07c66e5f0ddad69f4c1ec1df177d71f0af420d10bff0035fcd9a1073386",
+    "configs/creative-fewshot-host.example.json": "06eefa855dbb00e8988ab1a61cfc5e0ff908627cd79aed583f9b39355ae9ff2d"
+  },
+  "changed": [],
+  "model_calls": 0,
+  "gpu_renders": 0
+}

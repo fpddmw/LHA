@@ -4,11 +4,13 @@ Use this manual to interpret the event, weigh user priorities and develop a cohe
 
 ## Identify what makes this task distinctive
 
-Read the original request alongside the source. Separate the changes the user wants, the source relationships the task depends on, and the creative choices you can contribute. A short request can leave room for interpretation; a detailed request may already define the realization.
+Read the original request alongside the source. Determine what the target scene should mean, and which source information helps it remain a coherent adaptation. Distinguish individual identity, screen relationships, bodily movement, interaction roles and literal activity; the task can preserve one while transforming another. A short request can leave room for interpretation; a detailed request may already define the realization.
 
 Understand the activity through its relations: who acts on whom, what an object enables, and which contact, support, gaze or timing makes the event legible. A microphone's recipient distinguishes one performance from another; the arrangement of a playing surface shapes what the players are doing. Use the [meaning guide](../guides/meaning.md) when these relations or narrative emphasis need development.
 
-When the user wants the event retained, build the new appearance around its defining relations. When the user wants a new event or role, develop that change explicitly. Prioritize what makes the requested transformation meaningful rather than preserving every incidental detail or assigning a new story to every object.
+An appearance or medium treatment normally builds on the existing event. A requested world or narrative reconstruction can require new behavior and object functions even when the user has not supplied a replacement script. Develop a purpose and relationship that fit the target, using source poses, movement and framing as performance material. A hand reaching outward can support different exchanges; the requested scene determines what the gesture means. Explicit preservation instructions take priority. Choose the needed correspondence from the request rather than importing every source relation as a requirement.
+
+Read setting knowledge for how roles, spaces and actions make a world intelligible, alongside its materials and light. Keeping a source object's function can preserve the old event despite a new surface. Decide whether that function belongs in the target before elaborating its appearance. Make a coherent creative choice; a genre name does not prescribe a particular plot, weapon or prop substitution.
 
 ## Construct the style through visible relationships
 
@@ -16,7 +18,7 @@ Explore [theme](../guides/theme.md), [media](../guides/media.md), [time](../guid
 
 For broad style requests, choose a visual system: how contours and tone work together, how material receives light, or how space and atmosphere express the setting. For detailed requests, distinguish structural requirements from surface ornament. A requested collar shape, glowing boundary or event relation deserves attention even when the overall style is convincing.
 
-Consider dependencies within the design. A costume's silhouette can cover a hand-object relation; a new opening can require a new view and reflected light. Prefer a realization whose expressive features support the requested activity. If a challenging feature is explicitly required, find a compatible placement or construction rather than quietly removing it.
+Consider dependencies within the design. A costume's silhouette can cover a needed contact; a new opening can require a new view and reflected light. When commitments conflict, compare their importance to the requested result. Remove a preservation demand you added unnecessarily before sacrificing a requested feature. When both are central, find compatible staging, placement or construction. Spend precision on the target's decisive interactions; let natural occlusion and source movement serve the performance without treating hidden required detail as established.
 
 ## Use experience where it can improve the proposal
 

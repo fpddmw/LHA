@@ -1,0 +1,26 @@
+{
+  "count": 67,
+  "version": "lha-benchmark-20261102-67-train40-test27",
+  "splits": {
+    "train": 40,
+    "test": 27
+  },
+  "continuous_ids": false,
+  "direct_evidence_matches": 20,
+  "forced_training_including_source_groups": 23,
+  "evidence_holdout_violations": [],
+  "videos_and_prompts_unchanged": true,
+  "archived_manifests": {
+    "lha-benchmark-20261102-clean": {
+      "count": 75,
+      "missing_videos": []
+    },
+    "lha-benchmark-20261102-reviewed67": {
+      "count": 67,
+      "missing_videos": []
+    }
+  },
+  "package_files": 206,
+  "package_sha256": "3379b71ca721acbe3b1e65f18ec808bba51cdbd0c83355c5a12ea8265a66fbfc",
+  "package_bytes": 82135467
+}

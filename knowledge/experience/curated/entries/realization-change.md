@@ -1,6 +1,6 @@
 # EX-realization-change: Change the failed proposition, not just its emphasis
 
-Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; R2/R3/S3/S5/B5/B6/D4/D8/D9/X7.
+Revision 4. Approved for use; goal-directed semantic revision authorized on 2026-11-02. Bernini and Ditto; R2/R3/S3/S5/B5/B6/D4/D8/D9/X7.
 
 **When an explicit operation repeatedly fails, lower the priority of wording-only retries. Prefer a different visual realization, a resolved design conflict or a better-conditioned input. Use direct specification first when the important relation was genuinely missing.**
 
@@ -10,13 +10,15 @@ In the study runs, the original prompts retained reading but omitted the source'
 
 Scope conflict is different. F005 v1 already specified the green playing surface, central mechanism and blue tiles; v2 more distinctly allocated changes to clothing, room finishes and the outer table frame. Its improved apparatus supports investigating how the proposal assigns change, rather than assuming a forgotten object was added.
 
-Read the submitted prompt before choosing either explanation. Once F003's microphone recipient was explicit and still failed, adding an increasingly detailed performance recital no longer tested simple omission repair.
+Read the submitted prompt and ask whether the intended operation belongs in the requested result before choosing either explanation. An explicit but unnecessary preservation clause is a commitment to reconsider, not a requirement to enforce more strongly. Removing it can change the proposal more substantially than replacing all its adjectives. Once F003's microphone recipient was explicit and still failed, adding an increasingly detailed performance recital no longer tested simple omission repair.
 
 ## Distinguish the style cue from the operation
 
 Glitch outputs supplied color fringes, scan lines and opaque blocks without confirmed displacement of the actual scene inside the blocks. Ditto costume outputs supplied silk and embroidery while requested collar and headwear shapes remained absent. More words for the genre can strengthen a surface treatment while leaving its structural operation untouched.
 
-A different realization changes the relationship the model is asked to construct: a new location or contrast for an effect, a garment cut that clears the action, a different medium interpretation acceptable to the user, or an input with the needed structure. Explain that difference in the proposal itself. Replacing 'offset strips' with 'broken strips and tiles' still requests much the same operation.
+A different realization changes the relationship the model is asked to construct: a new location or contrast for an effect, staging that makes the target action legible, a revised object function and participant response, a different medium interpretation acceptable to the user, or an input with the needed structure. Explain that difference in the proposal itself. Replacing 'offset strips' with 'broken strips and tiles' still requests much the same operation.
+
+A changed object material can retain the same functional operation. A wooden hoop still gives a shot the same destination. Evaluate the difference in what the scene asks its participants to do, and keep the evidence for the required source correspondence. The [goal review](../evidence/semantic-goal-review-20261102.md) documents this distinction.
 
 ## Let repeated failure change the preference
 

@@ -1,6 +1,6 @@
 """Temporary loopback-only SSH route for HTTPS model traffic on the owned server.
 
-TLS remains end-to-end. This forwards CONNECT streams for OpenAI domains only;
+TLS remains end-to-end. This forwards CONNECT streams for OpenAI and OpenRouter;
 it does not inspect prompts, tokens or credentials and does not listen publicly.
 """
 import argparse
@@ -62,7 +62,7 @@ def relay(channel):
             if len(header)>8192:raise ValueError('Proxy header too large')
         method,authority,_=header.split(b'\r\n',1)[0].decode('ascii').split(' ',2)
         host,separator,port=authority.rpartition(':')
-        allowed=host in {'chatgpt.com','openai.com'} or host.endswith(('.chatgpt.com','.openai.com'))
+        allowed=host in {'chatgpt.com','openai.com','openrouter.ai'} or host.endswith(('.chatgpt.com','.openai.com','.openrouter.ai'))
         if method!='CONNECT' or separator!=':' or port!='443' or not re.fullmatch(r'[A-Za-z0-9.-]+',host) or not allowed:
             channel.sendall(b'HTTP/1.1 403 Forbidden\r\nContent-Length: 0\r\n\r\n');return
         target=socket.create_connection((host,443),timeout=30)
@@ -92,7 +92,7 @@ def record(status,**fields):
     history.append(event)
     temporary=a.state.with_suffix('.part')
     temporary.write_text(json.dumps({**event,'pid':os.getpid(),
-        'remote_bind':'127.0.0.1','port':a.port,'destination_scope':'OpenAI HTTPS only',
+        'remote_bind':'127.0.0.1','port':a.port,'destination_scope':'OpenAI and OpenRouter HTTPS',
         'local_network_required':True,'history':history[-40:]},indent=2)+'\n',encoding='utf-8')
     temporary.replace(a.state)
 

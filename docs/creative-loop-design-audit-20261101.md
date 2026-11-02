@@ -2,7 +2,7 @@
 
 Date: 2026-11-01. Baseline: `4e046d4af5bb85257d3c037e1c6217eeaad31b39`, `codex/creative-loop-v1`.
 
-Authority and target: [detailed development specification](creative-loop-development-plan.md), derived from [the user's approved plan](creative-loop-refactor-and-fewshot-plan.md). The specification was saved before the architecture audit in this pass. Its target behavior comes from the confirmed discussion; implementation remedies below are pending work.
+Authority and target: [detailed development specification](creative-loop-development-plan.md), derived from [the user's approved plan](creative-loop-refactor-and-benchmark-plan.md). The specification was saved before the architecture audit in this pass. Its target behavior comes from the confirmed discussion; implementation remedies below are pending work.
 
 This pass changes documentation only. Production code, operational manuals, knowledge, configuration and tests remain unchanged. No live model call, renderer invocation, GPU, AutoDL, independent scoring or experiment automation was used. There is no new claim about generated-video quality.
 

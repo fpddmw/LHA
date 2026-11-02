@@ -77,7 +77,7 @@ def evaluate(job, directory, root, model=None):
     from evaluation.judges import judge
     from evaluation.scoring import score
     from evaluation.protocol import validate_card
-    from vlm.codex_vlm import CodexVisionModel
+    from vlm.openrouter import OpenRouterVisionModel
     p = job["payload"]
     cfg = p["evaluation"]
     card = validate_card(cfg.get("card_data") or load(root / cfg["card"]))
@@ -89,7 +89,7 @@ def evaluate(job, directory, root, model=None):
         os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(directory / "evaluation-usage.jsonl")
     evidence = prepare(card, Path(p["video"]["path"]), directory / "evidence", root=root,
                        dense_ranges=cfg.get("dense_ranges", []), mapping=p["video"].get("time_mapping"))
-    client = EnglishEvaluationClient(model or CodexVisionModel(role="online_feedback"), directory / "english-evaluation")
+    client = EnglishEvaluationClient(model or OpenRouterVisionModel(role="online_feedback"), directory / "english-evaluation")
     judgment = judge(card, evidence, client, directory / "judge")
     return {"protocol": {"id": card["protocol"], "version": card["card_sha256"],
                          "implementation_sha256": {p.name: sha(p) for p in Path(evaluation.__file__).parent.glob("*.py")}},

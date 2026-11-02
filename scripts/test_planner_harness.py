@@ -115,7 +115,7 @@ class Tests(unittest.TestCase):
 
     def test_knowledge_access_and_pagination(self):
         k = Knowledge(ROOT)
-        for bad in ["../../etc/passwd", str(ROOT / "benchmark_data/all_samples.json"), "benchmark_data/all_samples.json"]:
+        for bad in ["../../etc/passwd", str(ROOT / "benchmark_data/benchmark.json"), "benchmark_data/benchmark.json"]:
             with self.assertRaises(ValueError):
                 k.read(bad)
         first = k.read("opuscar-053")

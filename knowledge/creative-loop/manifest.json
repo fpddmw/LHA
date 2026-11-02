@@ -18,9 +18,14 @@
   "navigation": {
     "map": "knowledge/creative-loop/README.md",
     "manual": "knowledge/creative-loop/READING.md",
-    "score-definitions": "src/critic_harness/SCORE_DEFINITIONS.md",
     "understand-and-design": "knowledge/creative-loop/UNDERSTAND_AND_DESIGN.md",
-    "understand-and-revise": "knowledge/creative-loop/UNDERSTAND_AND_REVISE.md"
+    "understand-and-revise": "knowledge/creative-loop/UNDERSTAND_AND_REVISE.md",
+    "observe-events": "knowledge/creative-loop/OBSERVE_EVENTS.md",
+    "planning-resources": "knowledge/creative-loop/PLANNING_RESOURCES.md",
+    "observation-diagnosis": "knowledge/creative-loop/OBSERVATION_DIAGNOSIS.md",
+    "generation-input": "knowledge/creative-loop/GENERATION_INPUT.md",
+    "operating-reference": "knowledge/creative-loop/OPERATING_REFERENCE.md",
+    "review": ".agents/skills/lha-video-review/SKILL.md"
   },
   "curated_catalog": "knowledge/experience/curated/catalog.json",
   "classes": [
@@ -52,7 +57,9 @@
         "manual": "knowledge/creative-loop/no-experience/READING.md",
         "understand-and-design": "knowledge/creative-loop/no-experience/UNDERSTAND_AND_DESIGN.md",
         "understand-and-revise": "knowledge/creative-loop/no-experience/UNDERSTAND_AND_REVISE.md",
-        "score-definitions": "src/critic_harness/SCORE_DEFINITIONS.md"
+        "observe-events": "knowledge/creative-loop/OBSERVE_EVENTS.md",
+        "operating-reference": "knowledge/creative-loop/OPERATING_REFERENCE.md",
+        "review": ".agents/skills/lha-video-review/SKILL.md"
       },
       "guide_overrides": {
         "meaning": "knowledge/creative-loop/no-experience/meaning.md",

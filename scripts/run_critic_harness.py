@@ -18,11 +18,11 @@ def main():
     args = parser.parse_args()
     from planner_harness.common import load
     from planner_harness.lock import RunLock
-    from vlm.codex_vlm import CodexVisionModel
+    from vlm.openrouter import OpenRouterVisionModel
     from critic_harness import CriticHarness
     os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(args.output.resolve() / "usage.jsonl")
     with RunLock(args.output):
-        harness = CriticHarness(args.output, CodexVisionModel(role="online_critic"))
+        harness = CriticHarness(args.output, OpenRouterVisionModel(role="online_critic"))
         state = harness.resume(args.additional_turns) if args.resume else harness.start(load(args.spec), max_turns=args.max_turns)
     print(f"Critic status: {state['status']}; report: {args.output / 'report.html'}", flush=True)
     return 0 if state["status"] == "complete" else 2

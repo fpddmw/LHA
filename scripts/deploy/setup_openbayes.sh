@@ -44,9 +44,6 @@ fi
 # wheel for CPython 3.11 / torch 2.7 / C++11 ABI; no local CUDA compilation.
 "$UV" pip install --python "$PYTHON" --no-deps \
     'https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3%2Bcu12torch2.7cxx11abiTRUE-cp311-cp311-linux_x86_64.whl'
-if [[ ! -x "$RUNTIME/codex/node_modules/.bin/codex" ]]; then
-    npm install --prefix "$RUNTIME/codex" @openai/codex@0.165.0
-fi
 PYTHONPATH="$ROOT/src:$ROOT/third_party/Bernini" "$PYTHON" -c \
     'import torch; from bernini.pipeline import BerniniRendererPipeline; from vlm import resolve_vision_model; print("CUDA:", torch.cuda.is_available(), torch.cuda.get_device_name(0)); print("Bernini imports OK")'
 "$UV" pip freeze --python "$PYTHON" > "$ROOT/out/deployment/installed-requirements.txt"

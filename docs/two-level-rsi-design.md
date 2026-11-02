@@ -1,5 +1,7 @@
 # Two-level RSI for the agent loop: design and experiment plan
 
+> Historical RSI workflow — 2026-10-30/31. This document preserves the opt-in legacy design and its implementation checkpoint. Current creative_loop_v1 excludes RSI and uses [current Planner/Critic implementation](creative-loop-implementation.md), [event observation](online-event-observation.md) and separately requested [experience maintenance](experience-usage-interface.md). Old authorization and execution statements below describe their recorded session.
+
 Date: 2026-10-30; revised 2026-10-31 after the Opus code review. Status: **authorized software remediation; live measurements remain a later stage.** The item-by-item implementation record is [rsi-opus-review-remediation.md](rsi-opus-review-remediation.md). The staged experience draft is in [`knowledge/staged/e1-20261030/`](../knowledge/staged/e1-20261030/README.md).
 
 

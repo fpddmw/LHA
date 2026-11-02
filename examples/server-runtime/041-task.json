@@ -1,6 +1,6 @@
 {
   "id": "041-loop-validation",
-  "source": "benchmark_data/main/041/041.mp4",
+  "source": "benchmark_data/train/020/video.mp4",
   "source_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
   "request": "Make it look like a children's storybook.",
   "max_generations": 3,

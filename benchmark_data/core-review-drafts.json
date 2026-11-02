@@ -1,0 +1,458 @@
+{
+  "schema": "lha-core-drafts-v1",
+  "dataset_sha256": "8fc42a097bb3e9e723cc3fa560c6c45425c222ca18bfb750515bba3b712d721e",
+  "scope": "one_shared_standard_per_video",
+  "evidence_method": "每题查看覆盖全片的8帧概览；034、059另查16帧较大图像。用于任务适配初筛，不作为动作连续性终评。",
+  "items": {
+    "001": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "床上共同观看电脑的活动与装饰艺术卧室相容，长提示词已明确保留。",
+      "review_status": "proposed"
+    },
+    "002": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "阅读、书桌和书籍与制图师工作室相容，提示词已覆盖场景改造。",
+      "review_status": "proposed"
+    },
+    "003": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "两位女子的交谈与植物主题沙龙相容，无须改变互动含义。",
+      "review_status": "proposed"
+    },
+    "004": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "人物特写中的视线与表情不因冬日水晶美学而需要改写。",
+      "review_status": "proposed"
+    },
+    "005": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "建筑外观更新不改变石庙的空间用途，提示词已规定建筑保留范围。",
+      "review_status": "proposed"
+    },
+    "006": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "作坊中众人的交谈可延续到工程舱，未见必须改写的活动逻辑。",
+      "review_status": "proposed"
+    },
+    "007": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "庭院中的两人交谈与地中海花园相容。",
+      "review_status": "proposed"
+    },
+    "008": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "成人与孩子在水槽边的共同活动与农舍厨房相容，长提示词已覆盖。",
+      "review_status": "proposed"
+    },
+    "009": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "近景中的说话动作与列车包厢相容，背景改造已有要求。",
+      "review_status": "proposed"
+    },
+    "010": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "办公交流和文件交接与材料设计工作室相容，物品保留已写明。",
+      "review_status": "proposed"
+    },
+    "011": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "庭院中的站立交流与沙漠城堡相容，不需要另设人物活动。",
+      "review_status": "proposed"
+    },
+    "012": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "伏案书写与船长书房相容，书写工具和动作已明确保留。",
+      "review_status": "proposed"
+    },
+    "013": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "车内打电话与近未来外交座驾相容，手机和动作已明确保留。",
+      "review_status": "proposed"
+    },
+    "014": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "植物间使用手机与当代日式冬季花园相容。",
+      "review_status": "proposed"
+    },
+    "015": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "坐着交谈与接待厅相容，人物关系和动作已有保留要求。",
+      "review_status": "proposed"
+    },
+    "016": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "城镇转为纸艺模型属于表现媒介变化，层次、建筑布局及运镜已有要求。",
+      "review_status": "proposed"
+    },
+    "017": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "多人站立交流与行会大厅相容，手持物和人物保留范围已写明。",
+      "review_status": "proposed"
+    },
+    "018": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "特写中的抬手和说话可延续到高级定制沙龙美学，饰品转换已有要求。",
+      "review_status": "proposed"
+    },
+    "019": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "投影中的平面人物已被长提示词明确要求保持平面，无须再补。",
+      "review_status": "proposed"
+    },
+    "020": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "两人共同书写和指点与创意工作室相容。",
+      "review_status": "proposed"
+    },
+    "021": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "交谈转为水粉动画不要求改写交流内容，表情和嘴唇动作已有保留要求。",
+      "review_status": "proposed"
+    },
+    "022": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "花间行走与电影感草甸相容，携带物品的动作已明确保留。",
+      "review_status": "proposed"
+    },
+    "023": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "花间耙地和行走与收获田野相容。",
+      "review_status": "proposed"
+    },
+    "024": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "工人在架体上作业与钢制高层架体相容，支撑与接触质量由共同指标评价。",
+      "review_status": "proposed"
+    },
+    "025": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "孩子奔跑与宫殿式展厅相容，长提示词已明确保留这一活动。",
+      "review_status": "proposed"
+    },
+    "026": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "从货车卸木板与手工艺作坊街区相容。",
+      "review_status": "proposed"
+    },
+    "027": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "群体歌唱、击鼓和表演与仪式庭院相容。",
+      "review_status": "proposed"
+    },
+    "028": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "板球活动与英格兰乡村场地相容，场上角色已有明确描述。",
+      "review_status": "proposed"
+    },
+    "029": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "吉他表演与复古庄园场景相容，道具变化已在提示词中指定。",
+      "review_status": "proposed"
+    },
+    "030": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "广场群舞与露天天体主题舞厅相容，舞蹈和观众已有保留要求。",
+      "review_status": "proposed"
+    },
+    "031": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "织物动画属于表现媒介变化，穿行、遮挡和行走已在提示词中明确。",
+      "review_status": "proposed"
+    },
+    "032": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "源视频为单人锻炼；长提示词明确保留锻炼动作、篮圈和场地布局。",
+      "review_status": "proposed"
+    },
+    "033": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "骑行与复古自行车竞技场相容，车轮、踏板及平衡动作已有要求。",
+      "review_status": "proposed"
+    },
+    "034": {
+      "recommendation": "supplement",
+      "core": "人物之间的互动也应融入武侠世界，摆脱现代篮球比赛的行为逻辑。",
+      "reason": "源视频包含运球、对位和投篮；长提示词描述了服装与山间场景，尚未交代篮球活动如何适配武侠世界。",
+      "review_status": "proposed"
+    },
+    "035": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "钢琴演奏与豪华钢琴酒廊相容，演奏及琴键关系已有要求。",
+      "review_status": "proposed"
+    },
+    "036": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "长提示词明确保留吉他及演奏动作，不再追加古代乐器或历史复原要求。",
+      "review_status": "proposed"
+    },
+    "037": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "乒乓球运动与空间站运动场相容，球路和球桌已明确保留。",
+      "review_status": "proposed"
+    },
+    "038": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "麻将活动与豪华赌场酒廊相容，人数和动作已明确保留。",
+      "review_status": "proposed"
+    },
+    "039": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "长提示词明确保留手机和手部动作，不再要求人物停止使用手机。",
+      "review_status": "proposed"
+    },
+    "040": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "列车行驶与未来交通枢纽相容，运动和车窗布局已有保留要求。",
+      "review_status": "proposed"
+    },
+    "041": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "孩子们在石铺地面活动与喜马拉雅庭院相容。",
+      "review_status": "proposed"
+    },
+    "042": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "源视频中的儿童对练与训练庭院相容，提示词已要求保留动态。",
+      "review_status": "proposed"
+    },
+    "043": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "划船与奥运赛艇航道相容，比赛服和水花效果已有要求。",
+      "review_status": "proposed"
+    },
+    "044": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "面包铲与炉边操作可延续到地中海面包房，原活动已明确保留。",
+      "review_status": "proposed"
+    },
+    "045": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "围绕容器的活动与山坡美化相容，容器材质变化已明确。",
+      "review_status": "proposed"
+    },
+    "046": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "群舞与月下仪式亭阁相容，表演道具的改造已有描述。",
+      "review_status": "proposed"
+    },
+    "047": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "用餐与鹦鹉螺主题餐厅相容，人物、食品和布局已明确保留。",
+      "review_status": "proposed"
+    },
+    "048": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "双人舞与维也纳舞厅相容，长提示词已明确保留观众和裁判。",
+      "review_status": "proposed"
+    },
+    "049": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "钢琴演奏与包豪斯音乐工作室相容，手指与键盘关系已有要求。",
+      "review_status": "proposed"
+    },
+    "050": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "歌唱和铃鼓活动已被长提示词明确保留，聆听酒廊不另作静默活动限制。",
+      "review_status": "proposed"
+    },
+    "051": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "蔬菜转为陶瓷静物属于材质重构，形状和重叠关系已有要求。",
+      "review_status": "proposed"
+    },
+    "052": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "坐着使用电脑与摩洛哥装饰拱廊相容，电脑和打字动作已明确保留。",
+      "review_status": "proposed"
+    },
+    "053": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "阅读交流与波斯风格阅览室相容，长提示词明确保留电脑等现代物品。",
+      "review_status": "proposed"
+    },
+    "054": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "遛狗与幻想花园相容，长提示词已明确保留牵绳犬群。",
+      "review_status": "proposed"
+    },
+    "055": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "学校活动的电影化主要改变光照与色彩，不需要新增活动规定。",
+      "review_status": "proposed"
+    },
+    "056": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "海滩清洁活动已明确保留，画面美化不需要另加行为要求。",
+      "review_status": "proposed"
+    },
+    "057": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "共同种植与植物温室相容，人物和种植活动已有说明。",
+      "review_status": "proposed"
+    },
+    "058": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "沿海岸行走与沉思氛围相容，衣着和光照改造已有说明。",
+      "review_status": "proposed"
+    },
+    "059": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "放大查看后可辨认头部羽饰和中央仪式摆设；仪式活动与黄金时刻处理相容，暂不补充。",
+      "review_status": "proposed"
+    },
+    "060": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "滚轮胎活动与街道电影化相容，长提示词已明确保留。",
+      "review_status": "proposed"
+    },
+    "061": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "林中拉运吊装带的劳动与国家公园场景相容，活动和装备已有保留要求。",
+      "review_status": "proposed"
+    },
+    "062": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "围绕轿辇列队舞动与仪式广场相容，队列和服饰已有要求。",
+      "review_status": "proposed"
+    },
+    "063": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "耙地、挖土与社区花园相容，劳动活动已明确保留。",
+      "review_status": "proposed"
+    },
+    "064": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "群体舞蹈与稀树草原空地相容，无须指定新的舞种或动作。",
+      "review_status": "proposed"
+    },
+    "065": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "儿童随现场表演舞动与欧洲广场相容，主体活动已有保留要求。",
+      "review_status": "proposed"
+    },
+    "066": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "人物群体活动与稀树草原落日相容，任务集中于光照和服饰细节。",
+      "review_status": "proposed"
+    },
+    "067": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "河岸提桶与三角洲电影化相容，行动已明确保留。",
+      "review_status": "proposed"
+    },
+    "068": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "群体舞蹈与仪式舞厅相容，服饰和室内改造已有说明。",
+      "review_status": "proposed"
+    },
+    "069": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "环绕中央柱舞动与印度庆典场所相容，服饰及活动已有要求。",
+      "review_status": "proposed"
+    },
+    "070": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "群体向前舞动与节庆场地相容，场景和衣着变化已有说明。",
+      "review_status": "proposed"
+    },
+    "071": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "从容器中分食的活动与村庄聚会场景相容，人物互动已有说明。",
+      "review_status": "proposed"
+    },
+    "072": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "鼓乐表演与节庆庭院相容，服饰和乐器变化已有说明。",
+      "review_status": "proposed"
+    },
+    "073": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "舞蹈游行与林间空地相容，队列和鼓乐活动已有保留要求。",
+      "review_status": "proposed"
+    },
+    "074": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "沿林间小径行走与电影感山林相容，人物衣着已有改造说明。",
+      "review_status": "proposed"
+    },
+    "075": {
+      "recommendation": "no_supplement",
+      "core": "",
+      "reason": "双人摇摆舞与 1940 年代舞厅相容，时代服饰和舞厅改造已有要求。",
+      "review_status": "proposed"
+    }
+  }
+}

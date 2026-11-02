@@ -23,7 +23,7 @@ def main():
     from planner_harness import PlannerHarness
     from planner_harness.common import load, save, sha
     from planner_harness.lock import RunLock
-    from vlm.codex_vlm import CodexVisionModel
+    from vlm.openrouter import OpenRouterVisionModel
     results = []
     with RunLock(base / "demonstration"):
         for name in ("041", "table_tennis"):
@@ -31,14 +31,14 @@ def main():
             output = base / name / "critic"
             os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(output / "usage.jsonl")
             with RunLock(output):
-                critic = CriticHarness(output, CodexVisionModel(role="online_critic"), root=ROOT)
+                critic = CriticHarness(output, OpenRouterVisionModel(role="online_critic"), root=ROOT)
                 state = critic.resume() if (output / "state.json").exists() else critic.start(spec, max_turns=20)
             if state["status"] != "complete":
                 raise RuntimeError(f"{name}: Critic {state['status']}; continue from its saved state")
             planner_output = base / name / "planner"
             os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(planner_output / "usage.jsonl")
             with RunLock(planner_output):
-                planner = PlannerHarness(planner_output, CodexVisionModel(role="planner"), root=ROOT)
+                planner = PlannerHarness(planner_output, OpenRouterVisionModel(role="planner"), root=ROOT)
                 if (planner_output / "state.json").exists():
                     state = planner.resume()
                 else:

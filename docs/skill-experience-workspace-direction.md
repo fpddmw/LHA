@@ -4,7 +4,7 @@ Date: 2026-11-01.
 
 Status: originally recorded as an agreed direction. The subsequent [bounded implementation plan](experience-library-refactor-plan.md) was approved on 2026-11-01 and now governs implementation. Three maintenance Skills, optional professional manuals and passive provenance implement that direction. Four new experience examples remain staged for content review; no RSI or experiments are authorized. The open questions below preserve the discussion history and are addressed by the newer plan and [interface](experience-usage-interface.md).
 
-Related material: [current development plan](creative-loop-development-plan.md), [creative knowledge map](../knowledge/creative-loop/README.md), [staged E1](../knowledge/staged/e1-20261030/README.md).
+Related material: [historical development plan](creative-loop-development-plan.md) and [current implementation](creative-loop-implementation.md), [creative knowledge map](../knowledge/creative-loop/README.md), [staged E1](../knowledge/staged/e1-20261030/README.md).
 
 ## Purpose
 

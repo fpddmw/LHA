@@ -1,8 +1,18 @@
 {
   "workflow": "creative_loop_v1",
-  "planner": {"model": "gpt-6.1-sol", "reasoning_effort": "high"},
-  "critic": {"model": "gpt-6.1-sol", "reasoning_effort": "high"},
-  "limits": {"gpu": 1, "llm": 2, "cpu": 2},
+  "planner": {
+    "model": "openai/gpt-6.1-sol",
+    "reasoning_effort": "high"
+  },
+  "critic": {
+    "model": "openai/gpt-6.1-sol",
+    "reasoning_effort": "high"
+  },
+  "limits": {
+    "gpu": 1,
+    "llm": 2,
+    "cpu": 2
+  },
   "enable_final_evaluation": false,
   "renderer": {
     "backend": "bernini",
@@ -15,6 +25,23 @@
       "max_image_size": 848,
       "negative_prompt": "",
       "prompt_enhancer": false
+    }
+  },
+  "review": {
+    "mode": "critic"
+  },
+  "models": {
+    "planner": {
+      "factory": "vlm.openrouter:OpenRouterVisionModel",
+      "options": {
+        "api_key_env": "OPENROUTER_API_KEY"
+      }
+    },
+    "online_critic": {
+      "factory": "vlm.openrouter:OpenRouterVisionModel",
+      "options": {
+        "api_key_env": "OPENROUTER_API_KEY"
+      }
     }
   }
 }

@@ -1,0 +1,135 @@
+{
+  "recorded_at": "2026-11-02T02:52:04.851178+08:00",
+  "operation": "git gc --no-prune with both reflog expiry settings and prune expiry set to never",
+  "history_rewritten": false,
+  "same_head": true,
+  "same_refs": true,
+  "same_all_objects_and_sizes": true,
+  "objects": 5128,
+  "object_inventory_sha256": "3e929bdca306f38f95e0f7aad1709d591feb3d99a87d883c4cbb2fa801f0e9fb",
+  "before": "count: 1863\nsize: 246892\nin-pack: 3265\npacks: 1\nsize-pack: 498166\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n",
+  "after": "count: 0\nsize: 0\nin-pack: 5128\npacks: 2\nsize-pack: 738151\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n",
+  "elapsed_seconds": 69.03,
+  "largest_objects": [
+    {
+      "oid": "6740cb2f6f65e63e1026b8ea60c28bb87cf7ebbd",
+      "type": "blob",
+      "bytes": 88696195,
+      "path": "zyx/films/opuscar98.mp4"
+    },
+    {
+      "oid": "4cee2e46b3ae2bb5625a21fcaf67dccab86e28b5",
+      "type": "blob",
+      "bytes": 13815295,
+      "path": "third_party/Bernini/assets/testcases/rv2v/source_case2.mp4"
+    },
+    {
+      "oid": "cde3836113f756246c49c58905e217651a49aef5",
+      "type": "blob",
+      "bytes": 12542914,
+      "path": "reports/20261030-sync/media/5f624085e062729e9b35f9326be306dff7e87b1beea3c49857bc1600a30b49a5.mp4"
+    },
+    {
+      "oid": "ed9df92db2239bb6e317188ddd267b60af62860b",
+      "type": "blob",
+      "bytes": 12271555,
+      "path": "reports/20261030-sync/media/1ec406b5563568822f8d06851abb81537b8113f6046ff44a07b35b1c0f3ce16f.mp4"
+    },
+    {
+      "oid": "96314fc8fda79d1b99d38db770a57c1361bc3443",
+      "type": "blob",
+      "bytes": 11810860,
+      "path": "reports/20261030-sync/media/c9dd33efcfd591846e18d1bf478cf159bdb94ac54af0c9ad9cb9520dcc8dcb58.mp4"
+    },
+    {
+      "oid": "62f9209176f2041ade2dc3f7d82e3a184d0d3e1b",
+      "type": "blob",
+      "bytes": 11012341,
+      "path": "reports/20261030-sync/media/1269d52ce2626bf0cad6bfc5430595fe367e9c024082da7e6a7efec31a9f60c1.mp4"
+    },
+    {
+      "oid": "099b41f40f006b10ce1f850b0e8815ec251c02f2",
+      "type": "blob",
+      "bytes": 10624855,
+      "path": "reports/20261030-sync/media/025008264d78e21bdb4bb8518659ffaf3271daf7ad59020b13beb9e8f9f726bc.mp4"
+    },
+    {
+      "oid": "ffdf7fc7f97adc6c835eb0bb4788320970daa0db",
+      "type": "blob",
+      "bytes": 10024882,
+      "path": "reports/20261030-sync/media/b3b8b4cc6e829021e19d1126309a9fe23e62646eab3f624b2173771cfbb1a796.mp4"
+    },
+    {
+      "oid": "9a1c93da0ba8c379582ca788ac3a6fa9f675da9d",
+      "type": "blob",
+      "bytes": 9830567,
+      "path": "reports/20261030-sync/ablation/frozen-experiment.zip"
+    },
+    {
+      "oid": "4e75152d48effa90610b6488cf4a24b9f838e153",
+      "type": "blob",
+      "bytes": 9730684,
+      "path": "third_party/Bernini/assets/testcases/rv2v/rv2v_case2_out.mp4"
+    },
+    {
+      "oid": "f8383ad94fcf39083fe0668e51142288135de79a",
+      "type": "blob",
+      "bytes": 9707576,
+      "path": "reports/20261030-sync/media/3a085bd7dc580c3c8fe67e0071c056e582f88001e0a81ce2368e19d4256f2cd1.mp4"
+    },
+    {
+      "oid": "13a1e0da676916bc854076c228bf60c8f5126420",
+      "type": "blob",
+      "bytes": 9239212,
+      "path": "reports/20261030-sync/media/d01a7e3844387978f49e00ad436bc22b1a439fa363c6cc60d1fc4f0ef334de8b.mp4"
+    },
+    {
+      "oid": "a9add4bfd211feb57d7c2b02aed11af3b9c3cb3a",
+      "type": "blob",
+      "bytes": 8072998,
+      "path": "reports/20261030-sync/media/49c26315f1b1bab5ae4b9a1f909bbe4490717934c8c0156e92a4c112a8f1001c.mp4"
+    },
+    {
+      "oid": "bafbc492a7d0b443c230d744c1d90f4a072ad742",
+      "type": "blob",
+      "bytes": 7799071,
+      "path": "reports/20261030-sync/media/084845954240b71d1ab83f376215da0eeaf6b57b08e1ca13be35ee8dac4a4c4f.mp4"
+    },
+    {
+      "oid": "b6562050ccf556af574673acd095a7ac9ab2a33d",
+      "type": "blob",
+      "bytes": 7696472,
+      "path": "reports/20261030-sync/media/c0bba88d0ebff33f1ba88df2c69a90ac6f397a20235ab067e31760aca0aef9f1.mp4"
+    },
+    {
+      "oid": "d1eaafd852d085d2442710c708f0a7e9003c74e1",
+      "type": "blob",
+      "bytes": 7525581,
+      "path": "reports/20261030-sync/media/6ee192c06cace5f2485df4e9c9d544792d5d9ba1c83fbc6dec2ebcaf5e3fdb12.mp4"
+    },
+    {
+      "oid": "aa87b4d933a20cb12cda0e52d08e2879bec4a094",
+      "type": "blob",
+      "bytes": 7487191,
+      "path": "third_party/Bernini/assets/testcases/v2v/v2v_case1_out.mp4"
+    },
+    {
+      "oid": "664ab0142346d9e255394b039989bab44a4b2800",
+      "type": "blob",
+      "bytes": 7407883,
+      "path": "reports/20261030-sync/media/d8875e3d451a060367de30cab9057d9329506b585a1bb1439802ce828ae18f8d.mp4"
+    },
+    {
+      "oid": "76fe78b8ea38a197e9312731c07dbfbc4e7f71d7",
+      "type": "blob",
+      "bytes": 7174244,
+      "path": "third_party/Bernini/assets/testcases/v2v/v2v_case2_out.mp4"
+    },
+    {
+      "oid": "9ab03fd3adbdc4e75a23fe741d82e807b32ba572",
+      "type": "blob",
+      "bytes": 7089376,
+      "path": "third_party/Bernini/assets/testcases/v2v/source_case1.mp4"
+    }
+  ]
+}

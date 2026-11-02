@@ -1,0 +1,102 @@
+{
+  "src/planner_harness/rsi_anchors.py": {
+    "previous_sha256": "8d0815bab1301742fb59b2819e46294520b4b3a1c4e9a7755455f2552e328eb3",
+    "implementation": "src/planner_harness/compat/rsi/rsi_anchors.py"
+  },
+  "src/planner_harness/rsi_batch.py": {
+    "previous_sha256": "8539c33bf788bf96909855a9c4619ef8e3ed2d00fc751b5d91db874407dc082d",
+    "implementation": "src/planner_harness/compat/rsi/rsi_batch.py"
+  },
+  "src/planner_harness/rsi_calibration.py": {
+    "previous_sha256": "642446a8649f035e1d9e72a526be7e93b39305c8015aa094374a1d17fe64b437",
+    "implementation": "src/planner_harness/compat/rsi/rsi_calibration.py"
+  },
+  "src/planner_harness/rsi_calls.py": {
+    "previous_sha256": "7113cffb3e4afea226b9ec03f9eac1270f288ef11304bca6a7ce966d795b79ec",
+    "implementation": "src/planner_harness/compat/rsi/rsi_calls.py"
+  },
+  "src/planner_harness/rsi_cards.py": {
+    "previous_sha256": "bd26ce48374c4682f1a16ffb139c6afe6044e2a1d2778dee9a8c15467164f662",
+    "implementation": "src/planner_harness/compat/rsi/rsi_cards.py"
+  },
+  "src/planner_harness/rsi_cli_ops.py": {
+    "previous_sha256": "d525e0d5061540769588e7725e31676ef0a9faebdce85607acc77ae310a54cd4",
+    "implementation": "src/planner_harness/compat/rsi/rsi_cli_ops.py"
+  },
+  "src/planner_harness/rsi_controls.py": {
+    "previous_sha256": "aa2f1e471d171195f208283b306b8130558e31970ab025583e26a31b3efe3f39",
+    "implementation": "src/planner_harness/compat/rsi/rsi_controls.py"
+  },
+  "src/planner_harness/rsi_cycle.py": {
+    "previous_sha256": "906cac3296d397317c0710f38e193a9c00216c3b2aa680b608a674de51ea7325",
+    "implementation": "src/planner_harness/compat/rsi/rsi_cycle.py"
+  },
+  "src/planner_harness/rsi_data.py": {
+    "previous_sha256": "d3ac8753db1bd6265e13c6a305ba400a72d2f6403234aa1ab172efffcb1fdea7",
+    "implementation": "src/planner_harness/compat/rsi/rsi_data.py"
+  },
+  "src/planner_harness/rsi_evidence.py": {
+    "previous_sha256": "075f4ada48d90ecb2fa839309fc93e93e90a40b484d2da6dbf24effdd7fba638",
+    "implementation": "src/planner_harness/compat/rsi/rsi_evidence.py"
+  },
+  "src/planner_harness/rsi_judge.py": {
+    "previous_sha256": "3f16a77ae6989700c2aab1679e9f4cf85a0ba77270cd7a77bae4a4088f016f2a",
+    "implementation": "src/planner_harness/compat/rsi/rsi_judge.py"
+  },
+  "src/planner_harness/rsi_paired_replay.py": {
+    "previous_sha256": "4a31401e1621dfe3d631a93bcb5f8b1bdcd246fd8d2ffccae5e8616cd3cc0d40",
+    "implementation": "src/planner_harness/compat/rsi/rsi_paired_replay.py"
+  },
+  "src/planner_harness/rsi_recovery.py": {
+    "previous_sha256": "6625c434a7150ab1dc61c3c26530692d89ec00461f42c06cc31494e437cfcbdd",
+    "implementation": "src/planner_harness/compat/rsi/rsi_recovery.py"
+  },
+  "src/planner_harness/rsi_remote.py": {
+    "previous_sha256": "870e71535d22d87b12e9a3f63bfd18848bc9ab0549dfaf7b192b01861a61a3f7",
+    "implementation": "src/planner_harness/compat/rsi/rsi_remote.py"
+  },
+  "src/planner_harness/rsi_replay.py": {
+    "previous_sha256": "0e9bddc5f7e482865e729b9ee23532b45d74433faf610f78e036ce2657a16216",
+    "implementation": "src/planner_harness/compat/rsi/rsi_replay.py"
+  },
+  "src/planner_harness/rsi_reporting.py": {
+    "previous_sha256": "795d1e18e8fb787d5032d5b8f2ae09006b087e39dbc73fa54527bf528ade03b1",
+    "implementation": "src/planner_harness/compat/rsi/rsi_reporting.py"
+  },
+  "src/planner_harness/rsi_round.py": {
+    "previous_sha256": "586d873664941b1ffea7fb5b190b076cfeb5b0a9bcc8b6345e3ddf5f16bc3c35",
+    "implementation": "src/planner_harness/compat/rsi/rsi_round.py"
+  },
+  "src/planner_harness/rsi_statistics.py": {
+    "previous_sha256": "e64dc69ae583821bcca8ddfe6ec1bedb6e342163a4468763c1b4dac3ef9f84a0",
+    "implementation": "src/planner_harness/compat/rsi/rsi_statistics.py"
+  },
+  "src/planner_harness/rsi_support.py": {
+    "previous_sha256": "2b97e48f56ec80a88e25ad1e409dc7fdc6bf4d3179b37475a84eb8baf9ffb2a8",
+    "implementation": "src/planner_harness/compat/rsi/rsi_support.py"
+  },
+  "src/planner_harness/rsi_validation.py": {
+    "previous_sha256": "4921069e01fa870916412c58829c3bf2eb72ce1e833a9e484648c4362daacc4c",
+    "implementation": "src/planner_harness/compat/rsi/rsi_validation.py"
+  },
+  "src/planner_harness/rsi_wiki.py": {
+    "previous_sha256": "c3b0b274c3f6ea6225b7ace224c076b30f7302a87810bda55c014b12ddb0f0ce",
+    "implementation": "src/planner_harness/compat/rsi/rsi_wiki.py"
+  },
+  "src/planner_harness/rsi_workflow.py": {
+    "previous_sha256": "16880319f4a8b8c4f5678b31cbbafd362f024ac58269c23e6753896c5f5e2e27",
+    "implementation": "src/planner_harness/compat/rsi/rsi_workflow.py"
+  },
+  "src/planner_harness/ledger.py": {
+    "previous_sha256": "9e042fbf98c95212c6ad4444e1eae1999cce9a0a957dd46d62586ac29f542ce2",
+    "implementation": "src/planner_harness/compat/legacy/ledger.py"
+  },
+  "src/planner_harness/task_criteria.py": {
+    "previous_sha256": "2d2d346870884f82de77238f96f831a53c7761c1e31b63819afde41a6bd76293",
+    "implementation": "src/planner_harness/compat/legacy/task_criteria.py"
+  },
+  "src/planner_harness/experience.py": {
+    "previous_sha256": "90bb83d3b408a2c6613cefdfadcbf3aa4c88fe84207f4f40fa883469a56a2358",
+    "implementation": "src/planner_harness/compat/legacy/experience.py"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "recorded_at": "2026-11-02T03:45:57.462219+08:00",
+  "root_scope": [
+    "LHA-012",
+    "LHA-016"
+  ],
+  "lineage": {
+    "implemented": "Historical qualitative schema support, paired score/requirement changes with identity bounds, ancestry costs, strict seed-matched controls, media/receipt-verified cohort CLI",
+    "software_tests": 8,
+    "software_test_failures": 0,
+    "historical_runs": 12,
+    "totals": {
+      "candidates": 36,
+      "chain_edges": 14,
+      "matched_controls": 0,
+      "verified_candidate_media": 36,
+      "verified_sources": 12,
+      "control_plans": 14,
+      "known_generation_seconds": 27370.788984537125,
+      "unknown_generation_costs": 0
+    },
+    "depth_counts": {
+      "1": 22,
+      "2": 14
+    },
+    "real_new_renders": 0,
+    "new_model_calls": 0,
+    "control_status": "Execution owner confirmed queued at a normal GPU0 Direct boundary, two fresh arms once each, then resume Direct. Other two GPUs continue. Paired receipts and independent assessment not received.",
+    "execution_thread": "01a196c9-bf54-7322-b798-d27c6543c1e8",
+    "latest_software_validation": "lineage-followup-validation.json",
+    "latest_software_snapshot_stable": true,
+    "coordination_record": "out/lineage_control/20261102/coordination.json",
+    "resource_authorization": {
+      "user_reply": "你可以和bernini七题实验协调。它那边有3张卡。",
+      "interpretation": "Use existing authorized GPU resources for the two prepared bounded renders, without new rental or extension. Monetary quote/cap was not supplied and is not invented.",
+      "max_renders": 2,
+      "max_attempts_per_arm": 1,
+      "judging": "paused",
+      "new_rental": false,
+      "live_code_source": "Execution owner existing frozen renderer; no deployment of ongoing local remediation."
+    }
+  },
+  "hygiene": {
+    "root_residual_files_moved": 8,
+    "recovery_bytes": 96482,
+    "git_history_rewritten": false,
+    "all_git_objects_preserved": 5128,
+    "all_refs_and_HEAD_preserved": true,
+    "git_fsck_passed": true,
+    "removed_media_entries_recoverable": 1175,
+    "historical_source_restore_sha256": "93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806",
+    "active_benchmark_changed_by_root": false,
+    "remaining": [
+      "Large media remain in Git history (largest 88696195-byte opuscar98.mp4); removing historic blobs requires a separate reviewed history rewrite.",
+      "Current source provenance does not establish redistribution/license permission.",
+      "Two historical example evaluation cards changed source_video during the separate dataset migration, retaining old frozen card hashes; both now fail validate_card. Original contents were preserved and the gap recorded in example-card-integrity.json."
+    ]
+  },
+  "entry_followup": {
+    "preflight": "passed",
+    "record": "final-local-preflight/local-preflight.json",
+    "curated_entries": 15,
+    "curated_resources": 56,
+    "none_curated_entries": 0,
+    "changes": [
+      "src/experiments/preflight.py: catalog ID membership and isolation replace hardcoded fourteen",
+      "knowledge/creative-loop/no-experience/design-expression.md: two relocated media links verified by exact Git HEAD vs active-media SHA256"
+    ],
+    "active_media_bytes_changed": 0,
+    "curated_content_or_review_hash_changed": false
+  },
+  "final_verification": {
+    "broad_passed": 390,
+    "affected_passed": 71,
+    "broad_and_affected_have_overlap": true,
+    "source_snapshots_stable": true,
+    "final_profile": "52732a6aa7c574b90422eebfe04d11a49ee4c0bb53e0160c57d029a86630db4a",
+    "local_preflight": "passed"
+  }
+}

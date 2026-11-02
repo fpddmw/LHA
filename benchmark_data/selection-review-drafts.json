@@ -1,0 +1,1808 @@
+{
+  "schema": "lha-benchmark-selection-proposals-v1",
+  "proposal_version": "lha-benchmark-20261102-67-train40-test27",
+  "dataset_sha256": "8dd8365872731344365b7a244e2209263f5a785fc2b0e549afd191151e55215a",
+  "target": 67,
+  "items": [
+    {
+      "id": "001",
+      "title": "粉彩酒店亲子时光",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-001",
+      "video": "train/001/video.mp4",
+      "source_sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+      "prompt_sha256": "d865f24d8e11b8535b62d307d4fd1c5bb9a2b22d00944f56461bfdca0d4f84e5",
+      "original": {
+        "short_zh": "将卧室改造成奢华的装饰艺术风格卧室套间。",
+        "long_zh": "将卧室改造成装饰艺术风格的卧室套间，配置扇形纹样天鹅绒床头板、弧形胡桃木墙板、黄铜镶嵌和象牙色缎面床品。让女子穿翡翠绿丝绸睡衣上装，孩子穿柔软的奶油色睡衣。保留两人在床上的相对位置、笔记本电脑和自然动作。",
+        "short_en": "Restyle the bedroom as a luxurious Art Deco sleeper suite.",
+        "long_en": "Transform the bedroom into an Art Deco sleeper suite with a fan-patterned velvet headboard, curved walnut wall panels, brass inlays, and ivory satin bedding. Dress the woman in an emerald silk pajama shirt and the child in soft cream sleepwear. Preserve their shared position on the bed, the laptop, and their natural gestures."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“装饰艺术卧室”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "sleeper suite可能被理解为列车卧铺，长短提示词的编辑范围也需要一致。",
+        "plan": "将卧室里的亲子相处场景，改造成《布达佩斯大饭店》美术风格的粉彩酒店套房。",
+        "short_zh": "将卧室里的亲子相处场景，改造成《布达佩斯大饭店》美术风格的粉彩酒店套房。",
+        "long_zh": "将卧室改造成《布达佩斯大饭店》美术风格的酒店套房，使用草莓粉墙面、奶油色雕花床头和酒红丝绒，形成精致而略带童话感的空间。女子与孩子穿色彩协调的复古睡衣，仍在床上共同观看笔记本电脑。柔和均匀的照明突出粉彩色块与整齐的装饰层次，呈现温暖、俏皮的家庭片段。"
+      }
+    },
+    {
+      "id": "002",
+      "title": "中土学者藏书室",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "period-dialogue-conservative",
+      "video": "train/002/video.mp4",
+      "source_sha256": "e2bd39613ab09168885308a3e935a832c70e97ad830f47367fa690db28b9eaa7",
+      "prompt_sha256": "85554442f83bde415f44b3997f7c0da731bf1fcc1ba4a09da8baedd13f654cce",
+      "original": {
+        "short_zh": "将书房改造成文艺复兴时期制图师的工作室。",
+        "long_zh": "将拱顶书房改造成文艺复兴时期制图师的工作室，包含绘有湿壁画的灰泥拱券、雕花橡木家具、皮面书籍和羊皮纸手稿。让坐着的读者穿带刺绣领口的铁锈色羊毛学者外套。保留拥挤的书桌、书堆、小壁炉和阅读动作；在现有墙面延展天体图案。",
+        "short_en": "Restyle the study as a Renaissance cartographer's workshop.",
+        "long_en": "Transform the vaulted study into a Renaissance cartographer's workshop with frescoed plaster arches, carved oak furniture, leather-bound books, and parchment manuscripts. Dress the seated reader in a rust-colored wool scholar's coat with an embroidered collar. Retain the crowded desk, book piles, small hearth, and reading movement; carry celestial motifs through the existing wall surfaces."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“文艺复兴制图室”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将书房里的阅读场景，改造成《指环王》式的中土学者研读古籍。",
+        "short_zh": "将书房里的阅读场景，改造成《指环王》式的中土学者研读古籍。",
+        "long_zh": "将书房改造成《指环王》式的中土学者藏书室。读者身穿厚实长袍，在堆满皮面古籍、卷轴与星图的桌前阅读。拱形石墙、深色木架和低燃壁炉围合空间，暖色火光照亮纸页，窗边透入幽蓝暮光，营造古老知识与远行传说交织的氛围。"
+      }
+    },
+    {
+      "id": "003",
+      "title": "新艺术植物沙龙",
+      "group": "建筑与历史装饰",
+      "split": "train",
+      "source_group": "period-drama-conservative",
+      "video": "archive/lha-benchmark-20261102-clean/train/003/video.mp4",
+      "source_sha256": "971b96ebc514885784532898c9d0340264d80dc72435dc1d112d2efe8c89c748",
+      "prompt_sha256": "0dcf1850cc331711cca1c4aebc2c5280b12a1eff378d7a65f28403c8877c2a6b",
+      "original": {
+        "short_zh": "将房间改造成新艺术风格的植物主题沙龙。",
+        "long_zh": "将房间改造成新艺术风格的植物主题沙龙，配置弧形胡桃木搁架、花卉彩绘玻璃板和虹彩陶瓷花瓶。站着的女子穿袖口绣有藤蔓的鼠尾草绿丝绸衬衫，坐着的女子穿梅紫色天鹅绒连衣裙。将发饰改为珐琅花朵，保留人物位置、表情和动作。",
+        "short_en": "Restyle the room as an Art Nouveau botanical salon.",
+        "long_en": "Transform the room into an Art Nouveau botanical salon with curved walnut shelving, floral stained-glass panels, and iridescent ceramic vases. Dress the standing woman in a sage silk blouse with embroidered vine cuffs and the seated woman in a plum velvet dress. Rework their hair ornaments as enamel flowers, preserving their positions, expressions, and gestures."
+      },
+      "suggestion": {
+        "decision": "drop",
+        "reason": "保留“新艺术植物沙龙”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将室内人物交谈改造成《美女与野兽》真人电影式的魔法城堡花房场景。",
+        "short_zh": "将室内人物交谈改造成《美女与野兽》真人电影式的魔法城堡花房场景。",
+        "long_zh": "将房间改造成《美女与野兽》真人电影式的城堡花房，弯曲的镀金花枝、彩绘玻璃和盛放玫瑰融入家具与窗框。两位女子身穿柔和宝石色的宫廷衣裙，延续一站一坐的交谈。透过花叶的暖光与阴影中的冷色形成层次，呈现华丽、亲密而带有魔法气息的画面。"
+      }
+    },
+    {
+      "id": "004",
+      "title": "冬日水晶宫廷",
+      "group": "幻想与舞台设计",
+      "split": "train",
+      "source_group": "period-drama-conservative",
+      "video": "archive/lha-benchmark-20261102-clean/train/004/video.mp4",
+      "source_sha256": "da941702a1b555fdc4fe0dc903423b9f34ca0456d93555cf593c8cef882e5ecf",
+      "prompt_sha256": "b8532ef278cbe409554932cf28206511f0a5ba20b9d95c130f447a587ba75161",
+      "original": {
+        "short_zh": "为人物特写营造雅致的冬日水晶宫廷美学。",
+        "long_zh": "将特写改造成冬日水晶宫廷场景。女子的袍服改为带银色霜花刺绣的浅蓝色天鹅绒，花朵头饰替换为半透明水晶花瓣。附近的花枝变成精巧的磨砂玻璃花，背景变成隐约可见的冰雕浮雕。保留面容、发型轮廓、视线和动作。",
+        "short_en": "Create an elegant winter crystal-court aesthetic for the close-up.",
+        "long_en": "Transform the close-up into a winter crystal-court scene. Restyle the woman's robe as pale-blue velvet with silver frost embroidery and replace her flower hairpiece with translucent crystal petals. Turn the nearby flowering branches into delicate frosted glass blossoms and the background into softly visible ice-carved reliefs. Preserve her face, hairstyle silhouette, gaze, and movement."
+      },
+      "suggestion": {
+        "decision": "drop",
+        "reason": "保留“冬日水晶宫廷”方向，提供幻想与舞台设计中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将女子特写改造成《冰雪奇缘》式的冰雪王国角色动画。",
+        "short_zh": "将女子特写改造成《冰雪奇缘》式的冰雪王国角色动画。",
+        "long_zh": "将整个特写转为《冰雪奇缘》式的三维动画。女子成为冰雪王国中的角色，身穿带霜花纹样的浅蓝礼服，头饰与身旁花枝化为透光冰晶。背景隐约展开蓝紫色冰宫，柔和面部光与晶体折射带出清透光泽。延续原有神态、视线与动作，使人物表演融入明亮的童话世界。"
+      }
+    },
+    {
+      "id": "005",
+      "title": "丛林失落圣殿",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-005",
+      "video": "train/005/video.mp4",
+      "source_sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+      "prompt_sha256": "b7f19f7401d73a93777f181cd1c7a2323cbc4744d37b01b5d99cecf3259b3d90",
+      "original": {
+        "short_zh": "赋予石庙华丽的仪式圣殿美学。",
+        "long_zh": "将石庙重新构想为装饰华丽的仪式圣殿，保留所有塔楼、台地、雕刻浮雕及原有运镜。建筑表面采用暖色砂岩、深朱红色凹部、镀金浮雕边框和带纹样的绿松石色屋顶装饰。将斑驳的庭院地面改为规整石铺地，保留其占地范围和周边绿植。",
+        "short_en": "Give the stone temple a richly decorated ceremonial sanctuary aesthetic.",
+        "long_en": "Reimagine the stone temple as a richly decorated ceremonial sanctuary, retaining every tower, terrace, carved relief, and the original camera movement. Restore the architectural surfaces with warm sandstone, deep vermilion recesses, gilded relief borders, and patterned turquoise roof accents. Replace the patchy courtyard surface with fitted stone paving while preserving its footprint and surrounding greenery."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“砂岩仪式圣殿”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将石庙改造成《古墓丽影》式的丛林失落圣殿。",
+        "short_zh": "将石庙改造成《古墓丽影》式的丛林失落圣殿。",
+        "long_zh": "将石庙重构为《古墓丽影》式的丛林遗迹：巨大的石塔与层叠台地覆盖古老浮雕，根系沿石缝攀爬，苔藓与残存金饰交织。阳光穿过潮湿林雾，在幽暗入口和高处石墙间形成强烈明暗层次。沿原镜头逐渐显露圣殿的规模，营造神秘的探险氛围。"
+      }
+    },
+    {
+      "id": "006",
+      "title": "魔法学院课堂",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "period-drama-conservative",
+      "video": "train/006/video.mp4",
+      "source_sha256": "af9df316f86dfd1a76bcf404b9f22b2ab2f485541a56a999e7b779df5dd5cae3",
+      "prompt_sha256": "75396c1b424ab71e12cd0cd9c5532f4572c665aa0a8d541e333af066c34fc8c8",
+      "original": {
+        "short_zh": "将作坊改造成未来轨道工程舱。",
+        "long_zh": "将拥挤的作坊改造成轨道工程舱。倾斜木桌改为边缘嵌有灯带的石墨色工作台，绿色墙面改为带肋纹的铝制储物面板，悬挂管状物改为带防护笼的工业灯。全体人物穿石板蓝技术工装，带铜色紧固细节，保留人数、位置和交谈活动。",
+        "short_en": "Transform the workshop into a futuristic orbital engineering bay.",
+        "long_en": "Transform the crowded workshop into an orbital engineering bay. Refinish the slanted wooden tables as graphite workbenches with inset luminous edges, the green wall as ribbed aluminum storage panels, and the hanging tubes as caged industrial lights. Dress the entire group in slate-blue technical coveralls with copper fastening details, preserving their number, positions, and conversation."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“轨道工程舱”方向，提供未来与科幻中的独立视觉目标。",
+        "issue": "源视频是古装学堂中的群体交流；旧稿将场景误认成作坊。",
+        "plan": "将古装学堂中的群体交流改造成《哈利·波特》式的魔法学院教室。",
+        "short_zh": "将古装学堂中的群体交流改造成《哈利·波特》式的魔法学院教室。",
+        "long_zh": "将学堂改造成《哈利·波特》式的魔法学院教室。成排书案摆着古籍、羊皮纸与墨水瓶，桌灯化为温暖烛灯，石拱窗与高处悬灯构成古老校园空间。人物穿学院长袍，延续聚在书案后方交谈和抬手示意的互动。冷色窗光与暖色烛光交织，营造神秘而鲜活的课堂氛围。"
+      }
+    },
+    {
+      "id": "007",
+      "title": "地中海别墅花园",
+      "group": "地域与生活空间",
+      "split": "train",
+      "source_group": "period-drama-conservative",
+      "video": "archive/lha-benchmark-20261102-clean/train/007/video.mp4",
+      "source_sha256": "33872c793101a7122956ae1e1a894b9153ff8346b9072898996dc59405308e85",
+      "prompt_sha256": "b6eefa5f7ab772ae6e5f3e45bf46ace104f97171d5ce8b0583e1035523e8e016",
+      "original": {
+        "short_zh": "将庭院改造成地中海别墅花园。",
+        "long_zh": "将庭院改造成地中海别墅花园，包含雕花石灰岩敞廊、陶土表面和蓝白马赛克装饰。保留开花的树，将现有石灯笼改为配套石灰岩材质。两位女子分别穿藏红花黄和钴蓝色亚麻服装，配编织饰边，保留交谈、动作和相对位置。",
+        "short_en": "Restyle the courtyard as a Mediterranean villa garden.",
+        "long_en": "Transform the courtyard into a Mediterranean villa garden with a carved limestone loggia, terracotta surfaces, and blue-and-white mosaic accents. Keep the flowering tree and restyle the existing stone lantern in matching limestone. Dress the two women in saffron and cobalt linen outfits with woven trim, preserving their conversation, gestures, and relative positions."
+      },
+      "suggestion": {
+        "decision": "drop",
+        "reason": "保留“地中海别墅花园”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将庭院交谈改造成《妈妈咪呀！》式的希腊海岛花园场景。",
+        "short_zh": "将庭院交谈改造成《妈妈咪呀！》式的希腊海岛花园场景。",
+        "long_zh": "将庭院改造成《妈妈咪呀！》式的希腊海岛花园，白灰墙、钴蓝门窗与盛放的三角梅围绕石铺小院。两位女子穿轻盈、鲜亮的夏日服装，在花树下自然交谈。明亮海岛日光、通透蓝色阴影和饱满花色构成轻快、松弛的音乐电影画面。"
+      }
+    },
+    {
+      "id": "008",
+      "title": "手绘动画厨房",
+      "group": "日漫与手绘动画",
+      "split": "train",
+      "source_group": "source-008",
+      "video": "train/008/video.mp4",
+      "source_sha256": "6491ef722721888f4099839651180cfb6e85c8d91d5a0d2532962a267448da46",
+      "prompt_sha256": "2da15702d882ca3f0bd1b34790f9afa3cc8b4c332233e39aeaa8b01a62c36234",
+      "original": {
+        "short_zh": "将厨房改造成质朴的托斯卡纳农舍工作间。",
+        "long_zh": "将厨房改造成质朴的托斯卡纳农舍工作间，使用手绘陶土砖、做旧橡木橱柜、锤纹铜水槽和石台面。年长女子穿刺绣亚麻围裙，女孩穿赭色棉质背带裤。保留窗户、踏脚凳、餐具，以及两人在水槽边共同进行的活动。",
+        "short_en": "Restyle the kitchen as a rustic Tuscan farmhouse workspace.",
+        "long_en": "Transform the kitchen into a rustic Tuscan farmhouse workspace with hand-painted terracotta tiles, weathered oak cupboards, a hammered copper sink, and a stone countertop. Dress the older woman in an embroidered linen apron and the girl in ochre cotton overalls. Preserve the window, step stool, dishes, and their shared activity at the sink."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“托斯卡纳农舍厨房”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将两人在厨房水槽边忙碌的场景，改成《魔女宅急便》式的手绘动画厨房。",
+        "short_zh": "将两人在厨房水槽边忙碌的场景，改成《魔女宅急便》式的手绘动画厨房。",
+        "long_zh": "将画面转为《魔女宅急便》式的手绘动画。年长女子与女孩在温暖的乡间厨房里一起忙碌，木柜、搪瓷餐具、陶罐与格纹布巾营造有人生活的细节。窗外绿意映进室内，阳光落在水槽与衣袖上，以柔和水彩背景和清晰人物线条呈现轻松的日常魔法感。"
+      }
+    },
+    {
+      "id": "009",
+      "title": "复古列车包厢",
+      "group": "未来与科幻",
+      "split": "train",
+      "source_group": "source-009",
+      "video": "archive/lha-benchmark-20261102-clean/train/009/video.mp4",
+      "source_sha256": "7f4b691f31091111107a6927a8c2d5561ea3bf790eb41d27065f79b2e6e03e44",
+      "prompt_sha256": "84d9bb81afc0d669946cde6113c8c8cb4f9a06fc422a14f0c4db7e61fc0797c9",
+      "original": {
+        "short_zh": "将室内改造成复古豪华列车包厢。",
+        "long_zh": "将昏暗室内改造成复古豪华列车包厢，使用凹槽胡桃木墙板、黄铜窗框饰条和酒红色皮革软包。男子的灰色拉链毛衣替换为炭灰色羊毛大衣与花纹丝巾。保留面部特征、头部运动、说话动作和原有特写构图；把现有蓝色背景区域融入窗玻璃。",
+        "short_en": "Restyle the interior as a vintage luxury railway compartment.",
+        "long_en": "Transform the dark interior into a vintage luxury railway compartment with fluted walnut panels, brass window trim, and burgundy leather upholstery. Replace the man's gray zip sweater with a charcoal wool overcoat and patterned silk scarf. Preserve his facial features, head movement, speaking action, and the original close-up composition; integrate the existing blue background area as window glass."
+      },
+      "suggestion": {
+        "decision": "drop",
+        "reason": "镜头几乎被脸和肩膀占满，难以展示列车包厢；优先保留空间可见的改造题。",
+        "issue": "镜头几乎被脸和肩膀占满，难以展示列车包厢；优先保留空间可见的改造题。",
+        "plan": "将室内改造成复古豪华列车包厢。",
+        "short_zh": "将室内改造成复古豪华列车包厢。",
+        "long_zh": "将昏暗室内改造成复古豪华列车包厢，使用凹槽胡桃木墙板、黄铜窗框饰条和酒红色皮革软包。男子的灰色拉链毛衣替换为炭灰色羊毛大衣与花纹丝巾。保留面部特征、头部运动、说话动作和原有特写构图；把现有蓝色背景区域融入窗玻璃。"
+      }
+    },
+    {
+      "id": "010",
+      "title": "高科技研发讨论",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-010",
+      "video": "train/010/video.mp4",
+      "source_sha256": "e8639c7f36de5289c978b26d34b179857b9156d5c1f5017158700f70e647ff95",
+      "prompt_sha256": "d4d98ff06651b4c59f2b967172ee5d23b3602cf30e545e441ba2cdecbfc0c9fb",
+      "original": {
+        "short_zh": "将办公室改造成当代材料设计工作室。",
+        "long_zh": "将办公室改造成当代材料设计工作室，使用浅橡木墙板，以排列规整的陶瓷和织物样板网格替换磁带展示。带框地图改为无文字的抽象建筑绘图。让几位男子穿象牙白与靛蓝色对比的剪裁服装，保留笔记本电脑、文件、桌面布局和递交文件的动作。",
+        "short_en": "Restyle the office as a contemporary materials-design studio.",
+        "long_en": "Transform the office into a contemporary materials-design studio with pale oak wall panels and a precise grid of ceramic and textile samples replacing the cassette display. Rework the framed map as an abstract architectural drawing without lettering. Dress the men in contrasting ivory and indigo tailoring, preserving the laptop, paperwork, desk arrangement, and document handover."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“当代材料工作室”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将办公室里的文件交流改造成《钢铁侠》式的高科技研发团队讨论。",
+        "short_zh": "将办公室里的文件交流改造成《钢铁侠》式的高科技研发团队讨论。",
+        "long_zh": "将办公室改造成《钢铁侠》式的研发实验室，人物在工作台前交换设计资料，周围是机械原型、透明屏幕与金属零件陈列。笔记本电脑与纸质图纸融入技术讨论，冷色设备光搭配温暖桌面照明，形成干净、锐利而充满发明气息的工业空间。"
+      }
+    },
+    {
+      "id": "011",
+      "title": "沙丘城堡行旅",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "period-drama-conservative",
+      "video": "train/011/video.mp4",
+      "source_sha256": "657b522e928100eefdc72392d7e7cb22ce212fe1cd06aefc04d77caebf35181f",
+      "prompt_sha256": "e891e4ad86d41580d17161657aa9320c159e564bb0eb1f9e98c6b95a99ae08d7",
+      "original": {
+        "short_zh": "将步道改造成赭色砂岩沙漠城堡庭院。",
+        "long_zh": "将红墙步道改造成沙漠城堡庭院，使用雕刻赭色砂岩墙、几何浮雕饰带和深色玄武岩铺地。保留现有树木和两个人物的位置。服装改为象牙白与森林绿编织礼袍，配青铜扣；女子的斗笠改为带精细压纹的金属表面。",
+        "short_en": "Restyle the walkway as an ochre sandstone desert citadel courtyard.",
+        "long_en": "Transform the red-walled walkway into a desert citadel courtyard with carved ochre sandstone walls, geometric relief bands, and dark basalt paving. Keep the existing trees and the two figures' positions. Restyle their garments as ivory and forest-green woven ceremonial robes with bronze clasps, and give the woman's conical hat a finely embossed metallic surface."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“砂岩沙漠城堡”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将庭院中的人物改造成《沙丘》式沙漠文明城堡里的行旅者。",
+        "short_zh": "将庭院中的人物改造成《沙丘》式沙漠文明城堡里的行旅者。",
+        "long_zh": "将红墙步道改造成《沙丘》式的沙漠城堡庭院，高耸赭色墙体、深切门洞和巨大几何体块形成肃穆空间。两人穿层叠长袍与防风披巾，沿原有位置和动作展开互动。低角度阳光在石墙上划出锋利阴影，薄尘柔化远景，以克制的沙金、岩灰和暗褐色营造史诗尺度。"
+      }
+    },
+    {
+      "id": "012",
+      "title": "海盗船长日志",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-012",
+      "video": "train/012/video.mp4",
+      "source_sha256": "531dbf1ce4cd04f1383eed28ec577598229f632d0188bf894e42da61bd145013",
+      "prompt_sha256": "e28e0e662e0d25afedd8fc7f4f9038e82662e6961cc50c8c61edbc6337ebf6ee",
+      "original": {
+        "short_zh": "将咖啡馆改造成木材与黄铜装饰的船长书房。",
+        "long_zh": "将工业风咖啡馆改造成船长书房，使用弧形木质顶棚肋架、海军蓝护墙板和黄铜窗框。现有桌子改为做旧柚木，男子的 T 恤改为深色羊毛海员毛衣。保留鸭舌帽、笔记本、笔、书写动作，以及置于锤纹黄铜容器中的盆栽。",
+        "short_en": "Restyle the cafe as a timber-and-brass ship captain's writing room.",
+        "long_en": "Transform the industrial café into a ship captain's writing room with curved timber ceiling ribs, navy paneled walls, and brass-framed windows. Refinish the existing table as weathered teak and replace the man's T-shirt with a dark wool seafarer's sweater. Retain his flat cap, notebook, pen, writing movement, and the potted plant in a hammered brass container."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“木与黄铜船长书房”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将咖啡馆中男子伏案书写的场景，改造成《加勒比海盗》式的海盗船长在船舱内记录航海日志。",
+        "short_zh": "将咖啡馆中男子伏案书写的场景，改造成《加勒比海盗》式的海盗船长在船舱内记录航海日志。",
+        "long_zh": "将场景改造成《加勒比海盗》式的海盗船长室。男子身穿旧皮革外套和亚麻衬衣，在铺着海图的木桌前书写航海日志。弧形船肋、旧航海仪器和悬挂提灯构成船舱，舷窗透入冷蓝色海光，与室内暖色灯火形成对比，呈现神秘、粗粝的海上冒险氛围。"
+      }
+    },
+    {
+      "id": "013",
+      "title": "数字都市座驾",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-013",
+      "video": "train/013/video.mp4",
+      "source_sha256": "4209b31d155292734d971b79c3c7d68a9d9777dee30d67b7e217017efc6c45f8",
+      "prompt_sha256": "e1036e02ee444a881ae9f97676ae2fe6e385f5b639fa12c6e7180f10b1a0ba60",
+      "original": {
+        "short_zh": "将车厢改造成流线感鲜明的近未来外交座驾。",
+        "long_zh": "将车厢改造成近未来外交座驾，配置珍珠白雕塑感面板、烟色玻璃、拉丝钛金属饰条和细窄靛蓝灯缝。男子的海军蓝西装改为挺括高领、带微妙虹彩的面料。保留手机、坐姿、说话动作，以及窗外掠过的城市建筑。",
+        "short_en": "Restyle the car cabin as a sleek near-future diplomatic vehicle.",
+        "long_en": "Transform the car cabin into a near-future diplomatic vehicle with pearl-white sculpted panels, smoked glass, brushed titanium trim, and thin indigo light seams. Restyle the man's navy suit with a structured high collar and subtly iridescent fabric. Preserve his phone, seated posture, speaking movement, and the window's view of passing city architecture."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“近未来外交座驾”方向，提供未来与科幻中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将车内通话场景改造成《创：战纪》式数字都市中的未来座驾。",
+        "short_zh": "将车内通话场景改造成《创：战纪》式数字都市中的未来座驾。",
+        "long_zh": "将车厢改造成《创：战纪》式的未来座驾，黑色流线面板被细窄青蓝光带勾勒，车窗映出向后流动的数字都市灯光。男子穿线条简洁的深色技术服，手中设备融入车内界面设计，继续原有通话与手势。画面以深黑、冷白和电光蓝形成高反差、洁净的数字空间感。"
+      }
+    },
+    {
+      "id": "014",
+      "title": "潘多拉生态研究站",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-014",
+      "video": "train/014/video.mp4",
+      "source_sha256": "5dae19122f24ff6b88c63baa241fa771616cdb2e17bcb76d0da879be5da2020c",
+      "prompt_sha256": "9d2979201df705f82e8a0c42ca985df0e292060b5a838a322ad1f55cd6ee0f7d",
+      "original": {
+        "short_zh": "将房间改造成当代日式冬季花园。",
+        "long_zh": "将布满植物的房间改造成当代日式冬季花园，使用半透明障子面板、深色木格栅和雕塑感玄武岩花盆。女子穿苔绿色亚麻裹身夹克，配宽大的象牙白袖口。保留辫子、手机、向下的视线和手部动作，使大叶片保持原有位置与大小。",
+        "short_en": "Restyle the room as a contemporary Japanese winter garden.",
+        "long_en": "Transform the plant-filled room into a contemporary Japanese winter garden with translucent shoji panels, dark timber slats, and sculptural basalt planters. Dress the woman in a moss-green linen wrap jacket with broad ivory cuffs. Preserve her braids, phone, downward gaze, and hand movements, keeping the large leaves in their original positions and scale."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“日式室内植物园”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "winter garden既可指室内温室，也可指室外冬季花园。",
+        "plan": "将植物环绕的室内人物改造成《阿凡达》式潘多拉生态研究站中的研究员。",
+        "short_zh": "将植物环绕的室内人物改造成《阿凡达》式潘多拉生态研究站中的研究员。",
+        "long_zh": "将房间改造成《阿凡达》式的潘多拉生态研究站，巨大的半透明叶片与微微发光的植物包围工作空间。女子穿轻便野外研究服，低头操作手持记录设备。蓝绿生物荧光与透入叶间的柔和日光交织，人工设施隐于茂密植物之中，呈现陌生而鲜活的外星生态。"
+      }
+    },
+    {
+      "id": "015",
+      "title": "贵族宫廷会面",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "period-dialogue-conservative",
+      "video": "train/015/video.mp4",
+      "source_sha256": "2ba61837481a761d408dfc99a30de7ba72ed24dede08902a6fcd3929d7a1754d",
+      "prompt_sha256": "bbd7e87f49b238cca51718aa42f24317bb039ade4726f916b161db66c5bd3977",
+      "original": {
+        "short_zh": "将起居室改造成华丽的拜占庭风格接待厅。",
+        "long_zh": "将带立柱的起居室改造成拜占庭风格接待厅，配置斑岩柱、镀金柱头和几何玻璃马赛克。沙发改用深红天鹅绒。深色头发的女子穿带金色刺绣领口的宝蓝织锦，同行者穿带花纹的酒红色衣料，保留面容、座位安排和交谈动作。",
+        "short_en": "Restyle the sitting room as an ornate Byzantine-inspired reception chamber.",
+        "long_en": "Transform the columned sitting room into a Byzantine-inspired reception chamber with porphyry columns, gilded capitals, and geometric glass mosaics. Reupholster the sofa in deep red velvet. Dress the dark-haired woman in sapphire brocade with a gold embroidered neckline and her companion in patterned burgundy fabric, preserving their faces, seated arrangement, and conversational gestures."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“拜占庭接待厅”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将起居室交谈改造成《权力的游戏》式的贵族宫廷会面。",
+        "short_zh": "将起居室交谈改造成《权力的游戏》式的贵族宫廷会面。",
+        "long_zh": "将起居室改造成《权力的游戏》式的贵族接待厅，厚重石柱、雕花木座和深红挂毯围合交谈空间。人物穿层叠织锦与金属扣饰的宫廷服装，在座位间延续原有对话。壁炉与烛光照亮面部，冷色天光留在高窗和石壁上，营造庄重、含蓄而带有权力张力的氛围。"
+      }
+    },
+    {
+      "id": "016",
+      "title": "立体纸艺城镇",
+      "group": "手工与材料",
+      "split": "train",
+      "source_group": "source-016",
+      "video": "train/016/video.mp4",
+      "source_sha256": "5fb11b8c52dcfeeb08b79b734878cf56721762475c425891a0ab9b4e33636d70",
+      "prompt_sha256": "8946c1cc605223b8f86cfb4f751d4bb2acb1a39dce6ed5e02850e0e7803a037e",
+      "original": {
+        "short_zh": "将城镇全景呈现为手工分层纸艺立体模型。",
+        "long_zh": "将城镇全景重建为手工纸艺立体模型。屋顶采用折叠陶土色卡纸，圆顶塔采用压纹铜箔，树冠采用层叠的赭色和橄榄绿剪纸。保留天际线、建筑位置和运镜；全景体现清晰折边、重叠纸层和细小投影。",
+        "short_en": "Render the town panorama as a handcrafted layered-paper diorama.",
+        "long_en": "Rebuild the town panorama as a handcrafted paper diorama. Render the rooftops in folded terracotta cardstock, the domed tower in embossed copper foil, and the tree canopies as layered ochre and olive paper cutouts. Preserve the skyline, building placement, and camera movement; reveal crisp folded edges, overlapping paper layers, and small cast shadows throughout."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“分层纸艺城镇”方向，提供手工与绘画媒介中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将城镇全景改造成一本立体童话书展开后的纸艺城镇。",
+        "short_zh": "将城镇全景改造成一本立体童话书展开后的纸艺城镇。",
+        "long_zh": "将城镇整体重建为立体童话书中的纸艺模型。屋顶由暖红卡纸折成，塔楼以压纹纸和少量金箔装饰，树冠由层叠剪纸构成。原有街道与建筑关系化为高低错落的纸层，柔和侧光显出折边、纸纤维与微小投影。随镜头移动展现真实微缩模型般的空间纵深。"
+      }
+    },
+    {
+      "id": "017",
+      "title": "爵士时代豪宅聚会",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "period-drama-conservative",
+      "video": "train/017/video.mp4",
+      "source_sha256": "41387202f9a1545a25aaa1796d58bd2b0a7706e0e7798e9f9b9196fa049181e4",
+      "prompt_sha256": "c6a3ca696a1a6ac52054116930ce5204c75e75d8dd64f58e122cb03a9454f767",
+      "original": {
+        "short_zh": "将房间改造成华丽的威尼斯行会大厅。",
+        "long_zh": "将房间改造成威尼斯行会大厅，配置雕花橡木屏风、花纹锦缎墙板和锻铁吊灯。前景女子穿奶油色织锦，有胡子的男子穿炭灰礼服外套，侍从穿酒红制服。保留所有人物、发型、手持物、位置和原有动作。",
+        "short_en": "Restyle the room as an ornate Venetian guild hall.",
+        "long_en": "Transform the room into a Venetian guild hall with carved oak screens, patterned damask wall panels, and wrought-iron pendant lanterns. Dress the foreground woman in cream brocade, the bearded man in a charcoal ceremonial jacket, and the attendants in burgundy livery. Preserve every person, their hairstyles, hand-held objects, positions, and original movements."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“威尼斯装饰大厅”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "历史行会大厅可能被当成严格时代复原，与固定保留原发型和手持物产生张力。",
+        "plan": "将室内人物场景改造成《了不起的盖茨比》式的爵士时代豪宅聚会。",
+        "short_zh": "将室内人物场景改造成《了不起的盖茨比》式的爵士时代豪宅聚会。",
+        "long_zh": "将房间改造成《了不起的盖茨比》式的豪宅会客厅，黑金几何装饰、镜面、丝绒和水晶灯共同构成华丽空间。人物穿珠饰晚礼服与剪裁利落的礼服西装，沿原有位置和动作交流。香槟色灯光在饰品与玻璃上闪烁，画面呈现热闹表象下精致而疏离的爵士时代气氛。"
+      }
+    },
+    {
+      "id": "018",
+      "title": "黑珍珠高级定制",
+      "group": "幻想与舞台设计",
+      "split": "train",
+      "source_group": "period-drama-conservative",
+      "video": "archive/lha-benchmark-20261102-clean/train/018/video.mp4",
+      "source_sha256": "5ae4ba788993b07596c1b613de89d3db7eeb71c03bd43fa4e7474e8def61454e",
+      "prompt_sha256": "7652b2d9eb554b41e5e9cd75a113a9d189969745d64c29c14ddf6588853547ea",
+      "original": {
+        "short_zh": "为人物特写营造黑珍珠高级定制沙龙美学。",
+        "long_zh": "将特写改为黑珍珠高级定制沙龙风格。女子的浅色袍服替换为带立体珍珠刺绣的午夜蓝丝绸，发簪和护甲重新设计为雕塑感银与珍珠饰品。可见背景改为黑漆表面，镶嵌贝母植物图案，保留面容、盘发、抬手姿态和说话动作。",
+        "short_en": "Give the close-up a black-pearl couture salon aesthetic.",
+        "long_en": "Restyle the close-up as a black-pearl couture salon. Replace the woman's pale robe with midnight-blue silk featuring raised pearl embroidery, and reinterpret her hairpins and finger guards as sculpted silver-and-pearl accessories. Refinish the visible background in black lacquer with mother-of-pearl botanical inlays, preserving her face, coiffure, raised-hand gesture, and speaking motion."
+      },
+      "suggestion": {
+        "decision": "drop",
+        "reason": "保留“黑珍珠高级定制”方向，提供幻想与舞台设计中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将女子特写改造成《沉睡魔咒》式暗黑童话中的宫廷人物。",
+        "short_zh": "将女子特写改造成《沉睡魔咒》式暗黑童话中的宫廷人物。",
+        "long_zh": "将特写重构为《沉睡魔咒》式的暗黑童话。女子穿午夜蓝丝绸与黑色羽纹织物，发饰和指饰采用盘绕枝蔓、银色尖叶与深色宝石。背景隐现黑木雕刻和冷色薄雾，侧光雕刻面部轮廓，细小高光落在珠宝与衣料上。延续抬手、说话和神态，呈现优雅而危险的宫廷气质。"
+      }
+    },
+    {
+      "id": "019",
+      "title": "民间幻想影戏",
+      "group": "手工与材料",
+      "split": "train",
+      "source_group": "period-drama-conservative",
+      "video": "train/019/video.mp4",
+      "source_sha256": "b1d7f9ebf012c3d638e8e6d70cd756adf6ac98b9838b4600c28fc5fbe7146e27",
+      "prompt_sha256": "5085a99d0afb3fa6f6892076850860ca57d84d3929cc3af98653f9f311c2528c",
+      "original": {
+        "short_zh": "将投影场景改造成华丽的剪纸皮影剧场。",
+        "long_zh": "将投影场景改造成华丽的剪纸皮影剧场。青绿色人物呈现为层叠剪纸剪影，以绘有扇贝形边缘的舞台口框住投影壁龛，将橙色圆盘重新解释为铜制太阳徽饰。前景女子穿钴蓝天鹅绒，保留姿态和手机；投影人物仍应明显平贴于墙面。",
+        "short_en": "Restyle the projected scene as an ornate paper-cut shadow theater.",
+        "long_en": "Transform the projected scene into an ornate paper-cut shadow theater. Render the teal figures as layered cut-paper silhouettes, frame the projected alcove with a painted scalloped proscenium, and reinterpret the orange discs as copper sun medallions. Dress the foreground woman in cobalt velvet, preserving her pose and phone; keep the projected figures visibly flat on the wall."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“剪纸影戏投影”方向，提供手工与绘画媒介中的独立视觉目标。",
+        "issue": "短版只编辑投影，长版还给前景真人换装，范围不同。",
+        "plan": "将墙面投影改成《中国奇谭》式民间幻想影戏，前景人物仍在观看和拍摄。",
+        "short_zh": "将墙面投影改成《中国奇谭》式民间幻想影戏，前景人物仍在观看和拍摄。",
+        "long_zh": "将墙面投影改为《中国奇谭》式的民间幻想影戏：人物以剪纸轮廓与皮影纹样呈现，朱红太阳、墨色山形和青绿色云气构成平面舞台。光影随原投影活动流动，始终呈现在墙面上；前景女子与手机保持真实拍摄质感。投影色彩映到周围，形成现实观看者与幻想故事同处一室的画面。"
+      }
+    },
+    {
+      "id": "020",
+      "title": "复古广告工作室",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-020",
+      "video": "train/020/video.mp4",
+      "source_sha256": "0827440a591d46aafc9fd410e4f8f3ec4b2de02f2f04a59877d99479752c57ca",
+      "prompt_sha256": "0aab7eaada116985b7efba87b9a8b41d57c496f2dc3263b05edc6829acf49017",
+      "original": {
+        "short_zh": "将房间改造成温暖、几何感鲜明的 1970 年代创意工作室。",
+        "long_zh": "将房间改造成 1970 年代创意工作室，使用焦橙色几何墙纸、胡桃木表面和镶铬边的烟色木桌面。坐着的男子穿芥末黄针织 Polo 衫，站着的女子穿酒红灯芯绒西装外套。保留笔记本、黑色笔、书写与指点动作及现有盆栽。",
+        "short_en": "Restyle the room as a warm, geometric 1970s creative studio.",
+        "long_en": "Transform the room into a 1970s creative studio with burnt-orange geometric wallpaper, walnut surfaces, and a smoked-wood tabletop edged in chrome. Dress the seated man in a mustard knit polo and the standing woman in a burgundy corduroy blazer. Preserve the notebook, black pen, their writing and pointing gestures, and the existing potted greenery."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“1970年代创意工作室”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将室内书写与讨论改造成《广告狂人》式的复古广告创意工作室。",
+        "short_zh": "将室内书写与讨论改造成《广告狂人》式的复古广告创意工作室。",
+        "long_zh": "将房间改造成《广告狂人》式的广告创意工作室，胡桃木家具、百叶窗和暖色织物围绕桌面，墙上陈列印刷海报与设计草图。坐着的男子与站着的女子穿20世纪中叶风格的衬衣、西装与半裙，延续书写和指点讨论。斜入的日光与略带胶片颗粒的棕金色调营造沉着、讲究的都市职业氛围。"
+      }
+    },
+    {
+      "id": "021",
+      "title": "双城之战绘画动画",
+      "group": "欧美动画与漫画",
+      "split": "train",
+      "source_group": "period-dialogue-conservative",
+      "video": "train/021/video.mp4",
+      "source_sha256": "83a1f303da15594d8547c87e674dfaa0898b3f7a7870e3286c1ee4fe556d48ab",
+      "prompt_sha256": "3e11350f09031bfc7c012e4aef9ceff946c91f51d5bcb86b98567ae9b20b76a7",
+      "original": {
+        "short_zh": "将交谈场景呈现为手绘水粉动画。",
+        "long_zh": "将交谈呈现为手绘水粉动画，使用不透明色块、断续笔触边缘和有意简化的色彩平面。男子的酒红服装和花纹围巾改为鲜明几何形状，灰泥墙用宽大、重叠的奶油色笔触绘制。保留两张面孔可辨识的比例、表情、嘴唇运动和过肩构图。",
+        "short_en": "Render the conversation as hand-painted gouache animation.",
+        "long_en": "Render the conversation as hand-painted gouache animation with opaque pigment blocks, broken brush edges, and deliberately simplified planes of color. Rework the man's burgundy clothing and patterned scarf into bold geometric shapes, and paint the plaster wall in broad overlapping cream strokes. Preserve both faces' recognizable proportions, expressions, lip movements, and the over-the-shoulder composition."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“水粉动画交谈”方向，提供手工与绘画媒介中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将人物对话改造成《英雄联盟：双城之战》式的绘画质感动画。",
+        "short_zh": "将人物对话改造成《英雄联盟：双城之战》式的绘画质感动画。",
+        "long_zh": "将整个对话画面转为《英雄联盟：双城之战》式动画，人物面部以清晰块面和手绘笔触塑造，服装纹理与背景呈现厚涂质感。暖色面部光与冷青阴影强化神态，墙面化为带有城市岁月痕迹的绘画背景。延续两人的表情变化、说话节奏与过肩关系，呈现富有戏剧张力的动画对话。"
+      }
+    },
+    {
+      "id": "022",
+      "title": "印象派花园漫步",
+      "group": "绘画与版画",
+      "split": "train",
+      "source_group": "peoples-garden-project",
+      "video": "train/022/video.mp4",
+      "source_sha256": "e20d1d8407575144985f713794c938284833d7d5718294af136846d96e987fb1",
+      "prompt_sha256": "3312293230116379db14fc35394168eb4d87339ed7186e34d40674039e5a597d",
+      "original": {
+        "short_zh": "为向日葵花园营造温暖黄金时刻的电影感草甸美学。",
+        "long_zh": "将向日葵夹道的花园小径改造成黄金时刻的电影感草甸：向日葵加深为鲜艳琥珀色和焦橙色，叶片呈浓郁翡翠绿，暖色斜射阳光照亮场景并形成长影。园丁的休闲 T 恤和帽子替换为旧亚麻田间衬衫与草帽，保留行走和搬运动作。",
+        "short_en": "Give the sunflower garden a warm golden-hour cinematic meadow aesthetic.",
+        "long_en": "Transform the sunflower-lined garden path into a golden-hour cinematic meadow: deepen the sunflowers to vivid amber and burnt orange, enrich the foliage with lush emerald tones, and bathe the scene in warm raking sunlight with long shadows. Replace the gardener's casual t-shirt and cap with a worn linen field shirt and straw hat, preserving their walk and carrying motion."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为印象派花园漫步。",
+        "issue": "旧稿的转换方向较泛，已改为印象派花园漫步。",
+        "plan": "将花园中提着容器行走的场景改造成莫奈式的印象派油画动画。",
+        "short_zh": "将花园中提着容器行走的场景改造成莫奈式的印象派油画动画。",
+        "long_zh": "将人物与向日葵花园整体转为莫奈式印象派油画。花朵、叶丛和小径由松散的短笔触与冷暖色点交织，人物提着容器穿过花间，身体轮廓融入明亮空气。柔和的黄绿、淡紫与蓝色阴影表现阳光闪动，笔触随人物行走和植物形态变化，形成轻盈、生动的夏日花园。"
+      }
+    },
+    {
+      "id": "023",
+      "title": "梵高向日葵劳动",
+      "group": "绘画与版画",
+      "split": "train",
+      "source_group": "peoples-garden-project",
+      "video": "train/023/video.mp4",
+      "source_sha256": "0539a5a383eba2d66ac0a766660aedfa066f9cca6fcbe459060740383b6945b1",
+      "prompt_sha256": "c8413c93f5d078328cc1ba68df0b33e8225f58fe8b9cf53aac40df6b7ea9db01",
+      "original": {
+        "short_zh": "将向日葵花园改造成黄金时刻的电影感收获田野。",
+        "long_zh": "将向日葵花园改造成黄金时刻的电影感收获田野：向日葵变得盛放鲜艳，土壤加深为浓郁琥珀色，暖色午后光线照亮场景。保留两名工人在花间耙地和行走的活动；在休闲服装外加旧亚麻围裙，以柔和体积光在翻耕土壤上投下长影。",
+        "short_en": "Restyle the sunflower garden as a cinematic golden-hour harvest field.",
+        "long_en": "Transform the sunflower garden into a cinematic golden-hour harvest field — enrich the sunflowers to full vivid bloom, deepen the soil to rich amber, and bathe the scene in warm late-afternoon rays. Keep both workers raking and walking among the flowers; dress them in worn linen aprons over their casual clothes, with soft volumetric light casting long shadows across the tilled earth."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“电影感向日葵田”方向，提供户外电影化中的独立视觉目标。",
+        "issue": "“收获田野”可能改变原向日葵种植场景的用途；旧文泛化要求两人同时耙地。",
+        "plan": "将向日葵田中的劳动场景改造成《至爱梵高》式的流动油画。",
+        "short_zh": "将向日葵田中的劳动场景改造成《至爱梵高》式的流动油画。",
+        "long_zh": "将向日葵田和其中的人物整体转为《至爱梵高》式油画动画。金黄花盘、深绿叶片与钴蓝天空由厚重而富有方向性的笔触组成，土地呈赭色起伏色块。人物延续花间劳动与行走，衣服和身体也融入同一油画材质，笔触随形体变化流动，营造炽烈、明亮的田野生命感。"
+      }
+    },
+    {
+      "id": "024",
+      "title": "都市漫画施工",
+      "group": "欧美动画与漫画",
+      "split": "train",
+      "source_group": "source-024",
+      "video": "train/024/video.mp4",
+      "source_sha256": "0b5bb96d14c1a6128ccdea85c212af3cba803fd4198cdd247a6a692d87ac6c5e",
+      "prompt_sha256": "d054050d408c63a74e82d636e063071080d4eababe87ad82587392f468e41b70",
+      "original": {
+        "short_zh": "将脚手架改造成黄金时刻的电影感钢制高层建筑架体。",
+        "long_zh": "将竹脚手架改造成映衬黄金时刻城市天际线的闪亮钢制高层建筑架体。以温暖电影感阳光重新布光，在结构上投下长影。保留工人的红衬衫和黄色安全帽，但强化每处细节：清晰纹理、丰富反差，以开阔城市背景替换平淡灰墙。",
+        "short_en": "Transform the scaffolding into cinematic steel high-rise rigging at golden hour.",
+        "long_en": "Transform the bamboo scaffolding into gleaming steel high-rise rigging against a golden-hour skyline. Relight the scene with warm cinematic sunlight casting long shadows across the structure. Keep the worker in their red shirt and yellow hard hat, but sharpen every detail — crisp textures, rich contrast, sweeping city backdrop replacing the flat grey wall."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“钢制高层施工架”方向，提供户外电影化中的独立视觉目标。",
+        "issue": "灰墙直接替换成天际线可能使作业环境失去建筑依托；“锐化所有细节”无明确范围。",
+        "plan": "将高处施工场景改造成《蜘蛛侠：平行宇宙》式的都市漫画动画。",
+        "short_zh": "将高处施工场景改造成《蜘蛛侠：平行宇宙》式的都市漫画动画。",
+        "long_zh": "将工人与施工架整体转为《蜘蛛侠：平行宇宙》式漫画动画。红黄工装以鲜明色块突出，结构线条带有手绘轮廓，都市高楼在背景中层叠延伸。半色调网点、轻微错版套色和图形化阴影塑造强烈纵深，原有施工动作与脚手架承重关系清晰可读，画面充满明快的都市节奏。"
+      }
+    },
+    {
+      "id": "025",
+      "title": "夜间博物馆探游",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-025",
+      "video": "train/025/video.mp4",
+      "source_sha256": "69c4ad2917e940903709925b4236031e6d50dd35c1222f5365062c828b415078",
+      "prompt_sha256": "c9516fd6eee125fd00c911f14ad4a8c5ec6234eaba2562cf1b2a7c8a1e53d5ad",
+      "original": {
+        "short_zh": "将美术馆改造成宏伟、暖光照明的宫殿展厅。",
+        "long_zh": "将明亮且光线平淡的当代美术馆改造成宏伟宫殿展厅，使用高耸镀金天花板、温暖琥珀色灯笼光和雕花木拱门。保留孩子们在宽阔大理石地面上自由奔跑的活动，并完整保留密集墙面装置。成年访客穿合体晚礼服，置于柔和电影光线下。",
+        "short_en": "Restyle the art gallery as a grand, warmly lit palatial exhibition hall.",
+        "long_en": "Transform the bright, flat-lit contemporary art gallery into a grand palatial exhibition hall with soaring gilded ceilings, warm amber lantern light, and carved wooden archways. Keep the children running freely across the vast marble floor and the dense wall installation intact. Dress the adult visitors in tailored evening attire under soft cinematic light."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“宫殿式美术展厅”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将美术馆中孩子奔跑的场景改造成《博物馆奇妙夜》式的夜间博物馆探游。",
+        "short_zh": "将美术馆中孩子奔跑的场景改造成《博物馆奇妙夜》式的夜间博物馆探游。",
+        "long_zh": "将展厅改造成《博物馆奇妙夜》式的宏大博物馆，古老石柱、挑高拱顶和密集展品在夜色中显现。孩子们继续穿行奔跑，成年访客与展品融入暖色展灯和冷蓝月光。明暗交错的长廊与远处若隐若现的展柜带出好奇和探险感，呈现日常空间突然变得神秘的电影氛围。"
+      }
+    },
+    {
+      "id": "026",
+      "title": "乐高货车卸料",
+      "group": "手工与材料",
+      "split": "train",
+      "source_group": "peoples-garden-project",
+      "video": "train/026/video.mp4",
+      "source_sha256": "2c2237f9759a749cbe295e897e4a159f1bf519421147bbb036226c16a39758c1",
+      "prompt_sha256": "8f4b0ea2f7e9630d3844553177e3212e8489a9d0d9a2ecf3eece6abfbed537b4",
+      "original": {
+        "short_zh": "将集市场景改造成黄金时刻的手工艺作坊街区。",
+        "long_zh": "将户外农贸市场改造成黄金时刻的手工艺作坊街区，以暖琥珀阳光和茂盛花圃替换停车场。保留戴帽男子从卡车货斗卸木板的动作，但让他在干净亨利领上衣外穿合身工匠围裙，腰带上露出擦亮的工具。",
+        "short_en": "Restyle the market setting as a golden-hour artisan workshop district.",
+        "long_en": "Transform the outdoor farmers market setting into a golden-hour artisan workshop district, with warm amber sunlight and lush garden beds replacing the parking lot. Keep the man in his cap unloading lumber planks from the truck bed, but dress him in a well-fitted craftsman apron over a clean henley, with polished tools visible at his belt."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为乐高货车卸料。",
+        "issue": "旧稿的转换方向较泛，已改为乐高货车卸料。",
+        "plan": "将男子从货车卸木料的场景改造成《乐高大电影》式的积木动画。",
+        "short_zh": "将男子从货车卸木料的场景改造成《乐高大电影》式的积木动画。",
+        "long_zh": "将男子、货车和周围环境整体改造成《乐高大电影》式积木世界。人物成为穿工装的积木小人，货车、木料与地面由可辨识的拼接零件构成，塑料表面带有细微划痕和柔和高光。延续从货斗搬卸长条材料的动作，积木手与材料接触清楚，明亮配色和微缩景深营造俏皮的建造现场。"
+      }
+    },
+    {
+      "id": "027",
+      "title": "魔法满屋庆典",
+      "group": "欧美动画与漫画",
+      "split": "train",
+      "source_group": "source-027",
+      "video": "train/027/video.mp4",
+      "source_sha256": "52628d59fec7b99932a0feeb4fa507718ab74abfab2ea5c96b0be5b5a6c53179",
+      "prompt_sha256": "969a2c8a30e66dc14c6b6a273e2d9cd7c2de8f7411177cb55d1a0784d6a214b8",
+      "original": {
+        "short_zh": "为庭院表演营造温暖热带黄金时刻的仪式美学。",
+        "long_zh": "将户外庭院改造成黄金时刻的仪式空间，使用浓郁琥珀光，将茂盛热带植被加深为翡翠绿，以暖色电影调色强化表演者鲜艳的青绿与橙色传统服装。添加穿过棕榈叶的柔和体积光，照在歌唱的女子和站立的鼓手身上。",
+        "short_en": "Give the courtyard performance a warm tropical golden-hour ceremonial aesthetic.",
+        "long_en": "Transform the outdoor courtyard into a golden-hour ceremonial space with rich amber light, lush tropical foliage deepened to emerald, and a warm cinematic grade that enriches the performers' vibrant teal-and-orange traditional attire. Add soft volumetric light filtering through the palm fronds onto the singing women and the standing drum player."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为魔法家族庭院庆典。",
+        "issue": "旧稿的转换方向较泛，已改为魔法家族庭院庆典。",
+        "plan": "将庭院中的歌唱、伴奏和舞动改造成《魔法满屋》式的三维动画庆典。",
+        "short_zh": "将庭院中的歌唱、伴奏和舞动改造成《魔法满屋》式的三维动画庆典。",
+        "long_zh": "将庭院与人群整体转为《魔法满屋》式三维动画。饱满的青绿、珊瑚红和橙色衣裙随歌唱与舞步摆动，花卉、棕榈与彩绘房屋围绕热闹庭院。人物表情鲜活，衣料和乐器具有细腻材质，斑驳阳光与柔和环境光照亮不同层次的人群，呈现温暖、有活力的家庭与社区庆典。"
+      }
+    },
+    {
+      "id": "028",
+      "title": "热血日漫板球",
+      "group": "日漫与手绘动画",
+      "split": "train",
+      "source_group": "source-028",
+      "video": "train/028/video.mp4",
+      "source_sha256": "2511f133c9c16395329f4a4ea6197dd71b3e668ad14c6711517b0de51136d1e2",
+      "prompt_sha256": "58231eec0eff1bfde4c229560a0a509711b800c81e20271d03a8c3bec01db7fe",
+      "original": {
+        "short_zh": "将板球场改造成黄金时刻的电影感英格兰乡村。",
+        "long_zh": "将烈日下的乡村板球场改造成黄金时刻的电影感英格兰乡村：用干砌石围墙和野花篱替换停放的汽车，浅色草地加深为翡翠绿；暖色午后阳光照亮穿白衣的投球手、飞扑接球手和守门员，在场地上投下戏剧性的长影。",
+        "short_en": "Restyle the cricket ground as cinematic English countryside at golden hour.",
+        "long_en": "Transform the sun-baked village cricket ground into a cinematic golden-hour English countryside setting: replace the parked cars with a dry-stone boundary wall and wildflower hedgerows, enrich the pale grass to deep emerald, and bathe the white-clad players — bowler mid-delivery, diving fielder, and wicketkeeper — in warm late-afternoon light with long dramatic shadows across the pitch."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“英式乡村板球场”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "旧文把连续比赛写成几个固定瞬间，对扑接角色的描述也可能误导。",
+        "plan": "将板球比赛改造成《排球少年！！》式的热血运动日漫。",
+        "short_zh": "将板球比赛改造成《排球少年！！》式的热血运动日漫。",
+        "long_zh": "将整场板球活动转为《排球少年！！》式的赛璐璐运动动画。人物采用利落线条、清晰轮廓和明亮队服色块，草地、球具与远景统一为手绘背景。沿原有投接与跑动表现身体重心、发力和队员配合，在关键运动处辅以克制的速度线与硬边阴影，呈现紧张而清爽的青春赛事感。"
+      }
+    },
+    {
+      "id": "029",
+      "title": "寻梦环游吉他演奏",
+      "group": "欧美动画与漫画",
+      "split": "train",
+      "source_group": "source-029",
+      "video": "train/029/video.mp4",
+      "source_sha256": "1e31a7bcc6f5d277e46c43570b92d45d0a0b7db20b2c4ff9d086dcc4dc79d453",
+      "prompt_sha256": "3fbf80a8e2732e1a23f04edf64cc384f0435bbbe184718724c162743ffdd16b6",
+      "original": {
+        "short_zh": "为庄园表演营造温暖复古的黄金时刻美学。",
+        "long_zh": "将阳光下的庄园场地改造成金色午后场景：石栏杆下的干土地变为斑驳鹅卵石地面，吉他手的黄外套替换为奶油色亚麻西装并保留巴拿马帽；暖琥珀色斜光掠过古典石构，便携音箱换为复古落地麦克风，背景树木加深为翡翠绿。",
+        "short_en": "Give the estate performance a warm, vintage golden-hour aesthetic.",
+        "long_en": "Transform the sunlit estate grounds into a golden late-afternoon setting: the dry earth becomes dappled cobblestones beneath the stone balustrade, the guitarist's yellow jacket replaced with a cream linen suit and panama hat retained, warm amber light raking across the classical stonework, the portable speaker swapped for a vintage floor microphone, background trees deepened to rich emerald."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为寻梦环游式吉他独奏。",
+        "issue": "旧稿的转换方向较泛，已改为寻梦环游式吉他独奏。",
+        "plan": "将户外吉他独奏改造成《寻梦环游记》式的彩色小镇动画表演。",
+        "short_zh": "将户外吉他独奏改造成《寻梦环游记》式的彩色小镇动画表演。",
+        "long_zh": "将吉他手和周围环境转为《寻梦环游记》式三维动画。演奏者坐在彩色小镇的石砌庭院中，身穿绣花外套，手中的木吉他具有温润光泽。剪纸彩旗、花盆与暖色窗灯点缀建筑，柔和暮光包裹人物。延续拨弦、按弦与身体随音乐摆动的节奏，呈现亲切、明亮的街头音乐片段。"
+      }
+    },
+    {
+      "id": "030",
+      "title": "星月幻想舞会",
+      "group": "日漫与手绘动画",
+      "split": "train",
+      "source_group": "user-upload-4701e05420e3b23acfadfb8dcbd3342b",
+      "video": "train/030/video.mp4",
+      "source_sha256": "3acccb1c12a1801b8444cbac348c47e1f34089b0fd7b655d7be8ae51540e6be7",
+      "prompt_sha256": "84ab09b03cb4f0e62dda77c81ea16f2ad50becf0d8e2ee79d2b417f54b9851b9",
+      "original": {
+        "short_zh": "将夜间广场改造成露天天体主题舞厅。",
+        "long_zh": "将夜间广场改造成露天天体主题舞厅，使用午夜蓝马赛克铺地，在现有建筑立面添加镀金天文浮雕，并设置黄铜框拱门。舞者的裙装和外套改为宝蓝天鹅绒与银色织锦，带星座刺绣。保留所有舞者和观众、位置、舞蹈动作和运镜。",
+        "short_en": "Restyle the nighttime plaza as an open-air celestial ballroom.",
+        "long_en": "Transform the nighttime plaza into an open-air celestial ballroom with midnight-blue mosaic paving, gilded astronomical reliefs on the existing façades, and brass-framed archways. Restyle the dancers' dresses and coats in sapphire velvet and silver brocade, with embroidered constellation motifs. Preserve every dancer and spectator, their positions, choreography, and camera movement."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“星象露天舞厅”方向，提供幻想与舞台设计中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将夜间广场舞改造成《美少女战士》式的星月幻想舞会。",
+        "short_zh": "将夜间广场舞改造成《美少女战士》式的星月幻想舞会。",
+        "long_zh": "将广场舞场景转为《美少女战士》式的复古赛璐璐动画，舞者穿带星月饰件的飘逸礼服，在深蓝星空与发光拱廊下起舞。粉紫渐变、柔光星芒与纤细人物线条构成梦幻画面。延续群舞节奏、观众和场上关系，让原本日常的夜间活动成为浪漫的星月舞会。"
+      }
+    },
+    {
+      "id": "031",
+      "title": "毛毡草坪活动",
+      "group": "手工与材料",
+      "split": "train",
+      "source_group": "user-campus-activity-20261102",
+      "video": "train/031/video.mp4",
+      "source_sha256": "bb07c2dd2f246240c1a92723339caa2f8a79edebb396d49060e9700100c88c0c",
+      "prompt_sha256": "2cf0ebcce51932bbe96182080b9c8f1803cc82feceaa9dd7d204d1a4eb8e4b27",
+      "original": {
+        "short_zh": "将草坪场景呈现为刺绣织物动画。",
+        "long_zh": "将草坪场景呈现为刺绣织物动画，使用缝制毛毡草地、层叠布料树冠和编织背景。以不同织物纹理与可见接缝重现女子的象牙白上衣、蓝裤和红包。保留所有人物可辨识的特征、行走动作、前景穿行、遮挡和原有横向运镜。",
+        "short_en": "Render the lawn scene as embroidered textile animation.",
+        "long_en": "Render the lawn scene as embroidered textile animation, with stitched felt grass, layered fabric tree canopies, and a woven backdrop. Recreate the woman's ivory top, blue trousers, and red bag using distinct cloth textures and visible seams. Preserve every person's recognizable features, walking movements, foreground crossings, occlusions, and the original camera pan."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "人物有快步、轻跑与前景穿行，原稿统一写成行走过窄。",
+        "issue": "人物有快步、轻跑与前景穿行，原稿统一写成行走过窄。",
+        "plan": "将草坪上的人物活动改造成毛毡手工定格动画。",
+        "short_zh": "将草坪上的人物活动改造成毛毡手工定格动画。",
+        "long_zh": "将人物、草地和树木塑造成毛毡与缝制布料组成的微缩世界，衣物显出针脚，草叶带有柔软纤维。人物的快步、轻跑与前景穿行带动布偶般的动作，暖侧光照出材质层次，形成轻盈的手工童话。"
+      }
+    },
+    {
+      "id": "032",
+      "title": "忍者学院晨练",
+      "group": "日漫与手绘动画",
+      "split": "train",
+      "source_group": "user-campus-activity-20261102",
+      "video": "train/032/video.mp4",
+      "source_sha256": "beca8ec680cfa75236465c9086862af7027f2fe343dccac671c2a894a2a11e15",
+      "prompt_sha256": "206e484dd75e7ceae6370cd942cdab5d2042e02b807e7f1385c8c7ab7bc36690",
+      "original": {
+        "short_zh": "将学校球场改造成山间武术学院庭院。",
+        "long_zh": "将学校球场改造成山间武术学院庭院，用规整砂岩铺地和雕花木拱廊替换学校立面。篮球架改为深色木质，同时保留篮圈和球场布局。锻炼者穿靛蓝绗缝训练夹克、奶油色腰带和宽松黑裤，保留原有锻炼动作。",
+        "short_en": "Restyle the school court as a mountain martial-arts academy courtyard.",
+        "long_en": "Transform the school court into a mountain martial-arts academy courtyard with fitted sandstone paving and carved timber arcades replacing the school façade. Refinish the basketball supports in dark wood while preserving the hoops and court layout. Dress the exercising person in an indigo quilted training jacket, cream sash, and loose black trousers, retaining the original exercise movements."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为忍者学院晨练。",
+        "issue": "旧稿的转换方向较泛，已改为忍者学院晨练。",
+        "plan": "将球场上的独自锻炼改造成《火影忍者》式的忍者学院训练。",
+        "short_zh": "将球场上的独自锻炼改造成《火影忍者》式的忍者学院训练。",
+        "long_zh": "将整幅画面转为《火影忍者》式赛璐璐动画。锻炼者成为年轻忍者，在木构回廊与练习木桩围绕的学院庭院中训练，服装采用简洁护具、绑腿与鲜明色块。原有抬臂、伸展和转身自然转为体术热身，利落线条与清晰硬边阴影突出身体动势，营造清爽的热血校园气氛。"
+      }
+    },
+    {
+      "id": "033",
+      "title": "赛博朋克自行车技巧",
+      "group": "日漫与手绘动画",
+      "split": "train",
+      "source_group": "user-campus-activity-20261102",
+      "video": "train/033/video.mp4",
+      "source_sha256": "24453863bcdcc21d3297830ec3b3afee1c1a751fdd64c130809f3842ac729477",
+      "prompt_sha256": "2d2f9d333d360cd9e334e9f08d4fb83c7eed06d16fce88d8a26121cc7dab3796",
+      "original": {
+        "short_zh": "将赛道改造成 1930 年代流线风格自行车竞技场。",
+        "long_zh": "将赛道改造成 1930 年代流线风格自行车竞技场，包含奶油色石柱廊、酒红色赛道和拉丝金属栏杆。骑手上衣改为红与象牙白拼接针织面料，自行车改为抛光镀铬并配樱桃红装饰。保留头盔、车轮和踏板几何形状、平衡动作、车道标线、观众及其位置。",
+        "short_en": "Restyle the track as a streamlined 1930s-inspired cycling arena.",
+        "long_en": "Transform the track into a streamlined 1930s-inspired cycling arena with cream stone colonnades, burgundy track surfacing, and brushed-metal railings. Restyle the rider's jersey in red-and-ivory knit panels and the bicycle in polished chrome with cherry-red accents. Preserve the helmet, wheel and pedal geometry, balancing movements, lane markings, spectators, and their positions."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "源视频重点是自行车平衡与控车；原稿的竞速意向会改变活动。",
+        "issue": "源视频重点是自行车平衡与控车；原稿的竞速意向会改变活动。",
+        "plan": "将自行车技巧表演改造成《阿基拉》式的复古赛博朋克日漫。",
+        "short_zh": "将自行车技巧表演改造成《阿基拉》式的复古赛博朋克日漫。",
+        "long_zh": "将骑手的平衡与控车动作转为《阿基拉》式手绘动画，红白技术运动服、精密机械线稿和浓厚赛璐璐色块形成鲜明轮廓。跑道周围采用混凝土看台与工业灯阵，深靛阴影和红色灯光营造复古未来都市气氛。"
+      }
+    },
+    {
+      "id": "034",
+      "title": "仙侠斗法",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-034",
+      "video": "train/034/video.mp4",
+      "source_sha256": "f0f055c5ce1ae01b845246ebd6a7b0b370028ca67ca1632f77d504dfd7c62c6c",
+      "prompt_sha256": "c8463d8980f2ff21a0e6014b9eedebc493862352ef791976db8e2f2b31a571f1",
+      "original": {
+        "short_zh": "将篮球场景改造成电影感武侠山间训练场景。",
+        "long_zh": "将篮球比赛视频改造成高预算电影质感的武侠场景。两位球员身穿优雅飘逸、宽袖的古代中国汉服。篮球场替换为位于云雾山巅、古老而风化的石制练武台，周围环绕茂密竹林和传统木塔。添加透过树叶的戏剧性黄金时刻阳光，形成长影与空气薄雾。",
+        "short_en": "Transform the basketball scene into a cinematic Wuxia mountain training scene.",
+        "long_en": "Transform the basketball game video into a high-budget cinematic Wuxia movie scene. The two players are now wearing elegant, flowing ancient Chinese Hanfu robes with wide sleeves. The basketball court is replaced by an ancient, weathered stone training platform located high in the misty mountains, surrounded by a dense bamboo forest and traditional wooden pagodas. Add dramatic golden hour sunlight filtering through the leaves, creating long shadows and atmospheric haze."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“武侠山间训练场”方向，提供幻想与舞台设计中的独立视觉目标。",
+        "issue": "武侠环境与完整保留现代篮球比赛逻辑之间没有交代。",
+        "plan": "将篮球互动重构为《蜀山传》式的仙侠斗法场景。",
+        "short_zh": "将篮球互动重构为《蜀山传》式的仙侠斗法场景。",
+        "long_zh": "将场景重构为《蜀山传》式的云山仙境，两人化身修行者，在悬空石台与远处仙宫之间斗法。原有攻守互动转为法术或法器之间的较量，服饰、道具和场地用途共同融入仙侠世界。流动云雾、冷暖交织的法光与飘动衣袍构成奇幻层次，具体招式由原有身体动作自然发展。"
+      }
+    },
+    {
+      "id": "035",
+      "title": "爵士酒吧钢琴",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-035",
+      "video": "train/035/video.mp4",
+      "source_sha256": "703484ab2151e3f9f8ef423d887a5a8de64ce49333a74d1e3d42a081dcdc478c",
+      "prompt_sha256": "cb7ad04373b494ab6ae4cfc84e6da8e7ae7b5ca61779124d24f8ee7ac2b15521",
+      "original": {
+        "short_zh": "将咖啡馆改造成奢华、暖光照明的钢琴酒廊。",
+        "long_zh": "将咖啡馆改造成配有水晶吊灯、深色木墙板和温暖电影光线的豪华钢琴酒廊。钢琴师穿黑色燕尾礼服，客人穿优雅晚礼服。钢琴改为抛光黑色表面。保留面容、演奏动作、琴键排列和运镜。",
+        "short_en": "Restyle the cafe as a luxurious, warmly lit piano lounge.",
+        "long_en": "Transform the café into a luxurious piano lounge with crystal chandeliers, dark wood paneling, and warm cinematic lighting. Dress the pianist in a black tuxedo and the guests in elegant evening wear. Give the piano a polished black finish. Preserve faces, playing motions, keyboard alignment, and camera movement."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“豪华钢琴酒廊”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将咖啡馆里的钢琴演奏改造成《爱乐之城》式的爵士酒吧表演。",
+        "short_zh": "将咖啡馆里的钢琴演奏改造成《爱乐之城》式的爵士酒吧表演。",
+        "long_zh": "将咖啡馆改造成《爱乐之城》式的爵士酒吧。钢琴师穿复古西装，在暖色聚光灯下演奏，周围客人融入昏暗的蓝紫色环境光。深色木饰面、红色丝绒与点状桌灯营造亲密的夜间空间，画面呈现浓郁色彩和浪漫的音乐电影氛围，延续原视频的演奏与人物互动。"
+      }
+    },
+    {
+      "id": "036",
+      "title": "中土吟游诗人",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-036",
+      "video": "train/036/video.mp4",
+      "source_sha256": "641fd5ea806609b881a303eb4f1216e791a028848bb01362118d6eac11ada5fd",
+      "prompt_sha256": "26b902599cb2cb472540120d7384564bf177fead742bfcf567165da489adf968",
+      "original": {
+        "short_zh": "将场所改造成优雅的中国宫廷音乐沙龙。",
+        "long_zh": "将场所改造成优雅的中国宫廷音乐沙龙，使用雕花木屏风、丝绸帷幔和温暖灯笼光。两位表演者均穿刺绣丝绸汉服。保留面容、姿态、吉他和手部动作。",
+        "short_en": "Restyle the venue as an elegant Chinese palace music salon.",
+        "long_en": "Transform the venue into an elegant Chinese palace music salon with carved wooden screens, silk drapes, and warm lantern lighting. Dress both performers in embroidered silk hanfu. Preserve their faces, poses, guitar, and hand movements."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为中土吟游诗人合演。",
+        "issue": "旧稿的转换方向较泛，已改为中土吟游诗人合演。",
+        "plan": "将舞台上的双人音乐表演改造成《指环王》式的吟游诗人演出。",
+        "short_zh": "将舞台上的双人音乐表演改造成《指环王》式的吟游诗人演出。",
+        "long_zh": "将舞台改造成《指环王》式的中土旅店音乐角，木梁、石壁与壁炉围绕表演者。坐着的乐手拨奏鲁特琴式弦乐器，站立同伴延续原有手势与配合，衣着采用朴素长袍、皮革和编织饰边。暖火光映在木质乐器和衣料上，前景听众融入旅店空间，呈现旅途中亲密、古朴的音乐时刻。"
+      }
+    },
+    {
+      "id": "037",
+      "title": "龙珠风格乒乓球",
+      "group": "日漫与手绘动画",
+      "split": "train",
+      "source_group": "source-037",
+      "video": "train/037/video.mp4",
+      "source_sha256": "16b3a2f47fc97ea28e551657003cd9b95d98a6d30a85804753ae3ed088c0737a",
+      "prompt_sha256": "88aeacc1d348cfdfe1b8b7bcf8e0332bcde24061b77906a8a1c9a02e4dc9a938",
+      "original": {
+        "short_zh": "将房间改造成未来空间站运动竞技场。",
+        "long_zh": "将房间改造成未来空间站运动竞技场，配置金属墙壁、蓝白照明和可望见地球的大窗。球员穿流线感科幻运动服，球桌添加发光蓝边。保留面容、打球动作、球的轨迹、球桌几何形状和运镜。",
+        "short_en": "Restyle the room as a futuristic space-station sports arena.",
+        "long_en": "Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges. Preserve faces, playing motions, ball trajectory, table geometry, and camera movement."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“空间站运动场”方向，提供未来与科幻中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将室内乒乓球对打改造成《龙珠》式的明快赛璐璐运动动画。",
+        "short_zh": "将室内乒乓球对打改造成《龙珠》式的明快赛璐璐运动动画。",
+        "long_zh": "将乒乓球场景转为《龙珠》式的赛璐璐动画，以有力轮廓、饱满色块和简洁硬边阴影描绘人物。球员穿鲜明配色的运动服，在胶囊科技感的圆弧场馆内对打。球台、球拍与来回击球关系保持清楚，局部速度线突出挥拍和转身，营造轻快、充满力量感的竞技氛围。"
+      }
+    },
+    {
+      "id": "038",
+      "title": "黑白漫画麻将",
+      "group": "欧美动画与漫画",
+      "split": "train",
+      "source_group": "source-038",
+      "video": "train/038/video.mp4",
+      "source_sha256": "836a89177f2e1c36cf22d12cc2338cede761ab6a96782e621d91724b429dd5da",
+      "prompt_sha256": "76c97744bc00778ef11687c3eca81493e5c3d0b88c7c9b23e86d1c493bdcc01f",
+      "original": {
+        "short_zh": "将房间改造成奢华、暖光照明的赌场酒廊。",
+        "long_zh": "将房间改造成采用温暖电影光线的豪华赌场酒廊。四名玩家都穿合体西装，麻将桌升级为抛光深色木材。面容、动作和运镜保持不变。",
+        "short_en": "Restyle the room as a luxurious, warmly lit casino lounge.",
+        "long_en": "Turn the room into a luxury casino lounge with warm cinematic lighting. Dress all four players in tailored suits and upgrade the mahjong table to polished dark wood. Keep faces, actions, and camera motion unchanged."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“豪华麻将酒廊”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "抛光木材可能被理解为覆盖全部麻将操作区域。",
+        "plan": "将麻将对局改造成《罪恶之城》式的黑白硬派漫画场景。",
+        "short_zh": "将麻将对局改造成《罪恶之城》式的黑白硬派漫画场景。",
+        "long_zh": "将麻将房转为《罪恶之城》式的黑白漫画空间，人物穿深色西装，面部与手部以大块纯黑阴影和锐利白色高光塑形。百叶窗光影切过桌面，麻将牌与摸打动作保持清楚，仅用少量暗红点缀衣饰和室内灯光。粗粝墨线与强烈明暗营造沉静、紧张的都市夜局。"
+      }
+    },
+    {
+      "id": "039",
+      "title": "日漫樱花公园",
+      "group": "日漫与手绘动画",
+      "split": "train",
+      "source_group": "source-039",
+      "video": "train/039/video.mp4",
+      "source_sha256": "e945d4e983e6a42e09b1a4418b6e6a0797d8314e0987b04a7add7b002d4224fd",
+      "prompt_sha256": "f5431c76aa1b966bfc46198d1a57b70daaf98578cdfb244bba44a48e2ddf149a",
+      "original": {
+        "short_zh": "将公园改造成带悬浮山峰的电影感中国幻想花园。",
+        "long_zh": "将公园改造成电影感中国幻想花园，远处有悬浮山峰、华丽亭阁和飘落樱花瓣。人物穿刺绣丝绸汉服。保留面容、手机、手部动作和运镜。",
+        "short_en": "Restyle the park as a cinematic Chinese fantasy garden with floating mountains.",
+        "long_en": "Transform the park into a cinematic Chinese fantasy garden with distant floating mountains, ornate pavilions, and drifting cherry petals. Dress the person in embroidered silk hanfu. Preserve the face, phone, hand movements, and camera motion."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为日漫樱花公园。",
+        "issue": "旧稿的转换方向较泛，已改为日漫樱花公园。",
+        "plan": "将樱花树下使用手机的人物改造成《你的名字。》式的现代日漫场景。",
+        "short_zh": "将樱花树下使用手机的人物改造成《你的名字。》式的现代日漫场景。",
+        "long_zh": "将人物与公园整体转为《你的名字。》式的手绘动画。人物保持现代便装与手机互动，樱花树、草地和远处建筑以细腻背景绘画呈现。通透蓝天、粉白花瓣与略带青紫的阴影构成清澈春日色彩，日光沿发丝和肩线形成柔亮轮廓，营造日常中带有浪漫感的青春画面。"
+      }
+    },
+    {
+      "id": "040",
+      "title": "雨夜未来列车",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-040",
+      "video": "train/040/video.mp4",
+      "source_sha256": "733ab4676d454172f04a885e8d6363ef5f87900b3b5bf6daf4db7d75e7a800ff",
+      "prompt_sha256": "c6b3f4181f7c8b5a2478e5bedb8d54a6356d897c85627c4ee739e210393a093e",
+      "original": {
+        "short_zh": "将列车和车站改造成未来科幻城市交通枢纽。",
+        "long_zh": "将列车改造成未来科幻列车，配置钛金属面板、发光蓝色灯带和流线型车顶供电模块。周围环境升级为未来城市交通枢纽，配电影感照明与真实反射。保留列车运动、车窗布局和运镜。",
+        "short_en": "Restyle the train and station as a futuristic sci-fi urban transit hub.",
+        "long_en": "Transform the train into a futuristic sci-fi train with titanium panels, glowing blue light strips, and sleek rooftop power modules. Upgrade the surroundings to a futuristic urban transit hub with cinematic lighting and realistic reflections. Preserve the train’s motion, window layout, and camera movement."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“未来城市列车”方向，提供未来与科幻中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将列车与车站改造成《银翼杀手2049》式的雨夜赛博朋克城市交通场景。",
+        "short_zh": "将列车与车站改造成《银翼杀手2049》式的雨夜赛博朋克城市交通场景。",
+        "long_zh": "将行驶中的列车置于《银翼杀手2049》式的未来都市雨夜。列车带有沉重的工业金属质感，车站融入层叠的巨型建筑，远处广告光幕透过潮湿薄雾显现。青蓝与洋红霓虹映在车身和湿润站台上，形成深暗、浓密而有纵深的城市画面。延续列车原有行进方向和镜头运动。"
+      }
+    },
+    {
+      "id": "041",
+      "title": "龙猫童年游戏",
+      "group": "日漫与手绘动画",
+      "split": "train",
+      "source_group": "source-041",
+      "video": "train/041/video.mp4",
+      "source_sha256": "99a434df7a452ba315369ff07d500b18cb95c29660d23470031632e71f18ef7d",
+      "prompt_sha256": "10aa681604100bec5b0ce8db5c63d9ea9c26603d416f5b360c5d204b9e2c2374",
+      "original": {
+        "short_zh": "将村庄小径改造成阳光下的喜马拉雅庭院。",
+        "long_zh": "将石铺村庄小径改造成阳光下的喜马拉雅庭院，配万寿菊花环和粉刷白墙。保留两名孩子在石板上追逐，以及站在边缘观看的成年人。孩子们穿鲜艳刺绣羊毛外套；阴天光线改为金色午后阳光，带清冽山间空气的薄雾感。",
+        "short_en": "Restyle the village path as a sunlit Himalayan courtyard.",
+        "long_en": "Transform the stone-paved village path into a sunlit Himalayan courtyard with marigold garlands and whitewashed walls. Keep the two children mid-chase across the flagstones and the adult bystander watching at the edge. Dress both children in bright embroidered wool coats; warm the overcast light to golden afternoon sun with crisp mountain air haze."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为龙猫式童年游戏。",
+        "issue": "旧稿的转换方向较泛，已改为龙猫式童年游戏。",
+        "plan": "将孩子们在小路上跳跃嬉戏的场景改造成《龙猫》式的吉卜力动画。",
+        "short_zh": "将孩子们在小路上跳跃嬉戏的场景改造成《龙猫》式的吉卜力动画。",
+        "long_zh": "将孩子与村庄小路转为《龙猫》式手绘动画。孩子穿朴素的日常衣服，在石铺小路上弯腰、跳跃和相互嬉戏，旁边的成年人自然观看。矮墙、野花、菜园与远处树丛构成温柔的乡村背景，暖日光和清新水彩色调突出童年活动的轻快与生活气息。"
+      }
+    },
+    {
+      "id": "042",
+      "title": "降世神通武术练习",
+      "group": "欧美动画与漫画",
+      "split": "train",
+      "source_group": "source-042",
+      "video": "train/042/video.mp4",
+      "source_sha256": "e6e96522a74e5e69c05a8d3c13137886b79c3fbfb5d3ba4c5c888a5d8d46d906",
+      "prompt_sha256": "965fccf8dfa997d9cfe8d19f036ac32f5b07ed3f7ec9012c17905847f0e6e3c3",
+      "original": {
+        "short_zh": "将学校操场改造成黄金时刻的电影感武术训练庭院。",
+        "long_zh": "将阳光下的砖砌学校操场改造成黄金时刻、戏剧性电影感的武术训练庭院。保留孩子们对练和舞动的动态；平淡铺地替换为暖琥珀光照下的石地，添加动态长影，以柔焦拱门增加背景深度。提升反差与色彩丰富度，达到精致电影调色效果。",
+        "short_en": "Restyle the schoolyard as a cinematic golden-hour martial-arts training courtyard.",
+        "long_en": "Transform the sunlit brick schoolyard into a dramatic cinematic martial-arts training courtyard at golden hour. Keep the children mid-sparring and dancing in motion; replace the flat pavement with warm amber-lit stone, add long dynamic shadows, and give the background depth with softly blurred archways. Boost contrast and color richness to a polished film-grade look."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为降世神通式练功庭院。",
+        "issue": "旧稿的转换方向较泛，已改为降世神通式练功庭院。",
+        "plan": "将操场上的多人练习改造成《降世神通：最后的气宗》式的武术学院动画。",
+        "short_zh": "将操场上的多人练习改造成《降世神通：最后的气宗》式的武术学院动画。",
+        "long_zh": "将画面转为《降世神通：最后的气宗》式二维动画。人物在石铺训练庭院中进行分组练习，宽松练功服、腰带和护腕随挥臂、侧身与步法摆动，木构回廊和远处山峦形成背景。清楚的人物轮廓、简洁色块和温暖日光突出动作配合，呈现有活力的少年练功场景。"
+      }
+    },
+    {
+      "id": "043",
+      "title": "梦幻水上赛艇",
+      "group": "电影与影视世界",
+      "split": "train",
+      "source_group": "source-043",
+      "video": "train/043/video.mp4",
+      "source_sha256": "5c0d41d5085edc59521fa77e8cec7eac31311c2d42fae3a6b0bb76e3136ddfcc",
+      "prompt_sha256": "af8ac42fe225ec5a4ca14605c70ad56cb25cdfacec0e508c17e6f756252fc1b4",
+      "original": {
+        "short_zh": "将赛艇湖面改造成黄金时刻、富有戏剧性的奥运赛艇航道。",
+        "long_zh": "将平淡的赛艇湖面改造成黄金时刻的奥运航道，琥珀色斜光掠过水面，加入深青色反射与戏剧性积云。四名划手穿流线型比赛服。白色桨叶切入水面时呈现清晰的慢动作水花，并强化远处航道标记，营造鲜明比赛日氛围。",
+        "short_en": "Restyle the regatta lake as a dramatic golden-hour Olympic rowing course.",
+        "long_en": "Transform the flat regatta lake into a golden-hour Olympic course with amber light raking across the water, deep teal reflections, and dramatic cumulus clouds. Dress the four rowers in sleek competition uniforms. Render the white oar blades cutting the surface with crisp slow-motion spray, and sharpen the distant course markers into vivid race-day atmosphere."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“电影感赛艇航道”方向，提供户外电影化中的独立视觉目标。",
+        "issue": "slow-motion spray可同时指水花细节或整段降速。",
+        "plan": "将赛艇场景改造成《少年派的奇幻漂流》式的梦幻水上影像。",
+        "short_zh": "将赛艇场景改造成《少年派的奇幻漂流》式的梦幻水上影像。",
+        "long_zh": "将赛艇与划手置于《少年派的奇幻漂流》式的辽阔水面，金粉色云层与深蓝水色相互映照，远处水天交界在轻雾中消融。人物与船体保持写实质感，桨叶按原有节奏入水，激起细密波纹与闪亮水花。以通透光线和鲜明倒影呈现壮阔、宁静而富有生命力的水上画面。"
+      }
+    },
+    {
+      "id": "044",
+      "title": "清线漫画户外烤炉",
+      "group": "欧美动画与漫画",
+      "split": "train",
+      "source_group": "source-044",
+      "video": "train/044/video.mp4",
+      "source_sha256": "add7aefad42ab7b819bbb837976134aa8339177c27a29e866edaf9d5fe7d7095",
+      "prompt_sha256": "31c3e839e62176614376a133d915edf7bf8e7450e6de0009ad4dc7c34d0b3fb4",
+      "original": {
+        "short_zh": "将面包炉场景改造成黄金时刻的乡村地中海面包房。",
+        "long_zh": "将传统石制面包炉改造成黄金时刻的宏大乡村地中海面包房，暖琥珀阳光照亮火山背景。保留穿白裙、戴遮阳帽的女子，以及男子用长木制面包铲推送面包的动作；用攀爬三角梅和柔和电影景深丰富风化石墙。",
+        "short_en": "Restyle the bread oven setting as a rustic Mediterranean bakery at golden hour.",
+        "long_en": "Transform the traditional stone bread oven into a grand rustic Mediterranean bakery at golden hour, with warm amber sunlight bathing the volcanic mountain backdrop. Keep the woman in her white dress and sun hat and the man sliding the loaf on his long wooden peel, but enrich the weathered stone walls with climbing bougainvillea and soft cinematic depth-of-field."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "与008的吉卜力厨房意向重复；源视频是户外烤炉，原稿写成室内厨房。",
+        "issue": "与008的吉卜力厨房意向重复；源视频是户外烤炉，原稿写成室内厨房。",
+        "plan": "将户外烤面包的场景改造成欧洲清线漫画动画。",
+        "short_zh": "将户外烤面包的场景改造成欧洲清线漫画动画。",
+        "long_zh": "将石炉、人物和周围院落画成欧洲清线漫画：均匀墨线、平整色块与清晰建筑细节，暖赭石墙衬托蓝色衣物。人物在户外石炉旁用长柄面包铲忙碌，面包与蒸汽以简洁轮廓表现，呈现明快的乡村生活。"
+      }
+    },
+    {
+      "id": "045",
+      "title": "马蒂斯剪纸洗衣",
+      "group": "手工与材料",
+      "split": "train",
+      "source_group": "source-045",
+      "video": "train/045/video.mp4",
+      "source_sha256": "4433e8b9c1471809567977c2e4e5835082e7fc3e7ce4aba398554a5967462863",
+      "prompt_sha256": "5d132c01aae0a4d7c952d97391fd06c060e00c8c1d738b45c0dbcd883620ec27",
+      "original": {
+        "short_zh": "为山坡场景营造鲜艳的黄金时刻电影风景美学。",
+        "long_zh": "将阳光强烈的山坡改造成黄金时刻电影风景，浓郁琥珀光照亮起伏绿丘。四名孩子穿鲜艳、干净的传统非洲印花服装。塑料盆替换为抛光铜制洗涤容器，让散落衣物以鲜艳饱和色彩映衬茂盛背景。",
+        "short_en": "Give the hillside scene a vibrant golden-hour cinematic landscape aesthetic.",
+        "long_en": "Transform the sun-drenched hillside into a golden-hour cinematic landscape with rich amber light glowing across the rolling green hills. Dress the four children in vibrant, clean traditional African prints. Replace the plastic basin with a polished copper washing vessel, and give the scattered clothes vivid, saturated colors against the lush backdrop."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“铜器与山坡洗衣”方向，提供户外电影化中的独立视觉目标。",
+        "issue": "“四个孩子”容易被理解为画面全部人数；服装风格只写“非洲印花”过宽。",
+        "plan": "将山坡洗衣场景改造成马蒂斯剪纸式的鲜明色块动画。",
+        "short_zh": "将山坡洗衣场景改造成马蒂斯剪纸式的鲜明色块动画。",
+        "long_zh": "将孩子、洗衣容器、衣物和山坡整体化为马蒂斯剪纸式画面。人物以简洁而富有动势的剪影表现，钴蓝、朱红、柠檬黄与翠绿构成大胆色彩关系，山丘和植物化为自由弯曲的纸片。保留洗衣活动与人物配合，以纸张边缘、叠层和轻微投影表现手工质感。"
+      }
+    },
+    {
+      "id": "046",
+      "title": "敦煌岩彩舞蹈",
+      "group": "绘画与版画",
+      "split": "test",
+      "source_group": "source-046",
+      "video": "test/046/video.mp4",
+      "source_sha256": "f0ff8ed2ebd192ef5ab9c215475f7f911278d8ad4844b9fb2bcd6616b63c988b",
+      "prompt_sha256": "0fbe5b43f5e98d870835231e21c068ab49ddcbae35a95642317973e1f2dadfaa",
+      "original": {
+        "short_zh": "将舞台改造成暖油灯照明的月下仪式亭阁。",
+        "long_zh": "将室内舞台改造成暮色中的宏大露天亭阁，以成排油灯和满月照明。舞者的红绿编织服装增加金色刺绣和珠宝头饰。以电影方式加深色彩反差，把竹制收获篮改为在暖琥珀光下闪亮的漆制仪式容器。",
+        "short_en": "Restyle the stage as a moonlit ceremonial pavilion with warm oil lamps.",
+        "long_en": "Transform the indoor stage into a grand open-air pavilion at dusk, lit by rows of oil lamps and a full moon. Enhance the dancers' woven red-and-green attire with golden embroidery and jeweled headdresses. Deepen the color contrast cinematically, rendering the bamboo harvest baskets as lacquered ceremonial vessels gleaming in warm amber light."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“月下仪式亭阁”方向，提供幻想与舞台设计中的独立视觉目标。",
+        "issue": "容器造型替换可能破坏原握持和舞蹈道具功能。",
+        "plan": "将舞台舞蹈改造成敦煌壁画活起来的岩彩动画。",
+        "short_zh": "将舞台舞蹈改造成敦煌壁画活起来的岩彩动画。",
+        "long_zh": "将舞者与舞台整体转为敦煌壁画式岩彩动画。朱砂、石绿、青金与赭金构成矿物色层，人物衣饰和飘带带有细致勾线，周围展开莲花、祥云与装饰纹样。原有舞蹈和手持道具融入壁画中的庆典表演，随动作流动的线条显出优雅节奏，纸地与斑驳颜料保留古老绘画质感。"
+      }
+    },
+    {
+      "id": "047",
+      "title": "鹦鹉螺号餐厅",
+      "group": "电影与影视世界",
+      "split": "test",
+      "source_group": "user-upload-0441fa91bb4b24775718e167fcb32882",
+      "video": "test/047/video.mp4",
+      "source_sha256": "822b2a3a7ef7c2ef9a6b4c39eaf51abbdced60f76b22e26c9b2ed176cee38dbb",
+      "prompt_sha256": "d87952623f93c6114249d57a6c7d78b50fdef87cd95aa4336d56814e77479987",
+      "original": {
+        "short_zh": "将餐厅改造成绿松石与珍珠色的鹦鹉螺主题餐饮沙龙。",
+        "long_zh": "将餐厅改造成鹦鹉螺主题餐饮沙龙，配置绿松石色扇贝形卡座软包、贝母墙砖和带肋纹的青绿天花板。吊灯改为雕塑感海葵玻璃灯，现有隔断改为雕刻波浪纹木质隔断。保留食客、员工、食物、瓶子、餐具、座位布局和原有运镜。",
+        "short_en": "Restyle the restaurant as a turquoise-and-pearl nautilus-inspired dining salon.",
+        "long_en": "Transform the restaurant into a nautilus-inspired dining salon with turquoise scalloped booth upholstery, mother-of-pearl wall tiles, and ribbed teal ceiling panels. Rework the hanging lamps as sculpted sea-anemone glass fixtures and the existing divider as carved wave-patterned wood. Preserve the diners, staff, food, bottles, tableware, seating layout, and original camera movement."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“鹦鹉螺主题餐厅”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将餐厅改造成《海底两万里》式鹦鹉螺号潜艇中的海底餐厅。",
+        "short_zh": "将餐厅改造成《海底两万里》式鹦鹉螺号潜艇中的海底餐厅。",
+        "long_zh": "将餐厅改造成《海底两万里》式的鹦鹉螺号餐厅，铆接铜壁、弧形肋架与厚玻璃舷窗围合用餐空间。食客与服务人员延续原有活动，餐具和桌灯融入维多利亚蒸汽机械美学。舷窗外的深蓝海水与游鱼剪影映进室内，与暖金灯光交织，形成隐秘、华丽的海底旅行氛围。"
+      }
+    },
+    {
+      "id": "048",
+      "title": "皇家舞会",
+      "group": "电影与影视世界",
+      "split": "test",
+      "source_group": "user-upload-3c356a079f0011d02def741843fa4191",
+      "video": "test/048/video.mp4",
+      "source_sha256": "673d9b2ca71a1a77319ce2382642d05768fd8103d10b4d8131fc08233fd62b98",
+      "prompt_sha256": "5a8af3e0cff73a6b56fbdb033dd193be2d474ef12c3a267d8c6adc96a082ef5b",
+      "original": {
+        "short_zh": "将体育馆改造成宏伟的维也纳舞厅。",
+        "long_zh": "将体育馆改造成宏伟维也纳舞厅，使用花纹拼木地板、镀金阳台立面，以酒红锦缎面板替换比赛背景。舞伴们穿翡翠绿缎面礼服和炭灰燕尾服。保留所有舞者、观众和裁判，保持双人握持、步法、场上位置及原有广角视野。",
+        "short_en": "Restyle the sports arena as a grand Viennese ballroom.",
+        "long_en": "Transform the sports arena into a grand Viennese ballroom with patterned parquet flooring, gilded balcony fronts, and burgundy damask panels replacing the competition backdrop. Dress the dancing couples in jade satin gowns and charcoal tailcoats. Preserve every dancer, spectator, and official, retaining the couples' holds, footwork, floor positions, and the original wide camera view."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“维也纳舞厅”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "舞厅容易被理解为取消竞技场中的观众和工作人员。",
+        "plan": "将双人舞比赛改造成《灰姑娘》真人电影式的皇家舞会。",
+        "short_zh": "将双人舞比赛改造成《灰姑娘》真人电影式的皇家舞会。",
+        "long_zh": "将体育馆改造成《灰姑娘》真人电影式的宫廷舞厅，金色拱廊、水晶吊灯与反光拼木地板构成宽阔空间。舞者穿宝石色礼服与宫廷礼装，裙摆随原有双人步法展开，场边观众融入舞会宾客。柔和金光在布料与地板上流动，营造轻盈、华美的童话舞会。"
+      }
+    },
+    {
+      "id": "049",
+      "title": "几何抽象钢琴",
+      "group": "绘画与版画",
+      "split": "test",
+      "source_group": "user-upload-29bdd757f594042ac8493fe77f4ea5ea",
+      "video": "test/049/video.mp4",
+      "source_sha256": "6a483f43c67b43312da759a86f54f69047564433a593efe24171c6fc4115c439",
+      "prompt_sha256": "3daf78c870e729206ad5dbac2b0ee94d716abb3d5366a782b32cc1d2df0201f2",
+      "original": {
+        "short_zh": "将钢琴练习室改造成几何风格包豪斯音乐工作室。",
+        "long_zh": "将钢琴练习室改造成包豪斯音乐工作室，使用钴蓝、赭色和象牙白几何吸音板、拉丝钢饰条及洁净漆面乐器。可见衣袖改为焦橙色织物。保留所有可见人物、手、键盘、耳机和乐谱，准确保持手指动作、反射及空间关系。",
+        "short_en": "Restyle the piano practice room as a geometric Bauhaus music studio.",
+        "long_en": "Transform the piano practice room into a Bauhaus music studio with cobalt, ochre, and ivory geometric acoustic panels, brushed-steel trim, and clean lacquered instrument surfaces. Restyle the visible sleeves in burnt-orange woven fabric. Preserve all visible people, hands, keyboards, headphones, and sheet music, maintaining the exact finger movements, reflections, and spatial relationships."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“包豪斯钢琴工作室”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "exact reflections与改变材质、衣服、环境的要求冲突。",
+        "plan": "将钢琴练习改造成康定斯基式的几何抽象动画。",
+        "short_zh": "将钢琴练习改造成康定斯基式的几何抽象动画。",
+        "long_zh": "将钢琴练习画面转为康定斯基式的几何抽象动画，以钴蓝、亮黄、朱红和黑白组成圆形、斜线与相交色面。键盘、手指与身体仍以可辨识的形状表现弹奏，背景和反射化为有节奏的几何构成，色面随演奏动作轻微呼应，形成仿佛能看见音乐结构的绘画空间。"
+      }
+    },
+    {
+      "id": "050",
+      "title": "太空港音乐酒吧",
+      "group": "日漫与手绘动画",
+      "split": "test",
+      "source_group": "user-upload-b76333b77d08a3671590bdfc87d08caa",
+      "video": "test/050/video.mp4",
+      "source_sha256": "ee30e4ca7ac09d62b2dc21dd79783eba9674e9a1c5ce8b8f74cfbaf91a5f270e",
+      "prompt_sha256": "a2f88ca2f641cf76707f3510333066fdd90bfe834c9e48ca76f6d1f7763d8209",
+      "original": {
+        "short_zh": "将卡拉 OK 包间改造成复古未来主义聆听酒廊。",
+        "long_zh": "将卡拉 OK 包间改造成复古未来主义聆听酒廊，配置弧形象牙白墙板、圆形铜制吸音嵌件、焦橙软包和抛光水磨石桌面。可见麦克风和铃鼓加上协调的镀铬细节。保留所有人物、歌唱与手势、饮品和餐具，以及房间原有布局。",
+        "short_en": "Restyle the karaoke room as a retro-futurist listening lounge.",
+        "long_en": "Transform the karaoke room into a retro-futurist listening lounge with curved ivory wall panels, circular copper acoustic insets, burnt-orange upholstery, and a polished terrazzo tabletop. Refinish the visible microphones and tambourine with coordinated chrome details. Preserve everyone present, their singing and hand gestures, the drinks and tableware, and the room's original arrangement."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“复古未来演唱酒廊”方向，提供未来与科幻中的独立视觉目标。",
+        "issue": "聆听酒廊的功能描述与继续唱歌、敲铃鼓不一致。",
+        "plan": "将卡拉OK演唱改造成《星际牛仔》式的太空港音乐酒吧动画。",
+        "short_zh": "将卡拉OK演唱改造成《星际牛仔》式的太空港音乐酒吧动画。",
+        "long_zh": "将包间改造成《星际牛仔》式的太空港音乐酒吧，人物用复古麦克风演唱，伙伴继续打节拍和互动。弧形窗外隐现停泊飞船，室内旧皮革、金属桌面和霓虹招牌带有使用痕迹。手绘赛璐璐线条、深蓝阴影与暖橙灯光构成松弛、略带落寞的太空爵士氛围。"
+      }
+    },
+    {
+      "id": "051",
+      "title": "陶瓷蔬菜静物",
+      "group": "手工与材料",
+      "split": "test",
+      "source_group": "source-051",
+      "video": "test/051/video.mp4",
+      "source_sha256": "e0c0799f6ae4dfa4cc2b46e89d5ccfc996621ac1a961020bc7a4d93f417987ca",
+      "prompt_sha256": "cfe84d4cebaaf6e384a2693ddc2ea8ea48368c18f7b5c1015162f24bae0fd0ba",
+      "original": {
+        "short_zh": "将蔬菜呈现为手工釉面陶瓷静物。",
+        "long_zh": "将蔬菜组合改造成手工陶瓷静物。西兰花采用哑光青瓷花球，胡萝卜采用赭色开片釉，甜椒采用亮面翡翠绿瓷质，卷心菜采用层叠浅绿陶瓷叶片。保留各物体形状、重叠关系和运镜，加入轻微手工塑形的不规则感，下方为深色釉面陶瓷台面。",
+        "short_en": "Render the vegetables as a handcrafted glazed-ceramic still life.",
+        "long_en": "Transform the vegetable arrangement into a handcrafted ceramic still life. Give the broccoli matte celadon florets, the carrot an ochre crackle glaze, the pepper glossy emerald porcelain, and the cabbage layered pale-green ceramic leaves. Preserve each object's shape, overlap, and camera movement, with subtle hand-molded irregularities and a dark glazed ceramic surface beneath them."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“釉面陶瓷静物”方向，提供手工与绘画媒介中的独立视觉目标。",
+        "issue": "保留形状与手工不规则需要区分整体轮廓和局部表面。",
+        "plan": "将蔬菜静物改造成手工釉彩陶瓷组成的微缩艺术场景。",
+        "short_zh": "将蔬菜静物改造成手工釉彩陶瓷组成的微缩艺术场景。",
+        "long_zh": "将蔬菜整体塑造成手工陶瓷：花球以颗粒状哑光青瓷呈现，根茎覆有赭色开片釉，叶片由薄而微卷的陶片层叠，果实带有亮面彩釉。各物体仍形成原有的静物组合，柔和侧光照出釉面反射、烧制色差与细小塑形痕迹，镜头移动时呈现真实陶艺模型的体积和触感。"
+      }
+    },
+    {
+      "id": "052",
+      "title": "水彩电脑近景",
+      "group": "绘画与版画",
+      "split": "test",
+      "source_group": "source-052",
+      "video": "test/052/video.mp4",
+      "source_sha256": "32356b978df2c7d5e3d3f3295c911199fa58fbd2460a292ad854c04599823c83",
+      "prompt_sha256": "3ebe34aead82a0fb637e376b4c99eea0ba4dfed3bbfa1672df1552657036bb65",
+      "original": {
+        "short_zh": "将休息区改造成摩洛哥马赛克瓷砖拱廊。",
+        "long_zh": "将石制休息区改造成摩洛哥瓷砖拱廊，配置钴蓝与象牙白几何马赛克、雕花雪松木窗套和花纹石凳。格纹西装外套改为沙色亚麻，裤子改为深青色织物。保留笔记本电脑、腕表、坐姿、打字动作和原有人体画面裁切。",
+        "short_en": "Restyle the seating area as a Moroccan mosaic-tiled arcade.",
+        "long_en": "Transform the stone seating area into a Moroccan tiled arcade with cobalt-and-ivory geometric mosaics, carved cedar window surrounds, and a patterned stone bench. Restyle the checked blazer as sand-colored linen and the trousers as deep teal woven fabric. Preserve the laptop, wristwatch, seated posture, typing motion, and the original crop of the person's body."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "画面主要是躯干、双手和电脑；大拱廊、窗景等要求超出近景可见范围。",
+        "issue": "画面主要是躯干、双手和电脑；大拱廊、窗景等要求超出近景可见范围。",
+        "plan": "将使用笔记本电脑的近景改造成透明水彩旅行手账。",
+        "short_zh": "将使用笔记本电脑的近景改造成透明水彩旅行手账。",
+        "long_zh": "将衣料、双手、电脑与近处石墙画成透明水彩，蓝紫阴影与暖赭水色自然晕染，少量铅笔线勾勒手指和键盘。纸白透出轻盈光感，近处墙面点缀摩洛哥几何纹样，呈现松弛的旅行手账气息。"
+      }
+    },
+    {
+      "id": "053",
+      "title": "蒸汽朋克档案馆",
+      "group": "原创世界设计",
+      "split": "test",
+      "source_group": "source-053",
+      "video": "test/053/video.mp4",
+      "source_sha256": "f2f4eacd5a09b0652edee5a3aab104859342b306e5f7a9ad07ecd23928485c9c",
+      "prompt_sha256": "a6a69500e2464f4f5b58abe4df872c41e08f79e52d9b3f6d6b15f958725a2509",
+      "original": {
+        "short_zh": "将图书馆改造成华丽的波斯风格阅览室。",
+        "long_zh": "将图书馆改造成华丽波斯风格阅览室，配置雕花雪松木书架、绿松石色几何墙砖和花纹天鹅绒座椅。众人穿质感丰富的当代夹克，配克制的刺绣饰边。保留每个人的位置、书籍、桌子和打开的笔记本电脑，使现有地毯、灯罩与房间的绿松石及铁锈色调协调。",
+        "short_en": "Restyle the library as an ornate Persian-inspired reading room.",
+        "long_en": "Transform the library into an ornate Persian-inspired reading room with carved cedar bookshelves, turquoise geometric wall tiles, and patterned velvet seating. Dress the group in richly textured contemporary jackets with restrained embroidered borders. Preserve every person's position, the books, tables, and open laptop, coordinating the existing rug and lampshades with the room's turquoise-and-rust palette."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“波斯风格阅览室”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将图书馆改造成蒸汽朋克世界中的机械档案馆。",
+        "short_zh": "将图书馆改造成蒸汽朋克世界中的机械档案馆。",
+        "long_zh": "将图书馆改造成蒸汽朋克机械档案馆，高耸木书架间穿插黄铜管道、齿轮升降装置与圆形仪表。读者穿带皮革与金属扣饰的学者服装，继续阅读和查阅资料，电脑被整合成铜框玻璃终端。绿色罩灯与高窗尘光照亮书页，形成古典知识与机械科技共存的空间。"
+      }
+    },
+    {
+      "id": "054",
+      "title": "黏土定格遛狗",
+      "group": "手工与材料",
+      "split": "test",
+      "source_group": "source-054",
+      "video": "test/054/video.mp4",
+      "source_sha256": "5c293a06e789a0185049d40b8fc93b70172c3cfb634035e857b5543015199dc4",
+      "prompt_sha256": "a5518776cde67600c36e0df332bd585eba3f667271aa017953c50606fb0561cc",
+      "original": {
+        "short_zh": "将公园改造成电影感中国幻想花园。",
+        "long_zh": "将城市公园小径改造成电影感中国幻想花园，两旁排列华丽石灯笼并飘落樱花。遛狗者穿刺绣丝绸汉服，同时完整保留十二只牵绳犬。温暖黄金时刻光线照亮树冠覆盖的宽阔大道，绿篱边萦绕柔雾。",
+        "short_en": "Restyle the park as a cinematic Chinese fantasy garden.",
+        "long_en": "Transform the urban park path into a cinematic Chinese fantasy garden lined with ornate stone lanterns and drifting cherry blossoms. Dress the dog walker in embroidered silk hanfu while keeping all dozen leashed dogs intact. Bathe the wide tree-canopied avenue in warm golden-hour light with soft mist along the hedgerows."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“幻想园林遛狗”方向，提供幻想与舞台设计中的独立视觉目标。",
+        "issue": "all dozen的精确数量未充分核实，犬群有遮挡。",
+        "plan": "将遛狗场景改造成《超级无敌掌门狗》式的黏土定格动画。",
+        "short_zh": "将遛狗场景改造成《超级无敌掌门狗》式的黏土定格动画。",
+        "long_zh": "将人物、犬群和公园整体转为《超级无敌掌门狗》式黏土定格动画。人物穿简洁的英式日常服装，犬只以各自鲜明的体型和耳尾轮廓塑造，表面带有柔软黏土的微小手工痕迹。微缩树篱、石径和花坛营造幽默亲切的街区公园，延续牵绳、行走和犬群之间的互动。"
+      }
+    },
+    {
+      "id": "055",
+      "title": "蜡笔小新式校园活动",
+      "group": "户外电影化",
+      "split": "test",
+      "source_group": "source-055",
+      "video": "archive/lha-benchmark-20261102-clean/test/055/video.mp4",
+      "source_sha256": "3da32dff5d1a8255db820779a7cc937ccdcdba0daca4e5f3818c5809ba48ddf8",
+      "prompt_sha256": "76e6520c6f994b85e93bdcdd18df8153fb876a5adfcb03516cec584d8651f296",
+      "original": {
+        "short_zh": "为学校操场营造鲜艳的黄金时刻电影美学。",
+        "long_zh": "将阿布贾的沙地公共广场改造成黄金时刻、鲜艳电影感的学校操场：温暖琥珀光照在穿青绿校服的学生身上，金属秋千架泛光，茂盛树木加深为翡翠绿；以鲜艳调色强化后方浅彩建筑，并加入浅景深散景。",
+        "short_en": "Give the schoolyard a vibrant cinematic golden-hour aesthetic.",
+        "long_en": "Transform the sandy public plaza in Abuja into a vibrant cinematic schoolyard at golden hour — warm amber light washing over the teal-uniformed students, the metal swing frame glowing, lush trees deepened to rich emerald, and the pastel buildings behind sharpened with vivid color grading and shallow depth-of-field bokeh."
+      },
+      "suggestion": {
+        "decision": "drop",
+        "reason": "约2.92秒由秋千远景切到孩子近景，明确切镜。",
+        "issue": "约2.92秒由秋千远景切到孩子近景，明确切镜。",
+        "plan": "将学校操场上的活动改造成《蜡笔小新》式的轻松日常动画。",
+        "short_zh": "将学校操场上的活动改造成《蜡笔小新》式的轻松日常动画。",
+        "long_zh": "将学生、秋千与校舍整体转为《蜡笔小新》式二维动画。人物以圆润比例、简洁表情和明快色块表现，校园建筑采用淡彩背景，荡秋千、走动和同伴互动保持活泼自然。全片使用统一的线条与配色，原有远景到近景的切换延续同一校园空间，呈现轻松、带有生活趣味的课间片段。"
+      }
+    },
+    {
+      "id": "056",
+      "title": "波妞式海岸清理",
+      "group": "户外电影化",
+      "split": "test",
+      "source_group": "source-056",
+      "video": "archive/lha-benchmark-20261102-clean/test/056/video.mp4",
+      "source_sha256": "d8019af2181af37d8f22e08a99769b34811689690bbaf486e0f6306d13ecdfb5",
+      "prompt_sha256": "2a40e6e032dc807a694a1633a8db1ea67bb1ae8f9b73f0cd948ae05bb07e26de",
+      "original": {
+        "short_zh": "为海滩清洁活动营造温暖的黄金时刻电影海岸美学。",
+        "long_zh": "将沙滩改造成黄金时刻的电影海岸，暖琥珀光在平静水面闪烁，覆林山丘加深为浓郁青色。志愿者穿协调的大地色亚麻工装。保留大家一起弯腰捡拾垃圾的活动，透明袋子像灯笼一样映着光。",
+        "short_en": "Give the beach cleanup a warm cinematic golden-hour shoreline aesthetic.",
+        "long_en": "Transform the sandy beach into a cinematic golden-hour shoreline with warm amber light glinting off the calm water and forested hills deepening to rich teal. Dress the volunteers in coordinated linen workwear in earthy tones. Keep the group bending and collecting debris together, the clear bags catching the light like lanterns."
+      },
+      "suggestion": {
+        "decision": "drop",
+        "reason": "约2.92秒由整理绳网切到另一组人装袋，明确切镜。",
+        "issue": "约2.92秒由整理绳网切到另一组人装袋，明确切镜。",
+        "plan": "将海滩清理活动改造成《悬崖上的金鱼姬》式的手绘动画。",
+        "short_zh": "将海滩清理活动改造成《悬崖上的金鱼姬》式的手绘动画。",
+        "long_zh": "将海岸与清理者整体转为《悬崖上的金鱼姬》式手绘动画。海浪以圆润而富有节奏的线条描绘，沙滩、海草和远处岛屿呈现明亮水彩色。人物延续整理废弃绳网、拾取物品和装袋的协作，衣服采用清爽色块；切镜前后保持同一海岸的色彩与人物画风，形成温柔、鲜活的环保日常。"
+      }
+    },
+    {
+      "id": "057",
+      "title": "霍格沃茨草药课",
+      "group": "电影与影视世界",
+      "split": "test",
+      "source_group": "source-057",
+      "video": "test/057/video.mp4",
+      "source_sha256": "cd78a1abbf7391f9c70f0a80bcf6864e74690aadb2b7421c2983aa3a179c23c0",
+      "prompt_sha256": "02ab4bd8a279db5fef91235eed41eaa5adf189a7a63cbdc2c1f4f1f30a07860a",
+      "original": {
+        "short_zh": "将社区花园改造成阳光下的铁与玻璃植物温室。",
+        "long_zh": "将城市社区花园改造成阳光下的植物温室，配置华丽铁玻璃墙体和茂盛热带植被。保留成年指导者与两名孩子共同种植黄色菊花的活动。温暖黄金时刻光线穿过头顶拱形玻璃板，在种植台和园艺手套上投下斑驳阴影。",
+        "short_en": "Restyle the community garden as a sunlit iron-and-glass botanical conservatory.",
+        "long_en": "Transform the urban community garden into a sunlit botanical conservatory with ornate iron-and-glass walls and lush tropical foliage. Keep the adult instructor and two children planting yellow chrysanthemums together. Render warm golden-hour light streaming through arched glass panels overhead, casting dappled shadows across the planting table and their gardening gloves."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“铁与玻璃植物温室”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "“种黄色菊花”把旁边花盆与手中操作的植株混在一起。",
+        "plan": "将共同园艺的场景改造成《哈利·波特》式的霍格沃茨草药课。",
+        "short_zh": "将共同园艺的场景改造成《哈利·波特》式的霍格沃茨草药课。",
+        "long_zh": "将场景改造成《哈利·波特》式的魔法温室，成人与孩子化身草药课教师和学生，共同照料奇异植物。旧铁架与拱形玻璃间爬满藤蔓，陶盆中生长着形态奇特、带有微妙生命感的叶片与花朵。人物穿学院长袍和园艺手套，温暖日光穿过湿润玻璃与茂密枝叶，营造古老、鲜活的魔法校园氛围。"
+      }
+    },
+    {
+      "id": "058",
+      "title": "极简海岸漫步",
+      "group": "日漫与手绘动画",
+      "split": "test",
+      "source_group": "source-058",
+      "video": "test/058/video.mp4",
+      "source_sha256": "7ef05f927fb5e90773acfb36ddab2bfec8d2f7f824396d79e9aa3e0481c929d7",
+      "prompt_sha256": "524c8cfcecf921fafaca96b8356a735012dd38be20cbac3f2ab48bc22c06eac7",
+      "original": {
+        "short_zh": "为海边漫步营造沉思氛围的黄金时刻电影海岸美学。",
+        "long_zh": "将平淡正午海滩改造成黄金时刻的电影海岸：绿松石色海水加深为浓郁琥珀古铜色，暖长光掠过湿沙，远处树木覆盖的岛屿呈朦胧紫色剪影。赤脚男子穿亚麻裤和白衬衫，沉思般行走，柔浪卷过脚边。",
+        "short_en": "Give the beach walk a contemplative cinematic golden-hour shoreline aesthetic.",
+        "long_en": "Transform the flat midday beach into a cinematic golden-hour shoreline: deepen the turquoise water to rich amber-bronze, cast long warm light across the wet sand, and render the distant tree-lined island in hazy violet silhouette. Dress the barefoot man in linen trousers and a white shirt, walking contemplatively as gentle waves curl around his feet."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为红海龟式海岸漫步。",
+        "issue": "旧稿的转换方向较泛，已改为红海龟式海岸漫步。",
+        "plan": "将男子沿海边行走的场景改造成《红海龟》式的极简手绘动画。",
+        "short_zh": "将男子沿海边行走的场景改造成《红海龟》式的极简手绘动画。",
+        "long_zh": "将人物与海滩转为《红海龟》式二维动画。以克制线条描绘人物，大片浅沙色、灰蓝海水与淡色天空构成开阔画面，浪花用简洁白色形状沿岸展开。男子顺着原有路线在水边行走，脚步与海浪接触自然；留白、柔和纸面纹理与细微色彩变化营造安静的海岸时刻。"
+      }
+    },
+    {
+      "id": "059",
+      "title": "木偶剪纸节庆",
+      "group": "欧美动画与漫画",
+      "split": "test",
+      "source_group": "source-059",
+      "video": "test/059/video.mp4",
+      "source_sha256": "3a953d778d151baea6a3667e73a062fa2542235186db3b2b86be2685adeb6ee6",
+      "prompt_sha256": "3e1ca853083741a6e8c80f2fe022f5db9ff559c096e6708f5394cb1877b727ab",
+      "original": {
+        "short_zh": "为仪式广场营造温暖、烟雾缭绕的黄金时刻电影美学。",
+        "long_zh": "将阴天广场改造成黄金时刻仪式场景：暖琥珀阳光照亮石广场与巴洛克教堂立面，阿兹特克舞者的红白服装加深为浓郁绯红；中央供品周围添加盘绕飘散的柯巴树脂香烟，羽毛头饰呈鲜艳虹彩。",
+        "short_en": "Give the ceremonial plaza a warm, smoky golden-hour cinematic aesthetic.",
+        "long_en": "Transform the overcast plaza into a golden-hour ceremonial scene: bathe the stone square and baroque cathedral facade in warm amber sunlight, deepen the red-and-white costumes of the Aztec dancers to rich crimson, add drifting copal smoke curling around the central offering arrangement, and render the feathered headdresses with vivid iridescent plumage."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为剪纸灯光节庆广场。",
+        "issue": "旧稿的转换方向较泛，已改为剪纸灯光节庆广场。",
+        "plan": "将广场群舞改造成《生命之书》式的木偶与剪纸节庆动画。",
+        "short_zh": "将广场群舞改造成《生命之书》式的木偶与剪纸节庆动画。",
+        "long_zh": "将舞者与广场整体重构为《生命之书》式的装饰性三维动画。人物具有彩绘木偶般的形体与细致服装纹样，建筑立面由鲜艳色块和精巧雕饰构成，头顶悬挂透光剪纸与彩灯。延续人群围绕中心活动的舞步和队形，以朱红、青绿和暖金色营造热烈而富有手工感的节庆空间。"
+      }
+    },
+    {
+      "id": "060",
+      "title": "花生漫画滚轮胎",
+      "group": "欧美动画与漫画",
+      "split": "test",
+      "source_group": "source-060",
+      "video": "test/060/video.mp4",
+      "source_sha256": "5e7b9c0a907b2489145670eaee32dc87ddf1112f7bfd8bbc6eb91c985f6d55b7",
+      "prompt_sha256": "f4843a55086b5b0b157d584ed1e02e82469b6ffcd10161b67fa83ae986614857",
+      "original": {
+        "short_zh": "将村庄街道改造成黄金时刻的电影感大道。",
+        "long_zh": "将尘土飞扬的村庄街道改造成黄金时刻的电影感大道：暖琥珀光丰富为浓郁落日色调，强化道路的陶土表面，添加戏剧性长影。保留穿校服的女孩滚轮胎的活动，背景店面改为鲜艳壁画，以茂盛热带植物框住场景。",
+        "short_en": "Restyle the village street as a cinematic golden-hour boulevard.",
+        "long_en": "Transform the dusty village street into a cinematic golden-hour boulevard: enrich the warm amber light into rich sunset tones, sharpen the road's terracotta surface, and add long dramatic shadows. Keep the girl in her school uniform rolling the tire, but render the background storefronts with vivid painted murals and lush tropical foliage framing the scene."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“彩绘街道滚轮胎”方向，提供户外电影化中的独立视觉目标。",
+        "issue": "大街景改造与人物滚轮胎的接触关系需要共用范围；泛化锐化没有明确目标。",
+        "plan": "将女孩滚轮胎的街道场景改造成《花生漫画》式的温暖美式手绘动画。",
+        "short_zh": "将女孩滚轮胎的街道场景改造成《花生漫画》式的温暖美式手绘动画。",
+        "long_zh": "将女孩与村庄街道整体转为《花生漫画》式的简洁手绘动画。人物以圆润比例、轻巧墨线和朴素色块表现，轮胎沿原有方向滚动，身体动作清楚而富有童趣。背景房屋、树木与道路用淡水彩和留白铺陈，柔和午后色调营造轻松、幽默的儿童日常。"
+      }
+    },
+    {
+      "id": "061",
+      "title": "恩多森林协作",
+      "group": "电影与影视世界",
+      "split": "test",
+      "source_group": "source-061",
+      "video": "test/061/video.mp4",
+      "source_sha256": "7e052d21569cce68e48e687991859f50847b61f3ffa152c6172cf48863ecc452",
+      "prompt_sha256": "166065489c453c23675836df06f00167bde86d25ba78dbb8bbee5a3e1a39de53",
+      "original": {
+        "short_zh": "为森林步道营造茂盛的黄金时刻电影国家公园美学。",
+        "long_zh": "将太平洋西北地区的密林改造成黄金时刻国家公园，暖琥珀阳光穿过高大古老针叶树，在土路上投下斑驳长影。保留四名戴安全帽、穿工作手套的 WTA 志愿者拉运黄色吊装带的活动，呈现丰富电影景深和鲜艳翡翠绿林下植被。",
+        "short_en": "Give the forest trail a lush cinematic golden-hour national-park aesthetic.",
+        "long_en": "Transform the dense Pacific Northwest forest into a golden-hour national park, with warm amber sunlight filtering through towering old-growth conifers and casting long dappled shadows across the dirt trail. Keep the four WTA volunteers in their hard hats and work gloves, hauling the yellow rigging strap, but render the scene with rich cinematic depth-of-field and vivid emerald undergrowth."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为恩多森林协作现场。",
+        "issue": "旧稿的转换方向较泛，已改为恩多森林协作现场。",
+        "plan": "将林间使用吊带的协作场景改造成《星球大战》式的恩多森林工作队。",
+        "short_zh": "将林间使用吊带的协作场景改造成《星球大战》式的恩多森林工作队。",
+        "long_zh": "将森林重构为《星球大战》式的恩多林地，高大树干、厚实苔藓和隐约可见的木制平台形成纵深。人物穿带实用护具的野外工作服，使用吊带协力搬运，手部受力与人员配合保持清楚。少量科幻器材融入现场，林冠间透下斑驳光束，呈现可信的森林基地日常。"
+      }
+    },
+    {
+      "id": "062",
+      "title": "浮世绘街头行列",
+      "group": "绘画与版画",
+      "split": "test",
+      "source_group": "source-062",
+      "video": "test/062/video.mp4",
+      "source_sha256": "7ee0c9bd9c581833920a284dadd5508ab92a260361decc0e4d0e24e2e59e982a",
+      "prompt_sha256": "fd927204b6a6b574eeee3dbb4cb674d26a5408f1216d433a2daf7c35a7f29c93",
+      "original": {
+        "short_zh": "为游行营造温暖的黄金时刻仪式广场美学。",
+        "long_zh": "将阴天城镇广场改造成黄金时刻仪式广场，暖落日光照亮铺装地面。保留巴达加舞者披独特黑白刺绣披肩、穿白色多蒂围布，围绕华丽轿辇列队舞动的活动；天空加深为浓郁琥珀云层，游行队伍间加入柔和火炬闪光。",
+        "short_en": "Give the procession a warm golden-hour ceremonial plaza aesthetic.",
+        "long_en": "Transform the overcast town square into a golden-hour ceremonial plaza with warm sunset light washing the paved ground. Keep the Badaga dancers in their distinctive black-and-white embroidered shawls and white dhotis moving in formation around the ornate palanquin; deepen the sky to rich amber clouds and add gentle torch-light flicker across the procession."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为浮世绘街头行列。",
+        "issue": "旧稿的转换方向较泛，已改为浮世绘街头行列。",
+        "plan": "将街头队列舞动改造成浮世绘套色木版画动画。",
+        "short_zh": "将街头队列舞动改造成浮世绘套色木版画动画。",
+        "long_zh": "将人群、建筑与街道整体转为浮世绘木版画风格。衣物纹样以精细线描和大块靛蓝、朱红、米白色版呈现，行列随原有步伐起伏，周围建筑化为层叠平面构图。穿过前景的人车也统一为相同画法，纸纹、套色边缘和简练阴影带出流动的市井节庆气息。"
+      }
+    },
+    {
+      "id": "063",
+      "title": "风之谷生态复苏",
+      "group": "日漫与手绘动画",
+      "split": "test",
+      "source_group": "source-063",
+      "video": "test/063/video.mp4",
+      "source_sha256": "d1ab5a83c5b40861e68e87468d8eb853450d2765cbf940907cd73fb79633d601",
+      "prompt_sha256": "6fdf1cc681475b907d18796edabd8ba8531aa870277df5cc234e69420e39833d",
+      "original": {
+        "short_zh": "将灌木荒地改造成黄金时刻的茂盛社区花园。",
+        "long_zh": "将干燥灌木荒地改造成黄金时刻的茂盛社区花园，浓郁琥珀阳光照在仍戴着安全帽、穿工作手套耙地和挖土的志愿者身上。冬季裸地替换为深色肥沃土壤和嫩绿幼苗，背景低层建筑映衬温暖朦胧的落日天空。",
+        "short_en": "Transform the scrubland into a lush community garden at golden hour.",
+        "long_en": "Transform the dry scrubland into a lush community garden at golden hour, with rich amber sunlight washing over the volunteers still raking and digging in hard hats and work gloves. Replace the bare winter ground with dark fertile soil and young green seedlings, and set the background low-rise buildings against a warm, hazy sunset sky."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“社区花园劳动”方向，提供户外电影化中的独立视觉目标。",
+        "issue": "新幼苗与持续挖土、耙地之间的作业区域关系需要一致。",
+        "plan": "将户外园艺劳动改造成《风之谷》式的生态复苏场景。",
+        "short_zh": "将户外园艺劳动改造成《风之谷》式的生态复苏场景。",
+        "long_zh": "将劳动场景转为《风之谷》式的手绘动画，人物穿适合野外作业的朴素服装，在旧文明遗迹边耙土、挖地和照料新生植物。低矮建筑逐渐被绿意包围，远处荒地与近处嫩芽形成层次。细腻水彩背景、清澈天光和随风摇动的草叶呈现人们重新培育土地的温柔希望。"
+      }
+    },
+    {
+      "id": "064",
+      "title": "蜡染拼布群舞",
+      "group": "手工与材料",
+      "split": "test",
+      "source_group": "source-064",
+      "video": "test/064/video.mp4",
+      "source_sha256": "73548cbe3693a63841509486606df95cc3e3c5d4f3e3dd13b76a6387b2243c1d",
+      "prompt_sha256": "29e4252641632b04a2eadf2d6b24a5eb2e822713e09c3e67f78efe95edb2a934",
+      "original": {
+        "short_zh": "将舞蹈场景改造成黄金时刻的电影感稀树草原空地。",
+        "long_zh": "将红土路改造成暮色中温暖黄金时刻的稀树草原空地，以电影感琥珀斜光在地面投下长影。舞者穿色彩丰富的串珠礼服。以体积薄雾和鲜明渐变天空增强茂盛绿色玉米田背景。",
+        "short_en": "Restyle the dance setting as a cinematic golden-hour savanna clearing.",
+        "long_en": "Transform the red dirt road into a warm golden-hour savanna clearing at dusk, with cinematic amber light raking long shadows across the earth. Dress the dancers in richly colored beaded ceremonial attire. Deepen the lush green cornfield backdrop with volumetric haze and a vivid gradient sky."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为蜡染拼布群舞。",
+        "issue": "旧稿的转换方向较泛，已改为蜡染拼布群舞。",
+        "plan": "将户外围成一圈的群舞改造成蜡染拼布动画。",
+        "short_zh": "将户外围成一圈的群舞改造成蜡染拼布动画。",
+        "long_zh": "将人物、道路与植物整体制作成蜡染拼布画面。衣物由靛蓝、赭红、明黄的纹样布片拼接，人物轮廓、手臂与腿部以层叠织物表现，针脚和布边清晰可见。延续围圈、拍手与中心人物舞动的配合，背景作物化为有节奏的布纹，呈现热烈而富有触感的群舞。"
+      }
+    },
+    {
+      "id": "065",
+      "title": "魔发奇缘街头舞动",
+      "group": "欧美动画与漫画",
+      "split": "test",
+      "source_group": "source-065",
+      "video": "test/065/video.mp4",
+      "source_sha256": "f101c232c9e26a404f83314a3aaf93f901065be2193e89344e230c8f0e0e50e3",
+      "prompt_sha256": "f706c278b0862eb6ade42008771baa35559c9054ea18e80cf683e8dda8f8dd69",
+      "original": {
+        "short_zh": "为城镇广场舞蹈营造柔和日照下的欧洲黄金时刻美学。",
+        "long_zh": "将开阔广场改造成黄金时刻阳光下的欧洲城镇广场，暖琥珀光照亮石铺地面，花卉围绕的路桩泛着浓郁光泽。保留画面中央穿花裙旋转的幼女、身后观看的旁观者和前景乐器盒，使它们都沐浴在柔和温暖的电影光线中。",
+        "short_en": "Give the town-square dance a soft, sunlit European golden-hour aesthetic.",
+        "long_en": "Transform the wide open plaza into a sunlit European town square at golden hour, with warm amber light washing across the stone pavement and flower-lined bollards glowing richly. Keep the toddler girl in her floral dress mid-twirl at center frame, bystanders watching behind her, and the instrument case in the foreground — all bathed in soft cinematic warmth."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为魔发奇缘式街头舞动。",
+        "issue": "开头快速放大，连续帧中人物与背景运动衔接；本轮未判为切镜。",
+        "plan": "将幼童在街头音乐前舞动的场景改造成《魔发奇缘》式的三维动画。",
+        "short_zh": "将幼童在街头音乐前舞动的场景改造成《魔发奇缘》式的三维动画。",
+        "long_zh": "将广场转为《魔发奇缘》式的童话小镇，温暖石铺路、彩色店面与花卉装饰围绕街头表演空间。幼童以柔和三维造型呈现，花裙随原有转身和小步舞动摆动，周围观看者和前景乐器融入同一画风。明亮日光与细腻表情营造可爱、自然的音乐时刻。"
+      }
+    },
+    {
+      "id": "066",
+      "title": "非洲未来主义庆典",
+      "group": "电影与影视世界",
+      "split": "test",
+      "source_group": "source-066",
+      "video": "test/066/video.mp4",
+      "source_sha256": "7d1ff3f906260fefee21720741583579e701e27cda938fdee400f98536fb0f24",
+      "prompt_sha256": "18d876f0a93815c0ba614071738a64908d4a3ca32b279a0f427b025dc22fac77",
+      "original": {
+        "short_zh": "为稀树草原场景营造鲜艳的电影落日美学。",
+        "long_zh": "将平淡阴天天空改造成黄金时刻的稀树草原落日，铺展大范围琥珀光。马赛武士红黑色舒卡披布加深为鲜艳高饱和绯红，强化项链珠饰细节。以调色赋予金合欢灌丛背景茂盛的电影空间层次，每个人面部带暖色轮廓光。",
+        "short_en": "Give the savanna scene a vivid cinematic sunset aesthetic.",
+        "long_en": "Transform the flat overcast sky into a golden-hour savanna sunset with sweeping amber light. Enrich the Maasai warriors' red and black shukas to vivid, deeply saturated crimson, and sharpen the beadwork detail on their necklaces. Grade the acacia scrubland background to lush, cinematic depth with warm rim lighting on each figure's face."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为黑豹式未来庆典群像。",
+        "issue": "旧稿的转换方向较泛，已改为黑豹式未来庆典群像。",
+        "plan": "将披布人群的集体活动改造成《黑豹》式的非洲未来主义庆典。",
+        "short_zh": "将披布人群的集体活动改造成《黑豹》式的非洲未来主义庆典。",
+        "long_zh": "将人群与环境重构为《黑豹》式的非洲未来主义场景。人物身上的红色披布、珠饰与手持长杆融入兼具织物工艺和精密金属细节的庆典服饰，远处植被间隐现有机形态的未来建筑。延续人群的表情、起伏和彼此呼应，饱满红色与深绿背景、柔和金光共同构成庄重而鲜活的群像。"
+      }
+    },
+    {
+      "id": "067",
+      "title": "水墨江岸提桶",
+      "group": "绘画与版画",
+      "split": "test",
+      "source_group": "source-067",
+      "video": "test/067/video.mp4",
+      "source_sha256": "b6975cbb8c9e96ff6c0a050662b2eb70dcfadc858ff8fe24e7e28074da7778d4",
+      "prompt_sha256": "656b3662fc147d82e04f4f10c81ac8a21216503869aaa7038684865b570e359d",
+      "original": {
+        "short_zh": "为河流三角洲营造鲜艳的黄金时刻电影美学。",
+        "long_zh": "将阴天河流三角洲改造成鲜艳黄金时刻场景：浑浊水面泛出浓郁琥珀反射，暖阳穿透戏剧性云层，风化木独木舟强化为浓郁红木色。保留男孩提桶沿泥岸行走的活动，两岸茂盛棕榈在电影感午后光线中发亮。",
+        "short_en": "Give the river delta a vivid cinematic golden-hour aesthetic.",
+        "long_en": "Transform the overcast river delta into a vivid golden-hour scene: bathe the murky water in deep amber reflections, let warm sunlight break through the dramatic clouds, and sharpen the weathered wooden canoes with rich mahogany tones. Keep the boy carrying his buckets along the muddy bank, framed by lush palm-lined shores glowing in cinematic late-afternoon light."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为水墨江岸提桶。",
+        "issue": "旧稿的转换方向较泛，已改为水墨江岸提桶。",
+        "plan": "将男孩在船边提桶行走的场景改造成中国水墨动画。",
+        "short_zh": "将男孩在船边提桶行走的场景改造成中国水墨动画。",
+        "long_zh": "将河岸、木船与男孩整体转为中国水墨动画。船体以浓淡墨线表现，水面用大面积留白和浅灰晕染铺开，远岸树影在薄雾中层层淡去。男孩提桶从船边走向岸上，身体、桶和脚下水迹保持清晰关系；少量赭红点染衣物，让日常动作融入疏朗、流动的江岸画意。"
+      }
+    },
+    {
+      "id": "068",
+      "title": "复古迪斯科",
+      "group": "电影与影视世界",
+      "split": "test",
+      "source_group": "source-068",
+      "video": "test/068/video.mp4",
+      "source_sha256": "54d0a5b4169b440b94f47a0e23b1dc8e405b82262b9d3da7f4a38bea020fdff7",
+      "prompt_sha256": "25044c163b0edf8e34e1d7c63c106b8d733fcf69ba5a1fd4b16442fcb28c75a1",
+      "original": {
+        "short_zh": "将室内改造成暖光照明的非洲仪式舞厅。",
+        "long_zh": "将昏暗、以篷布为墙的室内改造成暖光照明的非洲社区礼堂，使用抛光木地板、鲜艳肯特布壁挂和头顶发光灯笼。保留同一群欢快舞者的舞动；让他们穿刺绣丰富的安卡拉和阿迪雷仪式服装，场景沐浴金色电影光线。",
+        "short_en": "Restyle the interior as a warmly lit African ceremonial dance hall.",
+        "long_en": "Transform the dim, tarp-walled interior into a warmly lit African community hall with polished wooden floors, vibrant kente-cloth wall hangings, and glowing lanterns overhead. Keep the same group of joyful dancers mid-movement; dress them in richly embroidered ankara and adire ceremonial attire, with the scene bathed in golden cinematic light."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为周末夜狂热式舞厅。",
+        "issue": "旧稿的转换方向较泛，已改为周末夜狂热式舞厅。",
+        "plan": "将室内群舞改造成《周末夜狂热》式的复古迪斯科舞会。",
+        "short_zh": "将室内群舞改造成《周末夜狂热》式的复古迪斯科舞会。",
+        "long_zh": "将室内改造成《周末夜狂热》式的迪斯科舞厅，镜球、彩色灯带与深色木饰面围绕舞者。人物服装加入亮面布料和鲜明复古配色，延续拍手、摆臂与相互呼应的舞动。蓝紫环境光与暖色面部光交织，移动光斑落在衣料上，营造亲近、热闹的夜间聚会。"
+      }
+    },
+    {
+      "id": "069",
+      "title": "宝莱坞宫廷庆典",
+      "group": "电影与影视世界",
+      "split": "test",
+      "source_group": "source-069",
+      "video": "test/069/video.mp4",
+      "source_sha256": "8ae3cf2433254d31b9d87cfb2adaafbb959d7ba22c0db8dc9f34f7eecb2a27b2",
+      "prompt_sha256": "a4065eaf5c6af5024dfe1b184d460dc8a9a5f27153da153555f3a9d7ac9c4373",
+      "original": {
+        "short_zh": "将礼堂改造成以万寿菊和油灯装饰的温暖印度庆典场所。",
+        "long_zh": "将昏暗社区礼堂改造成暖光庆典场所，悬挂万寿菊花环，沿墙排列发光的迪亚油灯。将所有休闲连帽衫和混搭便装替换为鲜艳刺绣纱丽与莱亨加裙装；女子们继续围绕装饰中央柱跳圆圈舞，置于浓郁琥珀色电影照明下。",
+        "short_en": "Restyle the hall as a warm Indian celebration venue with marigolds and diyas.",
+        "long_en": "Transform the dim community hall into a warmly lit celebration venue with draped marigold garlands and glowing diyas lining the walls. Replace the casual hoodies and mixed casual wear with vibrant embroidered sarees and lehengas throughout, while the women continue their circular dance around the decorated central pillar under rich amber cinematic lighting."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“印度庆典舞厅”方向，提供地域与生活空间中的独立视觉目标。",
+        "issue": "长版写throughout可能把统一服饰扩展到所有背景人物；短版未点明服装。",
+        "plan": "将圆圈舞改造成《宝莱坞生死恋》式的华丽宫廷庆典。",
+        "short_zh": "将圆圈舞改造成《宝莱坞生死恋》式的华丽宫廷庆典。",
+        "long_zh": "将礼堂改造成《宝莱坞生死恋》式的宫廷庆典空间，雕花立柱、万寿菊花环与成排油灯围绕舞场。舞者穿宝石色刺绣舞裙，裙摆、金饰与薄纱随原有圆圈舞节奏流动，观众和陪同者融入庆典。浓郁红金色、层层烛光与富有光泽的织物构成热烈的歌舞电影画面。"
+      }
+    },
+    {
+      "id": "070",
+      "title": "宝莱坞乡村歌舞",
+      "group": "仪式与表演",
+      "split": "test",
+      "source_group": "mage-porob-2019",
+      "video": "archive/lha-benchmark-20261102-clean/test/070/video.mp4",
+      "source_sha256": "959f4bd9a8f6d4c2b3894598bd2d521b869e25d04f8f12e07500dac01df6ac91",
+      "prompt_sha256": "aae05b1eabc435585660bbda36b98612f5ba7673d1f7dd28b961604daaf41eb4",
+      "original": {
+        "short_zh": "为节庆空地营造鲜艳的黄金时刻电影美学。",
+        "long_zh": "将干燥朦胧的空地改造成黄金时刻节庆场地，浓郁琥珀斜光照亮舞者。光秃树木改为映衬炽烈落日天空的繁茂树冠剪影。纱丽的橙蓝色强化为鲜艳宝石色调，众人向前舞动时，地面升起暖色尘粒。",
+        "short_en": "Give the festival clearing a vivid cinematic golden-hour aesthetic.",
+        "long_en": "Transform the dry, hazy clearing into a golden-hour festival ground with rich amber light raking across the dancers. Deepen the bare trees into lush canopy silhouettes against a burning sunset sky. Enrich the saris' oranges and blues to vivid jewel tones and add warm dust-mote particles rising from the earth as the group dances forward."
+      },
+      "suggestion": {
+        "decision": "drop",
+        "reason": "与069重复宝莱坞群舞意向；与073林间舞蹈、072鼓乐场景也高度接近。保留069的室内歌舞、072的乐器近景与073的队列全景。",
+        "issue": "与069重复宝莱坞群舞意向；与073林间舞蹈、072鼓乐场景也高度接近。保留069的室内歌舞、072的乐器近景与073的队列全景。",
+        "plan": "将林边群舞改造成宝莱坞音乐电影式的乡村庆典。",
+        "short_zh": "将林边群舞改造成宝莱坞音乐电影式的乡村庆典。",
+        "long_zh": "将空地改造成鲜花与彩布点缀的乡村节庆场地，人物的纱丽与围布采用饱满的橙、蓝、粉色，随前进舞步和转身展开。周围树木、舞者与伴奏者保持有层次的空间关系，温暖侧光照亮飘动布料和轻微扬尘，以鲜明色彩和活跃群体互动呈现宝莱坞歌舞电影的热烈气氛。"
+      }
+    },
+    {
+      "id": "071",
+      "title": "彩铅庭院待客",
+      "group": "绘画与版画",
+      "split": "test",
+      "source_group": "mage-porob-2019",
+      "video": "test/071/video.mp4",
+      "source_sha256": "cd04b0f328c187105df91f9bc45420ffe80745180175409b61466b9ecc3157ba",
+      "prompt_sha256": "a3552121482fd071574f46ddb08298e9ef2470a248a35a59c2d45ba98e425630",
+      "original": {
+        "short_zh": "将庭院改造成温暖灯笼照明的村庄聚会场所。",
+        "long_zh": "将户外庭院改造成黄金时刻、温暖灯笼照明的村庄庭院，陶土墙面柔和泛光，头顶悬挂万寿菊花环。保留穿鲜艳纱丽的女子从陶罐中盛食物、分给坐在编织席上两名男子的活动；斑驳火光替换刺眼日光，香蕉叶餐盘在丰富电影阴影下泛光。",
+        "short_en": "Restyle the courtyard as a warm, lantern-lit village gathering place.",
+        "long_en": "Transform the outdoor courtyard into a warm, lantern-lit village courtyard at golden hour, with terracotta walls softly glowing and marigold garlands draped overhead. Keep the woman in her vibrant saree serving from the clay pot to the two men seated on a woven mat, as dappled firelight replaces harsh daylight and banana-leaf plates gleam beneath rich, cinematic shadows."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "递杯活动已校正；吉卜力日常与多题重复，改为有纸纹与排线的彩铅绘本。",
+        "issue": "递杯活动已校正；吉卜力日常与多题重复，改为有纸纹与排线的彩铅绘本。",
+        "plan": "将庭院中递杯待客的场景改造成彩铅绘本动画。",
+        "short_zh": "将庭院中递杯待客的场景改造成彩铅绘本动画。",
+        "long_zh": "以可见的彩铅排线、柔软轮廓和粗纸纹理描绘庭院中的待客片段。女子向坐着的人递送饮杯，衣料用暖红与靛蓝层层叠色，杯子和近处墙面留出明亮纸白，树影以轻柔笔触铺开，呈现亲切的生活感。"
+      }
+    },
+    {
+      "id": "072",
+      "title": "套色木刻鼓乐",
+      "group": "绘画与版画",
+      "split": "test",
+      "source_group": "mage-porob-2019",
+      "video": "test/072/video.mp4",
+      "source_sha256": "4ffda432e2dd5962b9bf4319f85289f59bac89403c8a81d208f7d73cdbd574cf",
+      "prompt_sha256": "34887e38d87e15458a8477c50710d3c29902c14b999331af7617de01091cd65d",
+      "original": {
+        "short_zh": "将空地改造成暮色中火炬照明的印度节庆庭院。",
+        "long_zh": "将干燥、树木光秃的空地改造成暮色中火炬照明的印度节庆庭院，树间悬挂万寿菊花环，远处火光投下暖琥珀色光辉。鼓手穿鲜艳刺绣库尔塔长衫、戴红色头巾，传统多尔鼓与纳加拉鼓饰以明亮流苏。",
+        "short_en": "Restyle the clearing as a torchlit Indian festival courtyard at dusk.",
+        "long_en": "Transform the dry bare-tree clearing into a torchlit Indian festival courtyard at dusk, with marigold garlands strung between the trees and distant firelight casting a warm amber glow. Dress the drummers in vibrant embroidered kurtas and red turbans, their traditional dhol and nagara drums adorned with bright tassels."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“暮色火光鼓乐”方向，提供仪式与表演中的独立视觉目标。",
+        "issue": "鼓的具体名称未经来源确认，容易反过来要求更换原乐器。",
+        "plan": "将户外鼓乐场景改造成套色木刻版画动画。",
+        "short_zh": "将户外鼓乐场景改造成套色木刻版画动画。",
+        "long_zh": "将鼓手与空地整体转为套色木刻版画，人物、鼓与树木以有力黑色刻线和粗粝刀痕塑形。朱红、土黄与深蓝色版形成鲜明对比，衣纹和鼓面以留白突出。延续原有击鼓动作与乐器关系，让刻线随身体节奏起伏，带出热烈、质朴的民间庆典力量。"
+      }
+    },
+    {
+      "id": "073",
+      "title": "剪纸森林行列",
+      "group": "手工与材料",
+      "split": "test",
+      "source_group": "mage-porob-2019",
+      "video": "test/073/video.mp4",
+      "source_sha256": "eeb9ff02057128e4272f55e7a5cd776b1ea09f65fa9d410b7e2d7c3573f957f0",
+      "prompt_sha256": "93464b75c28071e658cdabe68a7fc9af2ba4147fd95c732eab68dec5dec037e3",
+      "original": {
+        "short_zh": "将游行场景改造成黄金时刻的茂盛电影感林间空地。",
+        "long_zh": "将干燥、树木光秃的空地改造成沐浴黄金时刻阳光的茂盛林间空地，以浓绿草地替换干裂土地。保留村民排成游行队列跳舞、鼓手演奏编篮式鼓的活动。女子彩色纱丽升级为鲜艳丝绸，为头顶树冠增加温暖电影层次。",
+        "short_en": "Restyle the procession setting as a lush cinematic forest glade at golden hour.",
+        "long_en": "Transform the dry, bare-tree clearing into a lush forest glade bathed in golden-hour sunlight, with rich green grass replacing the parched earth. Keep the villagers dancing in a procession line and the drummers playing their woven-basket drums. Enhance the women's colorful saris to vivid silk and add warm cinematic depth to the canopy overhead."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为剪纸森林庆典行列。",
+        "issue": "旧稿的转换方向较泛，已改为剪纸森林庆典行列。",
+        "plan": "将林间舞蹈与鼓乐队列改造成层叠剪纸动画。",
+        "short_zh": "将林间舞蹈与鼓乐队列改造成层叠剪纸动画。",
+        "long_zh": "将舞者、鼓手与林地整体转为手工剪纸动画。人物衣服由朱红、金黄和湖蓝纸片拼接，鼓与四肢以清楚的轮廓表现动作，队列在层叠树影间随原有节奏前行。纸片边缘、细小投影和镂空叶纹形成空间层次，柔和侧光照亮手工材质，呈现轻快的民间庆典。"
+      }
+    },
+    {
+      "id": "074",
+      "title": "幽灵公主森林行旅",
+      "group": "日漫与手绘动画",
+      "split": "test",
+      "source_group": "source-074",
+      "video": "test/074/video.mp4",
+      "source_sha256": "c7679b1fddd6edf2596f156ace72f94dbd0b2280d5e8a131e86fe63a0af84864",
+      "prompt_sha256": "2fe4dcfe7ec2ed3b27efff00346bbf6546cca1e444288776f8bae90c697ff829",
+      "original": {
+        "short_zh": "将丛林小径改造成黄金时刻的电影感山林。",
+        "long_zh": "将茂盛杂草丛生的丛林小径改造成黄金时刻的电影感山林，暖琥珀阳光穿过覆满苔藓的古树。老人的格纹衬衫和隆基围布变为深靛蓝亚麻，同伴的粉衬衫变为做旧帆布夹克。野生白花在斑驳光线中柔和发亮。",
+        "short_en": "Restyle the jungle trail as a cinematic mountain forest at golden hour.",
+        "long_en": "Transform the lush overgrown jungle trail into a cinematic mountain forest at golden hour, with warm amber sunlight filtering through ancient moss-covered trees. The older man's plaid shirt and lungi become deep indigo linen; his companion's pink shirt becomes a weathered canvas jacket. Wild white blooms glow softly in the dappled light."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "按源视频活动重写为幽灵公主式森林行旅。",
+        "issue": "约3.79秒有突出的取景变化，邻帧人物动作与背景衔接，暂按快速变焦保留。",
+        "plan": "将两人在茂密小径上行走的场景改造成《幽灵公主》式的森林动画。",
+        "short_zh": "将两人在茂密小径上行走的场景改造成《幽灵公主》式的森林动画。",
+        "long_zh": "将人物与小径转为《幽灵公主》式手绘动画。两位行旅者穿朴素布衣，在覆满苔藓、蕨类与白色野花的古老森林中前行，延续老人走在前方、同伴跟随的关系。粗壮树根与浓密叶片形成幽深层次，林隙透入清冷日光，营造宁静、神秘而充满生命力的森林。"
+      }
+    },
+    {
+      "id": "075",
+      "title": "橡皮管摇摆舞",
+      "group": "欧美动画与漫画",
+      "split": "test",
+      "source_group": "source-075",
+      "video": "test/075/video.mp4",
+      "source_sha256": "763b3bd7056542f2176f2fbbe10714fbc264c0bcfb98d71d07b92823348435dd",
+      "prompt_sha256": "d1a3ad47bebe1048373ccd292f5e6db7ca8aa2869e88e0e0a5489d698681d197",
+      "original": {
+        "short_zh": "将社区礼堂改造成迷人的 1940 年代舞厅。",
+        "long_zh": "将配有普通吊灯、蓝色粉刷墙面的简陋社区礼堂改造成迷人的 1940 年代舞厅：添加华丽水晶吊灯、浓郁红木护墙板和暖琥珀聚光灯。摇摆舞者穿符合时代的鸡尾酒会礼服与合体西装，硬木地板在舞步下闪亮。",
+        "short_en": "Restyle the community hall as a glamorous 1940s ballroom.",
+        "long_en": "Transform the bare community hall — with its plain pendant lights and blue-washed walls — into a glamorous 1940s ballroom: add ornate crystal chandeliers, rich mahogany wainscoting, and warm amber spotlights. Dress the swing dancers in period-accurate cocktail dresses and tailored suits, the hardwood floor gleaming beneath their steps."
+      },
+      "suggestion": {
+        "decision": "modify",
+        "reason": "保留“1940年代摇摆舞厅”方向，提供建筑与历史装饰中的独立视觉目标。",
+        "issue": "本轮核对未发现需要单独改题的矛盾。",
+        "plan": "将摇摆舞场景改造成《茶杯头》式的1930年代橡皮管卡通。",
+        "short_zh": "将摇摆舞场景改造成《茶杯头》式的1930年代橡皮管卡通。",
+        "long_zh": "将舞厅与舞者整体转为《茶杯头》式的复古橡皮管动画。人物以圆润轮廓、富有弹性的四肢和鲜明表情表现摇摆舞，舞伴配合与原有步法仍清楚可辨。手绘水彩舞厅、奶油色聚光灯、轻微胶片颗粒和旧印刷色彩构成热闹、俏皮的早期音乐卡通氛围。"
+      }
+    }
+  ]
+}

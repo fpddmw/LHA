@@ -1,0 +1,35 @@
+{
+  "modules": [
+    "test_review_experiments",
+    "test_unified_results",
+    "test_final_review_remediation.Remediation.test_partial_best_n_registers_unknown_dimensions_and_reused_compute",
+    "test_final_review_remediation.Remediation.test_best_n_known_failed_attempt_keeps_earlier_completed_candidate"
+  ],
+  "returncode": 0,
+  "elapsed_seconds": 9.75,
+  "files_before": {
+    "src/experiments/unified_benchmark.py": "16bdafdeb0c8abedafd99faed9d2af2a7b515ee912e92948381fecb3c38e8db7",
+    "src/experiments/results.py": "71078df13e750b66d320a725de97d45078bb4f4880b733513303af2b38cd436f",
+    "src/experiments/creative_benchmark.py": "621fb49f19809edf8ac84db64cfb8b42c8217efb5ddcea7fc92c0ae24c6893c0",
+    "src/experiments/preflight.py": "6f2bf1a3eebb4a41490548424be3b3706ad408a68ca0ab251e6eb07f764292cd",
+    "scripts/run_creative_benchmark.py": "09392d36ebdbe3dced0f9bcaa2d36d8d908f9f944ae68faf0edbb27334655315",
+    "scripts/benchmark_results.py": "9149a05a53951cf8fa5909e9c66e5488b55ce733687a6d46eb9cf821cfa063fd",
+    "scripts/test_review_experiments.py": "c887ba78392661391ee99a9af97e9eaeef9ad0195e98369aa0afd3fd71aa788f",
+    "scripts/test_unified_results.py": "3f6b55e798eacc2999b8342e3df998bc3ca9f1b6b7939583e40e02de2a3466d2",
+    "scripts/test_final_review_remediation.py": "fa71289e9f46c9541f7f67b13450537d8ec5cb1eb55f21925bed303b6ca7faa3"
+  },
+  "files_after": {
+    "src/experiments/unified_benchmark.py": "16bdafdeb0c8abedafd99faed9d2af2a7b515ee912e92948381fecb3c38e8db7",
+    "src/experiments/results.py": "71078df13e750b66d320a725de97d45078bb4f4880b733513303af2b38cd436f",
+    "src/experiments/creative_benchmark.py": "621fb49f19809edf8ac84db64cfb8b42c8217efb5ddcea7fc92c0ae24c6893c0",
+    "src/experiments/preflight.py": "6f2bf1a3eebb4a41490548424be3b3706ad408a68ca0ab251e6eb07f764292cd",
+    "scripts/run_creative_benchmark.py": "09392d36ebdbe3dced0f9bcaa2d36d8d908f9f944ae68faf0edbb27334655315",
+    "scripts/benchmark_results.py": "9149a05a53951cf8fa5909e9c66e5488b55ce733687a6d46eb9cf821cfa063fd",
+    "scripts/test_review_experiments.py": "c887ba78392661391ee99a9af97e9eaeef9ad0195e98369aa0afd3fd71aa788f",
+    "scripts/test_unified_results.py": "3f6b55e798eacc2999b8342e3df998bc3ca9f1b6b7939583e40e02de2a3466d2",
+    "scripts/test_final_review_remediation.py": "fa71289e9f46c9541f7f67b13450537d8ec5cb1eb55f21925bed303b6ca7faa3"
+  },
+  "owned_identity_stable": true,
+  "real_model_calls": 0,
+  "gpu_renders": 0
+}

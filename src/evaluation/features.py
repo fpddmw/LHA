@@ -20,7 +20,7 @@ def adjacent_cosine(features):
     return mean(sum(a * b for a, b in zip(x, y)) for x, y in zip(normalized, normalized[1:]))
 
 
-def compute(video, *, clip_model="openai/clip-vit-large-patch14", dino_model="facebook/dinov2-large",
+def _compute(video, *, clip_model="openai/clip-vit-large-patch14", dino_model="facebook/dinov2-large",
             clip_revision="main", dino_revision="main", sample_fps=4.0, device="cpu", batch_size=8):
     import torch
     from transformers import AutoImageProcessor, AutoModel, CLIPModel, CLIPProcessor
@@ -56,3 +56,15 @@ def compute(video, *, clip_model="openai/clip-vit-large-patch14", dino_model="fa
                                      "torch": torch.__version__}
         del model
     return result
+
+
+def compute(video, *, clip_model='openai/clip-vit-large-patch14', dino_model='facebook/dinov2-large',
+            clip_revision='main',dino_revision='main',sample_fps=4.0,device='cpu',batch_size=8,accounting_scope=None):
+    from planner_harness.accounting import run_compute
+    from planner_harness.common import sha
+    inputs = {'video':str(video),'sha256':sha(video),'clip_model':clip_model,'dino_model':dino_model,
+              'clip_revision':clip_revision,'dino_revision':dino_revision,'sample_fps':sample_fps,
+              'device':device,'batch_size':batch_size,'implementation':sha(__file__)}
+    return run_compute('compute:features',inputs,lambda:_compute(video,clip_model=clip_model,dino_model=dino_model,
+        clip_revision=clip_revision,dino_revision=dino_revision,sample_fps=sample_fps,device=device,batch_size=batch_size),
+        binding=accounting_scope,requires_live=True)

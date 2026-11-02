@@ -1,0 +1,24 @@
+{
+  "version": "lha-benchmark-20261102-clean",
+  "path": "/mnt/c/Users/17919/Documents/LHA-benchmark-final/benchmark.zip",
+  "sha256": "39778077e7900954b9502a607b31dc7518b7802b94d0815513cbdee37dceddde",
+  "count": 75,
+  "splits": {
+    "train": 40,
+    "validation": 10,
+    "test": 25
+  },
+  "toolkits": [
+    {
+      "name": "bernini",
+      "path": "/mnt/c/Users/17919/Documents/LHA-benchmark-final/bernini-tools.zip",
+      "sha256": "79153506904933670fb56a373b594747456c048baaad88173f16898ead668cc2"
+    },
+    {
+      "name": "ditto",
+      "path": "/mnt/c/Users/17919/Documents/LHA-benchmark-final/ditto-tools.zip",
+      "sha256": "2a29c38d3c3ff4358ecbbef88d81c389e470180de0f52fc9b5091bf4094b956b",
+      "enhancement_version": "ditto-grounded-instruction-v2"
+    }
+  ]
+}

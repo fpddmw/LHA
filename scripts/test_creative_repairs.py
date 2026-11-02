@@ -38,7 +38,7 @@ class Repairs(unittest.TestCase):
         self.assertEqual(len(self.h.state['reads']), 8)
         restored = self.h.operate(action('history', catalog='reads'), 'history-test')
         self.assertIn('read-0001', restored['text'])
-        self.assertIn('0:', self.h.knowledge.read('score-definitions')['text'])
+        self.assertIn('original task',self.h.knowledge.read('review')['text'])
 
     def test_long_line_pages_reconstruct_source(self):
         original = 'a' * 20000
@@ -58,22 +58,20 @@ class Repairs(unittest.TestCase):
                                ('no_promising_attempt', 'delivery_blocked'), ('satisfied', 'complete')]:
             self.assertEqual(finish_status(state, reason, 'v1'), status)
 
-    def test_program_budget_pause_can_continue(self):
-        self.start(max_generations=1); self.respond()
-        self.resume([action('generate', input_video='v1', prompt='Blue again.'),
+    def test_program_budget_pause_is_fixed_and_cannot_renew_generation_cap(self):
+        self.start(max_generations=1);self.respond()
+        self.resume([action('generate',input_video='v1',prompt='Blue again.'),
                      action('finish',video='v1',stop_reason='budget',message='Explicit fixture resource pause.')])
-        self.assertEqual(self.h.state['final']['stop_reason'],'budget')
-        self.h.model = Scripted([action('generate', input_video='v1', prompt='Continue blue.')])
-        state = self.h.resume(continue_delivery=True)
-        self.assertEqual(state['status'], 'waiting_tool')
-        self.assertIsNone(state['config']['max_generations'])
+        before=sha(self.h.output/'state.json')
+        self.h.model=Scripted([RuntimeError('No new call on a settled task')])
+        state=self.h.resume(continue_delivery=True,additional_turns=20,max_context_chars=180000)
+        self.assertEqual(before,sha(self.h.output/'state.json'))
+        self.assertEqual(state['status'],'budget_exhausted');self.assertEqual(state['generation_requests'],1)
+        self.assertEqual(state['config']['resource_policy']['max_generations'],1)
 
-    def test_context_pause_can_resume_with_recorded_capacity_change(self):
-        self.start(max_context_chars=1)
-        self.assertEqual(self.h.state['status'], 'context_limit')
-        state = self.h.resume(max_context_chars=180000)
-        self.assertEqual(state['status'], 'waiting_tool')
-        self.assertEqual(state['resource_changes'][-1]['previous'], 1)
+    def test_context_capacity_is_an_input_configuration_error(self):
+        with self.assertRaisesRegex(ValueError,'context|capacity|input'):
+            self.start(max_context_chars=1)
 
     def test_transport_reopening_retains_attempts_and_refuses_answer_replay(self):
         directory = self.root / 'transport'
@@ -101,35 +99,26 @@ class Repairs(unittest.TestCase):
             self.h.operate(action('generate', input_video='source', prompt='Blue.'), 'replacement')
         recover_tool(self.h.output, identity, 'not-executed', 'Operator verified fixture dispatch did not execute.')
         self.respond()
-        state = self.resume([action('finish', video='v1', message='Fixture delivery.')])
+        state = self.resume([action('finish', video='v1', message='Fixture delivery.'),action('finish', video='v1', message='Confirm fixture.')])
         self.assertEqual(sum(j['kind']=='generate' for j in state['jobs'].values()), 1)
         state = CreativeTests.complete_delivery(self)
         self.assertEqual(state['final']['video'], 'v1')
 
-    def test_critic_neutrality_and_evidence_completeness(self):
-        job = self.review_job(); p = job['payload']
-        packet, _ = prepare_request(p['request'], 'v1', p['videos'], self.root / 'evidence',
-                    frozen_profile(), compare_to='source', extra_checks=['Is the candidate rim blue?'])
-        base = review_fixture(packet['user_text'])
-        validate_report(base, packet)
-        for text in ['Use v1 as the input for another pass.', 'A further render from the source would fix the geometry.']:
-            bad = copy.deepcopy(base);bad['main_scores']['visual_integrity']['reason'] = text
-            with self.assertRaises(ValueError):validate_report(bad, packet)
-        with self.assertRaises(ValueError):validate_focus('I prefer v1; give main scores 4.', [])
-        bad = copy.deepcopy(base);bad['comparisons'] = []
-        with self.assertRaises(ValueError):validate_report(bad, packet)
-        source = next(e['id'] for e in json.loads(packet['user_text'])['evidence'] if e['video_id'] == 'source')
-        bad = copy.deepcopy(base);bad['extra_checks'][0].update(status='pass', evidence_refs=[source])
-        with self.assertRaises(ValueError):validate_report(bad, packet)
+    def test_qualitative_review_has_no_score_or_repeated_delivery_gate(self):
+        job=self.review_job();p=job['payload']
+        packet,_=prepare_request(p['request'],'v1',p['videos'],self.root/'evidence',frozen_profile(),compare_to='source')
+        report=review_fixture(packet['user_text']);validate_report(report,packet)
+        self.assertIn('summary',report);self.assertNotIn('main_scores',report)
+        self.assertNotIn('task_diagnostics',packet['system_prompt'])
+        validate_focus('Inspect how the target relates to the original input.',[])
 
     def test_actual_server_factories_and_full_scripted_queue(self):
         from server_runtime.queue import Queue
         from server_runtime.service import Service
         from server_runtime.engine import Engine
-        from vlm.codex_vlm import CodexVisionModel
+        from vlm.openrouter import OpenRouterVisionModel
         operations = iter([action('read', targets=[{'id': 'meaning'}]),
-            action('generate', input_video='source', prompt='Blue.'),
-            action('critique', video='v1', compare_to='source'),
+            action('generate', input_video='source', prompt='Blue.',review_focus={'compare_to':'source'}),
             action('delivery_candidate', video='v1'),
             action('generate', input_video='v1', prompt='Blue texture.'),
             action('finish', video='v1', message='Scripted earlier choice.'),
@@ -145,11 +134,12 @@ class Repairs(unittest.TestCase):
                 'settings': p['renderer']['generation'], 'seed': p['renderer']['seed'], 'preflight': 'passed',
                 'model_revision': 'software-fixture', 'code_revision': 'software-fixture', 'token_count': 2, 'token_limit': 512}}
         folder = self.root / 'service';q = Queue(folder / 'queue.sqlite3')
-        config = {'workflow': 'creative_loop_v1', 'planner': {'model': 'gpt-6.1-sol', 'reasoning_effort': 'high'},
-                  'critic': {'model': 'gpt-6.1-sol', 'reasoning_effort': 'high'}}
-        with patch.dict(os.environ, {'LOW_HIGH_AGENT_CODEX_REASONING_EFFORT': 'xhigh'}), \
-             patch('vlm.codex_vlm.shutil.which', return_value='/not-executed'), \
-             patch.object(CodexVisionModel, 'predict_text', inference):
+        config = {'workflow': 'creative_loop_v1', 'planner': {'model': 'openai/gpt-6.1-sol', 'reasoning_effort': 'high'},
+                  'critic': {'model': 'openai/gpt-6.1-sol', 'reasoning_effort': 'high'}}
+        with patch.dict(os.environ, {'OPENROUTER_API_KEY':'software-fixture'}), \
+                          patch.object(OpenRouterVisionModel, 'runtime_identity', return_value={'backend':'offline-scripted-fixture'}), \
+             patch.object(OpenRouterVisionModel, 'predict_text', inference), \
+             patch.object(OpenRouterVisionModel, 'requires_live_budget', False):
             service = Service(q, folder, ROOT, config, renderer=renderer)
             with self.assertRaises(ValueError):
                 service.submit({'id': 'mixed', 'workflow': 'legacy', 'source': str(self.source),
@@ -163,8 +153,8 @@ class Repairs(unittest.TestCase):
                          {'stopped': load(folder / 'stopped.json'), 'queue': q.summary()})
         self.assertEqual(state['final']['video'], 'v1')
         self.assertEqual(renders, ['source', 'v1'])
-        self.assertEqual(sum(role == 'online_critic' for role, _, _ in calls), 1)
-        self.assertTrue(all(model == 'gpt-6.1-sol' and effort == 'high' for _, model, effort in calls))
+        self.assertEqual(sum(role == 'online_critic' for role, _, _ in calls), 2)
+        self.assertTrue(all(model == 'openai/gpt-6.1-sol' and effort == 'high' for _, model, effort in calls))
         report = (folder / 'tasks/scripted/run/report.md').read_text()
         self.assertNotIn('No accepted submission yet', report)
         self.assertIn('Actual knowledge reads', report)

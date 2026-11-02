@@ -1,0 +1,1915 @@
+{
+  "scope": "All knowledge evidence JSON/JSONL/Markdown, project cards directories and explicitly named evidence/card files under knowledge/examples/reports/out; environment and dependency directories excluded.",
+  "scanned_files": [
+    "knowledge/experience/curated/evidence/usage-audit.json",
+    "knowledge/experience/curated/evidence/H-B-041__short__full_knowledge.json",
+    "knowledge/experience/curated/evidence/frame-provenance.json",
+    "knowledge/experience/curated/evidence/visual-inspection.md",
+    "knowledge/experience/curated/evidence/D-FS4-no.json",
+    "knowledge/experience/curated/evidence/H-D-027__short__full_knowledge.json",
+    "knowledge/experience/curated/evidence/H-B-benchmark__003__short.json",
+    "knowledge/experience/curated/evidence/D-FS4-full.json",
+    "knowledge/experience/curated/evidence/B-024-full.json",
+    "knowledge/experience/curated/evidence/batch-manifest.json",
+    "knowledge/experience/curated/evidence/H-B-benchmark__001__short.json",
+    "knowledge/experience/curated/evidence/H-D-024__long__full_knowledge.json",
+    "knowledge/experience/curated/evidence/H-B-benchmark__001__long.json",
+    "knowledge/experience/curated/evidence/H-D-benchmark__001__short.json",
+    "knowledge/experience/curated/evidence/historical-sources.json",
+    "knowledge/experience/curated/evidence/fewshot-sources.json",
+    "knowledge/experience/curated/evidence/historical-score-extract.md",
+    "knowledge/experience/curated/evidence/B-FS4-full.json",
+    "knowledge/experience/curated/evidence/H-D-benchmark__003__long.json",
+    "knowledge/experience/curated/evidence/H-B-027__short__no_knowledge.json",
+    "knowledge/experience/curated/evidence/F004.json",
+    "knowledge/experience/curated/evidence/H-B-027__short__full_knowledge.json",
+    "knowledge/experience/curated/evidence/F005.json",
+    "knowledge/experience/curated/evidence/H-D-benchmark__003__short.json",
+    "knowledge/experience/curated/evidence/H-B-041__short__no_knowledge.json",
+    "knowledge/experience/curated/evidence/F003.json",
+    "knowledge/experience/curated/evidence/F002.json",
+    "knowledge/experience/curated/evidence/F001.json",
+    "knowledge/experience/curated/evidence/H-D-fewshot_004__long__full_knowledge.json",
+    "knowledge/experience/curated/evidence/H-B-fewshot_004__long__full_knowledge.json",
+    "knowledge/experience/curated/evidence/README.md",
+    "knowledge/experience/curated/evidence/H-D-041__short__full_knowledge.json",
+    "knowledge/experience/curated/evidence/H-D-027__short__no_knowledge.json",
+    "knowledge/experience/curated/evidence/batch-facts.json",
+    "knowledge/experience/curated/evidence/F007.json",
+    "knowledge/experience/curated/evidence/H-D-024__long__no_knowledge.json",
+    "knowledge/experience/curated/evidence/H-D-benchmark__001__long.json",
+    "knowledge/experience/curated/evidence/F006.json",
+    "knowledge/experience/curated/evidence/D-027-full.json",
+    "knowledge/experience/curated/evidence/H-B-fewshot_004__long__no_knowledge.json",
+    "knowledge/experience/curated/evidence/H-B-024__long__no_knowledge.json",
+    "knowledge/experience/curated/evidence/B-003.json",
+    "knowledge/experience/curated/evidence/H-D-fewshot_004__long__no_knowledge.json",
+    "knowledge/experience/curated/evidence/H-D-041__short__no_knowledge.json",
+    "knowledge/experience/curated/evidence/H-B-024__long__full_knowledge.json",
+    "knowledge/staged/experience-curation-20261101/evidence/D-FS4-no.json",
+    "knowledge/staged/experience-curation-20261101/evidence/D-FS4-full.json",
+    "knowledge/staged/experience-curation-20261101/evidence/B-024-full.json",
+    "knowledge/staged/experience-curation-20261101/evidence/historical-score-extract.md",
+    "knowledge/staged/experience-curation-20261101/evidence/B-FS4-full.json",
+    "knowledge/staged/experience-curation-20261101/evidence/README.md",
+    "knowledge/staged/experience-curation-20261101/evidence/sources.json",
+    "knowledge/staged/experience-curation-20261101/evidence/D-027-full.json",
+    "knowledge/staged/experience-curation-20261101/evidence/B-003.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/usage-audit.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-041__short__full_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/frame-provenance.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/visual-inspection.md",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/D-FS4-no.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-027__short__full_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-benchmark__003__short.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/D-FS4-full.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/B-024-full.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-manifest.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-benchmark__001__short.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-024__long__full_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-benchmark__001__long.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-benchmark__001__short.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/historical-sources.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/fewshot-sources.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/historical-score-extract.md",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/B-FS4-full.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-benchmark__003__long.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-027__short__no_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/F004.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-027__short__full_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/F005.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-benchmark__003__short.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-041__short__no_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/F003.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/F002.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/F001.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-fewshot_004__long__full_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-fewshot_004__long__full_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-041__short__full_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-027__short__no_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-facts.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/F007.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-024__long__no_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-benchmark__001__long.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/F006.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/D-027-full.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-fewshot_004__long__no_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-024__long__no_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/B-003.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-fewshot_004__long__no_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-041__short__no_knowledge.json",
+    "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-024__long__full_knowledge.json",
+    "examples/evaluation/041_long.card.json",
+    "examples/evaluation/041_short.card.json",
+    "reports/20261030-evaluation-v2/cards/027__long.json",
+    "reports/20261030-evaluation-v2/cards/041__short.json",
+    "reports/20261030-evaluation-v2/cards/027__short.json",
+    "reports/20261030-evaluation-v2/cards/024__long.json",
+    "reports/20261030-evaluation-v2/cards/fewshot_004__long.json",
+    "reports/20261030-evaluation-v2/cards/041__long.json",
+    "reports/20261030-sync/first_wave/cards/027__long.json",
+    "reports/20261030-sync/first_wave/cards/041__short.json",
+    "reports/20261030-sync/first_wave/cards/027__short.json",
+    "reports/20261030-sync/first_wave/cards/024__long.json",
+    "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+    "reports/20261030-sync/first_wave/cards/041__long.json",
+    "out/agent_loop_live/20261030/benchmark/admission-002/cards/004__long.json",
+    "out/agent_loop_live/20261030/benchmark/admission-002/cards/004__short.json",
+    "out/agent_loop_live/20261030/benchmark/admission-002/cards/002__short.json",
+    "out/agent_loop_live/20261030/benchmark/admission-002/cards/002__long.json",
+    "out/agent_loop_live/20261030/benchmark/admission-003/cards/005__long.json",
+    "out/agent_loop_live/20261030/benchmark/admission-003/cards/006__long.json",
+    "out/agent_loop_live/20261030/benchmark/admission-003/cards/005__short.json",
+    "out/agent_loop_live/20261030/benchmark/admission-003/cards/006__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/017__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/024__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/010__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/014__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/001__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/007__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/007__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/012__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/015__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/022__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/018__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/003__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/008__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/005__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/020__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/004__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/026__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/019__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/025__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/001__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/018__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/011__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/025__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/022__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/019__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/014__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/008__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/013__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/013__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/003__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/006__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/021__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/012__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/009__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/005__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/010__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/016__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/023__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/020__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/006__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/004__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/021__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/011__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/023__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/016__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/017__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/002__short.json",
+    "out/agent_loop_live/20261030/benchmark/cards/002__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/009__long.json",
+    "out/agent_loop_live/20261030/benchmark/cards/015__short.json",
+    "out/agent_loop_live/20261030/benchmark/admission-001/cards/001__long.json",
+    "out/agent_loop_live/20261030/benchmark/admission-001/cards/003__long.json",
+    "out/agent_loop_live/20261030/benchmark/admission-001/cards/001__short.json",
+    "out/agent_loop_live/20261030/benchmark/admission-001/cards/003__short.json",
+    "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001/cards/001__long.json",
+    "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001/cards/003__long.json",
+    "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001/cards/001__short.json",
+    "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001/cards/003__short.json",
+    "out/agent_loop_live/20261030/ditto-phase2/runtime/deployment/cards/041__short.json",
+    "out/agent_loop_live/20261030/ditto-phase2/runtime/deployment/cards/027__short.json",
+    "out/agent_loop_live/20261030/ditto-phase2/runtime/deployment/cards/024__long.json",
+    "out/agent_loop_live/20261030/ditto-phase2/runtime/deployment/cards/fewshot_004__long.json",
+    "out/agent_loop_live/20261030/ditto-phase2/completed-shutdown-runtime/runtime/deployment/cards/041__short.json",
+    "out/agent_loop_live/20261030/ditto-phase2/completed-shutdown-runtime/runtime/deployment/cards/027__short.json",
+    "out/agent_loop_live/20261030/ditto-phase2/completed-shutdown-runtime/runtime/deployment/cards/024__long.json",
+    "out/agent_loop_live/20261030/ditto-phase2/completed-shutdown-runtime/runtime/deployment/cards/fewshot_004__long.json",
+    "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001-preparation-incomplete/cards/001__long.json",
+    "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001-preparation-incomplete/cards/003__long.json",
+    "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001-preparation-incomplete/cards/001__short.json",
+    "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001-preparation-incomplete/cards/003__short.json",
+    "out/agent_loop_live/20261030/phase2/runtime/deployment/cards/041__short.json",
+    "out/agent_loop_live/20261030/phase2/runtime/deployment/cards/027__short.json",
+    "out/agent_loop_live/20261030/phase2/runtime/deployment/cards/024__long.json",
+    "out/agent_loop_live/20261030/phase2/runtime/deployment/cards/fewshot_004__long.json",
+    "out/evaluation_runs/20261030_first_wave/cards/027__long.json",
+    "out/evaluation_runs/20261030_first_wave/cards/041__short.json",
+    "out/evaluation_runs/20261030_first_wave/cards/027__short.json",
+    "out/evaluation_runs/20261030_first_wave/cards/024__long.json",
+    "out/evaluation_runs/20261030_first_wave/cards/fewshot_004__long.json",
+    "out/evaluation_runs/20261030_first_wave/cards/041__long.json"
+  ],
+  "matches": {
+    "002": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/admission-002/cards/002__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "7258c5e1e8b7320a55db99829944dc1a496d931186378e77a4015203361cc5c2"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/admission-002/cards/002__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "e8d9f536f6dd6aa49c7490d4308a53bc116734acda9947a62df8454f00d2469c"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/002__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "7258c5e1e8b7320a55db99829944dc1a496d931186378e77a4015203361cc5c2"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/002__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "e8d9f536f6dd6aa49c7490d4308a53bc116734acda9947a62df8454f00d2469c"
+      }
+    ],
+    "003": [
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-benchmark__003__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "b176bb6c63a6bf23c65740203b3dbdd48456b1303b67109fa8bfb16525adc1ee"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/historical-sources.json",
+        "match": [
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "85d68766f1157ad97b836b4269a65197b83d4604c20a6970605f1a7defc5cb4d"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-benchmark__003__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "ef88cf75ca6a743eb0a0813d17125391b0ef82f5cb94ef902dc4d00863f0da5a"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-benchmark__003__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "496e695e54e5f1eb0f1e6fd9938c1a2b54c50b4caf75a60500cc530603fa949b"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/README.md",
+        "match": [
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/B-003.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "acbbb4b91e8a13aefaee0ad842dbba0b3862d6ed29811cbd2de7ba11f57d390d"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/README.md",
+        "match": [
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "e5e35d98fdc735ff18dbca6482a04922d11cea2eb710f8c9522d6473eee90371"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/sources.json",
+        "match": [
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "a6d4ffe4cd24776cad8c280fabdd791ec78b2a29ac2d073ac9dd9c4827768d90"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/B-003.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "acbbb4b91e8a13aefaee0ad842dbba0b3862d6ed29811cbd2de7ba11f57d390d"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-benchmark__003__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "b176bb6c63a6bf23c65740203b3dbdd48456b1303b67109fa8bfb16525adc1ee"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/historical-sources.json",
+        "match": [
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "85d68766f1157ad97b836b4269a65197b83d4604c20a6970605f1a7defc5cb4d"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-benchmark__003__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "ef88cf75ca6a743eb0a0813d17125391b0ef82f5cb94ef902dc4d00863f0da5a"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-benchmark__003__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "496e695e54e5f1eb0f1e6fd9938c1a2b54c50b4caf75a60500cc530603fa949b"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+        "match": [
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "81edc7bb9273b0ec199f7988014ff292a27b4239de313b8970ea00ddadcd7daa"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/B-003.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_benchmark_task_id"
+        ],
+        "card_sha256": "acbbb4b91e8a13aefaee0ad842dbba0b3862d6ed29811cbd2de7ba11f57d390d"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/003__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "0e356fa7723574d2280e64d390fef554d6d293dd4b251524c0bd0f50a9d071e8"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/003__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "a42d72977f192684e546097b0cf24407db1e380546862586a5a2792bfbcb302e"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/admission-001/cards/003__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "0e356fa7723574d2280e64d390fef554d6d293dd4b251524c0bd0f50a9d071e8"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/admission-001/cards/003__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "a42d72977f192684e546097b0cf24407db1e380546862586a5a2792bfbcb302e"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001/cards/003__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "0e356fa7723574d2280e64d390fef554d6d293dd4b251524c0bd0f50a9d071e8"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001/cards/003__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "a42d72977f192684e546097b0cf24407db1e380546862586a5a2792bfbcb302e"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001-preparation-incomplete/cards/003__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "0e356fa7723574d2280e64d390fef554d6d293dd4b251524c0bd0f50a9d071e8"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/benchmark-admission-001-preparation-incomplete/cards/003__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "a42d72977f192684e546097b0cf24407db1e380546862586a5a2792bfbcb302e"
+      }
+    ],
+    "007": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/007__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "ba1094532fad514148e698452f4d1e9cefda6b3610108686420951dab61f0942"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/007__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "15ad4af3b89609f3a20749dcd9af33b986c86dcf27859d4916dc99de97eac1b4"
+      }
+    ],
+    "008": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/008__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "05ed4c91fb93eaeb984b847723d571e01ed5eab62a1a27ce9991770f4d4b678a"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/008__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "d6efcd5c6409e8e0fc9ac4a9695f59267b5dde2673063c4f4077e17cbb09dc7f"
+      }
+    ],
+    "010": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/010__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "d564d1709de23d89dd672993213b61347824756ee03987f9d09bf4ef4a4d5752"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/010__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "6d9c8d264fe1281efce3c009d12e0d96510168979081631a802573f7a17ffc3e"
+      }
+    ],
+    "011": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/011__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "8045467cb7a898fddce15abd9907a7944eaf924303d154e0387da331e890d581"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/011__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "d4470c62e1a75b90a9968401b2f306d46261ae4b5d3af45737cc03a4b7bffecc"
+      }
+    ],
+    "012": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/012__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "1270b37b609aea9df55788f4f4ce175a1e8bc13813318d956821269a37262bc6"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/012__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "bea7962dbcdf4400b2ae46603020a1fa5268c95ff1aaa52405ffd8d1ff4ade08"
+      }
+    ],
+    "015": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/015__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "9add780f3016ef321863933bcca742acbcea1bdda94b10094272288452de95c2"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/015__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "fc713ab2bc42fe538d956b329193a5b349b70db870605f2d1da8f1d9f80a6cfe"
+      }
+    ],
+    "018": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/018__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "119d8529b228e465b42d5cd84003f0aa651c62bcf4d5ac1e8839978f851baaa1"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/018__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "6eaf8338b48bbd021acf5d8d20ba89368adf5448823dd084dcde347295f2af2f"
+      }
+    ],
+    "019": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/019__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "2dc5dee5c099c055a963f8e4fc4ddaec20386d1634d13b8973169be48f5b67b9"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/019__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "0fd6131953cbac1672426909339beda35e0ffed18ccfa3818c2f9265789d30ce"
+      }
+    ],
+    "020": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/020__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "f85b473b9585d699b094f3b284187dfa1f0fa935c1cc17828f70867d49bc62c7"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/020__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "7fb2dbcecd2cf12c52035bf71ebc74b285750ab9bcdeeb1c2789f157ab47de93"
+      }
+    ],
+    "021": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/021__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "6ed5bcc3df33fafcbf2db045210fe2901807ad9ac4a2d9a7aff1ca9d3cf5a41d"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/021__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "8fa1c0bd4018766e1355afe3c7d0c881ad3c9aea038a694e16578a2d8ef0dcc7"
+      }
+    ],
+    "024": [
+      {
+        "card": "knowledge/experience/curated/evidence/B-024-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "ccc295054f0a664af2ff90e30a635b57e64c0bcf04aee59ed402e7e3e945b9e3"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-024__long__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "6815d7f16f212b9daad313859dc7ae4564543bf4a5424dbbd0ca14195cde52d8"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-024__long__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "7dbcb67db0deaae46ede209c74063bb8eb5851e0853262cfb4e76f0edbd8fd91"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-024__long__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "1335069873d63c27e3758ec5ac470c3257e2d068741975c589fb4098d9092c86"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-024__long__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "a1042ca1e7f3f735ae8d488fc45a2e25101f6025ce8f0d0aa007dfc5ad3f3e43"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/B-024-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "ccc295054f0a664af2ff90e30a635b57e64c0bcf04aee59ed402e7e3e945b9e3"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/B-024-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "ccc295054f0a664af2ff90e30a635b57e64c0bcf04aee59ed402e7e3e945b9e3"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-024__long__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "6815d7f16f212b9daad313859dc7ae4564543bf4a5424dbbd0ca14195cde52d8"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-024__long__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "7dbcb67db0deaae46ede209c74063bb8eb5851e0853262cfb4e76f0edbd8fd91"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-024__long__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "1335069873d63c27e3758ec5ac470c3257e2d068741975c589fb4098d9092c86"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-024__long__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "a1042ca1e7f3f735ae8d488fc45a2e25101f6025ce8f0d0aa007dfc5ad3f3e43"
+      },
+      {
+        "card": "reports/20261030-evaluation-v2/cards/024__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "40c82352e2d185d71593c43998b20f9c7b52c1513dfb854254e152b97538bfe8"
+      },
+      {
+        "card": "reports/20261030-sync/first_wave/cards/024__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "40c82352e2d185d71593c43998b20f9c7b52c1513dfb854254e152b97538bfe8"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/024__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "7ed1759e162c243543337721b85a7c200e1b2d07a2ddc774a05bee721b5a0f8c"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/runtime/deployment/cards/024__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "40c82352e2d185d71593c43998b20f9c7b52c1513dfb854254e152b97538bfe8"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/completed-shutdown-runtime/runtime/deployment/cards/024__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "40c82352e2d185d71593c43998b20f9c7b52c1513dfb854254e152b97538bfe8"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/phase2/runtime/deployment/cards/024__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "40c82352e2d185d71593c43998b20f9c7b52c1513dfb854254e152b97538bfe8"
+      },
+      {
+        "card": "out/evaluation_runs/20261030_first_wave/cards/024__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "40c82352e2d185d71593c43998b20f9c7b52c1513dfb854254e152b97538bfe8"
+      }
+    ],
+    "025": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/025__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "fd9d7d515cc8dd5d3dcd66b48ab9782b7f392df3ab7e563f48ea260abb539cc5"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/025__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "063222168c3b3c9ffce36e280974579f9e217cd9b92ec6ea41127f3b67e0dacd"
+      }
+    ],
+    "026": [
+      {
+        "card": "out/agent_loop_live/20261030/benchmark/cards/026__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "034cb3b0702f224c6276a8c96865a8f4d641264851059ee7d11ae0af1662f3a6"
+      }
+    ],
+    "027": [
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-027__short__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "7ec9fa533e996a8f19c014ebc9dee414380fa569a16c4dfe7cc0c75d910c3b33"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-027__short__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "68b46789eb0153bd318f3a6e62e8db472aab5f9994223d8f1b5be2e17fbbbc2f"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-027__short__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "902ca5c399dc016a98a67efddaf546ec6324d4e4a73e380441196e4eff49d886"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-027__short__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "1777e9ebbd02d142434ccb1d035cd81792f23d9f2c48234501faf76b4030ba8e"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/D-027-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "d6d3f2d849ebaa716b9ae5095ed44d0f1be6ef31dc128c7be59f03b9d2c7e69a"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/D-027-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "d6d3f2d849ebaa716b9ae5095ed44d0f1be6ef31dc128c7be59f03b9d2c7e69a"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-027__short__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "7ec9fa533e996a8f19c014ebc9dee414380fa569a16c4dfe7cc0c75d910c3b33"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-027__short__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "68b46789eb0153bd318f3a6e62e8db472aab5f9994223d8f1b5be2e17fbbbc2f"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-027__short__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "902ca5c399dc016a98a67efddaf546ec6324d4e4a73e380441196e4eff49d886"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-027__short__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "1777e9ebbd02d142434ccb1d035cd81792f23d9f2c48234501faf76b4030ba8e"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/D-027-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "d6d3f2d849ebaa716b9ae5095ed44d0f1be6ef31dc128c7be59f03b9d2c7e69a"
+      },
+      {
+        "card": "reports/20261030-evaluation-v2/cards/027__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "3c360fbe16310143fee12d4f3f2bf285967209ef370806eab2d43f5413c5da04"
+      },
+      {
+        "card": "reports/20261030-evaluation-v2/cards/027__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "e94a7eb5aaf91fe8853d92400accd44dcf7a01cbc164d9460c618a34ac78466d"
+      },
+      {
+        "card": "reports/20261030-sync/first_wave/cards/027__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "3c360fbe16310143fee12d4f3f2bf285967209ef370806eab2d43f5413c5da04"
+      },
+      {
+        "card": "reports/20261030-sync/first_wave/cards/027__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "e94a7eb5aaf91fe8853d92400accd44dcf7a01cbc164d9460c618a34ac78466d"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/runtime/deployment/cards/027__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "e94a7eb5aaf91fe8853d92400accd44dcf7a01cbc164d9460c618a34ac78466d"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/completed-shutdown-runtime/runtime/deployment/cards/027__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "e94a7eb5aaf91fe8853d92400accd44dcf7a01cbc164d9460c618a34ac78466d"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/phase2/runtime/deployment/cards/027__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "e94a7eb5aaf91fe8853d92400accd44dcf7a01cbc164d9460c618a34ac78466d"
+      },
+      {
+        "card": "out/evaluation_runs/20261030_first_wave/cards/027__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "3c360fbe16310143fee12d4f3f2bf285967209ef370806eab2d43f5413c5da04"
+      },
+      {
+        "card": "out/evaluation_runs/20261030_first_wave/cards/027__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "e94a7eb5aaf91fe8853d92400accd44dcf7a01cbc164d9460c618a34ac78466d"
+      }
+    ],
+    "041": [
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-041__short__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "63133717726a742ce177768a31c9d9ac7e4ad68dad791dc522f44173161ce3f8"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-041__short__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "c035ca7565fcc29fe9f4afb318c7a88658b2a62649c6e16a9ecc887949a876bb"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-041__short__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "6b7e8f9b784ba78f19e82ff62bf47ab36492ca655a77066b024814808f5440b1"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-041__short__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "06f8ef072e2036e58353fc2c20447525f2ad1653b0e8a9f0aef6a80ecee4f352"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-041__short__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "63133717726a742ce177768a31c9d9ac7e4ad68dad791dc522f44173161ce3f8"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-041__short__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "c035ca7565fcc29fe9f4afb318c7a88658b2a62649c6e16a9ecc887949a876bb"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-041__short__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "6b7e8f9b784ba78f19e82ff62bf47ab36492ca655a77066b024814808f5440b1"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-041__short__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "06f8ef072e2036e58353fc2c20447525f2ad1653b0e8a9f0aef6a80ecee4f352"
+      },
+      {
+        "card": "examples/evaluation/041_long.card.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "b1ae8bb2fc8dab549c937f64510b52ff6fcb5b01e06e0df22dfaf1e4c0dedbc2"
+      },
+      {
+        "card": "examples/evaluation/041_short.card.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "90fd3e2fe536f8c6c754fcd8157c480558de5471493268b5be03582b033306c7"
+      },
+      {
+        "card": "reports/20261030-evaluation-v2/cards/041__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "90fd3e2fe536f8c6c754fcd8157c480558de5471493268b5be03582b033306c7"
+      },
+      {
+        "card": "reports/20261030-evaluation-v2/cards/041__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "b1ae8bb2fc8dab549c937f64510b52ff6fcb5b01e06e0df22dfaf1e4c0dedbc2"
+      },
+      {
+        "card": "reports/20261030-sync/first_wave/cards/041__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "90fd3e2fe536f8c6c754fcd8157c480558de5471493268b5be03582b033306c7"
+      },
+      {
+        "card": "reports/20261030-sync/first_wave/cards/041__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "b1ae8bb2fc8dab549c937f64510b52ff6fcb5b01e06e0df22dfaf1e4c0dedbc2"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/runtime/deployment/cards/041__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "90fd3e2fe536f8c6c754fcd8157c480558de5471493268b5be03582b033306c7"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/completed-shutdown-runtime/runtime/deployment/cards/041__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "90fd3e2fe536f8c6c754fcd8157c480558de5471493268b5be03582b033306c7"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/phase2/runtime/deployment/cards/041__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "90fd3e2fe536f8c6c754fcd8157c480558de5471493268b5be03582b033306c7"
+      },
+      {
+        "card": "out/evaluation_runs/20261030_first_wave/cards/041__short.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "90fd3e2fe536f8c6c754fcd8157c480558de5471493268b5be03582b033306c7"
+      },
+      {
+        "card": "out/evaluation_runs/20261030_first_wave/cards/041__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path"
+        ],
+        "card_sha256": "b1ae8bb2fc8dab549c937f64510b52ff6fcb5b01e06e0df22dfaf1e4c0dedbc2"
+      }
+    ],
+    "fewshot_001": [
+      {
+        "card": "knowledge/experience/curated/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/F001.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "0fdfc892c177c747131e7a44f03640575d20d6eae11bf77975e0fd202e3c851c"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/F001.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "0fdfc892c177c747131e7a44f03640575d20d6eae11bf77975e0fd202e3c851c"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "81edc7bb9273b0ec199f7988014ff292a27b4239de313b8970ea00ddadcd7daa"
+      }
+    ],
+    "fewshot_002": [
+      {
+        "card": "knowledge/experience/curated/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/F002.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "313321963a4eb289cdfdbbfdf9230e02e53b8a27d83ffec35aefe9bc12618f49"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/F002.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "313321963a4eb289cdfdbbfdf9230e02e53b8a27d83ffec35aefe9bc12618f49"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "81edc7bb9273b0ec199f7988014ff292a27b4239de313b8970ea00ddadcd7daa"
+      }
+    ],
+    "fewshot_003": [
+      {
+        "card": "knowledge/experience/curated/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/frame-provenance.json",
+        "match": [
+          "source_video_sha256",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6b68b47f9313bbcc52e824795025e5f2cff82c492ea5ba0a9dba4abdd409a1f5"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/F003.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "78279ac2ef1cf77a3ad121e768c3ed85fdf287c1351b73dd52ede88133eafb4d"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/frame-provenance.json",
+        "match": [
+          "source_video_sha256",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6b68b47f9313bbcc52e824795025e5f2cff82c492ea5ba0a9dba4abdd409a1f5"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/F003.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "78279ac2ef1cf77a3ad121e768c3ed85fdf287c1351b73dd52ede88133eafb4d"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "81edc7bb9273b0ec199f7988014ff292a27b4239de313b8970ea00ddadcd7daa"
+      }
+    ],
+    "fewshot_004": [
+      {
+        "card": "knowledge/experience/curated/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/D-FS4-no.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "fbf7d657dc82a4974df21cab8b41600ab76f4a4658fe6fa54985a7043ef8c4d9"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/D-FS4-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "99c4bf717879e7bf21f6233498d031dcf9a10de25a03301211d50bab237f522f"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/historical-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "85d68766f1157ad97b836b4269a65197b83d4604c20a6970605f1a7defc5cb4d"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/B-FS4-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "9f924d28f8e478bb24e01a89785862b5f680a325c982edec63f3d60ffa2cde0d"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/F004.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "a8d76d78739f66bd52ac790bacd145f99121df74bf5bfaff2fbdf5ce39acc6de"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-fewshot_004__long__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "93ebab5bb271fdb851587addcb4ac48ad21c257a9a5d64d28001b94de2970793"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-fewshot_004__long__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "57c97186d3384c4f9f20be07bf5fb65af22c2e8b9fa504b31bfdd388f627790f"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-B-fewshot_004__long__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "e28b999b1ba2657936836ab86e4624020cef85671f4ab11bf152096ccef50aa7"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/H-D-fewshot_004__long__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "0ece15af7e642f0c96137780fec3eda14646db1d535ec3b939c788fbfe1d18f1"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/D-FS4-no.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "fbf7d657dc82a4974df21cab8b41600ab76f4a4658fe6fa54985a7043ef8c4d9"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/D-FS4-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "99c4bf717879e7bf21f6233498d031dcf9a10de25a03301211d50bab237f522f"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/B-FS4-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "9f924d28f8e478bb24e01a89785862b5f680a325c982edec63f3d60ffa2cde0d"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "e5e35d98fdc735ff18dbca6482a04922d11cea2eb710f8c9522d6473eee90371"
+      },
+      {
+        "card": "knowledge/staged/experience-curation-20261101/evidence/sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "a6d4ffe4cd24776cad8c280fabdd791ec78b2a29ac2d073ac9dd9c4827768d90"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/D-FS4-no.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "fbf7d657dc82a4974df21cab8b41600ab76f4a4658fe6fa54985a7043ef8c4d9"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/D-FS4-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "99c4bf717879e7bf21f6233498d031dcf9a10de25a03301211d50bab237f522f"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/historical-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "85d68766f1157ad97b836b4269a65197b83d4604c20a6970605f1a7defc5cb4d"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/B-FS4-full.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "9f924d28f8e478bb24e01a89785862b5f680a325c982edec63f3d60ffa2cde0d"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/F004.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "a8d76d78739f66bd52ac790bacd145f99121df74bf5bfaff2fbdf5ce39acc6de"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-fewshot_004__long__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "93ebab5bb271fdb851587addcb4ac48ad21c257a9a5d64d28001b94de2970793"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-fewshot_004__long__full_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "57c97186d3384c4f9f20be07bf5fb65af22c2e8b9fa504b31bfdd388f627790f"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "81edc7bb9273b0ec199f7988014ff292a27b4239de313b8970ea00ddadcd7daa"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-B-fewshot_004__long__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "e28b999b1ba2657936836ab86e4624020cef85671f4ab11bf152096ccef50aa7"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/H-D-fewshot_004__long__no_knowledge.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "0ece15af7e642f0c96137780fec3eda14646db1d535ec3b939c788fbfe1d18f1"
+      },
+      {
+        "card": "reports/20261030-evaluation-v2/cards/fewshot_004__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "375fd9b04eb49a38aa74da0d4bb4bd2b9389515fca2b8f3f821450b7dc1f04a9"
+      },
+      {
+        "card": "reports/20261030-sync/first_wave/cards/fewshot_004__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "375fd9b04eb49a38aa74da0d4bb4bd2b9389515fca2b8f3f821450b7dc1f04a9"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/runtime/deployment/cards/fewshot_004__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "375fd9b04eb49a38aa74da0d4bb4bd2b9389515fca2b8f3f821450b7dc1f04a9"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/ditto-phase2/completed-shutdown-runtime/runtime/deployment/cards/fewshot_004__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "375fd9b04eb49a38aa74da0d4bb4bd2b9389515fca2b8f3f821450b7dc1f04a9"
+      },
+      {
+        "card": "out/agent_loop_live/20261030/phase2/runtime/deployment/cards/fewshot_004__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "375fd9b04eb49a38aa74da0d4bb4bd2b9389515fca2b8f3f821450b7dc1f04a9"
+      },
+      {
+        "card": "out/evaluation_runs/20261030_first_wave/cards/fewshot_004__long.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "375fd9b04eb49a38aa74da0d4bb4bd2b9389515fca2b8f3f821450b7dc1f04a9"
+      }
+    ],
+    "fewshot_005": [
+      {
+        "card": "knowledge/experience/curated/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/frame-provenance.json",
+        "match": [
+          "source_video_sha256",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6b68b47f9313bbcc52e824795025e5f2cff82c492ea5ba0a9dba4abdd409a1f5"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/F005.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "4314a262283de9ccd6a55755359d2b7a76f5e4c5dfa8f43515a6baad12b6c128"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/frame-provenance.json",
+        "match": [
+          "source_video_sha256",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6b68b47f9313bbcc52e824795025e5f2cff82c492ea5ba0a9dba4abdd409a1f5"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/F005.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "4314a262283de9ccd6a55755359d2b7a76f5e4c5dfa8f43515a6baad12b6c128"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "81edc7bb9273b0ec199f7988014ff292a27b4239de313b8970ea00ddadcd7daa"
+      }
+    ],
+    "fewshot_006": [
+      {
+        "card": "knowledge/experience/curated/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/frame-provenance.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6b68b47f9313bbcc52e824795025e5f2cff82c492ea5ba0a9dba4abdd409a1f5"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/F006.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "acc144ed42e515e8b706d9cc8f8a6d771e83d5ff24e4b050fe9c590f30c600fb"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/frame-provenance.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6b68b47f9313bbcc52e824795025e5f2cff82c492ea5ba0a9dba4abdd409a1f5"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "81edc7bb9273b0ec199f7988014ff292a27b4239de313b8970ea00ddadcd7daa"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/F006.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "acc144ed42e515e8b706d9cc8f8a6d771e83d5ff24e4b050fe9c590f30c600fb"
+      }
+    ],
+    "fewshot_007": [
+      {
+        "card": "knowledge/experience/curated/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f"
+      },
+      {
+        "card": "knowledge/experience/curated/evidence/F007.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "0d4daa4109bc28d81e44092b39a8ac330fb9c5fb53185a61a0e2ec98d4885ca8"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/usage-audit.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "1f8d68156c7d0cab88934482c8d893aa18188a7cc07fd779a9ee99da96071e91"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/batch-manifest.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "799435637072152a460936d48d47396ef44e4b238aee236db83a341dc3f2c2f1"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/fewshot-sources.json",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "17d75e653ab19cc3502baf8affe3b6bef19f08e0e10cbeecd496ded8a9f26516"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/README.md",
+        "match": [
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "81edc7bb9273b0ec199f7988014ff292a27b4239de313b8970ea00ddadcd7daa"
+      },
+      {
+        "card": "knowledge/staged/experience-full-maintenance-20261101/evidence/F007.json",
+        "match": [
+          "source_video_sha256",
+          "source_video_path",
+          "stable_fewshot_id"
+        ],
+        "card_sha256": "0d4daa4109bc28d81e44092b39a8ac330fb9c5fb53185a61a0e2ec98d4885ca8"
+      }
+    ]
+  },
+  "rule": "Matching source video or stable task ID and every member of its source group must be train, regardless of prompt rewrite."
+}

@@ -1,5 +1,7 @@
 # Agent-loop development direction: two levels of RSI
 
+> Historical RSI workflow — 2026-10-30/31. This document preserves the opt-in legacy design and its implementation checkpoint. Current creative_loop_v1 excludes RSI and uses [current Planner/Critic implementation](creative-loop-implementation.md), [event observation](online-event-observation.md) and separately requested [experience maintenance](experience-usage-interface.md). Old authorization and execution statements below describe their recorded session.
+
 Approved by the user on 2026-10-30. This direction supersedes the earlier priority of completing the current benchmark and evaluation queues. The later same-day authorization permits the first lightweight harness implementation and local software verification: easier evidence access, optional continuity, and clearer knowledge entrances. It does not authorize model calls, experiments, scorer changes, shared-experience publication, or renewed GPU use.
 
 ## Objective and evidence role

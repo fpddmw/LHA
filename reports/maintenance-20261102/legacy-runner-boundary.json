@@ -1,0 +1,5 @@
+{
+  "runner_before_sha256": "93c1652be13ef172cb1d9b0070b9285ec11e91bc8aea626b17f39ec53fe6662d",
+  "runner_after_sha256": "04c0b1ed60d8bfdc139c22dead781578c798d5b8bed5dec4709905a0eae0ddce",
+  "note": "AST extraction of latest runner; event observe implementation preserved verbatim."
+}

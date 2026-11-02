@@ -16,7 +16,7 @@ def report(output, state, *, record_directory=None):
             return Path(path).resolve().as_uri()
     def encoded(value):
         return json.dumps(value, ensure_ascii=False, indent=2)
-    scope = "Recorded online work. Planner selection and Critic scores are not independent final evaluation."
+    scope = "Recorded online work. Planner selection and online reviews are distinct from independent final evaluation."
     if state["config"]["execution"].get("mode") == "replay":
         scope += " Replay execution uses archived or synthetic media and may use scripted responses; it is not new generation or quality evidence."
     md = ["# Creative loop record", "", scope, ""]
@@ -35,7 +35,7 @@ def report(output, state, *, record_directory=None):
         save(save_path, continuation)
         section('Continuation decisions (raw explanations, not usefulness grades)', continuation)
         body.append('<p><a href="continuation-index.json">Generation explanations, exact prompts/inputs and receipts</a></p>')
-    section('Delivery proposals and report exposure', state.get('delivery_reviews', {}))
+    section('Per-generation checks',state.get('reviews',{}))
     section("Actual knowledge reads", state.get("reads", {}))
     from .experience_usage import project_run, write_json
     try:
@@ -52,6 +52,15 @@ def report(output, state, *, record_directory=None):
         "prompt": j["payload"]["prompt"], "renderer": j["payload"]["renderer"]}
         for k, j in state["jobs"].items() if j["kind"] == "generate"])
     section("Candidates, ancestry and recorded execution costs", state["videos"])
+    from .lineage import analyze
+    from .working_memory import timeline
+    from .common import save
+    lineage = analyze(state)
+    memory = timeline(records, state)
+    save(output / "lineage-analysis.json", lineage)
+    save(output / "memory-analysis.json", memory)
+    section("Lineage, source restart controls and limits", lineage)
+    section("Memory visibility and rereading", memory)
     body.append("<h2>Videos</h2>")
     md.extend(["## Videos", ""])
     for identity, video in state["videos"].items():
@@ -65,8 +74,13 @@ def report(output, state, *, record_directory=None):
     for identity, feedback in state["evaluations"].items():
         cited = set()
         report = feedback["report"]
-        for row in list(report["main_scores"].values()) + report["comparisons"] + report["extra_checks"]:
-            cited.update(row["evidence_refs"])
+        def references(value):
+            if isinstance(value,dict):
+                if isinstance(value.get('evidence_refs'),list):cited.update(value['evidence_refs'])
+                for item in value.values():references(item)
+            elif isinstance(value,list):
+                for item in value:references(item)
+        references(report)
         body.append("<details><summary>Cited evidence: " + html.escape(identity) + "</summary>")
         for frame in feedback.get("evidence", []):
             if frame["id"] in cited:

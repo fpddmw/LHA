@@ -7,16 +7,24 @@ Shared by the three maintenance Skills. Purpose: turn development traces into pr
 An entry earns attention when it helps Planner notice a consequential condition, explain an outcome, and prefer a promising course over a plausible trap. State the preference clearly. A capable model gains little from an event list or from being told that every option has risks.
 
 - Event: a robe hid a chair; a later jacket exposed it.
-- Useful judgment: the authored silhouette covered the support relation that made sitting readable. Change that silhouette or its placement before adding more preservation wording. If the garment is user-required, design its drape around the necessary contact evidence.
+- Useful judgment: when seated reading is part of the target, the silhouette hides a necessary support relation; revise its staging or drape. When a narrative transformation no longer needs that literal activity, reconsider the preservation commitment before sacrificing the requested garment.
 - Weak conclusion: both clothing and preservation matter; inspect and decide.
 
 A strong entry changes what the reader notices, proposes, compares or stops repeating. The value can lie in a better initial design as well as a repair. Preserve the user's creative objective when recommending a lower-risk realization.
+
+## Establish what the experience was optimizing
+
+Read the request, the source observations, Planner's added commitments and the scoring interpretation as distinct parts of the case. Determine which source relationships the target needs. A source movement can supply useful performance material while its original purpose or prop function changes. A refined prompt can make the wrong objective more explicit.
+
+Develop advice that chooses a fitting goal before optimizing its execution. An appearance treatment can depend on the original activity; a world reconstruction can need new behavior. Preserve the task's meaningful correspondence while making the target event readable. Avoid turning either preservation or replacement into a genre-wide rule.
+
+When a historical task interpretation was mistaken, keep its raw records and add a linked reinterpretation. State which observation remains useful, which prior judgment changes, and what preference follows. A user-reported comparison, an inspected video and an old Critic verdict retain their respective sources. Judge the new event's progression with suitable evidence rather than learning to exploit sparse scoring.
 
 ## Give working defaults under uncertainty
 
 Development evidence can support a useful conditional preference before a controlled comparison exists. Explain why that preference fits the observed problem and what would change it.
 
-For example, useful foreground appearance and an unfinished environment favor continuing a candidate whose remaining spatial transformation is compatible with that foreground. Broken identity or activity favors an input that still contains the original relationship, together with a reconsidered design. The state difference is central to the decision, even though it also limits a causal comparison of routes.
+For example, useful foreground appearance and an unfinished environment favor continuing a candidate whose remaining spatial transformation is compatible with that foreground. Loss of required identity or activity favors an input that still contains that relationship, together with a reconsidered design. A candidate that has coherently replaced an obsolete source function can instead be the better foundation for the target. The state difference is central to the decision, even though it also limits a causal comparison of routes.
 
 State a working explanation at the level the evidence supports, then develop its practical consequence. When multiple explanations remain plausible, identify the observation that separates them and recommend the most useful next action. Keep a proposed repair visibly distinct from an observed repair by saying so once, in ordinary prose.
 
@@ -28,9 +36,10 @@ A default has a reason and an exception. Repeated explicit failure lowers the va
 
 Useful analytical lenses include:
 
+- **Target choice versus inherited commitment:** a prior Planner made a source action obligatory; later knowledge repeated that priority. Reconsider the commitment when it holds back the requested adaptation.
 - **Omission versus scope conflict versus execution failure:** a missing orientation, a request that preserves a playing surface while globally replacing the table, and an explicitly requested displacement that never appears call for different revisions.
 - **Instance correspondence versus category construction:** more facial adjectives can specify a plausible new person; retaining the source individual requires attention to input evidence and competing transformations.
-- **Authored conflict versus weak emphasis:** costume, light or scenery can cover the contacts that make an action intelligible. Revise the conflicting realization.
+- **Authored conflict versus weak emphasis:** costume, light or scenery can cover a target action's necessary contacts. If both matter, revise their shared staging; if the conflict comes from an unnecessary preservation demand, revise that demand.
 - **Activity relations versus an object inventory:** a microphone's recipient or a tile wall's role distinguishes the event from another plausible scene with the same objects.
 - **Connected visual change versus verbal locality:** a window, its view, frame and reflected light can form one coherent edit even though several objects change.
 - **Visible motif versus structural realization:** embroidery, lamp objects and sci-fi accents can appear while a required collar, illumination pattern or environment remains absent.
@@ -61,8 +70,22 @@ A useful review can find a sound judgment with a failed execution, an ineffectiv
 
 Read budget notices and protocol versions as the decision setting. Compare delivery proposals with the subsequent report-informed choice. Preserve unknown coverage and separate independent judge findings where they change the interpretation. A frozen library can supply conditional advice while a batch produces evidence for its next reviewed revision.
 
-## Maintain and stage
+## Contribute, curate and develop with distinct authority
 
-Merge duplicated explanations and split claims whose conditions lead to different actions. Preserve evidence, old IDs and replacement history. Use authorized development material; keep held-out outcomes outside maintenance input. Stage library and Planner-manual changes for content review and activation approval. Maintenance Skills may be revised within the user's authorized scope. Current task snapshots stay fixed.
+A task contributor can create a judgment, recommend a course, clarify a condition, add a counterexample or propose an exact revision. These are linked readable records in the authorized private contribution layer. Existing accounts retain their text and summary until explicit curation. New material can state a decisive working preference while retaining its author and source case.
 
-The [usage interface](experience-usage-interface.md) supplies factual records and batch exports. Analysis, use review and curation are separately usable maintenance capabilities; select the ones the current question needs.
+An explicitly assigned curator reconciles contributions and updates canonical entry text and discovery metadata together. Maps derive their recommendations from that metadata. System development handles manual, Skill and tool changes under its own authorization. A task's use of a maintenance Skill grants no authority to edit the Skill. Shared repository publication remains separate from private contribution ingestion.
+
+Follow the frozen experiment profile for admission and online exposure. Preserve actual split and original reading history. The [usage interface](experience-usage-interface.md) specifies the records and operations; campaign counts and scheduling policy belong in experiment configuration.
+
+## Continuous-event evidence in current runs
+
+The [event-observation contract](online-event-observation.md) distinguishes a logical review from its selection, segment-observation and main-report calls. Interpret actual Planner page attachments, `page_coverage`/`coverage`, Critic supplied and observed ranges, missing footage and unresolved observations. Follow the run's frozen protocol: historical short-window samples retain their original scope, while independent final evidence remains separate from online evidence. A requested interval alone is not a record of what the model saw.
+
+The shared tool instructions are exposed as `observe-events` in both experience scopes. Changes to pagination or fields belong in that [operating guide](../knowledge/creative-loop/OBSERVE_EVENTS.md) and both manuals; case-derived guidance stays in reviewed experience entries.
+
+## A contribution is a communication to the next reader
+
+Lead with the useful judgment and explain it through the actual intervention. Challenge your own choice, reviewer or old guidance when the record warrants it. Say which decision useful guidance improved; for disagreement supply a precise correction. Ordinary prose and source links suffice. Runtime binds the source case and target version, and exposes related contributions at the entry entrance. Comments remain identifiable instead of silently becoming the entry author's advice.
+
+Read the settled task's protocol before interpreting its reviews or choices. Maintenance may inspect additional saved intervals; identify these as post-task observations. Available independent outcomes remain attributed to their evaluator. This task introduces no new render or new independent score.

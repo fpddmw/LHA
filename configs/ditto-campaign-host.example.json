@@ -1,0 +1,41 @@
+{
+  "devices": [
+    0
+  ],
+  "lock_directory": "/tmp",
+  "review": {
+    "mode": "critic"
+  },
+  "models": {
+    "planner": {
+      "factory": "vlm.openrouter:OpenRouterVisionModel",
+      "options": {
+        "model": "openai/gpt-6.1-sol",
+        "reasoning_effort": "high"
+      }
+    },
+    "online_critic": {
+      "factory": "vlm.openrouter:OpenRouterVisionModel",
+      "options": {
+        "model": "openai/gpt-6.1-sol",
+        "reasoning_effort": "high"
+      }
+    }
+  },
+  "renderer": {
+    "backend": "ditto",
+    "asset_manifest": "configs/ditto-models-verified.json",
+    "asset_manifest_sha256": "REPLACE_WITH_VERIFIED_MANIFEST_SHA256",
+    "generation": {
+      "num_inference_steps": 50,
+      "cfg_scale": 5.0,
+      "lora_alpha": 1.0,
+      "negative_prompt": "",
+      "prompt_enhancer": false,
+      "tiled": true,
+      "precision": "bfloat16"
+    },
+    "code_dir": "Ditto",
+    "models_root": "models"
+  }
+}

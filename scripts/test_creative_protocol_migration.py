@@ -19,7 +19,10 @@ from planner_harness import PlannerHarness
 
 class MigrationTests(unittest.TestCase):
     setUp,tearDown=fixtures.DeliveryReviewTests.setUp,fixtures.DeliveryReviewTests.tearDown
-    start=fixtures.DeliveryReviewTests.start
+    def start(self,mode='full'):
+        self.h=PlannerHarness(self.root/'run',common.Scripted([common.action('generate',input_video='source',prompt='Blue.')]))
+        self.h.start(self.source,'Make it blue.',mode='loop',workflow='creative_loop_v1',execution={'mode':'replay','experience_mode':mode})
+        self.respond(review=False)
     respond=fixtures.DeliveryReviewTests.respond
     resume=fixtures.DeliveryReviewTests.resume
     finish=fixtures.DeliveryReviewTests.finish

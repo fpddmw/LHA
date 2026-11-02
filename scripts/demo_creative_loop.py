@@ -22,7 +22,7 @@ def main():
     output = (ROOT / args.output).resolve()
     if (output / "run/state.json").exists():
         raise SystemExit("Choose a fresh demonstration directory; existing evidence is not overwritten")
-    sample = next(s for s in load(ROOT / "benchmark_data/fewshot_index.json") if s["sample_id"] == "fewshot_004")
+    sample = next(s for s in load(ROOT / "benchmark_data/benchmark.json") if s["sample_id"] == "037")
     source = ROOT / sample["source_video"]
     candidate = (ROOT / args.candidate).resolve()
     if not candidate.is_file():
@@ -32,10 +32,10 @@ def main():
         action("search", query="science fiction material blue edge"),
         action("read", targets=[{"id": "design-expression"}, {"id": "domain-sci_fi_modern"}, {"id": "express-edits"}]),
         action("workspace", summary="Scripted demonstration: inspect object/part bindings using the existing materials."),
-        action("generate", input_video="source", prompt=sample["prompt_long"]),
+        action("generate", input_video="source", prompt=sample["instruction"]),
     ])
     h = PlannerHarness(output / "run", planner)
-    h.start(source, sample["prompt_long"], mode="loop", workflow="creative_loop_v1", execution={"mode": "replay"},
+    h.start(source, sample["instruction"], mode="loop", workflow="creative_loop_v1", execution={"mode": "replay"},
             label="OFFLINE SOFTWARE DEMONSTRATION: scripted choices, existing media, no new generation or quality measurement")
     job = h.state["jobs"][h.state["pending_tool"]]
     save(h.output / "jobs" / job["id"] / "response.json", {
@@ -57,7 +57,7 @@ def main():
         action("delivery_candidate", video="v1"),
         action("finish", video="v1", message="Scripted selection of archived media; not a real task delivery or quality result.")]))
     h.resume()
-    packet, images = prepare_final_request(sample["prompt_long"], h.state["videos"]["source"], h.state["videos"]["v1"], output / "independent-request")
+    packet, images = prepare_final_request(sample["instruction"], h.state["videos"]["source"], h.state["videos"]["v1"], output / "independent-request")
     summary = {"kind": "offline_software_demo", "live_model_calls": 0, "new_generations": 0,
                "independent_scores": 0, "online_scores": "scripted fixture values only",
                "source_sha256": sha(source), "archived_candidate_sha256": sha(candidate),

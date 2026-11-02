@@ -5,7 +5,7 @@ import bisect
 import statistics
 from pathlib import Path
 
-from .protocol import file_hash, require, signature, validate_card, write
+from .protocol import file_hash, require, signature, validate_card, write, resolve_card_source
 
 
 def decode(path):
@@ -48,7 +48,7 @@ def nearest(times, target, tolerance):
 def prepare(card, output, destination, *, root=Path("."), frame_count=12, dense_ranges=(), mapping=None, decoder=None):
     validate_card(card)
     require(frame_count >= 2, "Need at least two overview samples")
-    source = root / card["source_video"]
+    source = resolve_card_source(card, root)
     require(file_hash(source) == card["source_sha256"], "Source hash mismatch")
     destination = Path(destination)
     destination.mkdir(parents=True, exist_ok=True)

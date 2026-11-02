@@ -1,5 +1,7 @@
 # Experience curation implementation record
 
+> Historical checkpoint — 2026-11-01. The plan, activation state and observations below retain that date. Current access and operation are documented in [experience usage](experience-usage-interface.md), the [active curated catalog](../knowledge/experience/curated/catalog.json) and [current loop implementation](creative-loop-implementation.md).
+
 Date: 2026-11-01. Branch: `codex/experience-curation-v1`. The pre-change remote commit is `0f6a48ca9d008a208f46503943b217cff3c2b00c`; the saved-plan commit is `b3c76b4`. Final synchronization is recorded at the end of this document.
 
 ## Delivered content

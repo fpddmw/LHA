@@ -1,214 +1,64 @@
-# Creative loop implementation and validation status
+# 当前 Loop 设计与实现
 
-Approved scope: [implementation plan](creative-loop-refactor-and-fewshot-plan.md).
-Current preparation and capability results are maintained in the [three-arm plan](creative-fewshot-three-arm-plan.md). The user authorized activation, software tests and bounded provider checks; GPU experiments await container startup. Independent evaluation now preserves separate GLM and Sonnet reports. The chronology below records the earlier implementation states.
+本页定义当前开发代码的运行主线。主实验安排见 [experiment-campaign.md](experiment-campaign.md)，参数见 [配置说明](benchmark-guide/configuration.md)，实际验证状态见 [current-status.md](current-status.md)。
 
-Earlier implementation status, 2026-11-01: repairs against the
-[architecture audit](creative-loop-design-audit-20261101.md) are implemented under the
-[detailed development specification](creative-loop-development-plan.md). The user
-requested GitHub synchronization before simulated workflows and validation runs.
-The new regressions have been written but not executed; the old demo and 113-test
-result below describe the baseline only. No live experiment or model call occurred.
-The repair code is synchronized on `codex/creative-loop-v1` at
-`6af64be677af876db78e0fbd23cdef4ea390eac0`, with the remote SHA independently checked.
+## 一条任务怎样执行
 
-Earlier content status, before activation: [editorial alignment](knowledge-guidance-alignment-20261101.md) updates current reading routes and guides. The [fourteen-entry experience package and five proposed manuals](../knowledge/staged/experience-full-maintenance-20261101/README.md) remain staged. The active curated catalog is empty; these content edits neither activate it nor change the validation status above.
-
-## Current preparation extension
-
-Fourteen reviewed entries and five manuals are now active. `execution.experience_mode` selects frozen `full` or `none` access across every knowledge operation. The new coordinator holds a topic until Direct and both delivery Loops, two independent final judges and verified archival finish. Separate single-GPU workers can run the two Loops concurrently within this topic; later topics remain unadmitted. Completed receipts and scores are reused by identity. The current code and tests supersede older empty-catalog and deferred-validation statements in this history.
-
-## What changed
-
-`creative_loop_v1` is an explicit Planner workflow. The existing default is `legacy`,
-so historical runs keep their behavior. New creative tasks use the continuous Planner,
-video observation, durable worker jobs and all-candidate access. The CLI and server
-task submission both propagate the workflow. Resume retains the recorded workflow,
-model, knowledge snapshot, system prompt and frozen Critic profile.
-
-The new knowledge allowlist preserves four classes: operating manuals, semantic
-understanding, visual style/design, and static generation/iteration knowledge. It
-contains the 111 complete entries, five domain references, seven guides, one historical
-model-experience record, four static iteration topics and their map, original sources
-and 98 reference images. The class labels are entrances, not compulsory reasoning slots.
-Original entry, guide and static-topic bytes remain unchanged. New map/manual editions
-avoid the legacy Wiki/learning instructions. The mutable experience catalog and its
-publication journals are not read by this profile. Excluded references are inaccessible
-through browse, search, read and reference-image tools.
-
-The Planner chooses input, prompt, reading, observation, optional review and delivery.
-No requirements/intent forms or learning ledger are used. The newest candidate's
-overview is attached after collection; there is no automatic Critic. Delivery choice,
-generation input and comparison target are separate. A null count limit allows further
-generations, including a fourth. An explicit resource limit pauses delivery work;
-an unsuitable result with no promising next attempt remains blocked, with its candidate
-retained. A successful Critic report is not required for a Planner delivery judgment.
-
-## What the Planner sees
-
-The actual system text is assembled from
-[CREATIVE_LOOP.md](../src/planner_harness/CREATIVE_LOOP.md) and the
-[reading manual](../knowledge/creative-loop/READING.md). For example:
-
-> Your task persists across tool results. You can revise your interpretation and visual
-> direction as evidence develops. Optional notes and workspace nodes can retain useful
-> questions, alternatives and findings. There is no required thought sequence, form,
-> reading quota, prescribed aesthetic or mandatory narrative invention.
-
-The task context contains the original request, source overview, latest observation,
-optional workspace/notes, candidate directory, intended delivery, actual reading receipts,
-recent operations and historical retrieval links. The latest Critic report is present;
-older reports retain dimensional scores, evidence references and a full-record link.
-The Critic's internal role instructions are not copied into the Planner context.
-
-The manual also states:
-
-> Its findings are evidence to understand, not decisions to obey. Inspect relevant video
-> intervals yourself when a score or claim affects continued generation or selection.
-
-## One-shot Critic
-
-[SCORE_DEFINITIONS.md](../src/critic_harness/SCORE_DEFINITIONS.md) defines every 0-4 anchor
-for instruction_adherence, content_preservation, temporal_consistency, visual_integrity
-and aesthetic_coherence, including scope and boundary examples. Its exact text is
-included in [CREATIVE_RUBRIC.md](../src/critic_harness/CREATIVE_RUBRIC.md) at profile
-construction and can be read by Planner as `score-definitions`. The same manual,
-schema version, evidence policy, implementation hashes and gpt-6.1-sol/high profile
-produce the same profile hash across tasks. Changing these requires a new frozen runtime.
-
-Each requested review receives source, candidate and at most one optional comparison.
-Evidence is prepared deterministically: eight overview samples and three windows of
-six consecutive frames per video, deduplicating coincident windows for short clips.
-This is sampled evidence, not exhaustive temporal verification. Main scored findings
-need real evidence IDs; preservation needs source/candidate citations, and temporal
-scores need consecutive candidate evidence. Unknown remains null.
-
-Focus and custom checks are separate from the main rubric. Generation prompts, Planner
-predictions and preferred winner are excluded. Output consists of dimensional scores,
-reasons, evidence, descriptive comparisons, supplemental checks and limitations. There
-are no recommendation/action fields. Instructions prohibit advice in every prose field;
-validation rejects extra fields and common directive formulations. A deterministic text
-check cannot guarantee detection of every semantically disguised recommendation; actual
-model compliance remains a live validation item, not a demonstrated result.
-
-One accepted response is persisted, parsed and validated without model-driven repair.
-Repeated requests for a reviewed candidate reuse its report. Invalid reports remain
-recorded failures. Transport retries are bounded and logged separately; the caller's
-model object is not modified. An interrupted LLM attempt may have incurred provider
-cost and is recorded as uncertain before consuming the next retry slot. Rendering uses
-the existing immutable signed job/receipt path instead of this LLM retry mechanism.
-
-## Independent final judge
-
-`evaluation.creative.ParateraJudge` fixes the model to `glm5.3flash`, reads credentials
-from `LHA_PARATERA_API_KEY`, and requires a verified HTTPS API base URL on
-`llmapi.paratera.com` in `LHA_PARATERA_BASE_URL`. No credential is saved in artifacts.
-The request uses model/messages/max_tokens without GPT-specific reasoning parameters.
-Endpoint paths, model identifier acceptance and payload limits have not been tested live.
-There is no fallback model.
-
-`scripts/run_creative_judge.py` exports an independent request by default. Its explicit
-`--execute` path is for later authorized scoring. Inputs contain the original task,
-source and anonymous candidate only: no arm, iteration, Planner notes, online feedback,
-supplemental checks or selection rationale. Final scores cannot enter the creative
-Planner through an evaluate tool. Pair summaries retain per-dimension valid/missing
-counts, deltas and wins/ties/losses, without treating unknown as zero or inventing a total.
-
-## Historical offline walkthrough and checks
-
-The reproducible command is `python scripts/demo_creative_loop.py --output <fresh-directory>`.
-It uses an existing fewshot_004 source and historical candidate, scripted Planner/Critic
-responses and the actual runtime's tools and context assembly. It performs zero live
-model calls, renders or independent scores. Its score values and selection are software
-fixtures, not findings about the video. It also exports the anonymous final-judge request.
-
-The baseline walkthrough is in `out/creative_loop_refactor/demo-final/` and test records
-are in `out/creative_loop_refactor/`. Its README
-links the exact system prompt, initial context, material reads, post-generation context,
-post-review context, Critic request/report and independent request. Existing historical
-media is not republished to GitHub.
-
-Before the audit and current repairs, the suite passed 113 unique tests, with no failures, errors or skips, using the
-repository's declared media dependencies. Focused regression checks cover the creative workflow, legacy Planner and worker,
-lightweight context, delivery, legacy Critic, server queue/service and existing RSI tests.
-They use synthetic/saved media and scripted models only. The approved plan's progress
-section records actual counts and synchronization status. An initial broader discovery
-also found a missing pydantic dependency in the unrelated old mechanical video Planner;
-that module is outside this refactor's focused suite and was not modified.
-
-## Current repair checkpoint
-
-The revised context retains exact read/operation/observation records on disk and
-exposes paginated catalogs. Fresh knowledge pages carry line and character offsets;
-large previous results are replaced in working context by explicit reopening links.
-The latest review remains complete. Original request and model-owned notes are not
-silently rewritten. A resource command can enlarge an unfinished task's context.
-
-Creative delivery, explicit budget pause and blockage now use the same meanings in
-bounded and unbounded configurations. A transport exhaustion can be reopened under
-the original immutable request with one to three recorded extra attempts. An actual
-Critic response, valid or invalid, cannot be reinterpreted by this recovery command.
-Uncertain render outcomes retain their pending job and prevent a replacement render
-or finish until reconciled. Confirming non-execution and accepting a recovered
-receipt are explicit operator actions with preserved evidence.
-
-Neutral focus validation and supplemental-check evidence attribution are strengthened.
-A requested comparison produces a supported difference or an explicit unknown;
-source-only citations cannot establish a finding about the new candidate. Obvious
-preferred-score instructions and recommendation prose are rejected. These are
-deterministic boundaries, with semantic compliance still awaiting real observation.
-
-The new creative report shows actual prompts, ancestry, knowledge reads, observations,
-scores, selected/provisional video, costs and failure/recovery records. No mandatory
-proposal is introduced to populate it. The saved demo has not been regenerated.
-
-`scripts/test_creative_repairs.py` adds context/pagination, bounded outcome, transport
-exhaustion, uncertain-render recovery, Critic-contract and actual service-factory/queue
-cases. Only external model/render execution is mocked in the integration case. Tests
-are **not executed** in this pass. Python/JSON parsing and Git hygiene are static
-publication checks; they do not establish runtime correctness or video improvement.
-
-## Later use
-
-After validation/experiments are authorized, the Planner CLI accepts
-`--profile configs/creative-loop-v1.json --workflow creative_loop_v1 --mode loop`.
-Supply source, request, output directory and the renderer execution configuration.
-The profile now drives role settings and count/context defaults, rather than serving
-only as a reference. CLI and service resolve both online roles to gpt-6.1-sol/high;
-contradictory settings fail before task execution.
-
-`configs/creative-service.example.json` is a service configuration template. Replace
-its asset manifest path/hash with verified deployment values and restore the approved
-renderer negative prompt before use. It is not a ready-to-launch experiment. Task
-execution settings must match the service renderer. The service explicitly selects
-`creative_loop_v1`; legacy tasks keep a separate legacy entry.
-
-An optional shared identity is created with
-`python scripts/manage_creative_run.py freeze-profile --output <profile.json>`.
-This only saves code/knowledge/rubric/model hashes. CLI tasks and the separate judge
-accept `--experiment-profile <profile.json>`; the service accepts `experiment_profile`
-in its configuration and binds submitted creative tasks to it. A profile mismatch
-requires a new declared runtime revision. Existing frozen runs stay with their
-recorded checkout; this repair does not migrate them or start a new cohort.
-
-Operator recovery commands execute no inference or rendering:
-
-```text
-python scripts/manage_creative_run.py retry-planner --run <run> --reason <reason> --extra-attempts 1
-python scripts/manage_creative_run.py recover-tool --run <run> --job <job-id> --action retry-review --reason <reason>
-python scripts/manage_creative_run.py recover-tool --run <run> --job <job-id> --action receipt --receipt <receipt.json> --reason <reason>
-python scripts/manage_creative_run.py recover-tool --run <run> --job <job-id> --action not-executed --reason <verified-non-execution>
-python scripts/manage_creative_run.py resources --run <run> --context-chars 240000 --reason <reason>
-python scripts/manage_creative_run.py resources --run <run> --continue-delivery --reason <reason>
+```mermaid
+flowchart TD
+    A[原始任务、源视频、固定配置与经验权限] --> P[Planner 读取上下文并决定下一动作]
+    P --> O[阅读、观察、笔记与候选选择]
+    O --> P
+    P --> G[提交一次生成]
+    G -->|成功| M{review 模式}
+    M -->|critic 默认| C[独立 Critic 按需取证并定性评价]
+    M -->|planner| R[Planner 观察并提交自评]
+    C --> P
+    R --> P
+    G -->|明确失败| P
+    P --> F[选择交付，或合法无交付停止]
+    P -->|到期| T[冻结已有结果与执行状态]
+    F --> E[任务后经验维护或独立终评]
 ```
 
-For a service-owned run, stop its worker service first and add
-`--service <directory> --queue-job <id>` before the subcommand. The command requires
-the same service OS lock and checks task/job identity. A recovered failed queue job is
-requeued; resource continuation after a completed Planner queue attempt creates a new
-Planner queue item pointing at the same task. Start the same service later to execute
-it. No live run or recovery command was invoked in this repair pass.
+生成成功后每轮都检查，包括最后一轮。Critic 获得原始任务、Planner 提交与实际生效的生成提示词、关注重点、原片、实际输入、候选及参考；它按需请求概览、原生连续帧、分页或裁剪，给出评价和证据。在线检查不使用正式终评分数或评分手册，也不提供下一步编辑建议。
 
-The future validation pass should execute the focused tests and relevant legacy
-regressions, then regenerate the walkthrough. No deployment, GPU queue, heartbeat,
-live model probe or real judge was started by this implementation.
+Planner 自评与 Critic 共享观察能力。Planner 可先阅读、补看和记笔记，再将 `review: {video_id, summary, findings?}` 与下一动作一起提交。检查和动作按实际有效性更新状态；失败动作不应留下半次更新。
+
+`finish` 复用已做的检查，由 Planner 选择候选，不再启动末尾评审或要求第二次确认。明确的 Critic 失败作为工具结果返回，Planner 可以继续、交付已有候选或停止。超时优先保留 Planner 已指定候选；未指定时保留明确标记的最新成功生成 fallback，不伪造检查完成或最终确认。
+
+## 资源与终止
+
+每个样本 × 提示词版本 × 方法 × seed 是独立任务。默认最多 5 次生成、最长 3600 秒；N 可配置。实际提交的生成尝试计数，执行失败也计数，同一请求恢复不重计。达到 N 后仍可在剩余时间内观察、阅读和交付。
+
+模型调用、token、费用和执行状态继续记录。默认在线路径以生成次数和任务期限为边界；Planner 看到模糊阶段提示和是否还能生成。任务后维护单独配置，不消耗在线生成预算。独立 GLM／Sonnet 评分不设置人为调用、token 或费用上限。
+
+到期、明确失败、合法无交付停止和正常交付都能结算。已提交但结果未知的请求沿原 job 核实恢复，不将其伪装成失败后再次提交。未知模型调用隔离所属任务；未知 GPU 执行保留设备占用，避免重复渲染。
+
+## 模块职责
+
+| 层 | 主要模块 | 职责 |
+|---|---|---|
+| 状态机 | `planner_harness.runner`、`creative_actions` | 准备上下文、解释动作、保存状态和事件 |
+| 每轮检查 | `automatic_review`、`critic_harness.qualitative` | 生成后的检查、反馈与继续决策 |
+| 观察与记忆 | `video`、`event_observation`、`context`、`working_memory` | 原生时间证据、分页、工作记录与上下文 |
+| 交付 | `candidate_selection`、`delivery`、`delivery_review` | 候选选择、停止和最终结果 |
+| 执行与恢复 | `execution`、`model_call`、`recovery`、`accounting` | 请求与回执、已知失败、未知执行和恢复 |
+| 服务 | `server_runtime` | 持久队列、每设备渲染和跨任务流水线 |
+| 实验 | `experiments.campaign`、`unified_benchmark`、`results` | 方法条件、经验版本、登记、评分与汇总 |
+| API | `vlm.settings`、`vlm.openrouter` | 统一角色解析和真实请求传输 |
+| 终评 | `evaluation.providers`、`validation`、`low_high`、`final_suite` | 独立判官配置、正式评分和统计 |
+
+`critic_harness.one_shot` 保留历史导入兼容；正式数值评分校验由 `evaluation.validation` 维护。旧 RSI／legacy 实现在 `planner_harness.compat`，不扩展当前动作协议。历史直连判官在 `evaluation.legacy_providers`，当前默认工厂统一走 OpenRouter。
+
+## 数据与经验
+
+主实验按全量运行，RSI 划分只控制无经验组中哪些任务结束后维护经验，以及 RSI 汇总的子集；当前方案为 40／27。前段 none 结算后开放维护 Skill 和累计私有经验；后段 none 只运行、不维护。冻结后 full 运行全量，在线只读该版本。四组共享同一结果入口，数量和 PE／Planner 各自 N 见 [运行安排](experiment-campaign.md)。无新增经验是一种正常维护结果。
+
+Direct、PE、Planner-once、Best-of-N 和不同 loop 保留各自实际输入、提示词、seed、生成收据及候选谱系。跨 review 模式复用符合条件的 Direct 视频；不同方法／模式的结果身份不能互相覆盖。正式终评只读取原始任务与终评证据。
+
+## 修改和检查
+
+对主线修改，运行 `python scripts/check_repository.py --suite current`；对历史兼容修改，另跑对应历史模块。测试使用合成视频和脚本化／mock API，不把它们记作真实模型效果。新增入口应复用角色配置、生成执行和结果注册接口，避免再复制一套循环。
+
+运行中的任务继续使用既有配置与回执。实现或协议变更在新的运行目录中验证；已有媒体和冻结交接包保持可追溯。实测 API 地区限制是外部运行条件，见当前状态页。

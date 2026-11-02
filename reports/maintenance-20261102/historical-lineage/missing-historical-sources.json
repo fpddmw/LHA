@@ -1,0 +1,20 @@
+[
+  {
+    "run": "out/agent_loop_live/20261030/ditto-phase2/completed-benchmark-001-long/tasks/benchmark__001__long/run",
+    "id": "source",
+    "original_path": "/root/autodl-tmp/LHA-loop-benchmark-20261030-preparation/benchmark_data/main/001/001.mp4",
+    "sha256": "93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806",
+    "status": "restored_and_verified",
+    "recovery_record": "../historical-source-recovery.json",
+    "local_path": "out/maintenance-recovery/20261102-root-hygiene/historical-sources/93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806.mp4"
+  },
+  {
+    "run": "out/agent_loop_live/20261030/ditto-phase2/completed-pre-stop-six-tasks/tasks/benchmark__001__short/run",
+    "id": "source",
+    "original_path": "/root/autodl-tmp/LHA-loop-benchmark-20261030-preparation/benchmark_data/main/001/001.mp4",
+    "sha256": "93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806",
+    "status": "restored_and_verified",
+    "recovery_record": "../historical-source-recovery.json",
+    "local_path": "out/maintenance-recovery/20261102-root-hygiene/historical-sources/93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806.mp4"
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "benchmark_version": "lha-benchmark-20261102-clean",
+  "benchmark_index": "benchmark_data/benchmark.json",
+  "benchmark_index_sha256": "9071b3f14266913e90fd55812c2e68a0f6d1098566be9e0773aecd30c7f21cb7",
+  "sample_count": 75,
+  "output_positions": 150,
+  "split_counts": {
+    "train": 40,
+    "validation": 10,
+    "test": 25
+  },
+  "output_counts": {
+    "train": 80,
+    "validation": 20,
+    "test": 50
+  },
+  "splits": [
+    "train",
+    "validation",
+    "test"
+  ],
+  "prompt_forms": [
+    "short",
+    "long"
+  ],
+  "conditions": [
+    "pe"
+  ],
+  "instruction_policy": "All 75 samples have equal status; process approved short and long prompts separately.",
+  "colleague_scope": "Bernini-R official PE generation: 150 outputs; no Direct or quality judge",
+  "direct_owner": "Original experiment owner runs Direct separately; outside the colleague assignment.",
+  "report_policy": "Keep source count 75 separate from 150 prompt conditions. Report split, prompt form and origin separately.",
+  "data_archive": {
+    "filename": "benchmark.zip",
+    "sha256": "39778077e7900954b9502a607b31dc7518b7802b94d0815513cbdee37dceddde",
+    "bytes": 88589754
+  },
+  "renderer": "bernini",
+  "enhancer_revision": "e6c2cf11843470b08491745947abcba9c3c6b079",
+  "assignment": "75 sources x short/long x PE = 150 videos; Direct excluded"
+}

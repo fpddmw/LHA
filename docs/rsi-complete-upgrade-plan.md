@@ -1,5 +1,7 @@
 # Complete RSI upgrade: authorized implementation
 
+> Historical RSI workflow — 2026-10-30/31. This document preserves the opt-in legacy design and its implementation checkpoint. Current creative_loop_v1 excludes RSI and uses [current Planner/Critic implementation](creative-loop-implementation.md), [event observation](online-event-observation.md) and separately requested [experience maintenance](experience-usage-interface.md). Old authorization and execution statements below describe their recorded session.
+
 Authorized on 2026-10-31 following the complete Opus review reconciliation. This is the implementation checklist for the existing architecture, not a new parallel framework. Preserve historical evidence and running remote snapshots. Newly authored working material is English.
 
 ## A. Independent task criteria and useful local signals

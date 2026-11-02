@@ -78,7 +78,7 @@ def main():
     manifest = args.manifest.resolve()
     spec = json.loads(manifest.read_text(encoding="utf-8"))
     mapped = {c["case_id"]: c for c in json.loads(args.mapping_manifest.read_text(encoding="utf-8"))["cases"]}
-    samples = {s["sample_id"]: s for s in json.loads((ROOT / "benchmark_data/all_samples.json").read_text(encoding="utf-8"))}
+    samples = {s["legacy_id"]: {**s, "prompt_long": s["instruction"]} for s in json.loads((ROOT / "benchmark_data/benchmark.json").read_text(encoding="utf-8"))}
     model = None
     for case in spec["cases"]:
         if args.only and case["case_id"] not in args.only:
@@ -149,8 +149,8 @@ def main():
             print(json.dumps({"prepared": case["case_id"], "pairs": len(pairs)}), flush=True)
             continue
         if model is None:
-            from vlm.codex_vlm import CodexVisionModel
-            model = CodexVisionModel(role="probe_evaluator")
+            from vlm.openrouter import OpenRouterVisionModel
+            model = OpenRouterVisionModel(role="probe_evaluator")
         os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(manifest.parent / "judge_calls_v3.jsonl")
         if prior_raw is not None:
             response = prior_raw

@@ -1,0 +1,17 @@
+# Source exports omit media whose redistribution permission remains unverified.
+# These attributes do not remove or rewrite any existing Git object/history.
+*.mp4 export-ignore
+*.mov export-ignore
+*.webm export-ignore
+*.mkv export-ignore
+*.avi export-ignore
+*.jpg export-ignore
+*.jpeg export-ignore
+*.png export-ignore
+*.webp export-ignore
+*.gif export-ignore
+*.wav export-ignore
+*.mp3 export-ignore
+*.safetensors export-ignore
+*.ckpt export-ignore
+out export-ignore

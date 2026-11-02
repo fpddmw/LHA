@@ -14,7 +14,7 @@ Useful specificity explains the result. It can describe how a mark follows a for
 
 ## Benchmark main/041: an open storybook request
 
-The [source clip](../../../benchmark_data/main/041/041.mp4) shows a man writing beside a woman in a bright room. His blue striped shirt, her white blouse, and the writing surface offer concrete places to express an illustration treatment. Their social relationship need not be invented to make this visual decision. `main/041` is the benchmark identifier; [OPUSCAR 041](../../entries/opuscar-041.md) is an unrelated theater case.
+The [source clip](../../../benchmark_data/train/020/video.mp4) shows a man writing beside a woman in a bright room. His blue striped shirt, her white blouse, and the writing surface offer concrete places to express an illustration treatment. Their social relationship need not be invented to make this visual decision. `train/020` (formerly `main/041`) is the benchmark identifier; [OPUSCAR 041](../../entries/opuscar-041.md) is an unrelated theater case.
 
 The actual short request was:
 
@@ -52,7 +52,7 @@ Choose this treatment when a light, hand-drawn intimacy suits the request. Ink w
 
 ## Benchmark fewshot/004: develop a specified space-station design
 
-The [source clip](../../../benchmark_data/fewshot/004/004.mp4) shows two players at a table-tennis table in a sports interior. The detailed request already chooses the environment, lighting, clothing direction, Earth view, and blue table edges. Its style-related portion reads:
+The [source clip](../../../benchmark_data/train/037/video.mp4) shows two players at a table-tennis table in a sports interior. The detailed request already chooses the environment, lighting, clothing direction, Earth view, and blue table edges. Its style-related portion reads:
 
 > Transform the room into a futuristic space-station sports arena with metallic walls, blue-white lighting, and Earth visible through large windows. Dress the players in sleek sci-fi athletic suits and give the table glowing blue edges.
 

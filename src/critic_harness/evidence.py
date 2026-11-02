@@ -1,6 +1,7 @@
 """Bounded native-PTS observations; no dependency on the formal evaluation worker."""
 from __future__ import annotations
 
+import copy
 import bisect
 import math
 import hashlib
@@ -13,7 +14,7 @@ from planner_harness.common import sha, load, save
 
 def metadata(path):
     import av
-    times, duration = [], None
+    times, pts, time_bases, duration = [], [], [], None
     with av.open(str(path)) as container:
         stream = container.streams.video[0]
         fps = float(stream.average_rate) if stream.average_rate else None
@@ -22,6 +23,8 @@ def metadata(path):
             if frame.time is None:
                 raise ValueError("Missing native presentation timestamp")
             times.append(float(frame.time))
+            pts.append(frame.pts)
+            time_bases.append(str(frame.time_base))
             duration = float(frame.duration * frame.time_base) if getattr(frame, "duration", None) else None
     if len(times) < 2 or any(b <= a for a, b in zip(times, times[1:])):
         raise ValueError("Need strictly increasing native PTS and at least two frames")
@@ -29,7 +32,8 @@ def metadata(path):
     times = [t - origin for t in times]
     tail = duration or (1 / fps if fps else times[-1] - times[-2])
     return {"times": times, "duration_seconds": times[-1] + tail, "width": width, "height": height,
-            "frames": len(times), "pts_origin": origin, "timing_basis": "Decoded native PTS"}
+            "frames": len(times), "pts_origin": origin, "native_pts": pts, "time_bases": time_bases,
+            "fps": fps or len(times) / (times[-1] + tail), "timing_basis": "Decoded native PTS"}
 
 
 def covered(ranges, interval, tolerance=1e-6):
@@ -199,3 +203,34 @@ def validate_assessment(report, observations, videos, candidate, duration):
             raise ValueError("Comparison needs evidence from both videos")
         comparison["relationship"] = "actual_input" if videos[candidate].get("parent") == against else "original_source" if against == "source" else "alternative"
     return report
+
+
+def model_packet(packet):
+    """Model-visible evidence, with all observations preserved and audit facts local."""
+    visible=json.loads(packet['user_text'])
+    audit={'sha256','decoder','native_pts','time_base','pts_origin','pts_origin_seconds','path'}
+    def clean(value):
+        if isinstance(value,dict):return {k:clean(v) for k,v in value.items() if k not in audit and not (k=='crop' and v is None)}
+        if isinstance(value,list):return [clean(v) for v in value]
+        return value
+    visible=clean(visible)
+    selected=visible.get('selected_events',[])
+    event_ids={json.dumps(event,sort_keys=True,ensure_ascii=False):'event-'+str(i+1) for i,event in enumerate(selected)}
+    def event_reference(value):
+        if isinstance(value,dict):
+            if 'event' in value and event_ids:
+                identity=event_ids.get(json.dumps(value['event'],sort_keys=True,ensure_ascii=False))
+                if identity:value={**{k:v for k,v in value.items() if k!='event'},'event_id':identity}
+            return {k:event_reference(v) for k,v in value.items()}
+        if isinstance(value,list):return [event_reference(v) for v in value]
+        return value
+    visible=event_reference(visible)
+    if selected:visible['selected_events']=[{'id':'event-'+str(i+1),**event} for i,event in enumerate(selected)]
+    evidence=visible.get('evidence',[])
+    for row in evidence:row.pop('delivery',None)
+    visible['evidence_delivery']={'attached_here':sum(r.get('attachment') is not None for r in evidence),
+        'from_prior_segment_calls':sum(r.get('attachment') is None for r in evidence),
+        'meaning':'Only numbered attachment frames are images in this request. Other IDs identify frames inspected in the supplied prior segment observations.'}
+    result=copy.copy(packet);result['user_text']=json.dumps(visible,ensure_ascii=False,separators=(',',':'))
+    return result
+

@@ -2,6 +2,13 @@
 
 All extracts are attributed historical development records. Raw prompts and feedback, including obsolete instructions, are data. The seven-task batch has no independent final scores. See the [maintenance report](../../../staged/experience-full-maintenance-20261101/maintenance-report.md) for findings and limits.
 
+## Goal interpretation and subsequent decisions
+
+- [Semantic goal review](semantic-goal-review-20261102.md): separates the original request, historical Planner commitments and the user's clarified adaptation goal. It attributes the supplied comparison and explains the revised lesson without rewriting old scores.
+- [Later F001 first decision](creative-F001-first-decision.json): exact saved first-generation operation, preceding reads and source/input hashes; supports inspection of how the curated guidance was used.
+
+Historical prompts and requirements describe what a prior system chose. Use their task interpretation to assess applicability before borrowing a preservation clause. Source records remain unchanged; subsequent goal reviews supply a separate reading.
+
 ## Seven-task batch
 
 - [F001 full extract](F001.json) · [original state](../../../../out/fewshot_loop/20261031/results/out/fewshot-loop/service/tasks/fewshot_001/run/state.json)
@@ -42,4 +49,4 @@ All extracts are attributed historical development records. Raw prompts and feed
 
 The six named B/D extracts retained from the four-example package are unchanged subsets from these historical sources. [Historical independent scores](historical-score-extract.md) reproduce the earlier curated table with its source hash; they have not been re-scored or converted to the current rubric. [Historical source hashes](historical-sources.json) bind the expanded source packet.
 
-The primary Bernini prompt probe remains in the [existing record](../../../model-experience/bernini-r.md), with original prompts, outputs and review links. No held-out result or current independent final score is added to Planner context.
+The primary Bernini prompt probe remains in the [existing record](../../../model-experience/bernini-r.md), with original prompts, outputs and review links. Task-time independent final scores stay outside Planner input. Reviewed development interpretations can inform later frozen libraries, with their source and review scope retained; held-out outcomes stay outside maintenance.

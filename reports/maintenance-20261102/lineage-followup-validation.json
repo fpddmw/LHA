@@ -1,0 +1,21 @@
+{
+  "tests_run": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsed_seconds": 0.060660362243652344,
+  "sources_before": {
+    "src/planner_harness/lineage.py": "3a79f0b4ffa1f9c3858aaf0d3614e3f30c07385563f45ad6499bcb8ecaedcedd",
+    "scripts/analyze_lineage_cohort.py": "95ee5c57359f8f5980f912008e1ee3327397920ed00bd2e374d1a0be76ec4d09",
+    "scripts/test_lineage_analysis.py": "641a622c26b3f5df7a8d3d6d4549e67f8be5caeeb949c06095cb868b7a97ec12",
+    "scripts/audit_media.py": "5be33f6616f2a03bff61a6ecadc94ac592d93f90c26b29288d7b8d50a96c4d4d"
+  },
+  "sources_after": {
+    "src/planner_harness/lineage.py": "3a79f0b4ffa1f9c3858aaf0d3614e3f30c07385563f45ad6499bcb8ecaedcedd",
+    "scripts/analyze_lineage_cohort.py": "95ee5c57359f8f5980f912008e1ee3327397920ed00bd2e374d1a0be76ec4d09",
+    "scripts/test_lineage_analysis.py": "641a622c26b3f5df7a8d3d6d4549e67f8be5caeeb949c06095cb868b7a97ec12",
+    "scripts/audit_media.py": "5be33f6616f2a03bff61a6ecadc94ac592d93f90c26b29288d7b8d50a96c4d4d"
+  },
+  "scope": "Offline main-agent lineage checks; no external models or renders",
+  "sources_stable": true
+}

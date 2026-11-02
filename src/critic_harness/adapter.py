@@ -21,11 +21,15 @@ or act on supported findings; no fixed sequence or acceptance threshold is impos
 
 
 def critique(job, directory, root, model=None):
-    if job["payload"].get("critic", {}).get("protocol") == "lha-creative-review-v1":
+    from .one_shot import PROTOCOL
+    if job["payload"].get("critic", {}).get("protocol") == PROTOCOL:
         from .one_shot import run_review
         return run_review(job["payload"], directory, model=model)
+    protocol = job["payload"].get("critic", {}).get("protocol", "")
+    if isinstance(protocol, str) and protocol.startswith("lha-creative-review-"):
+        raise ValueError("Unsupported creative Critic protocol; use its recorded code snapshot or an explicit reviewed migration")
     from .runner import CriticHarness, load_feedback
-    from vlm.codex_vlm import CodexVisionModel
+    from vlm.openrouter import OpenRouterVisionModel
     payload = job["payload"]
     directory = Path(directory) / "active-critic"
     spec = {"request": payload["request"], "candidate": payload["video_id"],
@@ -36,7 +40,7 @@ def critique(job, directory, root, model=None):
         if key in payload:
             spec[key] = payload[key]
     if model is None:
-        model = CodexVisionModel(role="online_critic")
+        model = OpenRouterVisionModel(role="online_critic")
         for key in ("model", "reasoning_effort"):
             if key in payload["critic"]:
                 setattr(model, key, payload["critic"][key])

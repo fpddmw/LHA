@@ -1,0 +1,9 @@
+{
+  "source": "git HEAD:benchmark_data/main/001/001.mp4",
+  "commit": "c431ce67827aad1f355ed10eec7f1b8f31f56c53",
+  "restored_to": "out/maintenance-recovery/20261102-root-hygiene/historical-sources/93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806.mp4",
+  "sha256": "93aa8d9772abe7ec404c215da588c77ed0589e9fed06c5fb1a98dbf5ad471806",
+  "bytes": 183954,
+  "use": "Read-only historical experiment source recovery; excluded from active benchmark",
+  "verified": true
+}

@@ -5,3 +5,7 @@ av>=14,<20
 Pillow>=10,<13
 torch>=2.4,<3
 transformers>=4.45,<5
+
+# Full-frame CPU optical-flow diagnostics (no model download).
+numpy>=1.26,<3
+opencv-python-headless>=4.10,<5

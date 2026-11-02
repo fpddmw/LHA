@@ -1,5 +1,7 @@
 # Experience library and maintenance Skills: bounded implementation
 
+> Historical checkpoint — 2026-11-01. The plan, activation state and observations below retain that date. Current access and operation are documented in [experience usage](experience-usage-interface.md), the [active curated catalog](../knowledge/experience/curated/catalog.json) and [current loop implementation](creative-loop-implementation.md).
+
 Date: 2026-11-01. Status: bounded implementation complete; static/historical checks recorded below. Four authored entries await the planned content review before activation. Simulated and live workflows remain deferred.
 
 Follow-up: the user subsequently authorized complete rewriting and seven-task maintenance. That work is recorded in [the full maintenance plan](experience-full-maintenance-20261101.md) and [complete review package](../knowledge/staged/experience-full-maintenance-20261101/README.md). The bounded scope below remains the historical implementation record; its four-entry boundary no longer describes the current content work. Runtime activation still awaits content review.

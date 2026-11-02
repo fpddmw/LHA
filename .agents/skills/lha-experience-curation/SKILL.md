@@ -1,32 +1,30 @@
 ---
 name: lha-experience-curation
-description: Sharpen and organize LHA experience entries and renderer profiles during requested maintenance. Strengthen conditional recommendations, merge overlapping explanations, preserve useful boundaries and improve discovery.
+description: Consolidate LHA experience contributions into coherent conditional guidance and discovery metadata; propose revisions or apply explicitly authorized library curation.
 ---
 
-# Curate a library that improves judgment
+# Maintain a coherent body of judgment
 
-Use the [shared writing standard](../../../docs/experience-authoring-standard.md) and the [current approved library](../../../knowledge/experience/curated/README.md). Work from the requested content problem or supplied analysis; editorial maintenance can stand on its own.
+Use the [writing standard](../../../docs/experience-authoring-standard.md) and [authority and interface contract](../../../docs/experience-usage-interface.md). Read the actual entry, its linked contributions and cases before changing its account. A task contributor uses this Skill to recommend precise changes. An explicitly authorized library curator can accept, merge, supersede or decline contributions. Skill selection itself changes no permissions.
 
-## Strengthen the decision value
+## Decide what the new case changes
 
-Find the choice each entry helps a capable Planner make. State the relevant condition and preferred response in its opening and discovery summary. Replace generic caution with a useful discriminator: what makes this candidate a good editing input, which parts of a design conflict, or why another wording-only retry has low value.
+Choose the useful unit of understanding. Merge accounts that explain the same mechanism; separate conditions that favor different actions. A single case may sharpen an existing boundary rather than deserve a new entry. Keep a distinct renderer effect when it changes the practical preference.
 
-Preserve the explanatory relationship, not just its example objects. A robe/chair case can teach reasoning about silhouette and activity evidence without prescribing jackets for every scene. Keep recommendations strong enough to favor a course of action. Replace universal bans and numerical retry budgets with the underlying reason and the conditions for a different choice.
+Check the objective behind the evidence. Preserve observations while correcting assistant-invented obligations. If old advice treated every source action as mandatory, revise the condition that made it so. A world reconstruction should realize its new event; an appearance treatment may depend on the original activity. Do not turn a particular example into a mandatory plot.
 
-Keep action-changing boundaries beside the advice. Move repeated protocol limitations and counting details into the evidence footer. Verify that a striking explanation still matches the actual prompts and outcomes; repair its factual basis without draining its practical consequence.
+Compare the new contribution with its target version and current text. Keep informative counterexamples, successful choices and unresolved disagreements. A persuasive explanation still needs the actual input, prompt and outcome it claims. If evidence supports a useful working preference, write it directly and identify what would change it. Avoid returning decisive guidance to a list of generic cautions.
 
-## Place the improvement where it will be used
+## Put each change in its proper place
 
-Use the maintenance review's question, explanation, actual intervention and outcome links to revise the account that explains the decision. Preserve the decisive condition in its opening and summary. A changed understanding of a renderer belongs in an experience entry; a reusable way to interpret results belongs in a professional manual; argument names, report reuse and delivery confirmation belong in the operating manual. Link these materials so the next Planner can use the revised judgment without reading a batch postmortem.
+Canonical entries own revisable judgments. Their title, summary, questions and renderer scope must express the same operative condition as their body. Maps and renderer entrances derive their entry recommendations from this metadata. Cases retain actual interventions and outcomes; comments and proposed revisions remain linked records, including after a curation decision.
 
-Keep source events, candidate identities, experience versions and counterexamples reachable in the evidence footer. Repair summaries and navigation alongside the entry when their wording would preserve the old mistake. Do not turn the runtime's pressure schedule into an empirical stopping rule. Maintain a single current approval state across the active text and catalog; historical staged packages retain their original labels and content.
+Professional manuals teach how to understand a task, inspect evidence and use knowledge. Operating manuals describe tools. Skills teach maintenance methods. Propose changes to these in a development report; the contribution and library-curation interfaces cannot edit them. A shared-library publication also needs its own explicit authorization.
 
-## Organize for reading and revision
+## Curate or propose, according to the assignment
 
-Keep one primary account per mechanism. Merge duplicated advice; split conditions that call for different actions. Restore concrete renderer differences in actionable profile summaries and link to their full accounts. Put broadly useful interpretation methods in the professional manuals and tool/interface facts in the operating manual; empirical claims remain in versioned entries.
+During post-task contribution, write a clear comment, clarification, recommendation, new account or exact proposed revision. The runtime adds it as searchable material beside its target. No task-level operation overwrites an existing account.
 
-Make summaries useful on their own. Prefer a condition plus a practical preference over a topic label or a reference such as 'apply S1'. Question entrances and renderer profiles can point to the same explanation. Keep full provenance reachable without filling the first screen with audit details.
+During authorized library curation, state which contributions to accept or merge and provide complete entry text plus matching discovery metadata. Bind changes to the existing entry hash. For superseded contributions, name the successor; for a declined contribution, explain the consequential mismatch. The explicit curation command preserves the prior version and records the decision. Existing online snapshots retain their original contents.
 
-Maintain all [old-card destinations](../../../knowledge/staged/experience-full-maintenance-20261101/old-card-map.md), counterexamples and original records. The 14-entry organization is an editorial structure that can evolve with substantive needs. Review the [catalog contract](../../../docs/experience-usage-interface.md) before preparing discovery metadata or changing access.
-
-Stage library, catalog and Planner-manual revisions until content and activation are approved. Existing snapshots and historical evidence stay intact. Finish with a concise before/after account of the changed judgments, factual corrections and activation status. No automatic RSI workflow is part of this Skill.
+Use the current library's links and case records to preserve provenance and old-card destinations. End with the changed judgment and its practical effect, the contributions resolved, and anything left for development or further observation. No extra model pass, rendering run or automatic adoption cycle follows from completing this Skill.

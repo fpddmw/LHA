@@ -1,40 +1,66 @@
-# 当前 Benchmark：50 条正式题目 + 7 条示例
+# Benchmark：67条视频，40训练／27测试
 
-当前版本为 `2026-10-29-dest`，来自用户指定的 `dest.zip`。所有 57 段视频和
-57 份 `prompt.txt` 均按原始字节导入。正式 50 条的详细提示词与包内
-`rewrite_results.jsonl` 逐条一致。50 段正式视频通过 SHA-256 与仓库旧源视频
-逐条对应，映射保存在 `legacy_sample_id`，不依赖目录顺序猜测。
+版本：`lha-benchmark-20261102-67-train40-test27`。每个源视频配短、长两版提示词，共134个任务条件；不设验证集。
 
-## 当前数据入口
+## 1. 任务定义
 
-| 文件 | 内容 |
-| --- | --- |
-| `sample_index.json` | 正式 50 条；ID 为 `001`–`050` |
-| `fewshot_index.json` | 包内 `ok/` 的 7 条示例；ID 为 `fewshot_001`–`fewshot_007` |
-| `all_samples.json` | 完整 57 条，含明确的 `split` |
-| `instructions_short.jsonl` | 正式 50 条短提示词，原样取自 `style_intent` |
-| `instructions_long.jsonl` | 正式 50 条详细提示词，原样取自 `rewritten_prompt` / `prompt.txt` |
-| `main/<ID>/` | 正式题目的视频和原始 `prompt.txt` |
-| `fewshot/<ID>/` | 7 条示例的视频和原始 `prompt.txt` |
-| `rewrite_results.jsonl` | ZIP 内的完整重写溯源记录，含历史原文 |
-| `provenance.json` | ZIP 哈希、文件哈希、数量和来源说明 |
+Low→High任务要求系统根据源视频和编辑指令，形成具有可辨识视觉风格、世界设定或艺术媒介的完整作品。改造覆盖人物、环境、物体及其活动的协调，也考察画面表现和时间连续性。Low→High描述编辑目标，源视频没有预先被赋予一个统一低分。
 
-索引内的 `source_video`、`prompt_file` 均相对于仓库根目录。`instruction` 默认等于
-`prompt_long`；短提示词在 `prompt_short` 中。两份 `instructions_*.jsonl` 同时提供
-`instruction` 和兼容既有读取器的 `intent` 字段，字段值均为该文件对应的提示词。
-7 条示例在原包中没有独立的短提示词，`prompt_short` 保留为 `null`。
+内容对应随任务确定：媒介转换可以延续原有活动；世界观重构可以改变行为逻辑和物体用途。例如篮球转仙侠斗法，需要活动与新世界共同成立。系统可在任务给定的范围内发展具体设计。
 
-包内 `.frames/target/` 是重写对象视频的抽帧目录；经视频哈希匹配，正式视频均是
-旧仓库的 source_low。这次导入没有把这些帧命名解释成目标视频或标准答案。
-当前包没有提供新版生成结果、目标视频、评分量表或指标结果。
+## 2. 数据与划分
 
-## 与历史实验的关系
+| 划分 | 源视频 | 短任务 | 长任务 | 任务条件合计 |
+|---|---:|---:|---:|---:|
+| 训练 | 40 | 40 | 40 | 80 |
+| 测试 | 27 | 27 | 27 | 54 |
+| 合计 | 67 | 67 | 67 | 134 |
 
-当前题目与提示词以本目录为准。`reports/top50_video_bundle_20260725_nodup/`、
-`归档_extract/` 以及 `scripts/eval/bench_v3/`、`scripts/bench_v4/`、
-`scripts/bench_v5/` 中的旧提示词、派生 checklist、分数和生成记录保留为历史材料，
-它们对应此前运行的输入，不是本版的结果或评分目标。
+训练集用于经验开发与任务后经验更新；测试集使用冻结配置和经验版本进行比较，测试反馈不回写本轮训练经验。原35条训练保留，041–045加入训练，046–050加入测试。sample_id与legacy_id保持原值，同源组不跨集合；原编号有空缺。
 
-`scripts/bench_skill/run_bench.py` 的默认 `--sample-index` 已指向本版正式 50 条。
-旧版本专用启动脚本仍用于历史复现；读取当前数据时使用本目录索引及其源视频路径。
-本次只更新数据与读取默认值，没有执行旧 loop，也没有改造 planner、critic 或 skill。
+素材来自项目既有源视频、补充参考与用户上传，经过内容核对、风格目标重写和审阅筛选。当前清单的导入来源标签为：`sour-low11` 33条、`reconstructed` 19条、`user-upload` 8条、`reference` 7条。这些标签记录项目内的导入来源；原始发布方与许可信息需沿对应素材来源核对。新提示词以中文审阅稿为依据，英文译稿用于运行。
+
+筛选关注源内容与改造目标的适配、明确的视觉方向、风格多样性与镜头连续性。已移出003、004、007、009、018、055、056、070；其中055和056存在明确切镜，070与已有舞蹈题重复。065和074存在快速取景变化，本轮未确认切镜而保留。
+
+按主要目标归类：电影与影视世界25条，日漫与手绘动画12条，欧美动画与漫画11条，绘画与版画9条，手工与材料9条，原创世界设计1条。该分类用于展示覆盖，具体题目可能兼有世界设定和媒介特征。
+
+## 3. 长短任务与示例
+
+长短指提示词详略，与视频时长无关。同一源视频的两版围绕同一创作目标：短版指定主要方向，长版补充场景、服装、材质、光照或活动关系。两版分别执行，各方法在同一条件下使用相同源视频与原始提示词。评价共用五维锚点，并保留长短专项；短任务按短版实际要求评价。
+
+**012｜海盗船长日志（训练集）**。源片是男子在咖啡馆中伏案书写；改造把书写活动放入海盗船长室。查看[源视频](train/012/video.mp4)。
+
+短提示词（审阅原文）：
+
+> 将咖啡馆中男子伏案书写的场景，改造成《加勒比海盗》式的海盗船长在船舱内记录航海日志。
+
+长提示词（审阅原文）：
+
+> 将场景改造成《加勒比海盗》式的海盗船长室。男子身穿旧皮革外套和亚麻衬衣，在铺着海图的木桌前书写航海日志。弧形船肋、旧航海仪器和悬挂提灯构成船舱，舷窗透入冷蓝色海光，与室内暖色灯火形成对比，呈现神秘、粗粝的海上冒险氛围。
+
+短版明确角色、活动和世界方向，长版进一步给出可见的空间与光照设计。同一任务仍有构图和细节表达的发挥空间。
+
+补充示例：034把篮球互动重构为《蜀山传》式仙侠斗法，涉及活动逻辑变化；060把女孩滚轮胎转为《花生漫画》式手绘动画，主要改变表现媒介并延续滚轮胎活动。完整长短稿和视频见[中文预览](review.html)。这些是任务示例，生成结果在实验报告中另行展示。
+
+## 4. 清单、代码与复现
+
+`benchmark.json`是当前运行清单。`instruction`为英文长提示词，`prompt_short`为英文短提示词；`instruction_zh`、`prompt_short_zh`保存中文审阅稿。`source_video`、`prompt_file`、`prompt_short_file`相对于仓库根目录，分别指向视频和两版英文文本。源视频和提示词文件分别保存SHA-256，`release.json`记录版本、划分和清单哈希。
+
+在仓库根目录读取真实任务：
+
+```python
+import json
+from collections import Counter
+from pathlib import Path
+
+rows = json.loads(Path("benchmark_data/benchmark.json").read_text(encoding="utf-8"))
+assert Counter(r["split"] for r in rows) == {"train": 40, "test": 27}
+case = next(r for r in rows if r["sample_id"] == "012")
+print(case["source_video"])
+print(case["prompt_short"])  # 英文短任务输入
+print(case["instruction"])   # 英文长任务输入
+```
+
+完整工具：[inspect_benchmark.py](../scripts/inspect_benchmark.py)，运行`python scripts/inspect_benchmark.py --sample 012`。文件及来源组检查：[validate_benchmark.py](../scripts/validate_benchmark.py)。生成读取入口：[run_bernini_benchmark.py](../scripts/run_bernini_benchmark.py)；它按清单解析路径、提示词、划分和哈希。
+
+本版数据包为`benchmark-67-train40-test27.zip`。新实验使用本版清单和新的输出目录。旧版本与提示词保存在`archive/`，历史实验按原版本关联。评估细则见[Low→High评价说明](../docs/low-high-evaluation-v2.md)。

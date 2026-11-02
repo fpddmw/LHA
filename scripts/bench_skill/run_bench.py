@@ -349,10 +349,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate bench videos for one arm/shard.")
     parser.add_argument("--arm", required=True, choices=sorted(ARMS))
     parser.add_argument("--sample-index", type=Path,
-                        default=PROJECT_ROOT / "benchmark_data/sample_index.json",
-                        help="benchmark index; defaults to the current dest.zip 50-sample split")
+                        default=PROJECT_ROOT / "benchmark_data/benchmark.json",
+                        help="benchmark index; defaults to the frozen 40-task training split")
     parser.add_argument("--source-dir", type=Path, default=None,
                         help="directory of <sample_id>.mp4 sources; omit to use each row's source_video")
+    parser.add_argument("--split", choices=["train", "validation", "test"], default="train")
     parser.add_argument("--output-root", type=Path, required=True)
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--shard-count", type=int, default=1)
@@ -406,7 +407,7 @@ def apply_instruction_file(rows: list[dict], path: Path) -> list[dict]:
 def main() -> int:
     args = parse_args()
     spec = ARMS[args.arm]
-    rows = _read_index(args.sample_index)
+    rows = [r for r in _read_index(args.sample_index) if r.get("split") == args.split]
     if args.only_sample_ids:
         keep = {
             line.strip()

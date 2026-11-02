@@ -1,3 +1,7 @@
+> 历史设计记录。当前自动评审与评分接口以 [creative loop 实现](creative-loop-implementation.md) 和 [Low→High v2](low-high-evaluation-v2.md) 为准；文中的可选 critique／交付时新建评审不再是默认路径。
+
+> 阶段记录：本文保留当时的设计、数据版本或执行状态。当前开发版以 [文档入口](README.md)、[当前状态](current-status.md) 和 [实验运行安排](experiment-campaign.md) 为准。
+
 # Active Critic implementation plan
 
 Approved scope: 2026-10-30. Implement the combined Critic design and evaluation refinements, then demonstrate the complete evidence-to-feedback-to-Planner path on existing 041 and table-tennis videos. Working language is English.

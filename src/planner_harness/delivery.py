@@ -42,11 +42,26 @@ def continue_budget_stop(state):
         if (state.get("status") != "budget_exhausted" and state.get("final", {}).get("stop_reason") != "budget") or state.get("pending_event") or state.get("pending_tool"):
             raise ValueError("Continue a resource pause only after pending work is resolved")
         previous = copy.deepcopy(state["config"])
-        state["config"].update(completion_mode="delivery", max_generations=None, max_turns=None)
+        if state['config'].get('resource_policy',{}).get('version')=='creative-resources-v2':
+            from .resources import check_wall
+            check_wall(state)
+            state.setdefault('delivery_continuations',[]).append({'previous_config':previous,
+                'next_config':copy.deepcopy(state['config']),'reason':'Explicit continuation within the original deadline and generation occupancy; no allowance renewed.'})
+            return
+        from .resources import DEFAULTS
+        policy = state['config'].setdefault('resource_policy', copy.deepcopy(DEFAULTS))
+        policy['max_turns'] = max(state['config'].get('max_turns') or 0, state.get('attempts', 0)) + DEFAULTS['max_turns']
+        # Reopening model-side closing resources never refills the render allowance.
+        generation_cap = state['config'].get('continuation_policy', {}).get('hard_generation_limit')
+        if generation_cap is not None:
+            policy['max_generations'] = min(policy['max_generations'], generation_cap)
+        for key in ('max_model_calls', 'max_total_tokens', 'max_wall_seconds'):
+            policy[key] += DEFAULTS[key]
+        state['config'].update(completion_mode='delivery', max_generations=None, max_turns=policy['max_turns'])
         if state['config'].get('continuation_policy'):
-            state['config']['continuation_policy']['hard_generation_limit'] = None
+            state['config']['continuation_policy']['hard_generation_limit'] = policy['max_generations']
         state.setdefault("delivery_continuations", []).append({"previous_config": previous,
-            "next_config": copy.deepcopy(state["config"]), "reason": "Operator explicitly reopened the resource pause."})
+            "next_config": copy.deepcopy(state["config"]), "reason": "Operator reopened model-side resources; the generation allowance is unchanged."})
         state["status"] = "budget_exhausted"
         return
     if state.get("final", {}).get("stop_reason") != "budget" or state.get("pending_event") or state.get("pending_tool"):
@@ -115,3 +130,35 @@ def verify_delivery(run):
     return {"status": "delivered", "selected": selected, "candidates": list(candidates),
             "selected_video": videos[selected], "final": final,
             "scope": "Planner delivery judgment; unresolved Critic verdicts remain explicit."}
+
+
+def verify_settlement(run):
+    """Batch accounting includes unsuccessful and quarantined outcomes explicitly."""
+    run = Path(run)
+    state = load(run / "state.json")
+    status = state["status"]
+    if status == "complete":
+        delivery = verify_delivery(run)
+        return {"outcome": "delivered", "selected": delivery["selected"], "successful": True}
+    if status=='budget_exhausted' and state.get('final',{}).get('outcome')=='deadline_delivery':
+        from .candidate_selection import deadline_choice
+        proof=deadline_choice(state)
+        if not proof or proof!=state['final'].get('selection') or state['final'].get('planner_confirmed') is not False or state['final'].get('stop_reason')!='deadline':
+            raise ValueError('Deadline delivery selection proof changed')
+        selected=proof['selected']
+        if sha(state['videos'][selected]['path'])!=state['videos'][selected]['sha256']:raise ValueError('Deadline candidate changed')
+        return {'outcome':'deadline_delivery','selected':selected,'successful':True,'planner_confirmed':False,'selection':proof}
+    if state.get("pending_event") and not (status=="needs_reconciliation" and state.get("unresolved_calls")):
+        raise ValueError("Unresolved model action is not a settled task")
+    if status == "needs_reconciliation":
+        if not state.get("unresolved_jobs") and not state.get("unresolved_calls"):
+            raise ValueError("Quarantine requires an explicit unresolved external outcome")
+        return {"outcome": "execution_unknown", "successful": False, "selected": None,
+                "unresolved_jobs": state.get("unresolved_jobs",{}), "unresolved_calls":state.get("unresolved_calls",{}),
+                "scope": "Quarantined for batch accounting; recovery never resubmits an unknown render."}
+    clock=state.get('online_clock',{})
+    frozen_pending = status=='budget_exhausted' and bool(clock.get('frozen_unix'))
+    if status not in {"budget_exhausted", "execution_failed", "delivery_blocked", "context_limit"} or (state.get("pending_tool") and not frozen_pending):
+        raise ValueError("Task has no auditable settlement: " + status)
+    return {"outcome": status, "successful": False, "selected": None, "final": state.get("final"),
+            "scope": "Counted as an unsuccessful planned task; retained candidates are provisional."}

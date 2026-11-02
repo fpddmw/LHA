@@ -1,6 +1,6 @@
 # EX-connected-scope: Revise a coherent visual field
 
-Revision 4. Approved for use; editorial status synchronized on 2026-11-01. Bernini; X6/X3, F004/F006/F007.
+Revision 5. Approved for use; goal-directed semantic revision authorized on 2026-11-02. Bernini; X6/X3, F004/F006/F007.
 
 **Choose a revision scope by the relationships that must change together. A window, its frame, exterior view and nearby reflections can form one coherent edit; an unrelated face repair usually has a different cause and deserves separate consideration.**
 
@@ -14,7 +14,9 @@ F006 v3 placed mountains above an existing pavilion with foliage gaps and gained
 
 ## Choose scope for coherence, not minimum object count
 
-Prefer grouping edits that share a structural, optical or semantic dependency. Split unrelated complaints when combining them would obscure what the next realization is trying to achieve. A face restoration and a wall finish may require different inputs; a new luminous window and its reflection may require the same pass. A whole-image etching treatment is also coherent because its marks, tones and materials operate together.
+Prefer grouping edits that share a structural, optical or semantic dependency. Split unrelated complaints when combining them would obscure what the next realization is trying to achieve. A changed event can require coordinated changes to participants, prop function and the destination of an action. Treat that causal field as a useful scope, even when it crosses foreground and background. A materials-only change can leave the old purpose intact; [semantic reconstruction](semantic-reconstruction.md) develops when to change it. This extends the scope strategy as a working design application, not a newly rendered result.
+
+A face restoration and a wall finish may require different inputs; a new luminous window and its reflection may require the same pass. A whole-image etching treatment is also coherent because its marks, tones and materials operate together.
 
 A clearly scoped proposal can still fail. F004 v3 already specified walls, columns, equipment, floor and lighting, yet did not complete the arena. If that connected change has already been made explicit, move to the input and realization question rather than expanding the same list. Keep the successful foreground as a candidate for delivery while judging whether a stronger environment attempt is worthwhile.
 

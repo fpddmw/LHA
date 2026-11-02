@@ -5,9 +5,9 @@ import copy
 import json
 from pathlib import Path
 
-from critic_harness.one_shot import frozen_profile, validate_report
+from critic_harness.one_shot import PROTOCOL, frozen_profile, validate_report
 from evaluation.creative import judge_identity
-from experiments.creative_fewshot import cache_judgment as native_cache
+from experiments.creative_benchmark import cache_judgment as native_cache
 from planner_harness.common import load, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.lock import RunLock
@@ -68,6 +68,9 @@ def revalidate(directory, review, binding):
 
 
 def cache_judgment(root, output, topic, video, *, name='glm5.3flash', judge=None):
+    if frozen_profile()['protocol_id'] == PROTOCOL:
+        result = native_cache(root,output,topic,video,name=name,judge=judge)
+        return {**result, 'validation_status':'native_passed' if result['result'].get('report') is not None else 'native_missing'}
     binding=binding_for(root,topic,video,name)
     key=signature(binding);directory=Path(output)/'final-judge'/key
     review_path=directory/'supplemental-review/review.json'

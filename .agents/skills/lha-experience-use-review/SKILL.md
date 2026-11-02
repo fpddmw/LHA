@@ -1,30 +1,29 @@
 ---
 name: lha-experience-use-review
-description: Review how LHA Planner encountered, interpreted and acted on experience in saved runs. Diagnose discovery, wording, applicability and execution problems, and propose precise improvements to the guidance.
+description: Trace how LHA experience reached a Planner decision, diagnose misleading or unused guidance, and propose concrete improvements to its content or discovery.
 ---
 
-# Review experience in actual use
+# Review experience through actual decisions
 
-Determine what a piece of guidance contributed to a real decision and how its wording or discovery could improve. Use the [shared standard](../../../docs/experience-authoring-standard.md) and [usage interface](../../../docs/experience-usage-interface.md).
+Use the [writing standard](../../../docs/experience-authoring-standard.md) and [usage interface](../../../docs/experience-usage-interface.md). Review a guidance item's actual contribution to a decision. The task contributor can comment, clarify, recommend or propose precise revisions; curation and system development have separate authority.
 
-Read the saved entry version and actual call inputs alongside Planner's notes, chosen input, prompt and resulting video or attributed review. Distinguish an entrance title, a summary and a full-page read. Follow the interpretation into the submitted action: a claim to change realization matters when the requested visual relationship or conditioning actually changes.
+Read the saved knowledge version and actual call inputs alongside the model's statements, chosen input, submitted prompt and resulting video or attributed review. Distinguish an entrance title, a discovery summary, a full-page read and a post-task read. An unavailable entry did not influence the online task merely because the maintainer can read it now.
 
-Follow continuation explanations as first-class model statements. The joined decision record connects the exact question/input, experience exposure, explanation, submitted prompt/input, candidate and reports. Read explicit entry references in `justification` as well as notes and delivery messages; inspect paraphrased use yourself. The runtime deliberately does not assess answer quality. This maintenance pass should assess whether the explanation identifies a useful condition, whether the action applies it, and what the outcome teaches.
+Follow interpretation into action. Did the advice change which source meaning the model treated as obligatory? Did it identify the actual failed construction? Did the new prompt change that construction or rename it? Read continuation explanations as statements to investigate, including their experience references. Runtime records them without grading them. Quality lies in the distinction and its application, not in length or confidence.
 
-Inspect delivery as a sequence: proposal, full report presented, then confirmation, changed selection or continued work. A first `finish` expresses a preference; a confirmed `finish` records the post-report choice. A refused generation has no new outcome. Use these distinctions when explaining a stopped or revised attempt. Early exploration and historical decisions without questions retain their recorded context.
+Useful diagnoses include:
 
-Look for a specific point of leverage:
+- **Goal inheritance:** guidance made an optional source function obligatory. Propose a corrected operative condition and summary before adding rendering workarounds.
+- **Discovery:** relevant guidance was available but its title, summary or route hid the useful distinction. Propose the precise entrance that would expose it.
+- **Weak explanation:** advice named competing risks without showing which condition favors which action. Supply the missing discriminator.
+- **Misapplication:** the scene did not satisfy the recommendation's condition, or the action kept the same failed construction. Clarify the boundary through the actual case.
+- **Useful adoption or rejection:** a distinction improved scope, input selection or retention of an earlier result. Preserve what it helped the model notice.
+- **Execution failure:** the proposal fit the condition but the renderer did not realize it. Keep sound guidance and sharpen the renderer account.
 
-- **Discovery:** a known renderer problem occurred, but the available title or summary hid the relevant distinction.
-- **Weak guidance:** an entry named competing risks without explaining which condition should favor which action.
-- **Misapplication:** Planner adopted a recommendation whose scene condition did not fit, or changed wording while retaining the failed operation.
-- **Useful adoption or rejection:** the model used the distinction to form a better-scoped proposal, retain an earlier candidate, or explain why another route better served the user.
-- **Execution or explanation failure:** a well-targeted proposal still failed, or a counterexample challenged the entry's account of the renderer.
+Keep these alternatives open long enough to inspect the relevant evidence, then state a judgment. A success can occur without the entry, and a failed render can follow useful guidance. Report exposure counts as discovery evidence; explain benefit through the actual decision and outcome.
 
-Assess the content of the decision. Calling an attempt a hypothesis can accurately express uncertainty while supporting decisive action. In F002 v3, explicit tuxedo instructions remained in the prompt; guidance review should examine the proposed scope and input rather than infer that caution caused the wardrobe requirement to be dropped. The historical seven-task batch did not contain the new 14-entry library, so it provides prospective writing lessons rather than a test of those entries.
+Follow the recorded delivery protocol: initial preference, observations/review presented, and final confirmed choice where available. A refused generation has no new render. Explain budget-induced decisions under their actual policy. Read supplied independent outcomes separately from online reviews; neither becomes the other's score.
 
-Give a qualitative conclusion tied to exact events: what the model encountered, how it interpreted it, what changed in the action, and what the outcome suggests. Preserve cases where the guidance was useful despite a failed render, or added nothing to a decision the model already knew how to make. Explicit model statements and the maintainer's interpretation should be distinguishable in ordinary prose.
+Use the joined decision export to inspect exact questions, answers, prompts, candidates and review links. Open a saved interval when a new observation would decide the interpretation. Read the [observation contract](../../../docs/online-event-observation.md) for coverage rather than treating a requested interval as proof that all frames were seen.
 
-Recommend the exact passage, summary or entrance to change when the record exposes a fix. If explanations repeat “a different approach” while retaining the failed construction, sharpen the account's discriminator and show what a changed construction would look like. If the decision fits the condition but rendering fails, investigate the renderer account. If a useful distinction remains buried, repair discovery. Evaluate these alternatives through actual decisions rather than the elegance or length of the answer. If the issue is execution rather than guidance, keep sound text and identify the remaining renderer question. Report exposure/read counts as supporting context, with denominators; use them to explain discovery, not to assign automatic causal credit.
-
-Use authorized development runs, retaining incomplete cases. Stage proposed edits for review; no citation form, retrospective model interview or automatic knowledge update is added to Planner.
+Return a specific finding and exact proposed improvement, or explain why existing guidance should remain. Attach it to the entry as a contribution so the next reader sees the qualification. Manual/tool issues belong in the report for separately authorized development; using this Skill does not grant permission to edit those files.

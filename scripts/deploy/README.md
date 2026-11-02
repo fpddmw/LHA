@@ -1,5 +1,7 @@
 # OpenBayes runtime
 
+> Version scope: the infrastructure notes and commands below describe their dated deployments. For current creative_loop_v1 use [current status](../../docs/current-status.md), [configuration](../../configs/creative-loop-v1.json) and [event observation](../../docs/online-event-observation.md). The online protocol is v4; historical frozen workers/runs require their recorded checkout and explicit version reconciliation before resumption.
+
 ## RTX PRO 6000 and direct prompt exploration (2026-10-29)
 
 The current 96 GB Blackwell instance inherits the persistent locations below.

@@ -13,11 +13,11 @@ sys.path.insert(0, str(ROOT / "src"))
 
 
 def make_model(args):
-    if args.backend == "codex":
-        os.environ["LOW_HIGH_AGENT_CODEX_PLANNER_MODEL"] = args.model
-        os.environ["LOW_HIGH_AGENT_CODEX_PLANNER_REASONING_EFFORT"] = args.reasoning
-        from vlm.codex_vlm import CodexVisionModel
-        return CodexVisionModel(role="planner")
+    if args.backend == "openrouter":
+        os.environ["LHA_API_PLANNER_MODEL"] = args.model
+        os.environ["LHA_API_PLANNER_REASONING_EFFORT"] = args.reasoning
+        from vlm.openrouter import OpenRouterVisionModel
+        return OpenRouterVisionModel(role="planner")
     from vlm.litellm_vlm import LiteLLMVisionModel
     return LiteLLMVisionModel(model=args.model, reasoning_effort=args.reasoning, role="planner")
 
@@ -108,8 +108,8 @@ def main(argv=None):
     p.add_argument("--reviewed-by", required=True)
     for command in ("propose", "replay", "run-validation", "round"):
         p = sub.choices[command]
-        p.add_argument("--backend", choices=["codex", "litellm"], default="codex")
-        p.add_argument("--model", default="gpt-6.1-sol")
+        p.add_argument("--backend", choices=["openrouter", "litellm"], default="openrouter")
+        p.add_argument("--model", default="openai/gpt-6.1-sol")
         p.add_argument("--reasoning", default="xhigh")
         p.add_argument("--execute", action="store_true", help="Explicitly dispatch model/worker calls")
     args = parser.parse_args(argv)

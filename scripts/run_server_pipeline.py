@@ -46,10 +46,8 @@ def main(argv=None):
         q.retry(args.job, args.reason)
         return
     # Process-wide environment is set once before any worker threads are started.
-    os.environ["LOW_HIGH_AGENT_CODEX_TIMEOUT"] = str(config.get("llm_timeout_seconds", 1800))
-    os.environ["LOW_HIGH_AGENT_CODEX_ATTEMPTS"] = "1"
-    os.environ["LOW_HIGH_AGENT_CODEX_MODEL"] = config.get("model", "gpt-6.1-sol")
-    os.environ["LOW_HIGH_AGENT_CODEX_REASONING_EFFORT"] = config.get("reasoning_effort", "xhigh")
+    from vlm.openrouter import load_credentials
+    load_credentials(config.get('credential_file'))
     os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(directory / "llm-usage.jsonl")
     from server_runtime.service import Service
     service = Service(q, directory, args.root.resolve(), config)

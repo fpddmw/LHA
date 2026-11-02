@@ -1,5 +1,7 @@
 # Model-led Planner harness implementation
 
+> 阶段记录：本文保留当时的设计、数据版本或执行状态。当前开发版以 [文档入口](README.md)、[当前状态](current-status.md) 和 [实验运行安排](experiment-campaign.md) 为准。
+
 Approved: 2026-10-29. The user authorized saving this plan, implementing the new Planner harness, and running real tasks with inspectable observation, reading, design, and English prompt records. Generation feedback and the post-generation loop are a subsequent phase.
 
 ## Objective and design

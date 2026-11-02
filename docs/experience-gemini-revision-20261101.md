@@ -1,5 +1,7 @@
 # Gemini-led experience revision
 
+> Historical checkpoint — 2026-11-01. The plan, activation state and observations below retain that date. Current access and operation are documented in [experience usage](experience-usage-interface.md), the [active curated catalog](../knowledge/experience/curated/catalog.json) and [current loop implementation](creative-loop-implementation.md).
+
 Date: 2026-11-01. Status: complete as staged content; not activated. Authorization: revise the complete proposed experience library, shared writing standard, three maintenance Skills and related manuals using Gemini's draft as the primary editorial direction. Keep recommendations explicit. Correct verified factual errors and hard policies. No activation or experiments.
 
 ## Content decisions

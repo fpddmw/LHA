@@ -1,5 +1,7 @@
 # Connect continuation decisions to experience maintenance
 
+> Historical plan — 2026-11-01. The implementation and authorizations below describe that checkpoint. For current operation use [current implementation](creative-loop-implementation.md), [event observation](online-event-observation.md) and [Low→High evaluation](low-high-evaluation-v1.md). The v4 reviewer selects events and observes consecutive segments before one main report; a report is not one model call. Fixed short-window and earlier delivery assumptions below remain historical.
+
 Date: 2026-11-01. Authorization: the user approved this review and its bounded repairs, offline verification, commit and GitHub synchronization. Live experiments, model calls, GPU work and polling remain paused.
 
 ## Review findings and intended result

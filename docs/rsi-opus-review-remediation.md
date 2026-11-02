@@ -1,5 +1,7 @@
 # RSI review remediation
 
+> Historical RSI workflow — 2026-10-30/31. This document preserves the opt-in legacy design and its implementation checkpoint. Current creative_loop_v1 excludes RSI and uses [current Planner/Critic implementation](creative-loop-implementation.md), [event observation](online-event-observation.md) and separately requested [experience maintenance](experience-usage-interface.md). Old authorization and execution statements below describe their recorded session.
+
 Authorized: 2026-10-31. Scope: repair the complete Opus review against the audited implementation. Preserve historical runs, unrelated changes and the staged status of assisted E1. Software verification and saved-evidence analysis are authorized; this implementation run does not dispatch paid models or GPU experiments.
 
 ## Implementation order and acceptance

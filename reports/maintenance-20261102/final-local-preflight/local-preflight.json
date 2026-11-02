@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "full_curated_entries": 15,
+  "full_curated_resources": 56,
+  "none_curated_entries": 0,
+  "style_entries_each": 111,
+  "same_critic": "e53ae33553e3c9a9bdab88875f73daf2f3b1b86a7201eebf0e3c13880f7d35ac",
+  "experiment_profile_sha256": "52732a6aa7c574b90422eebfe04d11a49ee4c0bb53e0160c57d029a86630db4a",
+  "live_model_calls": 0,
+  "gpu_jobs": 0
+}

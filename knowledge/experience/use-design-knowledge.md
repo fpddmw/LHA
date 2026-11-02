@@ -6,6 +6,8 @@ Read to resolve a live design choice. Use a comparative guide when several direc
 
 Transfer the relationship that makes the source useful. Pencil showing through watercolor can inform a storybook treatment without importing the source's prairie, journal frame or narrative. A light source and its reflected color can inform an arena without importing a rainy street. The [design-expression guide](../guides/design-expression.md) develops both examples into concrete proposals.
 
-Use [meaning](../guides/meaning.md) to establish what the current event depends on; [theme](../guides/theme.md) to choose what the visual form emphasizes; [media](../guides/media.md) and [combination](../guides/combination.md) to construct that form. Follow [time](../guides/time.md) when the proposal changes how information unfolds.
+Use [meaning](../guides/meaning.md) to decide which source relationships serve the target event and which need reinterpretation; [theme](../guides/theme.md) to choose what the visual form emphasizes; [media](../guides/media.md) and [combination](../guides/combination.md) to construct that form. Follow [time](../guides/time.md) when the proposal changes how information unfolds.
+
+Read historical prompts as authored choices, including choices that may have misconstrued their task. Transfer a useful relationship together with its goal and scope. An old preservation clause earns a place in the current proposal only when it helps satisfy the current request.
 
 Keep the useful conclusion in ordinary working notes when it will matter later. Reading receipts retain what was opened, and the submitted prompt records what the renderer actually received. A source earns its place by improving the proposal or a decision; the reading tools impose no citation quota.

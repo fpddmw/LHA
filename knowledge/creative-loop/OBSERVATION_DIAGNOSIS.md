@@ -1,0 +1,5 @@
+# Diagnose the requested relationship with the evidence available
+
+Start with the consequential visible question. The overview can reveal a missing silhouette, an unchanged place or an identity problem; an event involving contact, turn, occlusion or response needs consecutive frames spanning that event. [Time binding](../experience/curated/entries/time-binding.md) and [object continuity](../experience/curated/entries/object-continuity.md) connect those observations to the target event. The [complete-event guide](OBSERVE_EVENTS.md) describes pagination and coverage.
+
+Read Critic's reason and cited evidence beside the original requirement. The [shared operating reference](OPERATING_REFERENCE.md) explains common report fields and review-focus arguments. Compare the reported defect with [design conflict](../experience/curated/entries/design-conflict.md) and [semantic reconstruction](../experience/curated/entries/semantic-reconstruction.md) when a preservation complaint may reflect an inherited goal.

@@ -1,6 +1,6 @@
 # EX-instance-identity: Protect the individual by reducing competing reconstruction
 
-Revision 4. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; R6/X4/B4/D3 plus the seven-task batch.
+Revision 5. Approved for use; goal-directed semantic revision authorized on 2026-11-02. Bernini and Ditto; R6/X4/B4/D3 plus the seven-task batch.
 
 **When identity matters, favor an input that still shows the right individual and reduce unnecessary reconstruction around that person. Keep identity wording concise and direct; spend design effort on the surrounding transformations instead of building an increasingly detailed substitute face.**
 
@@ -8,7 +8,9 @@ Revision 4. Approved for use; editorial status synchronized on 2026-11-01. Berni
 
 Age, hairstyle and glasses describe appearance categories. A renderer can satisfy those words while replacing the individual. Historical Ditto table-tennis attempts recovered glasses in one result without recovering the face; other descriptions produced older faces or opaque eyewear. Bernini F002 v2 improved the pianist's resemblance while worsening a guest, and F005 v3 enumerated hair and glasses without recovering the original identities.
 
-The practical consequence is to examine what invites a new person into the scene. A new social setting, collar, headwear, pose or facial illumination can interact with the face. For preservation tasks, prefer a realization that keeps those unnecessary structural changes small while delivering style through clothing surfaces, architecture and light elsewhere. Keep required costume changes explicit, and describe their extent where it helps separate them from the face.
+Distinguish individual correspondence from the person's activity and role. The same recognizable person can act differently in an adapted scene; preserving the face does not require preserving the source profession, task or prop. When the request transforms the character itself, choose the correspondence that makes that transformation legible instead of reinstating incidental source features.
+
+The practical consequence is to examine what invites an unintended new person into the scene. A new social setting, collar, headwear, pose or facial illumination can interact with the face. For preservation tasks, prefer a realization that keeps those unnecessary structural changes small while delivering style through clothing surfaces, architecture and light elsewhere. Keep required costume changes explicit, and describe their extent where it helps separate them from the face.
 
 ## Choose evidence-rich inputs and scoped designs
 

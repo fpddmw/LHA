@@ -1,4 +1,5 @@
 """Passive provenance and offline projections. Standard library only; no model calls."""
+
 from __future__ import annotations
 
 from collections import Counter
@@ -42,7 +43,10 @@ def record_exposure(directory, index, snapshot_sha256):
     binding = digest(input_file)
     if receipt.exists():
         previous = read_json(receipt)
-        if previous["input_sha256"] != binding or previous.get("knowledge_snapshot_sha256") != snapshot_sha256:
+        if (
+            previous["input_sha256"] != binding
+            or previous.get("knowledge_snapshot_sha256") != snapshot_sha256
+        ):
             raise ValueError("Exposure receipt belongs to different call input")
         return
     saved = read_json(input_file)
@@ -69,22 +73,56 @@ def record_exposure(directory, index, snapshot_sha256):
                 form = "summary"
             else:
                 form = "catalog_reference"
-            surfaces.append({**source, "surface": form, "pointer": pointer,
-                "visible_fields": sorted(row),
-                **{k: row[k] for k in ("read_id", "start_line", "end_line", "start_char", "end_char", "next_line", "next_char") if k in row},
-                "visible_payload_sha256": hashlib.sha256(json.dumps(row, ensure_ascii=False, sort_keys=True).encode()).hexdigest()})
+            surfaces.append(
+                {
+                    **source,
+                    "surface": form,
+                    "pointer": pointer,
+                    "visible_fields": sorted(row),
+                    **{
+                        k: row[k]
+                        for k in (
+                            "read_id",
+                            "start_line",
+                            "end_line",
+                            "start_char",
+                            "end_char",
+                            "next_line",
+                            "next_char",
+                        )
+                        if k in row
+                    },
+                    "visible_payload_sha256": hashlib.sha256(
+                        json.dumps(row, ensure_ascii=False, sort_keys=True).encode()
+                    ).hexdigest(),
+                }
+            )
     for i, attachment in enumerate(saved.get("images", [])):
         source = items.get(attachment.get("id"))
         if source and Path(source["path"]).suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}:
             if source["sha256"] != attachment.get("sha256"):
                 raise ValueError("Attached experience image does not match the frozen source")
-            surfaces.append({**source, "surface": "image_attachment", "pointer": "/images/" + str(i),
-                             "visible_fields": sorted(attachment)})
-    write_json(receipt, {"schema": "experience-exposure-v1", "call_id": directory.name,
-        "input_sha256": binding, "knowledge_snapshot_sha256": snapshot_sha256,
-        "catalog_revision": index["catalog_revision"], "surfaces": surfaces,
-        "unresolved_page_pointers": unresolved,
-        "meaning": "Content in a prepared request. Transport/response records determine dispatch status; exposure is not attention or adoption."})
+            surfaces.append(
+                {
+                    **source,
+                    "surface": "image_attachment",
+                    "pointer": "/images/" + str(i),
+                    "visible_fields": sorted(attachment),
+                }
+            )
+    write_json(
+        receipt,
+        {
+            "schema": "experience-exposure-v1",
+            "call_id": directory.name,
+            "input_sha256": binding,
+            "knowledge_snapshot_sha256": snapshot_sha256,
+            "catalog_revision": index["catalog_revision"],
+            "surfaces": surfaces,
+            "unresolved_page_pointers": unresolved,
+            "meaning": "Content in a prepared request. Transport/response records determine dispatch status; exposure is not attention or adoption.",
+        },
+    )
 
 
 def call_status(directory):
@@ -101,14 +139,24 @@ def call_status(directory):
 def snapshot_index(snapshot):
     """Use the run's library, never today's catalog, when reading old records."""
     result = {}
-    history = [r for r in snapshot.get("manifest", {}).get("guides", []) if r.get("id") == "experience"]
-    for row in snapshot.get("experiences", []) + snapshot.get("manifest", {}).get("model_experience", []) + history:
+    history = [
+        r for r in snapshot.get("manifest", {}).get("guides", []) if r.get("id") == "experience"
+    ]
+    for row in (
+        snapshot.get("experiences", [])
+        + snapshot.get("manifest", {}).get("model_experience", [])
+        + history
+    ):
         result[row["id"]] = {k: row.get(k) for k in ("id", "path", "title", "version")}
     curated = snapshot.get("curated_catalog", {})
-    for row in curated.get("entries", []) + curated.get("resources", []):
+    for row in (curated.get("entries", []) + curated.get("resources", [])
+                + snapshot.get("experience_contributions", {}).get("items", [])
+                + snapshot.get("experience_contributions", {}).get("cases", [])):
         result[row["id"]] = {k: row.get(k) for k in ("id", "path", "title", "version", "sha256")}
     for row in result.values():
-        row["sha256"] = row.get("sha256") or snapshot.get("documents", {}).get(row["path"], {}).get("sha256")
+        row["sha256"] = row.get("sha256") or snapshot.get("documents", {}).get(row["path"], {}).get(
+            "sha256"
+        )
     return result
 
 
@@ -118,12 +166,19 @@ def authored_texts(request):
         yield "/note", request["note"]
     if isinstance(request.get("purpose"), str):
         yield "/purpose", request["purpose"]
-    if request.get('action') == 'generate':
-        explanation = request.get('arguments', {}).get('justification')
+    if request.get("action") == "generate":
+        explanation = request.get("arguments", {}).get("justification")
         if isinstance(explanation, str):
-            yield '/arguments/justification', explanation
-    for name, value in (("/workspace", request.get("workspace")),
-                        ("/arguments", request.get("arguments") if request.get("action") in {"note", "workspace", "finish"} else None)):
+            yield "/arguments/justification", explanation
+    for name, value in (
+        ("/workspace", request.get("workspace")),
+        (
+            "/arguments",
+            request.get("arguments")
+            if request.get("action") in {"note", "workspace", "finish"}
+            else None,
+        ),
+    ):
         if isinstance(value, dict):
             for pointer, row in walk(value, name):
                 for key, text in row.items():
@@ -134,87 +189,132 @@ def authored_texts(request):
 def artifact_reference(run, state, path, expected=None, *, topic_archive=None, video_id=None):
     """Resolve a reading path without rewriting any immutable original record."""
     if not path:
-        return {'original_path': path, 'path': None, 'available': False, 'sha256': expected}
-    original = str(path).replace('\\', '/')
+        return {"original_path": path, "path": None, "available": False, "sha256": expected}
+    original = str(path).replace("\\", "/")
     roots = set()
-    for identity, video in state.get('videos', {}).items():
-        marker = '/videos/' + identity + '/'
-        recorded = str(video.get('path', '')).replace('\\', '/')
-        if video.get('job_id') and marker in recorded:
+    for identity, video in state.get("videos", {}).items():
+        marker = "/videos/" + identity + "/"
+        recorded = str(video.get("path", "")).replace("\\", "/")
+        if video.get("job_id") and marker in recorded:
             roots.add(recorded.rsplit(marker, 1)[0])
-    for row in state.get('generation_decisions', {}).values():
-        recorded = str(row.get('model_input_path', '')).replace('\\', '/')
-        if '/calls/' in recorded:
-            roots.add(recorded.rsplit('/calls/', 1)[0])
+    for row in state.get("generation_decisions", {}).values():
+        recorded = str(row.get("model_input_path", "")).replace("\\", "/")
+        if "/calls/" in recorded:
+            roots.add(recorded.rsplit("/calls/", 1)[0])
     resolved = Path(path)
     for root in sorted(roots, key=len, reverse=True):
-        if original.startswith(root + '/'):
-            resolved = run / original[len(root) + 1:]
+        if original.startswith(root + "/"):
+            resolved = run / original[len(root) + 1 :]
             break
     if not resolved.is_file() and topic_archive and video_id:
-        arm = state.get('config', {}).get('execution', {}).get('experience_mode')
-        candidate = Path(topic_archive) / 'videos' / ('source.mp4' if video_id == 'source' else f'{arm}/{video_id}.mp4')
+        arm = state.get("config", {}).get("execution", {}).get("experience_mode")
+        candidate = (
+            Path(topic_archive)
+            / "videos"
+            / ("source.mp4" if video_id == "source" else f"{arm}/{video_id}.mp4")
+        )
         if candidate.is_file() and expected and digest(candidate) == expected:
             resolved = candidate
-    return {'original_path': str(path), 'path': str(resolved.resolve()) if resolved.is_file() else None,
-            'available': resolved.is_file(), 'sha256': expected}
+    return {
+        "original_path": str(path),
+        "path": str(resolved.resolve()) if resolved.is_file() else None,
+        "available": resolved.is_file(),
+        "sha256": expected,
+    }
 
 
 def decision_records(run, state, surfaces, mentions):
     """Join existing records for an offline reader; no judgment of explanation quality."""
     result = []
-    proposals = state.get('delivery_reviews', {})
-    for event in state.get('events', []):
-        request = event.get('request', {}); action = request.get('action'); identity = event['event_id']
-        if action not in {'generate', 'finish', 'delivery_candidate'}:
+    proposals = state.get("delivery_reviews", {})
+    for event in state.get("events", []):
+        request = event.get("request", {})
+        action = request.get("action")
+        identity = event["event_id"]
+        if action not in {"generate", "finish", "delivery_candidate"}:
             continue
-        outcome = event.get('result', {})
-        row = {'event_id': identity, 'operation': action, 'operation_status': event.get('status'),
-               'disposition': outcome.get('delivery_status', outcome.get('status', event.get('status'))),
-               'arguments': request.get('arguments', {}), 'result': outcome,
-               'call_status': call_status(run / 'calls' / identity),
-               'model_input': artifact_reference(run, state, run / 'calls' / identity / 'input.json'),
-               'model_response': artifact_reference(run, state, run / 'calls' / identity / 'response.txt'),
-               'experience_exposure': [s for s in surfaces if s['call_id'] == identity],
-               'literal_references': [m for m in mentions if m['event_id'] == identity]}
-        input_path = run / 'calls' / identity / 'input.json'
+        outcome = event.get("result", {})
+        row = {
+            "event_id": identity,
+            "operation": action,
+            "operation_status": event.get("status"),
+            "disposition": outcome.get(
+                "delivery_status", outcome.get("status", event.get("status"))
+            ),
+            "arguments": request.get("arguments", {}),
+            "result": outcome,
+            "call_status": call_status(run / "calls" / identity),
+            "model_input": artifact_reference(run, state, run / "calls" / identity / "input.json"),
+            "model_response": artifact_reference(
+                run, state, run / "calls" / identity / "response.txt"
+            ),
+            "experience_exposure": [s for s in surfaces if s["call_id"] == identity],
+            "literal_references": [m for m in mentions if m["event_id"] == identity],
+        }
+        input_path = run / "calls" / identity / "input.json"
         saved_input = read_json(input_path) if input_path.exists() else {}
-        row['observed_images'] = [{**frame, 'artifact': artifact_reference(run, state, frame.get('path'), frame.get('sha256'))}
-                                  for frame in saved_input.get('images', [])]
-        audit = run / 'calls' / identity / 'continuation-policy.json'
-        row['continuation_audit'] = None
+        row["observed_images"] = [
+            {
+                **frame,
+                "artifact": artifact_reference(run, state, frame.get("path"), frame.get("sha256")),
+            }
+            for frame in saved_input.get("images", [])
+        ]
+        audit = run / "calls" / identity / "continuation-policy.json"
+        row["continuation_audit"] = None
         if audit.exists():
             saved = read_json(audit)
-            if saved['event_id'] != identity or saved['model_input_sha256'] != digest(run / 'calls' / identity / 'input.json'):
-                raise ValueError('Continuation audit does not match the saved decision input')
-            row['continuation_audit'] = saved
+            if saved["event_id"] != identity or saved["model_input_sha256"] != digest(
+                run / "calls" / identity / "input.json"
+            ):
+                raise ValueError("Continuation audit does not match the saved decision input")
+            row["continuation_audit"] = saved
         # A submitted job is matched by its decision event, never by temporal proximity.
-        record = state.get('generation_decisions', {}).get(identity + '-generate')
-        row['generation_decision'] = record
-        key = identity + '-generate'
-        job = state.get('jobs', {}).get(key)
-        if action == 'generate' and job:
-            if record and (record['request_sha256'] != job['sha256'] or record['arguments'] != request.get('arguments', {})):
-                raise ValueError('Continuation explanation and dispatched operation differ')
-            response = run / 'jobs' / key / 'response.json'
+        record = state.get("generation_decisions", {}).get(identity + "-generate")
+        row["generation_decision"] = record
+        key = identity + "-generate"
+        job = state.get("jobs", {}).get(key)
+        if action == "generate" and job:
+            if record and (
+                record["request_sha256"] != job["sha256"]
+                or record["arguments"] != request.get("arguments", {})
+            ):
+                raise ValueError("Continuation explanation and dispatched operation differ")
+            response = run / "jobs" / key / "response.json"
             returned = read_json(response) if response.exists() else None
-            row['submission'] = {'job_id': key, 'request_sha256': job['sha256'],
-                'input_id': job['payload']['input_id'], 'input_sha256': job['payload']['input']['sha256'],
-                'prompt': job['payload']['prompt'], 'renderer': job['payload']['renderer'],
-                'request': artifact_reference(run, state, run / 'jobs' / key / 'request.json'),
-                'response': artifact_reference(run, state, response),
-                'outcome_status': returned.get('status') if returned else 'pending',
-                'outcome_unknown': returned.get('outcome_unknown', False) if returned else None}
-            row['candidate_ids'] = [i for i, v in state['videos'].items() if v.get('job_id') == key]
-            row['online_review_ids'] = [i for i, v in state.get('evaluations', {}).items() if v.get('video_id') in row['candidate_ids']]
-            row['disposition'] = 'render_submitted'
-        elif action == 'generate':
-            row['submission'] = None
+            row["submission"] = {
+                "job_id": key,
+                "request_sha256": job["sha256"],
+                "input_id": job["payload"]["input_id"],
+                "input_sha256": job["payload"]["input"]["sha256"],
+                "prompt": job["payload"]["prompt"],
+                "renderer": job["payload"]["renderer"],
+                "request": artifact_reference(run, state, run / "jobs" / key / "request.json"),
+                "response": artifact_reference(run, state, response),
+                "outcome_status": returned.get("status") if returned else "pending",
+                "outcome_unknown": returned.get("outcome_unknown", False) if returned else None,
+            }
+            row["candidate_ids"] = [i for i, v in state["videos"].items() if v.get("job_id") == key]
+            row["online_review_ids"] = [
+                i
+                for i, v in state.get("evaluations", {}).items()
+                if v.get("video_id") in row["candidate_ids"]
+            ]
+            row["disposition"] = "render_submitted"
+        elif action == "generate":
+            row["submission"] = None
         for pid, proposal in proposals.items():
-            if proposal.get('event_id') == identity:
-                row.update(delivery_proposal_id=pid, disposition='delivery_proposed')
-            if proposal.get('confirmation', {}).get('planner_event_id') == identity:
-                row.update(delivery_proposal_id=pid, disposition='delivery_confirmed')
+            if proposal.get("event_id") == identity:
+                row.update(delivery_proposal_id=pid, disposition="delivery_proposed")
+            if proposal.get("confirmation", {}).get("planner_event_id") == identity:
+                row.update(delivery_proposal_id=pid, disposition="delivery_confirmed")
+        final = state.get("final", {})
+        if (
+            action == "finish"
+            and state.get("status") == "complete"
+            and final.get("delivery_review", {}).get("planner_event_id") == identity
+        ):
+            row["disposition"] = "delivery_complete"
         result.append(row)
     return result
 
@@ -222,54 +322,91 @@ def decision_records(run, state, surfaces, mentions):
 def topic_evidence(archive, state):
     """Explicit offline access to hash-verified completed judgments, kept per judge."""
     archive = Path(archive).resolve()
-    manifest = read_json(archive.parent / 'archive-manifest.json')
-    files = manifest['files']
-    signature = hashlib.sha256(json.dumps(files, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
-    if signature != manifest['sha256']:
-        raise ValueError('Archive manifest identity changed')
+    manifest = read_json(archive.parent / "archive-manifest.json")
+    files = manifest["files"]
+    signature = hashlib.sha256(
+        json.dumps(files, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()
+    ).hexdigest()
+    if signature != manifest["sha256"]:
+        raise ValueError("Archive manifest identity changed")
+
     def verified(relative):
         path = (archive / relative).resolve()
-        if not path.is_relative_to(archive) or relative not in files or digest(path) != files[relative]:
-            raise ValueError('Maintenance archive artifact is missing or changed: ' + relative)
+        if (
+            not path.is_relative_to(archive)
+            or relative not in files
+            or digest(path) != files[relative]
+        ):
+            raise ValueError("Maintenance archive artifact is missing or changed: " + relative)
         return read_json(path)
-    summary = verified('summary.json')
-    if summary['request'] != state['request']['text'] or summary.get('data_role') != 'development_regression':
-        raise ValueError('Topic archive is not the matching development task')
-    arm = state['config']['execution']['experience_mode']
-    arm_record = verified(arm + '-record.json')
-    for identity, video in state['videos'].items():
-        if identity != 'source' and not video.get('imported') and arm_record['videos'].get(identity, {}).get('sha256') != video['sha256']:
-            raise ValueError('Topic archive has different candidate identities')
+
+    summary = verified("summary.json")
+    if (
+        summary["request"] != state["request"]["text"]
+        or summary.get("data_role") != "development_regression"
+    ):
+        raise ValueError("Topic archive is not the matching development task")
+    arm = state["config"]["execution"]["experience_mode"]
+    arm_record = verified(arm + "-record.json")
+    for identity, video in state["videos"].items():
+        if (
+            identity != "source"
+            and not video.get("imported")
+            and arm_record["videos"].get(identity, {}).get("sha256") != video["sha256"]
+        ):
+            raise ValueError("Topic archive has different candidate identities")
     judges = {}
-    for name, group in summary['judges'].items():
+    for name, group in summary["judges"].items():
         positions = {}
-        for position, item in group['positions'].items():
-            result = verified('judgments/' + item['key'] + '/judgment.json')
-            binding = verified('judgments/' + item['key'] + '/identity.json')
-            if position == 'direct':
-                position_arm, point = 'direct', 'first'
+        for position, item in group["positions"].items():
+            result = verified("judgments/" + item["key"] + "/judgment.json")
+            binding = verified("judgments/" + item["key"] + "/identity.json")
+            if position == "direct":
+                position_arm, point = "direct", "first"
             else:
-                position_arm, point = position.rsplit('_', 1)
-                if position_arm not in {'full', 'none'} or point not in {'first', 'final'}:
-                    raise ValueError('Unknown independent scoring position')
-            position_record = verified(position_arm + '-record.json')
-            selected = position_record['first' if point == 'first' else 'selected']
-            binding_hash = hashlib.sha256(json.dumps(binding, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
-            if (digest(archive / 'judgments' / item['key'] / 'judgment.json') != item['sha256'] or result != item['result']
-                    or result.get('usage') != 'independent_final' or result['model'] != name
-                    or result['source_sha256'] != state['videos']['source']['sha256']
-                    or binding['request'] != state['request']['text'] or binding['candidate'] != result['output_sha256']
-                    or binding['source'] != result['source_sha256'] or binding_hash != item['key']
-                    or binding['protocol'] != result['profile_sha256']
-                    or any(binding.get(k) != result.get(k) for k in ('model', 'provider_model', 'reasoning_effort'))
-                    or position_record['videos'][selected]['sha256'] != result['output_sha256']):
-                raise ValueError('Independent judgment binding differs from the topic')
-            positions[position] = {'result': result, 'path': str(archive / 'judgments' / item['key'] / 'judgment.json'),
-                                   'sha256': item['sha256']}
-        judges[name] = {'positions': positions, 'comparisons': group.get('comparisons', {})}
-    return {'archive': str(archive), 'summary_sha256': files['summary.json'], 'topic': summary['topic'],
-            'judges': judges, 'judge_disagreement': summary.get('judge_disagreement'),
-            'costs': summary.get('costs'), 'scope': 'Explicit offline maintenance input. Judges remain separate; intermediate unscored candidates have no inferred final grade.'}
+                position_arm, point = position.rsplit("_", 1)
+                if position_arm not in {"full", "none"} or point not in {"first", "final"}:
+                    raise ValueError("Unknown independent scoring position")
+            position_record = verified(position_arm + "-record.json")
+            selected = position_record["first" if point == "first" else "selected"]
+            binding_hash = hashlib.sha256(
+                json.dumps(
+                    binding, sort_keys=True, ensure_ascii=False, separators=(",", ":")
+                ).encode()
+            ).hexdigest()
+            if (
+                digest(archive / "judgments" / item["key"] / "judgment.json") != item["sha256"]
+                or result != item["result"]
+                or result.get("usage") != "independent_final"
+                or result["model"] != name
+                or result["source_sha256"] != state["videos"]["source"]["sha256"]
+                or binding["request"] != state["request"]["text"]
+                or binding["candidate"] != result["output_sha256"]
+                or binding["source"] != result["source_sha256"]
+                or binding_hash != item["key"]
+                or binding["protocol"] != result["profile_sha256"]
+                or any(
+                    binding.get(k) != result.get(k)
+                    for k in ("model", "provider_model", "reasoning_effort")
+                )
+                or position_record["videos"][selected]["sha256"] != result["output_sha256"]
+            ):
+                raise ValueError("Independent judgment binding differs from the topic")
+            positions[position] = {
+                "result": result,
+                "path": str(archive / "judgments" / item["key"] / "judgment.json"),
+                "sha256": item["sha256"],
+            }
+        judges[name] = {"positions": positions, "comparisons": group.get("comparisons", {})}
+    return {
+        "archive": str(archive),
+        "summary_sha256": files["summary.json"],
+        "topic": summary["topic"],
+        "judges": judges,
+        "judge_disagreement": summary.get("judge_disagreement"),
+        "costs": summary.get("costs"),
+        "scope": "Explicit offline maintenance input. Judges remain separate; intermediate unscored candidates have no inferred final grade.",
+    }
 
 
 def project_run(run, *, topic_archive=None):
@@ -280,8 +417,14 @@ def project_run(run, *, topic_archive=None):
     issues = []
     snapshot_path = run / "knowledge-snapshot.json"
     snapshot = read_json(snapshot_path) if snapshot_path.exists() else {}
-    if snapshot and state.get("knowledge_snapshot_sha256") and state["knowledge_snapshot_sha256"] != digest(snapshot_path):
-        issues.append("Knowledge snapshot differs from the state's binding; source attribution disabled.")
+    if (
+        snapshot
+        and state.get("knowledge_snapshot_sha256")
+        and state["knowledge_snapshot_sha256"] != digest(snapshot_path)
+    ):
+        issues.append(
+            "Knowledge snapshot differs from the state's binding; source attribution disabled."
+        )
         snapshot = {}
     if not snapshot:
         issues.append("Knowledge snapshot missing; experience attribution is incomplete.")
@@ -291,20 +434,29 @@ def project_run(run, *, topic_archive=None):
         if not directory.is_dir():
             continue
         status = call_status(directory)
-        record = {"call_id": directory.name, "status": status, "input_path": str(directory / "input.json"),
-                  "exposure_recorded": False}
+        record = {
+            "call_id": directory.name,
+            "status": status,
+            "input_path": str(directory / "input.json"),
+            "exposure_recorded": False,
+        }
         receipt_path = directory / "experience-exposure.json"
         if receipt_path.exists():
             try:
                 receipt = read_json(receipt_path)
                 if receipt["input_sha256"] != digest(directory / "input.json"):
                     raise ValueError("Input hash mismatch")
-                if not snapshot_path.exists() or receipt["knowledge_snapshot_sha256"] != digest(snapshot_path):
+                if not snapshot_path.exists() or receipt["knowledge_snapshot_sha256"] != digest(
+                    snapshot_path
+                ):
                     raise ValueError("Knowledge snapshot hash mismatch")
                 record["exposure_recorded"] = True
                 record["receipt_path"] = str(receipt_path)
                 record["unresolved_page_pointers"] = receipt.get("unresolved_page_pointers", [])
-                surfaces.extend({**r, "call_id": directory.name, "call_status": status} for r in receipt["surfaces"])
+                surfaces.extend(
+                    {**r, "call_id": directory.name, "call_status": status}
+                    for r in receipt["surfaces"]
+                )
             except (ValueError, KeyError, TypeError, OSError) as exc:
                 record["receipt_error"] = type(exc).__name__
                 issues.append("Unusable exposure receipt: " + directory.name)
@@ -313,22 +465,52 @@ def project_run(run, *, topic_archive=None):
     for identity, row in state.get("reads", {}).items():
         source = index.get(row.get("id"))
         if source is not None:
-            reads.append({"read_id": identity, **row, "version": source.get("version"),
-                          "meaning": "Returned read; presentation to a later model call is tracked separately."})
+            reads.append(
+                {
+                    "read_id": identity,
+                    **row,
+                    "version": source.get("version"),
+                    "meaning": "Returned read; presentation to a later model call is tracked separately.",
+                }
+            )
     actions = []
     for event in state.get("events", []):
         request = event.get("request", {})
         identity = event["event_id"]
         for pointer, text in authored_texts(request):
-            ids = [key for key in index if re.search(r"(?<![A-Za-z0-9_.-])" + re.escape(key) + r"(?![A-Za-z0-9_.-])", text)]
+            ids = [
+                key
+                for key in index
+                if re.search(r"(?<![A-Za-z0-9_.-])" + re.escape(key) + r"(?![A-Za-z0-9_.-])", text)
+            ]
             if ids:
-                mentions.append({"event_id": identity, "pointer": "/request" + pointer,
-                    "experience_ids": ids, "text": text, "basis": "literal_model_reference",
-                    "interpretation": "unclassified; a mention is not acceptance, rejection or causal use"})
-        if request.get("action") in {"generate", "observe", "critique", "delivery_candidate", "finish"}:
-            actions.append({"event_id": identity, "action": request["action"], "status": event.get("status"),
-                            "arguments": request.get("arguments", {}), "purpose": request.get("purpose"),
-                            "event_path": str(run / "events" / (identity + ".json"))})
+                mentions.append(
+                    {
+                        "event_id": identity,
+                        "pointer": "/request" + pointer,
+                        "experience_ids": ids,
+                        "text": text,
+                        "basis": "literal_model_reference",
+                        "interpretation": "unclassified; a mention is not acceptance, rejection or causal use",
+                    }
+                )
+        if request.get("action") in {
+            "generate",
+            "observe",
+            "critique",
+            "delivery_candidate",
+            "finish",
+        }:
+            actions.append(
+                {
+                    "event_id": identity,
+                    "action": request["action"],
+                    "status": event.get("status"),
+                    "arguments": request.get("arguments", {}),
+                    "purpose": request.get("purpose"),
+                    "event_path": str(run / "events" / (identity + ".json")),
+                }
+            )
     videos = {}
     for identity, video in state.get("videos", {}).items():
         execution = video.get("execution", {})
@@ -336,28 +518,87 @@ def project_run(run, *, topic_archive=None):
         seconds = execution.get("generation_seconds")
         if seconds is None and isinstance(execution.get("receipt"), dict):
             seconds = execution["receipt"].get("generation_seconds")
-        videos[identity] = {k: video.get(k) for k in ("parent", "prompt", "sha256", "job_id", "duration_seconds", "path", "imported")}
+        videos[identity] = {
+            k: video.get(k)
+            for k in (
+                "parent",
+                "prompt",
+                "sha256",
+                "job_id",
+                "duration_seconds",
+                "path",
+                "imported",
+            )
+        }
         videos[identity]["generation_seconds"] = seconds
-        videos[identity]['media'] = artifact_reference(run, state, video.get('path'), video.get('sha256'),
-                                                       topic_archive=topic_archive, video_id=identity)
+        videos[identity]["media"] = artifact_reference(
+            run,
+            state,
+            video.get("path"),
+            video.get("sha256"),
+            topic_archive=topic_archive,
+            video_id=identity,
+        )
     feedback = []
     for identity, value in state.get("evaluations", {}).items():
-        feedback.append({"id": identity, "video_id": value.get("video_id"), "protocol": value.get("protocol"),
-                         "state_pointer": "/evaluations/" + identity,
-                         "main_scores": value.get("report", {}).get("main_scores"),
-                         "report": value.get('report'),
-                         "request": artifact_reference(run, state, value.get('request_path')),
-                         "evidence": [{**frame, 'artifact': artifact_reference(run, state, frame.get('path'), frame.get('sha256'))}
-                                      for frame in value.get('evidence', [])],
-                         "historical_outcome": value.get("outcome"),
-                         "scope": "Saved online judgment; not independent final scoring."})
+        feedback.append(
+            {
+                "id": identity,
+                "video_id": value.get("video_id"),
+                "protocol": value.get("protocol"),
+                "state_pointer": "/evaluations/" + identity,
+                "main_scores": value.get("report", {}).get("main_scores"),
+                "report": value.get("report"),
+                "request": artifact_reference(run, state, value.get("request_path")),
+                "evidence": [
+                    {
+                        **frame,
+                        "artifact": artifact_reference(
+                            run, state, frame.get("path"), frame.get("sha256")
+                        ),
+                    }
+                    for frame in value.get("evidence", [])
+                ],
+                "historical_outcome": value.get("outcome"),
+                "scope": "Saved online judgment; not independent final scoring.",
+            }
+        )
+    for identity, value in state.get("reviews", {}).items():
+        if value.get("mode") != "planner":
+            continue
+        feedback.append(
+            {
+                "id": "planner-check-" + identity,
+                "video_id": identity,
+                "protocol": "contextual-planner-review-v1",
+                "state_pointer": "/reviews/" + identity,
+                "main_scores": None,
+                "report": value.get("report"),
+                "request": artifact_reference(
+                    run, state, str(run / "calls" / value["event_id"] / "input.json")
+                ),
+                "evidence": [],
+                "historical_outcome": None,
+                "scope": "Planner self-check in its task context; not independent evaluation.",
+            }
+        )
     if any(not c["exposure_recorded"] for c in calls):
-        issues.append("Some calls have no bound exposure receipt; no retrospective claim of visibility/adoption is made.")
+        issues.append(
+            "Some calls have no bound exposure receipt; no retrospective claim of visibility/adoption is made."
+        )
     config = state.get("config", {})
-    generated = list({v["job_id"]: v for k, v in videos.items()
-                      if k != "source" and v.get("job_id") and not v.get("imported")}.values())
-    known_costs = [v["generation_seconds"] for v in generated
-                   if type(v.get("generation_seconds")) in {int, float} and v["generation_seconds"] >= 0]
+    generated = list(
+        {
+            v["job_id"]: v
+            for k, v in videos.items()
+            if k != "source" and v.get("job_id") and not v.get("imported")
+        }.values()
+    )
+    known_costs = [
+        v["generation_seconds"]
+        for v in generated
+        if type(v.get("generation_seconds")) in {int, float} and v["generation_seconds"] >= 0
+    ]
     decisions = decision_records(run, state, surfaces, mentions)
     independent, independent_error = None, None
     if topic_archive:
@@ -365,51 +606,89 @@ def project_run(run, *, topic_archive=None):
             independent = topic_evidence(topic_archive, state)
         except (ValueError, KeyError, TypeError, OSError) as exc:
             independent_error = str(exc)
-            issues.append('Independent evidence rejected; task decision records remain available: ' + independent_error)
+            issues.append(
+                "Independent evidence rejected; task decision records remain available: "
+                + independent_error
+            )
     if independent:
         for video in videos.values():
-            video['independent_positions'] = [{'judge': name, 'position': position}
-                for name, group in independent['judges'].items() for position, item in group['positions'].items()
-                if item['result']['output_sha256'] == video['sha256']]
-    return {"schema": "experience-use-v2", "run": str(run), "state_sha256": digest(state_file),
-        "status": state.get("status"), "final": state.get("final"), "delivery_candidate": state.get("delivery_candidate"),
-        "request": state.get("request", {}).get("text"), "knowledge_snapshot_sha256": digest(snapshot_path) if snapshot_path.exists() else None,
-        "knowledge_index": index, "calls": calls, "surfaces": surfaces, "reads": reads, "model_references": mentions,
-        "actions": actions, "videos": videos, "online_feedback": feedback,
-        "decisions": decisions, "delivery_proposals": state.get('delivery_reviews', {}),
+            video["independent_positions"] = [
+                {"judge": name, "position": position}
+                for name, group in independent["judges"].items()
+                for position, item in group["positions"].items()
+                if item["result"]["output_sha256"] == video["sha256"]
+            ]
+    return {
+        "schema": "experience-use-v2",
+        "run": str(run),
+        "state_sha256": digest(state_file),
+        "status": state.get("status"),
+        "final": state.get("final"),
+        "delivery_candidate": state.get("delivery_candidate"),
+        "request": state.get("request", {}).get("text"),
+        "knowledge_snapshot_sha256": digest(snapshot_path) if snapshot_path.exists() else None,
+        "knowledge_index": index,
+        "calls": calls,
+        "surfaces": surfaces,
+        "reads": reads,
+        "model_references": mentions,
+        "actions": actions,
+        "videos": videos,
+        "online_feedback": feedback,
+        "decisions": decisions,
+        "delivery_proposals": state.get("delivery_reviews", {}),
         "knowledge_snapshot": str(snapshot_path) if snapshot_path.exists() else None,
         "independent_outcomes": independent,
         "independent_evidence_error": independent_error,
-        "counts": {"planner_generate_operations": sum(a["action"] == "generate" for a in actions),
-                   "accepted_generation_requests": state.get("generation_requests"),
-                   "returned_generated_candidates": len(generated), "saved_online_reviews": len(feedback)},
-        "generation_cost": {"known_seconds": sum(known_costs), "known_candidates": len(known_costs),
-                            "unknown_candidates": len(generated) - len(known_costs),
-                            "scope": "Returned candidates with recorded generation time; failed jobs and LLM cost are not inferred."},
-        "cohort": {"workflow": config.get("workflow", "historical"), "planner_model": config.get("model"),
-                   "reasoning_effort": config.get("reasoning_effort"),
-                   "experience_mode": config.get('execution', {}).get('experience_mode'),
-                   "renderer": config.get('execution', {}).get('renderer', {}).get('backend'),
-                   "continuation_policy": config.get('continuation_policy'),
-                   "delivery_review_protocol": config.get('delivery_review_protocol'),
-                   "protocol_migrations": state.get('protocol_migrations', []),
-                   "catalog_revision": snapshot.get("curated_catalog", {}).get("revision"),
-                   "online_protocols": sorted({v["protocol"] for v in feedback if v.get("protocol")})},
+        "counts": {
+            "planner_generate_operations": sum(a["action"] == "generate" for a in actions),
+            "accepted_generation_requests": state.get("generation_requests"),
+            "returned_generated_candidates": len(generated),
+            "saved_online_reviews": len(feedback),
+        },
+        "generation_cost": {
+            "known_seconds": sum(known_costs),
+            "known_candidates": len(known_costs),
+            "unknown_candidates": len(generated) - len(known_costs),
+            "scope": "Returned candidates with recorded generation time; failed jobs and LLM cost are not inferred.",
+        },
+        "cohort": {
+            "workflow": config.get("workflow", "historical"),
+            "planner_model": config.get("model"),
+            "reasoning_effort": config.get("reasoning_effort"),
+            "experience_mode": config.get("execution", {}).get("experience_mode"),
+            "renderer": config.get("execution", {}).get("renderer", {}).get("backend"),
+            "continuation_policy": config.get("continuation_policy"),
+            "delivery_review_protocol": config.get("delivery_review_protocol"),
+            "protocol_migrations": state.get("protocol_migrations", []),
+            "catalog_revision": snapshot.get("curated_catalog", {}).get("revision"),
+            "online_protocols": sorted({v["protocol"] for v in feedback if v.get("protocol")}),
+        },
         "working_material": {"state_path": str(state_file), "pointers": ["/notes", "/workspace"]},
-        "issues": issues, "recording_warnings": state.get("experience_recording_warnings", []),
-        "scope": "Factual links and attributed judgments. Effectiveness and causal credit require semantic review and suitable comparisons."}
+        "issues": issues,
+        "recording_warnings": state.get("experience_recording_warnings", []),
+        "scope": "Factual links and attributed judgments. Effectiveness and causal credit require semantic review and suitable comparisons.",
+    }
 
 
 def export_batch(manifest_path, output):
     manifest_path, output = Path(manifest_path).resolve(), Path(output).resolve()
     manifest = read_json(manifest_path)
-    if manifest.get("purpose") != "development_maintenance" or not isinstance(manifest.get("runs"), list):
+    if manifest.get("purpose") != "development_maintenance" or not isinstance(
+        manifest.get("runs"), list
+    ):
         raise ValueError("Use an explicit development_maintenance manifest with a runs list")
     for row in manifest["runs"]:
-        if not isinstance(row, dict) or not isinstance(row.get("path"), str) or not re.fullmatch(r"[A-Za-z0-9_.-]+", str(row.get("id", ""))):
+        if (
+            not isinstance(row, dict)
+            or not isinstance(row.get("path"), str)
+            or not re.fullmatch(r"[A-Za-z0-9_.-]+", str(row.get("id", "")))
+        ):
             raise ValueError("Each run needs a safe ID and an explicit directory path")
     run_paths = [(manifest_path.parent / r["path"]).resolve() for r in manifest["runs"]]
-    if len({r["id"] for r in manifest["runs"]}) != len(run_paths) or len(set(run_paths)) != len(run_paths):
+    if len({r["id"] for r in manifest["runs"]}) != len(run_paths) or len(set(run_paths)) != len(
+        run_paths
+    ):
         raise ValueError("Duplicate run ID or directory")
     if any(output == p or output.is_relative_to(p) or p.is_relative_to(output) for p in run_paths):
         raise ValueError("Export output must be separate from every source run")
@@ -420,113 +699,287 @@ def export_batch(manifest_path, output):
     for row, path in zip(manifest["runs"], run_paths):
         base = {"id": row["id"], "run": str(path), "data_role": row.get("data_role", "unspecified")}
         if row.get("data_role") != "development":
-            records.append({**base, "status": "excluded", "reason": "Only explicitly development-authorized material enters maintenance."})
+            records.append(
+                {
+                    **base,
+                    "status": "excluded",
+                    "reason": "Only explicitly development-authorized material enters maintenance.",
+                }
+            )
             continue
         try:
-            topic_archive = row.get('topic_archive')
+            topic_archive = row.get("topic_archive")
             if topic_archive is not None and not isinstance(topic_archive, str):
-                raise ValueError('topic_archive must name an explicitly authorized development archive')
-            report = project_run(path, topic_archive=(manifest_path.parent / topic_archive).resolve() if topic_archive else None)
+                raise ValueError(
+                    "topic_archive must name an explicitly authorized development archive"
+                )
+            report = project_run(
+                path,
+                topic_archive=(manifest_path.parent / topic_archive).resolve()
+                if topic_archive
+                else None,
+            )
         except (ValueError, KeyError, TypeError, OSError) as exc:
             records.append({**base, "status": "unavailable", "reason": type(exc).__name__})
             continue
         report["run_id"] = row["id"]
         write_json(output / "runs" / (row["id"] + ".json"), report)
-        review_path = output / 'runs' / (row['id'] + '.md')
+        review_path = output / "runs" / (row["id"] + ".md")
+
         def link(label, artifact):
-            if not artifact['available']:
-                return label + ' (unavailable in this copy)'
+            if not artifact["available"]:
+                return label + " (unavailable in this copy)"
             try:
-                location = Path(os.path.relpath(artifact['path'], review_path.parent)).as_posix()
+                location = Path(os.path.relpath(artifact["path"], review_path.parent)).as_posix()
             except ValueError:
-                location = Path(artifact['path']).as_posix()
-            return f'[{label}](<{location}>)'
-        review_lines = ['# Decision evidence: ' + row['id'], '',
-                        'Read the stated judgment against the dispatched input/prompt and returned result. Follow the relevant experience version to decide what guidance deserves revision.', '',
-                        '[Complete joined record](' + row['id'] + '.json)', '']
-        for decision in report['decisions']:
-            review_lines += ['## ' + decision['event_id'] + ': ' + str(decision['disposition']), '']
-            audit = decision['continuation_audit']
+                location = Path(artifact["path"]).as_posix()
+            return f"[{label}](<{location}>)"
+
+        review_lines = [
+            "# Decision evidence: " + row["id"],
+            "",
+            "Read the stated judgment against the dispatched input/prompt and returned result. Follow the relevant experience version to decide what guidance deserves revision.",
+            "",
+            "[Complete joined record](" + row["id"] + ".json)",
+            "",
+        ]
+        for decision in report["decisions"]:
+            review_lines += ["## " + decision["event_id"] + ": " + str(decision["disposition"]), ""]
+            audit = decision["continuation_audit"]
             if audit:
-                review_lines += ['Budget notice supplied: ' + audit['visible']['budget_awareness'], '']
-                review_lines += ['- ' + q for q in audit['visible'].get('continuation_questions', [])]
+                review_lines += [
+                    "Budget notice supplied: " + audit["visible"]["budget_awareness"],
+                    "",
+                ]
+                review_lines += [
+                    "- " + q for q in audit["visible"].get("continuation_questions", [])
+                ]
             else:
-                review_lines += ['Continuation-question record unavailable for this historical decision.', '']
-            explanation = decision['arguments'].get('justification')
+                review_lines += [
+                    "Continuation-question record unavailable for this historical decision.",
+                    "",
+                ]
+            explanation = decision["arguments"].get("justification")
             if explanation:
-                review_lines += ['', 'Planner explanation:', '', '```text', explanation, '```', '']
-            submission = decision.get('submission')
+                review_lines += ["", "Planner explanation:", "", "```text", explanation, "```", ""]
+            submission = decision.get("submission")
             if submission:
-                review_lines += ['Submitted input: ' + submission['input_id'] + '. Result: ' + submission['outcome_status'] + '.',
-                                 '', '```text', submission['prompt'], '```', '',
-                                 'Returned candidates: ' + ', '.join(decision['candidate_ids']) + '.', '']
-            if decision['operation'] in {'finish', 'delivery_candidate'}:
-                review_lines += ['Selected candidate: ' + str(decision['arguments'].get('video')) + '.', '']
-                if decision['arguments'].get('message'):
-                    review_lines += ['Planner message:', '', '```text', decision['arguments']['message'], '```', '']
-                proposal = report['delivery_proposals'].get(decision.get('delivery_proposal_id'))
+                review_lines += [
+                    "Submitted input: "
+                    + submission["input_id"]
+                    + ". Result: "
+                    + submission["outcome_status"]
+                    + ".",
+                    "",
+                    "```text",
+                    submission["prompt"],
+                    "```",
+                    "",
+                    "Returned candidates: " + ", ".join(decision["candidate_ids"]) + ".",
+                    "",
+                ]
+            if decision["operation"] in {"finish", "delivery_candidate"}:
+                review_lines += [
+                    "Selected candidate: " + str(decision["arguments"].get("video")) + ".",
+                    "",
+                ]
+                if decision["arguments"].get("message"):
+                    review_lines += [
+                        "Planner message:",
+                        "",
+                        "```text",
+                        decision["arguments"]["message"],
+                        "```",
+                        "",
+                    ]
+                proposal = report["delivery_proposals"].get(decision.get("delivery_proposal_id"))
                 if proposal:
-                    review_lines += ['Bound review: ' + str(proposal.get('review_job')) +
-                                     '. Proposal record: ' + str(proposal['id']) + '.', '']
-            for label in ('model_input', 'model_response'):
+                    review_lines += [
+                        "Bound review: "
+                        + str(proposal.get("review_job"))
+                        + ". Proposal record: "
+                        + str(proposal["id"])
+                        + ".",
+                        "",
+                    ]
+            for label in ("model_input", "model_response"):
                 artifact = decision[label]
-                if artifact['available']:
-                    review_lines += [link(label.replace('_', ' '), artifact), '']
-        review_lines += ['## Candidate evidence and saved online findings', '']
-        for identity, video in report['videos'].items():
-            review_lines += ['### ' + identity, '', link('Video', video['media']), '',
-                            'Input: ' + str(video.get('parent')) + '. Recorded generation seconds: ' +
-                            str(video['generation_seconds']) + '.', '']
-            for review in report['online_feedback']:
-                if review['video_id'] != identity:
+                if artifact["available"]:
+                    review_lines += [link(label.replace("_", " "), artifact), ""]
+        review_lines += ["## Candidate evidence and saved online findings", ""]
+        for identity, video in report["videos"].items():
+            review_lines += [
+                "### " + identity,
+                "",
+                link("Video", video["media"]),
+                "",
+                "Input: "
+                + str(video.get("parent"))
+                + ". Recorded generation seconds: "
+                + str(video["generation_seconds"])
+                + ".",
+                "",
+            ]
+            for review in report["online_feedback"]:
+                if review["video_id"] != identity:
                     continue
-                review_lines += ['Online report: ' + review['id'] + '. ' + link('Evidence packet', review['request']), '']
-                for dimension, finding in (review['main_scores'] or {}).items():
-                    review_lines += ['- ' + dimension + ': ' + str(finding.get('score')) +
-                                     ' (' + str(finding.get('status')) + '). ' + str(finding.get('reason', ''))]
-                review_lines += ['', 'Full report, limitations and frame references remain in the joined record.', '']
-        if report['independent_outcomes']:
-            review_lines += ['## Independent outcomes', '',
-                            'The joined JSON contains separate verified judge reports and Direct/first/final positions. Read disagreements alongside the online report; unscored intermediates remain unscored.', '']
-        if report['issues']:
-            review_lines += ['## Available-evidence notes', '', *['- ' + issue for issue in report['issues']], '']
-        review_lines += ['## Maintenance use', '',
-                        'Analysis develops the scene/renderer explanation. Use review traces how guidance shaped the choice. Curation revises the account, summary or manual where the improvement belongs. Record the exact proposed passage and source events for content review.', '']
-        review_path.write_text('\n'.join(review_lines), encoding='utf-8')
-        records.append({**base, "status": "included", "run_status": report["status"], "report": "runs/" + row["id"] + ".json",
-                        "review": 'runs/' + row['id'] + '.md',
-                        "decision_dispositions": dict(Counter(d['disposition'] for d in report['decisions'])),
-                        "knowledge_snapshot_sha256": report["knowledge_snapshot_sha256"], "cohort": report["cohort"],
-                        "counts": report["counts"], "generation_cost": report["generation_cost"], "issues": report["issues"]})
+                review_lines += [
+                    "Online report: "
+                    + review["id"]
+                    + ". "
+                    + link("Evidence packet", review["request"]),
+                    "",
+                ]
+                qualitative = review.get("report") or {}
+                if qualitative.get("summary"):
+                    review_lines += [str(qualitative["summary"]), ""]
+                    for finding in qualitative.get("findings") or []:
+                        review_lines += [
+                            "- "
+                            + (
+                                finding
+                                if isinstance(finding, str)
+                                else json.dumps(finding, ensure_ascii=False)
+                            )
+                        ]
+                    review_lines += [""]
+                for dimension, finding in (review["main_scores"] or {}).items():
+                    review_lines += [
+                        "- "
+                        + dimension
+                        + ": "
+                        + str(finding.get("score"))
+                        + " ("
+                        + str(finding.get("status"))
+                        + "). "
+                        + str(finding.get("reason", ""))
+                    ]
+                if review.get("report"):
+                    review_lines += [
+                        "",
+                        json.dumps(review["report"], ensure_ascii=False, indent=2),
+                        "",
+                    ]
+                review_lines += [
+                    "",
+                    "Full report and frame references remain in the joined record.",
+                    "",
+                ]
+        if report["independent_outcomes"]:
+            review_lines += [
+                "## Independent outcomes",
+                "",
+                "The joined JSON contains separate verified judge reports and Direct/first/final positions. Read disagreements alongside the online report; unscored intermediates remain unscored.",
+                "",
+            ]
+        if report["issues"]:
+            review_lines += [
+                "## Available-evidence notes",
+                "",
+                *["- " + issue for issue in report["issues"]],
+                "",
+            ]
+        review_lines += [
+            "## Maintenance use",
+            "",
+            "Analysis develops the scene/renderer explanation. Use review traces how guidance shaped the choice. Curation revises the account, summary or manual where the improvement belongs. Record the exact proposed passage and source events for content review.",
+            "",
+        ]
+        review_path.write_text("\n".join(review_lines), encoding="utf-8")
+        records.append(
+            {
+                **base,
+                "status": "included",
+                "run_status": report["status"],
+                "report": "runs/" + row["id"] + ".json",
+                "review": "runs/" + row["id"] + ".md",
+                "decision_dispositions": dict(
+                    Counter(d["disposition"] for d in report["decisions"])
+                ),
+                "knowledge_snapshot_sha256": report["knowledge_snapshot_sha256"],
+                "cohort": report["cohort"],
+                "counts": report["counts"],
+                "generation_cost": report["generation_cost"],
+                "issues": report["issues"],
+            }
+        )
         for identity, entry in report["knowledge_index"].items():
             content_key = entry.get("sha256") or ("unknown-in-" + row["id"])
             key = identity + "@" + content_key + "@" + str(entry.get("version"))
-            stats = per_entry.setdefault(key, {"id": identity, "sha256": entry.get("sha256"), "version": entry.get("version"),
-                "available_in_runs": [], "read_events": 0, "answered_calls_with_exposure": 0,
-                "prepared_or_uncertain_calls_with_exposure": 0, "literal_reference_events": 0})
+            stats = per_entry.setdefault(
+                key,
+                {
+                    "id": identity,
+                    "sha256": entry.get("sha256"),
+                    "version": entry.get("version"),
+                    "available_in_runs": [],
+                    "read_events": 0,
+                    "answered_calls_with_exposure": 0,
+                    "prepared_or_uncertain_calls_with_exposure": 0,
+                    "literal_reference_events": 0,
+                },
+            )
             stats["available_in_runs"].append(row["id"])
             stats["read_events"] += sum(r.get("id") == identity for r in report["reads"])
-            exposed = {(r["call_id"], r["call_status"]) for r in report["surfaces"] if r["id"] == identity}
-            stats["answered_calls_with_exposure"] += sum(status == "response_recorded" for _, status in exposed)
-            stats["prepared_or_uncertain_calls_with_exposure"] += sum(status != "response_recorded" for _, status in exposed)
-            stats["literal_reference_events"] += len({r["event_id"] for r in report["model_references"] if identity in r["experience_ids"]})
-    summary = {"schema": "experience-batch-v2", "batch_id": manifest.get("batch_id"),
-        "manifest_sha256": digest(manifest_path), "manifest_path": str(manifest_path),
-        "exporter_sha256": digest(__file__), "specified_runs": len(records),
+            exposed = {
+                (r["call_id"], r["call_status"]) for r in report["surfaces"] if r["id"] == identity
+            }
+            stats["answered_calls_with_exposure"] += sum(
+                status == "response_recorded" for _, status in exposed
+            )
+            stats["prepared_or_uncertain_calls_with_exposure"] += sum(
+                status != "response_recorded" for _, status in exposed
+            )
+            stats["literal_reference_events"] += len(
+                {
+                    r["event_id"]
+                    for r in report["model_references"]
+                    if identity in r["experience_ids"]
+                }
+            )
+    summary = {
+        "schema": "experience-batch-v2",
+        "batch_id": manifest.get("batch_id"),
+        "manifest_sha256": digest(manifest_path),
+        "manifest_path": str(manifest_path),
+        "exporter_sha256": digest(__file__),
+        "specified_runs": len(records),
         "record_counts": dict(Counter(r["status"] for r in records)),
-        "run_status_counts": dict(Counter(r.get("run_status") for r in records if r["status"] == "included")),
-        "runs": records, "experience_usage": list(per_entry.values()),
-        "limits": ["Counts are exposure/read/reference events, not effectiveness scores.",
-                   "Absent historical receipts are missing evidence, not zero actual attention.",
-                   "Scores remain in per-run protocol/version cohorts; no pooled quality estimate is computed.",
-                   "No independent scoring, semantic inference, rendering or publication was executed."]}
+        "run_status_counts": dict(
+            Counter(r.get("run_status") for r in records if r["status"] == "included")
+        ),
+        "runs": records,
+        "experience_usage": list(per_entry.values()),
+        "limits": [
+            "Counts are exposure/read/reference events, not effectiveness scores.",
+            "Absent historical receipts are missing evidence, not zero actual attention.",
+            "Scores remain in per-run protocol/version cohorts; no pooled quality estimate is computed.",
+            "No independent scoring, semantic inference, rendering or publication was executed.",
+        ],
+    }
     write_json(output / "batch.json", summary)
-    lines = ["# Experience maintenance batch", "", f"Specified runs: {len(records)}. Records: {summary['record_counts']}.", "",
-             "| Run | Inclusion | Recorded state | Detail |", "|---|---|---|---|"]
+    lines = [
+        "# Experience maintenance batch",
+        "",
+        f"Specified runs: {len(records)}. Records: {summary['record_counts']}.",
+        "",
+        "| Run | Inclusion | Recorded state | Detail |",
+        "|---|---|---|---|",
+    ]
     for r in records:
-        link = f"[Decision review]({r['review']}) / [Record]({r['report']})" if r.get("report") else r.get("reason", "")
+        link = (
+            f"[Decision review]({r['review']}) / [Record]({r['report']})"
+            if r.get("report")
+            else r.get("reason", "")
+        )
         lines.append(f"| {r['id']} | {r['status']} | {r.get('run_status', 'unknown')} | {link} |")
-    lines += ["", "[Full factual summary](batch.json)", "", *summary["limits"], "",
-              "Review model references in context; they have not been classified as adoption. Record any retrospective interpretation separately, with source events and author identity. Stage proposed content edits for user review."]
+    lines += [
+        "",
+        "[Full factual summary](batch.json)",
+        "",
+        *summary["limits"],
+        "",
+        "Review model references in context; they have not been classified as adoption. Record any retrospective interpretation separately, with source events and author identity. Stage proposed content edits for user review.",
+    ]
     (output / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return summary

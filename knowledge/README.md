@@ -6,7 +6,8 @@ Use the [creative-loop map](creative-loop/README.md) and [reading manual](creati
 
 - **Understand and design:** the [professional manual](creative-loop/UNDERSTAND_AND_DESIGN.md) and [meaning guide](guides/meaning.md) connect the requested change to activities, object roles and narrative emphasis.
 - **Visual construction:** [theme](guides/theme.md), [media](guides/media.md), [time](guides/time.md), [combination](guides/combination.md) and [design expression](guides/design-expression.md) help choose and develop a coherent proposal.
-- **Understand and revise:** the [professional manual](creative-loop/UNDERSTAND_AND_REVISE.md) and [experience entrance](experience/curated/README.md) connect observed results to comparison and revision. Approved curated experience is currently empty; its rewritten content awaits activation review.
+- **Understand and revise:** the [professional manual](creative-loop/UNDERSTAND_AND_REVISE.md) and [experience entrance](experience/curated/README.md) connect observed results to comparison and revision. The active reviewed entries, evidence and renderer profiles are listed in the [curated catalog](experience/curated/catalog.json).
+- **Inspect complete events:** the shared [observation guide](creative-loop/OBSERVE_EVENTS.md) explains native-frame pages, question-led Critic evidence and actual coverage. Both experience scopes use this tool contract.
 - **Trace a claim:** complete entries link original designs and references; [generation history](guides/experience.md) and the [Bernini probe](model-experience/bernini-r.md) retain the conditions behind observed outcomes.
 
 The working language is English. Editorial guidance and translations identify their sources; original-language records remain available for provenance. Task exploration follows the unresolved question. The full catalog is an inventory, while the guides explain useful differences and reading paths.
@@ -208,7 +209,7 @@ The complete catalog below is organized by provenance for inventory and direct a
 - [Historical conversion of 98 source records into templates](../scripts/build_opuscar_templates.py)
 - [Context for legacy dimensions, keywords, preservation rules, and strengths](../src/skills/dimensions.py)
 - [Historical evaluation, input controls, and corrections to interpretation](../LESSONS.md)
-- [v1/v2 approaches, budgets, truncation, and task settings](../_deprecated/eval/bench_v2/HANDOFF.md)
-- [Repository analysis of three cases and their prompt changes](../_deprecated/eval/bench_v2/data/walkthrough_notes.json)
-- [Models, tasks, input arms, references, and evaluation settings](../scripts/eval/bench_v3/README.md)
-- [Historical motivation and conditional results for deterministic compilation](../scripts/bench_v4/README.md)
+- v1/v2 approaches, budgets, truncation, and task settings: historical path `../_deprecated/eval/bench_v2/HANDOFF.md` (absent from this checkout).
+- Repository analysis of three cases and their prompt changes: historical path `../_deprecated/eval/bench_v2/data/walkthrough_notes.json` (absent from this checkout).
+- Models, tasks, input arms, references, and evaluation settings: historical path `../scripts/eval/bench_v3/README.md` (absent from this checkout).
+- Historical motivation and conditional results for deterministic compilation: historical path `../scripts/bench_v4/README.md` (absent from this checkout).

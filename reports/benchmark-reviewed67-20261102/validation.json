@@ -1,0 +1,17 @@
+{
+  "count": 67,
+  "prompt_conditions": 134,
+  "exact_chinese_review_match": true,
+  "source_and_prompt_hashes": true,
+  "old_75_archive_hashes": true,
+  "review_html_js": "passed",
+  "zip_entries": 205,
+  "package_bytes": 82152829,
+  "package_sha256": "617e9044294ea406348f2c7feed2d6368c1382bfa884cc942aadad51a9cf3692",
+  "generation_runner_tests": {
+    "passed": 13,
+    "failed": 0,
+    "environment": "TianGong-AI-Workspace/.venv (Pillow available)",
+    "real_generation_started": false
+  }
+}

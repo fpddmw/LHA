@@ -2,7 +2,7 @@
 
 [Experience entrance](curated/README.md) · [Understand and revise](../creative-loop/UNDERSTAND_AND_REVISE.md)
 
-Choose the input that supplies the visual information needed by the next proposal. A candidate with useful styling is a strong starting point when the remaining work can build on it. When a key identity, action or structure has been lost, inspect an earlier candidate or the source that still contains it. Keep the proposed delivery separate from the next editing input.
+Choose the input that supplies the visual information needed by the next proposal. A candidate with useful styling is a strong starting point when the remaining work can build on it. When a required identity, action or structure has been lost, inspect an earlier candidate or the source that still contains it. When a candidate has successfully changed an obsolete source function, consider developing that progress rather than restoring the old event. Keep the proposed delivery separate from the next editing input.
 
 This page routes an input decision to its supporting material:
 

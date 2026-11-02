@@ -1,14 +1,16 @@
 # EX-environment-replacement: Transform the structures that make the place recognizable
 
-Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; B2/D2 plus F001/F004/F005/F006/F007.
+Revision 4. Approved for use; goal-directed semantic revision authorized on 2026-11-02. Bernini and Ditto; B2/D2 plus F001/F004/F005/F006/F007.
 
-**When a scene has the requested theme but still reads as the old location, target the surfaces, openings and sightlines carrying that location. Prefer concrete spatial remapping over adding more thematic objects around an unchanged setting.**
+**When a themed result still reads as the old place, change the structures and uses that sustain that reading. Reconstruct the target setting through spatial organization and activity together; preserve an original function only when it belongs in the requested scene.**
 
 ## Separate motifs from the place they inhabit
 
 A space view, futuristic suit and cyan accents can coexist with a recognizable gym. Lanterns and polished wood can coexist with utilitarian walls and wiring. F007's metallic train initially sat in an ordinary street crossing. In each case, the successful motif leaves an identifiable carrier of the old scene.
 
-Look for the broad planes and boundaries that dominate recognition: wall spans, barriers, shop fronts, roof silhouettes, exposed equipment and the route through the setting. Assign those structures new roles compatible with the requested environment and the source perspective. For a station, an existing shop front can become an entrance and a pitched roof can become a glazed concourse. These are illustrative correspondences, selected according to the actual shot.
+Inspect functional anchors as well as appearance. A scoring target, teaching board or checkout counter can keep organizing the old activity after its material changes. Decide whether its function serves the target world, then preserve, reinterpret or replace it with the surrounding relationships. These are design comparisons; the [goal review](../evidence/semantic-goal-review-20261102.md) provides the recorded preservation error.
+
+Look for the broad planes and boundaries that dominate recognition: wall spans, barriers, shop fronts, roof silhouettes, exposed equipment and the route through the setting. Assign those structures roles compatible with the target activity and useful source perspective. Keep one-to-one remapping when it helps; remove an obsolete function when keeping its footprint would preserve the wrong scene. For a station, an existing shop front can become an entrance and a pitched roof can become a glazed concourse. These are illustrative correspondences, selected according to the actual shot.
 
 ## Give additions a visible place
 

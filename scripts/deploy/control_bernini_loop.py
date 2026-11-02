@@ -167,7 +167,7 @@ def images(task, clips, directory):
 
 
 def call_cached(directory, system, request, paths, role):
-    from vlm.codex_vlm import CodexVisionModel
+    from vlm.openrouter import OpenRouterVisionModel
     directory.mkdir(parents=True,exist_ok=True)
     sig=hashlib.sha256(json.dumps({'system':system,'request':request,
           'images':[digest(Path(p)) for p in paths]},sort_keys=True,ensure_ascii=False).encode()).hexdigest()
@@ -176,7 +176,7 @@ def call_cached(directory, system, request, paths, role):
         saved=json.loads(target.read_text(encoding='utf-8'));assert saved['signature']==sig
         return saved['response']
     save(directory/'input.json',{'signature':sig,'system':system,'request':request})
-    model=CodexVisionModel(role=role)
+    model=OpenRouterVisionModel(role=role)
     os.environ['LOW_HIGH_VLM_AUDIT_LOG']=str(RUN/'model-calls.jsonl')
     response=model.predict_json(system_prompt=system,user_text=json.dumps(request,ensure_ascii=False),image_paths=paths)
     save(target,{'signature':sig,'model':model.model,'reasoning_effort':model.reasoning_effort,

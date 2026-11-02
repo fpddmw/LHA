@@ -2,7 +2,7 @@
 
 [Experience entrance](curated/README.md) · [Understand and design](../creative-loop/UNDERSTAND_AND_DESIGN.md) · [Design expression](../guides/design-expression.md)
 
-Write the visible arrangement the selected input should become. The renderer receives its supplied input and prompt; references to earlier notes or comparisons need to be expressed as visible content when that information is absent from the input.
+Write the event and visible arrangement the selected input should become. Decide which source functions belong in it before specifying preservation. For a reconstructed scene, describe what participants do and how their actions connect; more accurate wording of the old activity can keep the wrong event intact. The renderer receives its supplied input and prompt; references to earlier notes or comparisons need to be expressed as visible content when that information is absent from the input.
 
 Use the [design-expression guide](../guides/design-expression.md) to turn a style into connected visual choices. Pencil visible through transparent wash specifies how two materials share a figure. A luminous strip on the upper tabletop perimeter identifies a different target from illuminated supports. Specificity is useful when it resolves such a choice.
 

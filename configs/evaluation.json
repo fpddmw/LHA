@@ -1,0 +1,22 @@
+{
+  "judges": [
+    {
+      "provider": "openrouter",
+      "model": "glm5.3flash",
+      "provider_model": "z-ai/glm-5.3-flash",
+      "base_url_env": "OPENROUTER_BASE_URL",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "reasoning_effort": null,
+      "max_output_tokens": null
+    },
+    {
+      "provider": "openrouter",
+      "model": "sonnet-5.5high",
+      "provider_model": "anthropic/claude-sonnet-5.5",
+      "base_url_env": "OPENROUTER_BASE_URL",
+      "api_key_env": "OPENROUTER_API_KEY",
+      "reasoning_effort": "high",
+      "max_output_tokens": null
+    }
+  ]
+}

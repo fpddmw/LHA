@@ -1,0 +1,84 @@
+{
+  "recorded_at": "2026-11-02T02:39:02.933230+08:00",
+  "modules": [
+    "test_remediation_20261102",
+    "test_creative_delivery_review"
+  ],
+  "tests_run": 38,
+  "test_ids": [
+    "test_remediation_20261102.EnvelopeTests.test_focus_polysemy_and_score_instructions",
+    "test_remediation_20261102.EnvelopeTests.test_identical_json_envelopes_and_rejections",
+    "test_remediation_20261102.LifecycleTests.test_drain_waits_for_active_job_and_repeated_exit",
+    "test_remediation_20261102.LineageTests.test_chain_restart_control_and_missing_costs",
+    "test_remediation_20261102.Repairs.test_cached_final_score_tampering_is_detected",
+    "test_remediation_20261102.Repairs.test_conflicting_turn_caps_reject_and_explicit_extension_stays_consistent",
+    "test_remediation_20261102.Repairs.test_delivery_reuses_recovered_second_attempt_without_rescoring",
+    "test_remediation_20261102.Repairs.test_failed_action_preserves_notes_workspace_and_proposal",
+    "test_remediation_20261102.Repairs.test_failed_loops_and_missing_judges_keep_all_topic_denominators",
+    "test_remediation_20261102.Repairs.test_memory_retention_and_full_none_mechanism",
+    "test_remediation_20261102.Repairs.test_native_pts_and_dense_pixel_identity",
+    "test_remediation_20261102.Repairs.test_observe_loop_and_multimodal_limit_settle",
+    "test_remediation_20261102.Repairs.test_old_creative_protocol_never_dispatches_legacy_critic",
+    "test_remediation_20261102.Repairs.test_online_projection_and_final_descriptions",
+    "test_remediation_20261102.Repairs.test_permanent_failure_replay_never_uses_second_allowance",
+    "test_remediation_20261102.Repairs.test_plain_output_notes_and_turns_are_bounded",
+    "test_remediation_20261102.Repairs.test_profile_identity_tracks_actual_inputs_and_not_legacy_docs",
+    "test_remediation_20261102.Repairs.test_provider_identity_failure_is_hard_and_durable",
+    "test_remediation_20261102.Repairs.test_raw_online_advice_is_audit_only",
+    "test_remediation_20261102.Repairs.test_receipt_repair_does_not_infer",
+    "test_remediation_20261102.Repairs.test_report_context_guard_precedes_provider_dispatch",
+    "test_remediation_20261102.Repairs.test_report_failure_classes_and_bounded_replay",
+    "test_remediation_20261102.Repairs.test_report_integrity_is_not_a_recovery_category",
+    "test_remediation_20261102.Repairs.test_request_identity_is_explicit",
+    "test_remediation_20261102.Repairs.test_resource_call_token_and_cost_guards",
+    "test_remediation_20261102.Repairs.test_service_engine_quarantines_unknown_render_without_another_model_call",
+    "test_creative_delivery_review.DeliveryReviewTests.test_both_experience_modes_and_tampered_confirmation",
+    "test_creative_delivery_review.DeliveryReviewTests.test_changed_candidate_invalidates_even_when_selecting_back",
+    "test_creative_delivery_review.DeliveryReviewTests.test_comparison_focus_and_supplemental_checks_are_reused_unchanged",
+    "test_creative_delivery_review.DeliveryReviewTests.test_failed_or_tampered_review_stays_incomplete",
+    "test_creative_delivery_review.DeliveryReviewTests.test_invalid_cached_profile_blocks_replacement_review",
+    "test_creative_delivery_review.DeliveryReviewTests.test_invalid_ordinary_answer_cannot_be_retried_through_delivery",
+    "test_creative_delivery_review.DeliveryReviewTests.test_new_generation_invalidates_proposal_and_later_finish_reuses_valid_report",
+    "test_creative_delivery_review.DeliveryReviewTests.test_ordinary_review_reused_with_new_proposal_input_and_real_confirmation",
+    "test_creative_delivery_review.DeliveryReviewTests.test_real_post_report_finish_accepts_low_scores_unknowns_and_full_report",
+    "test_creative_delivery_review.DeliveryReviewTests.test_report_alone_or_direct_finish_cannot_confirm",
+    "test_creative_delivery_review.DeliveryReviewTests.test_resume_cannot_return_manually_assembled_complete_flag",
+    "test_creative_delivery_review.DeliveryReviewTests.test_same_proposal_recovery_has_no_extra_call_and_initial_finish_is_not_confirmation"
+  ],
+  "errors": [],
+  "failures": [
+    [
+      "test_remediation_20261102.Repairs.test_delivery_reuses_recovered_second_attempt_without_rescoring",
+      "Traceback (most recent call last):\n  File \"/home/fpddmw/projects/LHA/scripts/test_remediation_20261102.py\", line 212, in test_delivery_reuses_recovered_second_attempt_without_rescoring\n    self.assertEqual(feedback['answer_binding']['attempt'],2)\nAssertionError: 1 != 2\n"
+    ],
+    [
+      "test_creative_delivery_review.DeliveryReviewTests.test_comparison_focus_and_supplemental_checks_are_reused_unchanged",
+      "Traceback (most recent call last):\n  File \"/home/fpddmw/projects/LHA/scripts/test_creative_delivery_review.py\", line 123, in test_comparison_focus_and_supplemental_checks_are_reused_unchanged\n    self.assertEqual(proof['review_job'],job['id']);self.assertEqual(len(critic.inputs),1)\n                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 3 != 1\n"
+    ],
+    [
+      "test_creative_delivery_review.DeliveryReviewTests.test_invalid_ordinary_answer_cannot_be_retried_through_delivery",
+      "Traceback (most recent call last):\n  File \"/home/fpddmw/projects/LHA/scripts/test_creative_delivery_review.py\", line 167, in test_invalid_ordinary_answer_cannot_be_retried_through_delivery\n    self.assertEqual(len(critic.inputs),2)\nAssertionError: 8 != 2\n"
+    ],
+    [
+      "test_creative_delivery_review.DeliveryReviewTests.test_ordinary_review_reused_with_new_proposal_input_and_real_confirmation",
+      "Traceback (most recent call last):\n  File \"/home/fpddmw/projects/LHA/scripts/test_creative_delivery_review.py\", line 55, in test_ordinary_review_reused_with_new_proposal_input_and_real_confirmation\n    self.assertEqual(state['status'],'complete');self.assertEqual(len(critic.inputs),1)\n                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 3 != 1\n"
+    ]
+  ],
+  "skipped": [],
+  "elapsed_seconds": 55.83,
+  "source_changed_during_tests": {
+    "src/planner_harness/runner.py": [
+      "78d085a150b1fcf46f02fb3bc9446b3b4429c7b07f1a2159dea0592e20687164",
+      "93c1652be13ef172cb1d9b0070b9285ec11e91bc8aea626b17f39ec53fe6662d"
+    ],
+    "src/critic_harness/event_review.py": [
+      "fac701650e38a6abca06ce9ca1ef5f1e41547d7c2fff2cf5d64dce1199286a93",
+      "5e0d9031060bd9b4f542ca23dd344d9c78b1f5f2d98f4477dfd90fa44f5eca18"
+    ]
+  },
+  "profile_before_sha256": "c7fddd35195b32d0093687e2754c0d0d81ee4d49956f5bb16b43f1e65ddf1b97",
+  "profile_after_sha256": "bf9fe88540ef537c672ecc22af4eb06b583d4bce162a18f78b9c4becb500bd72",
+  "real_model_calls": 0,
+  "gpu_jobs": 0,
+  "live_signals": 0
+}

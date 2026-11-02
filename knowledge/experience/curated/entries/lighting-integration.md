@@ -1,6 +1,6 @@
 # EX-lighting-integration: Design what the light does to the scene
 
-Revision 3. Approved for use; editorial status synchronized on 2026-11-01. Bernini and Ditto; F002/F004/F005/F007 and D5.
+Revision 4. Approved for use; goal-directed semantic revision authorized on 2026-11-02. Bernini and Ditto; F002/F004/F005/F007 and D5.
 
 **When lamps or glowing accents appear without the requested atmosphere, specify their effect on the visible scene. Prioritize the receiving surfaces, facial fill and reflections that carry the lighting change over adding more luminous objects.**
 
@@ -17,6 +17,8 @@ For an illustrative warm lounge, amber practicals can graze wood panels while so
 The Ditto palace correction strengthened a yellow-orange facial cast even though it requested natural skin. Prefer an explicit separation between the light on faces and the warmth of background practicals when both are important. Merely asking for a globally golden scene and normal skin leaves the competing goals unresolved.
 
 Reflective surfaces deserve the same relational treatment. A titanium body implies something about what surrounds it through its highlights. F007's improved station did not fully resolve smeared reflections. Judge the material, the environment and their correspondence separately; choose whether the remaining reflection defect materially harms the desired appearance before risking another whole-scene pass.
+
+Let the light support the target event: reveal the participant or response that matters, and integrate a newly authored effect with the scene it influences. A source contact deserves emphasis when the target still needs it. Natural shadow can suit a scene, while a concealed essential action still needs visible progression or remains uncertain.
 
 A lighting correction can legitimately alter several connected surfaces. Plan it as that coherent field, and inspect both the desired atmosphere and any identity or geometry cost.
 

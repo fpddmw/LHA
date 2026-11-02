@@ -1,5 +1,7 @@
 # Agent-loop defect review and bounded refactoring proposal
 
+> Historical checkpoint — 2026-10-30. The plan, activation state and observations below retain that date. Current access and operation are documented in [experience usage](experience-usage-interface.md), the [active curated catalog](../knowledge/experience/curated/catalog.json) and [current loop implementation](creative-loop-implementation.md).
+
 Date: 2026-10-30. Status: **the lightweight first round below is approved for implementation and local software checks; the broader packages remain a roadmap. No experiments are authorized.**
 
 ## Latest scope adjustment: a thin first round

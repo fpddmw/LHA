@@ -1,0 +1,368 @@
+{
+  "task": "Independent review of LHA checklist remediation",
+  "baseline_commit": "c431ce67827aad1f355ed10eec7f1b8f31f56c53",
+  "scope": "Main-agent independent review against original issues 1-16, including 390 stable-snapshot offline tests, 71 final affected tests, two executable ownership/allocation probes, historical lineage and reversible hygiene verification. Separately authorized dataset/experience work and frozen live execution remain attributed to their owners.",
+  "status": "original_scope_14_engineering_closed_2_partial_independently_verified",
+  "findings": [
+    {
+      "id": "IR-01",
+      "issue": "Report retry wrapper could swallow input/receipt integrity failures",
+      "result": "Corrected; call integrity verification now runs outside model-output recovery."
+    },
+    {
+      "id": "IR-02",
+      "issue": "Original online action advice could be exposed through feedback/state despite projection",
+      "result": "Independently verified: raw original advice retained in audit only; context/history/state omit the sentence, score unchanged, projection fields recorded."
+    },
+    {
+      "id": "IR-03",
+      "issue": "Conditioning ancestry used index/fps after native PTS migration",
+      "result": "Corrected; source mapping uses Video(parent_path).times."
+    },
+    {
+      "id": "IR-04",
+      "issue": "Replaying permanent report failure submitted an extra model call and conflicted with unavailable.json",
+      "result": "Independently reproduced before fix; independently verified after fix."
+    },
+    {
+      "id": "IR-05",
+      "issue": "Selected recovery attempt needed binding to its actual input/model/evidence",
+      "result": "Final-cache and delivery verification now inspect the selected call input, not only the first call."
+    },
+    {
+      "id": "IR-06",
+      "issue": "Top-level max_turns=3 silently bypassed resource_policy.max_turns=1",
+      "result": "Independently reproduced 3 actual calls; after fix conflicting limits reject before any model call."
+    },
+    {
+      "id": "IR-07",
+      "issue": "Unknown render stalled in waiting_tool because queue needs_review prevented collection",
+      "result": "Independently reproduced with Service/Queue/Engine; after fix unknown task settles as execution_unknown, next task proceeds, replay does not rerender."
+    },
+    {
+      "id": "IR-08",
+      "issue": "New shared source-plan report exhaustion could escape final-judgment failure handling and block the batch",
+      "result": "Execution agent corrected the cross-module path; stable 56-test post-concurrency suite includes failed dual-topic accounting."
+    },
+    {
+      "id": "IR-09",
+      "issue": "Provider actual model identity mismatch could be downgraded to ordinary missing assessment",
+      "result": "Execution agent added hard integrity classification and durable no-call replay; actual HTTP-mock targeted tests passed."
+    },
+    {
+      "id": "IR-10",
+      "issue": "Unified invocation had a stale-record duplicate-dispatch race, lease leaks and pre-dispatch deadline gaps",
+      "result": "Fixed and independently exercised by contention/deadline tests; root timeout replay invoked the fixture once and retained its lock."
+    },
+    {
+      "id": "IR-11",
+      "issue": "Shared topic budgets could let full consume none allowances",
+      "result": "Explicit equal full/none lane allocations plus complete-topic admission; root independently exhausted full while none remained available."
+    },
+    {
+      "id": "IR-12",
+      "issue": "Resident worker glob consumed its own started markers; scope-marker writes raced",
+      "result": "Started markers moved to a separate directory; scope writes have a dedicated lock; actual worker polling and concurrent binds tested."
+    },
+    {
+      "id": "IR-13",
+      "issue": "Standalone Bernini/PE calls and inner Codex timeout bypassed unified accounting/ownership",
+      "result": "Future local standalone entry now accounts each request, disables hidden SDK retries and reads output-token settings; bound Codex calls use outer supervision without inner timeout killing."
+    },
+    {
+      "id": "IR-14",
+      "issue": "Moved RSI replay inventory omitted actual compatibility implementations",
+      "result": "Recursive actual implementation hashes restored; affected legacy compatibility tests passed."
+    },
+    {
+      "id": "IR-15",
+      "issue": "Known unsubmitted original operations were replay-classified as unknown execution",
+      "result": "SubmissionRefused preserves known outcome and terminal no-retry semantics in ledger, call_text and Service; repeated fixture probes executed zero external calls."
+    },
+    {
+      "id": "IR-16",
+      "issue": "Current startup hardcoded fourteen entries and no-experience manual retained two old media links",
+      "result": "Preflight now validates reviewed catalog membership/isolation; media links changed only after exact old/new content-hash matching; real local preflight passed with 15 entries."
+    },
+    {
+      "id": "IR-17",
+      "issue": "Two relocated frozen example cards retained invalid old signatures",
+      "result": "Open in LHA-016; read-only audit saved. Synthetic unit fixtures are explicitly separate from these real invalid examples."
+    }
+  ],
+  "independent_probes": [
+    {
+      "name": "permanent_report_replay",
+      "provider_fixture_calls": 1,
+      "replays": 3,
+      "results": [
+        "ReportUnavailable",
+        "ReportUnavailable",
+        "ReportUnavailable"
+      ],
+      "passed": true
+    },
+    {
+      "name": "conflicting_turn_caps",
+      "top_level_limit": 3,
+      "resource_limit": 1,
+      "provider_fixture_calls": 0,
+      "result": "ValueError: Conflicting top-level and resource policy max_turns",
+      "passed": true
+    },
+    {
+      "name": "protocol_routing",
+      "current_protocol": "lha-creative-review-v3-low-high",
+      "current_route_calls": 1,
+      "rejected_old_protocols": [
+        "lha-creative-review-v1",
+        "lha-creative-review-v2"
+      ],
+      "passed": true
+    },
+    {
+      "name": "reasoning_only_capacity_actual_paratera_adapter",
+      "http": "offline mock only",
+      "first_content": null,
+      "first_finish_reason": "length",
+      "first_usage": {
+        "prompt_tokens": 10,
+        "completion_tokens": 16384,
+        "total_tokens": 16394
+      },
+      "first_failure_category": "capacity",
+      "raw_empty_answer_preserved": true,
+      "selected_attempt": 2,
+      "passed": true
+    },
+    {
+      "name": "unknown_render_queue_integration",
+      "components": [
+        "Service",
+        "Queue",
+        "Engine",
+        "collect",
+        "verify_settlement"
+      ],
+      "patch": "Service.source_inventory={} only, to isolate concurrent files-under-construction",
+      "submission_sequence": [
+        "unknown",
+        "following",
+        "unknown"
+      ],
+      "first_outcome": "execution_unknown",
+      "following_outcome": "delivery_blocked",
+      "renderer_fixture_calls": 1,
+      "planner_fixture_calls": 2,
+      "passed": true
+    },
+    {
+      "name": "online_advice_visibility_real_harness",
+      "raw_audit_contains_original": true,
+      "planner_context_contains_original": false,
+      "planner_history_contains_original": false,
+      "state_contains_original": false,
+      "score_preserved": true,
+      "projection_fields_recorded": true,
+      "passed": true
+    }
+  ],
+  "remaining": [
+    "LHA-012: 12 historical runs/36 candidates/14 chain edges reanalyzed with verified artifacts; zero original matched controls. Two fresh fewshot_006 renders are scheduled with the existing three-GPU Bernini owner at a normal Direct boundary. Paired outputs and independent assessment have not yet been received; judging remains paused.",
+    "LHA-016: Two historical example cards (041_short/041_long) changed source_video during the separate dataset migration while retaining old frozen signatures. Both fail validate_card; original files are preserved and exact evidence is recorded in example-card-integrity.json.",
+    "LHA-016: Root scratch cleanup and media recovery audit are completed; all 5128 Git objects and refs were retained, with about 720.85 MiB historical object storage. Source redistribution/license status remains unknown; history rewriting and rights conclusions were not performed.",
+    "LHA-004 deployment condition: new live entries require explicit user budget/currency/quotes. Submission protection and bounded supervision are implemented; unknown in-flight costs remain reserved, and supplier invoice ceilings are not verified. Existing frozen Bernini jobs have not adopted this new implementation.",
+    "Memory-policy effects and final video-quality conclusions still require controlled experiments. Local remediation has not been deployed or committed/pushed."
+  ],
+  "external_model_calls": 0,
+  "gpu_jobs": 0,
+  "validation_evidence": {
+    "combined": {
+      "file": "offline-validation.json",
+      "unique_tests": 269,
+      "passed": 269,
+      "source_changed_during_run": true,
+      "test_sources_changed_during_run": true,
+      "qualification": "Not one frozen baseline; concurrent modifications explicitly recorded."
+    },
+    "affected_retest": {
+      "file": "post-concurrency-validation.json",
+      "unique_tests": 56,
+      "passed": 56,
+      "source_and_tests_stable": true
+    },
+    "last_incremental": {
+      "file": "final-incremental-validation.json",
+      "unique_tests": 7,
+      "passed": 6,
+      "errors": 1,
+      "source_stable": true,
+      "error_scope": "Service/Engine fixture could not create state because curated knowledge content no longer matched the review catalog, independently confirmed in 14 entries."
+    },
+    "post_curation_entry_retest": {
+      "file": "post-curation-entry-validation.json",
+      "tests_run": 7,
+      "passed": 7,
+      "errors": 0,
+      "failures": 0,
+      "source_and_experiment_profile_stable": true,
+      "experiment_profile_sha256": "2fea33c1ee46a170b7fe444b402bbf930e9e6aea350e8feb84ca997dba3a4a86",
+      "note": "Root agent reran the final incremental/Service-Engine tests after the authorized curated catalog synchronization. Both full and none knowledge loading succeeded."
+    },
+    "final_stable_broad": {
+      "file": "final-stable-validation.json",
+      "tests_run": 390,
+      "passed": 390,
+      "source_and_tests_stable": true,
+      "profile": "8fe9f49b48a384b16aee324e26822cf34a11ddb7fe7c68a9e75d10584dbdeae2"
+    },
+    "final_affected_incremental": {
+      "file": "root-final-incremental.json",
+      "tests_run": 71,
+      "passed": 71,
+      "source_and_tests_stable": true,
+      "profile": "52732a6aa7c574b90422eebfe04d11a49ee4c0bb53e0160c57d029a86630db4a",
+      "changes_since_broad": [
+        "src/planner_harness/accounting.py",
+        "src/planner_harness/compat/rsi/rsi_replay.py",
+        "scripts/test_legacy_boundary.py",
+        "scripts/test_resource_accounting.py",
+        "src/server_runtime/service.py",
+        "src/experiments/creative_benchmark.py"
+      ],
+      "note": "Includes overlapping tests; do not add the two counts as unique coverage."
+    },
+    "root_budget_probes": {
+      "file": "root-budget-probes.json",
+      "passed": 2,
+      "scope": "Timeout/ownership/original late-result reuse and full/none independent allocations, local fixtures only."
+    },
+    "local_preflight": {
+      "status": "passed",
+      "full_curated_entries": 15,
+      "full_curated_resources": 56,
+      "none_curated_entries": 0,
+      "style_entries_each": 111,
+      "same_critic": "e53ae33553e3c9a9bdab88875f73daf2f3b1b86a7201eebf0e3c13880f7d35ac",
+      "experiment_profile_sha256": "52732a6aa7c574b90422eebfe04d11a49ee4c0bb53e0160c57d029a86630db4a",
+      "live_model_calls": 0,
+      "gpu_jobs": 0
+    }
+  },
+  "resolved_external_dependency": {
+    "kind": "curated_experience_catalog_sync",
+    "status": "resolved_by_other_authorized_maintenance",
+    "root_writes_to_experience_or_catalog": 0,
+    "full_items": 480,
+    "none_items": 337
+  },
+  "recorded_at": "2026-11-02T03:45:57.462219+08:00",
+  "original_scope_recheck": {
+    "recorded_at": "2026-11-02T03:45:57.462219+08:00",
+    "engineering_closed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15
+    ],
+    "partially_complete": [
+      12,
+      16
+    ],
+    "current_protocol": "lha-creative-review-v4-events",
+    "final_experiment_profile_sha256": "52732a6aa7c574b90422eebfe04d11a49ee4c0bb53e0160c57d029a86630db4a",
+    "scope": "Engineering closure under covered offline cases; real scientific effects and actual invoice ceilings are not claimed.",
+    "source_and_tests_stable": true,
+    "broad_validation": "final-stable-validation.json",
+    "final_affected_validation": "root-final-incremental.json",
+    "local_preflight": "final-local-preflight/local-preflight.json",
+    "current_benchmark": {
+      "total": 75,
+      "train": 40,
+      "validation": 10,
+      "test": 25,
+      "owner": "separate authorized data maintenance"
+    }
+  },
+  "original_scope_recheck_history": [
+    {
+      "recorded_at": "2026-11-02T02:45:03.144854+08:00",
+      "scope": "Original user issues 1-16; appendix does not inflate completion",
+      "implemented_with_offline_evidence": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        14,
+        15
+      ],
+      "partially_complete": [
+        4,
+        12,
+        13,
+        16
+      ],
+      "correction": "Earlier 19/21 closure used narrower acceptance for issues 4 and 13; both reopened against original scope.",
+      "current_test_sync": "The four original failures were stale whole-review call-count and wrong-stage fault-injection assertions. Stage-aware test repairs passed those assertions. Latest 38-test run had 37 passes and one frozen-profile rejection during concurrent source changes; current shared baseline is not claimed fully green.",
+      "initial_test_record": "original-sixteen-recheck-tests.json",
+      "retest_record": "original-sixteen-stage-retest.json",
+      "latest_targeted_result": {
+        "tests_run": 38,
+        "passed": 37,
+        "errors": 1,
+        "failures": 0,
+        "skipped": 0,
+        "source_and_test_changes": {
+          "scripts/test_creative_delivery_review.py": [
+            "babec67b54e2d721c0c176247a48ed839f0dc021488e770d1ef7d0552decd20e",
+            "615440b537671606401f643c7c277a31eda5fb2fd55334a6efc5218bcccc9b7b"
+          ],
+          "scripts/test_remediation_20261102.py": [
+            "1cf9d190dda7bb067d8f77f63a8d61722d0e0db32adca21ea7a23647fcb7848b",
+            "02b89947863381c5eaddea6b4873eb6247d264ac2ab752fbdb6baa05b0898209"
+          ],
+          "scripts/test_creative_loop.py": [
+            "53543fc7b25ea6357635c7ef7a55786a6511677e32c9e7a6d544757f3d540c38",
+            "5ae5fa703692cd336d7881cadf0804215a2fcf3aa3633c6e4213c68b130438c5"
+          ],
+          "src/planner_harness/event_observation.py": [
+            "88d9ea88ffd6716449b9c3496db717c0815448c4898e22be5fa7e4930446d1a4",
+            "3b114d2ba65da25dc06f45a780c2dc935ccda859cfb90ac3fbe4667932d29559"
+          ]
+        },
+        "profile_before": "bf9fe88540ef537c672ecc22af4eb06b583d4bce162a18f78b9c4becb500bd72",
+        "profile_after": "946265358bb2588a6ab35851f8b5c53f7c7159490ca29030b774873bf90031c8"
+      },
+      "root_production_edits_this_recheck": [],
+      "root_test_edits": [
+        "scripts/test_creative_delivery_review.py",
+        "scripts/test_remediation_20261102.py"
+      ],
+      "final_validation_requirement": "After concurrent online-evidence edits settle, rerun affected entry/recovery tests once against a stable recorded source and test snapshot. Historical passing runs remain scoped to their original snapshots."
+    }
+  ],
+  "root_scope_followup": "scope-root-followup.json",
+  "implementation_handoff": "scope-completion-handoff.md",
+  "live_control_coordination": {
+    "thread": "01a196c9-bf54-7322-b798-d27c6543c1e8",
+    "record": "out/lineage_control/20261102/coordination.json",
+    "latest_verified_arrangement": "Two fresh renders at a normal GPU0 Direct boundary, then resume that Direct shard; other two GPUs continue; evaluation paused.",
+    "new_receipts_received": false
+  }
+}

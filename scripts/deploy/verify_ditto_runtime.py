@@ -70,7 +70,7 @@ def main():
         pipe.enable_vram_management()
         report["load_seconds"] = time.time() - started
         report_path.write_text(json.dumps(report, indent=2))
-        source = VideoData(str(ROOT / "benchmark_data/main/027/027.mp4"), height=256, width=448)
+        source = VideoData(str(ROOT / "benchmark_data/train/016/video.mp4"), height=256, width=448)
         frames = pipe(prompt="Make it look like a 19th-century etching.", negative_prompt="",
                       vace_video=[source[i] for i in range(13)], vace_reference_image=None,
                       num_frames=13, height=256, width=448, num_inference_steps=2,

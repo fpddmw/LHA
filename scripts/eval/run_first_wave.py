@@ -122,7 +122,7 @@ def publish(run, manifest, records):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--run", type=Path, required=True)
-    p.add_argument("--factory", default="vlm.codex_vlm:CodexVisionModel")
+    p.add_argument("--factory", default="vlm.openrouter:OpenRouterVisionModel")
     p.add_argument("--workers", type=int, default=2)
     p.add_argument("--poll-seconds", type=int, default=600)
     p.add_argument("--references-only", action="store_true")

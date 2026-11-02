@@ -28,8 +28,8 @@ def main():
     retry = sub.add_parser("retry", help="Create a new job identity after an explicit adapter failure")
     retry.add_argument("--reason", required=True)
     revise = sub.add_parser("revise", help="Run or resume the pending child Planner, without rendering")
-    revise.add_argument("--backend", choices=["codex", "litellm"], default="codex")
-    revise.add_argument("--model", default="gpt-6.1-sol")
+    revise.add_argument("--backend", choices=["openrouter", "litellm"], default="openrouter")
+    revise.add_argument("--model", default="openai/gpt-6.1-sol")
     revise.add_argument("--reasoning", default="xhigh")
     revise.add_argument("--additional-turns", type=int, default=0)
     args = parser.parse_args()
@@ -45,11 +45,11 @@ def main():
     elif args.command == "retry":
         state = loop.retry(args.reason)
     elif args.command == "revise":
-        if args.backend == "codex":
-            os.environ["LOW_HIGH_AGENT_CODEX_PLANNER_MODEL"] = args.model
-            os.environ["LOW_HIGH_AGENT_CODEX_PLANNER_REASONING_EFFORT"] = args.reasoning
-            from vlm.codex_vlm import CodexVisionModel
-            model = CodexVisionModel(role="planner")
+        if args.backend == "openrouter":
+            os.environ["LHA_API_PLANNER_MODEL"] = args.model
+            os.environ["LHA_API_PLANNER_REASONING_EFFORT"] = args.reasoning
+            from vlm.openrouter import OpenRouterVisionModel
+            model = OpenRouterVisionModel(role="planner")
         else:
             from vlm.litellm_vlm import LiteLLMVisionModel
             model = LiteLLMVisionModel(model=args.model, reasoning_effort=args.reasoning, role="planner")

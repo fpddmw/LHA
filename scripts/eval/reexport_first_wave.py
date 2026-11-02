@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import os
 import re
 import shutil
@@ -20,6 +20,17 @@ from evaluation.registry import METRICS, applicable, RATING_STEP, RATING_SCALE, 
 from evaluation.scoring import score
 
 
+def portable_path(root, value):
+    """Historical repository-relative Windows paths retain their recorded spelling."""
+    relative = Path(*PureWindowsPath(value).parts)
+    if relative.is_absolute() or PureWindowsPath(value).drive or ".." in relative.parts:
+        raise ValueError("Historical card path must stay within the repository")
+    target = (Path(root) / relative).resolve()
+    if not target.is_relative_to(Path(root).resolve()):
+        raise ValueError("Historical card path escapes repository")
+    return target
+
+
 def primary_cohort(run, records, *, root=ROOT):
     manifest = {c["case_id"]: c for c in read(run / "manifest.json")["cases"]}
     identities = read(run / "primary_cases.json")
@@ -29,7 +40,7 @@ def primary_cohort(run, records, *, root=ROOT):
     selected, cohort = [], []
     for cid in identities:
         case = manifest[cid]
-        card = read(root / case["card"])
+        card = read(portable_path(root, case["card"]))
         renderer = cid.split("__")[0]
         role = "planner" if "__planner__" in cid else "direct"
         require(renderer in {"bernini", "ditto"} and case["method"] != "source_control", "Invalid primary method")
@@ -66,7 +77,7 @@ def reexport(run, *, repeats=2000):
     raw_ratings = 0
     for row in records:
         case = next(c for c in read(run / "manifest.json")["cases"] if c["case_id"] == row["case_id"])
-        card = read(ROOT / case["card"])
+        card = read(portable_path(ROOT, case["card"]))
         j = validate_judgment(card, read(run / "judgments" / row["case_id"] / "judgment.json"))
         current = score(card, j, role="final")
         previous = normalized_records([row])[0]["result"]

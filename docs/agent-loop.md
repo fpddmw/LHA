@@ -1,6 +1,6 @@
 # Continuous Planner loop
 
-> Historical scope — 2026-11-01: This document describes the earlier loop, retained for historical runs. For creative_loop_v1 use [current implementation](creative-loop-implementation.md) and [the detailed specification](creative-loop-development-plan.md). Requirements, automatic evaluation and RSI paths described below are not part of the current creative profile.
+> Historical scope — 2026-11-01: This document describes the earlier loop, retained for historical runs. For creative_loop_v1 use [current implementation](creative-loop-implementation.md) and [event observation](online-event-observation.md). Requirements, automatic evaluation and RSI paths described below are not part of the current creative profile.
 
 [Approved plan](planner-loop-experience-plan.md) · [Planner setup](planner-harness.md) · [Operating manual](../src/planner_harness/OPERATIONS.md) · [Experience map](../knowledge/experience/README.md)
 
@@ -64,7 +64,7 @@ This is the existing 041 Ditto configuration: 101 frames at 20 FPS is 5.05 secon
 
 ```bash
 python scripts/run_agent_loop.py \
-  --source benchmark_data/main/041/041.mp4 \
+  --source benchmark_data/train/020/video.mp4 \
   --request "Make it look like a children's storybook." \
   --output out/planner_continuous/example --target ditto \
   --execution-config execution.json --max-generations 2

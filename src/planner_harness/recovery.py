@@ -18,7 +18,25 @@ def recover_tool(run, job_id, action, reason, *, response=None, extra_attempts=1
         state = load(run / "state.json")
         if state["config"].get("workflow") != "creative_loop_v1":
             raise ValueError("Use the historical recovery procedure for legacy runs")
+        clock=state.get('online_clock',{})
+        import time
+        frozen=bool(clock and (clock.get('frozen_unix') or time.time()>=clock['deadline_unix'] or state.get('final')))
         job = state["jobs"][job_id]
+        if frozen:
+            if action=='retry-review':raise ValueError('The task is settled; no new review submission is allowed')
+            if action not in {'receipt','not-executed'}:raise ValueError('Choose original receipt or not-executed evidence')
+            evidence=load(response) if action=='receipt' else None
+            if evidence is not None:
+                if evidence.get('request_sha256')!=job['sha256'] or evidence.get('mode')!=job['mode']:
+                    raise ValueError('Late evidence must match the original signed job')
+                if evidence.get('status')=='complete' and job['kind']=='generate':
+                    media=evidence['payload']['video']
+                    if sha(media['path'])!=media['sha256']:raise ValueError('Late media changed')
+            record={'action':action,'reason':reason,'job_id':job_id,'request_sha256':job['sha256'],
+                    'evidence':evidence,'task_state_sha256':sha(run/'state.json'),'task_result_changed':False}
+            from .execution import immutable,signature
+            immutable(run/'late-evidence'/(signature(record)+'.json'),record)
+            return record
         folder = (run / "jobs" / job_id).resolve()
         if not folder.is_relative_to(run / "jobs") or state.get("pending_tool") not in {None, job_id}:
             raise ValueError("Recover the outstanding job in this run")
@@ -46,7 +64,10 @@ def recover_tool(run, job_id, action, reason, *, response=None, extra_attempts=1
                 if job["kind"] != "critique":
                     raise ValueError("Choose a Critic transport job")
                 from .model_call import reopen_call
-                reopen_call(folder / "one-shot-critic/call", reason, extra_attempts)
+                review=folder/'one-shot-critic'
+                current=load(review/'state.json') if (review/'state.json').exists() else None
+                call=review/'calls'/('review-'+str(current['attempts']+1).zfill(4))/'call' if current is not None else review/'call'
+                reopen_call(call,reason,extra_attempts)
             else:
                 raise ValueError("Choose receipt, not-executed or retry-review")
             history = folder / "recoveries"

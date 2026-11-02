@@ -1,16 +1,43 @@
 {
   "schema": "creative-experience-catalog-v1",
-  "revision": "20261101-approved-status-maintenance-v2",
+  "revision": "20261103-contribution-discovery-v1",
   "entries": [
     {
-      "id": "EX-design-conflict",
-      "title": "Change the design that hides the action",
-      "path": "knowledge/experience/curated/entries/design-conflict.md",
-      "version": "4",
-      "sha256": "fd5316879f4354e7649e7de04241c7a0dea956d4e252d48bef34fc5399ff1a15",
-      "summary": "When a design hides the contacts that make the action readable, reshape or relocate that design before adding preservation clauses. Realize user-required features around the action.",
+      "id": "EX-semantic-reconstruction",
+      "path": "knowledge/experience/curated/entries/semantic-reconstruction.md",
+      "version": "1",
+      "renderers": [
+        "bernini"
+      ],
+      "evidence_ids": [
+        "EV-semantic-goal-review",
+        "EV-F001",
+        "EV-F001-creative-first"
+      ],
+      "review_status": "approved",
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "title": "Remove preservation commitments that defeat the target",
+      "summary": "When the target world changes the event, rebuild its purpose and causal relationships. Use useful source performance material and remove preservation demands that keep the old activity in place.",
       "questions": [
-        "Why did a visually successful addition make the action unreadable?"
+        "Which preservation commitments prevent the target scene from working?"
+      ],
+      "sha256": "a20db01292e62f924b60dbb133584693f4dec8790a76a6abdf0b3ce81d61545c",
+      "aliases": [
+        "semantic reconstruction",
+        "Which preservation commitments prevent the target scene from working?"
+      ],
+      "applicability": "When the target world changes the event, rebuild its purpose and causal relationships.",
+      "recommendation": "When the target world changes the event, rebuild its purpose and causal relationships. Use useful source performance material and remove preservation demands that keep the old activity in place."
+    },
+    {
+      "id": "EX-design-conflict",
+      "title": "Resolve conflicts between the target design and necessary action",
+      "path": "knowledge/experience/curated/entries/design-conflict.md",
+      "version": "5",
+      "sha256": "4ad9030e23f79540fb1895d869b91fdbf6e41b2b51cfe3a7b5711f8745e0c9f4",
+      "summary": "Remove an unnecessary preservation demand before sacrificing a requested design feature. When appearance and action are both central, stage them together so the target interaction remains readable.",
+      "questions": [
+        "Does this conflict come from a required action or an unnecessary preservation demand?"
       ],
       "renderers": [
         "bernini"
@@ -18,20 +45,27 @@
       "evidence_ids": [
         "EV-B-003",
         "EV-F003",
-        "EV-F001"
+        "EV-F001",
+        "EV-semantic-goal-review"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "design conflict",
+        "Does this conflict come from a required action or an unnecessary preservation demand?"
+      ],
+      "applicability": "Remove an unnecessary preservation demand before sacrificing a requested design feature.",
+      "recommendation": "Remove an unnecessary preservation demand before sacrificing a requested design feature. When appearance and action are both central, stage them together so the target interaction remains readable."
     },
     {
       "id": "EX-activity-relations",
-      "title": "Give the new style a place without reassigning the activity",
+      "title": "Organize the activity around the requested world",
       "path": "knowledge/experience/curated/entries/activity-relations.md",
-      "version": "3",
-      "sha256": "1e9dda804633b986fa43cbb4cf07dd5c64ce33a43a11da5776cb8f3cf8ea8731",
-      "summary": "When retaining an event under a new genre, anchor who acts on whom and give the genre concrete visual scope. A preserved object inventory can still permit the wrong activity.",
+      "version": "4",
+      "sha256": "3e2fa087598b0b7d20488b8c9c4ca995680e4e98f875adfab523ab873207500c",
+      "summary": "Organize participants and object functions around the target event. Preserve a required interaction; reconstruct an obsolete purpose with a readable new exchange rather than merely retaining the same nouns.",
       "questions": [
-        "Why do the right people and objects still perform a different event?"
+        "Which activity relationships should the target retain or reinterpret?"
       ],
       "renderers": [
         "bernini"
@@ -40,20 +74,27 @@
         "EV-F003",
         "EV-F005",
         "EV-F001",
-        "EV-visual-inspection"
+        "EV-visual-inspection",
+        "EV-semantic-goal-review"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "activity relations",
+        "Which activity relationships should the target retain or reinterpret?"
+      ],
+      "applicability": "Organize participants and object functions around the target event.",
+      "recommendation": "Organize participants and object functions around the target event. Preserve a required interaction; reconstruct an obsolete purpose with a readable new exchange rather than merely retaining the same nouns."
     },
     {
       "id": "EX-instance-identity",
       "title": "Protect the individual by reducing competing reconstruction",
       "path": "knowledge/experience/curated/entries/instance-identity.md",
-      "version": "4",
-      "sha256": "7dbeb7da71821764389fe70785047b008611929b46355bd569946532196667fd",
-      "summary": "For identity-sensitive edits, favor an input with the right individual and reduce competing reconstruction around the person. Keep identity wording concise while preserving explicit costume requirements.",
+      "version": "5",
+      "sha256": "1af021017212f2c85e03a77d7a6f04931b2f195e412004f25bb3dd145e7ee7dd",
+      "summary": "For identity-sensitive edits, preserve individual correspondence through useful input evidence and scoped design. Allow the role and behavior to change when requested; concise identity wording avoids constructing a substitute face.",
       "questions": [
-        "Why did more accurate person descriptions fail to preserve identity?"
+        "How can the same person take a new role without becoming a different individual?"
       ],
       "renderers": [
         "bernini",
@@ -70,37 +111,50 @@
         "EV-visual-inspection"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "instance identity",
+        "How can the same person take a new role without becoming a different individual?"
+      ],
+      "applicability": "For identity-sensitive edits, preserve individual correspondence through useful input evidence and scoped design.",
+      "recommendation": "For identity-sensitive edits, preserve individual correspondence through useful input evidence and scoped design. Allow the role and behavior to change when requested; concise identity wording avoids constructing a substitute face."
     },
     {
       "id": "EX-object-continuity",
-      "title": "Preserve a moving prop's role across state changes",
+      "title": "Keep the target interaction coherent through transitions",
       "path": "knowledge/experience/curated/entries/object-continuity.md",
-      "version": "3",
-      "sha256": "3ee3ae014e853f9b7fdf680d77547e6aca6bbd05079088f93e298a41a180e51e",
-      "summary": "For existing motion, favor concise source-linked object roles over unnecessary choreography. Inspect retrieval, occlusion and release before responding to duplication with more repetitions of one.",
+      "version": "4",
+      "sha256": "05ee8f2f7d582760407a7dc74c5090a12966934c1bfd92d07b5445e82e99d0a6",
+      "summary": "Bind continuity to the target participant and event. Use source-linked roles for retained action; establish new contacts and progression for adapted action, and inspect occlusion and release where they matter.",
       "questions": [
-        "Why did a correctly named object multiply during an action?"
+        "What must stay involved as the target interaction develops?"
       ],
       "renderers": [
         "bernini"
       ],
       "evidence_ids": [
         "EV-F001",
-        "EV-F006"
+        "EV-F006",
+        "EV-semantic-goal-review"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "object continuity",
+        "What must stay involved as the target interaction develops?"
+      ],
+      "applicability": "Bind continuity to the target participant and event.",
+      "recommendation": "Bind continuity to the target participant and event. Use source-linked roles for retained action; establish new contacts and progression for adapted action, and inspect occlusion and release where they matter."
     },
     {
       "id": "EX-connected-scope",
       "title": "Revise a coherent visual field",
       "path": "knowledge/experience/curated/entries/connected-scope.md",
-      "version": "4",
-      "sha256": "58aaaf127851cc234079649230c300ca42dae7e80b9e4ada2f663b3603ea3f05",
-      "summary": "Group changes by visual dependency: a window, view and reflections can be one coherent edit. Separate unrelated repairs when they need different inputs or explanations.",
+      "version": "5",
+      "sha256": "bd5d271f4dd86dba6f3ff96b62816013b38a458a2cb93ad04c0224da2709e4a5",
+      "summary": "Group changes that share a structural, optical or semantic dependency. An adapted event can connect people, prop functions and environment; unrelated repairs may need a different scope or input.",
       "questions": [
-        "What does a focused revision actually need to change?"
+        "Which visual and behavioral relationships need to change together?"
       ],
       "renderers": [
         "bernini"
@@ -112,17 +166,23 @@
         "EV-F004"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "connected scope",
+        "Which visual and behavioral relationships need to change together?"
+      ],
+      "applicability": "Group changes that share a structural, optical or semantic dependency.",
+      "recommendation": "Group changes that share a structural, optical or semantic dependency. An adapted event can connect people, prop functions and environment; unrelated repairs may need a different scope or input."
     },
     {
       "id": "EX-input-conditioning",
-      "title": "Select the input that supports the next transformation",
+      "title": "Choose the input that best supports the target transformation",
       "path": "knowledge/experience/curated/entries/input-conditioning.md",
-      "version": "4",
-      "sha256": "febe86913fac9993436be38499c29b1442be88c122fbc391782d1d05c07a926b",
-      "summary": "Continue a useful candidate when the next transformation builds on its achievements. If a central relationship is lost, favor the source or an earlier intact candidate and reconsider the transformation.",
+      "version": "5",
+      "sha256": "0f8c505840507ec3a48d599bcb645994c7017ee1b3fb174c74476407b2b10c97",
+      "summary": "Continue a candidate with useful target achievements. Recover required lost information from an earlier input; an authorized change of source activity can be progress rather than damage.",
       "questions": [
-        "Which source or candidate supplies what the next proposal needs?"
+        "Which input supports the target without reinstating an obsolete source function?"
       ],
       "renderers": [
         "bernini",
@@ -138,20 +198,27 @@
         "EV-H-D-024__long__full_knowledge",
         "EV-D-027-full",
         "EV-B-024-full",
-        "EV-historical-score-extract"
+        "EV-historical-score-extract",
+        "EV-semantic-goal-review"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "input conditioning",
+        "Which input supports the target without reinstating an obsolete source function?"
+      ],
+      "applicability": "Continue a candidate with useful target achievements.",
+      "recommendation": "Continue a candidate with useful target achievements. Recover required lost information from an earlier input; an authorized change of source activity can be progress rather than damage."
     },
     {
       "id": "EX-realization-change",
       "title": "Change the failed proposition, not just its emphasis",
       "path": "knowledge/experience/curated/entries/realization-change.md",
-      "version": "3",
-      "sha256": "c426636e7d4472b2bfefd132d27a5710f8aca03edcec6bdcb9fa36a211b0bacc",
-      "summary": "After repeated explicit failure, prioritize changed realization or conditioning over stronger synonyms. Direct specification is more promising when the decisive relation was genuinely missing.",
+      "version": "4",
+      "sha256": "5cb1e3c8060bdf6ea8f4835bec2086d9979ce5871457061d7c8e4f3ec700534d",
+      "summary": "Reconsider an unnecessary commitment before retrying its execution. For a required operation, prefer a changed construction or input after explicit failure; a new material can still preserve the old function.",
       "questions": [
-        "Did the proposed alternative actually change the failed operation?"
+        "Did the attempt change the required construction, its function, or only its wording?"
       ],
       "renderers": [
         "bernini",
@@ -166,20 +233,27 @@
         "EV-F001",
         "EV-F003",
         "EV-F005",
-        "EV-historical-score-extract"
+        "EV-historical-score-extract",
+        "EV-semantic-goal-review"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "realization change",
+        "Did the attempt change the required construction, its function, or only its wording?"
+      ],
+      "applicability": "Reconsider an unnecessary commitment before retrying its execution.",
+      "recommendation": "Reconsider an unnecessary commitment before retrying its execution. For a required operation, prefer a changed construction or input after explicit failure; a new material can still preserve the old function."
     },
     {
       "id": "EX-part-binding",
       "title": "Bind the effect to the intended part and distinguish its neighbor",
       "path": "knowledge/experience/curated/entries/part-binding.md",
-      "version": "3",
-      "sha256": "86141aee9944153507152218c9dbcef73c0015b170d26ea911f4d9debae0c972",
-      "summary": "For an effect on the wrong part, describe the intended carrier in contrast to its neighbor. Anchor shape repair to the existing instance; consider an earlier intact input when duplication appears.",
+      "version": "4",
+      "sha256": "9f7c49df4a1e358a72f7cebfd61c9d2f574ba5fb0c40c1e4347d998691c293fa",
+      "summary": "Clarify the intended carrier relative to its neighbors. Anchor an existing instance for a required repair; describe the new construction when the task replaces its form or function.",
       "questions": [
-        "Why did the correct effect appear on the wrong part?"
+        "Which target part or function should carry this effect?"
       ],
       "renderers": [
         "bernini",
@@ -192,17 +266,23 @@
         "EV-H-B-027__short__no_knowledge"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "part binding",
+        "Which target part or function should carry this effect?"
+      ],
+      "applicability": "Clarify the intended carrier relative to its neighbors.",
+      "recommendation": "Clarify the intended carrier relative to its neighbors. Anchor an existing instance for a required repair; describe the new construction when the task replaces its form or function."
     },
     {
       "id": "EX-wanted-state",
       "title": "Replace an unwanted effect with a coherent visual alternative",
       "path": "knowledge/experience/curated/entries/wanted-state.md",
-      "version": "3",
-      "sha256": "a48a5a6eb853468fbfa490ea13962180f7a52a36476093107387b2892494c1dd",
-      "summary": "Lead correction with a positive visual replacement and resolve conflicts with the surrounding design. Use short exclusions to disambiguate that arrangement.",
+      "version": "4",
+      "sha256": "2121849dda25d3ca0d7e85034b51b636a080c7d89e8ae6b750efa758b185d558",
+      "summary": "Specify the positive visual relationship and, for event reconstruction, the purpose that should replace the old one. Resolve the surrounding conflict instead of repeatedly suppressing its symptom.",
       "questions": [
-        "What visual state replaces the unwanted artifact?"
+        "What new arrangement and function should replace the unwanted effect?"
       ],
       "renderers": [
         "bernini",
@@ -215,17 +295,23 @@
         "EV-H-B-fewshot_004__long__no_knowledge"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "wanted state",
+        "What new arrangement and function should replace the unwanted effect?"
+      ],
+      "applicability": "Specify the positive visual relationship and, for event reconstruction, the purpose that should replace the old one.",
+      "recommendation": "Specify the positive visual relationship and, for event reconstruction, the purpose that should replace the old one. Resolve the surrounding conflict instead of repeatedly suppressing its symptom."
     },
     {
       "id": "EX-style-realization",
       "title": "Choose a visible system that makes the style legible",
       "path": "knowledge/experience/curated/entries/style-realization.md",
-      "version": "3",
-      "sha256": "86615f06765bcc642f9798f3138f309160be79176b00583ce9a397446d94cb12",
-      "summary": "Choose a coherent visible system for broad style requests. For detailed requests, check required construction separately from convincing ornament and atmosphere.",
+      "version": "4",
+      "sha256": "25d452125899a53c9ec5ac6de54a4a5061e8d5d46d4edd5ead2a3cafe7c92df6",
+      "summary": "Choose a coherent visible system and the event logic required by the request. World reconstruction can need new behavior; atmosphere and ornament do not substitute for required structures or relationships.",
       "questions": [
-        "What does style knowledge add beyond a genre label?"
+        "Does the proposal realize a medium, a new world, or both?"
       ],
       "renderers": [
         "bernini",
@@ -236,17 +322,23 @@
         "EV-F003"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "style realization",
+        "Does the proposal realize a medium, a new world, or both?"
+      ],
+      "applicability": "Choose a coherent visible system and the event logic required by the request.",
+      "recommendation": "Choose a coherent visible system and the event logic required by the request. World reconstruction can need new behavior; atmosphere and ornament do not substitute for required structures or relationships."
     },
     {
       "id": "EX-environment-replacement",
       "title": "Transform the structures that make the place recognizable",
       "path": "knowledge/experience/curated/entries/environment-replacement.md",
-      "version": "3",
-      "sha256": "e6b9115a371075cb80a1d5736f905d2929b6eaa850ec7a3288d6da52f0dae7c3",
-      "summary": "If theme cues appear but the old place persists, remap its defining surfaces, boundaries and sightlines. Reassess input and realization when that mapping was already explicit and failed.",
+      "version": "4",
+      "sha256": "cfcce32521aa233650035089a1fccce7ad93bb473b6bb4dc913df6990082df7a",
+      "summary": "Transform the location-defining planes, sightlines and functions together. Replace an obsolete use when the target needs it; additional theme objects or new materials can leave the old scene intact.",
       "questions": [
-        "Why does the scene have theme cues but remain the old place?"
+        "Which structures and uses keep the old place recognizable?"
       ],
       "renderers": [
         "bernini",
@@ -258,20 +350,27 @@
         "EV-F006",
         "EV-F007",
         "EV-F001",
-        "EV-D-FS4-full"
+        "EV-D-FS4-full",
+        "EV-semantic-goal-review"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "environment replacement",
+        "Which structures and uses keep the old place recognizable?"
+      ],
+      "applicability": "Transform the location-defining planes, sightlines and functions together.",
+      "recommendation": "Transform the location-defining planes, sightlines and functions together. Replace an obsolete use when the target needs it; additional theme objects or new materials can leave the old scene intact."
     },
     {
       "id": "EX-lighting-integration",
       "title": "Design what the light does to the scene",
       "path": "knowledge/experience/curated/entries/lighting-integration.md",
-      "version": "3",
-      "sha256": "13ec1903e43c882c29a71b62a627ff8fc3632f9c2931bc5ccb73f141dc90eff5",
-      "summary": "If lamps appear without atmosphere, describe receiving surfaces, fill and reflections. Separate facial illumination from the background cast when both matter.",
+      "version": "4",
+      "sha256": "59609e0bf50489c0d5af3fb12ee8aec9af91e2a47d9470d5e778e6d1c38d6f57",
+      "summary": "Design receiving surfaces, fill and reflections that produce the desired atmosphere. Use light to make the target event readable; lamps alone can leave old illumination or obsolete action emphasis intact.",
       "questions": [
-        "Why are lamps and glows present without the intended atmosphere?"
+        "How should illumination support the target scene and event?"
       ],
       "renderers": [
         "bernini",
@@ -285,17 +384,23 @@
         "EV-H-D-benchmark__001__short"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "lighting integration",
+        "How should illumination support the target scene and event?"
+      ],
+      "applicability": "Design receiving surfaces, fill and reflections that produce the desired atmosphere.",
+      "recommendation": "Design receiving surfaces, fill and reflections that produce the desired atmosphere. Use light to make the target event readable; lamps alone can leave old illumination or obsolete action emphasis intact."
     },
     {
       "id": "EX-time-binding",
       "title": "Inspect the transitions that can undo a convincing opening",
       "path": "knowledge/experience/curated/entries/time-binding.md",
-      "version": "3",
-      "sha256": "01626329a0fd3fd63363bb4ed70f10b52d53ea1a37d5a34c0bc73f4b6b380d05",
-      "summary": "Inspect the turns, occlusions and interactions that can undo an attractive opening. Favor delivery for incidental drift; give timing further attention when it carries the requested event.",
+      "version": "4",
+      "sha256": "bf20f71b7fa158b0eb2ed9e5516722e166be77f000d020d615a9e0897f9f8942",
+      "summary": "Inspect the target event and appearance through turns, contacts and responses. Preserve original timing where required; evaluate adapted behavior on its own progression rather than its resemblance to the old action.",
       "questions": [
-        "Did the design persist, and did the original event persist?"
+        "Does the intended event remain coherent through meaningful transitions?"
       ],
       "renderers": [
         "bernini",
@@ -310,17 +415,23 @@
         "EV-visual-inspection"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "time binding",
+        "Does the intended event remain coherent through meaningful transitions?"
+      ],
+      "applicability": "Inspect the target event and appearance through turns, contacts and responses.",
+      "recommendation": "Inspect the target event and appearance through turns, contacts and responses. Preserve original timing where required; evaluate adapted behavior on its own progression rather than its resemblance to the old action."
     },
     {
       "id": "EX-continuation-value",
       "title": "Spend another attempt on a gap that can change the delivery",
       "path": "knowledge/experience/curated/entries/continuation-value.md",
-      "version": "3",
-      "sha256": "fff47a0f8ae0b8a73d5954f5b00d215136e7406c5c3ff3be493e11b69446f40d",
-      "summary": "Favor delivery when the central request is met. Spend another attempt on an important gap with a concrete improvement basis, and compare with the best retained answer.",
+      "version": "4",
+      "sha256": "3377d34a3a4ea0ce27147d77727ff0180a610713a5dc0fc779ccef6f69424ce9",
+      "summary": "Favor delivery when the target is adequately realized. Reassess inherited preservation complaints; spend another attempt on an important target gap and compare against retained alternatives.",
       "questions": [
-        "Is a repaired complaint enough to justify another attempt or a final choice?"
+        "Would another attempt improve the requested result or merely restore an obsolete commitment?"
       ],
       "renderers": [
         "bernini",
@@ -334,10 +445,17 @@
         "EV-F004",
         "EV-F006",
         "EV-F007",
-        "EV-batch-facts"
+        "EV-batch-facts",
+        "EV-semantic-goal-review"
       ],
       "review_status": "approved",
-      "review_reference": "docs/continuation-maintenance-integration-plan.md#bounded-implementation"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "aliases": [
+        "continuation value",
+        "Would another attempt improve the requested result or merely restore an obsolete commitment?"
+      ],
+      "applicability": "Favor delivery when the target is adequately realized.",
+      "recommendation": "Favor delivery when the target is adequately realized. Reassess inherited preservation complaints; spend another attempt on an important target gap and compare against retained alternatives."
     }
   ],
   "resources": [
@@ -669,10 +787,10 @@
       "id": "EV-README",
       "title": "README",
       "path": "knowledge/experience/curated/evidence/README.md",
-      "version": "1",
-      "sha256": "6feac17895c13ed358ab4c12fe5c7240d3e1bfb69cc5025944f9bbc0a261ed5f",
+      "version": "2",
+      "sha256": "d7770e2589cc7826952f4fab3513702f3f1b0e9129f15bda44aea4257bdbd64c",
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change"
     },
     {
       "id": "EV-batch-facts",
@@ -822,10 +940,37 @@
       "id": "EX-renderer-profiles",
       "title": "Bernini and Ditto: starting preferences and recurring traps",
       "path": "knowledge/experience/curated/renderers.md",
-      "version": "2",
-      "sha256": "d2c1ff3684074bf9561f9dfd80ebe7b3fef5d5db8a9c0c4080731dfb71128bcc",
+      "version": "4",
+      "sha256": "6095e75c0c8665eae63d227d2679f2b8c2e45081bdd1361c4837a1067c913d37",
       "review_status": "approved",
-      "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
+      "review_reference": "docs/experience-system-refactor-20261103.md"
+    },
+    {
+      "id": "EV-semantic-goal-review",
+      "title": "Goal interpretation and inherited preservation commitments",
+      "path": "knowledge/experience/curated/evidence/semantic-goal-review-20261102.md",
+      "version": "1",
+      "review_status": "approved",
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "sha256": "0ef3904389db5103703cb24e2935b61a4fad257e48e7901bd1bddb40b3cadce9"
+    },
+    {
+      "id": "EV-F001-creative-first",
+      "title": "Later F001 first decision and preceding knowledge reads",
+      "path": "knowledge/experience/curated/evidence/creative-F001-first-decision.json",
+      "version": "1",
+      "review_status": "approved",
+      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "sha256": "97e06b0a55e4b3ce165859bf98b27811769e3d593f25b3935fd88c826efe6d9a"
+    },
+    {
+      "id": "EV-renderer-profile-20261102",
+      "title": "Historical renderer profiles and recorded setups (2026-11-02)",
+      "path": "knowledge/experience/curated/evidence/renderer-profile-20261102.md",
+      "version": "1",
+      "sha256": "27c170eabbcda93eea35bd3287878f044f6c68df4076404dd81117c798b7c0a2",
+      "review_status": "approved",
+      "review_reference": "docs/experience-system-refactor-20261103.md"
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "scope": "Root independent executable probes using local fixtures only",
+  "probes": [
+    {
+      "name": "timeout_unknown_then_original_completion_replay",
+      "passed": true,
+      "actual_fixture_executions": 1,
+      "lock_retained_during_unknown": true,
+      "unknown_money_retained": true,
+      "late_result": {
+        "original": "late receipt"
+      }
+    },
+    {
+      "name": "full_budget_exhaustion_preserves_none_allowance",
+      "passed": true,
+      "fixture_calls": 3,
+      "full_extra_refused": true,
+      "money_scope": "Synthetic test quote, no external expenditure"
+    }
+  ],
+  "accounting_source_stable": true,
+  "accounting_source_sha256": "71eb72bf963de23d358ee29789432e34b1609019444dbd4a0569a1fffa03c2b5",
+  "external_model_calls": 0,
+  "gpu_jobs": 0
+}

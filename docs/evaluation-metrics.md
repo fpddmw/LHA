@@ -1,4 +1,6 @@
-# 统一评价指标定义（自动生成）
+# 历史评价卡指标定义（自动生成）
+
+> 适用范围：旧版评价卡与 lha-score-v3 管线。当前 creative_loop_v1 使用 [Low→High 评分标准](low-high-evaluation-v1.md)；各版本分别解释和汇总。
 
 定义版本：`lha-metrics-v3`；计算版本：`lha-score-v3`。
 

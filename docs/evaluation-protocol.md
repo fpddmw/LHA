@@ -1,4 +1,6 @@
-# 视频编辑与 agent loop 统一评价协议
+# 历史评价卡协议：视频编辑与 agent loop
+
+> 适用范围：旧版评价卡与 `lha-score-v3` 管线。当前 creative_loop_v1 使用 [Low→High 五维评分、独立抽帧与盲评](low-high-evaluation-v1.md)。以下保留旧协议的计算和历史结果解释，分别汇总版本。
 
 冻结卡/原始 judgment 协议仍为 `lha-evaluation-v1`；新计算结果为 `lha-score-v3`，统计/展示为 `lha-report-v3`，唯一指标定义为 `lha-metrics-v3`。
 
@@ -8,9 +10,10 @@ PickScore 不属于本版。代码入口为 `scripts/eval/evaluate_benchmark.py`
 ## 1. 评价对象与资产边界
 
 - 正式依据为原视频、用户原始指令和生成前固定的评价卡。planner 扩写提示词只进入过程诊断。
-- 当前 `benchmark_data/all_samples.json` 有 50 条正式视频与 7 条示例。正式视频有短、长两个任务；示例只有长任务，共 107 个任务入口。
+- 当前唯一清单 `benchmark_data/benchmark.json` 共 75 条，统一编号 001–075：训练 001–040、验证 041–050、测试 051–075。所有样本同等处理。每条含短风格提示词和详细指令；两种条件共用源样本及划分。
 - 新数据包没有配套标准生成视频。包中的 source 抽帧、旧 target、旧 rubric 和旧评分不作为本版目标答案。
-- `main`、`fewshot`、`development` 分开统计；已经参与提示词／planner 调试的题目应标记开发暴露。
+- 按 `train`、`validation`、`test` 分开统计；fewshot 是训练子集。历史开发暴露记录在索引中，测试集自本版起冻结。旧 split 值仅供历史记录读取。
+- 已进入 evidence card 的源视频及其同源组全部归入训练集，即使本版重写了 prompt；验证和测试不得包含这些条目。
 - 一个源视频是统计聚类单位。多 seed、短长指令、帧和检查项都不是独立的视频样本。
 - `examples/evaluation/041_*.card.json` 是基于已看片的开发示例，包含真正的原始需求与源文件哈希；不附带虚构评分。041 已用于开发，不代表未接触的测试题。
 
@@ -184,11 +187,11 @@ python scripts/eval/evaluate_benchmark.py --help
 大模型权重仅在显式运行 features 时按指定编码器加载；安装依赖和执行统计不会自动运行生成模型。
 不覆盖现有 GPU 的 PyTorch 环境；按该机器 CUDA 版本安装兼容 torch，或在独立评测环境安装。
 
-建立 107 个任务入口：
+建立 75 个任务入口（实际运行使用对应 split 的索引）：
 
 ```bash
 python scripts/eval/evaluate_benchmark.py scaffold \
-  --index benchmark_data/all_samples.json --out out/evaluation/task_index.json
+  --index benchmark_data/benchmark.json --out out/evaluation/task_index.json
 ```
 
 生成一张 source-only 草稿并审阅冻结：

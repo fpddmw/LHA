@@ -1,0 +1,7 @@
+# Express a construction and choose the input that supports it
+
+Describe the visible arrangement, participant roles and progression that would realize the task. Use [part binding](../experience/curated/entries/part-binding.md) when an effect needs a specific carrier, [connected scope](../experience/curated/entries/connected-scope.md) for dependent changes, and [wanted state](../experience/curated/entries/wanted-state.md) when a positive replacement relationship clarifies the design.
+
+The selected input determines which useful information the next attempt can use. [Input conditioning](../experience/curated/entries/input-conditioning.md) develops the choice between continuing target achievements and recovering required lost information. [Instance identity](../experience/curated/entries/instance-identity.md) is relevant when individual correspondence matters. Read the [renderer profile](../experience/curated/renderers.md) for model-specific starting preferences, then its linked account for conditions and counterexamples.
+
+Use the style library to construct coherent media, space, lighting and color relationships. [Style realization](../experience/curated/entries/style-realization.md), [environment replacement](../experience/curated/entries/environment-replacement.md) and [lighting integration](../experience/curated/entries/lighting-integration.md) explain why a plausible motif may leave the requested structure or function unrealized. The [shared operating reference](OPERATING_REFERENCE.md) explains renderer input validation and submission counting.
