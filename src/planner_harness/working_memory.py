@@ -1,12 +1,24 @@
-"""Identical finite memory mechanics for full/none, with exact archive pointers."""
+"""Keep read pages across actions; fit their display only at actual context capacity."""
 import copy
 import json
 import math
 
-POLICY = {"version": "creative-memory-v1", "notes_chars": 12000,
-          "knowledge_chars": 18000, "max_input_tokens": 100000,
+POLICY = {"version": "creative-memory-v2", "notes_chars": 12000,
+          "max_input_tokens": 100000,
           "image_tokens": 1600, "reserve_tokens": 8192,
-          "eviction": "oldest read fragment first; repeated exact fragments refresh recency"}
+          "eviction": "No read-page eviction; deduplicate rereads and shorten displayed excerpts only at total context capacity"}
+
+MATERIAL_FIELDS = (
+    "id", "path", "title", "kind", "sha256", "version", "read_id", "text",
+    "summary", "start_line", "start_char", "end_line", "end_char", "total_lines",
+    "next_line", "next_char", "links",
+)
+
+
+def compact(material):
+    # Directory inventories and repeated catalog metadata stay in the read event.
+    # Preserve the exact page text, its identity, and usable navigation links.
+    return {k: copy.deepcopy(material[k]) for k in MATERIAL_FIELDS if k in material}
 
 
 def retain(state, materials, event_id):
@@ -19,20 +31,63 @@ def retain(state, materials, event_id):
         memory[:] = [r for r in memory if r["fragment_key"] != key]
         memory.append({"fragment_key": key, "event_id": event_id,
                        "reread_of": [r["material"]["read_id"] for r in reread],
-                       "material": copy.deepcopy(material),
+                       "material": compact(material),
                        "open": {"action": "history", "arguments": {"event_id": event_id}}})
-    evicted = []
-    while memory and len(json.dumps(memory, ensure_ascii=False)) > POLICY["knowledge_chars"]:
-        evicted.append(memory.pop(0)["material"]["read_id"])
-    if evicted:
-        state.setdefault("memory_evictions", []).append({"event_id": event_id, "read_ids": evicted,
-                                                         "reason": "knowledge fragment budget"})
 
 
 def visible(payload, state):
-    payload["working_memory"] = {"policy": {k:POLICY[k] for k in ("version","eviction")}, "retained_reads": copy.deepcopy(state.get("knowledge_memory", [])),
+    retained = [
+        {**copy.deepcopy(row), "material": compact(row["material"])}
+        for row in state.get("knowledge_memory", [])
+    ]
+    payload["working_memory"] = {"policy": {k:POLICY[k] for k in ("version","eviction")}, "retained_reads": retained,
         "evicted_fragment_count": sum(len(r["read_ids"]) for r in state.get("memory_evictions", [])),
-        "scope": "Read/exposure/retention/note evidence is observable; downstream action causality requires a controlled comparison."}
+        "scope": "Previously read pages remain available here across actions. Exact complete read results open through their history links."}
+    # The newest tool result and memory otherwise repeat the same page verbatim.
+    retained_ids = {r["material"]["read_id"] for r in retained}
+    for event in payload.get("recent_operations", []):
+        for material in event.get("result", {}).get("materials", []):
+            if material.get("read_id") in retained_ids:
+                material.pop("text", None)
+                material["text_location"] = "working_memory.retained_reads"
+
+
+def fit_display(payload, limit, system_chars):
+    """Fit all remembered sources together; never delete state or a source's pointer.
+
+    A shared excerpt length gives every read a visible place under real pressure.
+    Short pages remain complete. The original full pages stay in state/history.
+    """
+    memory = payload.get("working_memory", {})
+    rows = memory.get("retained_reads", [])
+    if not rows:
+        return
+    # Preserve useful prose before repeated hashes, page receipts and link lists.
+    # The event link opens all of that metadata with the exact original page.
+    for row in rows:
+        row.pop("fragment_key", None)
+        row["material"] = {
+            k: row["material"][k]
+            for k in ("id", "title", "read_id", "text", "start_line", "start_char")
+            if k in row["material"]
+        }
+    texts = [r["material"].get("text", "") for r in rows]
+
+    def project(size):
+        for row, text in zip(rows, texts):
+            row["material"]["text"] = text[:size]
+            row["material"]["text_is_complete"] = len(text) <= size
+        return system_chars + len(json.dumps(payload, ensure_ascii=False, indent=2))
+
+    # Binary search uses the actual serialized size, including image metadata.
+    low, high = 0, max(map(len, texts), default=0)
+    while low < high:
+        middle = (low + high + 1) // 2
+        if project(middle) <= limit:
+            low = middle
+        else:
+            high = middle - 1
+    project(low)
 
 
 def estimate(system, user, images):

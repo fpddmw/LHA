@@ -2,6 +2,7 @@
 from pathlib import Path
 import copy
 
+from planner_harness.resources import MAX_WALL_SECONDS
 from planner_harness.common import load, save, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.lock import RunLock
@@ -84,7 +85,7 @@ def configuration(path):
     for key in ('max_generations', 'pe_max_generations', 'seed_step', 'task_wall_seconds'):
         if type(value[key]) is not int or value[key] < 1:
             raise ValueError(key + ' must be positive')
-    if type(value['seed_start']) is not int or value['seed_start'] < 0 or value['task_wall_seconds'] > 3600:
+    if type(value['seed_start']) is not int or value['seed_start'] < 0 or value['task_wall_seconds'] > MAX_WALL_SECONDS:
         raise ValueError('Invalid seed or online time allowance')
     forms = value['prompt_forms']
     if not forms or len(set(forms)) != len(forms) or set(forms) - {'short', 'long'}:

@@ -1,5 +1,7 @@
 # LHA 工程问题与阶段修复记录 — 2026-11-02
 
+2026-11-03 当前覆盖规则：在线默认 4 次／2.5 小时；中性模糊提示、可选生成理由、直接交付；已读正文持续保留并改善风格检索。以下一小时／N=5 文字为当时阶段记录，当前实现见 `docs/planner-harness.md`。
+
 ## 当前工程整理
 
 当前入口统一见 [实现说明](creative-loop-implementation.md)、[配置说明](benchmark-guide/configuration.md)、[当前状态](current-status.md) 和 [文档索引](README.md)。本轮覆盖 API 配置封装、在线／正式评价边界、异步失败恢复、任务隔离、实验结算与文档一致性；验证结果集中在当前状态和离线报告。 最终 29 模块 325 项独立离线测试全部通过，源码／配置起止一致，见 [本轮验证](../reports/maintenance-20261102/engineering-cleanup-validation.json)。

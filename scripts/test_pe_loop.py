@@ -73,7 +73,7 @@ class PELoopTests(Fixture):
     def test_test_default_is_four_groups_and_old_methods_remain_explicit(self):
         batch = self.prepare(splits=['test'], methods=None, best_of_n=None)
         self.assertEqual(batch['arms'], ['direct', 'pe-loop', 'none', 'full'])
-        self.assertEqual(sum(1 if m == 'direct' else batch['max_generations'] for m in batch['arms']), 16)
+        self.assertEqual(sum(1 if m == 'direct' else batch['max_generations'] for m in batch['arms']), 13)
         self.assertIn('pe', results.RUN_METHODS)
         self.assertIn('direct-best-of-n', results.RUN_METHODS)
         self.assertFalse(batch['pe_loop']['knowledge_access'])
@@ -316,7 +316,7 @@ class PELoopTests(Fixture):
         policy = u.policy(batch, supplied)
         self.assertEqual(policy['online_task_budget']['lanes'], ['pe-loop'])
         self.assertEqual(policy['online_task_budget']['max_generations'], 3)
-        self.assertEqual(policy['online_task_budget']['wall_seconds'], 3600)
+        self.assertEqual(policy['online_task_budget']['wall_seconds'], 9000)
 
 
 if __name__ == '__main__':

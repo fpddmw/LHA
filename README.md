@@ -28,7 +28,7 @@ python scripts/check_repository.py --suite current
 
 唯一当前清单是 [benchmark_data/benchmark.json](benchmark_data/benchmark.json)：67 条源视频，训练 40、测试 27，不设验证集；保留原编号和 short/long 两种独立任务条件，共 134 个条件。数据视频与模型权重需另行准备；任务定义、分布和示例见 [数据说明](benchmark_data/README.md)，清单读取见 [代码](scripts/inspect_benchmark.py)。
 
-主实验四组覆盖全量：Direct、PE Loop、无经验 Planner、有经验 Planner。无经验组先运行 RSI 训练部分并在任务后维护经验，再运行 RSI 测试部分；冻结后，有经验组运行全量。RSI 分析取测试子集，复用主实验视频与评分。Planner 默认最多 5 次生成、PE 最多 4 次，每条在线任务最长一小时；Planner 获得模糊资源提醒。自评作为追加消融。
+主实验四组覆盖全量：Direct、PE Loop、无经验 Planner、有经验 Planner。无经验组先运行 RSI 训练部分并在任务后维护经验，再运行 RSI 测试部分；冻结后，有经验组运行全量。RSI 分析取测试子集，复用主实验视频与评分。Planner 与 PE 默认最多 4 次生成，每条在线任务最长 2.5 小时；Planner 获得模糊资源提醒。自评作为追加消融。
 
 ## 代码边界
 

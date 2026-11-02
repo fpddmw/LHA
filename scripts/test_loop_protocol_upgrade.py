@@ -37,8 +37,8 @@ class ProtocolTests(unittest.TestCase):
             "videos": {},
             "submitted_generation_ids": [],
             "online_clock": {
-                "started_unix": now - 3600 * fraction,
-                "deadline_unix": now + 3600 * (1 - fraction),
+                "started_unix": now - r.MAX_WALL_SECONDS * fraction,
+                "deadline_unix": now + r.MAX_WALL_SECONDS * (1 - fraction),
             },
         }
         r.configure(s)

@@ -7,7 +7,7 @@
   ],
   "seed_start": 42,
   "seed_step": 1,
-  "task_wall_seconds": 3600,
+  "task_wall_seconds": 9000,
   "model": "openai/gpt-6.1-sol",
   "reasoning_effort": "high",
   "evaluation_id": "all67-critic-v2",

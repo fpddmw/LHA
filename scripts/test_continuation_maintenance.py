@@ -53,7 +53,7 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(generation["submission"]["input_id"], "v2")
         self.assertEqual(generation["submission"]["prompt"], generation["arguments"]["prompt"])
         self.assertEqual(generation["candidate_ids"], ["v3"])
-        self.assertTrue(generation["continuation_audit"]["visible"]["justification_required"])
+        self.assertFalse(generation["continuation_audit"]["visible"]["justification_required"])
         self.assertEqual(generation["call_status"], "response_recorded")
         self.assertTrue(
             any(
@@ -89,30 +89,18 @@ class MaintenanceTests(unittest.TestCase):
         self.assertNotIn("instruction_adherence:", readable)
         self.assertEqual(summary["runs"][0]["decision_dispositions"]["delivery_complete"], 1)
 
-    def test_refused_generation_is_not_projected_as_a_render(self):
+    def test_optional_explanation_does_not_prevent_render_projection(self):
         self.start()
         self.review()
         self.resume([action("generate", input_video="source", prompt="Second.")])
         self.respond()
-        self.resume(
-            [
-                action("generate", input_video="v2", prompt="Third without an explanation."),
-                action(
-                    "finish",
-                    video="v2",
-                    message="Retain a provisional result.",
-                    stop_reason="no_promising_attempt",
-                ),
-            ]
-        )
+        self.resume([action("generate", input_video="v2", prompt="Third without an explanation.")])
+        self.respond()
         report = project_run(self.h.output)
-        refusal = next(
-            d for d in report["decisions"] if d["disposition"] == "justification_required"
-        )
-        self.assertIsNone(refusal["submission"])
-        self.assertIsNone(refusal["generation_decision"])
-        self.assertTrue(refusal["continuation_audit"]["visible"]["justification_required"])
-        self.assertEqual(report["counts"]["accepted_generation_requests"], 2)
+        decision = next(d for d in report["decisions"] if d["arguments"].get("prompt") == "Third without an explanation.")
+        self.assertIsNotNone(decision["generation_decision"])
+        self.assertFalse(decision["continuation_audit"]["visible"]["justification_required"])
+        self.assertEqual(report["counts"]["accepted_generation_requests"], 3)
 
     def test_historical_missing_records_and_default_judge_isolation(self):
         self.start()

@@ -8,14 +8,15 @@ import time
 from .common import load, save
 from .lock import RunLock
 
-MAX_GENERATIONS = 5
+MAX_GENERATIONS = 4
+MAX_WALL_SECONDS = 9000
 DEFAULTS = {
     "version": "creative-resources-v2",
     "max_turns": None,
     "max_generations": MAX_GENERATIONS,
     "max_model_calls": None,
     "max_total_tokens": None,
-    "max_wall_seconds": 3600,
+    "max_wall_seconds": MAX_WALL_SECONDS,
     "max_cost": None,
     "token_price_per_million": None,
 }
@@ -52,8 +53,8 @@ def configure(state, supplied=None, *, continuation=None):
     for key in ("max_generations", "max_wall_seconds"):
         if type(policy[key]) is not int or policy[key] <= 0:
             raise ValueError("Generation and wall guards require positive integer limits")
-    if policy["max_wall_seconds"] > 3600:
-        raise ValueError("Online tasks have a hard maximum of one hour")
+    if policy["max_wall_seconds"] > MAX_WALL_SECONDS:
+        raise ValueError("Online tasks have a hard maximum of 2.5 hours")
     # These fields remain in records for compatibility, with no task stop semantics.
     for key in ("max_turns", "max_model_calls", "max_total_tokens"):
         policy[key] = None

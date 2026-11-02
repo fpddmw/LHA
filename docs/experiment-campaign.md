@@ -67,7 +67,7 @@ validated offline and did not launch it.
 
 ## 双模型一键命令与配置
 
-在自己的 LHA 仓库根目录执行。通用实验参数见 [experiment-campaign.json](../configs/experiment-campaign.json)：Planner／PE 含首轮最多 4 次，seed42 起步，每条在线任务最多 1 小时；Planner 与 Critic 使用 6.1-sol high。模型资产、设备和凭据放在各自主机配置里。
+在自己的 LHA 仓库根目录执行。通用实验参数见 [experiment-campaign.json](../configs/experiment-campaign.json)：Planner／PE 含首轮最多 4 次，seed42 起步，每条在线任务最多 2.5 小时；Planner 与 Critic 使用 6.1-sol high。模型资产、设备和凭据放在各自主机配置里。
 
 首次复制三个示例，然后填写两份主机配置的实际设备、已验证资产清单及哈希。`*.local.json` 已加入 Git 排除。两模型若部署在同一主机，可直接使用 `both`；分处两台主机时，各自在本机用对应单模型命令。
 

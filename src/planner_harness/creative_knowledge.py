@@ -242,27 +242,16 @@ class CreativeKnowledge(Knowledge):
             return {"material": self.items[target], "instruction": "Read this operating page when useful."}
         return super().browse(target)
 
-    def search(self, query, limit=8):
-        # Reuse scoped lexical retrieval. Expand a few working concepts, without
-        # a second corpus, network service, or bypass around frozen permissions.
-        aliases = {"lost face":"instance identity input conditioning", "same room":"environment replacement",
-            "wording":"realization change", "budget":"continuation value planning resources",
-            "omission":"requirements binding", "camera turn":"time binding object continuity",
-            "人脸":"instance identity", "输入":"input conditioning", "光照":"lighting integration",
-            "改写":"realization change", "场景":"environment replacement"}
-        expanded = query + " " + " ".join(v for k,v in aliases.items() if k in query.lower())
-        result = super().search(expanded,15)
-        terms = set(re.findall(r"[a-z0-9]+",expanded.lower()))
+    def search(self, query, limit=8, scope="all"):
+        from .knowledge_search import search
+
+        result = search(self, query, limit, scope)
         for row in result['matches']:
-            metadata = " ".join([*row.get('questions',[]),*row.get('aliases',[]),*row.get('renderers',[]),row.get('summary','')]).lower()
-            row['score'] += sum(t in metadata for t in terms)
             if row.get('kind')=='experience':
                 row['applicability'] = row.get('applicability',row.get('summary'))
                 row['recommendation'] = row.get('recommendation',row.get('summary'))
             row['open'] = {'action':'read','arguments':{'targets':[{'id':row['id']}]}}
             row.update(self.related(row['id']))
-        result.update(query=query,expanded_query=expanded,
-            matches=sorted(result['matches'],key=lambda r:r['score'],reverse=True)[:max(1,min(int(limit),15))])
         return result
 
     def overview(self):

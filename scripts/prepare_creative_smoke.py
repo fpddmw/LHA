@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 
 
-def prepare(host_path,output,sample_id,prompt_form,device,*,experience='full',seed=42,max_generations=1,wall_seconds=3600):
+def prepare(host_path,output,sample_id,prompt_form,device,*,experience='full',seed=42,max_generations=1,wall_seconds=9000):
     from planner_harness.common import load,sha
     from planner_harness.execution import immutable
     from planner_harness.creative import experiment_profile
@@ -62,7 +62,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--host-config',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--sample-id',required=True);p.add_argument('--prompt-form',choices=['short','long'],default='short');p.add_argument('--device',required=True,type=int)
     p.add_argument('--experience',choices=['full','none'],default='full');p.add_argument('--seed',type=int,default=42)
-    p.add_argument('--max-generations',type=int,default=1);p.add_argument('--wall-seconds',type=int,default=3600);args=p.parse_args()
+    p.add_argument('--max-generations',type=int,default=1);p.add_argument('--wall-seconds',type=int,default=9000);args=p.parse_args()
     print(json.dumps(prepare(args.host_config,args.output,args.sample_id,args.prompt_form,args.device,
         experience=args.experience,seed=args.seed,max_generations=args.max_generations,wall_seconds=args.wall_seconds)))
 

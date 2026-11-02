@@ -1,4 +1,4 @@
-"""Factual spent resources and non-semantic continuation questions; operator policy stays private."""
+"""Approximate resource awareness without favoring continuation or delivery."""
 
 from __future__ import annotations
 
@@ -9,18 +9,13 @@ from .common import load, sha
 from .execution import immutable, signature
 from .resources import MAX_GENERATIONS
 
-VERSION = "creative-continuation-v3"
-QUESTIONS = [
-    "Which retained candidate currently seems most suitable for delivery, and what unresolved issue makes you choose to continue?",
-    "What will this attempt change or establish, and why use this input video? State plainly if it is resampling rather than a new realization.",
-    "Why is the expected benefit worth another generation instead of reviewing and delivering the retained candidate now?",
-]
+VERSION = "creative-continuation-v4"
 PRESSURE = {
-    "exploration": "This task operates under a limited budget. Use the available resources deliberately while developing and evaluating your proposal.",
-    "continuation": "Before spending resources on another generation, answer the continuation questions using the actual candidates, previous prompts and observed results.",
-    "deliberate": "Further generation warrants a deliberate choice under the limited budget. Reserve it for an important unresolved part of the task. Explain why it is preferable to reviewing and delivering a retained candidate, and what this attempt will change or establish.",
-    "strong": "Exercise strong restraint before spending more on generation. Prefer reviewing and confirming a suitable retained candidate. If you continue, explain the consequential gap and the concrete value of this attempt using the actual results.",
-    "frozen": "Generation resources are exhausted. Inspect and compare retained candidates, use review as needed, and review and deliver the retained candidate for a suitable result. If none is suitable, retain a provisional candidate and report the unresolved outcome.",
+    "exploration": "There is room to develop and evaluate your proposal within the task budget.",
+    "continuation": "Some of the task budget has been used. Further attempts remain available.",
+    "deliberate": "The task budget is more limited. Choose your next action using the task requirements and the results so far.",
+    "strong": "The task budget is getting tight. Focus the available resources on the changes or comparisons that matter most to the task.",
+    "frozen": "Further generation is unavailable. You can still inspect and compare the existing candidates and choose the task outcome.",
 }
 
 
@@ -134,12 +129,11 @@ def view(state):
         not state.get("unresolved_jobs")
         and facts["submitted_render_requests"] < policy["hard_generation_limit"]
     )
-    required = available and phase(state) != "exploration"
     return {
         "stage": phase(state),
         "budget_awareness": PRESSURE[phase(state)],
-        "justification_required": required,
-        "continuation_questions": copy.deepcopy(QUESTIONS) if required else [],
+        "justification_required": False,
+        "continuation_questions": [],
         "generation_available": available,
     }
 
@@ -178,12 +172,6 @@ def authorize(state, args, event_id):
     explanation = args.get("justification")
     if explanation is not None and not isinstance(explanation, str):
         raise ValueError("justification must be free text")
-    if visible["justification_required"] and (explanation is None or not explanation.strip()):
-        return {
-            "status": "justification_required",
-            "message": "Answer the continuation questions in the justification field together with the actual prompt and input video. No render was submitted.",
-            "continuation": visible,
-        }
     return None
 
 

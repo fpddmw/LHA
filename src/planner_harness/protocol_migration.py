@@ -13,11 +13,10 @@ from .continuation import VERSION
 
 TOUCHED = {'state.json','system-prompt.txt','final.json','report.html','report.md',
            'continuation-index.json','experience-usage.json'}
-INSTRUCTIONS = ('Complete the video task using the limited budget deliberately. Answer the continuation questions '
-                'in generate justification when requested. A satisfied finish proposes delivery; a valid matching '
-                'report is reused, or requested if absent. The full report is supplied for that proposal in a '
-                'subsequent input; confirm the same candidate with finish or continue work. Independent final '
-                'judgments are not Planner feedback.')
+INSTRUCTIONS = ('Complete the video task using the available resources. An optional generate justification '
+                'can record the improvement or comparison you intend. Every successful generation receives '
+                'its configured review. Choose the final candidate using the original task, actual results '
+                'and those reviews; finish delivers directly. Independent final judgments are not Planner feedback.')
 
 
 def prepare_batch(root, batch_file, previous_profile_file, output):

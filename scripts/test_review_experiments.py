@@ -65,11 +65,11 @@ class ReviewExperiments(Fixture):
         self.assertIsNone(results.find(self.registry,'001','short','full',42,'critic'))
         self.assertEqual(results.find(self.registry,'001','short','full',42)['sha256'],entry['sha256'])
 
-    def test_prepare_freezes_review_and_api_roles_and_default_one_hour_policy(self):
+    def test_prepare_freezes_review_and_api_roles_and_default_two_and_half_hour_policy(self):
         batch=self.prepare(methods=['none'],best_of_n=None,splits=['train'],review={'mode':'planner'})
         self.assertEqual(batch['review'],{'mode':'planner'})
-        self.assertEqual(batch['resource_policy']['max_wall_seconds'],3600)
-        self.assertEqual(batch['max_generations'],5)
+        self.assertEqual(batch['resource_policy']['max_wall_seconds'],9000)
+        self.assertEqual(batch['max_generations'],4)
         self.assertEqual(batch['models']['planner']['factory'],'vlm.openrouter:OpenRouterVisionModel')
         from experiments.creative_benchmark import task_spec
         task=task_spec(batch['topics'][0],'none',batch,self.output/'profile.json')

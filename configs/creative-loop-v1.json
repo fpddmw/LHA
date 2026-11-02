@@ -9,11 +9,11 @@
     "reasoning_effort": "high"
   },
   "completion_mode": "delivery",
-  "max_generations": 5,
+  "max_generations": 4,
   "max_turns": null,
   "continuation_policy": {
-    "version": "creative-continuation-v3",
-    "hard_generation_limit": 5
+    "version": "creative-continuation-v4",
+    "hard_generation_limit": 4
   },
   "experiments": "awaiting_user_start_two_gpu_loop",
   "review": {
@@ -32,5 +32,8 @@
         "api_key_env": "OPENROUTER_API_KEY"
       }
     }
+  },
+  "resource_policy": {
+    "max_wall_seconds": 9000
   }
 }

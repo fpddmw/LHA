@@ -159,7 +159,7 @@ def operate(harness, response, event_id):
     if action == "browse":
         return harness.knowledge.browse(args.get("id", "map"))
     if action == "search":
-        return harness.knowledge.search(args["query"], args.get("limit", 8))
+        return harness.knowledge.search(args["query"], args.get("limit", 8), args.get("scope", "all"))
     if action == "read":
         return read(harness, args, event_id)
     if action == "observe":

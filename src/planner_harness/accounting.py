@@ -17,6 +17,7 @@ import re
 import threading
 import time
 
+from .resources import MAX_GENERATIONS, MAX_WALL_SECONDS
 from .common import load, save, sha, stamp
 from .execution import immutable, signature
 from .integrity import IntegrityError
@@ -85,7 +86,7 @@ def validate_policy(supplied=None, *, require_live=False, required_quotes=()):
         or type(online.get("max_generations")) is not int
         or online["max_generations"] < 1
         or type(online.get("wall_seconds")) is not int
-        or not 1 <= online["wall_seconds"] <= 3600
+        or not 1 <= online["wall_seconds"] <= MAX_WALL_SECONDS
         or not set(online.get("lanes", [])) <= set(LANES + OPTIONAL_LANES)
     ):
         raise BudgetConfigurationError("Invalid per-task online generation/time policy")
@@ -315,7 +316,7 @@ def checked(binding, *, require_live=False):
     return root, p
 
 
-def default_online_policy(*, max_generations=5, wall_seconds=3600, lanes=("full",)):
+def default_online_policy(*, max_generations=MAX_GENERATIONS, wall_seconds=MAX_WALL_SECONDS, lanes=("full",)):
     """Online execution meters usage; each task owns its N/time allowance."""
     limits = {key: wall_seconds if key == "wall_seconds" else None for key in LIMITS}
     return {
@@ -337,7 +338,7 @@ def default_online_policy(*, max_generations=5, wall_seconds=3600, lanes=("full"
 
 
 def default_api_scope(
-    directory, model=None, *, max_generations=5, wall_seconds=3600, lane="full", topic=None
+    directory, model=None, *, max_generations=MAX_GENERATIONS, wall_seconds=MAX_WALL_SECONDS, lane="full", topic=None
 ):
     directory = Path(directory).resolve()
     policy = default_online_policy(
@@ -950,7 +951,7 @@ def validate_cohort(policy, *, max_generations=None, max_model_calls=None, topic
         "version": "online-task-v2",
         "lanes": ["direct", "full", "none"],
         "max_generations": max_generations,
-        "wall_seconds": 3600,
+        "wall_seconds": MAX_WALL_SECONDS,
     }
     p = validate_policy(
         policy,
@@ -1116,11 +1117,11 @@ def start_task(binding, *, wall_seconds=None):
     root, p = checked(binding)
     limits = online_limits(binding, p)
     if wall_seconds is None:
-        wall_seconds = limits["wall_seconds"] if limits else 3600
+        wall_seconds = limits["wall_seconds"] if limits else MAX_WALL_SECONDS
     if limits and wall_seconds != limits["wall_seconds"]:
         raise BudgetConfigurationError("Task clock must match the frozen online wall allowance")
-    if wall_seconds <= 0 or wall_seconds > 3600:
-        raise BudgetConfigurationError("Online task clock must fit within one hour")
+    if wall_seconds <= 0 or wall_seconds > MAX_WALL_SECONDS:
+        raise BudgetConfigurationError("Online task clock must fit within 2.5 hours")
     with RunLock(root / "accounting-lock", timeout=10):
         ledger = load_ledger(root)
         now = time.time()

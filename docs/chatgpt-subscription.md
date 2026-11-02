@@ -13,7 +13,7 @@ python scripts/chatgpt_subscription.py models
 python scripts/chatgpt_subscription.py probe --output out/chatgpt_subscription_probe
 ```
 
-`login` 启动本机回调监听并打开官方授权页。使用浏览器登录并授权 LHA 使用 ChatGPT plan。WSL 场景可加 `--no-browser --port 18765`，在 Windows 浏览器打开程序显示的本机地址。授权监听默认等待 30 分钟；这与在线任务的一小时期限分开。
+`login` 启动本机回调监听并打开官方授权页。使用浏览器登录并授权 LHA 使用 ChatGPT plan。WSL 场景可加 `--no-browser --port 18765`，在 Windows 浏览器打开程序显示的本机地址。授权监听默认等待 30 分钟；这与在线任务的 2.5 小时期限分开。
 
 凭证保存在仓库外 `~/.config/lha/chatgpt-subscription.json`，也可通过 `LHA_CHATGPT_CREDENTIAL_FILE` 或 `--credential-file` 指定。宿主标识保存在同目录 `chatgpt-host.json`。同一凭证的续期通过进程锁串行执行，access/refresh token 一起原子替换。授权记录属于 LHA，不读取 Codex 登录文件。
 
@@ -44,7 +44,7 @@ python scripts/run_creative_benchmark.py prepare \
 
 完成依据是实际 SSE 帧中的 `response.completed` 和响应对象的 `status: completed`。部分中转会把真实 SSE 标成 `application/json`，客户端保留这个头部差异并按实际流解析；普通 JSON 正文和没有终态的残缺流仍不视为完成。
 
-只有 `response.completed` 才保存为成功回答。明确失败和截断保留原因及实际 usage；连接中断保留未确认状态，由原运行的恢复入口处理。原请求已经保存完整回答时直接收取，不重复提交。模型调用沿用在线任务的一小时期限以及原有账本。
+只有 `response.completed` 才保存为成功回答。明确失败和截断保留原因及实际 usage；连接中断保留未确认状态，由原运行的恢复入口处理。原请求已经保存完整回答时直接收取，不重复提交。模型调用沿用在线任务的 2.5 小时期限以及原有账本。
 
 多卡同机进程共享同一受保护凭证文件，串行续期。跨主机部署时，先指定一个运行宿主为凭证续期负责人；不要复制同一可旋转 refresh token 后让多台主机独立续期。官方支持在本机完成授权后转移到自托管主机，该主机接管后续续期并保留独立宿主标识；使用多个独立运行宿主时应各自完成授权或通过单一凭证负责人转发调用。
 

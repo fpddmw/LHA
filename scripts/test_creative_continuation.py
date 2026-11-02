@@ -38,24 +38,16 @@ class ContinuationTests(unittest.TestCase):
         collect(self.h)
         fixtures.drain_review(self.h)
 
-    def test_two_successes_then_missing_blank_and_weak_explanations(self):
+    def test_two_successes_then_generation_without_an_explanation(self):
         self.start();self.collect_render(1.5)
         self.h.operate(action('generate',input_video='source',prompt='Second.'),'second');self.collect_render(2.5)
-        before=(len(self.h.state['jobs']),self.h.state['generation_requests'])
-        for text in [None,'','  ']:
-            args={'input_video':'source','prompt':'Third.'}
-            if text is not None:args['justification']=text
-            result=self.h.operate(action('generate',**args),'omitted')
-            self.assertEqual(result['status'],'justification_required')
-            self.assertEqual(len(result['continuation']['continuation_questions']),3)
-            self.assertEqual((len(self.h.state['jobs']),self.h.state['generation_requests']),before)
-        result=self.h.operate(action('generate',input_video='source',prompt='Third.',justification='x'),'third')
+        result=self.h.operate(action('generate',input_video='source',prompt='Third.'),'third')
         self.assertEqual(result['status'],'pending')
         job=self.h.state['jobs'][result['job_id']]
         self.assertEqual(job['payload']['renderer']['seed'],44)
         self.assertNotIn('justification',json.dumps(job))
         record=load(self.h.output/'jobs'/job['id']/'continuation.json')
-        self.assertEqual(record['justification'],'x');self.assertEqual(record['prompt'],'Third.')
+        self.assertIsNone(record['justification']);self.assertEqual(record['prompt'],'Third.')
         self.assertEqual(usage(self.h.state)['known_rendering_elapsed_seconds'],4.0)
 
     def test_compliant_prompt_and_justification_use_one_model_response_and_stable_recovery(self):
@@ -71,28 +63,28 @@ class ContinuationTests(unittest.TestCase):
         self.assertEqual(load(self.h.output/'jobs'/job_id/'request.json'),request)
         self.assertEqual(self.h.model.inputs,[])
 
-    def test_five_request_budget_escalates_and_locks_without_semantic_judging(self):
+    def test_four_request_budget_hints_and_locks_without_semantic_judging(self):
         self.start()
         notices=[]
-        for n,expected in enumerate(('exploration','continuation','deliberate','strong'),1):
+        for n,expected in enumerate(('exploration','continuation','deliberate'),1):
             self.collect_render()
             self.assertEqual(phase(self.h.state),expected)
             visible=view(self.h.state);notices.append(visible['budget_awareness'])
-            self.assertEqual(visible['justification_required'],n>=2)
+            self.assertFalse(visible['justification_required'])
             self.h.operate(action('generate',input_video='source',prompt='Blue again.',justification='x'),'repeat-'+str(n))
         self.collect_render()
-        self.assertEqual(self.h.state['generation_requests'],5)
-        self.assertEqual(len(set(notices)),4)
+        self.assertEqual(self.h.state['generation_requests'],4)
+        self.assertEqual(len(set(notices)),3)
         self.assertEqual(phase(self.h.state),'frozen')
-        result=self.h.operate(action('generate',input_video='source',prompt='Sixth.',justification='x'),'refused-sixth')
+        result=self.h.operate(action('generate',input_video='source',prompt='Fifth.',justification='x'),'refused-fifth')
         self.assertEqual(result['status'],'generation_unavailable')
-        self.assertEqual(self.h.state['generation_requests'],5)
+        self.assertEqual(self.h.state['generation_requests'],4)
         self.assertFalse(view(self.h.state)['justification_required'])
         self.assertEqual(view(self.h.state)['continuation_questions'],[])
         for notice in notices+[view(self.h.state)['budget_awareness']]:
             for leak in ('five','six','half','remaining','last attempt','%'):
                 self.assertNotIn(leak,notice.lower())
-        self.assertEqual(sum(j['kind']=='critique' for j in self.h.state['jobs'].values()),5)
+        self.assertEqual(sum(j['kind']=='critique' for j in self.h.state['jobs'].values()),4)
         self.assertEqual({r['justification'] for r in self.h.state['generation_decisions'].values() if r['justification'] is not None},{'x'})
 
     def test_actual_cap_locks_only_generate_and_keeps_full_confirmation_available(self):
@@ -118,7 +110,7 @@ class ContinuationTests(unittest.TestCase):
         self.assertEqual(self.h.state['jobs'][self.h.state['pending_tool']]['payload']['renderer']['seed'],42)
         self.collect_render()
         self.assertTrue(view(self.h.state)['generation_available'])
-        self.assertTrue(view(self.h.state)['justification_required'])
+        self.assertFalse(view(self.h.state)['justification_required'])
         self.assertEqual(phase(self.h.state),'continuation')
         self.assertEqual(usage(self.h.state)['generated_candidates'],1)
         self.assertEqual(usage(self.h.state)['submitted_render_requests'],2)
@@ -147,7 +139,7 @@ class ContinuationTests(unittest.TestCase):
                 self.assertNotIn('resource_status',context)
                 self.assertNotIn('continuation_policy',context['execution_profile'])
                 audit=load(self.h.output/'calls/event-0001/continuation-policy.json')
-                self.assertEqual(audit['policy']['hard_generation_limit'],5)
+                self.assertEqual(audit['policy']['hard_generation_limit'],4)
                 self.h.state['config']['context_version']=1
                 self.assertNotIn('generation_limit',self.h.context()[0])
                 self.h.state['config']['context_version']=2
@@ -155,7 +147,7 @@ class ContinuationTests(unittest.TestCase):
                 result=self.h.operate(action('generate',input_video='source',prompt='Third.'),'missing')
                 visible=self.h.system+'\n'+self.h.context()[0]+'\n'+json.dumps(result)
                 for token in forbidden:self.assertNotIn(token,visible)
-                self.assertTrue(result['continuation']['justification_required'])
+                self.assertFalse(result['continuation']['justification_required'])
 
     def test_model_resource_recovery_keeps_generation_frozen(self):
         from planner_harness.delivery import continue_budget_stop

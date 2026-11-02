@@ -21,3 +21,7 @@ For a working question, browse `planning-resources`, `observation-diagnosis` or 
 The experience map and search expose canonical entries alongside new contributions. Read a relevant contribution and its linked case when it changes the interpretation, including a correction to an older recommendation. The entry's first page links related comments and proposed revisions; their authorship, target version and curation decision remain visible. A useful new judgment can guide the task while its original evidence stays identifiable.
 
 Keep task-specific understanding in the workspace. After settlement, an authorized maintenance session can turn it into a linked contribution using the maintenance Skills. That session can create, clarify, recommend or comment; canonical revisions use a separate curation operation. Tool manuals and Skills change through authorized development.
+
+Search with `scope: "style"` for visual references or `scope: "experience"` for experience (when available). Results include source prose and literal named-reference coverage. If a work has no dedicated entry, explore its visual features and related design sources. Open useful entries for their full relationships and reference images. Reading remains your choice.
+
+Read pages persist in working memory across operations. Repeated directory metadata is stored in history rather than copied beside every page. Only actual context capacity shortens displayed excerpts; source identities and reopening links remain, and complete text stays available.

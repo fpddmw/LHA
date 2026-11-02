@@ -55,7 +55,8 @@ def record_exposure(directory, index, snapshot_sha256):
     by_path = {r["path"]: r for r in items.values()}
     surfaces, unresolved = [], []
     # Task text, Planner notes and receipt metadata are not actual source-page exposure.
-    roots = {"knowledge_entrances": payload.get("knowledge_entrances", {})}
+    roots = {"knowledge_entrances": payload.get("knowledge_entrances", {}),
+             "working_memory": payload.get("working_memory", {})}
     for i, event in enumerate(payload.get("recent_operations", [])):
         roots[f"recent_operations/{i}/result"] = event.get("result", {})
     for name, value in roots.items():
@@ -65,8 +66,8 @@ def record_exposure(directory, index, snapshot_sha256):
                 if isinstance(row.get("text"), str) and "start_line" in row:
                     unresolved.append(pointer)
                 continue
-            if isinstance(row.get("text"), str) and "start_line" in row:
-                form = "text_page"
+            if row.get("text") and isinstance(row["text"], str) and "start_line" in row:
+                form = "text_excerpt" if row.get("text_is_complete") is False else "text_page"
             elif isinstance(row.get("matches"), list):
                 form = "search_excerpt"
             elif row.get("summary"):
@@ -89,6 +90,7 @@ def record_exposure(directory, index, snapshot_sha256):
                             "end_char",
                             "next_line",
                             "next_char",
+                            "text_is_complete",
                         )
                         if k in row
                     },

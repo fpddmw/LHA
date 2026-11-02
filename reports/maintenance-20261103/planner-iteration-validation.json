@@ -1,0 +1,33 @@
+{
+  "scope": "Planner resource hints, 4-generation/9000-second limits, local retrieval and read retention",
+  "current_suite": {
+    "tests": 357,
+    "modules": 31,
+    "passed": true,
+    "source_changed_during_tests": false,
+    "report": "out/planner_iteration_20261103/final-current/summary.json"
+  },
+  "additional_continuation_regression": {
+    "tests": 10,
+    "passed": true,
+    "report": "out/planner_iteration_20261103/final/summary.json"
+  },
+  "saved_case_replay": {
+    "001": {
+      "old_final_retained_reads": 3,
+      "new_final_retained_reads": 7,
+      "all_read_pages_complete": true,
+      "total_context_chars": 89066
+    },
+    "005": {
+      "old_final_retained_reads": 2,
+      "new_final_retained_reads": 6,
+      "all_read_pages_complete": true,
+      "total_context_chars": 83137
+    }
+  },
+  "replay_report": "out/planner_iteration_20261103/saved-case-replay.json",
+  "external_calls": 0,
+  "renderer_calls": 0,
+  "interpretation": "Checks establish the runtime contracts and saved-source visibility. New Planner behavior and output quality are observed in subsequent real runs."
+}

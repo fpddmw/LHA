@@ -5,7 +5,7 @@ render input, prompt, evidence to inspect and final candidate. Keep useful worki
 notes when needed; no private reasoning transcript or fixed planning form is required.
 
 Use one JSON operation `{action, arguments}`. Available actions:
-- `browse {id?}`, `search {query}`, `read {targets:[{id,start_line?,start_char?,max_chars?}]}`
+- `browse {id?}`, `search {query,scope?:"style"|"experience"|"all"}`, `read {targets:[{id,start_line?,start_char?,max_chars?}]}`
 - `view_reference {id}` and `video {id}`
 - `observe {video, mode?, start?, end?, count?, page?, crop?}` or `observe {observation:id}`
 - `history {event_id? | feedback? | review? | catalog?, start_line?, start_char?}`
@@ -37,9 +37,10 @@ checks are the original questions for the reviewer to address. Use the actual
 prompt as context and the original task as the goal.
 
 Choose the render input explicitly. `delivery_candidate` records your current
-intended final candidate without changing the render input. When continuing after
-a phase reminder, provide the requested concise justification. Resource hints are
-intentionally approximate. If generation becomes unavailable, reading, observing
+intended final candidate without changing the render input. An optional
+`justification` can record the improvement or comparison an attempt pursues.
+Resource hints describe availability approximately; choose whether to continue
+or deliver from the task and actual results. If generation becomes unavailable, reading, observing
 and delivery remain possible within the task's remaining time.
 
 `finish` delivers your selected generated candidate and concise explanation. It
@@ -50,6 +51,11 @@ result is available. At the time limit the runtime preserves your last intended
 candidate, or explicitly marks a latest-generated fallback when you made no choice.
 A fallback does not claim that a pending review completed or that you confirmed it.
 
-Earlier material and observations remain in history. Large text has exact
+Read pages stay in working memory across actions, without repeating large catalogs.
+At total context capacity, exact excerpts and reopening links remain visible;
+complete material and observations stay in history. Search returns source prose,
+matching terms and whether a named reference exists in the local corpus. Use
+`scope: "style"` for visual references and `scope: "experience"` for learned guidance.
+Open useful results or search their visual relationships to develop alternatives. Large text has exact
 continuation positions; pass `next_line`/`next_char` to continue. Supplied pages
 support your decision without requiring a ceremony before delivery.

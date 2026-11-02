@@ -15,7 +15,7 @@ from planner_harness.common import load, save, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.integrity import IntegrityError
 from planner_harness.lock import RunLock
-from planner_harness.resources import MAX_GENERATIONS, ResourceExhausted
+from planner_harness.resources import MAX_GENERATIONS, MAX_WALL_SECONDS, ResourceExhausted
 from planner_harness import accounting
 from . import results, render_profiles
 
@@ -291,7 +291,7 @@ def policy(batch, supplied, *, require_live=True):
         if options.get("model"):required.append("model:"+options["model"]+"/"+str(options.get("reasoning_effort") or "none"))
     supplied = copy.deepcopy(supplied or {"version":accounting.VERSION,"mode":"offline"})
     supplied["online_task_budget"] = {"version":"online-task-v2","lanes":list(batch["arms"]),
-        "max_generations":batch["max_generations"],"wall_seconds":batch.get("resource_policy",{}).get("max_wall_seconds",3600)}
+        "max_generations":batch["max_generations"],"wall_seconds":batch.get("resource_policy",{}).get("max_wall_seconds",MAX_WALL_SECONDS)}
     p = accounting.validate_policy(supplied, require_live=require_live, required_quotes=required)
     if not require_live:
         return p
@@ -602,7 +602,7 @@ def execute_method(root, output, topic, method, batch, runtime):
     accounting.bind(directory, scope)
     if hasattr(runtime,"ready"):
         runtime.ready()
-    accounting.start_task(scope, wall_seconds=batch.get("resource_policy",{}).get("max_wall_seconds",3600))
+    accounting.start_task(scope, wall_seconds=batch.get("resource_policy",{}).get("max_wall_seconds",MAX_WALL_SECONDS))
     prompt = topic["request"]
     if method == 'pe-loop':
         from .pe_loop import execute

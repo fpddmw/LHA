@@ -14,7 +14,7 @@ import uuid
 from planner_harness.common import load, save, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.lock import RunLock
-from planner_harness.resources import ResourceExhausted, MAX_GENERATIONS
+from planner_harness.resources import ResourceExhausted, MAX_GENERATIONS, MAX_WALL_SECONDS
 from planner_harness.accounting import ExternalExecutionUnknown
 from evaluation.creative import JUDGES, judge_identity
 from . import render_profiles
@@ -72,7 +72,7 @@ def task_spec(topic, arm, batch, profile_path):
                 "seed_sequence": batch["seed_sequence"], "renderer": renderer_spec(topic, batch)},
             "run_instructions": "Complete the user's video task using the limited budget deliberately. "
                 "Choose prompts, input candidates, review focus and delivery. Every successful generation is automatically reviewed before your next decision. "
-                "Answer continuation questions in the generate justification when requested. "
+                "Use optional generate justification to record what an attempt aims to improve or compare. "
                 "Complete the configured per-generation review, then select a reviewed candidate for delivery. "
                 + render_profiles.prompt_guidance(render_profiles.backend(batch)) + " " +
                 "The rendering seed sequence is fixed by the experiment. A blocked or interrupted task remains incomplete."}
@@ -147,7 +147,7 @@ def run_arm(topic, arm):
     admit_topic(budget_scope)
     service.ensure_ready()
     from planner_harness.accounting import start_task
-    start_task(budget_scope, wall_seconds=batch.get("resource_policy",{}).get("max_wall_seconds",3600))
+    start_task(budget_scope, wall_seconds=batch.get("resource_policy",{}).get("max_wall_seconds",MAX_WALL_SECONDS))
     os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(output / "topics" / topic["id"] / (arm + "-model-usage.jsonl"))
     if arm == "direct":
         jobdir = directory / "direct" / topic["id"]

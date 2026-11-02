@@ -34,8 +34,8 @@ Compare plausible retained candidates, including the best earlier answer. Repair
 
 ## Decide what another attempt is worth
 
-Favor delivery when the central request is met and remaining discrepancies are incidental. Continue when an important gap remains and the proposed attempt has a concrete basis for improving the answer. The [continuation account](../experience/curated/entries/continuation-value.md) explains how regressions and adequate earlier candidates affect this judgment.
+Choose continuation or delivery by comparing the actual result with the original task. A further attempt can develop an unresolved requirement or compare a plausible alternative; a satisfactory candidate can be delivered. Budget hints describe resource availability and do not determine whether a defect matters. The [continuation account](../experience/curated/entries/continuation-value.md) explains how regressions and adequate earlier candidates affect this judgment.
 
-When continuation questions appear, explain the concrete choice you are making using the candidates and observations you have. Submit that explanation with the actual input and prompt. At delivery, use the checks already made to choose the retained candidate and explain accepted tradeoffs. Final delivery starts no additional review.
+An optional generation justification can connect the actual input and prompt with the change or comparison you intend. At delivery, use the checks already made to choose the retained candidate and explain accepted tradeoffs. Final delivery starts no additional review.
 
 If no promising path remains for an unsuitable result, retain the best provisional candidate and explain the blockage through the operating interface. Use notes/workspace to carry forward the useful interpretation, alternative or rejected explanation. The recorded reads and operations preserve the underlying evidence.

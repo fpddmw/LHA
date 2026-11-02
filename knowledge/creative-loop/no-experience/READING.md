@@ -9,3 +9,7 @@ This task provides operating, semantic and style material. Renderer experience, 
 Earlier continuation explanations and exact submitted operations are available through history. Use them to reconnect a new observation with the choice it was meant to test. The professional revision manual develops this comparison; notes/workspace hold the understanding you want to retain.
 
 Read `observe-events` when choosing continuous observation pages or a Critic event question. It explains actual coverage, absent footage and unresolved ranges. Both experience scopes use the same operating guide.
+
+Search with `scope: "style"` for visual references or `scope: "experience"` for experience (when available). Results include source prose and literal named-reference coverage. If a work has no dedicated entry, explore its visual features and related design sources. Open useful entries for their full relationships and reference images. Reading remains your choice.
+
+Read pages persist in working memory across operations. Repeated directory metadata is stored in history rather than copied beside every page. Only actual context capacity shortens displayed excerpts; source identities and reopening links remain, and complete text stays available.

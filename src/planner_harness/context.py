@@ -266,6 +266,27 @@ def fit_creative(payload, state, system_chars):
     def fits():
         return system_chars + len(json.dumps(payload, ensure_ascii=False, indent=2)) <= limit
 
+    if not fits():
+        # Transport hashes/paths and directory inventories are already saved in
+        # the call and source receipts. Spend scarce input space on read content.
+        payload["attached_images_in_order"] = [
+            {k: frame[k] for k in ("attachment", "id", "video_id", "observation_id",
+                                   "frame_index", "timestamp_seconds", "crop", "kind") if k in frame}
+            for frame in payload.get("attached_images_in_order", [])
+        ]
+        navigation = payload.get("knowledge_entrances", {})
+        if "entrances" in navigation:
+            navigation["entrances"] = [
+                {k: row[k] for k in ("id", "title") if k in row}
+                for row in navigation["entrances"]
+            ]
+        payload["read_receipts"] = {
+            "count": len(state["reads"]),
+            "open": {"action": "history", "arguments": {"catalog": "reads"}},
+        }
+        if not payload.get("working_memory", {}).get("retained_reads"):
+            payload.pop("working_memory", None)
+
     for field in ("recent_operations", "available_observations"):
         while not fits() and len(payload.get(field, [])) > 1:
             payload[field].pop(0)
@@ -285,11 +306,6 @@ def fit_creative(payload, state, system_chars):
     while not fits() and len(reviews) > 1:
         del reviews[next(iter(reviews))]
     # Oversized current records are exact pages, never invented summaries.
-    if not fits():
-        payload.pop("working_memory", None)
-        payload["read_receipts"] = {
-            "open": {"action": "history", "arguments": {"catalog": "reads"}}
-        }
     for identity, value in list(payload.get("evaluations", {}).items()):
         if fits():
             break
@@ -310,6 +326,10 @@ def fit_creative(payload, state, system_chars):
                 "open": {"action": "history", "arguments": {"event_id": newest["event_id"]}},
             }
         ]
+    if not fits():
+        from .working_memory import fit_display
+
+        fit_display(payload, limit, system_chars)
     return payload
 
 

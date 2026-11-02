@@ -29,6 +29,7 @@ CURRENT = (
     "test_review_modes",
     "test_review_experiments",
     "test_loop_protocol_upgrade",
+    "test_planner_iteration",
     "test_loop_engineering",
     "test_engineering_cleanup",
     "test_creative_loop",
