@@ -1,0 +1,13 @@
+{
+  "tests": 69,
+  "modules": 5,
+  "passed": true,
+  "source_changed_during_tests": false,
+  "test_report": "out/planner_iteration_20261103/judge-projection/summary.json",
+  "saved_plan_projection": "out/planner_iteration_20261103/judge-coordinate-replay.json",
+  "new_final_profile_sha256": "35695256d7ef478da9969a2e27ebeac3bed96a7a1fc13204ce4b41e0e822cac5",
+  "plan_changed": false,
+  "existing_judgment_changed": false,
+  "model_calls": 0,
+  "scope": "Expose verbatim requirements without character offsets; name video timeline units explicitly in every judge packet."
+}

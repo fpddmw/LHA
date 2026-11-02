@@ -94,10 +94,21 @@ def _visible(rows):
 
 
 def _packet(system, visible, rows, profile_hash):
+    from .task_spec import judge_view, scope_view
+
     rows = [{**row, "attachment": i+1} for i,row in enumerate(rows)]
     visible = {**visible, "evidence": _visible(rows)}
+    if visible.get("task_spec") is not None:
+        visible["task_spec"] = judge_view(visible["task_spec"])
+    if "scope" in visible:
+        visible["scope"] = scope_view(visible["scope"])
+    if "event_observations" in visible:
+        visible["event_observations"] = [
+            {**row, "scope": scope_view(row["scope"])}
+            for row in visible["event_observations"]
+        ]
     return {"system_prompt": system, "user_text": json.dumps(visible, ensure_ascii=False, indent=2),
-            "images": rows, "profile_sha256": profile_hash,"input_projection":"evidence-v1"}
+            "images": rows, "profile_sha256": profile_hash,"input_projection":"evidence-v2-text-requirements-seconds"}
 
 
 def collect_evidence(request, source, candidates, directory, plan=None):

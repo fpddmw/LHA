@@ -7,6 +7,8 @@
 
 本轮迭代验证：当前套件 31 个模块、357 项测试全部通过，补充 10 项 continuation 回归通过；测试期间源码未变。001／005 原始阅读记录离线重放分别完整保留 7／6 份正文，原记录未改，也未调用模型或生成视频。详见 [验证记录](../reports/maintenance-20261103/planner-iteration-validation.json)。
 
+独立终评追加修复：已确认 GLM 将原文字符偏移 212–440 误读为帧区间。新模型输入只给要求 id＋原文，并将视频区间标明秒；原始 plan 和旧报告保留。5 个评价模块、69 项回归通过，真实 001 计划零调用投影复核通过；新评分 profile 使用独立缓存。卡管理负责恢复 GLM，Sonnet 保持暂停。
+
 ## 2026-11-03 四视频预览接入
 
 - 官方 ChatGPT 订阅 Responses 后端已实现，见 [登录、配置与运行说明](chatgpt-subscription.md)。保留现有 Planner／Critic 提示词、原图传输与使用量记录，独立于 Codex CLI。

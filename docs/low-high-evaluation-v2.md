@@ -76,3 +76,7 @@ python scripts/run_low_high_eval.py score --source /path/source.mp4 \
 ## 配置与实现边界
 
 独立判官配置为 [evaluation.json](../configs/evaluation.json)，由 `evaluation.providers` 创建；API 客户端共享 `vlm.settings` 和 `vlm.openrouter`。正式校验位于 `evaluation.validation`，在线定性评审无需加载它。终评 profile 绑定判官配置与相关实现，更改判官会生成不同评价身份。历史直连接口保留在 `evaluation.legacy_providers`，当前默认入口不使用它。
+
+## 原文位置与视频时间
+
+2026-11-03 输入投影修复：冻结计划中的 requirements.start/end 保留原始请求的字符偏移，用于定位原文；模型可见的 requirement 只包含 id 与原文 text。真实视频事件使用 start_seconds／end_seconds、requested_interval_seconds 和 interval_seconds，帧证据仍使用 frame_index 与 timestamp_seconds。事件观察、终评、成对比较及分项评分共用这一投影。修改会产生新的 final profile 哈希；旧报告与原始输入保留，新评分使用新 profile 的缓存目录。

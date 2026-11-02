@@ -76,6 +76,28 @@ class Tests(unittest.TestCase):
         with self.assertRaises(ValueError):lh.freeze_plan({'targets':['invention']},self.request,self.source,self.root/'bad')
         with self.assertRaises(ValueError):lh.check_plan(plan,'different',self.source)
 
+    def test_request_character_spans_never_become_judge_time_ranges(self):
+        request = "Preserve this scene with " + "careful detail " * 16 + ". Keep the people together. Add warm light."
+        plan = lh.freeze_plan(body(), request, self.source, self.root / "long-request-plan")
+        before = json.dumps(plan, sort_keys=True)
+        self.assertGreater(plan["task"]["requirements"][1]["start"], self.source["frames"])
+        judge = Judge()
+        judge_candidate(request, self.source, self.source, self.root / "long-request-score", model=judge, plan=plan)
+        pairwise.compare(request, self.source, self.source, self.source, self.root / "long-request-pair", plan=plan, seed=1, model=judge)
+        for visible in judge.calls:
+            task = visible["task_spec"]
+            self.assertEqual(task["requirements"], [{"id":r["id"],"text":r["text"]} for r in plan["task"]["requirements"]])
+            for event in task["events"]:
+                self.assertEqual((event["start_seconds"], event["end_seconds"]), (1.0, 2.0))
+                self.assertNotIn("start", event)
+            scopes = ([visible["scope"]] if "scope" in visible else []) + [r["scope"] for r in visible.get("event_observations", [])]
+            for scope in scopes:
+                self.assertIn("requested_interval_seconds", scope)
+                self.assertNotIn("start", scope["event"])
+                self.assertTrue(all("interval_seconds" in r for r in scope["coverage"].values()))
+        self.assertEqual(json.dumps(plan, sort_keys=True), before)
+        lh.check_plan(plan, request, self.source)
+
     def test_final_overview_and_events_are_independent_from_online(self):
         self.assertNotEqual(lh.profile()["sha256"],frozen_profile()["sha256"])
         overview,segments,coverage=lh.collect_evidence(self.request,self.source,{"candidate":self.source},self.root / "evidence",self.plan)

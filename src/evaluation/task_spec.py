@@ -1,6 +1,37 @@
 """Verbatim original requirements and reproducible evidence/motion configuration."""
 import re
+import copy
 from planner_harness.execution import signature
+
+
+def judge_view(task):
+    """The judge needs verbatim requirements, not request-string offsets.
+
+    Character spans remain in the immutable plan for provenance. Video event
+    coordinates use explicit seconds in the model-facing projection.
+    """
+    result = copy.deepcopy(task)
+    result['requirements'] = [{k: row[k] for k in ('id', 'text')} for row in task['requirements']]
+    result['events'] = [event_view(event) for event in task['events']]
+    return result
+
+
+def event_view(event):
+    return {**{k: v for k, v in event.items() if k not in {'start', 'end'}},
+            'start_seconds': event['start'], 'end_seconds': event['end']}
+
+
+def scope_view(scope):
+    result = copy.deepcopy(scope)
+    if 'event' in result:
+        result['event'] = event_view(result['event'])
+    if 'requested_interval' in result:
+        result['requested_interval_seconds'] = result.pop('requested_interval')
+    for coverage in result.get('coverage', {}).values():
+        if 'interval' in coverage:
+            coverage['interval_seconds'] = coverage.pop('interval')
+    return result
+
 
 def clauses(request):
     # Stable verbatim spans, not an LLM-expanded list of requirements.
