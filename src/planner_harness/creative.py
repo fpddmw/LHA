@@ -181,14 +181,13 @@ def system_prompt(harness):
     operations = (harness.knowledge.snapshot or {}).get("documents", {}).get(path, {}).get("text")
     if operations is None:
         operations = (harness.root / path).read_text(encoding="utf-8")
-    row = harness.knowledge.items["manual"]
-    return (
-        operations
-        + "\n\n"
-        + harness.knowledge.document(row)["text"]
-        + "\n\n"
-        + harness.knowledge.document(harness.knowledge.items["review"])["text"]
-    )
+    sections = [operations]
+    # Older snapshots retain their original instruction set.
+    if "prompt-writing" in harness.knowledge.items:
+        sections.append(harness.knowledge.document(harness.knowledge.items["prompt-writing"])["text"])
+    for identity in ("manual", "review"):
+        sections.append(harness.knowledge.document(harness.knowledge.items[identity])["text"])
+    return "\n\n".join(sections)
 
 
 def review_payload(harness, args):

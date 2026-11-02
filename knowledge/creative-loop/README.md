@@ -5,6 +5,7 @@
 | How do the tools and continuing workspace work? | [Operating manual](../../src/planner_harness/CREATIVE_LOOP.md), [reading guide](READING.md) |
 | Which source meanings should the target retain or reinterpret? | [Task and design manual](UNDERSTAND_AND_DESIGN.md), [meaning guide](../guides/meaning.md) |
 | How can the proposed visual direction be realized? | [Theme](../guides/theme.md), [media](../guides/media.md), [time](../guides/time.md), [combination](../guides/combination.md), [design expression](../guides/design-expression.md); full entries and domain references |
+| How do I turn this design and feedback into a rendering prompt? | [Prompt-writing guide](PROMPT_WRITING.md), also included in the Planner instructions |
 | What should this renderer make me anticipate? | [Renderer profiles](../experience/curated/renderers.md), then relevant [experience entries](../experience/curated/README.md) |
 | Why did this result occur, and what is worth changing? | [Revision manual](UNDERSTAND_AND_REVISE.md), [experience map](../experience/curated/README.md) |
 | How should I check the generated result? | [Qualitative review guide](../../.agents/skills/lha-video-review/SKILL.md) |

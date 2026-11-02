@@ -1,5 +1,7 @@
 # Express a construction and choose the input that supports it
 
+The [prompt-writing guide](PROMPT_WRITING.md) is included in every Planner call. Use it to turn the task, viewed frames, relevant readings and review findings into the visual relationships expressed in `generate.prompt`.
+
 Describe the visible arrangement, participant roles and progression that would realize the task. Use [part binding](../experience/curated/entries/part-binding.md) when an effect needs a specific carrier, [connected scope](../experience/curated/entries/connected-scope.md) for dependent changes, and [wanted state](../experience/curated/entries/wanted-state.md) when a positive replacement relationship clarifies the design.
 
 The selected input determines which useful information the next attempt can use. [Input conditioning](../experience/curated/entries/input-conditioning.md) develops the choice between continuing target achievements and recovering required lost information. [Instance identity](../experience/curated/entries/instance-identity.md) is relevant when individual correspondence matters. Read the [renderer profile](../experience/curated/renderers.md) for model-specific starting preferences, then its linked account for conditions and counterexamples.

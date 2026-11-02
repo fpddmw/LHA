@@ -83,14 +83,15 @@ class ManualContractTests(unittest.TestCase):
                 collect(h)
                 job = h.state["jobs"][h.state["pending_tool"]]
                 self.assertEqual(job["payload"]["events"], examples[1]["arguments"]["review_focus"]["events"])
-                result = critique(job, h.output / "jobs" / job["id"], ROOT, model=fixtures.ScriptedCritic())
-                event = result["coverage"]["events"][0]["event"]
-                self.assertLessEqual(event["start"], 1.2)
-                self.assertGreaterEqual(event["end"], 3.8)
+                critic = fixtures.ScriptedCritic()
+                result = critique(job, h.output / "jobs" / job["id"], ROOT, model=critic)
+                requested = json.loads(critic.inputs[0]["user_text"])["requested_events"]
+                self.assertEqual(requested, examples[1]["arguments"]["review_focus"]["events"])
+                self.assertEqual(result["protocol"], one_shot.PROTOCOL)
+                self.assertTrue(result["report"]["summary"])
         # Scopes differ in knowledge, while model-visible operation contracts match.
         def common(text):
-            tools = text.split("## Tools", 1)[1]
-            return tools.split("\nThe `understand-and-design`", 1)[0].split("\nThe understand-and-design", 1)[0]
+            return re.findall(r"^- `.*$", text, re.M)
         self.assertEqual(common(systems[0]), common(systems[1]))
 
     def test_guide_is_discoverable_and_snapshot_readable_without_experience(self):
@@ -108,6 +109,52 @@ class ManualContractTests(unittest.TestCase):
                 if mode == "none":
                     self.assertEqual(resumed.curated_catalog["entries"], [])
         self.assertEqual(paths[0], paths[1])
+
+    def test_prompt_writing_reaches_generate_with_reads_and_review_in_existing_calls(self):
+        """Check instruction/evidence delivery and dispatch, not model writing quality."""
+        guide = ROOT / "knowledge/creative-loop/PROMPT_WRITING.md"
+        for mode in ("full", "none"):
+            with self.subTest(mode=mode):
+                ids = ["theme"] + (["EX-lighting-integration"] if mode == "full" else [])
+                model = fixtures.Scripted([
+                    fixtures.action("read", targets=[{"id": identity} for identity in ids]),
+                    fixtures.action("generate", input_video="source", prompt="Blue light falls across the scene."),
+                ])
+                h = PlannerHarness(self.root / ("writing-" + mode), model)
+                h.start(self.source, "Make the scene blue.", mode="loop", workflow="creative_loop_v1",
+                        execution={"mode": "replay", "experience_mode": mode})
+                frozen_system = h.system
+                self.assertEqual(len(model.inputs), 2)
+                self.assertEqual(frozen_system.count(guide.read_text()), 1)
+                snapshot = load(h.output / "knowledge-snapshot.json")
+                self.assertEqual(snapshot["documents"][str(guide.relative_to(ROOT))]["text"], guide.read_text())
+                self.assertIn("prompt-writing", h.knowledge.items)
+
+                fixture = type("Fixture", (), {"h": h, "source": self.source})()
+                fixtures.CreativeTests.respond(fixture)
+                revised = "Soft blue light grazes the foreground; deeper blue shadows separate the background."
+                model = fixtures.Scripted([fixtures.action("generate", input_video="v1", prompt=revised)])
+                h = PlannerHarness(h.output, model)
+                h.resume()
+                self.assertEqual(len(model.inputs), 1)
+                self.assertEqual(model.inputs[0]["system_prompt"], frozen_system)
+                context = json.loads(model.inputs[0]["user_text"])
+                self.assertEqual([r["material"]["id"] for r in context["working_memory"]["retained_reads"]], ids)
+                latest = next(reversed(h.state["evaluations"]))
+                self.assertEqual(context["evaluations"][latest]["report"], h.state["evaluations"][latest]["report"])
+                job = h.state["jobs"][h.state["pending_tool"]]
+                self.assertEqual(job["payload"]["prompt"], revised)
+                self.assertEqual(job["payload"]["input_id"], "v1")
+
+                fixture.h = h
+                fixtures.CreativeTests.respond(fixture)
+                jobs_before_delivery = len(h.state["jobs"])
+                model = fixtures.Scripted([fixtures.action("finish", video="v2", message="Use the revised lighting.")])
+                h = PlannerHarness(h.output, model)
+                h.resume()
+                self.assertEqual(len(model.inputs), 1)
+                self.assertEqual(len(h.state["jobs"]), jobs_before_delivery)
+                self.assertEqual(h.state["status"], "complete")
 
     def test_generated_legacy_metric_reference_matches_source(self):
         self.assertEqual((ROOT / "docs/evaluation-metrics.md").read_text(), registry.markdown())
