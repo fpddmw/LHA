@@ -235,6 +235,10 @@ class PersistentDittoRenderer:
             ]
         )
         if not 0 < tokens <= 512:
+            save(directory / "prompt-length.json", {
+                "request_sha256": job.get("sha256"), "token_count": tokens,
+                "token_limit": 512, "includes_official_prefix": False,
+            })
             raise ValueError("Prompt exceeds tokenizer limit; truncation is disabled")
         save(
             directory / "renderer-input.json",

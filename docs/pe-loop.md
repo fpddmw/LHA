@@ -49,6 +49,23 @@ python scripts/run_creative_benchmark.py recover-pe-loop \
 
 该命令只重新开放原任务的结算和队列位置，保存恢复原因；它不调用模型、不重置预算或删除阶段记录。之后用原 `run` 命令接续。仍在执行或结果未知的外部请求会阻止恢复，历史失败结算单独存档。
 
+### 提示词长度恢复
+
+Bernini 用官方 tokenizer 计算清洗后的提示词和官方前缀，共 512 token；Ditto 计算提示词本身的 512 token。超长请求在 GPU 生成前返回失败，并保存 `prompt-length.json` 中的实际计数。
+
+PE 对明确的生成前长度拒绝最多做两次压缩。压缩模型保留任务的关键变化和视觉关系，按原文长度缩减；每次新提示词再经过实际 tokenizer 检查。正常提示词沿原流程直接生成。压缩调用计入原 PE 账本和截止时间，未派发 GPU 的拒绝不消耗生成次数。
+
+原始增强答卷和 `rounds/NNNN/prompt.json` 保留。压缩调用与输出进入原生成目录的 `prompt-revisions/1`、`2`；新的生成请求分别使用 `N-prompt-1`、`N-prompt-2` 目录。Critic、后续历史和结果记录使用实际渲染的提示词。两次压缩仍超长时，有既有候选的任务按最近一次完成的选择结算，并记录 `prompt_limit_delivery`。
+
+已有旧版本任务可用独立的新代码目录恢复原运行。先检查，再执行同一条命令加 `--execute`：
+
+```bash
+python scripts/recover_pe_prompt.py --output /path/original-run \
+  --topic SAMPLE__long --device 0 --reason "已核实生成前 tokenizer 超限"
+```
+
+`--device` 使用原 worker 的设备编号。执行入口为本次恢复建立独立服务队列，记录当前代码指纹、原失败回执和压缩策略；原代码快照、模型配置、生成参数、视频与调用记录继续保留。已 closed 的调度记录在原期限内重新开放，时钟和已用次数保持原值；期限已到时直接结算已有选择。原失败结算保存在 `settlement-history`，恢复记录位于 `prompt-length-recovery`，结果中保留恢复来源。
+
 结果登记三种身份：`first` 首轮、`last` 末轮、`final` 最终选中；`selected` 候选标记对应 final。N=1 时三者可指向同一个视频。内容哈希共用媒体及终评缓存，首轮对照无需再生成。
 
 默认主比较为 PE Loop 最终结果与无知识 Planner Loop 最终结果；有／无知识、首轮／最终及 Direct 参照作为相应增量分析。原有对照仍可显式运行。统计按原始长短任务及来源组汇总。

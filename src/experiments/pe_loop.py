@@ -15,6 +15,51 @@ from planner_harness.lock import RunLock
 from planner_harness.resources import ResourceExhausted
 
 PROTOCOL = "lha-pe-critic-loop-v1"
+MAX_PROMPT_REVISIONS = 2
+COMPACT_PROMPT = """Shorten a video rendering prompt to fit the renderer's text encoder.
+Keep the original task's defining visual changes, subjects, relations and actions.
+Combine repeated descriptions and express the complete scene in compact English.
+Use the supplied target word count as an editing guide, prioritizing the requested
+changes and distinctive details. The renderer checks the actual encoder tokens.
+Return exactly JSON {"prompt": "..."}.
+"""
+
+
+class PromptLengthRefused(RuntimeError):
+    """A recorded tokenizer refusal before any GPU generation was submitted."""
+
+    def __init__(self, details):
+        self.details = details
+        super().__init__("Rendering prompt exceeds the text encoder capacity")
+
+
+def compact_prompt(topic, prompt, details, directory, model, scope, *, backend="bernini"):
+    from planner_harness.model_call import call_text
+    from planner_harness.json_output import decode_object
+    from planner_harness.ledger import english
+    from .render_profiles import prompt_guidance
+
+    directory = Path(directory)
+    count, limit = details.get("token_count"), details.get("token_limit", 512)
+    ratio = min(.85, max(.1, (limit - 32) / count)) if count else .8
+    packet = {"original_request": topic["request"], "prompt": prompt,
+              "target_words": max(1, int(len(prompt.split()) * ratio)),
+              "renderer": prompt_guidance(backend), "refusal": details}
+    immutable(directory / "revision-input.json", packet)
+
+    def produce():
+        accounting.check_task(scope)
+        raw = call_text(directory / "call", model, COMPACT_PROMPT,
+                        json.dumps(packet, ensure_ascii=False), [], attempts=1)
+        answer = decode_object(raw)
+        if set(answer) != {"prompt"} or not isinstance(answer["prompt"], str) or not answer["prompt"].strip():
+            raise ValueError("Prompt compaction requires one nonempty English prompt")
+        english(answer["prompt"])
+        return answer["prompt"]
+
+    return _completed(directory / "prompt.json", produce)
+
+
 SYSTEM_PROMPT = """You enhance a video-editing prompt for Bernini V2V.
 Write a complete, concrete English rendering prompt for the user's original task.
 Use the source frames to translate the requested appearance and scene changes into
@@ -119,6 +164,7 @@ def execute(topic, batch, runtime, directory, scope):
             return _completed(directory / "complete.json", lambda: None)
         history, candidates, reviews = [], [], []
         selected, decision, stop = 0, None, None
+        stop_kind = "deadline_delivery"
         phase, number = "enhance", 0
         try:
             for number in range(batch["max_generations"]):
@@ -133,7 +179,7 @@ def execute(topic, batch, runtime, directory, scope):
                     accounting.check_task(scope)
                     seed = batch["seed_sequence"]["start"] + number * batch["seed_sequence"]["step"]
                     value = runtime.render(topic, "pe-loop", prompt, seed, number, scope)
-                    return {**value, "id": "v" + str(number + 1), "prompt": prompt}
+                    return {**value, "id": "v" + str(number + 1), "prompt": value.get("prompt", prompt)}
                 candidate = _completed(folder / "candidate.json", render)
                 if sha(candidate["video"]["path"]) != candidate["video"]["sha256"]:
                     raise IntegrityError("PE candidate video changed")
@@ -158,13 +204,19 @@ def execute(topic, batch, runtime, directory, scope):
                 selected, decision = _completed(folder / "choice.json", choose)
                 if type(selected) is not int or not 0 <= selected < len(candidates):
                     raise IntegrityError("PE selector returned an unknown candidate")
-                history.append({"prompt": prompt, "candidate": candidate, "feedback": feedback})
+                history.append({"prompt": candidate["prompt"], "candidate": candidate, "feedback": feedback})
                 save(directory / "progress.json", {"round": number + 1, "phase": "reviewed",
                                                      "selected": candidates[selected]["id"]})
         except ResourceExhausted as exc:
             stop = str(exc)
             if not candidates:
                 raise
+        except PromptLengthRefused as exc:
+            if not candidates:
+                raise
+            stop = "Prompt length remains over capacity after bounded revisions"
+            stop_kind = "prompt_limit_delivery"
+            save(directory / "prompt-limit-stop.json", exc.details)
         except Exception as exc:
             save(directory / "progress.json", {"round": number + 1, "phase": phase,
                  "status": "awaiting_recovery", "error_type": type(exc).__name__, "reason": str(exc)})
@@ -184,7 +236,7 @@ def execute(topic, batch, runtime, directory, scope):
             and r['kind'] == 'render' and r['status'] != 'not_submitted' for r in operations)
         immutable(directory / "selection.json", selection)
         chosen = copy.deepcopy(candidates[selected])
-        chosen.update(actual_generations=len(candidates), delivery_kind="deadline_delivery" if stop else "selected",
+        chosen.update(actual_generations=len(candidates), delivery_kind=stop_kind if stop else "selected",
                       planner_confirmed=False, reviews=selection["review_sha256"])
         result = {"candidate": chosen, "candidates": candidates, "partial": bool(stop)}
         return _completed(directory / "complete.json", lambda: result)

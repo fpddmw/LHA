@@ -508,10 +508,29 @@ class Runtime:
         self.service.ensure_ready()
 
     def render(self, topic, method, prompt, seed, number, scope):
+        from .pe_loop import MAX_PROMPT_REVISIONS, PromptLengthRefused, compact_prompt
+
+        original = prompt
+        for revision in range(MAX_PROMPT_REVISIONS + 1):
+            try:
+                result = self._render(topic, method, prompt, seed, number, scope, revision=revision)
+                if revision:
+                    result.update(prompt=prompt, original_prompt=original, prompt_revisions=revision)
+                return result
+            except PromptLengthRefused as exc:
+                if method != "pe-loop" or revision == MAX_PROMPT_REVISIONS:
+                    raise
+                directory = self.directory / "baselines" / topic["id"] / method / str(number) / "prompt-revisions" / str(revision + 1)
+                model = accounting.attach(self.service.model_factory("planner"), scope)
+                prompt = compact_prompt(topic, prompt, exc.details, directory, model, scope,
+                                        backend=render_profiles.backend(self.batch))
+
+    def _render(self, topic, method, prompt, seed, number, scope, *, revision=0):
         from server_runtime.engine import Engine
         from planner_harness.video import Video
-        jobdir = self.directory / "baselines" / topic["id"] / method / str(number)
-        body = {"id": topic["id"] + "__" + method + "__" + str(number), "kind": "generate", "mode": "live",
+        attempt = str(number) + ("-prompt-" + str(revision) if revision else "")
+        jobdir = self.directory / "baselines" / topic["id"] / method / attempt
+        body = {"id": topic["id"] + "__" + method + "__" + attempt, "kind": "generate", "mode": "live",
             "accounting_scope": scope, "payload": {"input_id": "source", "input": topic["source_info"],
                 "prompt": prompt, "renderer": render_profiles.renderer_spec(topic, self.batch, seed)}}
         request = {**body, "sha256": signature(body)}
@@ -526,13 +545,35 @@ class Runtime:
             if (jobdir / "render-started.json").exists():
                 raise accounting.ExternalExecutionUnknown("Original render was dispatched; await its owned receipt")
             self.queue.enqueue(body["id"], "tool", "gpu", {"request": str(jobdir / "request.json"), "request_sha256": request["sha256"]})
-            Engine(self.queue, self.directory, self.service, self.service.expand).run(once=True)
+            Engine(self.queue, self.service.directory, self.service, self.service.expand).run(once=True)
             response = load(response_path)
         if response["request_sha256"] != request["sha256"]:
             raise IntegrityError("Generated response has a different request identity")
         if response["status"] != "complete":
             if response.get("outcome_unknown"):
                 raise accounting.ExternalExecutionUnknown("Original baseline render remains unresolved")
+            if response.get("task_deadline") or response.get("failure_kind") == "resource_exhausted":
+                raise ResourceExhausted(response.get("error", "Original rendering budget exhausted"))
+            length_errors = {
+                "ValueError: Prompt exceeds tokenizer limit; automatic truncation is disabled",
+                "ValueError: Prompt exceeds tokenizer limit; truncation is disabled",
+            }
+            operation = accounting.operation(scope, request["sha256"])
+            if (response.get("error") in length_errors
+                    and not (jobdir / "render-started.json").exists()
+                    and not (jobdir / "renderer-input.json").exists()
+                    and (operation is None or operation["status"] == "not_submitted")):
+                from .pe_loop import PromptLengthRefused
+                details = {"response": str(response_path), "response_sha256": sha(response_path),
+                           "request_sha256": request["sha256"], "token_limit": 512,
+                           "error": response["error"], "render_submitted": False}
+                measured = jobdir / "prompt-length.json"
+                if measured.exists():
+                    measured = load(measured)
+                    if measured.get("request_sha256") != request["sha256"]:
+                        raise IntegrityError("Prompt length measurement belongs to another request")
+                    details.update(measured)
+                raise PromptLengthRefused(details)
             raise RuntimeError("Baseline render failed; original receipt retained")
         video = Video(response["payload"]["video"]["path"], jobdir).info
         if video["sha256"] != response["payload"]["video"]["sha256"]:
@@ -716,7 +757,11 @@ def _register(root, batch, topic, method, seed, candidate, directory, candidates
             "selected_render_seed": candidate["seed"], "candidate_hashes": [c["video"]["sha256"] for c in candidates],
             "selection":load(Path(directory)/"selection.json") if (Path(directory)/"selection.json").exists() else None,
             "delivery_kind":candidate.get("delivery_kind","selected"),"planner_confirmed":candidate.get("planner_confirmed"),"reviews":candidate.get('reviews'),
-            "experience_snapshot_sha256":candidate.get("experience_snapshot_sha256"),"render_runtime":candidate.get("execution",candidate["video"].get("execution",{})),"actual_generations":candidate.get("actual_generations"),"requested_generations":batch["best_of_n"] if method=="direct-best-of-n" else batch["max_generations"] if method in results.TRAJECTORY_METHODS else 1},
+            "experience_snapshot_sha256":candidate.get("experience_snapshot_sha256"),"render_runtime":candidate.get("execution",candidate["video"].get("execution",{})),"actual_generations":candidate.get("actual_generations"),"requested_generations":batch["best_of_n"] if method=="direct-best-of-n" else batch["max_generations"] if method in results.TRAJECTORY_METHODS else 1,
+            "prompt_revisions": [{"candidate_id": c.get("id"), "count": c["prompt_revisions"],
+                                  "original_prompt": c.get("original_prompt"), "rendered_prompt": c.get("prompt"),
+                                  "response": c["response"]} for c in candidates if c.get("prompt_revisions")],
+            "prompt_recovery_execution": load(Path(directory)/"prompt-length-recovery/execution.json") if (Path(directory)/"prompt-length-recovery/execution.json").exists() else None},
         "candidates": [{"id": c["id"], "video": c["video"]["path"], "video_sha256": c["video"]["sha256"],
             "seed": c["seed"], "roles": c["roles"]} for c in candidates] if method in results.TRAJECTORY_METHODS else []})
 

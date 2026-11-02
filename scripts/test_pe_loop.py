@@ -318,6 +318,106 @@ class PELoopTests(Fixture):
         self.assertEqual(policy['online_task_budget']['max_generations'], 3)
         self.assertEqual(policy['online_task_budget']['wall_seconds'], 9000)
 
+    def test_prompt_compaction_is_cached_and_uses_original_scope(self):
+        batch, _ = self.setup_loop(n=2)
+        topic = batch['topics'][0]
+        scope = accounting.topic_scope(self.output, topic['id'], lane='pe-loop')
+        seen = []
+        class Model:
+            model = 'openai/gpt-6.1-sol'
+            reasoning_effort = 'high'
+            def predict_text(self, **kwargs):
+                seen.append(kwargs)
+                return json.dumps({'prompt': 'Blue light across the stone surface.'})
+        model = accounting.attach(Model(), scope)
+        path = self.root / 'compact'
+        args = (topic, 'A detailed blue scene. ' * 80, {'token_count': 533, 'token_limit': 512}, path, model, scope)
+        answer = pe_loop.compact_prompt(*args)
+        with patch.object(accounting, 'check_task', side_effect=ResourceExhausted('deadline')):
+            self.assertEqual(pe_loop.compact_prompt(*args), answer)
+            with self.assertRaises(ResourceExhausted):
+                pe_loop.compact_prompt(*args[:3], self.root / 'new-compact', model, scope)
+        self.assertEqual(len(seen), 1)
+        packet = json.loads(seen[0]['user_text'])
+        self.assertEqual(packet['original_request'], topic['request'])
+        self.assertEqual(packet['refusal']['token_count'], 533)
+        self.assertLess(packet['target_words'], len(packet['prompt'].split()))
+        calls = list(accounting.load_ledger(scope['root'])['operations'].values())
+        self.assertEqual(len(calls), 1)
+        self.assertEqual((calls[0]['topic'], calls[0]['lane']), (topic['id'], 'pe-loop'))
+
+    def test_runtime_bounds_prompt_revisions_and_leaves_direct_unchanged(self):
+        batch, _ = self.setup_loop(n=2)
+        topic = batch['topics'][0]
+        scope = accounting.topic_scope(self.output, topic['id'], lane='pe-loop')
+        host = u.Runtime.__new__(u.Runtime)
+        host.directory, host.batch = self.root / 'worker', batch
+        host.service = SimpleNamespace(model_factory=lambda role: SimpleNamespace())
+        refused = pe_loop.PromptLengthRefused({'token_count': 533, 'token_limit': 512})
+        with patch.object(host, '_render', side_effect=refused) as render, \
+             patch.object(pe_loop, 'compact_prompt', side_effect=['Shorter first.', 'Shorter second.']) as compact:
+            with self.assertRaises(pe_loop.PromptLengthRefused):
+                host.render(topic, 'pe-loop', 'Original prompt.', 43, 1, scope)
+            self.assertEqual(compact.call_count, 2)
+            self.assertEqual([c.kwargs['revision'] for c in render.call_args_list], [0, 1, 2])
+            self.assertEqual([c.args[2] for c in render.call_args_list], ['Original prompt.', 'Shorter first.', 'Shorter second.'])
+            render.reset_mock(); compact.reset_mock()
+            with self.assertRaises(pe_loop.PromptLengthRefused):
+                host.render(topic, 'direct', 'Original prompt.', 43, 1, scope)
+            self.assertEqual(render.call_count, 1)
+            compact.assert_not_called()
+
+    def test_only_definite_unsubmitted_length_refusal_can_be_compacted(self):
+        batch, _ = self.setup_loop(n=2)
+        topic = batch['topics'][0]
+        scope = accounting.topic_scope(self.output, topic['id'], lane='pe-loop')
+        host = u.Runtime.__new__(u.Runtime)
+        host.directory, host.batch = self.output / 'workers/0', batch
+        from experiments.render_profiles import renderer_spec
+        body = {'id': topic['id'] + '__pe-loop__0', 'kind': 'generate', 'mode': 'live',
+                'accounting_scope': scope, 'payload': {'input_id': 'source', 'input': topic['source_info'],
+                'prompt': 'Original prompt.', 'renderer': renderer_spec(topic, batch, 42)}}
+        request = {**body, 'sha256': u.signature(body)}
+        folder = host.directory / 'baselines' / topic['id'] / 'pe-loop/0'
+        save(folder / 'request.json', request)
+        response = {'request_sha256': request['sha256'], 'status': 'failed', 'mode': 'live',
+                    'error': 'ValueError: Prompt exceeds tokenizer limit; automatic truncation is disabled'}
+        save(folder / 'response.json', response)
+        before = (folder / 'response.json').read_bytes()
+        with self.assertRaises(pe_loop.PromptLengthRefused):
+            host._render(topic, 'pe-loop', 'Original prompt.', 42, 0, scope)
+        self.assertEqual((folder / 'response.json').read_bytes(), before)
+        save(folder / 'render-started.json', {'request_sha256': request['sha256']})
+        with self.assertRaisesRegex(RuntimeError, 'Baseline render failed'):
+            host._render(topic, 'pe-loop', 'Original prompt.', 42, 0, scope)
+        save(folder / 'response.json', {**response, 'task_deadline': True, 'error': 'TaskDeadline: original deadline'})
+        with self.assertRaises(ResourceExhausted):
+            host._render(topic, 'pe-loop', 'Original prompt.', 42, 0, scope)
+        save(folder / 'response.json', {**response, 'outcome_unknown': True})
+        with self.assertRaises(accounting.ExternalExecutionUnknown):
+            host._render(topic, 'pe-loop', 'Original prompt.', 42, 0, scope)
+
+    def test_effective_prompt_reaches_critic_history_and_length_stop_retains_choice(self):
+        batch, runtime = self.setup_loop(n=3)
+        original = runtime.render
+        def render(topic, method, prompt, seed, number, scope):
+            if number == 2:
+                raise pe_loop.PromptLengthRefused({'token_count': 520, 'token_limit': 512})
+            return {**original(topic, method, prompt, seed, number, scope),
+                    'prompt': 'The actual compact blue scene.', 'prompt_revisions': 1}
+        runtime.render = render
+        result = self.run_loop(batch, runtime)
+        self.assertTrue(result['partial'])
+        self.assertEqual(result['delivery_kind'], 'prompt_limit_delivery')
+        self.assertEqual(runtime.last_history[0]['prompt'], 'The actual compact blue scene.')
+        self.assertTrue(all(c[3] == 'The actual compact blue scene.' for c in runtime.calls if c[0] == 'review'))
+        row = results.find(self.registry, '001', 'short', 'pe-loop', 42)
+        self.assertEqual(row['evidence']['actual_generations'], 2)
+        self.assertEqual(row['candidates'][0]['roles'], ['first', 'selected'])
+        directory = self.output / 'methods' / batch['topics'][0]['id'] / 'pe-loop'
+        self.assertEqual(load(directory / 'rounds/0001/prompt.json')['value'], 'A blue painted scene. Round 1')
+        self.assertTrue((directory / 'prompt-limit-stop.json').exists())
+
 
 if __name__ == '__main__':
     unittest.main()

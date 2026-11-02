@@ -140,6 +140,10 @@ class PersistentRenderer:
             self.tokenizer(encoded_text, truncation=False, add_special_tokens=True)["input_ids"]
         )
         if not 0 < tokens <= 512:
+            save(directory / "prompt-length.json", {
+                "request_sha256": job.get("sha256"), "token_count": tokens,
+                "token_limit": 512, "includes_official_prefix": True,
+            })
             raise ValueError("Prompt exceeds tokenizer limit; automatic truncation is disabled")
         reader = self.reader(str(source))
         indices = [

@@ -305,6 +305,9 @@ class ServiceTests(unittest.TestCase):
             renderer.tokenizer = lambda *args, **kwargs: {"input_ids": [1] * 513}
             with self.assertRaisesRegex(ValueError, "tokenizer limit"):
                 renderer(job, self.root / "oversized")
+            measurement = load(self.root / "oversized/prompt-length.json")
+            self.assertEqual((measurement["token_count"], measurement["token_limit"]), (513, 512))
+            self.assertTrue(measurement["includes_official_prefix"])
             self.assertEqual(len(calls), 2)
             job["payload"]["renderer"]["generation"] = {**g, "num_inference_steps": 20}
             with self.assertRaisesRegex(ValueError, "differs"):
