@@ -654,10 +654,18 @@ def execute_method(root, output, topic, method, batch, runtime):
         loop = load(receipt) if receipt.exists() else runtime.loop(topic, method)
         from .creative_benchmark import verify_arm
         verify_arm(topic, method, loop, batch["profile_sha256"])
-        if loop["selected"] is None:
+        if loop["selected"] is None and (loop.get("outcome") != "execution_failed" or loop.get("supervisor_settlement")):
             return {"status": loop["outcome"], "entry_sha256": None}
-        selected = loop["videos"][loop["selected"]]
         state = load(Path(loop["record_directory"]) / "state.json")
+        selected_id, retained = loop["selected"], None
+        if selected_id is None and loop.get("outcome") == "execution_failed":
+            from planner_harness.candidate_selection import recorded_choice
+            retained = recorded_choice(state)
+            if retained:
+                selected_id = retained["selected"]
+        if selected_id is None:
+            return {"status": loop["outcome"], "entry_sha256": None}
+        selected = loop["videos"][selected_id]
         job = state["jobs"][selected["job_id"]]
         actual_seed = job["payload"]["renderer"]["seed"]
         if selected.get("execution", {}).get("seed", actual_seed) != actual_seed:
@@ -665,11 +673,15 @@ def execute_method(root, output, topic, method, batch, runtime):
         if state.get('config',{}).get('execution',{}).get('review',batch.get('review'))!=batch.get('review'):
             raise IntegrityError('Loop state used a different review mode')
         candidate = {"video": selected, "response": loop["completion_record"]["path"], "seed": actual_seed,"delivery_kind":loop.get("outcome","delivered"),"planner_confirmed":loop.get("planner_confirmed",loop.get("outcome","delivered")=="delivered"),"actual_generations":len(state.get("submitted_generation_ids",[])),"experience_snapshot_sha256":state.get("knowledge_snapshot_sha256"),"reviews":state.get('reviews',{})}
+        if retained:
+            candidate.update(delivery_kind="interrupted_delivery", planner_confirmed=False,
+                             run_outcome=loop["outcome"], retained_selection=retained)
         candidates = []
+        last_id = next(reversed(loop["videos"]), None)
         for identity, video in loop["videos"].items():
             job = state["jobs"][video["job_id"]]
             candidates.append({"id": identity, "video": video, "seed": job["payload"]["renderer"]["seed"],
-                "roles": (["first"] if identity == loop["first"] else []) + (["selected"] if identity == loop["selected"] else [])})
+                "roles": (["first"] if identity == loop["first"] else []) + (["last"] if identity == last_id else []) + (["selected"] if identity == selected_id else [])})
     else:
         if method == "planner-once":
             model = accounting.attach(runtime.service.model_factory("planner"), scope)
@@ -736,10 +748,17 @@ def execute_method(root, output, topic, method, batch, runtime):
         else:candidate=candidates[0]
     # Retained, already completed candidates can be selected after a time stop.
     # This is deterministic settlement, with no new model or render admission.
-    if method not in {'direct-best-of-n','pe-loop'} and candidate.get('delivery_kind')!='deadline_delivery':accounting.check_task(scope)
+    if method not in {'direct-best-of-n','pe-loop'} and candidate.get('delivery_kind') not in {'deadline_delivery','interrupted_delivery'}:accounting.check_task(scope)
 
     entry = _register(root, batch, topic, method, seed, candidate, directory, candidates)
-    return {"status": "ready", "entry_sha256": entry["sha256"],"delivery_kind":candidate.get("delivery_kind","selected"),"partial":bool((method=="direct-best-of-n" and len(candidates)<batch["best_of_n"]) or (method=='pe-loop' and outcome['partial']))}
+    partial = (candidate.get("delivery_kind") == "interrupted_delivery"
+               or (method == "direct-best-of-n" and len(candidates) < batch["best_of_n"])
+               or (method == "pe-loop" and outcome["partial"]))
+    result = {"status": "ready", "entry_sha256": entry["sha256"],
+              "delivery_kind": candidate.get("delivery_kind", "selected"), "partial": bool(partial)}
+    if candidate.get("run_outcome"):
+        result.update(run_outcome=candidate["run_outcome"], planner_confirmed=False)
+    return result
 
 
 def _register(root, batch, topic, method, seed, candidate, directory, candidates):
@@ -757,6 +776,7 @@ def _register(root, batch, topic, method, seed, candidate, directory, candidates
             "selected_render_seed": candidate["seed"], "candidate_hashes": [c["video"]["sha256"] for c in candidates],
             "selection":load(Path(directory)/"selection.json") if (Path(directory)/"selection.json").exists() else None,
             "delivery_kind":candidate.get("delivery_kind","selected"),"planner_confirmed":candidate.get("planner_confirmed"),"reviews":candidate.get('reviews'),
+            "run_outcome":candidate.get("run_outcome"),"retained_selection":candidate.get("retained_selection"),
             "experience_snapshot_sha256":candidate.get("experience_snapshot_sha256"),"render_runtime":candidate.get("execution",candidate["video"].get("execution",{})),"actual_generations":candidate.get("actual_generations"),"requested_generations":batch["best_of_n"] if method=="direct-best-of-n" else batch["max_generations"] if method in results.TRAJECTORY_METHODS else 1,
             "prompt_revisions": [{"candidate_id": c.get("id"), "count": c["prompt_revisions"],
                                   "original_prompt": c.get("original_prompt"), "rendered_prompt": c.get("prompt"),

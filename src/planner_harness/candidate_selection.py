@@ -57,6 +57,11 @@ def deadline_choice(state):
         raise IntegrityError(
             "Deadline delivery requires a persisted freeze at or after the original deadline"
         )
+    return recorded_choice(state)
+
+
+def recorded_choice(state):
+    """Read the committed candidate choice, retaining its original provenance."""
     record = state.get("deadline_selection")
     if not record or not record.get("selected"):
         return None
@@ -65,6 +70,6 @@ def deadline_choice(state):
         k: v for k, v in body.items() if k != "recorded_unix"
     } != _projection(state):
         raise IntegrityError("Precommitted deadline selection changed")
-    if body["recorded_unix"] > state["online_clock"]["deadline_unix"]:
+    if body["recorded_unix"] > state.get("online_clock", {}).get("deadline_unix", float("inf")):
         raise IntegrityError("Deadline selection was not committed before the deadline")
     return copy.deepcopy(record)

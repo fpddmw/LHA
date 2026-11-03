@@ -248,6 +248,72 @@ def settle_pe_interruption(output, topic, device, *, execute=False):
         return row
 
 
+def settle_planner_failure(output, topic, device, *, method="full", execute=False):
+    """Register retained Planner candidates while keeping the failed run intact."""
+    from . import unified_benchmark as unified
+    from .creative_benchmark import verify_arm
+    from planner_harness.candidate_selection import recorded_choice
+
+    output = Path(output).resolve()
+    if method not in {"full", "none"}:
+        raise ValueError("Choose full or none Planner loop")
+    directory = output / "methods" / topic / method
+    worker = output / "workers" / str(device)
+    if not directory.resolve().is_relative_to(output) or not worker.resolve().is_relative_to(output):
+        raise ValueError("Settlement paths must belong to the original run")
+    with RunLock(output / "unified-owner"), RunLock(output / "batch-owner"):
+        batch = load(output / "batch.json")
+        if batch.get("sha256") != signature({k: v for k, v in batch.items() if k != "sha256"}):
+            raise ValueError("Frozen batch changed")
+        task = next(t for t in batch["topics"] if t["id"] == topic)
+        path = directory / "settlement.json"
+        if path.exists() and load(path).get("status") == "ready":
+            return {"status": "complete", "topic": topic}
+        receipt_path = output / "topics" / topic / (method + ".json")
+        receipt = load(receipt_path)
+        run = Path(receipt["record_directory"]).resolve()
+        if not run.is_relative_to(worker):
+            raise ValueError("Specify the original Planner worker")
+        with RunLock(run):
+            verify_arm(task, method, receipt, batch["profile_sha256"])
+            state = load(run / "state.json")
+            if receipt.get("outcome") != "execution_failed":
+                raise ValueError("This entry settles a recorded Planner execution failure")
+            selection = recorded_choice(state)
+            if not selection:
+                raise ValueError("No committed candidate choice is available")
+            plan = {"status": "settlement_ready", "topic": topic, "method": method,
+                    "batch_sha256": batch["sha256"], "native_state_sha256": sha(run / "state.json"),
+                    "arm_receipt_sha256": sha(receipt_path), "selection": selection,
+                    "run_outcome": "execution_failed", "planner_confirmed": False,
+                    "clock": state.get("online_clock"), "model_calls": 0, "renders": 0}
+            if not execute:
+                return plan
+            repair = directory / "failure-settlement"
+            immutable(repair / "execution.json", plan)
+            host = load(worker / "host.json") if (worker / "host.json").exists() else {}
+            if host.get("renderer"):
+                batch = {**batch, "renderer_identity": host["renderer"]}
+            if host.get("local_results_root"):
+                batch = {**batch, "results_root": host["local_results_root"]}
+
+            class CachedRuntime:
+                def loop(self, *args):
+                    raise ValueError("The original completed arm receipt is required")
+
+            root = Path(__file__).resolve().parents[2]
+            result = unified.execute_method(root, output, task, method, batch, CachedRuntime())
+            if path.exists():
+                previous = load(path)
+                immutable(directory / "settlement-history" / (signature(previous) + ".json"), previous)
+            row = {"topic": topic, "method": method, "review_mode": unified.method_review_mode(method, batch),
+                   "batch_sha256": batch["sha256"], **result,
+                   "recovery_execution": str(repair / "execution.json")}
+            save(path, row)
+            save(repair / "result.json", row)
+            return row
+
+
 def recover_pe_loop(output, topic, reason):
     """Reopen settlement/dispatch only; reuse all original PE phase receipts."""
     import sqlite3
