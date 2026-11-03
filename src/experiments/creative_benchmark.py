@@ -62,13 +62,13 @@ def verify_batch(root, output):
 
 
 def task_spec(topic, arm, batch, profile_path):
-    if arm not in {"full", "none"}:
+    if arm not in {"full", "none", "pre-experience"}:
         raise ValueError("Direct is a renderer job, not a Planner task")
     spec = {"id": topic["id"] + "__" + arm, "workflow": "creative_loop_v1",
             "source": topic["source"], "source_sha256": topic["source_sha256"], "request": topic["request"],
             "completion_mode": "delivery", "max_generations": batch["max_generations"], "max_turns": batch["max_turns"],
             "max_context_chars": 180000,
-            "execution": {"mode": "live", "experience_mode": arm, "task_track": topic.get("track", topic.get("prompt_form", "long")), "benchmark_metadata":{"split":topic.get("split","train"),"sample_id":topic.get("sample_id",topic["id"]),"seed":batch["seed_sequence"]["start"]}, "experiment_profile": str(profile_path),
+            "execution": {"mode": "live", "experience_mode": "full" if arm == "pre-experience" else arm, "task_track": topic.get("track", topic.get("prompt_form", "long")), "benchmark_metadata":{"split":topic.get("split","train"),"sample_id":topic.get("sample_id",topic["id"]),"seed":batch["seed_sequence"]["start"]}, "experiment_profile": str(profile_path),
                 "seed_sequence": batch["seed_sequence"], "renderer": renderer_spec(topic, batch)},
             "run_instructions": "Complete the user's video task using the limited budget deliberately. "
                 "Choose prompts, input candidates, review focus and delivery. Every successful generation is automatically reviewed before your next decision. "
@@ -76,6 +76,8 @@ def task_spec(topic, arm, batch, profile_path):
                 "Complete the configured per-generation review, then select a reviewed candidate for delivery. "
                 + render_profiles.prompt_guidance(render_profiles.backend(batch)) + " " +
                 "The rendering seed sequence is fixed by the experiment. A blocked or interrupted task remains incomplete."}
+    if arm == "pre-experience":
+        spec["execution"]["experience_condition"] = arm
     if batch.get("resource_policy"):
         spec["execution"]["resource_policy"] = batch["resource_policy"]
     spec["execution"]["review"] = copy.deepcopy(batch.get("review", {"mode":"critic"}))

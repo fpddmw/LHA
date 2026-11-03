@@ -31,10 +31,21 @@ def _permutation(values):
     return (1+sum(x>=observed-1e-12 for x in estimates))/(1+len(estimates))
 
 
-def summarize(rows, *, population="test"):
+def analysis_plan_for(pre_experience=False):
+    if not pre_experience:
+        return PLAN
+    return {**PLAN, "version": "lha-test-analysis-v4-pre-experience",
+            "primary": {**PLAN["primary"], "comparison": "pe-loop_final__to__pre-experience_final",
+                        "positive_direction": "pre-experience_final"}}
+
+
+def summarize(rows, *, population="test", pre_experience=False):
     if population not in {"test","main","rsi"}:raise ValueError("Unknown analysis population")
-    analysis_plan={**PLAN,"population":"All planned benchmark source groups"} if population=="main" else PLAN
-    if population=="rsi":analysis_plan={**PLAN,"population":"RSI heldout source groups only","primary":{"comparison":"none_final__to__full_final","endpoint":"task_completion","positive_direction":"full_final"}}
+    plan = analysis_plan_for(pre_experience)
+    control = "pre-experience_final" if pre_experience else "none_final"
+    analysis_plan={**plan,"population":"All planned benchmark source groups"} if population=="main" else plan
+    if population=="rsi":analysis_plan={**plan,"population":"RSI heldout source groups only","primary":{"comparison":f"{control}__to__full_final","endpoint":"task_completion","positive_direction":"full_final"}}
+    preference = analysis_plan["primary"]["positive_direction"] if pre_experience else "none_final"
     groups=defaultdict(list)
     for row in rows:
         if population=='main' or row.get('split')=='test':groups[(row['judge'],row['comparison'])].append(row)
@@ -78,8 +89,8 @@ def summarize(rows, *, population="test"):
                 metric['role']='primary' if primary else 'secondary'
                 if primary:
                     bounds=metric['left_itt_source_mean_bounds']
-                    metric['none_final_preference_bounds']=[1-bounds[1],1-bounds[0]] if bounds else None
-                    value=metric['left_itt_source_mean'];metric['none_final_preference']=1-value if value is not None else None
+                    metric[f'{preference}_preference_bounds']=[1-bounds[1],1-bounds[0]] if bounds else None
+                    value=metric['left_itt_source_mean'];metric[f'{preference}_preference']=1-value if value is not None else None
                 if not primary:family.append(metric)
         # Missing p values remain members of the prespecified family with p=1.
         ordered=sorted(family,key=lambda m:m['paired_permutation_p'] if m['paired_permutation_p'] is not None else 1)

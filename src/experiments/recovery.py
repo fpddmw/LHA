@@ -255,8 +255,8 @@ def settle_planner_failure(output, topic, device, *, method="full", execute=Fals
     from planner_harness.candidate_selection import recorded_choice
 
     output = Path(output).resolve()
-    if method not in {"full", "none"}:
-        raise ValueError("Choose full or none Planner loop")
+    if method not in {"full", "none", "pre-experience"}:
+        raise ValueError("Choose a Planner loop method")
     directory = output / "methods" / topic / method
     worker = output / "workers" / str(device)
     if not directory.resolve().is_relative_to(output) or not worker.resolve().is_relative_to(output):

@@ -9,37 +9,36 @@ CPU-only smoke test, start with the [public experiment guide](public-experiment-
 
 | 顺序／入口 | 覆盖范围与行为 | 每个条件最多生成 | 完整任务轨迹数 | 视频生成上限 |
 |---|---|---:|---:|---:|
-| 1 `zero` | 无经验 Planner 跑完 67 条；先跑前 40 条并逐题维护经验，再跑后 27 条，后段关闭维护 | 4 | 134 | 536＝320＋216 |
-| 2 `knowledge` | 用刚积累的固定经验，跑全量 67 条有经验 Planner | 4 | 134 | 536 |
+| 1 `zero` | 预经验 Planner 跑完 67 条，每题结算后维护；前 40 条的贡献用于本轮，后 27 条留到下一批 | 4 | 134 | 536＝320＋216 |
+| 2 `knowledge` | 用刚积累的固定经验，跑全量 67 条全经验 Planner | 4 | 134 | 536 |
 | 3 `direct` | 全量 Direct；兼容的历史结果直接复用 | 1 | 134 | 134 |
 | 4 `pe-loop` | 全量 PE＋Critic Loop，含首轮共最多 4 次 | 4 | 134 | 536 |
 | 5 `score` | 同批视频统一终评，输出全量主表与 RSI 子集表 | 0 | 复用视频 | 0 |
-| 追加 `self-review` | 全量有／无经验 Planner 切为 Planner 自评；独立积累并冻结自身经验 | 每组 4 | 268 | ＋1072 |
+| 追加 `self-review` | 全量预经验／全经验 Planner 切为 Planner 自评；独立积累并冻结自身经验 | 每组 4 | 268 | ＋1072 |
 
-**主实验最多 1742 次视频生成、536 条完整任务轨迹。** 每个提示词条件对应 `1＋4＋4＋4＝13` 次生成。无经验前 40 条的 320 次已经包含其中，经验维护追加的是模型调用，不追加视频。只跑一种提示词时，上述主实验是 871 次；配置默认长短两版均跑。
+**主实验最多 1742 次视频生成、536 条完整任务轨迹。** 每个提示词条件对应 `1＋4＋4＋4＝13` 次生成。预经验组每题结算后维护，维护只增加模型调用。只跑一种提示词时，上述主实验是 871 次；配置默认长短两版均跑。
 
-一键顺序是 `zero → knowledge → direct → pe-loop → score`。Direct 和 PE 是独立基线，也能单独启动；有经验组依赖无经验全量流程结束后的经验快照。Planner loops use the complete configured generation allowance before final selection, including when an early candidate is adequate. The Planner chooses every prompt and input and may finally select an earlier candidate. Actual submissions include failed render attempts; deadline, execution-unknown and interrupted outcomes remain separately reported. Historical Direct reuse reduces new submissions. First-round comparisons reuse each loop's first saved video.
+一键顺序是 `zero → knowledge → direct → pe-loop → score`。Direct 和 PE 是独立基线，也能单独启动；全经验组依赖预经验全量流程结束后的经验快照。Planner loops use the complete configured generation allowance before final selection, including when an early candidate is adequate. The Planner chooses every prompt and input and may finally select an earlier candidate. Actual submissions include failed render attempts; deadline, execution-unknown and interrupted outcomes remain separately reported. Historical Direct reuse reduces new submissions. First-round comparisons reuse each loop's first saved video.
 
 ## 40／27 怎样用于 RSI
 
 当前清单保留原编号：前 40 条为 001–040 中仍保留的 35 条，加 041–045；后 27 条为 046–075 中仍保留的条目。具体 ID 在命令 `plan` 输出及冻结的 `plan.json` 中；同一 source_group 和同一源视频哈希不会跨 RSI 两侧。原始视频、提示词与文件路径保持原样，`split` 标签表示 RSI 角色，不限制主实验覆盖。
 
-`zero` 的前 40 条在线不读经验，但从预置知识库开始维护。任务结算后，恢复该题 Planner 的实际工作记录，开放三个维护 Skill、预置条目和累计私有经验，允许新建经验、追加评论和提出修订建议；正式整理另行决定采纳与改写。下一题在线继续无经验；只在任务后的维护中读取累计经验。后 27 条继续运行同一个无经验方法，关闭维护，也不读取积累的经验。
+所有任务开跑前冻结 `initial-experience.json`。新 campaign 的 `zero` 阶段对应方法 `pre-experience`。每题在线 Planner 和任务后的维护模型均绑定同一份预经验，维护模型另外读取本题的工作记录和维护指南，可写评论、提修订或提交新条目。
 
-这一批 67 条全部结算后，把前 40 条累积的经验固定为 `trained-experience.json`。`knowledge` 用这份经验跑完整 67 条，整个过程只读。经验更新留在本次运行的私有快照，仓库共享知识库保持原样；维护失败或无增量保留此前版本，未确认的外部执行按原请求恢复。
+前 40 条的贡献按来源登记到私有经验版本。评论和修订建议与原条目关联，新条目作为贡献层进入检索。后 27 条的贡献及来源记录保存在该阶段的 `training-experience/deferred/` 与维护任务目录，供下一批整理。它们不会进入本轮的全经验快照。
 
-**主表汇总 67 条四组结果；RSI 对照直接取后 27 条的无经验／有经验结果。** 前者衡量整个流程，后者衡量经验向未参与维护任务的迁移。两张表共用视频、独立评分和缓存；没有额外的训练批次或 RSI 测试重跑，也不设验证集。本次有经验组包含现有基础经验和前 40 条的维护增量。所有批次开跑前固定非空的 `initial-experience.json`；`none` 只控制在线经验可见范围，不表示库为空。基础设计知识仍可用，Direct／PE 不使用 Planner 经验工具；后 27 题与固定经验组按实验配置只读。
+预经验阶段结算后，`trained-experience.json` 固定预经验与前 40 条的贡献。`knowledge` 阶段用这份快照跑完整 67 条，整组只读。主表汇总全量四组结果，RSI 表取后 27 条的预经验／全经验结果。历史 `none` 结果保留原实验身份。切换到这版 campaign 时使用新的实验目录。
 
 ## Planner self-review: independent accumulation and frozen use
 
 P1 uses the same complete Planner to review its result within the task context.
 For each renderer, both review families start from the same nonempty seed, then
-maintain separate private libraries. Online `none` disables experience access
-while editing; it retains the full seeded corpus for post-task maintenance.
+maintain separate private libraries. The pre-experience stage reads the frozen seed during editing and maintenance.
 
 | Stage | Online experience | Post-task maintenance | Maximum renders |
 |---|---|---|---:|
-| `self-review-zero` | None during editing | First 40 training tasks only, both prompt forms | 536 |
+| `self-review-zero` | Frozen pre-experience seed | All 67 tasks, both forms. The first 40 contribute to this campaign | 536 |
 | `self-review-knowledge` | Its own frozen self-review library | Disabled for all 67 tasks | 536 |
 
 `--stage self-review` runs these two stages in order. It does not depend on or
@@ -56,9 +55,7 @@ are rejected at batch preparation and maintenance entry points. Existing unbound
 legacy runs remain historical records; use a new output directory for this policy.
 
 Maintenance appends new entries, comments, clarifications and revision proposals
-with their source cases. An explicit curator can revise canonical guidance. Online
-`none` tasks never receive the library or post-task contributions in their editing
-context. Full tasks read the frozen map, entries, contributions and linked cases.
+with their source cases. An explicit curator can revise canonical guidance. Full tasks read the frozen map, entries, contributions and linked cases.
 
 ```bash
 python scripts/run_experiment_campaign.py run --backend bernini --stage self-review \
@@ -105,8 +102,8 @@ PE 随渲染器自动适配：Ditto 使用[专用编辑指令模板](pe-loop.md#
 
 | 批次 | 阶段参数 | 前置条件／产出 |
 |---|---|---|
-| 无知识支持 Planner＋维护 | `zero` | 从预置库开始；前 40 题交付后维护，后 27 题关闭维护；产出本模型固定经验 |
-| 有知识支持 Planner | `knowledge` | 依赖本模型 zero 结算；读取本模型固定经验 |
+| 预经验 Planner＋维护 | `zero` | 每题读固定预经验并维护。前 40 题贡献进入全经验，后 27 题延后 |
+| 全经验 Planner | `knowledge` | 依赖本模型 zero 结算；读取本模型固定经验 |
 | Direct | `direct` | 独立基线；复用条件一致的历史视频 |
 | PE Loop | `pe-loop` | 原视频逐轮生成，独立 Critic 反馈，在线选片 |
 | 终评／汇总 | `score` | 复用已有视频与有效评分，输出主表和 RSI 子集 |
@@ -127,7 +124,7 @@ Each model writes `results/index.html` and `results/results.json`, with `results
 
 [一键入口](../scripts/run_experiment_campaign.py)通过 [campaign.py](../src/experiments/campaign.py)复用原 [统一运行器](../src/experiments/unified_benchmark.py)、设备队列、生成回执和结果注册。各批冻结自己的生成次数与 `training_maintenance`：主实验中只有 `zero` 为 true，其他主实验批次为 false。底层手动运行全量有经验组时，使用 `--split train test --method full --no-maintenance`；PE 单独使用 `--max-generations 4 --no-maintenance`。
 
-`zero` 的设备队列将前 40 条的长短条件组成顺序维护链，最后一个维护任务结算后才放行后 27 条。全量有经验组中的前 40 条保持只读，不会因原有 `train` 标签重新维护。具体维护由 [training_experience.py](../src/planner_harness/training_experience.py)与 [maintenance.py](../src/planner_harness/maintenance.py)处理。
+`zero` 的设备队列逐题结算维护。全经验阶段读取已冻结的贡献版本。具体维护由 [training_experience.py](../src/planner_harness/training_experience.py)与 [maintenance.py](../src/planner_harness/maintenance.py)处理。
 
 独立评分复用 [results.py](../src/experiments/results.py) 中的五维、长短专项、CLIP/DINO、光流和匿名交换顺序盲评；原始提示词与源视频是共同评价依据。主实验统计覆盖全部源组，RSI 单独覆盖后段源组。Direct 从 `reuse_direct_results` 指定的历史注册目录核验后导入，旧分数不导入；同一视频的首轮／末轮／选中角色共用新评分。真实调用数、维护费用和 GPU 请求单独记录。
 

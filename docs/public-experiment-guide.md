@@ -55,20 +55,20 @@ not remove training tasks from the full main-method comparison.
 
 | Stage | Online method | Experience maintenance | Render allowance per condition |
 |---|---|---|---:|
-| `zero` | Complete Planner, independent qualitative Critic; no online experience | After both forms of the first 40 tasks | 4 |
+| `zero` | Complete Planner, independent qualitative Critic; reads the frozen pre-experience seed | After both forms of all 67 tasks | 4 |
 | `knowledge` | Same Planner/Critic, its own frozen accumulated experience | Disabled | 4 |
 | `direct` | Exact user request sent directly to renderer | None | 1 |
 | `pe-loop` | Renderer-specific prompt enhancement with Critic feedback; source input each round | None | 4 |
-| `self-review-zero` | Complete Planner reviews its result in the task context; no online experience | After both forms of the first 40 tasks | 4 |
+| `self-review-zero` | Complete Planner reviews its result in the task context; reads the frozen pre-experience seed | After both forms of all 67 tasks | 4 |
 | `self-review-knowledge` | Self-review Planner reads its own frozen accumulated experience | Disabled | 4 |
 
 All Planner arms retain style/semantic knowledge and operating tools. Every family
-starts with the same nonempty seed. `none` restricts experience access during
-editing; its post-task maintainer sees the seeded private library and earlier
-contributions. The held-out 27 tasks never maintain it. Critic and self-review
-families and the two renderers own separate private increments. Maintenance appends
-entries/comments/clarifications/revision proposals; canonical curation is separately
-authorized. There is no automatic shared knowledge publication.
+starts with the same nonempty seed. The pre-experience Planner and its maintainer
+read that fixed snapshot for every task. The full-experience arm uses the seed plus
+the indexed contributions from the first 40 tasks. The other 27 tasks' contributions
+are deferred for a later campaign. Critic and self-review families and the two
+renderers own separate private increments. Maintenance records new entries,
+comments, clarifications and revision proposals. Canonical curation is separate.
 
 Four attempts are required before final Planner selection. Prompts and input
 candidates remain model-led; the selected result may be an early candidate. Failed

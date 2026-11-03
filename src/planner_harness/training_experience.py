@@ -125,6 +125,27 @@ def current(root, output):
     return pointer
 
 
+def base_snapshot(root, output):
+    directory = Path(output).resolve() / "training-experience"
+    owner = load(directory / "library.json")
+    revision = {"owner": owner, "version": 0,
+                "snapshot": str(directory / "versions/base/snapshot.json"),
+                "snapshot_sha256": owner["seed_sha256"]}
+    bound_snapshot(root, revision, output=output)
+    return revision
+
+
+def verify_pre_experience(run, library):
+    run = Path(run)
+    execution = load(run / "state.json")["config"]["execution"]
+    digest = (library or {}).get("snapshot_sha256")
+    if (execution.get("experience_condition") != "pre-experience"
+            or not digest or digest != library["owner"]["seed_sha256"]
+            or execution.get("experience_snapshot_sha256") != digest
+            or load(run / "knowledge-snapshot.json") != load(library["snapshot"])):
+        raise ValueError("Pre-experience maintenance and online reads must share the original seed")
+
+
 def changeset(root, snapshot, changes, provenance, case=None):
     """Append a contribution layer; existing entries and manuals stay fixed."""
     from .experience_contributions import append
@@ -150,9 +171,10 @@ def activate(root, output, contribution):
     if sha(job_path) != value["job_sha256"]:
         raise ValueError("Training contribution job changed")
     job = load(job_path)
+    pre_experience = job["method"] == "pre-experience"
     if (
-        job["method"] not in {"none", "full"}
-        or provenance(root, job["run"], job["split"]) != value["provenance"]
+        job["method"] not in {"none", "full", "pre-experience"}
+        or provenance(root, job["run"], job["split"], deferred=pre_experience) != value["provenance"]
         or job["provenance"] != value["provenance"]
     ):
         raise ValueError(
@@ -183,6 +205,17 @@ def activate(root, output, contribution):
         bound_snapshot(root, library, output=output, **family(load(Path(job["run"]) / "state.json")))
         if library["owner"] != before["owner"]:
             raise ValueError("Maintenance contribution belongs to another experience library")
+        if pre_experience:
+            verify_pre_experience(job["run"], library)
+            if job["split"] == "test":
+                record = {
+                    "status": "deferred" if value["changes"] else "no_increment",
+                    "provenance": value["provenance"],
+                    "contribution": {"path": str(contribution.resolve()), "sha256": sha(contribution)},
+                    "seed_sha256": library["snapshot_sha256"],
+                }
+                immutable(directory / "deferred" / (job["id"] + ".json"), record)
+                return record
         receipt = directory / "activations" / (job["id"] + ".json")
         journal = directory / "journals" / (job["id"] + ".json")
         if receipt.exists():
@@ -198,11 +231,11 @@ def activate(root, output, contribution):
                 raise ValueError("Training activation journal conflicts with current revision")
             immutable(receipt, record)
             return record
-        # Maintenance sees the accumulated library after the none task has settled.
-        # Bind the exact version to the original job, not to mutable runtime state.
-        if library["snapshot_sha256"] != before["snapshot_sha256"]:
+        # Legacy maintenance reads the current revision. Pre-experience
+        # maintenance reads the seed while activation appends to the revision.
+        if not pre_experience and library["snapshot_sha256"] != before["snapshot_sha256"]:
             raise ValueError("Maintenance library is no longer the current training revision")
-        observed = load(library["snapshot"])
+        observed = load(before["snapshot"])
         online = load(Path(job["run"]) / "knowledge-snapshot.json")
         if job["method"] == "none" and online.get("experience_mode") != "none":
             raise ValueError("No-knowledge training task saw full experience online")
@@ -221,7 +254,18 @@ def activate(root, output, contribution):
             "events": load(Path(job["run"]) / "state.json").get("events", []),
             "maintenance_observations": value.get("observations", []),
         }
-        snapshot, changed = changeset(root, observed, value["changes"], value["provenance"], case)
+        changes = value["changes"]
+        if pre_experience:
+            from .experience_contributions import append
+            append(load(library["snapshot"]), changes, value["provenance"])
+            occupied = {row["id"] for row in observed.get("experience_contributions", {}).get("items", [])}
+            # Independent tasks can propose the same new ID without seeing one another.
+            changes = [
+                {**change, "id": change["id"] + "-" + job["id"][:16]}
+                if change["op"] == "create" and change["id"] in occupied else change
+                for change in changes
+            ]
+        snapshot, changed = changeset(root, observed, changes, value["provenance"], case)
         after = before
         if changed:
             snapshot["training_revision"]["owner"] = before["owner"]
@@ -304,7 +348,7 @@ def maintain(root, output, run, job_id, config=None, *, model_factory=None):
         folder / "status.json",
         {
             "status": "complete"
-            if result["status"] in {"activated", "no_increment"}
+            if result["status"] in {"activated", "no_increment", "deferred"}
             else result["status"],
             "attempts": number,
         },

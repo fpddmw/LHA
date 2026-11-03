@@ -37,10 +37,10 @@ class CampaignTests(base.Fixture):
         self.assertEqual(result['main_trajectories'], 16)
         self.assertEqual(result['validation_conditions_scheduled'], 0)
         self.assertNotIn('self-review', campaign.MAIN)
-        self.assertEqual(stages['self-review-zero']['methods'], ['none'])
+        self.assertEqual(stages['self-review-zero']['methods'], ['pre-experience'])
         self.assertEqual(stages['self-review-knowledge']['methods'], ['full'])
         self.assertEqual(stages['self-review-zero']['review_mode'], 'planner')
-        self.assertEqual(stages['self-review-zero']['post_task_maintenance'], 2)
+        self.assertEqual(stages['self-review-zero']['post_task_maintenance'], 4)
         self.assertEqual(stages['self-review-knowledge']['post_task_maintenance'], 0)
 
     def test_plan_does_not_prepare_run_or_touch_benchmark(self):
@@ -73,6 +73,22 @@ class CampaignTests(base.Fixture):
         training = [t for t in units if t['split'] == 'train']
         self.assertEqual(training[1]['dependency'], training[0]['claim_id'])
         self.assertTrue(all(t['dependency'] == training[-1]['claim_id'] for t in units if t['split'] == 'test'))
+
+    def test_pre_experience_prepares_both_splits_with_a_fixed_seed(self):
+        from experiments.creative_benchmark import task_spec
+        from experiments.device_scheduler import work_units
+
+        batch = self.prepare(methods=["pre-experience"], best_of_n=None)
+        seed = tx.base_snapshot(self.repo, self.output)
+        self.assertEqual(batch["experience_seed_sha256"], seed["snapshot_sha256"])
+        units = work_units(batch, {})
+        self.assertEqual({unit["split"] for unit in units}, {"train", "test"})
+        for index, unit in enumerate(units):
+            self.assertTrue(u.training_topic(unit, batch))
+            self.assertEqual(unit["dependency"], units[index - 1]["claim_id"] if index else None)
+            execution = task_spec(unit, "pre-experience", batch, self.output / "profile.json")["execution"]
+            self.assertEqual((execution["experience_mode"], execution["experience_condition"]),
+                             ("full", "pre-experience"))
 
     def test_main_stage_order_reuses_zero_training_in_the_same_registry(self):
         self.config['reuse_direct_results'] = None
@@ -111,7 +127,7 @@ class CampaignTests(base.Fixture):
             campaign.execute(self.repo, self.output, self.config, {'renderer': {'backend': 'bernini'}}, 'main', execute_paid=True)
         self.assertEqual([v[1] for v in calls if v[0] == 'run'], ['zero', 'knowledge', 'direct', 'pe-loop'])
         preparations = {v[1]: v[2] for v in calls if v[0] == 'prepare'}
-        self.assertEqual(preparations['zero']['methods'], ['none'])
+        self.assertEqual(preparations['zero']['methods'], ['pre-experience'])
         self.assertEqual(preparations['zero']['review'], {'mode': 'critic'})
         self.assertEqual({str(p['results_root']) for p in preparations.values()}, {str(self.output/'results')})
         self.assertEqual({key:p['training_maintenance'] for key,p in preparations.items()},
@@ -122,7 +138,7 @@ class CampaignTests(base.Fixture):
 
     def test_pending_generation_does_not_start_training(self):
         self.config['reuse_direct_results'] = None
-        batch = {'topics': [{}], 'profile_sha256':'fixture', 'arms': ['none'], 'review': {'mode': 'critic'}, 'training_maintenance':True,
+        batch = {'topics': [{}], 'profile_sha256':'fixture', 'arms': ['pre-experience'], 'review': {'mode': 'critic'}, 'training_maintenance':True,
                  'max_generations': 4, 'seed_sequence': {'start': 42, 'step': 1},
                  'requested_splits': ['train','test'], 'requested_prompt_forms': ['short', 'long'],
                  'results_root': str(self.output / 'results')}

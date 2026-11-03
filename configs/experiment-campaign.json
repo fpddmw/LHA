@@ -1,5 +1,5 @@
 {
-  "version": "lha-experiment-campaign-v3",
+  "version": "lha-experiment-campaign-v4",
   "max_generations": 4,
   "prompt_forms": [
     "short",

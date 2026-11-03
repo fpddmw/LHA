@@ -50,7 +50,7 @@ def work_units(batch,host):
     for topic in shard_topics(batch,host):
         methods=topic.get('methods',batch['arms'])
         if training_topic(topic,batch):
-            training_method='none' if 'none' in methods else 'full'
+            training_method = 'pre-experience' if 'pre-experience' in methods else 'none'
             if host.get('shard_count',1)!=1:raise ValueError('One ordered training stream cannot be split across hosts; shard read-only test/baselines instead')
             identity=topic['id']+'__training_'+training_method
             units.append({**topic,'claim_id':identity,'methods':[training_method],'dependency':previous});previous=identity
@@ -58,7 +58,7 @@ def work_units(batch,host):
             if baseline:units.append({**topic,'claim_id':topic['id']+'__baselines','methods':baseline})
         else:units.append(topic)
     if previous:
-        units=[{**unit,'dependency':previous} if unit.get('split') in {'validation','test'} else unit for unit in units]
+        units=[{**unit,'dependency':previous} if unit.get('split') in {'validation','test'} and not training_topic(unit, batch) else unit for unit in units]
     return units
 
 

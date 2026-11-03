@@ -9,22 +9,21 @@ from planner_harness.lock import RunLock
 
 # Split labels describe RSI roles only. Every method covers the full population.
 STAGES = {
-    'zero': (('none',), 'critic', True),
+    'zero': (('pre-experience',), 'critic', True),
     'knowledge': (('full',), 'critic', False),
     'direct': (('direct',), 'critic', False),
     'pe-loop': (('pe-loop',), 'critic', False),
-    'self-review-zero': (('none',), 'planner', True),
+    'self-review-zero': (('pre-experience',), 'planner', True),
     'self-review-knowledge': (('full',), 'planner', False),
 }
 MAIN = ('zero', 'knowledge', 'direct', 'pe-loop', 'score')
-VERSION = 'lha-experiment-campaign-v3'
+VERSION = 'lha-experiment-campaign-v4'
 
 
 def seed_library(root, output, initial=None):
     """Bind a nonempty pre-existing corpus before any campaign stage can run.
 
-    Online exposure is a separate decision. A none task's post-delivery
-    maintenance reads this full corpus plus its own accumulated contributions.
+    The pre-experience arm uses this exact seed online and after settlement.
     """
     from planner_harness.creative_knowledge import CreativeKnowledge
     from planner_harness.training_experience import validate_snapshot
@@ -53,8 +52,8 @@ def seed_library(root, output, initial=None):
     immutable(target, value)
     immutable(output / 'initial-experience-receipt.json', {
         'snapshot_sha256': sha(target), 'preexisting_entries': len(knowledge.curated_catalog['entries']),
-        'online_exposure': 'controlled per method; none restricts experience access only during generation',
-        'maintenance': 'after delivery, eligible training Planners browse the full seeded private library',
+        'online_exposure': 'pre-experience reads this seed online and after settlement',
+        'maintenance': 'train contributions enter the current campaign; test contributions are deferred',
     })
     return target
 
@@ -141,7 +140,9 @@ def plan(root, config):
                         'conditions': count, 'trajectories': count * len(methods),
                         'max_generations': count * n * len(methods), 'generations_per_condition': n * len(methods),
                         'task_budgets': {name: estimate_budget(name, n, **config['task_budget']) for name in ('bernini', 'ditto')},
-                        'post_task_maintenance': train_count if maintain else 0,
+                        'post_task_maintenance': count if maintain else 0,
+                        'current_campaign_contribution_conditions': train_count if maintain else 0,
+                        'deferred_contribution_conditions': count - train_count if maintain else 0,
                         'rsi_train_conditions': train_count, 'rsi_test_conditions': count - train_count,
                         'additional_ablation': stage.startswith('self-review')})
     return {'version': VERSION, 'planner_N': config['max_generations'], 'pe_N': config['pe_max_generations'],
@@ -219,20 +220,24 @@ def freeze_training(root, output, *, review_mode="critic"):
     source = output / ('zero' if review_mode == 'critic' else 'self-review-zero')
     name = 'trained-experience' if review_mode == 'critic' else 'self-review-trained-experience'
     batch = load(source / 'batch.json')
-    if batch.get('review') != {'mode':review_mode} or not batch.get('training_maintenance') or batch.get('arms') != ['none']:
+    method, = batch['arms']
+    if batch.get('review') != {'mode':review_mode} or not batch.get('training_maintenance') or method not in {'none', 'pre-experience'}:
         raise ValueError('Freeze requires the matching accumulating review family')
     coverage=[]
     from .unified_benchmark import training_completion
     for topic in batch['topics']:
-        settled = load(source / 'methods' / topic['id'] / 'none/settlement.json')
+        settled = load(source / 'methods' / topic['id'] / method / 'settlement.json')
         if settled['status'] in {'execution_unknown','topic_quarantined','unexecuted','running'}:
             raise ValueError('Training task needs original execution recovery: '+topic['id'])
-        if topic['split'] != 'train':
+        if topic['split'] != 'train' and method != 'pre-experience':
             continue
         result=training_completion(source,topic['id'])
         if result['status'] in {'pending','execution_unknown'}:
             raise ValueError('Training maintenance needs recovery: '+topic['id'])
-        coverage.append({'topic':topic['id'],'online_status':settled['status'],'maintenance':result})
+        record = {'topic': topic['id'], 'online_status': settled['status'], 'maintenance': result}
+        if method == 'pre-experience':
+            record['split'] = topic['split']
+        coverage.append(record)
     revision = current(root, source)
     validate_owner(revision['owner'],output=source,review_mode=review_mode,renderer_backend=batch['backend'])
     if revision['owner'] != batch.get('experience_owner'):
@@ -240,9 +245,9 @@ def freeze_training(root, output, *, review_mode="critic"):
     value = load(revision['snapshot']); validate_snapshot(root, value)
     immutable(output / (name + '.json'), value)
     immutable(output / (name + '-receipt.json'), {
-        'training_batch_sha256': batch['sha256'], 'conditions': len(coverage), 'full_run_conditions': len(batch['topics']),
+        'training_batch_sha256': batch['sha256'], 'conditions': sum(row.get('split', 'train') == 'train' for row in coverage), 'full_run_conditions': len(batch['topics']),
         'revision': revision, 'snapshot_sha256': sha(output / (name + '.json')),
-        'online_mode': 'none', 'maintenance_scope': 'private accumulated full library after task settlement','coverage':coverage})
+        'online_mode': method, 'maintenance_scope': 'fixed seed; test contributions deferred' if method == 'pre-experience' else 'private accumulated full library after task settlement','coverage':coverage})
     return output / (name + '.json')
 
 
@@ -253,7 +258,9 @@ def score_stage(root, output, config, summary):
     results.ensure_evaluation(root, registry, evaluation_id=config['evaluation_id'])
     budget = evaluation_budget(config, next(b['conditions'] for b in summary['batches'] if b['stage'] == 'zero'))
     results.score_evaluation(root, registry, budget)
-    results.report(root, registry, splits=['test'], methods=['none', 'full'], review_modes=['critic'],
+    baseline = output / 'zero/batch.json'
+    control = 'none' if baseline.exists() and load(baseline)['arms'] == ['none'] else 'pre-experience'
+    results.report(root, registry, splits=['test'], methods=[control, 'full'], review_modes=['critic'],
                    analysis_population='rsi', output_name='rsi')
     return results.report(root, registry)
 

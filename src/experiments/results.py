@@ -20,12 +20,12 @@ from planner_harness.lock import RunLock
 
 VERSION = "lha-video-results-v1"
 SAFE = re.compile(r"[A-Za-z0-9_-]+\Z")
-METHODS = ("direct", "direct-best-of-n", "planner-once", "pe", "full", "none",
+METHODS = ("direct", "direct-best-of-n", "planner-once", "pe", "full", "none", "pre-experience",
            "pe-loop", "lineage-chain", "lineage-source-restart")
 RUN_METHODS = tuple(m for m in METHODS if not m.startswith("lineage-"))
 DEFAULT_TEST_METHODS = ("direct", "pe-loop", "none", "full")
-TRAJECTORY_METHODS = {"full", "none", "pe-loop"}
-REVIEW_METHODS = {"full", "none"}
+TRAJECTORY_METHODS = {"full", "none", "pre-experience", "pe-loop"}
+REVIEW_METHODS = {"full", "none", "pre-experience"}
 REVIEW_MODES = ("critic", "planner")
 
 
@@ -50,16 +50,20 @@ def result_variant(method, mode):
     return method + "/" + mode if method in REVIEW_METHODS else method
 
 
-def comparison_pairs():
+def comparison_pairs(*, pre_experience=False):
     from .creative_benchmark import PAIRS
-    return [list(pair) for pair in PAIRS + (("direct", "planner-once"), ("direct", "pe"),
+    pairs = PAIRS + (("direct", "planner-once"), ("direct", "pe"),
         ("direct", "direct-best-of-n"), ("direct-best-of-n", "full_final"), ("direct-best-of-n", "none_final"),
         ("planner-once", "none_first"), ("planner-once", "full_first"), ("pe", "planner-once"),
         ("lineage-source-restart", "lineage-chain"),
         ("direct", "pe-loop_first"), ("direct", "pe-loop_final"),
         ("pe-loop_first", "pe-loop_final"), ("pe-loop_final", "none_final"),
         ("pe-loop_final", "full_final"), ("pe-loop_first", "none_first"),
-        ("full_final@critic", "full_final@planner"), ("none_final@critic", "none_final@planner"))]
+        ("full_final@critic", "full_final@planner"), ("none_final@critic", "none_final@planner"))
+    return [list(pair) for pair in pairs] + [
+        [label.replace("none_", "pre-experience_") for label in pair]
+        for pair in pairs if pre_experience and any(label.startswith("none_") for label in pair)
+    ]
 
 
 def inventory(repository):
@@ -295,6 +299,10 @@ def prepare_evaluation(repository, root, *, evaluation_id=None):
     if directory.exists():
         raise ValueError("A fresh evaluation requires a new ID; use score-evaluation to resume the current one")
     positions = _evaluation_positions(repository, root)
+    pre_experience = any(p["method"] == "pre-experience" for p in positions) or any(
+        p["method"] == "pre-experience"
+        for path in (root / "plans").glob("*.json") for p in load(path)["positions"]
+    )
     population_path=root/'analysis-population.json'
     body = {"schema": "lha-result-evaluation-v1", "evaluation_id": evaluation_id,
         "analysis_population":load(population_path) if population_path.exists() else None,
@@ -302,7 +310,7 @@ def prepare_evaluation(repository, root, *, evaluation_id=None):
         "protocol_sha256": profile()["sha256"], "judges": [judge_identity(j) for j in JUDGES],
         "positions": positions, "source_task": "original request and source video under the shared scoring handbook",
         "adapter_sha256": sha(Path(__file__).parents[1] / "evaluation/creative.py"),
-        "comparison_pairs": comparison_pairs(),
+        "comparison_pairs": comparison_pairs(pre_experience=pre_experience),
         "cache_scope": "this fresh evaluation only; bound additions retain the same rules"}
     with RunLock(root / "registry-owner"):
         immutable(directory / "evaluation.json", {**body, "sha256": signature(body)})
@@ -482,7 +490,7 @@ def compare_evaluation(repository, root, *, models=None):
         if not any(group[:3] == key for group in groups):groups[*key,"shared"] = {}
     for key in sorted({group[:3] for group in groups if group[3] in REVIEW_MODES}):
         cross={}
-        for method in ('full','none'):
+        for method in ('full','none','pre-experience'):
             label=method+'_final'
             # Reviewer ablation exists only when both modes are actually planned.
             # A planned but unavailable candidate still contributes its missing denominator.
@@ -491,16 +499,18 @@ def compare_evaluation(repository, root, *, models=None):
         if cross:groups[*key,'critic-vs-planner']=cross
     for (sample, form, seed, mode), group in groups.items():
         group.update({label:p for label,p in shared.get((sample,form,seed),{}).items() if label not in group})
-        if seed == 42 and any(k in group for k in ("full_final", "none_final", "pe-loop_final", "pe", "planner-once", "direct-best-of-n")):
+        if seed == 42 and any(k in group for k in ("full_final", "none_final", "pre-experience_final", "pe-loop_final", "pe", "planner-once", "direct-best-of-n")):
             group.setdefault("direct", None)
         if "lineage-chain" in group or "lineage-source-restart" in group:
             group.setdefault("lineage-chain", None);group.setdefault("lineage-source-restart", None)
         for method in TRAJECTORY_METHODS:
             if method + "_final" in group:group.setdefault(method + "_first", None)
-    from evaluation.statistics import PLAN as analysis_plan
+    from evaluation.statistics import analysis_plan_for
+    pairs = evaluation["comparison_pairs"]
+    analysis_plan = analysis_plan_for(any(label.startswith("pre-experience_") for pair in pairs for label in pair))
     if evaluation.get('analysis_population'):
         analysis_plan={**analysis_plan,'population':'Full benchmark for main analysis; frozen RSI heldout subset reported separately'}
-    contrast_body={"evaluation_sha256":evaluation["sha256"],"pairs":comparison_pairs(),"analysis_plan":analysis_plan}
+    contrast_body={"evaluation_sha256":evaluation["sha256"],"pairs":pairs,"analysis_plan":analysis_plan}
     immutable(directory/"contrast-plan-v2.json",{**contrast_body,"sha256":signature(contrast_body)})
     contrasts = contrast_body["pairs"]
     tasks = inventory(repository)
@@ -729,9 +739,10 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
             summary['paired_differences']={key:paired(values) for key,values in differences.items()}
     if active and index_path.exists():
         from evaluation.statistics import summarize as formal_summary
+        pre_experience = any(label.startswith("pre-experience_") for pair in active[1]["comparison_pairs"] for label in pair)
         modes={r.get('review_mode','shared') for r in records}
         key={'test':'test_analysis','main':'main_analysis','rsi':'rsi_analysis'}[analysis_population]
-        summary[key]=formal_summary(records,population=analysis_population) if modes<={'shared','legacy'} else {'by_review_mode':{mode:formal_summary([r for r in records if r.get('review_mode','shared')==mode],population=analysis_population) for mode in sorted(modes)}}
+        summary[key]=formal_summary(records,population=analysis_population,pre_experience=pre_experience) if modes<={'shared','legacy'} else {'by_review_mode':{mode:formal_summary([r for r in records if r.get('review_mode','shared')==mode],population=analysis_population,pre_experience=pre_experience) for mode in sorted(modes)}}
     save(root / ("results.json" if output_name=="index" else output_name+".json"), summary)
     body = ['<!doctype html><meta charset="utf-8"><title>LHA 视频结果</title>',
         '<style>body{font:16px system-ui;max-width:1200px;margin:auto;padding:24px}section{border-top:1px solid #ccc;padding:16px 0}video{max-width:100%;max-height:360px}p{white-space:pre-wrap}</style>',
@@ -745,7 +756,8 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
     if summary.get('paired_differences'):
         body.append('<details><summary>当前配对差值</summary><pre>'+html.escape(json.dumps(summary['paired_differences'],ensure_ascii=False,indent=2))+'</pre></details>')
     for row in rows:
-        body.append('<section><h2>' + html.escape(f'{row["sample_id"]} / {row["prompt_form"]} / {result_variant(row["method"],row["review_mode"])} / seed {row["seed"]}') + '</h2><p>' + html.escape(row["request"]) + '</p>')
+        label = {"pre-experience": "预经验", "full": "全经验"}.get(row["method"], row["method"])
+        body.append('<section><h2>' + html.escape(f'{row["sample_id"]} / {row["prompt_form"]} / {result_variant(row["method"],row["review_mode"]).replace(row["method"], label, 1)} / seed {row["seed"]}') + '</h2><p>' + html.escape(row["request"]) + '</p>')
         body.append('<video controls preload="none" src="' + quote(row["video"], safe="/.") + '"></video><p>' + ('待新评价' if not row["judges"] else '当前评价：' + html.escape(row["evaluation_status"])) + '</p>' if row["video"] else '<p>视频缺失</p>')
         for name, judgment in row["judges"].items():
             body.append('<h3>' + html.escape(name) + '</h3><pre>' + html.escape(json.dumps(judgment.get("metrics") or {"status":judgment["status"]}, ensure_ascii=False, indent=2)) + '</pre>')

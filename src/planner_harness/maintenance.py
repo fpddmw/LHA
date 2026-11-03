@@ -111,9 +111,9 @@ def stage_profile(root,batch,config=None):
     return {**body,'sha256':signature(body)}
 
 
-def eligible(run,split):
+def eligible(run,split, *, deferred=False):
     run=Path(run)
-    if split!='train' or not (run/'state.json').is_file():return False
+    if (split != 'train' and not (deferred and split == 'test')) or not (run/'state.json').is_file():return False
     state=load(run/'state.json')
     if state.get('config',{}).get('workflow') not in {'creative_loop_v1','single_planner_trace'} or not state.get('final'):return False
     if state.get('status') in {'running','waiting_tool','needs_reconciliation','interrupted'}:return False
@@ -125,14 +125,15 @@ def eligible(run,split):
     return False
 
 
-def provenance(root,run,split):
+def provenance(root,run,split, *, deferred=False):
     """Verify actual benchmark membership, rather than trusting a split argument."""
     state=load(Path(run)/'state.json')
     metadata=state['config']['execution'].get('benchmark_metadata',{})
     sample=metadata.get('sample_id')
     rows=load(Path(root)/'benchmark_data/benchmark.json')
     row=next((r for r in rows if r['sample_id']==sample),None)
-    if split!='train' or metadata.get('split')!=split or row is None or row['split']!=split:
+    deferred = deferred and state['config']['execution'].get('experience_condition') == 'pre-experience'
+    if (split != 'train' and not (deferred and split == 'test')) or metadata.get('split')!=split or row is None or row['split']!=split:
         raise ValueError('New library candidates require an attested training task; test/validation are excluded')
     source=state.get('videos',{}).get('source',state.get('source',{}))
     if source.get('sha256')!=row['source_video_sha256']:
@@ -150,12 +151,15 @@ def provenance(root,run,split):
 def enqueue(root, batch_output, run, *, split, topic, method, batch_sha256, maintenance_profile=None, maintenance_snapshot=None):
     """Idempotent after fixed settlement; no model, dataset write or activation."""
     run,batch_output=Path(run).resolve(),Path(batch_output).resolve()
-    if not eligible(run,split):return None
+    pre_experience = method == 'pre-experience'
+    if not eligible(run, split, deferred=pre_experience):return None
     batch_path=batch_output/'batch.json'
     if batch_path.exists() and load(batch_path).get('training_maintenance') is False:
         return None
     state=load(run/'state.json')
-    from .training_experience import initialize, bound_snapshot, family
+    from .training_experience import initialize, bound_snapshot, family, verify_pre_experience
+    if pre_experience:
+        verify_pre_experience(run, maintenance_snapshot)
     identity=signature({'run':str(run),'batch_sha256':batch_sha256})
     directory=batch_output/'maintenance/jobs'/identity
     if (directory/'job.json').exists():
@@ -174,7 +178,7 @@ def enqueue(root, batch_output, run, *, split, topic, method, batch_sha256, main
     if any(v is None for v in [*profile['skills'].values(),*profile['references'].values()]):raise ValueError('Maintenance reading material is missing')
     body={'version':VERSION,'implementation_sha256':sha(__file__),'run':str(run),'run_state_sha256':sha(run/'state.json'),
           'knowledge_snapshot_sha256':sha(run/'knowledge-snapshot.json'),'batch_sha256':batch_sha256,
-          'provenance':provenance(root,run,split),'split':split,'topic':topic,'method':method,'settlement':copy.deepcopy(state['final']),
+          'provenance':provenance(root,run,split,deferred=pre_experience),'split':split,'topic':topic,'method':method,'settlement':copy.deepcopy(state['final']),
           'experience_mode':state['config']['execution'].get('experience_mode'),
           'events':[e['event_id'] for e in state.get('events',[])],
           'entry_versions':{r['id']:{k:r.get(k) for k in ('version','sha256')} for r in load(run/'knowledge-snapshot.json').get('curated_catalog',{}).get('entries',[])},
@@ -245,7 +249,9 @@ def _execute(root,folder,job,cfg,model):
     if sha(run/'state.json')!=job['run_state_sha256'] or sha(run/'knowledge-snapshot.json')!=job['knowledge_snapshot_sha256']:
         raise ValueError('Frozen task/knowledge changed before maintenance')
     library=job.get('maintenance_snapshot')
-    from .training_experience import bound_snapshot, family
+    from .training_experience import bound_snapshot, family, verify_pre_experience
+    if job['method'] == 'pre-experience':
+        verify_pre_experience(run, library)
     knowledge=bound_snapshot(root,library,**family(load(run/'state.json')))
     files={'state':run/'state.json','knowledge-snapshot':run/'knowledge-snapshot.json'}
     for identity,path in job.get('additional_sources',{}).items():files[identity]=Path(path)
@@ -387,7 +393,13 @@ def merge_candidates(output):
     """One cross-task candidate input; no active-library writes or new evaluation."""
     output=Path(output);rows=[]
     for path in sorted((output/'maintenance/jobs').glob('*/*/contribution.json')):
-        value=load(path);rows.append({'path':str(path),'sha256':sha(path),**value})
+        value = load(path)
+        deferred = output / 'training-experience/deferred' / (path.parent.parent.name + '.json')
+        if deferred.exists() and value.get('provenance', {}).get('split') == 'test':
+            receipt = load(deferred)
+            if receipt.get('contribution') == {'path': str(path.resolve()), 'sha256': sha(path)}:
+                continue
+        rows.append({'path':str(path),'sha256':sha(path),**value})
     for row in rows:
         if row.get('provenance',{}).get('split')!='train':raise ValueError('Test or unattested contribution cannot enter a formal candidate revision')
     body={'version':VERSION,'contributions':rows,'activation':'candidate_only_requires_user_review',
@@ -403,7 +415,8 @@ def curate_candidate_revision(root,output,bundle,cfg,model_factory):
     bundle=Path(bundle)
     target=bundle.parent/'revision'
     if (target/'status.json').exists():return
-    jobs=[load(p) for p in (Path(output)/'maintenance/jobs').glob('*/job.json')]
+    jobs=[job for p in (Path(output)/'maintenance/jobs').glob('*/job.json')
+          if (job := load(p)).get('split') == 'train']
     if not jobs:return
     source=next((j for j in jobs if j['experience_mode']=='full'),jobs[0])
     job=copy.deepcopy(source)

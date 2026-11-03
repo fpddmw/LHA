@@ -74,7 +74,9 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
         raise ValueError("best_of_n is only used by the selected direct-best-of-n method")
     if training_maintenance is not None and type(training_maintenance) is not bool:
         raise ValueError('training_maintenance must be a boolean')
-    training_maintenance = ('train' in splits and 'none' in methods) if training_maintenance is None else training_maintenance
+    training_maintenance = ('pre-experience' in methods or ('train' in splits and 'none' in methods)) if training_maintenance is None else training_maintenance
+    if "pre-experience" in methods and training_maintenance and {"none", "full"} & set(methods):
+        raise ValueError("Run accumulating pre-experience separately from other Planner arms")
     review = normalize_review(review)
     planner, critic, model_config = model_configuration(planner, models)
     if 'pe-loop' in methods:
@@ -109,6 +111,8 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
         from planner_harness.training_experience import initialize, validate_snapshot, validate_owner, owned_copy
         if experience_snapshot:
             recorded=load(experience_snapshot).get('training_revision',{})
+            if recorded and "pre-experience" in methods:
+                raise ValueError("Pre-experience requires the original seed, not an accumulated revision")
             if recorded:
                 recorded_owner=recorded.get('owner')
                 if not recorded_owner:
@@ -121,7 +125,7 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
             if not experience_snapshot:
                 raise ValueError('An owned frozen library needs its exact snapshot')
             owned_copy(root,experience_snapshot,experience_owner)
-        if training_maintenance and 'train' in splits:
+        if training_maintenance and ('train' in splits or 'pre-experience' in methods):
             if experience_owner:
                 raise ValueError('An accumulating family starts from the shared seed, not another owned library')
             initial=initialize(root,output,experience_snapshot,review_mode=review['mode'],renderer_backend=backend)
@@ -145,7 +149,7 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
         from .pe_loop import configuration as pe_configuration
         body = {"experience_owner":experience_owner,"training_maintenance":training_maintenance,"pe_loop": pe_configuration(backend) if 'pe-loop' in methods else None,
             "experience_none_snapshot":str(none_snapshot) if none_snapshot else None,"experience_none_sha256":sha(none_snapshot) if none_snapshot else None,"experience_seed_sha256":initial["snapshot_sha256"] if initial else None,"experience_snapshot":initial["snapshot"] if initial else None,
-            "training_policy":"ordered RSI train none with post-task maintenance; heldout read-only" if training_maintenance else "read-only full-population experiment", "analysis_plan":analysis_plan,"schema": SCHEMA, "backend": backend, "arms": methods, "topics": topics, "generation": GENERATION,
+            "training_policy":("fixed pre-experience reads; train contributions activate, test contributions defer" if "pre-experience" in methods else "ordered RSI train none with post-task maintenance; heldout read-only") if training_maintenance else "read-only full-population experiment", "analysis_plan":analysis_plan,"schema": SCHEMA, "backend": backend, "arms": methods, "topics": topics, "generation": GENERATION,
             "seed_sequence": {"start": seed_start, "step": seed_step}, "max_generations": max_generations,
             "max_turns": max_turns, "best_of_n": best_of_n, "selector": SELECTOR,
             "planner": planner, "critic":critic, "models":model_config, "review":review,
@@ -182,15 +186,19 @@ def maintenance_model(batch):
 
 
 def training_topic(topic,batch):
-    return (batch.get('training_maintenance',True) and topic.get('split')=='train'
-            and TRAINING_METHOD in topic.get('methods',batch['arms']))
+    methods = topic.get("methods", batch["arms"])
+    if not batch.get("training_maintenance", True):
+        return False
+    if "pre-experience" in methods:
+        return topic.get("split") in {"train", "test"}
+    return topic.get("split") == "train" and TRAINING_METHOD in methods
 
 
 def training_completion(output,topic):
     """Read actual post-task outcomes; failed maintenance retains the current library."""
     output=Path(output)
     jobs=[p for p in (output/'maintenance/jobs').glob('*/job.json')
-          if load(p).get('topic')==topic and load(p).get('method')==TRAINING_METHOD]
+          if load(p).get('topic')==topic and load(p).get('method') in {TRAINING_METHOD, 'pre-experience'}]
     if len(jobs)>1:raise IntegrityError('Ambiguous training maintenance jobs: '+topic)
     if jobs:
         path=jobs[0].parent/'training-maintenance.json'
@@ -206,19 +214,20 @@ def training_completion(output,topic):
 
 def maintain_training_task(root,output,topic,batch,profile,config,model_factory=None):
     from planner_harness.maintenance import enqueue
-    from planner_harness.training_experience import maintain,current
+    from planner_harness.training_experience import maintain,current,base_snapshot
     previous=training_completion(output,topic['id'])
     if previous['status']!='pending':return previous
     output=Path(output)
     marker=output/'maintenance/training-errors'/(topic['id']+'.json')
+    method = 'pre-experience' if 'pre-experience' in topic.get('methods', batch['arms']) else TRAINING_METHOD
     try:
-        arm_path=output/'topics'/topic['id']/(TRAINING_METHOD+'.json')
+        arm_path=output/'topics'/topic['id']/(method+'.json')
         if not arm_path.exists():
             save(marker,{'status':'not_eligible','reason':'Online task produced no settled Planner trace','current_version_retained':True,'online_result_changed':False})
         else:
             run=Path(load(arm_path)['record_directory'])
-            identity=enqueue(root,output,run,split='train',topic=topic['id'],method=TRAINING_METHOD,batch_sha256=batch['sha256'],
-                maintenance_profile=profile,maintenance_snapshot=current(root,output))
+            identity=enqueue(root,output,run,split=topic['split'],topic=topic['id'],method=method,batch_sha256=batch['sha256'],
+                maintenance_profile=profile,maintenance_snapshot=base_snapshot(root, output) if method == "pre-experience" else current(root,output))
             if identity:
                 maintain(root,output,run,identity,config,model_factory=model_factory or (lambda:maintenance_model(batch)))
             else:
@@ -367,26 +376,32 @@ def check_entry(topic, method, batch, entry, *, static_only=False):
 
 
 def method_identity(method,batch):
-    return {'method':method,'planner':batch['planner'] if method in {'planner-once','full','none','direct-best-of-n','pe-loop'} else None,
+    return {'method':method,'planner':batch['planner'] if method in {'planner-once','full','none','pre-experience','direct-best-of-n','pe-loop'} else None,
         **({'pe_loop':batch.get('pe_loop')} if method=='pe-loop' else {}),
         'best_of_n':batch['best_of_n'] if method=='direct-best-of-n' else None,
         'selector':batch.get('selection',selection_config()) if method in {'direct-best-of-n','pe-loop'} else None,
         'review_mode':method_review_mode(method,batch) if method in results.REVIEW_METHODS else 'shared',
         'models':batch.get('models') if method!='direct' else None,
         'profile_sha256':batch['profile_sha256'] if method!='direct' else None,
-        'max_generations':batch['max_generations'] if method in {'full','none','direct-best-of-n','pe-loop'} else 1,
+        'max_generations':batch['max_generations'] if method in {'full','none','pre-experience','direct-best-of-n','pe-loop'} else 1,
         'resource_policy':batch.get('resource_policy'), 'seed_sequence':batch['seed_sequence'],
-        'experience_seed_sha256':batch.get('experience_seed_sha256') if method in {'full','none'} else None,
-        'actual_knowledge_sha256':batch.get('actual_knowledge_sha256') if method in {'full','none'} else None,
-        'planner_completion_policy':batch.get('planner_completion_policy','model_choice') if method in {'full','none'} else None,
-        'experience_owner':batch.get('experience_owner') if method in {'full','none'} else None,
-        'maintenance_identity':batch.get('maintenance_identity') if batch.get('training_method') and method==TRAINING_METHOD else None}
+        'experience_seed_sha256':batch.get('experience_seed_sha256') if method in {'full','none','pre-experience'} else None,
+        'actual_knowledge_sha256':batch.get('actual_knowledge_sha256') if method in {'full','none','pre-experience'} else None,
+        'planner_completion_policy':batch.get('planner_completion_policy','model_choice') if method in {'full','none','pre-experience'} else None,
+        'experience_owner':batch.get('experience_owner') if method in {'full','none','pre-experience'} else None,
+        'maintenance_identity':batch.get('maintenance_identity') if batch.get('training_method') and method in {TRAINING_METHOD, 'pre-experience'} else None}
 
 
 def task_conditions(root,output,topic,method,batch):
     """One bound knowledge input per task; recovery reuses it after current advances."""
-    if method not in {'full','none'}:return batch
+    if method not in {'full','none','pre-experience'}:return batch
     from planner_harness import training_experience as training
+    if method == "pre-experience":
+        snapshot = batch["experience_snapshot"]
+        digest = batch["experience_seed_sha256"]
+        if sha(snapshot) != digest:
+            raise IntegrityError("Frozen pre-experience snapshot changed")
+        return {**batch, "actual_knowledge_sha256": digest, "training_method": training_topic(topic, batch)}
     output=Path(output);record=output/'methods'/topic['id']/method/'experience.json'
     with RunLock(record.parent/'experience-owner'):
         if record.exists():revision=load(record)
@@ -655,7 +670,7 @@ def execute_method(root, output, topic, method, batch, runtime):
         from .pe_loop import execute
         outcome = execute(topic, batch, runtime, directory, scope)
         candidate, candidates = outcome['candidate'], outcome['candidates']
-    elif method in {"full", "none"}:
+    elif method in {"full", "none", "pre-experience"}:
         receipt = Path(output) / "topics" / topic["id"] / (method + ".json")
         loop = load(receipt) if receipt.exists() else runtime.loop(topic, method)
         from .creative_benchmark import verify_arm
@@ -869,7 +884,7 @@ def run_serial(root, output, host, *, runtime_factory=Runtime, maintenance_model
                         try:enqueue_planner_once(root,output,topic,row,batch)
                         except Exception as exc:
                             save(output/"maintenance/enqueue-errors"/(topic["id"]+"__"+method+".json"),{"error_type":type(exc).__name__,"online_result_changed":False})
-                    if method == TRAINING_METHOD and training_topic(topic,batch):
+                    if method in {TRAINING_METHOD, "pre-experience"} and training_topic(topic,batch):
                         completion=maintain_training_task(root,output,topic,batch,maintenance_profile,host.get('maintenance'),maintenance_model_factory)
                         if completion['status'] in {'pending','execution_unknown'}:
                             if claim:claim.finish(topic.get('claim_id',topic['id']),'recovery_required')

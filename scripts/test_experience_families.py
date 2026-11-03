@@ -31,6 +31,85 @@ class LibraryTests(unittest.TestCase):
         save(run/'state.json',state)
         return run
 
+    def test_pre_experience_keeps_train_and_test_maintenance_on_the_seed(self):
+        output = self.root / "self-review-zero"
+        seed = tx.initialize(ROOT, output, self.seed, review_mode="planner")
+        batch = {"arms": ["pre-experience"], "experience_snapshot": seed["snapshot"],
+                 "experience_seed_sha256": seed["snapshot_sha256"], "training_maintenance": True,
+                 "experience_owner": seed["owner"], "backend": "bernini", "review": {"mode": "planner"},
+                 "sha256": "fixture", "topics": []}
+        target = load(self.seed)["curated_catalog"]["entries"][0]["id"]
+
+        def run_task(number, split, new_id):
+            folder = self.root / str(number)
+            folder.mkdir()
+            run = protocol_tests.IntegrationTests.run_record(self, folder)
+            row = next(r for r in load(ROOT / "benchmark_data/benchmark.json") if r["split"] == split)
+            topic = {"id": f"fixture-{number}", "split": split}
+            batch["topics"].append(topic)
+            save(output / "methods" / topic["id"] / "pre-experience/settlement.json", {"status": "ready"})
+            conditions = u.task_conditions(ROOT, output, topic, "pre-experience", batch)
+            self.assertTrue(conditions["training_method"])
+            online = CreativeKnowledge(ROOT, conditions["experience_snapshot"], experience_mode="full")
+            self.assertIn(target, online.items)
+            self.assertNotIn("train-only-fixture", online.items)
+            online.freeze(run / "knowledge-snapshot.json")
+            state = load(run / "state.json")
+            state["request"]["text"] = row["prompt_short"]
+            state["source"]["sha256"] = row["source_video_sha256"]
+            state["config"]["execution"].update(
+                review={"mode": "planner"}, renderer={"backend": "bernini"},
+                experience_mode="full", experience_condition="pre-experience",
+                experience_snapshot_sha256=conditions["actual_knowledge_sha256"],
+                benchmark_metadata={"sample_id": row["sample_id"], "split": split},
+            )
+            save(run / "state.json", state)
+            library = tx.base_snapshot(ROOT, output)
+            identity = m.enqueue(ROOT, output, run, split=split, topic=topic["id"],
+                                 method="pre-experience", batch_sha256="fixture", maintenance_snapshot=library)
+            inputs = []
+
+            class Contributor:
+                model = "offline-fixture"
+                reasoning_effort = "high"
+
+                def predict_text(self, **kwargs):
+                    inputs.append(json.loads(kwargs["user_text"]))
+                    if len(inputs) == 1:
+                        return json.dumps({"action": "search", "arguments": {"query": "uniquecopperwillow"}})
+                    return json.dumps({"action": "contribute", "arguments": {"text": "Fixture review.",
+                        "changes": [
+                            {"op": "create", "id": new_id, "title": "uniquecopperwillow",
+                             "summary": "Inspect the transition.", "text": "Inspect the transition."},
+                            {"op": "comment", "id": target, "text": "Record the observed transition."},
+                            {"op": "propose_revision", "id": target, "text": "Distinguish the two transitions."},
+                        ]}})
+
+            result = tx.maintain(ROOT, output, run, identity,
+                                 {"model_calls": 2, "attempts": 1, "wall_seconds": 30}, model_factory=Contributor)
+            self.assertEqual(inputs[0]["maintenance_snapshot"]["snapshot_sha256"], seed["snapshot_sha256"])
+            self.assertNotIn("train-only-fixture", json.dumps(inputs[1]))
+            return result
+
+        for number, identity in [(1, "train-only-fixture"), (2, "train-second-fixture")]:
+            result = run_task(number, "train", identity)
+            self.assertEqual(result["status"], "activated", result.get("reason"))
+        before = tx.current(ROOT, output)
+        self.assertEqual(run_task(3, "test", "heldout-fixture")["status"], "deferred")
+        self.assertEqual(tx.current(ROOT, output), before)
+        self.assertEqual(len(list((output / "training-experience/deferred").glob("*.json"))), 1)
+        save(output / "batch.json", batch)
+        frozen = campaign.freeze_training(ROOT, self.root, review_mode="planner")
+        self.assertEqual(sha(frozen), before["snapshot_sha256"])
+        self.assertEqual({r["provenance"]["split"] for r in load(m.merge_candidates(output))["contributions"]}, {"train"})
+        full_batch = {"arms": ["full"], "topics": batch["topics"], "training_maintenance": False,
+                      "experience_snapshot": str(frozen), "experience_seed_sha256": sha(frozen)}
+        full_conditions = u.task_conditions(ROOT, self.root / "knowledge", batch["topics"][-1], "full", full_batch)
+        full = CreativeKnowledge(ROOT, full_conditions["experience_snapshot"], experience_mode="full")
+        matches = {match["id"] for match in full.search("uniquecopperwillow")["matches"]}
+        self.assertTrue({"train-only-fixture", "train-second-fixture"} <= matches)
+        self.assertNotIn("heldout-fixture", full.items)
+
     def test_same_nonempty_seed_independent_ownership_and_resume(self):
         libraries = [tx.initialize(ROOT,self.root/name,self.seed,review_mode=mode,renderer_backend=backend)
                      for name,mode,backend in [('critic','critic','bernini'),('self','planner','bernini'),('ditto','planner','ditto')]]

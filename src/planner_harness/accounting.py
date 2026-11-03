@@ -34,7 +34,7 @@ LIMITS = {
     "amount": None,
 }
 LANES = ("direct", "full", "none", "independent")
-OPTIONAL_LANES = ("direct-best-of-n", "planner-once", "pe", "pe-loop")
+OPTIONAL_LANES = ("pre-experience", "direct-best-of-n", "planner-once", "pe", "pe-loop")
 REQUIRED_QUOTES = (
     "model:gpt-6.1-sol/high",
     "render:bernini",
