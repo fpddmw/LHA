@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 import time
 
-TERMINAL_EVENTS = {"response.completed", "response.incomplete", "response.failed"}
+TERMINAL_EVENTS = {"response.completed", "response.incomplete", "response.failed", "error"}
 
 
 def final_answer(response):

@@ -86,6 +86,52 @@ class SubscriptionTests(unittest.TestCase):
         self.token_patch.start()
         self.addCleanup(self.token_patch.stop)
 
+    def overload_stream(self):
+        response = stream(
+            {"type": "response.created", "response": {"id": "resp-overloaded"}},
+            {"type": "response.in_progress", "response": {"usage": {"total_tokens": 12}}},
+            {"type": "response.metadata", "response_id": "resp-overloaded"},
+            {"type": "error", "error": {"type": "service_unavailable_error",
+                "code": "server_is_overloaded",
+                "headers": {"retry-after": "310", "retry-after-ms": "310000"}}},
+        )
+        response.status = 200
+        return response
+
+    def test_sse_overload_preserves_original_stream_and_known_usage(self):
+        model = ChatGPTSubscriptionVisionModel()
+        model.lha_audit_directory = self.root / "audit"
+        response = self.overload_stream()
+        raw = response.getvalue()
+        with patch.object(model, "_open", return_value=response):
+            with self.assertRaises(SubscriptionAPIError) as raised:
+                model.predict_text(system_prompt="s", user_text="u", image_paths=[])
+        error = raised.exception
+        self.assertTrue(error.retryable)
+        self.assertEqual(error.safe_diagnostic, {"status": 503, "code": "server_is_overloaded", "retry_after_seconds": 310})
+        self.assertEqual(model.last_client_audit["http_status"], 200)
+        self.assertEqual(model.last_client_audit["terminal_event"], "error")
+        self.assertEqual(model.last_usage, {"total_tokens": 12})
+        self.assertEqual((self.root / "audit/stream.bin").read_bytes(), raw)
+
+    def test_sse_overload_cannot_retry_beyond_original_deadline(self):
+        from planner_harness import accounting
+        from planner_harness.model_call import call_text
+        from planner_harness.resources import TaskDeadline
+
+        root = accounting.install(self.root / "accounting", accounting.default_online_policy(wall_seconds=60))
+        scope = accounting.scope(root, "fixture", "full")
+        accounting.start_task(scope)
+        model = accounting.attach(ChatGPTSubscriptionVisionModel(), scope)
+        call = self.root / "call"
+        with patch.object(model, "_open", return_value=self.overload_stream()) as post:
+            with self.assertRaisesRegex(TaskDeadline, "retry-after exceeds"):
+                call_text(call, model, "s", "u", [], attempts=2)
+        self.assertEqual(post.call_count, 1)
+        record = accounting.operation(scope, str(call / "attempts/01"))
+        self.assertEqual(record["actual_usage"], {"total_tokens": 12})
+        self.assertFalse((call / "attempts/02/submitted.json").exists())
+
     def test_exact_large_prompt_original_image_and_completed_usage(self):
         image = self.root / "frame.png"
         image.write_bytes(b"fixture-image")

@@ -121,6 +121,25 @@ def collect_owned_answer(directory, entry, accounting_scope, output_budget, capa
     return value["text"]
 
 
+def _wait_for_provider_retry(scope, previous_attempt):
+    from .accounting import check_task, load_ledger, online_limits
+    from .resources import TaskDeadline
+
+    failure = previous_attempt / "failed.json"
+    if not failure.exists():
+        return
+    wait = load(failure).get("retry_not_before_unix", 0) - time.time()
+    if wait <= 0:
+        return
+    if online_limits(scope):
+        check_task(scope)
+        clock = load_ledger(scope["root"])["topics"][scope["topic"]]["lanes"][scope["lane"]]
+        if time.time() + wait >= clock["deadline_unix"]:
+            raise TaskDeadline("Provider retry-after exceeds the original task deadline")
+    time.sleep(wait)
+    check_task(scope)
+
+
 def call_text(directory, model, system, user, images, *, attempts=3, retry_delay=2, max_new_tokens=7000, meter_only=False):
     if meter_only:return metered_text(directory,model,system,user,images,max_new_tokens=max_new_tokens)
     directory = Path(directory)
@@ -176,6 +195,7 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
                     save(entry/'unknown.json',{'failure_kind':'external_execution_unknown','scope':accounting_scope})
             if (entry / "unknown.json").exists():
                 return collect_owned_answer(directory, entry, accounting_scope, max_new_tokens, capabilities)
+            _wait_for_provider_retry(accounting_scope, entry.parent / f"{number - 1:02d}")
             budget = getattr(model, "lha_resource_budget", None)
             if budget and budget["policy"].get("max_cost") is not None:
                 from .resources import reserve, check_wall
@@ -225,10 +245,16 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
                 retryable = False if getattr(exc,"retryable",None) is False else transient(exc)
                 # Do not persist provider error bodies that can contain credentials.
                 diagnostic = getattr(exc, "safe_diagnostic", None)
-                save(entry / "failed.json", {"type": type(exc).__name__, "retryable": retryable,"failure_kind":getattr(exc,"failure_kind",None),"client_execution":getattr(client,"last_client_audit",None),"provider_error":diagnostic})
+                failure = {"type": type(exc).__name__, "retryable": retryable, "failure_kind": getattr(exc, "failure_kind", None),
+                           "client_execution": getattr(client, "last_client_audit", None), "provider_error": diagnostic}
+                retry_after = getattr(exc, "retry_after", None)
+                if retryable and retry_after is not None:
+                    failure["retry_not_before_unix"] = time.time() + retry_after
+                save(entry / "failed.json", failure)
                 if not retryable or number == policy["last"]:
                     raise ModelTransportError("Model transport failed; inspect recorded attempt status", retryable=retryable,provider_error=diagnostic) from None
-                time.sleep(retry_delay * number)
+                if retry_after is None:
+                    time.sleep(retry_delay * number)
                 continue
             body = getattr(client, "last_provider_response", {})
             finish = getattr(client, "last_finish_reason", None)

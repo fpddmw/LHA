@@ -103,6 +103,22 @@ class Engineering(unittest.TestCase):
             },
         }
 
+    def test_planner_overload_retries_same_event_without_repeating_render(self):
+        from vlm.chatgpt_subscription import SubscriptionAPIError
+
+        service, queue, renderer, planner = self.service([
+            review.action("generate", input_video="source", prompt="Make blue."),
+            SubscriptionAPIError(503, "server_is_overloaded", retry_after=0),
+            review.action("finish", video="v1", message="Select the reviewed result."),
+        ])
+        service.submit(self.task())
+        Engine(queue, service.directory, service, service.expand, interval=0.005).run(once=True)
+        run = service.directory / "tasks/topic/run"
+        self.assertEqual(verify_delivery(run)["selected"], "v1")
+        self.assertEqual(len(renderer.calls), 1)
+        self.assertEqual(planner.inputs[-2], planner.inputs[-1])
+        self.assertEqual(load(run / "calls/event-0002/transport/returned.json")["attempt"], 2)
+
     def test_known_critic_transport_failure_resumes_dependent_planner(self):
         critic = review.Reviewer(
             [ModelTransportError("Known rejected fixture API request", retryable=False)]

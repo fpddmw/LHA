@@ -17,14 +17,31 @@ from .responses_stream import events, StreamAudit, final_answer, response_header
 
 
 class SubscriptionAPIError(RuntimeError):
-    def __init__(self, status, code):
+    def __init__(self, status, code, *, retry_after=None):
         self.http_status = status
         self.retryable = status in {408, 429, 500, 502, 503, 504} and code not in {
             "subscription_sharing_usage_limit_exceeded",
             "subscription_sharing_usage_unavailable",
         }
         self.safe_diagnostic = {"status": status, "code": code}
+        if retry_after is not None:
+            self.safe_diagnostic["retry_after_seconds"] = retry_after
+        self.retry_after = retry_after
         super().__init__(f"ChatGPT Responses API: HTTP {status}, {code}")
+
+
+def _stream_error(detail, fallback):
+    code = detail.get("code") or fallback
+    if code != "server_is_overloaded" or detail.get("type") not in {None, "service_unavailable_error"}:
+        return SubscriptionAPIError(422, code)
+    headers = detail.get("headers") or {}
+    delays = []
+    if isinstance(headers, dict):
+        for name, divisor in (("retry-after", 1), ("retry-after-ms", 1000)):
+            value = str(headers.get(name, ""))
+            if value.isascii() and value.isdecimal() and len(value) <= 12:
+                delays.append(int(value) / divisor)
+    return SubscriptionAPIError(503, code, retry_after=max(delays, default=None))
 
 
 def _deadline_timeout(client):
@@ -172,9 +189,11 @@ class ChatGPTSubscriptionVisionModel:
                     value = event.get("response") or {}
                     if value.get("id"):
                         self.last_client_audit["response_id"] = value["id"]
+                    usage = value.get("usage") or event.get("usage")
+                    if isinstance(usage, dict):
+                        self.last_usage = usage
                     if kind in {"response.completed", "response.incomplete", "response.failed"}:
                         self.last_provider_model = value.get("model")
-                        self.last_usage = value.get("usage") or {}
                         self.last_finish_reason = {
                             "response.completed": "stop",
                             "response.incomplete": "length",
@@ -185,9 +204,7 @@ class ChatGPTSubscriptionVisionModel:
                         self.last_client_audit["returned_model"] = value.get("model")
                         if kind != "response.completed":
                             detail = value.get("error") or value.get("incomplete_details") or {}
-                            raise SubscriptionAPIError(
-                                422, detail.get("code") or detail.get("reason") or kind
-                            )
+                            raise _stream_error(detail, detail.get("reason") or kind)
                         if value.get("status") != "completed":
                             stage = "invalid_terminal"
                             raise ExternalExecutionUnknown(
@@ -203,7 +220,12 @@ class ChatGPTSubscriptionVisionModel:
                             "ChatGPT relay interrupted: " + str(event.get("stage"))
                         )
                     if kind == "error":
-                        raise SubscriptionAPIError(422, event.get("code") or "stream_error")
+                        detail = event.get("error")
+                        detail = detail if isinstance(detail, dict) else event
+                        if isinstance(detail.get("usage"), dict):
+                            self.last_usage = detail["usage"]
+                        self.last_finish_reason = "error"
+                        raise _stream_error(detail, "stream_error")
                     if time.monotonic() - started >= timeout:
                         stage = "deadline"
                         raise ExternalExecutionUnknown(
@@ -229,7 +251,7 @@ class ChatGPTSubscriptionVisionModel:
             self.last_client_audit["outcome"] = "http_error"
             raise SubscriptionAPIError(exc.code, code or "http_error") from None
         except SubscriptionAPIError as exc:
-            self.last_client_audit.update(outcome="provider_error", error=exc.safe_diagnostic)
+            self.last_client_audit.update(outcome="provider_error", error=exc.safe_diagnostic, usage=self.last_usage)
             raise
         except ExternalExecutionUnknown as exc:
             self.last_client_audit.update(outcome="execution_unknown", error=safe_exception(exc))
