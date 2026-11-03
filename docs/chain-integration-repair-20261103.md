@@ -1,6 +1,6 @@
 # Creative loop integration repair
 
-Status: approved for implementation; experiments remain paused.
+Status: implementation, offline verification and GitHub delivery complete. Experiments remain paused.
 
 Baseline: `939583ac60d68cbbbc30ccb059bec143d1b06efc` on `codex/experience-curation-v1`.
 
@@ -24,8 +24,8 @@ Current documentation also disagrees on early delivery, continuation protocol, s
 - [x] Connect campaign status to existing live and settled records.
 - [x] Update current documentation and command descriptions; label dated verification facts as historical rather than current totals.
 - [x] Add cross-entry regression tests covering these reproduced failures, including the actual CLI with scripted clients, maintenance search-to-read, and active/finished status.
-- [ ] Run focused offline checks, then the current regression suite if focused checks pass. Check tracked diff and knowledge-content hashes.
-- [ ] Commit scoped changes, push the existing branch, and verify the remote commit.
+- [x] Run focused offline checks, then the current regression suite if focused checks pass. Check tracked diff and knowledge-content hashes.
+- [x] Commit scoped changes, push the existing branch, and verify the remote commit.
 
 ## Completion criteria
 
@@ -40,3 +40,18 @@ Current documentation also disagrees on early delivery, continuation protocol, s
 ## Verification and synchronization
 
 Focused verification: 46 offline tests passed, including 10 new cross-entry cases. The existing maintenance integration test now executes the action returned by search rather than constructing its own read request. Full-suite and synchronization results follow after completion. All validation in this repair is offline software validation, not a new claim about model behavior or video quality.
+
+
+### Final verification
+
+- Focused checks: 46 tests passed, including 10 new cross-entry cases. The existing private-maintenance integration test executes the opening action returned by search and retains online experience isolation.
+- Full suite: 449 tests executed; 448 passed initially. The existing resource timeout test exceeded its five-second wall assertion in the parallel run (13.42 seconds). The complete 27-test module passed unchanged in isolation. Neither the timeout assertion nor the runtime was relaxed.
+- During the full suite, another session committed `7bc8e07` (relay TLS setup retry), changing `src/vlm/chatgpt_relay.py` and `scripts/test_chatgpt_subscription.py`. That independent commit is preserved. Re-ran the affected subscription, interrupted-recovery, API and cross-entry modules: 50 tests passed, including the two new relay tests. Source/configuration hashes remained stable during these final checks. There are now 451 distinct current tests with passing results across the recorded validation passes; this is not represented as a single clean full-suite run.
+- All four CLI help entries loaded. Single/dual-model plans still report 1742/3484 maximum generation attempts and 536/1072 main trajectories.
+- Verified 153 tracked experience, experiment-configuration and evaluation files against the baseline: unchanged. Eleven current operator documentation pages have no missing local file links. Scoped Python syntax, diff whitespace and added-credential-pattern checks passed.
+- Evidence: `out/chain_integration_repair_20261103/verification.json`, `current/summary.json`, `timing-rerun/summary.json`, `relay-integration/summary.json`, `protected-content-and-links.json`, `cli-contracts.json` and `scoped-files.json`.
+- No live model call, video generation, independent scoring, deployment migration or experiment launch occurred.
+
+### GitHub delivery
+
+Implementation commit: `298b06affb6e0ef6210c85c4c0ce7debaed5377b`, containing the 22 scoped implementation/documentation/test files. Pushed to `origin/codex/experience-curation-v1`; `git ls-remote` returned that exact commit. The concurrent relay commit remains its parent, separate from this repair's changes. This final documentation update records the completed verification and handoff.

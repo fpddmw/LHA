@@ -6,6 +6,8 @@ The single-task entry uses the same role factory as the service, retains saved c
 
 Critic and self-review families start from the same canonical seed and maintain separate private libraries. The active corpus remains 21 entries and 74 resources; this repair changes no experience prose, judgment, scoring standard or experiment design. Current maintenance authority and commands are described in [experience usage](experience-usage-interface.md).
 
+Offline verification covers 451 current cases with passing results across the recorded checks. The initial 449-test suite had one timing assertion failure; its unmodified 27-test module passed in isolation. A concurrent relay commit added two tests, and 50 affected subscription/recovery/API/CLI tests passed afterward with stable source hashes. The original failure and all reruns are retained. Implementation commit `298b06a` is verified on GitHub.
+
 Verification and commit details: [integration repair plan](chain-integration-repair-20261103.md). Experiments remain paused. No new model, GPU, provider-availability or evaluation check was performed by this repair. Existing deployments and frozen runs were not migrated.
 
 ## Historical status records
