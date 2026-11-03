@@ -31,6 +31,7 @@ CURRENT = (
     "test_loop_protocol_upgrade",
     "test_planner_iteration",
     "test_loop_engineering",
+    "test_interrupted_model_recovery",
     "test_engineering_cleanup",
     "test_creative_loop",
     "test_creative_repairs",

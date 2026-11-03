@@ -39,3 +39,18 @@ python scripts/run_server_pipeline.py --service /persistent/lha-service drain
 常驻服务使用 `run`，单次排空依赖链使用 `run --once`。既有任务继续使用冻结配置与收据；代码升级在新服务目录验证。正式 Low→High 终评从独立结果入口运行，creative 服务不混入旧 task-card 评价队列。
 
 多卡主实验优先使用 [实验运行安排](experiment-campaign.md) 中的 campaign 入口；不要手动重复启动同一张卡的生成 worker。用户目前要求等待通知才启动双卡 loop。
+
+## Relay 502 后续接原文本调用
+
+`scripts/recover_interrupted_model.py` 处理已经返回本地失败回执的 Planner／Critic 文本调用。先停止原 worker，再用原 `client-audit/summary.json` 的 SHA256 检查恢复范围：
+
+```bash
+python scripts/recover_interrupted_model.py --run /path/batch/workers/0/tasks/TASK/run \
+  --audit-sha256 ORIGINAL_SUMMARY_SHA256 --reason "Resume interrupted relay text request"
+```
+
+加 `--execute --abandon-response` 准备原状态与队列的续接，随后由原调度命令运行。准备步骤不调用模型或 GPU；保留原时限、候选、生成回执和原账本费用，为同一文本请求开放一次新的 transport attempt。旧异常、队列结果及外层中断汇总保存在该 run 的 `model-recoveries/` 中。已过期任务保持原结果。
+
+`upstream_connect` 覆盖发送请求及等候响应；`RemoteDisconnected` 或 `SSL EOF` 本身均不证明未提交。此入口将两者记为 `possibly_submitted`，原未知费用继续保留。`--abandon-response` 表示放弃该次中断文本并另取一次回答，不声称原请求未执行。已保存回答走原结果收集路径。
+
+冻结运行只需复制这一个脚本到原 checkout 的 `scripts/`；无需更新运行库、提示词或 profile。兼容测试覆盖冻结 `4db2bba` 的 Planner 同事件续接和 Critic 第四次检查续接。
