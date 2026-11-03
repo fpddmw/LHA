@@ -9,7 +9,8 @@ from .common import load, sha
 from .execution import immutable, signature
 from .resources import MAX_GENERATIONS
 
-VERSION = "creative-continuation-v4"
+VERSION = "creative-continuation-v5"
+FIXED_BUDGET = "fixed_generation_budget"
 PRESSURE = {
     "exploration": "There is room to develop and evaluate your proposal within the task budget.",
     "continuation": "Some of the task budget has been used. Further attempts remain available.",
@@ -27,6 +28,7 @@ def configure(state, supplied=None):
         "version": VERSION,
         "hard_generation_limit": resource_limit,
         "phase_fractions": [0.4, 0.6, 0.8],
+        "completion_policy": "model_choice",
     }
     supplied = copy.deepcopy(supplied or {})
     if set(supplied) - set(policy):
@@ -34,6 +36,8 @@ def configure(state, supplied=None):
     if supplied.get("hard_generation_limit", "missing") is None:
         supplied.pop("hard_generation_limit")
     policy.update(supplied)
+    if policy["completion_policy"] not in {"model_choice", FIXED_BUDGET}:
+        raise ValueError("Unknown Planner completion policy")
     if policy["version"] != VERSION or policy["phase_fractions"] != [0.4, 0.6, 0.8]:
         raise ValueError("Use the approved fractional continuation schedule")
     explicit = policy["hard_generation_limit"]
@@ -129,13 +133,38 @@ def view(state):
         not state.get("unresolved_jobs")
         and facts["submitted_render_requests"] < policy["hard_generation_limit"]
     )
+    awareness = PRESSURE[phase(state)]
+    if policy.get("completion_policy") == FIXED_BUDGET:
+        awareness += (
+            " This experiment uses the complete generation allowance before final selection. "
+            "The fixed-budget policy takes precedence over experience advice to finish early. "
+            "Choose each attempt's prompt and input, retaining useful earlier candidates while exploring alternatives; finish is not yet available."
+            if completion_pending(state) else
+            " The generation allowance has been used. Complete the configured review, compare candidates and select your final result; an earlier candidate is eligible."
+        )
     return {
         "stage": phase(state),
-        "budget_awareness": PRESSURE[phase(state)],
+        "budget_awareness": awareness,
         "justification_required": False,
         "continuation_questions": [],
         "generation_available": available,
     }
+
+
+def completion_pending(state):
+    policy = state["config"].get("continuation_policy", {})
+    return (policy.get("completion_policy") == FIXED_BUDGET
+            and usage(state)["submitted_render_requests"] < policy["hard_generation_limit"])
+
+
+def authorize_finish(state):
+    if completion_pending(state):
+        return {
+            "status": "generation_budget_remaining",
+            "message": "This experiment requires using the remaining generation allowance before final selection. Keep useful candidates and choose a further attempt. Observation, knowledge reading and review remain available.",
+            "continuation": view(state),
+        }
+    return None
 
 
 def record_input(harness, event_id, call_dir):

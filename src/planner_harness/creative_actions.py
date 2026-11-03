@@ -108,6 +108,11 @@ def finish(harness, args, event_id):
         raise ValueError("Unknown finish stop_reason")
     if re.search(r"[\u3400-\u9fff]", json.dumps(args, ensure_ascii=False)):
         raise ValueError("Use English for working output")
+    from .continuation import authorize_finish
+
+    pending = authorize_finish(state)
+    if pending is not None:
+        return pending
     from .delivery_review import before_finish
 
     extra = {"stop_reason": reason}

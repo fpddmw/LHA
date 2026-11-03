@@ -1,6 +1,10 @@
 # Creative video task
 
-Work toward a useful video that serves the user's original request. Choose the
+Work toward a useful video that serves the user's original request. The task recasts
+the source video into the requested world or artistic medium as one coherent work: keep
+the source moment recognizable (who acts, what happens, in which order and spatial
+arrangement), rebuild subjects, props, environment and light in the target world, and
+deliver a stable, clean sequence. Choose the
 render input, prompt, evidence to inspect and final candidate. Keep useful working
 notes when needed; no private reasoning transcript or fixed planning form is required.
 
@@ -21,8 +25,8 @@ references. It returns observations and evaluation without modification advice.
 In Planner mode, inspect the new result in this same task context. Include
 `review: {video_id, summary, findings?}` at the top level beside your next action,
 or return a separate `review` operation. You may inspect, read or take notes first.
-An explicit tool failure remains a failure; choose another candidate, continue or
-stop as appropriate. A pending or unknown submitted request belongs to its original
+An explicit tool failure remains a failure; choose another candidate or action
+within the task's completion policy. A pending or unknown submitted request belongs to its original
 job and is recovered without submitting it again.
 
 The shared review guide is available as `read {targets:[{id:"review"}]}` and is
@@ -39,15 +43,27 @@ prompt as context and the original task as the goal.
 Choose the render input explicitly. `delivery_candidate` records your current
 intended final candidate without changing the render input. An optional
 `justification` can record the improvement or comparison an attempt pursues.
-Resource hints describe availability approximately; choose whether to continue
-or deliver from the task and actual results. If generation becomes unavailable, reading, observing
+Resource hints describe availability approximately. Follow the task's completion
+policy. In fixed-budget experiments, use the complete generation allowance before
+finishing. This experiment policy takes precedence over experience advice to deliver
+early or stop when a result is adequate. Retain the experience's guidance on candidate
+quality, input choice and useful alternatives; stopping time is set by the experiment.
+Choose each attempt's prompt and input yourself, using the source or any earlier
+candidate. You may refine a candidate, explore another realization, or resample a
+credible proposal. An adequate result can remain adequate: further attempts seek
+alternatives, and do not require inventing a defect or repeatedly repairing the latest
+version. Keep useful candidates; after using the allowance, select the best available
+answer to the original request, including an early version. For other tasks, choose
+continuation or delivery from the actual results.
+If generation becomes unavailable, reading, observing
 and delivery remain possible within the task's remaining time.
 
 `finish` delivers your selected generated candidate and concise explanation. It
 reuses the per-generation checks and never starts a new review. Low confidence,
 defects or a failed Critic request do not impose a grade threshold; explain the
-actual tradeoffs. Use `stop_reason: no_promising_attempt` when you decide no useful
-result is available. At the time limit the runtime preserves your last intended
+actual tradeoffs. In a fixed-budget experiment, no `stop_reason` bypasses the
+remaining generation allowance. After using it, `no_promising_attempt` can report
+that no useful result is available. At the time limit the runtime preserves your last intended
 candidate, or explicitly marks a latest-generated fallback when you made no choice.
 A fallback does not claim that a pending review completed or that you confirmed it.
 

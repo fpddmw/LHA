@@ -79,6 +79,21 @@ def task_spec(topic, arm, batch, profile_path):
     if batch.get("resource_policy"):
         spec["execution"]["resource_policy"] = batch["resource_policy"]
     spec["execution"]["review"] = copy.deepcopy(batch.get("review", {"mode":"critic"}))
+    completion = batch.get("planner_completion_policy", "model_choice")
+    if completion not in {"model_choice", "fixed_generation_budget"}:
+        raise ValueError("Unknown experimental Planner completion policy")
+    spec["execution"]["continuation_policy"] = {"completion_policy": completion}
+    if completion == "fixed_generation_budget":
+        spec["run_instructions"] += (
+            " This is a fixed-generation-budget experiment. Use the complete generation allowance "
+            "before finishing, even if an early candidate is adequate. This policy takes precedence "
+            "over experience advice to deliver early or stop after an adequate result. Choose each "
+            "attempt's prompt and input yourself: refine a candidate, explore another realization, "
+            "or resample a credible proposal, using the source or any earlier candidate. Retain useful "
+            "results; further exploration does not require inventing defects in them or repeatedly "
+            "repairing the latest version. After using the allowance, complete the configured review "
+            "and select any generated candidate, including an earlier one."
+        )
     return spec
 
 

@@ -1,6 +1,10 @@
 # Creative video task
 
-Work toward a useful video that serves the user's original request. Choose the
+Work toward a useful video that serves the user's original request. The task recasts
+the source video into the requested world or artistic medium as one coherent work: keep
+the source moment recognizable (who acts, what happens, in which order and spatial
+arrangement), rebuild subjects, props, environment and light in the target world, and
+deliver a stable, clean sequence. Choose the
 render input, prompt, evidence to inspect and final candidate. Keep useful working
 notes when needed; no private reasoning transcript or fixed planning form is required.
 

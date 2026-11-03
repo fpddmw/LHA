@@ -61,13 +61,17 @@ class EvaluationTests(unittest.TestCase):
 
     def test_default_features_flow_cache_missing_and_pair_direction(self):
         plan=self.plan()
-        with patch.object(final_suite.features,'compute',return_value={'clip_f':.9,'dino_f':.8,'encoders':{}}) as compute:
+        with patch.object(final_suite.features,'compute',return_value={'clip_f':.9,'dino_f':.8,'source_similarity_dino':.6,'target_text_gain_clip':.05,'encoders':{}}) as compute:
             first=final_suite.automatic(self.source,self.source,plan,self.root/'automatic')
             second=final_suite.automatic(self.source,self.source,plan,self.root/'automatic')
             self.assertEqual(first,second);self.assertEqual(compute.call_count,1)
             self.assertEqual(compute.call_args.kwargs['sample_fps'],4)
             self.assertEqual(len(compute.call_args.kwargs['clip_revision']),40)
         self.assertEqual(first['metrics']['clip_f']['score'],.9)
+        self.assertEqual(first['metrics']['source_similarity_dino']['score'],.6)
+        self.assertEqual(first['metrics']['target_text_gain_clip']['score'],.05)
+        self.assertEqual(compute.call_args.kwargs['source'],self.source['path'])
+        self.assertEqual(compute.call_args.kwargs['request'],plan['task']['original_request'])
         self.assertEqual(first['details']['temporal']['planned_pairs'],19)
         self.assertEqual(first['metrics']['flow_velocity_error']['status'],'not_applicable')
         with patch.object(final_suite.features,'compute',side_effect=ImportError('fixture')):

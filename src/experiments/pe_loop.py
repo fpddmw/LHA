@@ -71,6 +71,10 @@ SYSTEM_PROMPT = bernini_system_prompt()
 # Port the grounded-instruction writing from the Ditto adapted-v2 handoff to
 # the shared loop's eight-frame evidence, JSON response and Critic history.
 DITTO_SYSTEM_PROMPT = """You rewrite editing instructions for Ditto V2V.
+This benchmark recasts the source video into the requested world or artistic medium as
+one coherent work. Keep the source moment recognizable (who acts, what happens, in which
+order and spatial arrangement), rebuild subjects, props, environment and light in the
+target world, and keep the result a stable, clean sequence.
 Use the user's original request, chronological source frames and any recorded
 Critic feedback to write one complete English editing paragraph.
 

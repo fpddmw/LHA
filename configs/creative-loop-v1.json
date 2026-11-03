@@ -12,8 +12,9 @@
   "max_generations": 4,
   "max_turns": null,
   "continuation_policy": {
-    "version": "creative-continuation-v4",
-    "hard_generation_limit": 4
+    "version": "creative-continuation-v5",
+    "hard_generation_limit": 4,
+    "completion_policy": "fixed_generation_budget"
   },
   "experiments": "awaiting_user_start_two_gpu_loop",
   "review": {

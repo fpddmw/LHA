@@ -145,8 +145,8 @@ def markdown():
 
 
 # Current creative metrics are versioned independently of the historical card contract.
-LOW_HIGH_VERSION = "lha-low-high-metrics-v4"
-LOW_HIGH_FINAL_PROTOCOL = "lha-low-high-final-v4"
+LOW_HIGH_VERSION = "lha-low-high-metrics-v5"
+LOW_HIGH_FINAL_PROTOCOL = "lha-low-high-final-v5"
 LOW_HIGH_RATING_SCALE = (0.0, 4.0)
 LOW_HIGH_RATING_STEP = 0.1
 LOW_HIGH_RATING_TEXT = "0.0..4.0 in 0.1 steps; missing=null"
@@ -162,11 +162,17 @@ def validate_low_high_rating(value):
 
 
 LOW_HIGH_AESTHETICS = AESTHETICS
+# The judge schema keeps relative_originality; without a fixed reference set it is
+# always unknown, so v5 summaries report only the three informative specialties.
 LOW_HIGH_SPECIALTIES = ("style_realization", "scene_specific_design", "effective_creativity", "relative_originality")
+LOW_HIGH_REPORTED_SPECIALTIES = LOW_HIGH_SPECIALTIES[:3]
+# Recast extent: how far the output moved from the source and toward the requested
+# world. Context for the stability metrics, never a quality score by itself.
+LOW_HIGH_RECAST_EXTENT = ("source_similarity_dino", "target_text_gain_clip")
 LOW_HIGH_METRICS = {
     **{k:{"scale":list(LOW_HIGH_RATING_SCALE),"raw_step":LOW_HIGH_RATING_STEP,"display_decimals":1,"unit":"ordinal","track":"all","direction":"higher"} for k in
        ("instruction_adherence","content_preservation","temporal_consistency","visual_integrity","aesthetic_coherence")},
-    **{k:{"scale":list(LOW_HIGH_RATING_SCALE),"raw_step":LOW_HIGH_RATING_STEP,"display_decimals":1,"unit":"ordinal","track":"short","direction":"higher"} for k in LOW_HIGH_SPECIALTIES},
+    **{k:{"scale":list(LOW_HIGH_RATING_SCALE),"raw_step":LOW_HIGH_RATING_STEP,"display_decimals":1,"unit":"ordinal","track":"short","direction":"higher"} for k in LOW_HIGH_REPORTED_SPECIALTIES},
     **{k:{"scale":list(LOW_HIGH_RATING_SCALE),"raw_step":LOW_HIGH_RATING_STEP,"display_decimals":1,"unit":"ordinal","track":"all","direction":"higher"} for k in LOW_HIGH_AESTHETICS},
     **{k:{"scale":[0,1],"unit":"score","track":"all","direction":"higher"} for k in
        ("edit_completion","required_correspondence")},
@@ -180,10 +186,12 @@ LOW_HIGH_METRICS = {
     "motion_diagonals_per_second":{"scale":None,"unit":"diagonals/second","track":"all","direction":"context"},
     "low_motion_duration_fraction":{"scale":[0,1],"unit":"fraction","track":"all","direction":"context"},
     "flow_velocity_error":{"scale":None,"unit":"diagonals/second","track":"conditional_motion","direction":"lower"},
+    "source_similarity_dino":{"scale":[-1,1],"unit":"cosine","track":"all","direction":"context"},
+    "target_text_gain_clip":{"scale":[-2,2],"unit":"cosine_delta","track":"all","direction":"context"},
 }
 
 LOW_HIGH_ANCHORS = {
- "style_realization":["No requested style", "Isolated style cues", "Recognizable but incomplete expression", "Clear integrated style with minor issues", "Fully integrated, task-specific expression"],
+ "style_realization":["No requested style", "Isolated style cues or grading only", "Recognizable medium on part of the scene or duration", "Medium covers subjects and dominant environment with minor gaps", "Whole scene and duration built with the medium's visible construction logic"],
  "scene_specific_design":["No useful adaptation", "Generic overlay with isolated choices", "Some useful scene-based choices", "Coherent adaptation of subjects/space/interactions", "Distinctive integrated design with clear scene-specific value"],
  "effective_creativity":["No coherent useful design choice", "Routine or fragmented choices", "Some useful invention, partly integrated", "Coherent valuable choices within allowed freedom", "Strongly distinctive and effective integrated solution"],
  "relative_originality":["No effective distinction within fixed references", "Routine within reference set", "Small useful variation", "Identifiably distinctive coherent solution", "Strong effective distinction from fixed references"],

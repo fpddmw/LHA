@@ -561,16 +561,17 @@ def evaluation_coverage(directory, evaluation):
     """Expose every metric family and its actual status across unique judgments."""
     from collections import Counter
     from evaluation.final_suite import ratings
-    from evaluation.registry import LOW_HIGH_AESTHETICS, LOW_HIGH_SPECIALTIES
+    from evaluation.registry import LOW_HIGH_AESTHETICS, LOW_HIGH_RECAST_EXTENT, LOW_HIGH_REPORTED_SPECIALTIES
     from evaluation.validation import DIMENSIONS
     families = {
         'main': tuple(DIMENSIONS),
-        'short': LOW_HIGH_SPECIALTIES,
+        'short': LOW_HIGH_REPORTED_SPECIALTIES,
         'long_and_requirements': ('edit_completion', 'binding_accuracy', 'joint_satisfaction',
                                   'required_correspondence', 'unrequested_damage', 'major_damage'),
         'aesthetics': (*LOW_HIGH_AESTHETICS, 'aesthetic_mean'),
         'objective_and_motion': ('clip_f', 'dino_f', 'flow_warp_l1', 'motion_diagonals_per_second',
                                  'low_motion_duration_fraction', 'flow_velocity_error'),
+        'recast_extent': LOW_HIGH_RECAST_EXTENT,
     }
     counts = {group: {name: Counter() for name in names} for group, names in families.items()}
     seen, event_reviews = set(), 0

@@ -150,6 +150,7 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
             "max_turns": max_turns, "best_of_n": best_of_n, "selector": SELECTOR,
             "planner": planner, "critic":critic, "models":model_config, "review":review,
             "selection":selection_config(), "resource_policy": resource_policy, "budget_estimate":budget_estimate, "completion_mode": "delivery",
+            "planner_completion_policy": "fixed_generation_budget",
             "requested_splits": list(splits), "requested_prompt_forms": list(prompt_forms),
             "results_root": str(Path(results_root or root / "out/benchmark_results").resolve()),
             "profile_sha256": profile["sha256"], "input_plan_sha256": inputs["sha256"],
@@ -375,6 +376,7 @@ def method_identity(method,batch):
         'resource_policy':batch.get('resource_policy'), 'seed_sequence':batch['seed_sequence'],
         'experience_seed_sha256':batch.get('experience_seed_sha256') if method in {'full','none'} else None,
         'actual_knowledge_sha256':batch.get('actual_knowledge_sha256') if method in {'full','none'} else None,
+        'planner_completion_policy':batch.get('planner_completion_policy','model_choice') if method in {'full','none'} else None,
         'experience_owner':batch.get('experience_owner') if method in {'full','none'} else None,
         'maintenance_identity':batch.get('maintenance_identity') if batch.get('training_method') and method==TRAINING_METHOD else None}
 

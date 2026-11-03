@@ -14,6 +14,8 @@ PROMPT="""Assess original requirements and design diagnostics for the current vi
 Use the original request verbatim. Its fixed spans are reporting groups, not new requirements.
 Assess all conditions within a span together: pass requires all; partial is incomplete but meaningful.
 Use only the original request and source; do not invent hidden goals.
+The task recasts the source moment into the requested world or medium: the moment
+stays recognizable while subjects, props, environment and light are rebuilt.
 Return exactly items, required_correspondence, unrequested_damage, specialties, aesthetics.
 items has exactly one {id,completion,binding} per supplied requirement id. completion/binding and
 required_correspondence each contain label (pass/partial/fail/unknown/not_applicable),
@@ -21,17 +23,27 @@ reason (text), evidence_refs (list of actual IDs). Completion always applies; bi
 for short tasks, or for a clause with no object-attribute/relation binding. Preserve source meaning only
 as required by the task; authorized behavior reconstruction can replace the original action logic.
 unrequested_damage contains exactly status (scored/unknown), severity (none/minor/major or null),
-reason and evidence_refs. Judge changes outside the allowed task scope, not all source differences.
+reason and evidence_refs. Judge unmotivated changes: ones neither the request nor the requested
+world explains, such as deleting a character, adding unrelated objects, or changing a salient
+identity attribute. A change the requested world implies is not damage. Major damage removes or
+replaces a central role or interaction.
 specialties contains exactly style_realization, scene_specific_design, effective_creativity,
 relative_originality; each has status (scored/unknown/not_applicable), score (0.0..4.0 in 0.1 steps or null),
 reason, evidence_refs. They apply to short tasks; long tasks mark them not_applicable.
 A short task with no style target marks style_realization not_applicable. Restricted design freedom
 can make effective_creativity not_applicable. Relative originality is unknown without a supplied
 fixed anonymous reference set. Do not award invention for fulfilling an explicitly specified detail.
+style_realization judges coverage of the medium across the scene and duration, not grading alone.
+scene_specific_design rewards adapting this source's subjects, props and space into fitting
+counterparts rather than adding generic theme decoration.
 aesthetics contains exactly narrative_emotional_fit, style_world_consistency, composition_lighting,
 color_texture, hierarchy_readability, with the same ordinal rating fields, for both task lengths.
 Aesthetic anchors: 0 collapsed/inappropriate, 1 predominantly fragmented, 2 consequential conflict,
 3 convincing with minor issues, 4 deliberate integrated finish appropriate to the task.
+An unrequested mixture of stylized subjects and live-action surroundings is a consequential
+conflict for style_world_consistency. Clutter or merged figure/background lowers hierarchy_readability.
+Each ratable field has status exactly scored, unknown or not_applicable; labels belong only to
+items, binding and required_correspondence.
 Use intermediate tenths to express the observed degree between adjacent anchors.
 All supported judgments cite candidate evidence. Source correspondence/damage cite source and candidate.
 For temporal claims use reviewed consecutive-event findings and state scope; unseen action is unknown.
@@ -76,7 +88,23 @@ def validate(report, packet):
     return report
 
 
-FINAL_PROJECTION='final-diagnostic-field-evidence-v1'
+FINAL_PROJECTION='final-diagnostic-field-evidence-v3'
+
+
+def normalize_field(row, refs):
+    """Repair unambiguous format slips only and return the recorded changes."""
+    if not isinstance(row,dict):return row,[]
+    fixed,notes=copy.deepcopy(row),[]
+    if 'score' in fixed and 'status' not in fixed and fixed.get('label') in {'scored','unknown','not_applicable'}:
+        notes.append({'field':'label','renamed_to':'status'});fixed['status']=fixed.pop('label')
+    if fixed.get('status') == 'observed' and type(fixed.get('score')) in (int,float):
+        notes.append({'field':'status','from':fixed.get('status'),'to':'scored'});fixed['status']='scored'
+    ids=fixed.get('evidence_refs')
+    if isinstance(ids,list):
+        kept=[i for i in ids if isinstance(i,str) and i in refs]
+        if len(kept)!=len(ids):
+            notes.append({'field':'evidence_refs','dropped':[i for i in ids if i not in kept]});fixed['evidence_refs']=kept
+    return fixed,notes
 
 
 def project_final(report,packet):
@@ -101,7 +129,8 @@ def project_final(report,packet):
         'specialties':{k:rating('not_applicable' if task['track']=='long' else 'unknown') for k in LOW_HIGH_SPECIALTIES},
         'aesthetics':{k:rating() for k in LOW_HIGH_AESTHETICS}}
     validate(baseline,packet)
-    projected=copy.deepcopy(report);errors=[]
+    projected=copy.deepcopy(report);errors=[];normalized=[]
+    refs={e['id'] for e in visible['evidence']}
     paths=[('items',i,k) for i in range(len(report['items'])) for k in ('completion','binding')]
     paths += [('required_correspondence',),('unrequested_damage',)]
     paths += [(section,name) for section in ('specialties','aesthetics') for name in report[section]]
@@ -111,17 +140,33 @@ def project_final(report,packet):
     def put(value,path,row):
         for key in path[:-1]:value=value[key]
         value[path[-1]]=row
+    def structural(path,row):
+        # Fields the protocol defines as inapplicable for this track carry no judgment.
+        short_binding=task['track']=='short' and path[0]=='items' and path[2]=='binding'
+        long_specialty=task['track']=='long' and path[0]=='specialties'
+        if not isinstance(row,dict) or not (short_binding or long_specialty):return row,[]
+        if short_binding and row.get('label')!='not_applicable':
+            return {'label':'not_applicable','reason':row.get('reason') or 'Not applicable to short tasks','evidence_refs':[]},[{'field':'label','from':row.get('label'),'to':'not_applicable'}]
+        if long_specialty and row.get('status')!='not_applicable':
+            return {'status':'not_applicable','score':None,'reason':row.get('reason') or 'Not applicable to long tasks','evidence_refs':[]},[{'field':'status','from':row.get('status'),'to':'not_applicable'}]
+        return row,[]
     for path in paths:
-        row=get(report,path);trial=copy.deepcopy(baseline);put(trial,path,copy.deepcopy(row))
-        try:validate(trial,packet)
+        original=get(report,path);row,notes=normalize_field(original,refs)
+        row,more=structural(path,row);notes+=more
+        trial=copy.deepcopy(baseline);put(trial,path,copy.deepcopy(row))
+        try:
+            validate(trial,packet)
+            if notes:
+                put(projected,path,row)
+                normalized.append({'path':list(path),'changes':notes,'original':copy.deepcopy(original)})
         except (ValueError,KeyError,TypeError) as exc:
             replacement=copy.deepcopy(get(baseline,path))
             replacement['reason']='Unassessed after field validation: '+str(exc)
             put(projected,path,replacement)
             errors.append({'path':list(path),'error_type':type(exc).__name__,'error':str(exc),
-                'original':copy.deepcopy(row),'replacement':replacement})
+                'original':copy.deepcopy(original),'replacement':replacement})
     validate(projected,packet)
-    return projected,errors
+    return projected,errors,normalized
 
 
 def label_mean(rows):
@@ -173,20 +218,22 @@ def evaluate(packet, directory, model, *, usage="independent_final"):
     request=request_packet(packet, usage)
     visible=json.loads(request["user_text"])
     immutable(directory/'request.json',request)
-    projection_errors=[]
+    projection_errors=[];projection_normalized=[]
     def accept(value,packet):
         if usage=='independent_final':
-            projected,errors=project_final(value,packet);projection_errors[:]=errors
+            projected,errors,normalized=project_final(value,packet)
+            projection_errors[:]=errors;projection_normalized[:]=normalized
             value.clear();value.update(projected)
         else:validate(value,packet)
     try:
         report,binding=call_report(directory,model,request,[r['path'] for r in request['images']],accept,usage=usage)
         if usage=='independent_final':
-            immutable(directory/'field-projection.json',{'version':FINAL_PROJECTION,'answer_binding':binding,'errors':projection_errors})
+            immutable(directory/'field-projection.json',{'version':FINAL_PROJECTION,'answer_binding':binding,
+                                                          'errors':projection_errors,'normalized':projection_normalized})
         result={'protocol_id':LOW_HIGH_VERSION,'usage':usage,'status':'scored','report':report,'answer_binding':binding,
                 'track':visible['task_spec']['track'],
                 'metrics':calculate(report,visible['task_spec']['track'])}
-        if usage=='independent_final':result['field_projection']={'version':FINAL_PROJECTION,'errors':projection_errors}
+        if usage=='independent_final':result['field_projection']={'version':FINAL_PROJECTION,'errors':projection_errors,'normalized':projection_normalized}
     except (ReportUnavailable, ResourceExhausted, ExternalExecutionUnknown) as exc:
         if not (directory/'unavailable.json').exists():
             immutable(directory/'unavailable.json',{'failures':[],'reason':type(exc).__name__})
@@ -223,9 +270,10 @@ def verify(directory, model, *, expected_packet=None, usage="independent_final")
             from planner_harness.json_output import decode_object
             from planner_harness.common import load
             call=verify_answer(directory,result['report'],project=lambda value:project_final(value,packet)[0])
-            _,errors=project_final(decode_object((call/'response.txt').read_text()),packet)
+            _,errors,normalized=project_final(decode_object((call/'response.txt').read_text()),packet)
             projection=load(directory/'field-projection.json')
-            if (result['answer_binding']!=load(directory/'selected-answer.json') or result['field_projection']!={'version':FINAL_PROJECTION,'errors':errors} or projection!={'version':FINAL_PROJECTION,'answer_binding':result['answer_binding'],'errors':errors}):
+            expected={'version':FINAL_PROJECTION,'errors':errors,'normalized':normalized}
+            if (result['answer_binding']!=load(directory/'selected-answer.json') or result['field_projection']!=expected or projection!={**expected,'answer_binding':result['answer_binding']}):
                 raise ValueError('Final diagnostic field projection changed')
         else:call=verify_answer(directory,result['report'])
         verify_inputs(call,model,packet,[r['path'] for r in packet['images']])

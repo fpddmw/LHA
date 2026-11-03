@@ -3,7 +3,11 @@ name: lha-video-review
 description: Inspect a newly generated LHA video against the user task, actual prompt and relevant source, input and references; provide a qualitative review or Planner self-review.
 ---
 
-Check what the generated video actually achieves for the original task. Read the
+Check what the generated video actually achieves for the original task. The task
+recasts the source moment into the requested world or medium: the moment should stay
+recognizable while the visible scene is rebuilt, and the sequence should be stable and
+clean. Report which regions or intervals remain source-like, and inspect focal faces,
+hands, held props, contacts and the final second closely. Read the
 actual generation prompt as process context; it does not replace the user's goal.
 For short requests, consider the intended transformation, style/world and concrete
 coordination of the scene. For detailed requests, check requested objects,

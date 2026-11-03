@@ -2,7 +2,7 @@
 from pathlib import Path
 import math
 from . import features, temporal
-from .registry import LOW_HIGH_METRICS
+from .registry import LOW_HIGH_METRICS, LOW_HIGH_RECAST_EXTENT
 from planner_harness.common import load,sha
 from planner_harness.execution import immutable,signature
 from planner_harness.lock import RunLock
@@ -20,7 +20,9 @@ def automatic(source,candidate,plan,directory,*,accounting_scope=None):
     check_plan(plan,plan['task']['original_request'],source)
     if any(sha(v['path'])!=v['sha256'] for v in (source,candidate)):
         raise ValueError('Automatic metric video identity changed')
-    identity={'protocol_id':'lha-automatic-v2','source':source['sha256'],'candidate':candidate['sha256'],
+    request=plan['task']['original_request']
+    identity={'protocol_id':'lha-automatic-v3','source':source['sha256'],'candidate':candidate['sha256'],
+              'request_sha256':signature({'text':request}),
               'motion_scope':plan['task']['motion_preservation'],'config':CONFIG,
               'implementation':{n:sha(Path(__file__).parent/n) for n in ('features.py','temporal.py','media.py','final_suite.py')}}
     directory=Path(directory)/signature(identity)
@@ -32,9 +34,10 @@ def automatic(source,candidate,plan,directory,*,accounting_scope=None):
                 raise ValueError('Automatic metric cache changed')
             return result
         metrics={};details={}
-        jobs=(('features',('clip_f','dino_f'),lambda:features.compute(candidate['path'],
+        jobs=(('features',('clip_f','dino_f')+LOW_HIGH_RECAST_EXTENT,lambda:features.compute(candidate['path'],
                     clip_revision=CONFIG['clip_revision'],dino_revision=CONFIG['dino_revision'],
-                    sample_fps=CONFIG['sample_fps'],device=CONFIG['device'],accounting_scope=accounting_scope)),
+                    sample_fps=CONFIG['sample_fps'],device=CONFIG['device'],accounting_scope=accounting_scope,
+                    source=source['path'],request=request)),
               ('temporal',('flow_warp_l1','motion_diagonals_per_second','low_motion_duration_fraction'),
                   lambda:temporal.compute(candidate['path'],source=source['path'],
                     motion_scope=plan['task']['motion_preservation'],max_side=CONFIG['max_side'],accounting_scope=accounting_scope)))
@@ -44,10 +47,16 @@ def automatic(source,candidate,plan,directory,*,accounting_scope=None):
             try:
                 raw=compute();details[kind]=raw
                 for name in names:
-                    value=raw[name]
+                    value=raw.get(name)
                     if value is not None and (type(value) not in (int,float) or not math.isfinite(value)):
                         raise ValueError('Non-finite automatic metric')
                     metrics[name]={'status':'scored' if value is not None else 'unknown','score':value}
+                    if name=='target_text_gain_clip' and raw.get('clip_text_input'):
+                        text=raw['clip_text_input']
+                        metrics[name]['text_coverage']={k:text[k] for k in (
+                            'scope','truncated','original_content_tokens','encoded_content_tokens',
+                            'content_token_span','content_token_coverage','encoded_text')}
+                        metrics[name]['text_input_record']='details.features.clip_text_input'
                 if kind=='temporal':
                     motion=raw['source_motion']
                     metrics['flow_velocity_error']={'status':motion['status'],'score':motion.get('flow_velocity_error'),

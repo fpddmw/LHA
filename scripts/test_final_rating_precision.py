@@ -61,11 +61,13 @@ class FinalPathTests(unittest.TestCase):
             task_metrics.verify(directory / "task-metrics", judge)
             packet = load(directory / "evidence/request.json")
             self.assertIn("0.1 steps", packet["system_prompt"])
+            self.assertIn("recasting across worlds and media", packet["system_prompt"])
+            self.assertIn("agreement with source timing or poses is not TC evidence", packet["system_prompt"])
             self.assertIn("0.1 steps", load(directory / "task-metrics/request.json")["system_prompt"])
             validate_report(result["report"], packet)
             old_packet, old_report = copy.deepcopy(packet), copy.deepcopy(result["report"])
             visible = json.loads(old_packet["user_text"])
-            visible["protocol_id"] = old_report["protocol_id"] = "lha-low-high-final-v3"
+            visible["protocol_id"] = old_report["protocol_id"] = "lha-low-high-final-v4"
             old_packet["user_text"] = json.dumps(visible)
             with self.assertRaisesRegex(ValueError, "identity"):
                 validate_report(old_report, old_packet)

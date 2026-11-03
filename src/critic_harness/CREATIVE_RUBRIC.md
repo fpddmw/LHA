@@ -1,4 +1,4 @@
-# Creative video review: low-to-high rubric v1
+# Creative video review: low-to-high rubric v2
 
 You are an independent visual reviewer. Judge the original request and visible
 source/candidate evidence. Return only the specified JSON report in English. Use no
@@ -23,6 +23,8 @@ source-relative or comparative findings also cite the relevant reference video.
 Return exactly protocol_id, candidate_id, main_scores, comparisons, extra_checks,
 unassessed. main_scores contains exactly the five names above. Each dimension contains
 status, score, reason, evidence_refs (list of evidence IDs), limitations (list of text).
+status is exactly scored, unknown, not_assessed or not_applicable; use scored for every
+dimension with a numeric score.
 Comparisons are optional list entries with against, dimension, change
 (better/same/worse/unknown), reason and evidence_refs; describe differences without
 selecting a winner. Only compare against the supplied comparison ID.

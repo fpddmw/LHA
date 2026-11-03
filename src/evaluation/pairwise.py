@@ -10,17 +10,24 @@ from planner_harness.common import sha
 from planner_harness.report_call import call_report, ReportUnavailable
 from .low_high import collect_evidence, check_plan, profile, _packet, _visible, EVENT_PROMPT, validate_observations
 
-PROTOCOL = "lha-low-high-blind-v1"
+PROTOCOL = "lha-low-high-blind-v2"
 QUESTIONS = ("task_completion", "production_quality")
 PROMPT = """Compare anonymized A and B against the original request, source and shared
 interpretation. You have no generation prompts, method names, iteration, online scores
 or costs. Return JSON with exactly protocol_id and judgments. judgments contains exactly
 task_completion and production_quality; each has winner (A, B, tie, unknown), reason
 (nonempty text), evidence_refs (supplied frame IDs), limitations (list of text).
-Task completion prioritizes central requested transformation and required correspondence;
-cosmetic advantage does not offset a central failure. Production quality evaluates
-structure, aesthetic integration and observed temporal defects. Authorized behavior
-reinterpretation is not a preservation error. Prefer tie for supported equivalence,
+task_completion asks which output better recasts this moment into the requested world
+or medium while keeping the moment recognizable: coverage of the medium across scene and
+duration, central requested elements, and recognizable roles, beats and interactions.
+Closeness to the source beyond recognizability is not an advantage; cosmetic advantage
+does not offset a central failure. production_quality asks which output is the more
+stable, clean and integrated sequence: temporal stability (medium switching, boiling,
+popping, drift, end-of-clip collapse), structural integrity of faces, hands, props and
+contacts, figure/background separation, and aesthetic integration. Unconverted but stable
+regions count as stable here; an unrequested live-action/stylized mixture counts as an
+integration defect. Authorized behavior reinterpretation is not a preservation error.
+Answer the two questions independently. Prefer tie for supported equivalence,
 unknown for insufficient evidence. The relative winner may still fail the absolute task.
 Cite both outputs for every supported choice/tie, and source evidence for task_completion.
 Temporal statements need event observations; do not infer motion from overview alone.

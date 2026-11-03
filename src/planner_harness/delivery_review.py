@@ -50,6 +50,9 @@ def validated_feedback(run, state, identity, job_id):
 
 
 def verify(run, state):
+    from .continuation import completion_pending
+    if completion_pending(state):
+        raise ValueError("Fixed-budget delivery still has unused generation allowance")
     run = Path(run)
     proof = state.get("final", {}).get("delivery_review", {})
     identity = state["final"].get("video")

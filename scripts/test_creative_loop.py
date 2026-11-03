@@ -53,7 +53,7 @@ def review_fixture(user_text):
                 'aesthetics':{k:rating('scored') for k in LOW_HIGH_AESTHETICS}}
     if 'scope' in p:
         return {'status':'observed','observations':[{'finding':'Synthetic event fixture','evidence_refs':[e['id'] for e in p['evidence']]}],'limitations':['Synthetic only']}
-    if p.get('protocol_id')=='lha-low-high-blind-v1':
+    if p.get('protocol_id')=='lha-low-high-blind-v2':
         return {'protocol_id':p['protocol_id'],'judgments':{q:{'winner':'tie','reason':'Synthetic tie','evidence_refs':[e['id'] for e in p['evidence']],'limitations':[]} for q in ('task_completion','production_quality')}}
     candidate = p["candidate_id"]
     source_ref = next(e["id"] for e in p["evidence"] if e["video_id"] == "source")

@@ -410,9 +410,20 @@ save(output/(sys.argv[3]+'.json'),{'pid':os.getpid(),'topics':seen,'warm_initial
         visible=json.loads(packet['user_text']);visible['protocol_id']=PROTOCOL;packet['user_text']=json.dumps(visible)
         raw=loop.review_fixture(packet['user_text']);raw.pop('task_diagnostics',None)
         raw['main_scores']['aesthetic_coherence']['evidence_refs']=['candidate:missing:999']
-        projected,errors=fp.project(raw,packet)
+        projected,errors,normalized=fp.project(raw,packet)
         self.assertEqual(len(errors),1);self.assertEqual(projected['main_scores']['aesthetic_coherence']['status'],'unknown')
         self.assertEqual(projected['main_scores']['instruction_adherence'],raw['main_scores']['instruction_adherence'])
+        # A stray citation beside valid ones is dropped; a non-schema status with a score is scored.
+        valid=list(raw['main_scores']['visual_integrity']['evidence_refs'])
+        slipped=copy.deepcopy(raw)
+        slipped['main_scores']['visual_integrity']['evidence_refs']=valid+['candidate:missing:999']
+        slipped['main_scores']['content_preservation']['status']='observed'
+        projected,errors,normalized=fp.project(slipped,packet)
+        self.assertEqual(projected['main_scores']['visual_integrity']['evidence_refs'],valid)
+        self.assertEqual(projected['main_scores']['content_preservation']['status'],'scored')
+        self.assertEqual({tuple(n['path']) for n in normalized},
+                         {('main_scores','visual_integrity'),('main_scores','content_preservation')})
+        self.assertTrue(all(n['original'] for n in normalized))
         class Model:
             model='fixture';reasoning_effort='high'
             def predict_text(inner,**kw):return json.dumps(raw)
@@ -447,6 +458,7 @@ save(output/(sys.argv[3]+'.json'),{'pid':os.getpid(),'topics':seen,'warm_initial
         self.assertEqual(result['report']['aesthetics']['composition_lighting']['score'],3)
         self.assertEqual(result['report']['items'][0]['completion']['label'],'pass')
         self.assertEqual(len(result['field_projection']['errors']),2)
+        self.assertEqual(result['field_projection']['normalized'],[])
         self.assertEqual(tm.verify(directory,model,expected_packet=packet),result)
         tampered=copy.deepcopy(result);tampered['answer_binding']['response_sha256']='forged'
         projection=load(directory/'field-projection.json');original_projection=copy.deepcopy(projection)
@@ -455,6 +467,37 @@ save(output/(sys.argv[3]+'.json'),{'pid':os.getpid(),'topics':seen,'warm_initial
         save(directory/'field-projection.json',original_projection)
         result['field_projection']['errors']=[];save(directory/'result.json',result)
         with self.assertRaisesRegex(ValueError,'projection changed'):tm.verify(directory,model,expected_packet=packet)
+
+    def test_final_diagnostics_normalize_track_inapplicable_and_label_slips(self):
+        from evaluation import task_metrics as tm
+        from evaluation.low_high import prepare_final, freeze_plan
+        from planner_harness.video import Video
+        info=Video(self.source,self.root/'info').info
+        for track in ('short','long'):
+            plan=freeze_plan({'track':track},'Make the room blue.',info,self.root/('plan-'+track))
+            packet,_=prepare_final('Make the room blue.',info,info,self.root/('evidence-'+track),plan=plan)
+            value=loop.review_fixture(tm.request_packet(packet,'independent_final')['user_text'])
+            refs=[e['id'] for e in json.loads(packet['user_text'])['evidence']]
+            if track=='short':
+                value['items'][0]['binding']={'label':'pass','reason':'Judge filled binding','evidence_refs':refs}
+            else:
+                value['specialties']['style_realization']={'status':'scored','score':3,'reason':'Judge filled specialty','evidence_refs':refs}
+            row=value['aesthetics']['color_texture'];row['label']=row.pop('status')
+            projected,errors,normalized=tm.project_final(value,tm.request_packet(packet,'independent_final'))
+            self.assertEqual(errors,[])
+            self.assertEqual(projected['aesthetics']['color_texture']['status'],'scored')
+            if track=='short':self.assertEqual(projected['items'][0]['binding']['label'],'not_applicable')
+            else:self.assertEqual(projected['specialties']['style_realization']['status'],'not_applicable')
+            self.assertEqual(len(normalized),2)
+
+    def test_recast_extent_math_is_source_relative(self):
+        from evaluation.features import paired_cosine,text_gain
+        same=[[1,0],[0,1]];moved=[[0,1],[1,0]]
+        self.assertAlmostEqual(paired_cosine(same,same),1.0)
+        self.assertAlmostEqual(paired_cosine(same,moved),0.0)
+        self.assertAlmostEqual(text_gain([[1,0]],[[0,1]],[0,1]),1.0)
+        self.assertAlmostEqual(text_gain([[0,1]],[[0,1]],[0,1]),0.0)
+        with self.assertRaises(ValueError):paired_cosine(same,same[:1])
 
     def test_source_group_itt_distinguishes_missing_outputs_from_unknown_judge(self):
         from evaluation.statistics import summarize

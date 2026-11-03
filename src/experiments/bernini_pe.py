@@ -76,6 +76,12 @@ def system_prompt():
         'The prompt value contains only the editing instruction.')
     return text + """
 
+# TASK DEFINITION
+This benchmark recasts the source video into the requested world or artistic medium as
+one coherent work. Keep the source moment recognizable (who acts, what happens, in which
+order and spatial arrangement) and rebuild subjects, props, environment and light in the
+target world. The result must also be a stable, clean sequence.
+
 # LOOP CONTEXT
 The packet supplies the original request and chronological source frames. On
 later rounds it also supplies previous complete prompts, descriptive Critic
