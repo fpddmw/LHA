@@ -29,8 +29,8 @@ def main():
     parser.add_argument("--sample-ids", nargs="+", help="Prepare only these sample IDs within the selected splits")
     parser.add_argument("--prompt-form", nargs="+", choices=["short", "long"], default=["short", "long"])
     from experiments.results import RUN_METHODS
-    parser.add_argument("--method", nargs="+", choices=RUN_METHODS, default=None,
-                        help="Test default: direct pe-loop none full; pe retains the legacy single enhancement")
+    parser.add_argument("--method", nargs="+", choices=RUN_METHODS, default=['pre-experience'],
+                        help="Default: pre-experience; use run_experiment_campaign.py for automatic full-experience handoff")
     parser.add_argument("--seed-start", type=int, default=42)
     parser.add_argument("--seed-step", type=int, default=1)
     from planner_harness.resources import MAX_GENERATIONS
@@ -51,6 +51,11 @@ def main():
     from experiments.creative_benchmark import run
     from experiments.preflight import local_preflight, host_preflight, provider_preflight
     host = load(args.host_config) if args.host_config else None
+    if args.devices:
+        if host is None or args.command not in {'preflight', 'run'}:
+            parser.error('--devices requires --host-config and preflight/run')
+        from experiments.device_scheduler import device_selection
+        host['devices'] = device_selection('auto' if args.devices == ['auto'] else args.devices)
     if args.command == "prepare":
         result = prepare(ROOT, args.output, backend=args.backend or (host or {}).get("renderer", {}).get("backend", "bernini"),
             output_dimensions=(host or {}).get("renderer", {}).get("output"), splits=args.split, prompt_forms=args.prompt_form, methods=args.method,
@@ -89,7 +94,6 @@ def main():
     elif args.command == "run":
         if host is None:
             parser.error("Use --host-config for explicitly opened devices and verified assets")
-        if args.devices:host["devices"]="auto" if args.devices==["auto"] else args.devices
         for field,default in (("shard_rank",0),("shard_count",1)):
             override=getattr(args,field)
             if override is not None:host[field]=override

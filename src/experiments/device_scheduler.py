@@ -10,16 +10,27 @@ from planner_harness.execution import immutable,signature
 from planner_harness.lock import RunLock
 
 
-def devices(host, *, query=None):
+def device_selection(selected):
+    """Validate configuration without querying or initializing a GPU."""
     import re
-    selected=host.get('devices','auto')
+    if selected == 'auto':
+        return selected
+    if (not isinstance(selected, list) or not selected
+            or any(type(d) not in (int, str) or not re.fullmatch(r'[A-Za-z0-9_-]+', str(d)) for d in selected)):
+        raise ValueError('devices must be auto or a nonempty physical index/UUID list')
+    selected = [str(d) for d in selected]
+    if 'auto' in selected or len(set(selected)) != len(selected):
+        raise ValueError('Use auto alone or distinct physical GPU identifiers')
+    return selected
+
+
+def devices(host, *, query=None):
+    selected=device_selection(host.get('devices','auto'))
     visible=os.environ.get('CUDA_VISIBLE_DEVICES')
     if visible is not None and visible.strip() in {'','-1'}:
         raise ValueError('Host CUDA_VISIBLE_DEVICES masks all GPUs; no dispatch')
     if host.get('renders_per_device',1)!=1:
         raise ValueError('Only one render per device is validated; provision more GPUs rather than unmeasured VRAM overcommit')
-    if selected!='auto' and (not isinstance(selected,list) or not selected or any(not isinstance(d,(int,str)) or not re.fullmatch(r'[A-Za-z0-9_-]+',str(d)) for d in selected)):
-        raise ValueError('devices must be auto or a nonempty safe physical index/UUID list')
     query=query or (lambda:subprocess.check_output(['nvidia-smi','--query-gpu=index,uuid','--format=csv,noheader'],text=True))
     identities=[tuple(x.strip() for x in r.split(',')) for r in query().splitlines() if r.strip()]
     if not identities or any(len(row)!=2 for row in identities):raise ValueError('GPU inventory is unavailable or malformed')
@@ -30,9 +41,7 @@ def devices(host, *, query=None):
     else:selected=[mapping.get(str(d),str(d)) for d in selected]
     if not set(selected)<=physical:raise ValueError('Requested GPU is absent from the host inventory')
     if not set(selected)<=set(allowed):raise ValueError('Requested GPU is masked by host CUDA_VISIBLE_DEVICES')
-    if not isinstance(selected,list) or not selected or any(not isinstance(d,(int,str)) or not re.fullmatch(r'[A-Za-z0-9_-]+',str(d)) for d in selected):
-        raise ValueError('devices must be auto or a nonempty safe physical index/UUID list')
-    selected=[str(d) for d in selected]
+    selected=device_selection(selected)
     if len(set(selected))!=len(selected):raise ValueError('Duplicate GPU device')
     return selected
 
@@ -44,16 +53,18 @@ def shard_topics(batch,host):
 
 
 def work_units(batch,host):
-    """An ordered no-knowledge training chain plus independently schedulable baselines."""
+    """Fixed-seed tasks are independent; historical adaptive reads stay ordered."""
     from .unified_benchmark import training_topic
     units=[];previous=None
     for topic in shard_topics(batch,host):
         methods=topic.get('methods',batch['arms'])
         if training_topic(topic,batch):
             training_method = 'pre-experience' if 'pre-experience' in methods else 'none'
-            if host.get('shard_count',1)!=1:raise ValueError('One ordered training stream cannot be split across hosts; shard read-only test/baselines instead')
+            if host.get('shard_count',1)!=1:raise ValueError('Private accumulation uses one host with N GPUs; shard read-only batches instead')
             identity=topic['id']+'__training_'+training_method
-            units.append({**topic,'claim_id':identity,'methods':[training_method],'dependency':previous});previous=identity
+            dependency = previous if training_method == 'none' else None
+            units.append({**topic,'claim_id':identity,'methods':[training_method],'dependency':dependency})
+            if training_method == 'none':previous=identity
             baseline=[m for m in methods if m!=training_method]
             if baseline:units.append({**topic,'claim_id':topic['id']+'__baselines','methods':baseline})
         else:units.append(topic)
@@ -75,8 +86,10 @@ class Claims:
             db.execute('CREATE TABLE IF NOT EXISTS tasks (id TEXT PRIMARY KEY, ordinal INTEGER, plan TEXT, status TEXT, owner TEXT, dependency TEXT)')
             if 'dependency' not in [r[1] for r in db.execute('PRAGMA table_info(tasks)')]:db.execute('ALTER TABLE tasks ADD COLUMN dependency TEXT')
             for i,t in enumerate(topics):db.execute('INSERT OR IGNORE INTO tasks VALUES (?,?,?,"pending",NULL,?)',(t.get('claim_id',t['id']),i,plan,t.get('dependency')))
-            rows=db.execute('SELECT id,plan FROM tasks').fetchall()
-            if {r[0] for r in rows}!=set(self.topics) or any(r[1]!=plan for r in rows):raise ValueError('Queue differs from frozen local shard')
+            rows=db.execute('SELECT id,plan,dependency FROM tasks').fetchall()
+            if ({r[0] for r in rows}!=set(self.topics)
+                    or any(r[1]!=plan or r[2]!=self.topics[r[0]].get('dependency') for r in rows)):
+                raise ValueError('Queue differs from frozen local shard/dependencies; retain the original runtime for an existing run')
     def connect(self):return sqlite3.connect(self.path,timeout=30)
     def next(self,*,wait=False):
         while True:
@@ -197,7 +210,7 @@ def run_devices(root,output,host):
             'topics':topics,'positions':positions,'workers':{d:c.returncode for c,_,d,_ in children},'claims':queue.rows(),
             'quality_scoring':'pending_new_evaluation'}
         save(output/'checkpoint.json',result);results.report(root,batch['results_root'])
-        # Training maintenance is ordered per none task; validation/test are read-only.
+        # The coordinator joins all task/maintenance workers before a dependent stage.
         return result
 
 

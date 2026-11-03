@@ -47,6 +47,13 @@ Planner uses the complete configured `max_generations` allowance, currently 4, b
 
 ## 主机与多卡
 
+Both public runners accept `--devices 0 1 ...` and `--devices auto`; the host JSON
+also accepts a device list or `"auto"`. One coordinator dispatches up to N independent
+tasks to N resident renderer workers. Pre-experience reads stay fixed while private
+contributions append; full-experience begins after those tasks settle. Device count
+does not change the four-attempt per-task budget. See the [public guide](../public-experiment-guide.md#n-gpus-on-one-host)
+for device selection, resume and automatic library handoff commands.
+
 主机文件填写实际设备及渲染资产清单。单设备服务串行生成并复用常驻模型；多设备批次由 scheduler 为各设备派发任务，任务内依赖顺序不变。配置两个 GPU 并不意味着同时在一张卡上启动两次 Bernini。
 
 当前双卡主机已配置临时 SSH 出口。远端环境文件可额外包含 `HTTPS_PROXY`、`HTTP_PROXY`、`NO_PROXY`；这些值仅供对应运行进程使用。地址依实际主机设置，不将临时端口作为项目公共默认值。Experiments remain paused during the current integration repair; historical host notes are not a fresh availability check.

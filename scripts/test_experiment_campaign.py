@@ -85,7 +85,7 @@ class CampaignTests(base.Fixture):
         self.assertEqual({unit["split"] for unit in units}, {"train", "test"})
         for index, unit in enumerate(units):
             self.assertTrue(u.training_topic(unit, batch))
-            self.assertEqual(unit["dependency"], units[index - 1]["claim_id"] if index else None)
+            self.assertIsNone(unit["dependency"])
             execution = task_spec(unit, "pre-experience", batch, self.output / "profile.json")["execution"]
             self.assertEqual((execution["experience_mode"], execution["experience_condition"]),
                              ("full", "pre-experience"))

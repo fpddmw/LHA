@@ -36,6 +36,8 @@ def main():
     parser.add_argument('--config', type=Path, default=ROOT / 'configs/experiment-campaign.json')
     parser.add_argument('--output', type=Path, default=ROOT / 'out/main-all67-v5')
     parser.add_argument('--host-config', type=Path)
+    parser.add_argument('--devices', nargs='+',
+                        help='Physical GPU IDs or auto; overrides each selected host for check/run')
     parser.add_argument('--backend', choices=['bernini', 'ditto', 'both'],
                         help='both runs separate Bernini/Ditto subdirectories; single-host configs infer the backend')
     old_stages = {"zero": "pre-experience", "knowledge": "full-experience",
@@ -52,6 +54,15 @@ def main():
         parser.error('--verify-assets is only available with check')
     if args.execute and args.command != 'run':
         parser.error('--execute is only available with run')
+    if args.devices and (args.command not in {'check', 'run'} or not args.host_config):
+        parser.error('--devices requires --host-config and check/run')
+    def selected_hosts():
+        hosts = load_hosts(args.host_config, args.backend) if args.host_config else None
+        if args.devices:
+            from experiments.device_scheduler import device_selection
+            selected = device_selection('auto' if args.devices == ['auto'] else args.devices)
+            hosts = {name: {**host, 'devices': selected} for name, host in hosts.items()}
+        return hosts
     both = args.backend == 'both'
     if args.command == 'status':
         models = [n for n in ('bernini', 'ditto') if (args.output / n / 'campaign.json').exists()]
@@ -62,7 +73,7 @@ def main():
         config = campaign.configuration(args.config)
         if args.command == 'check':
             from experiments.readiness import check
-            hosts = load_hosts(args.host_config, args.backend) if args.host_config else None
+            hosts = selected_hosts()
             result = check(ROOT, config, hosts, verify_assets=args.verify_assets)
         elif args.command == 'plan':
             result = campaign.plan(ROOT, config)
@@ -78,7 +89,7 @@ def main():
             if both and not args.host_config and args.stage == 'score':
                 hosts = {n: {'renderer': {'backend': n}} for n in ('bernini', 'ditto')}
             else:
-                hosts = load_hosts(args.host_config, args.backend) if args.host_config else None
+                hosts = selected_hosts()
             if both or (hosts and len(hosts) > 1):
                 if not hosts:
                     parser.error('both requires a host config mapping for Bernini and Ditto')

@@ -71,10 +71,10 @@ def check(root, config, hosts=None, *, verify_assets=False):
         def declaration(name=name, host=host):
             if host.get('renderer', {}).get('backend') != name:
                 raise ValueError('Host backend mismatch')
-            if not isinstance(host.get('devices'), list) or not host['devices']:
-                raise ValueError('Declare devices explicitly')
-            if len(set(map(str, host['devices']))) != len(host['devices']):
-                raise ValueError('Repeated device')
+            from .device_scheduler import device_selection
+            selected = device_selection(host.get('devices', 'auto'))
+            if host.get('renders_per_device', 1) != 1:
+                raise ValueError('Use one worker/render slot per device')
             expected = {'model': config['model'], 'reasoning_effort': config['reasoning_effort']}
             planner, critic, _ = model_configuration(expected, host.get('models'))
             if planner != expected or critic != expected:
@@ -82,7 +82,8 @@ def check(root, config, hosts=None, *, verify_assets=False):
             renderer = host['renderer']
             if renderer.get('generation', render_profiles.generation(name)) != render_profiles.generation(name):
                 raise ValueError('Generation profile differs')
-            return {'backend': name, 'device_count': len(host['devices']),
+            return {'backend': name, 'device_count': None if selected == 'auto' else len(selected),
+                    'devices': selected, 'availability': 'Resolved against the host inventory at launch',
                     'planner': planner, 'critic': critic}
         record(name + '_host', declaration)
 

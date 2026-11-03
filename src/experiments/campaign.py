@@ -286,7 +286,7 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
     if stage != 'score' and not host:
         raise ValueError('Generation requires --host-config with verified renderer assets/devices')
     if host and (host.get('local_results_root') or host.get('shard_count', 1) != 1):
-        raise ValueError('Campaign uses its own result roots/models and one ordered training host; use the lower-level runner for sharding')
+        raise ValueError('Campaign uses its own result roots/models and one host with N GPUs; use the lower-level runner for read-only sharding')
     from . import render_profiles
     name = render_profiles.backend({'backend': host['renderer']['backend']}) if host else None
     if host and host['renderer'].get('generation', render_profiles.generation(name)) != render_profiles.generation(name):
@@ -406,6 +406,11 @@ def batch_status(output):
 def status(output):
     output = Path(output)
     answer = {stage: batch_status(output / stage) for stage in STAGES}
+    # Inspect historical results under their original names, never relabel an
+    # actual no-knowledge run as a new pre-experience control.
+    for stage in ('zero', 'knowledge', 'self-review-zero', 'self-review-knowledge'):
+        if (output / stage / 'batch.json').exists():
+            answer[stage] = batch_status(output / stage)
     answer['trained_snapshot'] = (output / 'trained-experience.json').exists()
     answer['self_review_trained_snapshot'] = (output / 'self-review-trained-experience.json').exists()
     answer['results'] = str(output / 'results/index.html')

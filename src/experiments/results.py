@@ -135,12 +135,13 @@ def import_video(repository, root, row):
     if not isinstance(row.get("evidence"), dict) or not row["evidence"]:
         raise ValueError("Retain the original render evidence with each video")
     evidence = copy.deepcopy(row["evidence"])
+    receipt_copy = None
     if evidence.get("receipt_sha256"):
         receipt = Path(evidence["receipt"])
         if not receipt.is_file() or sha(receipt) != evidence["receipt_sha256"]:
             raise ValueError("Original render receipt is unavailable or changed")
         destination=root/"receipts"/(evidence["receipt_sha256"]+".json")
-        _copy(receipt,destination,evidence["receipt_sha256"])
+        receipt_copy = (receipt, destination, evidence["receipt_sha256"])
         evidence.setdefault("original_receipt",str(receipt))
         evidence["receipt"]=str(destination)
     # Scores and stale judging artifacts deliberately have no import field.
@@ -166,13 +167,15 @@ def import_video(repository, root, row):
         if method == "pe-loop" and sum("last" in c["roles"] for c in candidates) != 1:
             raise ValueError("PE Loop needs one last candidate identity")
         body["candidates"] = [{k: v for k, v in c.items() if k != "_source"} for c in candidates]
-    with RunLock(root / "registry-owner"):
+    with RunLock(root / "registry-owner", timeout=120):
         if path.exists():
             old = verify_entry(root, path)
             identity = ("source_sha256", "request_sha256", "video_sha256", "generation")
             if any(old[k] != body[k] for k in identity) or (method!="direct" and old["evidence"].get("method_identity")!=body["evidence"].get("method_identity")):
                 raise ValueError("This result key already names different video/conditions; inspect the conflict")
             return old
+        if receipt_copy:
+            _copy(*receipt_copy)
         _copy(source, root / body["video"], digest)
         for candidate in candidates:
             _copy(candidate["_source"], root / candidate["video"], candidate["video_sha256"])

@@ -161,6 +161,42 @@ def changeset(root, snapshot, changes, provenance, case=None):
     return result, changed
 
 
+def _recover_activations(root, output):
+    """Finish a durable append before another worker advances the pointer.
+
+    Caller owns the library lock. This touches receipts only, never a model call.
+    """
+    directory = Path(output) / "training-experience"
+    pending = [(path, load(path)) for path in (directory / "journals").glob("*.json")
+               if not (directory / "activations" / path.name).exists()]
+    for path, record in sorted(pending, key=lambda item: item[1]["after"]["version"]):
+        pointer = current(root, output)
+        before, after = record["before"], record["after"]
+        if (before["owner"] != pointer["owner"] or after["owner"] != pointer["owner"]
+                or sha(after["snapshot"]) != after["snapshot_sha256"]):
+            raise ValueError("Training activation journal identity changed")
+        if pointer == before:
+            if after != before:
+                save(directory / "current.json", after)
+        elif pointer != after:
+            raise ValueError("Training activation journal conflicts with current revision")
+        job = Path(output) / 'maintenance/jobs' / path.stem
+        if (job / 'job.json').exists():
+            result_path = job / 'training-maintenance.json'
+            previous = load(result_path) if result_path.exists() else None
+            recovery = job / 'activation-recovery.json'
+            if recovery.exists():
+                if load(recovery)['activation'] != record:
+                    raise ValueError('Activation recovery receipt changed')
+            else:
+                immutable(recovery, {'previous_result': previous, 'activation': record})
+            save(result_path, record)
+            save(job / 'status.json', {'status': 'complete',
+                 'attempts': len(list(job.glob('training-attempt-*'))),
+                 'recovered_from_activation_journal': True})
+        immutable(directory / "activations" / path.name, record)
+
+
 def activate(root, output, contribution):
     from .maintenance import provenance
     from .json_output import decode_object
@@ -199,7 +235,9 @@ def activate(root, output, contribution):
     ):
         raise ValueError("Training revision differs from original Planner contribution")
     directory = Path(output) / "training-experience"
-    with RunLock(directory / "owner"):
+    # Independent task maintenance runs in parallel; only its durable append waits.
+    with RunLock(directory / "owner", timeout=120):
+        _recover_activations(root, output)
         before = current(root, output)
         library = job.get("maintenance_snapshot")
         bound_snapshot(root, library, output=output, **family(load(Path(job["run"]) / "state.json")))
@@ -220,17 +258,6 @@ def activate(root, output, contribution):
         journal = directory / "journals" / (job["id"] + ".json")
         if receipt.exists():
             return load(receipt)
-        if journal.exists():
-            record = load(journal)
-            after = record["after"]
-            if sha(after["snapshot"]) != after["snapshot_sha256"]:
-                raise ValueError("Training activation journal snapshot changed")
-            if before == record["before"]:
-                save(directory / "current.json", after)
-            elif before != after:
-                raise ValueError("Training activation journal conflicts with current revision")
-            immutable(receipt, record)
-            return record
         # Legacy maintenance reads the current revision. Pre-experience
         # maintenance reads the seed while activation appends to the revision.
         if not pre_experience and library["snapshot_sha256"] != before["snapshot_sha256"]:
@@ -260,11 +287,11 @@ def activate(root, output, contribution):
             append(load(library["snapshot"]), changes, value["provenance"])
             occupied = {row["id"] for row in observed.get("experience_contributions", {}).get("items", [])}
             # Independent tasks can propose the same new ID without seeing one another.
-            changes = [
-                {**change, "id": change["id"] + "-" + job["id"][:16]}
-                if change["op"] == "create" and change["id"] in occupied else change
-                for change in changes
-            ]
+            renamed = {change['id']: change['id'] + '-' + job['id'][:16]
+                       for change in changes if change['op'] == 'create' and change['id'] in occupied}
+            # Comments on a newly created account must follow that same account,
+            # not a previous task's coincidentally identical proposed ID.
+            changes = [{**change, 'id': renamed.get(change['id'], change['id'])} for change in changes]
         snapshot, changed = changeset(root, observed, changes, value["provenance"], case)
         after = before
         if changed:

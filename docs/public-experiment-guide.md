@@ -114,6 +114,34 @@ to the repository root or absolute on the execution host. The example device `[0
 is a placeholder for your hardware. The campaign does not rent, create or stop GPUs.
 Private local host files are ignored by Git.
 
+### N GPUs on one host
+
+Set `"devices": [0, 1, 2, 3]` in the host file, or use `--devices 0 1 2 3`
+on `check` and `run`. `--devices auto` uses all devices visible to that process.
+The campaign and lower-level `run_creative_benchmark.py` runner use the same
+device selection and one host-local coordinator. Start one command, not one
+copy of the campaign per card. Each selected card owns one resident renderer
+and one task worker; no device has two concurrent render submissions.
+
+All four main arms support independent tasks across N workers. Pre-experience
+online and maintenance reads remain on the initial seed, even when another worker
+has already contributed an increment. Only the brief append/result registration
+operations serialize. Training increments accumulate without replacing the shared
+corpus; test increments remain deferred. The coordinator waits for task and
+maintenance settlements before freezing the full-experience input. Consequently,
+increasing GPU count changes scheduling, not the experience visible to a task.
+
+Candidate iterations within a task remain sequential. A worker performs that
+task's API/maintenance work as well as rendering, so N GPUs provide up to N
+concurrent task trajectories, not a promise of continuous 100% GPU utilization.
+Per-task generation budgets stay at four. Provider limits can also constrain
+throughput. `check` validates device syntax only; real launch resolves physical
+GPU availability, visibility and duplicate index/UUID aliases.
+
+The selected devices and scheduling dependencies are frozen when a batch starts.
+Resume with the same host/selection. Historical sequential queues retain their
+original runtime; changing the scheduling contract requires a new output root.
+
 Put API credentials outside the checkout, for example `~/.config/lha/openrouter.env`:
 
 ```dotenv
@@ -222,6 +250,26 @@ Uncertain calls/renders remain quarantined; use the existing
 [recovery procedures](server-runtime.md) against their original requests. Do not
 delete receipts or change identities to force a rerender. Main `full-experience` depends
 on its own `pre-experience` settlement; self-review has its separate dependency and owner.
+
+To run the first stage now and continue full-experience later on the same host:
+
+```bash
+python scripts/run_experiment_campaign.py run --backend bernini --stage pre-experience \
+  --host-config configs/bernini-campaign-host.local.json --devices 0 1 2 3 \
+  --output out/formal/bernini --execute
+python scripts/run_experiment_campaign.py run --backend bernini --stage full-experience \
+  --host-config configs/bernini-campaign-host.local.json --devices 0 1 2 3 \
+  --output out/formal/bernini --execute
+```
+
+The second command resolves `trained-experience.json` from this campaign's own
+pre-experience stage, checks its settlements and ownership, and binds it read-only.
+There is no manual snapshot flag or global experience toggle. A new output root
+is a different campaign and does not silently search other runs for a library.
+For self-review use its two named stages in the same root; it selects its own
+`self-review-trained-experience.json`. The `main`/`all` commands already perform
+these handoffs automatically. The lower-level preparation command defaults to
+`pre-experience`; legacy `none` is available only when explicitly selected there.
 
 ### Independent evaluation
 

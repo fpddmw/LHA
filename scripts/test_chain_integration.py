@@ -230,7 +230,15 @@ class StatusTests(unittest.TestCase):
         save(self.folder / 'bernini/campaign.json', {'fixture': True})
         result = self.cli_status(campaign_cli, ['status', '--output', str(self.folder)])
         self.assertIn('bernini', result)
-        self.assertEqual(result['bernini']['zero']['status'], 'not_started')
+        self.assertEqual(result['bernini']['pre-experience']['status'], 'not_started')
+        self.assertNotIn('zero', result['bernini'])
+
+    def test_current_pre_experience_status_does_not_claim_a_no_knowledge_run(self):
+        save(self.folder / 'pre-experience/batch.json',
+             {'arms': ['pre-experience'], 'topics': [{'id': 'fixture'}]})
+        report = self.cli_status(campaign_cli, ['status', '--output', str(self.folder)])
+        self.assertEqual(report['pre-experience']['planned'], 1)
+        self.assertEqual(report['zero']['planned'], 2)
 
 
 if __name__ == '__main__':

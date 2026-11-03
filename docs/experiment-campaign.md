@@ -124,7 +124,7 @@ Each model writes `results/index.html` and `results/results.json`, with `results
 
 [一键入口](../scripts/run_experiment_campaign.py)通过 [campaign.py](../src/experiments/campaign.py)复用原 [统一运行器](../src/experiments/unified_benchmark.py)、设备队列、生成回执和结果注册。各批冻结自己的生成次数与 `training_maintenance`：主实验中只有 `pre-experience` 为 true，其他主实验批次为 false。底层手动运行全量有经验组时，使用 `--split train test --method full --no-maintenance`；PE 单独使用 `--max-generations 4 --no-maintenance`。
 
-`pre-experience` 的设备队列逐题结算维护。全经验阶段读取已冻结的贡献版本。具体维护由 [training_experience.py](../src/planner_harness/training_experience.py)与 [maintenance.py](../src/planner_harness/maintenance.py)处理。
+`pre-experience` tasks run independently on N selected GPUs. Each task reads the same seed online and during maintenance; shared contribution commits serialize briefly. Full-experience waits for the stage's settlements and automatically reads its frozen training contributions. Test contributions remain deferred. Both public runners accept `--devices 0 1 ...` or `--devices auto`; see [multi-GPU execution and continuation](public-experiment-guide.md#n-gpus-on-one-host). The existing [training experience](../src/planner_harness/training_experience.py) and [maintenance](../src/planner_harness/maintenance.py) modules implement the handoff.
 
 独立评分复用 [results.py](../src/experiments/results.py) 中的五维、长短专项、CLIP/DINO、光流和匿名交换顺序盲评；原始提示词与源视频是共同评价依据。主实验统计覆盖全部源组，RSI 单独覆盖后段源组。Direct 从 `reuse_direct_results` 指定的历史注册目录核验后导入，旧分数不导入；同一视频的首轮／末轮／选中角色共用新评分。真实调用数、维护费用和 GPU 请求单独记录。
 
