@@ -271,7 +271,7 @@ class MethodTests(Fixture):
             def render(inner, topic, method, prompt, seed, number, scope):
                 return a.invoke(scope, "owned-render", "render", "render:bernini", render_actual)
             def close(inner):pass
-        with patch("experiments.unified_benchmark.verify", return_value=batch), patch("experiments.unified_benchmark.policy", return_value=a.validate_policy(policy)):
+        with patch("experiments.unified_benchmark.verify", return_value=batch), patch("experiments.unified_benchmark.policy", return_value=a.validate_policy(policy)), patch("experiments.preflight.renderer_asset_paths"):
             try:
                 with self.assertRaises(a.ExternalExecutionUnknown):
                     u.run(self.repo, self.output, {"budget": policy,"maintenance":{"enabled":False},"renderer":{"backend":"bernini"}}, runtime_factory=Runtime)

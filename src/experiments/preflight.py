@@ -50,6 +50,30 @@ def local_preflight(root, output):
     return result
 
 
+def renderer_asset_paths(root, renderer):
+    """Check deployment paths before spawning workers, without rereading weights."""
+    root = Path(root).resolve()
+    if not renderer.get("asset_manifest"):
+        raise ValueError("Set renderer.asset_manifest to the deployment's asset manifest path")
+    manifest = root / renderer["asset_manifest"]
+    if not manifest.is_file():
+        raise FileNotFoundError(f"Missing renderer asset manifest: {manifest}")
+    assets = load(manifest)
+    missing = {
+        str(root / directory)
+        for directory in (assets.get("model_dir"), assets.get("code_dir"), renderer.get("code_dir"))
+        if directory and not (root / directory).is_dir()
+    }
+    missing.update(
+        str(root / row["path"])
+        for row in assets["files"]
+        if not (root / row["path"]).is_file()
+    )
+    if missing:
+        raise FileNotFoundError("Missing renderer deployment paths:\n" + "\n".join(sorted(missing)))
+    return assets
+
+
 def host_preflight(root, host, *, execute=False):
     """Run on the opened host; verify assets/devices without loading a GPU model."""
     root = Path(root)
@@ -62,7 +86,7 @@ def host_preflight(root, host, *, execute=False):
     path = root / cfg["asset_manifest"]
     if sha(path) != cfg["asset_manifest_sha256"]:
         raise ValueError("Asset manifest hash mismatch")
-    assets = load(path)
+    assets = renderer_asset_paths(root, cfg)
     for row in assets["files"]:
         file = root / row["path"]
         if not file.is_file() or file.stat().st_size != row["bytes"] or sha(file) != row["sha256"]:

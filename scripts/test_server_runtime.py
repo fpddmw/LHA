@@ -30,6 +30,38 @@ ScriptedModel = fixtures.ScriptedModel
 from test_evaluation import card_fixture, judgment_fixture
 
 
+class RendererReadinessTests(unittest.TestCase):
+    def test_missing_deployment_paths_are_reported_together(self):
+        from experiments.preflight import renderer_asset_paths
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            save(root / "assets.json", {
+                "code_dir": "third_party/Bernini",
+                "model_dir": "models/bernini",
+                "files": [{"path": "models/bernini/config.json"}],
+            })
+            with self.assertRaises(FileNotFoundError) as error:
+                renderer_asset_paths(root, {"asset_manifest": "assets.json"})
+            self.assertIn(str(root / "third_party/Bernini"), str(error.exception))
+            self.assertIn(str(root / "models/bernini/config.json"), str(error.exception))
+
+    @unittest.skipIf(os.name == "nt", "Resident process uses POSIX process groups")
+    def test_spawned_renderer_preserves_initialization_exception(self):
+        from server_runtime.renderers import ProcessRenderer
+
+        with tempfile.TemporaryDirectory() as tmp:
+            renderer = ProcessRenderer(tmp, {
+                "backend": "bernini", "asset_manifest": "missing-assets.json",
+                "asset_manifest_sha256": "fixture",
+            }, tmp)
+            try:
+                with self.assertRaisesRegex(ValueError, "initialization failed: FileNotFoundError: .*missing-assets.json"):
+                    renderer.initialize()
+            finally:
+                renderer.close()
+
+
 class QueueTests(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()

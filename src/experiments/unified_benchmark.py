@@ -329,6 +329,8 @@ def preflight(root, output, host=None):
                 ready += 1
     if host:
         render_profiles.check_host(batch, host)
+        from .preflight import renderer_asset_paths
+        renderer_asset_paths(root, host["renderer"])
         p = policy(batch, host.get("budget"))
         if host.get('models') and host['models']!=batch.get('models'):
             raise ValueError('Host API model roles differ from the frozen batch')

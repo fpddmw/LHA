@@ -250,28 +250,35 @@ def _renderer_process(root, config, directory, connection):
     """This process exclusively owns its pipeline and device lock."""
     import os
 
-    os.setsid()
-    if config.get("backend") == "ditto":
-        from .ditto import PersistentDittoRenderer
-        renderer = PersistentDittoRenderer(root, config, directory)
-    elif config.get("backend") == "bernini":
-        renderer = PersistentRenderer(root, config, directory)
-    else:
-        raise ValueError("Unsupported resident renderer backend")
+    renderer = None
     try:
-        renderer.initialize()
-        if config["backend"] == "ditto":
-            renderer.load_pipeline()
-        else:
-            renderer.pipeline = renderer.build(renderer.cli, renderer.torch.device("cuda:0"))
-        save(
-            Path(directory) / "model-loaded.json",
-            {
-                "at": time.time(),
-                "asset_manifest_sha256": config["asset_manifest_sha256"],
-                "hardware": getattr(renderer, "hardware", None),
-            },
-        )
+        try:
+            os.setsid()
+            if config.get("backend") == "ditto":
+                from .ditto import PersistentDittoRenderer
+
+                renderer = PersistentDittoRenderer(root, config, directory)
+            elif config.get("backend") == "bernini":
+                renderer = PersistentRenderer(root, config, directory)
+            else:
+                raise ValueError("Unsupported resident renderer backend")
+            renderer.initialize()
+            if config["backend"] == "ditto":
+                renderer.load_pipeline()
+            else:
+                renderer.pipeline = renderer.build(renderer.cli, renderer.torch.device("cuda:0"))
+            save(
+                Path(directory) / "model-loaded.json",
+                {
+                    "at": time.time(),
+                    "asset_manifest_sha256": config["asset_manifest_sha256"],
+                    "hardware": getattr(renderer, "hardware", None),
+                },
+            )
+        except Exception as exc:
+            connection.send({"status": "failed", "error_type": type(exc).__name__,
+                             "error": f"Renderer initialization failed: {type(exc).__name__}: {exc}"})
+            return
         connection.send({"status": "ready"})
         while True:
             action, job, folder = connection.recv()
@@ -289,8 +296,11 @@ def _renderer_process(root, config, directory, connection):
                     {"status": "failed", "error_type": type(exc).__name__, "error": str(exc)}
                 )
     finally:
-        renderer.close()
-        connection.close()
+        try:
+            if renderer is not None:
+                renderer.close()
+        finally:
+            connection.close()
 
 
 class ProcessRenderer:
@@ -305,6 +315,8 @@ class ProcessRenderer:
 
     def initialize(self):
         if self.process is not None and self.process.is_alive():
+            if self.connection.closed:
+                raise RuntimeError("Failed renderer initialization is still shutting down")
             return
         import multiprocessing
 
@@ -319,7 +331,12 @@ class ProcessRenderer:
         from planner_harness.owned_process import birth
 
         self.birth = birth(self.process.pid)
-        self._receive()
+        try:
+            self._receive()
+        except Exception:
+            parent.close()
+            self.process.join(timeout=2)
+            raise
 
     def _receive(self):
         while not self.connection.poll(0.1):
@@ -327,7 +344,12 @@ class ProcessRenderer:
                 from planner_harness.accounting import ExternalExecutionUnknown
 
                 raise ExternalExecutionUnknown("Owned renderer exited without its original receipt")
-        result = self.connection.recv()
+        try:
+            result = self.connection.recv()
+        except EOFError as exc:
+            from planner_harness.accounting import ExternalExecutionUnknown
+
+            raise ExternalExecutionUnknown("Owned renderer pipe closed without its original receipt") from exc
         if result["status"] == "failed":
             raise ValueError(result["error"])
         return result.get("payload")
@@ -390,8 +412,11 @@ class ProcessRenderer:
     def close(self):
         if self.process is None:
             return
-        if self.process.is_alive():
-            self.connection.send(("close", None, None))
+        if self.process.is_alive() and not self.connection.closed:
+            try:
+                self.connection.send(("close", None, None))
+            except OSError:
+                pass
             self.process.join(timeout=2)
         if self.process.is_alive():
             return self.cancel()

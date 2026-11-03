@@ -167,7 +167,7 @@ class CreativeKnowledge(Knowledge):
             else:
                 file = (self.root / relative).resolve()
                 if not file.is_relative_to(self.root / "knowledge/experience/curated") or not file.is_file() or sha(file) != row["sha256"]:
-                    raise ValueError("Curated content missing or changed since review")
+                    raise ValueError(f"Curated content missing or changed since review: {file}")
             self.add(row["id"], row["path"], row["title"], "experience" if entry else "experience_evidence")
             self.items[row["id"]].update(copy.deepcopy(row))
             self.items[row["id"]]["kind"] = "experience" if entry else "experience_evidence"
