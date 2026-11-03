@@ -37,11 +37,11 @@ class CampaignTests(base.Fixture):
         self.assertEqual(result['main_trajectories'], 16)
         self.assertEqual(result['validation_conditions_scheduled'], 0)
         self.assertNotIn('self-review', campaign.MAIN)
-        self.assertEqual(stages['self-review-zero']['methods'], ['pre-experience'])
-        self.assertEqual(stages['self-review-knowledge']['methods'], ['full'])
-        self.assertEqual(stages['self-review-zero']['review_mode'], 'planner')
-        self.assertEqual(stages['self-review-zero']['post_task_maintenance'], 4)
-        self.assertEqual(stages['self-review-knowledge']['post_task_maintenance'], 0)
+        self.assertEqual(stages['self-review-pre-experience']['methods'], ['pre-experience'])
+        self.assertEqual(stages['self-review-full-experience']['methods'], ['full'])
+        self.assertEqual(stages['self-review-pre-experience']['review_mode'], 'planner')
+        self.assertEqual(stages['self-review-pre-experience']['post_task_maintenance'], 4)
+        self.assertEqual(stages['self-review-full-experience']['post_task_maintenance'], 0)
 
     def test_plan_does_not_prepare_run_or_touch_benchmark(self):
         before = sha(self.repo / 'benchmark_data/benchmark.json')
@@ -90,7 +90,7 @@ class CampaignTests(base.Fixture):
             self.assertEqual((execution["experience_mode"], execution["experience_condition"]),
                              ("full", "pre-experience"))
 
-    def test_main_stage_order_reuses_zero_training_in_the_same_registry(self):
+    def test_all_stage_runs_both_review_families_then_scores(self):
         self.config['reuse_direct_results'] = None
         calls = []
         batches = {}
@@ -107,8 +107,8 @@ class CampaignTests(base.Fixture):
         def run(root, output, host):
             calls.append(('run', Path(output).name))
             return {'status': 'settled', 'positions': [{'status': 'ready'}]}
-        def freeze(root, output):
-            path = Path(output) / 'trained-experience.json'
+        def freeze(root, output, *, review_mode="critic"):
+            path = Path(output) / f'{review_mode}-trained-experience.json'
             save(path, {'fixture': True})
             save(path.with_name(path.stem+'-receipt.json'),{'revision':{'owner':{'fixture':'critic'}}})
             return path
@@ -124,16 +124,16 @@ class CampaignTests(base.Fixture):
             stack.enter_context(patch('experiments.results.current_evaluation', return_value=None))
             stack.enter_context(patch('experiments.results.prepare_evaluation'))
             score = stack.enter_context(patch('experiments.results.score_evaluation'))
-            campaign.execute(self.repo, self.output, self.config, {'renderer': {'backend': 'bernini'}}, 'main', execute_paid=True)
-        self.assertEqual([v[1] for v in calls if v[0] == 'run'], ['zero', 'knowledge', 'direct', 'pe-loop'])
+            campaign.execute(self.repo, self.output, self.config, {'renderer': {'backend': 'bernini'}}, 'all', execute_paid=True)
+        self.assertEqual([v[1] for v in calls if v[0] == 'run'], list(campaign.ALL[:-1]))
         preparations = {v[1]: v[2] for v in calls if v[0] == 'prepare'}
-        self.assertEqual(preparations['zero']['methods'], ['pre-experience'])
-        self.assertEqual(preparations['zero']['review'], {'mode': 'critic'})
+        self.assertEqual(preparations['pre-experience']['methods'], ['pre-experience'])
+        self.assertEqual(preparations['pre-experience']['review'], {'mode': 'critic'})
         self.assertEqual({str(p['results_root']) for p in preparations.values()}, {str(self.output/'results')})
         self.assertEqual({key:p['training_maintenance'] for key,p in preparations.items()},
-                         {'zero':True,'knowledge':False,'direct':False,'pe-loop':False})
+                         {'pre-experience':True,'full-experience':False,'direct':False,'pe-loop':False, 'self-review-pre-experience':True, 'self-review-full-experience':False})
         self.assertEqual(preparations['pe-loop']['max_generations'],4)
-        self.assertEqual(preparations['knowledge']['max_generations'],4)
+        self.assertEqual(preparations['full-experience']['max_generations'],4)
         score.assert_called_once()
 
     def test_pending_generation_does_not_start_training(self):

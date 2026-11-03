@@ -612,6 +612,90 @@ def evaluation_coverage(directory, evaluation):
             'blind_comparisons_finished': index.exists()}
 
 
+def _report_table(title, headers, rows):
+    if not rows:
+        return ""
+    cells = lambda tag, values: "".join(f"<{tag}>{html.escape(str(value))}</{tag}>" for value in values)
+    return (f"<h2>{html.escape(title)}</h2><div class='table-scroll'><table><thead><tr>"
+            + cells("th", headers) + "</tr></thead><tbody>"
+            + "".join("<tr>" + cells("td", row) + "</tr>" for row in rows)
+            + "</tbody></table></div>")
+
+
+def _score_tables(summary):
+    from evaluation.registry import LOW_HIGH_AESTHETICS, LOW_HIGH_METRICS, LOW_HIGH_REPORTED_SPECIALTIES
+    from evaluation.validation import DIMENSIONS
+
+    labels = dict(zip(DIMENSIONS, ("指令达成", "必要内容保留", "时序一致性", "视觉完整性", "美学协调")))
+    labels.update(style_realization="风格实现", scene_specific_design="场景针对性设计",
+                  effective_creativity="有效创造性", edit_completion="要求完成", binding_accuracy="对象与属性绑定",
+                  joint_satisfaction="联合满足", required_correspondence="必要对应",
+                  unrequested_damage="非预期损伤", major_damage="重大损伤",
+                  narrative_emotional_fit="叙事与情绪", style_world_consistency="风格与世界一致性",
+                  composition_lighting="构图与光影", color_texture="色彩与材质",
+                  hierarchy_readability="层次与可读性", aesthetic_mean="美学均值")
+    scopes = {"all": "全部", "short": "短任务", "long": "长任务"}
+    groups = summary.get("metrics", {}).get("groups", [])
+    main = [group for group in groups if "/planner" not in group["variant"]]
+    self_review = [group for group in groups if "/planner" in group["variant"]]
+    selected = [group for group in main if not group["variant"].endswith(("_first", "_last"))]
+    long = ("edit_completion", "binding_accuracy", "joint_satisfaction", "required_correspondence",
+            "unrequested_damage", "major_damage")
+    auxiliary = tuple(key for key in LOW_HIGH_METRICS if key not in
+                      {*DIMENSIONS, *LOW_HIGH_REPORTED_SPECIALTIES, *long, *LOW_HIGH_AESTHETICS, "aesthetic_mean"})
+
+    def cell(metric):
+        mean = metric["mean_source_macro"]
+        if mean is None:
+            states = {"unknown": "未知", "not_assessed": "未评", "not_applicable": "不适用",
+                      "missing": "缺失", "not_measured": "未测", "execution_failed": "执行失败"}
+            value = "、".join(f"{states.get(state, state)} {count}"
+                              for state, count in metric["statuses"].items() if count)
+        else:
+            value = f"{mean:.3f}"
+        return f"{value}（{metric['valid']}/{metric['planned']}）"
+
+    def metrics(title, keys, selection):
+        return _report_table(title, ["方法与位置", "判官", "范围", *(labels.get(k, k) for k in keys)],
+                             [[variant_label(g["variant"]), g["judge"], scopes[g["length"]],
+                               *(cell(g["dimensions"][k]) for k in keys)] for g in selection])
+
+    def variant_label(variant):
+        position = "在线选中"
+        if variant.endswith("_first"):
+            variant, position = variant.removesuffix("_first"), "首轮"
+        elif variant.endswith("_last"):
+            variant, position = variant.removesuffix("_last"), "末轮"
+        method, _, mode = variant.partition("/")
+        label = {"pre-experience": "预经验", "full": "全经验", "none": "历史无经验",
+                 "direct": "Direct", "pe-loop": "PE Loop"}.get(method, method)
+        review = {"critic": "独立 Critic", "planner": "Planner 自评"}.get(mode)
+        if method not in TRAJECTORY_METHODS:
+            return label
+        return " / ".join(part for part in (label, review, position) if part)
+
+    comparisons = []
+    for comparison, judges in summary.get("blind_comparisons", {}).items():
+        for judge, by_scope in judges.items():
+            for scope, questions in by_scope.items():
+                for question, counts in questions.items():
+                    comparisons.append([comparison, judge, scopes[scope],
+                                        {"task_completion": "任务完成", "production_quality": "制作质量"}[question],
+                                        counts["left"], counts["tie"], counts["right"],
+                                        counts["unknown"], counts["order_unstable"], counts["missing"],
+                                        f"{counts['valid']}/{counts['planned']}"])
+    return "".join([
+        metrics("五维主表（0–4）", DIMENSIONS, main),
+        metrics("Planner 自评消融五维（0–4）", DIMENSIONS, self_review),
+        metrics("短任务专项（0–4）", LOW_HIGH_REPORTED_SPECIALTIES, [g for g in selected if g["length"] == "short"]),
+        metrics("长任务专项（0–1）", long, [g for g in selected if g["length"] == "long"]),
+        metrics("美学明细（0–4）", (*LOW_HIGH_AESTHETICS, "aesthetic_mean"), selected),
+        metrics("客观指标与运动诊断", auxiliary, selected),
+        _report_table("独立盲评", ["对照（左 → 右）", "判官", "范围", "问题", "左胜", "平",
+                                    "右胜", "未知", "顺序不稳", "缺失", "有效／计划"], comparisons),
+    ])
+
+
 def report(repository, root, *, methods=None, seeds=None, splits=None, forms=None, review_modes=None, analysis_population=None, output_name="index"):
     root = Path(root).resolve()
     if not SAFE.fullmatch(output_name):raise ValueError('Use a safe report name')
@@ -688,15 +772,14 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
             row["evaluation_status"] = ("complete_with_missing" if missing else "complete") if full else "partial"
         for role in ('first', 'last') if row['method'] in TRAJECTORY_METHODS else ():
             candidate = next((c for c in row['candidates'] if role in c['roles']), None)
-            if candidate is None:
-                continue
-            row[role] = {**candidate, "judges": {}}
-            candidate_position = {**row, **candidate}
+            if candidate:
+                row[role] = {**candidate, "judges": {}}
+            candidate_position = {**row, **candidate} if candidate else None
             if active:
                 for identity in active[1]["judges"]:
                     name = identity["model"]
-                    link = active[0] / "scores" / (_score_key(candidate_position, name) + ".json")
-                    result = _read_score(active[0], link, active[1]) if link.exists() else None
+                    link = active[0] / "scores" / (_score_key(candidate_position, name) + ".json") if candidate_position else None
+                    result = _read_score(active[0], link, active[1]) if link and link.exists() else None
                     if result:
                         row[role]["judges"][name] = {"metrics": ratings(result), "record": str(link.relative_to(root))}
                     metric_rows.append({"source_id": row["source_sha256"], "sample_id": row["sample_id"] + "__" + row["prompt_form"] + "__" + str(row["seed"]),
@@ -745,14 +828,15 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
         summary[key]=formal_summary(records,population=analysis_population,pre_experience=pre_experience) if modes<={'shared','legacy'} else {'by_review_mode':{mode:formal_summary([r for r in records if r.get('review_mode','shared')==mode],population=analysis_population,pre_experience=pre_experience) for mode in sorted(modes)}}
     save(root / ("results.json" if output_name=="index" else output_name+".json"), summary)
     body = ['<!doctype html><meta charset="utf-8"><title>LHA 视频结果</title>',
-        '<style>body{font:16px system-ui;max-width:1200px;margin:auto;padding:24px}section{border-top:1px solid #ccc;padding:16px 0}video{max-width:100%;max-height:360px}p{white-space:pre-wrap}</style>',
+        '<style>body{font:16px system-ui;max-width:1200px;margin:auto;padding:24px}section{border-top:1px solid #ccc;padding:16px 0}video{max-width:100%;max-height:360px}p{white-space:pre-wrap}.table-scroll{overflow-x:auto}table{border-collapse:collapse;font-size:14px}th,td{border:1px solid #ccc;padding:.45em .65em;text-align:left}th{background:#f3f3f3}</style>',
         '<h1>LHA 视频结果</h1><p>已就绪 ' + str(summary["ready"]) + ' / ' + str(summary["planned"]) + '；按当前评价会话显示评分。</p>']
     body.append('<p>统计范围：'+{'main':'全量主实验','rsi':'RSI 后段测试集','test':'当前筛选范围'}[analysis_population]+'</p>')
+    if summary.get("metrics"):
+        body.append("<p>各格为按源视频等权的均值（有效条件数／计划条件数）。判官分别报告。</p>")
+        body.append(_score_tables(summary))
     if summary.get('evaluation_coverage'):
         body.append('<details><summary>全量评分执行情况</summary><pre>' + html.escape(json.dumps(summary['evaluation_coverage'], ensure_ascii=False, indent=2)) + '</pre></details>')
     if analysis_population=='main' and (root/'rsi.html').exists():body.append('<a href="rsi.html">RSI 测试集对照</a>')
-    if summary.get("blind_comparisons"):
-        body.append('<details><summary>当前盲比较</summary><pre>' + html.escape(json.dumps(summary["blind_comparisons"], ensure_ascii=False, indent=2)) + '</pre></details>')
     if summary.get('paired_differences'):
         body.append('<details><summary>当前配对差值</summary><pre>'+html.escape(json.dumps(summary['paired_differences'],ensure_ascii=False,indent=2))+'</pre></details>')
     for row in rows:

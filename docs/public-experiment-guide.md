@@ -55,12 +55,12 @@ not remove training tasks from the full main-method comparison.
 
 | Stage | Online method | Experience maintenance | Render allowance per condition |
 |---|---|---|---:|
-| `zero` | Complete Planner, independent qualitative Critic; reads the frozen pre-experience seed | After both forms of all 67 tasks | 4 |
-| `knowledge` | Same Planner/Critic, its own frozen accumulated experience | Disabled | 4 |
+| `pre-experience` | Complete Planner, independent qualitative Critic; reads the frozen pre-experience seed | After both forms of all 67 tasks | 4 |
+| `full-experience` | Same Planner/Critic, its own frozen accumulated experience | Disabled | 4 |
 | `direct` | Exact user request sent directly to renderer | None | 1 |
 | `pe-loop` | Renderer-specific prompt enhancement with Critic feedback; source input each round | None | 4 |
-| `self-review-zero` | Complete Planner reviews its result in the task context; reads the frozen pre-experience seed | After both forms of all 67 tasks | 4 |
-| `self-review-knowledge` | Self-review Planner reads its own frozen accumulated experience | Disabled | 4 |
+| `self-review-pre-experience` | Complete Planner reviews its result in the task context; reads the frozen pre-experience seed | After both forms of all 67 tasks | 4 |
+| `self-review-full-experience` | Self-review Planner reads its own frozen accumulated experience | Disabled | 4 |
 
 All Planner arms retain style/semantic knowledge and operating tools. Every family
 starts with the same nonempty seed. The pre-experience Planner and its maintainer
@@ -193,12 +193,12 @@ Keep the same output root for one immutable experiment; changing code, data,
 knowledge or policy requires a new run root.
 
 ```bash
-# Main: zero -> knowledge -> direct -> pe-loop -> independent score.
+# Main: pre-experience -> full-experience -> direct -> pe-loop -> independent score.
 python scripts/run_experiment_campaign.py run --backend bernini --stage main \
   --host-config configs/bernini-campaign-host.local.json \
   --output out/formal/bernini --execute
 
-# Self-review: its own zero -> its own frozen-knowledge arm.
+# Self-review: its own pre-experience -> its own full-experience arm.
 python scripts/run_experiment_campaign.py run --backend bernini --stage self-review \
   --host-config configs/bernini-campaign-host.local.json \
   --output out/formal/bernini --execute
@@ -220,8 +220,8 @@ stage selections; `main` never implicitly includes the ablation.
 Repeating an unchanged command collects existing receipts and skips completed work.
 Uncertain calls/renders remain quarantined; use the existing
 [recovery procedures](server-runtime.md) against their original requests. Do not
-delete receipts or change identities to force a rerender. Main `knowledge` depends
-on its own `zero` settlement; self-review has its separate dependency and owner.
+delete receipts or change identities to force a rerender. Main `full-experience` depends
+on its own `pre-experience` settlement; self-review has its separate dependency and owner.
 
 ### Independent evaluation
 

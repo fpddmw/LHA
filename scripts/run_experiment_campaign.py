@@ -34,11 +34,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['plan', 'check', 'run', 'status'])
     parser.add_argument('--config', type=Path, default=ROOT / 'configs/experiment-campaign.json')
-    parser.add_argument('--output', type=Path, default=ROOT / 'out/main-all67-v2')
+    parser.add_argument('--output', type=Path, default=ROOT / 'out/main-all67-v5')
     parser.add_argument('--host-config', type=Path)
     parser.add_argument('--backend', choices=['bernini', 'ditto', 'both'],
                         help='both runs separate Bernini/Ditto subdirectories; single-host configs infer the backend')
-    parser.add_argument('--stage', choices=['main', 'self-review', *campaign.STAGES, 'score'], default='main')
+    old_stages = {"zero": "pre-experience", "knowledge": "full-experience",
+                  "self-review-zero": "self-review-pre-experience",
+                  "self-review-knowledge": "self-review-full-experience"}
+    parser.add_argument('--stage', type=lambda value: old_stages.get(value, value),
+                        choices=['main', 'all', 'self-review', *campaign.STAGES, 'score'],
+                        default='main', help='all runs the main experiment and both self-review arms before scoring')
     parser.add_argument('--execute', action='store_true', help='Actually submit generation/model/evaluation work')
     parser.add_argument('--verify-assets', action='store_true',
                         help='With check, hash all declared asset files (CPU/disk only; no model load)')

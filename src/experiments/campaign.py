@@ -9,15 +9,17 @@ from planner_harness.lock import RunLock
 
 # Split labels describe RSI roles only. Every method covers the full population.
 STAGES = {
-    'zero': (('pre-experience',), 'critic', True),
-    'knowledge': (('full',), 'critic', False),
+    'pre-experience': (('pre-experience',), 'critic', True),
+    'full-experience': (('full',), 'critic', False),
     'direct': (('direct',), 'critic', False),
     'pe-loop': (('pe-loop',), 'critic', False),
-    'self-review-zero': (('pre-experience',), 'planner', True),
-    'self-review-knowledge': (('full',), 'planner', False),
+    'self-review-pre-experience': (('pre-experience',), 'planner', True),
+    'self-review-full-experience': (('full',), 'planner', False),
 }
-MAIN = ('zero', 'knowledge', 'direct', 'pe-loop', 'score')
-VERSION = 'lha-experiment-campaign-v4'
+MAIN = ('pre-experience', 'full-experience', 'direct', 'pe-loop', 'score')
+SELF_REVIEW = ('self-review-pre-experience', 'self-review-full-experience')
+ALL = (*MAIN[:-1], *SELF_REVIEW, 'score')
+VERSION = 'lha-experiment-campaign-v5'
 
 
 def seed_library(root, output, initial=None):
@@ -37,7 +39,7 @@ def seed_library(root, output, initial=None):
         value = load(initial)
     else:
         # Existing ordered runs retain their original seed when resumed.
-        original = output / 'zero/training-experience/versions/base/snapshot.json'
+        original = output / 'pre-experience/training-experience/versions/base/snapshot.json'
         if original.exists():
             value = load(original)
         else:
@@ -217,8 +219,10 @@ def freeze_training(root, output, *, review_mode="critic"):
     output = Path(output)
     if review_mode not in {'critic', 'planner'}:
         raise ValueError('Unknown review family')
-    source = output / ('zero' if review_mode == 'critic' else 'self-review-zero')
+    source = output / ('pre-experience' if review_mode == 'critic' else 'self-review-pre-experience')
     name = 'trained-experience' if review_mode == 'critic' else 'self-review-trained-experience'
+    if not (source / 'batch.json').exists():
+        source = output / ('zero' if review_mode == 'critic' else 'self-review-zero')
     batch = load(source / 'batch.json')
     method, = batch['arms']
     if batch.get('review') != {'mode':review_mode} or not batch.get('training_maintenance') or method not in {'none', 'pre-experience'}:
@@ -256,9 +260,11 @@ def score_stage(root, output, config, summary):
     from . import results
     registry = output / 'results'
     results.ensure_evaluation(root, registry, evaluation_id=config['evaluation_id'])
-    budget = evaluation_budget(config, next(b['conditions'] for b in summary['batches'] if b['stage'] == 'zero'))
+    budget = evaluation_budget(config, next(b['conditions'] for b in summary['batches'] if b['stage'] == 'pre-experience'))
     results.score_evaluation(root, registry, budget)
-    baseline = output / 'zero/batch.json'
+    baseline = output / 'pre-experience/batch.json'
+    if not baseline.exists():
+        baseline = output / 'zero/batch.json'  # Historical score-only input.
     control = 'none' if baseline.exists() and load(baseline)['arms'] == ['none'] else 'pre-experience'
     results.report(root, registry, splits=['test'], methods=[control, 'full'], review_modes=['critic'],
                    analysis_population='rsi', output_name='rsi')
@@ -268,7 +274,7 @@ def score_stage(root, output, config, summary):
 def execute(root, output, config, host, stage, *, execute_paid=False, initial_snapshot=None):
     if not execute_paid:
         raise ValueError('Execution requires --execute; use plan to inspect counts without calls')
-    if stage not in {*STAGES, 'self-review', 'main', 'score'}:
+    if stage not in {*STAGES, 'self-review', 'main', 'all', 'score'}:
         raise ValueError('Unknown campaign stage')
     from . import unified_benchmark as runner, results
     from planner_harness import accounting
@@ -285,7 +291,7 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
     name = render_profiles.backend({'backend': host['renderer']['backend']}) if host else None
     if host and host['renderer'].get('generation', render_profiles.generation(name)) != render_profiles.generation(name):
         raise ValueError('Host generation settings differ from the supported renderer profile')
-    stages = MAIN if stage == 'main' else ('self-review-zero','self-review-knowledge') if stage == 'self-review' else (stage,)
+    stages = {'main': MAIN, 'all': ALL, 'self-review': SELF_REVIEW}.get(stage, (stage,))
     summary = plan(root, config)
     registry = output / 'results'
     with RunLock(output / 'campaign-owner'):
@@ -303,7 +309,7 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
             local_config = stage_config(config, item, name)
             snapshot = seed_snapshot
             owner = None
-            if item in {'knowledge', 'self-review-knowledge'}:
+            if item in {'full-experience', 'self-review-full-experience'}:
                 snapshot = freeze_training(root, output) if review == 'critic' else freeze_training(root, output, review_mode='planner')
                 validate_snapshot(root, load(snapshot))
                 receipt = load(snapshot.with_name(snapshot.stem + '-receipt.json'))
@@ -342,9 +348,9 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
             bad = [p for p in result['positions'] if p['status'] in {'execution_unknown','topic_quarantined','unexecuted'}]
             if bad or result['status'] not in {'settled','complete'}:
                 raise RuntimeError(f'{item}: unresolved trajectories or dispatch need attention; retained original receipts, no new dependent stage')
-            if item == 'zero':
+            if item == 'pre-experience':
                 freeze_training(root, output)
-            elif item == 'self-review-zero':
+            elif item == 'self-review-pre-experience':
                 freeze_training(root, output, review_mode='planner')
         return summary
 

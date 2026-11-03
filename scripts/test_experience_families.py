@@ -32,7 +32,7 @@ class LibraryTests(unittest.TestCase):
         return run
 
     def test_pre_experience_keeps_train_and_test_maintenance_on_the_seed(self):
-        output = self.root / "self-review-zero"
+        output = self.root / "self-review-pre-experience"
         seed = tx.initialize(ROOT, output, self.seed, review_mode="planner")
         batch = {"arms": ["pre-experience"], "experience_snapshot": seed["snapshot"],
                  "experience_seed_sha256": seed["snapshot_sha256"], "training_maintenance": True,
@@ -104,7 +104,7 @@ class LibraryTests(unittest.TestCase):
         self.assertEqual({r["provenance"]["split"] for r in load(m.merge_candidates(output))["contributions"]}, {"train"})
         full_batch = {"arms": ["full"], "topics": batch["topics"], "training_maintenance": False,
                       "experience_snapshot": str(frozen), "experience_seed_sha256": sha(frozen)}
-        full_conditions = u.task_conditions(ROOT, self.root / "knowledge", batch["topics"][-1], "full", full_batch)
+        full_conditions = u.task_conditions(ROOT, self.root / "full-experience", batch["topics"][-1], "full", full_batch)
         full = CreativeKnowledge(ROOT, full_conditions["experience_snapshot"], experience_mode="full")
         matches = {match["id"] for match in full.search("uniquecopperwillow")["matches"]}
         self.assertTrue({"train-only-fixture", "train-second-fixture"} <= matches)
@@ -226,14 +226,14 @@ class CampaignFamilyTests(Fixture):
                 stack.enter_context(patch.object(u,name,side_effect=fn))
             stack.enter_context(patch('planner_harness.accounting.install'))
             campaign.execute(self.repo,self.output,config,{'renderer':{'backend':'bernini'}},'self-review',execute_paid=True)
-        self.assertEqual(calls,['self-review-zero','self-review-knowledge'])
-        zero,full=prepared['self-review-zero'],prepared['self-review-knowledge']
+        self.assertEqual(calls,['self-review-pre-experience','self-review-full-experience'])
+        zero,full=prepared['self-review-pre-experience'],prepared['self-review-full-experience']
         self.assertEqual(zero['experience_snapshot'],seed)
         self.assertTrue(zero['training_maintenance'])
         self.assertEqual(full['experience_snapshot'],self.output/'self-review-trained-experience.json')
         self.assertFalse(full['training_maintenance'])
         self.assertTrue(all(p['review']=={'mode':'planner'} for p in prepared.values()))
-        self.assertFalse((self.output/'zero').exists())
+        self.assertFalse((self.output/'pre-experience').exists())
 
     def test_readonly_batch_rejects_empty_experience_snapshot(self):
         path=self.root/'empty.json';CreativeKnowledge(ROOT,experience_mode='full').freeze(path)
@@ -276,7 +276,7 @@ class CampaignFamilyTests(Fixture):
 
     def test_real_family_freeze_uses_self_review_batch(self):
         parent=self.output
-        self.output=parent/'self-review-zero'
+        self.output=parent/'self-review-pre-experience'
         batch=self.prepare(methods=['none'],review={'mode':'planner'},training_maintenance=True)
         for t in batch['topics']:
             save(self.output/'methods'/t['id']/'none/settlement.json',{'status':'ready'})

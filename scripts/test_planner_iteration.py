@@ -27,7 +27,7 @@ class BudgetTests(unittest.TestCase):
         self.assertEqual(budget["online_task_budget"]["max_generations"], 4)
         self.assertEqual(budget["online_task_budget"]["wall_seconds"], 5400)
         config = configuration(ROOT / "configs/experiment-campaign.json")
-        self.assertEqual((config["max_generations"], stage_config(config, "zero")["task_wall_seconds"]), (4, 5400))
+        self.assertEqual((config["max_generations"], stage_config(config, "pre-experience")["task_wall_seconds"]), (4, 5400))
         self.assertEqual(resources.configure({"config": {}}, backend="ditto")["max_wall_seconds"], 10800)
 
     def test_late_generation_needs_no_extra_explanation_and_hints_hide_numbers(self):

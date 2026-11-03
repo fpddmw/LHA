@@ -84,31 +84,36 @@ class SyntheticHandoff(Fixture):
             shutil.copyfile(ROOT / name, target)
         seed = self.root / 'seed.json'
         CreativeKnowledge(ROOT, experience_mode='full').freeze(seed)
-        none_snapshot = self.root / 'none.json'
-        CreativeKnowledge(ROOT, experience_mode='none').freeze(none_snapshot)
         initial = load(seed)
         entry_id = initial['curated_catalog']['entries'][0]['id']
         self.registry = self.root / 'example/results'
         traces = []
         for mode in ('critic', 'planner'):
             campaign_root = self.root / 'example' / mode
-            family = campaign_root / ('zero' if mode == 'critic' else 'self-review-zero')
+            family = campaign_root / ('pre-experience' if mode == 'critic' else 'self-review-pre-experience')
             before = tx.initialize(self.repo, family, seed, review_mode=mode)
             save(family / 'batch.json', {'sha256': 'synthetic', 'review': {'mode': mode},
-                'training_maintenance': True, 'arms': ['none'], 'backend': 'bernini',
+                'training_maintenance': True, 'arms': ['pre-experience'], 'backend': 'bernini',
                 'experience_owner': before['owner'], 'topics': [{'id': '001-short', 'split': 'train'}]})
-            for arm in ('none', 'full'):
-                snapshot = none_snapshot if arm == 'none' else frozen
+            for arm in ('pre-experience', 'full'):
+                snapshot = Path(before['snapshot']) if arm == 'pre-experience' else frozen
                 run = campaign_root / ('online-' + arm)
                 self.h = PlannerHarness(run, scripted.Scripted([
                     scripted.action('generate', input_video='source', prompt='Synthetic blue treatment.')]), root=self.repo)
                 self.h.start(self.source, self.rows[0]['prompt_short'], mode='loop', workflow='creative_loop_v1',
-                    execution={'mode': 'replay', 'experience_mode': arm,
+                    execution={'mode': 'replay', 'experience_mode': 'full', 'experience_condition': arm,
                         'experience_snapshot': str(snapshot), 'experience_snapshot_sha256': sha(snapshot),
                         'review': {'mode': mode}, 'renderer': {'backend': 'bernini', 'seed': 42},
                         'resource_policy': {'max_generations': 4},
                         'continuation_policy': {'completion_policy': 'fixed_generation_budget'},
                         'benchmark_metadata': {'split': 'train', 'sample_id': '001'}})
+                first_call = self.h.model.inputs[0]
+                self.assertIn(self.rows[0]['prompt_short'], first_call['user_text'])
+                self.assertIn('complete generation allowance', first_call['system_prompt'])
+                self.assertNotIn('main_scores', first_call['user_text'])
+                self.assertIn(entry_id, self.h.knowledge.items)
+                if arm == 'pre-experience':
+                    self.assertEqual(load(run / 'knowledge-snapshot.json'), initial)
                 for n in range(1, 5):
                     scripted.CreativeTests.respond(self, review=mode == 'critic')
                     if mode == 'planner':
@@ -131,10 +136,9 @@ class SyntheticHandoff(Fixture):
                 results.import_video(self.repo, self.registry, self.row(method=arm, review_mode=mode,
                     candidates=candidates, evidence={'synthetic': True, 'delivery_sha256': sha(run / 'state.json')}))
                 online_hash = sha(run / 'knowledge-snapshot.json')
-                if arm == 'none':
-                    self.assertEqual(load(run / 'knowledge-snapshot.json')['curated_catalog']['entries'], [])
-                    job = maintenance.enqueue(self.repo, family, run, split='train', topic='001-short', method='none',
-                        batch_sha256='synthetic', maintenance_snapshot=before)
+                if arm == 'pre-experience':
+                    job = maintenance.enqueue(self.repo, family, run, split='train', topic='001-short', method='pre-experience',
+                        batch_sha256='synthetic', maintenance_snapshot=tx.base_snapshot(self.repo, family))
                     class Contributor:
                         model = 'scripted-maintainer'; reasoning_effort = 'high'
                         def predict_text(inner, **kwargs):
@@ -146,7 +150,7 @@ class SyntheticHandoff(Fixture):
                     self.assertEqual(result['status'], 'activated', result)
                     after = tx.current(self.repo, family)
                     self.assertNotEqual(before['snapshot_sha256'], after['snapshot_sha256'])
-                    save(family / 'methods/001-short/none/settlement.json', {'status': 'ready'})
+                    save(family / 'methods/001-short/pre-experience/settlement.json', {'status': 'ready'})
                     frozen = campaign.freeze_training(self.repo, campaign_root, review_mode=mode)
                     self.assertEqual(sha(frozen), after['snapshot_sha256'])
                 else:

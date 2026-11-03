@@ -131,7 +131,9 @@ class ScoringEntryTests(Fixture):
                 self.assertNotIn('pending', states)
         self.assertIn('scored', coverage['metric_families']['objective_and_motion']['clip_f'])
         self.assertIn('not_applicable', coverage['metric_families']['objective_and_motion']['flow_velocity_error'])
-        self.assertTrue((self.registry / 'index.html').exists())
+        page = (self.registry / 'index.html').read_text()
+        for label in ('五维主表', '必要内容保留', '短任务专项', '长任务专项', '美学明细', '客观指标与运动诊断', '独立盲评'):
+            self.assertIn(label, page)
 
     def test_dual_campaign_score_needs_no_generation_host_or_library(self):
         import run_experiment_campaign as entry
@@ -147,7 +149,7 @@ class ScoringEntryTests(Fixture):
                 '--output', str(self.root), '--config', str(config), '--execute']
         with patch.object(entry, 'ROOT', self.repo), patch.object(sys, 'argv', args), \
              patch.object(campaign, 'seed_library', side_effect=AssertionError('Scoring needs no generation library')), \
-             patch.object(campaign, 'plan', return_value={'batches': [{'stage': 'zero', 'conditions': 4}]}), \
+             patch.object(campaign, 'plan', return_value={'batches': [{'stage': 'pre-experience', 'conditions': 4}]}), \
              patch.object(results, 'score_evaluation', return_value={}) as score, \
              patch.object(results, 'report', return_value={}), contextlib.redirect_stdout(io.StringIO()):
             entry.main()

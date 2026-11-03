@@ -9,8 +9,8 @@ CPU-only smoke test, start with the [public experiment guide](public-experiment-
 
 | 顺序／入口 | 覆盖范围与行为 | 每个条件最多生成 | 完整任务轨迹数 | 视频生成上限 |
 |---|---|---:|---:|---:|
-| 1 `zero` | 预经验 Planner 跑完 67 条，每题结算后维护；前 40 条的贡献用于本轮，后 27 条留到下一批 | 4 | 134 | 536＝320＋216 |
-| 2 `knowledge` | 用刚积累的固定经验，跑全量 67 条全经验 Planner | 4 | 134 | 536 |
+| 1 `pre-experience` | 预经验 Planner 跑完 67 条，每题结算后维护；前 40 条的贡献用于本轮，后 27 条留到下一批 | 4 | 134 | 536＝320＋216 |
+| 2 `full-experience` | 用刚积累的固定经验，跑全量 67 条全经验 Planner | 4 | 134 | 536 |
 | 3 `direct` | 全量 Direct；兼容的历史结果直接复用 | 1 | 134 | 134 |
 | 4 `pe-loop` | 全量 PE＋Critic Loop，含首轮共最多 4 次 | 4 | 134 | 536 |
 | 5 `score` | 同批视频统一终评，输出全量主表与 RSI 子集表 | 0 | 复用视频 | 0 |
@@ -18,17 +18,17 @@ CPU-only smoke test, start with the [public experiment guide](public-experiment-
 
 **主实验最多 1742 次视频生成、536 条完整任务轨迹。** 每个提示词条件对应 `1＋4＋4＋4＝13` 次生成。预经验组每题结算后维护，维护只增加模型调用。只跑一种提示词时，上述主实验是 871 次；配置默认长短两版均跑。
 
-一键顺序是 `zero → knowledge → direct → pe-loop → score`。Direct 和 PE 是独立基线，也能单独启动；全经验组依赖预经验全量流程结束后的经验快照。Planner loops use the complete configured generation allowance before final selection, including when an early candidate is adequate. The Planner chooses every prompt and input and may finally select an earlier candidate. Actual submissions include failed render attempts; deadline, execution-unknown and interrupted outcomes remain separately reported. Historical Direct reuse reduces new submissions. First-round comparisons reuse each loop's first saved video.
+一键顺序是 `pre-experience → full-experience → direct → pe-loop → score`。Direct 和 PE 是独立基线，也能单独启动；全经验组依赖预经验全量流程结束后的经验快照。Planner loops use the complete configured generation allowance before final selection, including when an early candidate is adequate. The Planner chooses every prompt and input and may finally select an earlier candidate. Actual submissions include failed render attempts; deadline, execution-unknown and interrupted outcomes remain separately reported. Historical Direct reuse reduces new submissions. First-round comparisons reuse each loop's first saved video.
 
 ## 40／27 怎样用于 RSI
 
 当前清单保留原编号：前 40 条为 001–040 中仍保留的 35 条，加 041–045；后 27 条为 046–075 中仍保留的条目。具体 ID 在命令 `plan` 输出及冻结的 `plan.json` 中；同一 source_group 和同一源视频哈希不会跨 RSI 两侧。原始视频、提示词与文件路径保持原样，`split` 标签表示 RSI 角色，不限制主实验覆盖。
 
-所有任务开跑前冻结 `initial-experience.json`。新 campaign 的 `zero` 阶段对应方法 `pre-experience`。每题在线 Planner 和任务后的维护模型均绑定同一份预经验，维护模型另外读取本题的工作记录和维护指南，可写评论、提修订或提交新条目。
+所有任务开跑前冻结 `initial-experience.json`。`pre-experience` 阶段运行预经验组。每题在线 Planner 和任务后的维护模型均绑定同一份预经验，维护模型另外读取本题的工作记录和维护指南，可写评论、提修订或提交新条目。
 
 前 40 条的贡献按来源登记到私有经验版本。评论和修订建议与原条目关联，新条目作为贡献层进入检索。后 27 条的贡献及来源记录保存在该阶段的 `training-experience/deferred/` 与维护任务目录，供下一批整理。它们不会进入本轮的全经验快照。
 
-预经验阶段结算后，`trained-experience.json` 固定预经验与前 40 条的贡献。`knowledge` 阶段用这份快照跑完整 67 条，整组只读。主表汇总全量四组结果，RSI 表取后 27 条的预经验／全经验结果。历史 `none` 结果保留原实验身份。切换到这版 campaign 时使用新的实验目录。
+预经验阶段结算后，`trained-experience.json` 固定预经验与前 40 条的贡献。`full-experience` 阶段用这份快照跑完整 67 条，整组只读。主表汇总全量四组结果，RSI 表取后 27 条的预经验／全经验结果。历史 `none` 结果保留原实验身份。切换到这版 campaign 时使用新的实验目录。
 
 ## Planner self-review: independent accumulation and frozen use
 
@@ -38,11 +38,11 @@ maintain separate private libraries. The pre-experience stage reads the frozen s
 
 | Stage | Online experience | Post-task maintenance | Maximum renders |
 |---|---|---|---:|
-| `self-review-zero` | Frozen pre-experience seed | All 67 tasks, both forms. The first 40 contribute to this campaign | 536 |
-| `self-review-knowledge` | Its own frozen self-review library | Disabled for all 67 tasks | 536 |
+| `self-review-pre-experience` | Frozen pre-experience seed | All 67 tasks, both forms. The first 40 contribute to this campaign | 536 |
+| `self-review-full-experience` | Its own frozen self-review library | Disabled for all 67 tasks | 536 |
 
 `--stage self-review` runs these two stages in order. It does not depend on or
-import the Critic family's `zero`/`knowledge` run. Its immutable result is
+import the Critic family's `pre-experience`/`full-experience` run. Its immutable result is
 `self-review-trained-experience.json` with a receipt recording the source family,
 renderer, seed, training coverage and revision. The existing `trained-experience.json`
 continues to belong to the Critic family. Direct/PE results remain reusable;
@@ -94,7 +94,7 @@ python scripts/run_experiment_campaign.py run --backend both --stage main \
   --host-config configs/experiment-hosts.local.json --output out/main-all67-n4 --execute
 ```
 
-入口顺序执行 Bernini、Ditto，各自完成 `zero → knowledge → direct → pe-loop → score`。运行开始固定同一份预置知识；两模型的维护增量、视频与评分缓存分别进入 `out/main-all67-n4/bernini` 和 `out/main-all67-n4/ditto`。每模型主实验上限 1742 个视频，双模型上限 3484；已完成结果和同视频评分继续复用。
+入口顺序执行 Bernini、Ditto，各自完成 `pre-experience → full-experience → direct → pe-loop → score`。运行开始固定同一份预置知识；两模型的维护增量、视频与评分缓存分别进入 `out/main-all67-n4/bernini` 和 `out/main-all67-n4/ditto`。每模型主实验上限 1742 个视频，双模型上限 3484；已完成结果和同视频评分继续复用。
 
 PE 随渲染器自动适配：Ditto 使用[专用编辑指令模板](pe-loop.md#ditto-的编辑指令适配)，将短风格要求具体展开、保全长任务条款，并吸收逐轮 Critic 反馈；Bernini 使用自己的模板。沿用本页命令即可，单独执行 Ditto PE 时使用 `--backend ditto --stage pe-loop` 和 Ditto 主机配置。`pe-loop` 的渲染设置中 `prompt_enhancer=false` 表示渲染器直接接收已增强的文本，增强由 Loop 负责。
 
@@ -102,8 +102,8 @@ PE 随渲染器自动适配：Ditto 使用[专用编辑指令模板](pe-loop.md#
 
 | 批次 | 阶段参数 | 前置条件／产出 |
 |---|---|---|
-| 预经验 Planner＋维护 | `zero` | 每题读固定预经验并维护。前 40 题贡献进入全经验，后 27 题延后 |
-| 全经验 Planner | `knowledge` | 依赖本模型 zero 结算；读取本模型固定经验 |
+| 预经验 Planner＋维护 | `pre-experience` | 每题读固定预经验并维护。前 40 题贡献进入全经验，后 27 题延后 |
+| 全经验 Planner | `full-experience` | 依赖本模型预经验组结算；读取本模型固定经验 |
 | Direct | `direct` | 独立基线；复用条件一致的历史视频 |
 | PE Loop | `pe-loop` | 原视频逐轮生成，独立 Critic 反馈，在线选片 |
 | 终评／汇总 | `score` | 复用已有视频与有效评分，输出主表和 RSI 子集 |
@@ -122,9 +122,9 @@ Each model writes `results/index.html` and `results/results.json`, with `results
 
 ## 复用与实现
 
-[一键入口](../scripts/run_experiment_campaign.py)通过 [campaign.py](../src/experiments/campaign.py)复用原 [统一运行器](../src/experiments/unified_benchmark.py)、设备队列、生成回执和结果注册。各批冻结自己的生成次数与 `training_maintenance`：主实验中只有 `zero` 为 true，其他主实验批次为 false。底层手动运行全量有经验组时，使用 `--split train test --method full --no-maintenance`；PE 单独使用 `--max-generations 4 --no-maintenance`。
+[一键入口](../scripts/run_experiment_campaign.py)通过 [campaign.py](../src/experiments/campaign.py)复用原 [统一运行器](../src/experiments/unified_benchmark.py)、设备队列、生成回执和结果注册。各批冻结自己的生成次数与 `training_maintenance`：主实验中只有 `pre-experience` 为 true，其他主实验批次为 false。底层手动运行全量有经验组时，使用 `--split train test --method full --no-maintenance`；PE 单独使用 `--max-generations 4 --no-maintenance`。
 
-`zero` 的设备队列逐题结算维护。全经验阶段读取已冻结的贡献版本。具体维护由 [training_experience.py](../src/planner_harness/training_experience.py)与 [maintenance.py](../src/planner_harness/maintenance.py)处理。
+`pre-experience` 的设备队列逐题结算维护。全经验阶段读取已冻结的贡献版本。具体维护由 [training_experience.py](../src/planner_harness/training_experience.py)与 [maintenance.py](../src/planner_harness/maintenance.py)处理。
 
 独立评分复用 [results.py](../src/experiments/results.py) 中的五维、长短专项、CLIP/DINO、光流和匿名交换顺序盲评；原始提示词与源视频是共同评价依据。主实验统计覆盖全部源组，RSI 单独覆盖后段源组。Direct 从 `reuse_direct_results` 指定的历史注册目录核验后导入，旧分数不导入；同一视频的首轮／末轮／选中角色共用新评分。真实调用数、维护费用和 GPU 请求单独记录。
 
@@ -164,3 +164,8 @@ python scripts/run_experiment_campaign.py run --backend both --stage score \
 执行当前注册指标的全部管线；相对原创性需要对应参考条件，精确源运动保留需要适用任务、区域和配准条件，缺少时记录相应状态。可选人工轨迹误差需要另行提供注册轨迹。结果页的“全量评分执行情况”和 `results.json` 的 `evaluation_coverage` 按指标列出已评分、未知、不适用、未测及失败，显示连续片段评审数和盲评结果。
 
 环境安装 `requirements.evaluation.txt`，准备 `configs/evaluation.json` 指定判官的凭据；CLIP/DINO 首次运行需要相应权重。默认无需费用或 token 额度配置。`--budget-config` 若显式提供，仅用于客观指标计算任务。此命令会调用独立判官并计算指标。
+
+
+使用 `--stage all` 可一次运行四组主实验、两组 Planner 自评消融和独立终评。默认 `main` 运行四组主实验和终评。旧版飞书命令里的 `zero`、`knowledge` 仍可作为入口别名，新实验目录使用 `pre-experience`、`full-experience`。
+
+评分后的 `results/index.html` 展开五维主表、长短专项、美学、客观指标与运动诊断、两两盲评。每位判官和长短条件分别报告，均值附有效数和计划数。主表含首轮、末轮和在线选中结果。RSI 子集使用同一套分数生成 `rsi.html`。

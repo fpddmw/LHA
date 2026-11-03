@@ -51,15 +51,13 @@ def check(root, config, hosts=None, *, verify_assets=False):
         checks[-1]['status'] = 'needs_configuration'
 
     def knowledge():
-        full = CreativeKnowledge(root, experience_mode='full')
-        none = CreativeKnowledge(root, experience_mode='none')
-        entries = full.curated_catalog['entries']
-        if not entries or none.curated_catalog['entries']:
-            raise ValueError('Knowledge seed or online exposure is invalid')
-        for library in (full, none):
-            for name in ('manual', 'map', 'meaning', 'design-expression'):
-                library.read(name)
-        return {'seed_entries': len(entries), 'none_online_entries': 0}
+        seed = CreativeKnowledge(root, experience_mode='full')
+        entries = seed.curated_catalog['entries']
+        if not entries:
+            raise ValueError('Pre-experience seed is empty')
+        for name in ('manual', 'map', 'meaning', 'design-expression', 'review'):
+            seed.read(name)
+        return {'seed_entries': len(entries), 'pre_experience_online_entries': len(entries)}
 
     record('knowledge', knowledge)
     record('judges', lambda: [{key: row.get(key) for key in
