@@ -57,3 +57,33 @@ def role_settings(config, role):
         name: options.get(name, nested.get(name, config.get(name, default)))
         for name, default in defaults.items()
     }
+
+
+def create_client(config, role):
+    """Instantiate the same role specification for a service or a single task."""
+    import importlib
+
+    spec = config.get("models", {}).get(role, {})
+    module, name = spec.get("factory", "vlm.openrouter:OpenRouterVisionModel").split(":", 1)
+    options = dict(spec.get("options", {}))
+    if config.get("credential_file"):
+        options.setdefault("credential_file", config["credential_file"])
+    if config.get("llm_timeout_seconds"):
+        options.setdefault("timeout", config["llm_timeout_seconds"])
+    expected = {
+        "model": config.get("model", DEFAULT_MODEL),
+        "reasoning_effort": config.get("reasoning_effort", "high"),
+    }
+    if config.get("workflow") == "creative_loop_v1":
+        expected = role_settings(config, role)
+        options.update(expected)
+    client = getattr(importlib.import_module(module), name)(**{"role": role, **options})
+    if getattr(client, "model", None) != expected["model"]:
+        raise ValueError("Backend resolved a different model from the role configuration")
+    if getattr(client, "reasoning_effort", None) != expected["reasoning_effort"]:
+        raise ValueError("Backend resolved a different reasoning effort")
+    if not callable(getattr(client, "predict_json", None)) or (
+        role != "benchmark_final" and not callable(getattr(client, "predict_text", None))
+    ):
+        raise ValueError("Backend does not implement the required vision interface")
+    return client

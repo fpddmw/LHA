@@ -15,7 +15,7 @@
 
 **主实验最多 1742 次视频生成、536 条完整任务轨迹。** 每个提示词条件对应 `1＋4＋4＋4＝13` 次生成。无经验前 40 条的 320 次已经包含其中，经验维护追加的是模型调用，不追加视频。只跑一种提示词时，上述主实验是 871 次；配置默认长短两版均跑。
 
-一键顺序是 `zero → knowledge → direct → pe-loop → score`。Direct 和 PE 是独立基线，也能单独启动；有经验组依赖无经验全量流程结束后的经验快照。Loop 可以提前交付；表中是上限，实际新增数量扣除历史 Direct 复用和提前结束。首轮对照直接使用各 Loop 的首个视频，无需重跑。
+一键顺序是 `zero → knowledge → direct → pe-loop → score`。Direct 和 PE 是独立基线，也能单独启动；有经验组依赖无经验全量流程结束后的经验快照。Planner loops use the complete configured generation allowance before final selection, including when an early candidate is adequate. The Planner chooses every prompt and input and may finally select an earlier candidate. Actual submissions include failed render attempts; deadline, execution-unknown and interrupted outcomes remain separately reported. Historical Direct reuse reduces new submissions. First-round comparisons reuse each loop's first saved video.
 
 ## 40／27 怎样用于 RSI
 
@@ -116,7 +116,9 @@ python scripts/run_experiment_campaign.py run --backend bernini --stage main \
 python scripts/run_experiment_campaign.py status --backend both --output out/main-all67-n4
 ```
 
-每模型结果入口：`results/index.html`、`results/results.json`；RSI 为 `results/rsi.html`、`results/rsi.json`。命令默认只做所选阶段；没有 `--execute` 不提交生成或评分。
+Each model writes `results/index.html` and `results/results.json`, with `results/rsi.html` and `results/rsi.json` for the held-out experience analysis. Campaign execution requires `run --execute`; `plan` and `status` submit no work.
+
+`status` reads existing dispatch records, worker checkpoints and durable method settlements while a batch is running, then the final checkpoint. It reports planned/recorded/ready counts, outcome and claim counts, and unresolved outcomes. `running` means the latest recorded dispatch state, not a fresh process-liveness check. With a combined output directory, model subdirectories are detected automatically; explicit `--backend both` also works. The lower-level `run_creative_benchmark.py status --output <batch>` uses the same projection. These commands do not resume or repair jobs.
 
 ## 复用与实现
 

@@ -289,7 +289,10 @@ def _execute(root,folder,job,cfg,model):
                 loaded_skills[args['id']]=job['skills'][args['id']]['text']
                 result={'skill':args['id'],'text':loaded_skills[args['id']]}
             elif kind=='browse':result=knowledge.browse(args.get('id','map'))
-            elif kind=='search':result=knowledge.search(args['query'])
+            elif kind=='search':
+                result=knowledge.search(args['query'])
+                for match in result['matches']:
+                    match['open']={'action':'read','arguments':{'source':'knowledge','id':match['id']}}
             elif kind=='read' and args.get('source')=='knowledge':
                 result=knowledge.read(args['id'],args.get('start_line',1),start_char=args.get('start_char',0),max_chars=min(8000,args.get('max_chars',6000)))
                 if result.get('kind') == 'experience_case':

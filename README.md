@@ -23,13 +23,13 @@ python scripts/run_experiment_campaign.py plan
 python scripts/check_repository.py --suite current
 ```
 
-`plan` 依据当前数据清单计算任务数，不提交生成或模型请求。检查脚本运行离线测试。真实执行仍由实验入口显式启动；当前等待用户通知启动双卡 loop。
+`plan` 依据当前数据清单计算任务数，不提交生成或模型请求。检查脚本运行离线测试。Live execution requires the explicit experiment launch command. This integration repair starts no experiment; deployment and provider availability require a separate live preflight when experiments are resumed.
 
 ## 当前数据和实验
 
 唯一当前清单是 [benchmark_data/benchmark.json](benchmark_data/benchmark.json)：67 条源视频，训练 40、测试 27，不设验证集；保留原编号和 short/long 两种独立任务条件，共 134 个条件。数据视频与模型权重需另行准备；任务定义、分布和示例见 [数据说明](benchmark_data/README.md)，清单读取见 [代码](scripts/inspect_benchmark.py)。
 
-主实验四组覆盖全量：Direct、PE Loop、无经验 Planner、有经验 Planner。无经验组先运行 RSI 训练部分并在任务后维护经验，再运行 RSI 测试部分；冻结后，有经验组运行全量。RSI 分析取测试子集，复用主实验视频与评分。Planner 与 PE 默认最多 4 次生成，在线期限按单次生成耗时 ×（次数上限＋0.5）计算：Bernini 默认 90 分钟，Ditto 默认 180 分钟；Planner 获得模糊资源提醒。自评作为追加消融。
+The main experiment runs Direct, PE Loop, no-experience Planner and full-experience Planner over the full population. The no-experience arm maintains its private library after training tasks, then runs the held-out tasks without maintenance. The full arm reads the resulting frozen library. Held-out experience analysis reuses the same videos and independent scores. Planner loops use the complete configured generation allowance (default N=4), then select any candidate, including an earlier one. PE also uses N=4. Task deadlines are the renderer estimate multiplied by N+0.5: currently 90 minutes for Bernini and 180 minutes for Ditto. Planner receives approximate resource hints. Self-review is a separate ablation with its own privately accumulated library.
 
 ## 代码边界
 

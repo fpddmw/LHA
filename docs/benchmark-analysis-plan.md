@@ -4,7 +4,7 @@
 
 先跑无经验全量流程，前 40 条逐题维护，后 27 条关闭维护；再以固定累计经验跑全量有经验组。两者使用同一结果注册目录，前段结果直接进入主表，后段结果直接构成 RSI 对照。经验积累不额外生成一批训练视频。
 
-主实验预设主比较为无经验 Planner 最终对 PE 最终的 task_completion 盲偏好；RSI 子集的主比较为后 27 条无经验对有经验最终结果。Direct 对各首轮、各自首轮对最终、有／无经验全量对照作为相应增量分析。Planner 自评为追加消融，复用相同经验，和独立 Critic 按模式分开报告。
+主实验预设主比较为无经验 Planner 最终对 PE 最终的 task_completion 盲偏好；RSI 子集的主比较为后 27 条无经验对有经验最终结果。Direct 对各首轮、各自首轮对最终、有／无经验全量对照作为相应增量分析。Planner self-review is an additional ablation. Critic and self-review families start from the same canonical seed, accumulate separate private contributions, and freeze their own libraries for their corresponding full arm. Their results and experience ownership are reported separately.
 
 每个源组先聚合 short/long 条件，统计单位为 source_group。采用源组聚类 bootstrap 和配对源组符号置换检验；每位判官分别报告，对次要比较及终点做 Holm 校正。当前 seed42 的结论覆盖这一生成种子。程序的 `main_analysis` 使用全量；`rsi_analysis` 仅使用 RSI 测试侧，并明确各自分母和主比较。
 

@@ -1,4 +1,18 @@
-# 当前状态 — 2026-11-03
+# Current implementation status
+
+2026-11-03 integration repair. The current continuation protocol is `creative-continuation-v5`. Main experiments use all configured generation attempts before final selection; N remains 4. Bernini and Ditto deadlines remain 90 and 180 minutes at this N. Both knowledge arms share the completion rules; the Planner still chooses each prompt, input and final candidate.
+
+The single-task entry uses the same role factory as the service, retains saved clients on resume, and carries a new-task generation override into both guards. Maintenance search returns executable maintenance read actions. Campaign and batch status read active dispatch and durable settlements, with last-recorded process state explicitly distinguished from fresh liveness verification.
+
+Critic and self-review families start from the same canonical seed and maintain separate private libraries. The active corpus remains 21 entries and 74 resources; this repair changes no experience prose, judgment, scoring standard or experiment design. Current maintenance authority and commands are described in [experience usage](experience-usage-interface.md).
+
+Verification and commit details: [integration repair plan](chain-integration-repair-20261103.md). Experiments remain paused. No new model, GPU, provider-availability or evaluation check was performed by this repair. Existing deployments and frozen runs were not migrated.
+
+## Historical status records
+
+The following dated notes retain earlier validation counts, deployment observations and protocol descriptions. They are historical evidence, not the current launch configuration or a live progress report. Use the current implementation and campaign status entry for those purposes.
+
+### Archived status — 2026-11-03, before the integration repair
 
 2026-11-03 调整：新建在线任务默认最多 4 次生成，期限按单次生成耗时 ×（N＋0.5）计算，Bernini 为 90 分钟、Ditto 为 180 分钟，Planner 继续只接收模糊资源提示。`creative-continuation-v4` 不偏向收尾，生成理由可选，交付没有新增门槛。已读正文持续保留，重复目录元数据从常驻上下文移除；仅在总上下文容量实际不足时显示精确摘录和重开入口。风格／经验检索使用带词频、短语和标题权重的本地搜索，明确专名命中与相关参考。下列已冻结的一小时运行仍保留原始配置和事实。
 

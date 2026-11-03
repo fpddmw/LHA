@@ -43,7 +43,10 @@ def main():
     args = parser.parse_args()
     both = args.backend == 'both'
     if args.command == 'status':
-        result = {n: campaign.status(args.output / n) for n in ('bernini', 'ditto')} if both else campaign.status(args.output)
+        models = [n for n in ('bernini', 'ditto') if (args.output / n / 'campaign.json').exists()]
+        if both:
+            models = ['bernini', 'ditto']
+        result = {n: campaign.status(args.output / n) for n in models} if both or (args.backend is None and models) else campaign.status(args.output)
     else:
         config = campaign.configuration(args.config)
         if args.command == 'plan':

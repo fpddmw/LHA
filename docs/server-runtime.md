@@ -38,7 +38,7 @@ python scripts/run_server_pipeline.py --service /persistent/lha-service drain
 
 常驻服务使用 `run`，单次排空依赖链使用 `run --once`。既有任务继续使用冻结配置与收据；代码升级在新服务目录验证。正式 Low→High 终评从独立结果入口运行，creative 服务不混入旧 task-card 评价队列。
 
-多卡主实验优先使用 [实验运行安排](experiment-campaign.md) 中的 campaign 入口；不要手动重复启动同一张卡的生成 worker。用户目前要求等待通知才启动双卡 loop。
+多卡主实验优先使用 [实验运行安排](experiment-campaign.md) 中的 campaign 入口；不要手动重复启动同一张卡的生成 worker。This documentation does not authorize a new launch. The current integration repair leaves experiments paused; existing frozen services retain their own configuration.
 
 ## Relay 502 后续接原文本调用
 

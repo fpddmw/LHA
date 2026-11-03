@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import argparse
+import copy
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -11,6 +13,78 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 
+def creative_configuration(args, profile, execution, recorded, parser):
+    """Resolve new-task overrides or retain the exact saved client on resume."""
+    from vlm.settings import role_settings
+
+    declared_factory = (execution or {}).get("models", {}).get("planner", {}).get("factory")
+    if recorded is not None:
+        saved = recorded["execution"]
+        if execution is not None and execution != saved:
+            parser.error("Resume retains the recorded execution configuration")
+        execution = copy.deepcopy(saved)
+        for field in ("model", "reasoning_effort"):
+            supplied = args.model if field == "model" else args.reasoning
+            if supplied is not None and supplied != recorded[field]:
+                parser.error("Resume retains the recorded " + field)
+        if args.review_mode and args.review_mode != saved.get("review", {}).get("mode", "critic"):
+            parser.error("Resume retains its original review mode")
+        count = recorded.get("resource_policy", {}).get("max_generations", recorded.get("max_generations"))
+        if args.max_generations is not None and args.max_generations != count:
+            parser.error("Resume retains its recorded generation limit")
+        # A profile may confirm a resume, but cannot silently switch its client.
+        for role in ("planner", "online_critic"):
+            proposed = profile.get("models", {}).get(role, {})
+            original = saved.get("models", {}).get(role, {})
+            if proposed.get("factory", original.get("factory")) != original.get("factory"):
+                parser.error("Resume retains its recorded model factory")
+            if any(original.get("options", {}).get(k) != v for k, v in proposed.get("options", {}).items()):
+                parser.error("Resume retains its recorded model options")
+        execution.setdefault("models", {}).setdefault("planner", {}).setdefault("options", {}).update(
+            model=recorded["model"], reasoning_effort=recorded["reasoning_effort"]
+        )
+    else:
+        supplied = copy.deepcopy(execution or {})
+        execution = copy.deepcopy(supplied)
+        for field in ("review", "planner", "critic", "resource_policy", "continuation_policy",
+                      "credential_file", "llm_timeout_seconds"):
+            if field in profile:
+                execution.setdefault(field, copy.deepcopy(profile[field]))
+        roles = copy.deepcopy(profile.get("models", {}))
+        for role, spec in supplied.get("models", {}).items():
+            default = roles.get(role, {})
+            roles[role] = {**default, **spec, "options": {**default.get("options", {}), **spec.get("options", {})}}
+        execution["models"] = roles
+        if args.review_mode:
+            execution["review"] = {"mode": args.review_mode}
+        execution.setdefault("review", {"mode": "critic"})
+        if args.max_generations is not None:
+            execution.setdefault("resource_policy", {})["max_generations"] = args.max_generations
+            execution.setdefault("continuation_policy", {})["hard_generation_limit"] = args.max_generations
+        else:
+            args.max_generations = supplied.get("resource_policy", {}).get("max_generations", profile.get("max_generations"))
+
+    spec = execution.setdefault("models", {}).setdefault("planner", {})
+    if args.backend:
+        factory = {"openrouter": "vlm.openrouter:OpenRouterVisionModel", "litellm": "vlm.litellm_vlm:LiteLLMVisionModel"}[args.backend]
+        explicit = recorded is not None or args.profile is not None or declared_factory is not None
+        if explicit and spec.get("factory", factory) != factory:
+            parser.error("--backend conflicts with the configured model factory; use the matching profile")
+        spec["factory"] = factory
+    spec.setdefault("factory", "vlm.openrouter:OpenRouterVisionModel")
+    options = spec.setdefault("options", {})
+    if args.model is not None:
+        options["model"] = args.model
+    if args.reasoning is not None:
+        options["reasoning_effort"] = args.reasoning
+    resolved = role_settings(execution, "planner")
+    options.update(resolved)
+    execution["planner"] = resolved
+    role_settings(execution, "online_critic")
+    args.model, args.reasoning = resolved["model"], resolved["reasoning_effort"]
+    return execution
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source")
@@ -18,25 +92,25 @@ def main():
     parser.add_argument("--request-file")
     parser.add_argument("--run-instructions-file", help="Optional operator instructions, separate from the original video requirement")
     parser.add_argument("--output", required=True)
-    parser.add_argument("--backend", choices=["openrouter", "litellm"], default="openrouter")
+    parser.add_argument("--backend", choices=["openrouter", "litellm"], help="Optional client choice; must agree with an explicit profile or saved run")
     parser.add_argument("--model", default=None)
     parser.add_argument("--reasoning", default=None)
-    parser.add_argument("--workflow", choices=["legacy", "creative_loop_v1"], default=None)
+    parser.add_argument("--workflow", choices=["legacy", "creative_loop_v1"], default=None, help="New tasks default to creative_loop_v1; legacy is explicit, resumes retain their workflow")
     parser.add_argument("--profile", type=Path, help="Creative role/default configuration JSON")
     parser.add_argument("--review-mode", choices=["critic", "planner"], help="Reviewer after every successful generation")
     parser.add_argument("--experiment-profile", type=Path, help="Optional shared frozen cohort profile")
     parser.add_argument("--target", default="unspecified")
-    parser.add_argument("--mode", choices=["plan", "loop"], default="plan")
+    parser.add_argument("--mode", choices=["plan", "loop"], help="Creative tasks use loop; explicit legacy tasks default to plan")
     parser.add_argument("--execution-config")
     parser.add_argument("--rsi", action="store_true", help="Enable requirement-linked task learning and automatic Critic")
     parser.add_argument("--rsi-config", help="Optional JSON RSI configuration, including candidate experience and fixed seeds")
     parser.add_argument("--task-card", help="Reviewed independent v2 task card; required for new live RSI runs")
     parser.add_argument("--import-videos", help="JSON list of existing videos with truthful provenance")
     parser.add_argument("--critic-feedback", action="append", default=[], help="Verified online Critic feedback JSON to import")
-    parser.add_argument("--max-generations", type=int, default=None, help="Generation limit; creative tasks default to five")
+    parser.add_argument("--max-generations", type=int, default=None, help="New-task generation limit; overrides the profile consistently (current default: 4)")
     parser.add_argument("--completion-mode", choices=["delivery", "bounded_experiment"], default="delivery")
     parser.add_argument("--label", default="")
-    parser.add_argument("--max-turns", type=int, default=None, help="Optional explicit turn limit")
+    parser.add_argument("--max-turns", type=int, default=None, help="Legacy turn limit; creative tasks use generation and time limits")
     parser.add_argument("--max-context-chars", type=int, default=None, help="New capacity or explicit resume capacity; default 180000 for new runs")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--continue-delivery", action="store_true", help="Continue an eligible stopped delivery with its recorded generation and time policy")
@@ -44,35 +118,32 @@ def main():
     parser.add_argument("--worker-command", nargs=argparse.REMAINDER,
                         help="Optional worker argv, last on the command line. {request} and {response} are substituted without a shell.")
     args = parser.parse_args()
-    import json
     profile = json.loads(args.profile.read_text(encoding="utf-8")) if args.profile else {}
     if profile:
         if profile.get("workflow") != "creative_loop_v1" or (args.workflow and args.workflow != profile["workflow"]):
             parser.error("Profile must identify the selected creative workflow")
         args.workflow = profile["workflow"]
-        if not args.resume:
-            if args.max_generations is None:
-                args.max_generations = profile.get("max_generations")
-            if args.max_turns is None:
-                args.max_turns = profile.get("max_turns")
+    recorded = None
     if args.resume:
-        import json
         recorded = json.loads((Path(args.output) / "state.json").read_text(encoding="utf-8"))["config"]
         if args.workflow and args.workflow != recorded.get("workflow", "legacy"):
             parser.error("Resume must retain the recorded workflow")
         args.workflow = recorded.get("workflow", "legacy")
-        args.reasoning = args.reasoning or recorded["reasoning_effort"]
-        args.model = args.model or recorded['model']
-    args.workflow = args.workflow or "legacy"
+    args.workflow = args.workflow or "creative_loop_v1"
+    args.mode = args.mode or ("loop" if args.workflow == "creative_loop_v1" else "plan")
+    execution = json.loads(Path(args.execution_config).read_text(encoding="utf-8")) if args.execution_config else None
     if args.workflow == "creative_loop_v1":
-        from planner_harness.creative import role_settings
-        options = profile.setdefault('models', {}).setdefault('planner', {}).setdefault('options', {})
-        if args.model is not None: options['model'] = args.model
-        if args.reasoning is not None: options['reasoning_effort'] = args.reasoning
-        elif args.resume: options['reasoning_effort'] = recorded['reasoning_effort']
-        settings = role_settings(profile, "planner")
-        role_settings(profile, "online_critic")
-        args.model, args.reasoning = settings['model'], settings['reasoning_effort']
+        if not args.resume and not args.profile:
+            profile = json.loads((ROOT / "configs/creative-loop-v1.json").read_text(encoding="utf-8"))
+        if args.mode != "loop":
+            parser.error("Creative tasks use --mode loop; use --workflow legacy for proposal-only planning")
+        if args.max_turns is not None:
+            parser.error("Creative tasks use generation and time limits, not --max-turns")
+        execution = creative_configuration(args, profile, execution, recorded, parser)
+    elif recorded:
+        args.reasoning = args.reasoning if args.reasoning is not None else recorded["reasoning_effort"]
+        args.model = args.model or recorded["model"]
+        args.backend = args.backend or ("litellm" if recorded.get("backend") == "LiteLLMVisionModel" else "openrouter")
     from vlm.openrouter import DEFAULT_MODEL
     args.model = args.model or DEFAULT_MODEL
     if args.workflow != 'creative_loop_v1': args.reasoning = args.reasoning or 'xhigh'
@@ -84,9 +155,13 @@ def main():
         parser.error("A new run requires --source and --request or --request-file")
     from planner_harness import PlannerHarness
     from planner_harness.lock import RunLock
-    if args.backend == "openrouter":
+    if args.workflow == "creative_loop_v1":
+        from vlm.settings import create_client
+        model = create_client({**execution, "workflow": args.workflow}, "planner")
+    elif args.backend in {None, "openrouter"}:
         os.environ["LHA_API_PLANNER_MODEL"] = args.model
-        os.environ["LHA_API_PLANNER_REASONING_EFFORT"] = args.reasoning
+        if args.reasoning is not None:
+            os.environ["LHA_API_PLANNER_REASONING_EFFORT"] = args.reasoning
         from vlm.openrouter import OpenRouterVisionModel
         model = OpenRouterVisionModel(role="planner", model=args.model, reasoning_effort=args.reasoning)
     else:
@@ -96,20 +171,6 @@ def main():
     os.environ["LOW_HIGH_VLM_AUDIT_LOG"] = str(output / "model-usage.jsonl")
     with RunLock(output):
         harness = PlannerHarness(output, model)
-        import json
-        execution = json.loads(Path(args.execution_config).read_text(encoding="utf-8")) if args.execution_config else None
-        if not args.resume and args.workflow == 'creative_loop_v1':
-            execution = dict(execution or {})
-            for field in ('review', 'planner', 'critic', 'models'):
-                if field in profile: execution.setdefault(field, profile[field])
-            execution['planner'] = {'model':args.model,'reasoning_effort':args.reasoning}
-            if args.review_mode: execution['review'] = {'mode': args.review_mode}
-            execution.setdefault('review', {'mode': 'critic'})
-        elif args.resume and args.review_mode and args.review_mode != recorded['execution'].get('review', {}).get('mode', 'critic'):
-            parser.error('Resume retains its original review mode')
-        if not args.resume and args.workflow=='creative_loop_v1' and profile.get('continuation_policy'):
-            execution = dict(execution or {})
-            execution.setdefault('continuation_policy', profile['continuation_policy'])
         if args.experiment_profile and not args.resume:
             execution = {**(execution or {}), "experiment_profile": str(args.experiment_profile.resolve())}
         elif args.experiment_profile:
@@ -118,7 +179,7 @@ def main():
             if recorded["execution"].get("experiment_profile") != str(args.experiment_profile.resolve()):
                 parser.error("Resume must use its recorded shared profile")
         if args.resume:
-            state = harness.resume(additional_turns=args.additional_turns, execution=execution, continue_delivery=args.continue_delivery,
+            state = harness.resume(additional_turns=args.additional_turns, execution=None if args.workflow == "creative_loop_v1" else execution, continue_delivery=args.continue_delivery,
                                    max_context_chars=args.max_context_chars)
         else:
             request = Path(args.request_file).read_text(encoding="utf-8") if args.request_file else args.request

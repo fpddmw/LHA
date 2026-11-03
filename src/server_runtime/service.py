@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import copy
-import importlib
 from pathlib import Path
 import re
 import sys
@@ -98,36 +97,9 @@ class Service:
         return sources
 
     def client(self, role):
-        spec = self.config.get("models", {}).get(role, {})
-        factory = spec.get("factory", "vlm.openrouter:OpenRouterVisionModel")
-        module, name = factory.split(":")
-        options = dict(spec.get("options", {}))
-        if self.config.get("credential_file"):
-            options.setdefault("credential_file", self.config["credential_file"])
-        if self.config.get("llm_timeout_seconds"):
-            options.setdefault("timeout", self.config["llm_timeout_seconds"])
-        from vlm.openrouter import DEFAULT_MODEL
+        from vlm.settings import create_client
 
-        expected = {
-            "model": self.config.get("model", DEFAULT_MODEL),
-            "reasoning_effort": self.config.get("reasoning_effort", "high"),
-        }
-        if self.config.get("workflow") == "creative_loop_v1":
-            from planner_harness.creative import role_settings
-
-            expected = role_settings(self.config, role)
-            options.update(expected)
-        client = getattr(importlib.import_module(module), name)(**{"role": role, **options})
-        if getattr(client, "model", None) != expected["model"]:
-            raise ValueError(
-                "Backend resolved a different model from the frozen service configuration"
-            )
-        if getattr(client, "reasoning_effort", None) != expected["reasoning_effort"]:
-            raise ValueError("Backend resolved a different reasoning effort")
-        if not callable(getattr(client, "predict_json", None)) or (
-            role != "benchmark_final" and not callable(getattr(client, "predict_text", None))
-        ):
-            raise ValueError("Backend does not implement the required vision interface")
+        client = create_client(self.config, role)
         client.lha_service_owner = str(self.directory)
         return client
 

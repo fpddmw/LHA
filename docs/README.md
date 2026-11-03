@@ -14,7 +14,7 @@
 | 全量主实验与 RSI 子集 | [实验运行安排](experiment-campaign.md) | `experiments.campaign` |
 | PE 固定流程基线 | [PE Loop](pe-loop.md) | `experiments.pe_loop` |
 | 终评与分析 | [评价协议](low-high-evaluation-v2.md)、[统计约定](benchmark-analysis-plan.md) | `evaluation` |
-| 经验内容与使用 | [使用接口](experience-usage-interface.md)、[写作标准](experience-authoring-standard.md)、[维护实现](experience-curation-implementation.md) | `creative_knowledge`、`training_experience` |
+| 经验内容与使用 | [使用接口](experience-usage-interface.md)、[写作标准](experience-authoring-standard.md)、[Maintenance lifecycle](experience-usage-interface.md#post-task-actions) | `creative_knowledge`、`training_experience` |
 | 已验证状态与剩余问题 | [当前状态](current-status.md)、[问题及修复记录](code-review-remediation-checklist-20261102.md) | 离线报告与运行回执 |
 
 ## 开发检查
@@ -26,7 +26,7 @@ python scripts/check_repository.py --suite current
 python scripts/check_repository.py --module test_api_backend --module test_review_modes
 ```
 
-检查默认离线，使用合成视频和脚本化模型；本地 HTTP fixture 可用，外部连接会被测试入口拦截。每个模块独立进程，只收集本模块定义的测试，避免导入测试类重复计数。默认每个测试模块最多运行 180 秒，可用 `--timeout` 调整；这是测试工具的超时，与实验 2.5 小时期限分开。`--jobs` 控制测试并发。
+检查默认离线，使用合成视频和脚本化模型；本地 HTTP fixture 可用，外部连接会被测试入口拦截。每个模块独立进程，只收集本模块定义的测试，避免导入测试类重复计数。默认每个测试模块最多运行 180 秒，可用 `--timeout` 调整；This is a software-test timeout. Online task deadlines are computed from the renderer and N; current N=4 defaults are 90 minutes for Bernini and 180 minutes for Ditto.`--jobs` 控制测试并发。
 
 日志和汇总默认写入 `out/repository-check/`。当前模块清单在 [检查入口](../scripts/check_repository.py) 的 `CURRENT`。`--suite historical` 保留先前协议的测试入口；其中旧 RSI、旧数值在线评审和旧 Planner 生命周期的部分断言已经失效，修改对应兼容代码时按模块核对。`--suite all` 用于调查全部历史兼容情况，不作为当前协议通过声明。
 

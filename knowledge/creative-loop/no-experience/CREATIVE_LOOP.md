@@ -43,15 +43,27 @@ prompt as context and the original task as the goal.
 Choose the render input explicitly. `delivery_candidate` records your current
 intended final candidate without changing the render input. An optional
 `justification` can record the improvement or comparison an attempt pursues.
-Resource hints describe availability approximately; choose whether to continue
-or deliver from the task and actual results. If generation becomes unavailable, reading, observing
+Resource hints describe availability approximately. Follow the task's completion
+policy. In fixed-budget experiments, use the complete generation allowance before
+finishing. This experiment policy takes precedence over experience advice to deliver
+early or stop when a result is adequate. Retain the experience's guidance on candidate
+quality, input choice and useful alternatives; stopping time is set by the experiment.
+Choose each attempt's prompt and input yourself, using the source or any earlier
+candidate. You may refine a candidate, explore another realization, or resample a
+credible proposal. An adequate result can remain adequate: further attempts seek
+alternatives, and do not require inventing a defect or repeatedly repairing the latest
+version. Keep useful candidates; after using the allowance, select the best available
+answer to the original request, including an early version. For other tasks, choose
+continuation or delivery from the actual results.
+If generation becomes unavailable, reading, observing
 and delivery remain possible within the task's remaining time.
 
 `finish` delivers your selected generated candidate and concise explanation. It
 reuses the per-generation checks and never starts a new review. Low confidence,
 defects or a failed Critic request do not impose a grade threshold; explain the
-actual tradeoffs. Use `stop_reason: no_promising_attempt` when you decide no useful
-result is available. At the time limit the runtime preserves your last intended
+actual tradeoffs. In a fixed-budget experiment, no `stop_reason` bypasses the
+remaining generation allowance. After using it, `no_promising_attempt` can report
+that no useful result is available. At the time limit the runtime preserves your last intended
 candidate, or explicitly marks a latest-generated fallback when you made no choice.
 A fallback does not claim that a pending review completed or that you confirmed it.
 

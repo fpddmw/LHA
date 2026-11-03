@@ -289,7 +289,12 @@ class CampaignTests(base.Fixture):
             def predict_text(inner, **kw):
                 inputs.append(kw)
                 if len(inputs) == 1:
-                    return json.dumps({'action': 'read', 'arguments': {'source': 'knowledge', 'id': entry['id']}})
+                    return json.dumps({'action': 'search', 'arguments': {'query': entry['title']}})
+                if len(inputs) == 2:
+                    search = json.loads(kw['user_text'])['current_result']
+                    match = next(row for row in search['matches'] if row['id'] == entry['id'])
+                    return json.dumps(match['open'])
+                self.assertEqual(json.loads(kw['user_text'])['current_result']['id'], entry['id'])
                 return json.dumps({'action': 'contribute', 'arguments': {'text': 'Private fixture increment.', 'changes': [
                     {'op': 'comment', 'id': entry['id'], 'text': 'A post-task fixture boundary.'},
                     {'op': 'create', 'id': 'fixture-new', 'title': 'New insight', 'summary': 'A fixture condition.', 'text': 'New conditional guidance.'}]}})
@@ -301,6 +306,7 @@ class CampaignTests(base.Fixture):
         self.assertEqual(sha(self.h.output / 'knowledge-snapshot.json'), online_hash)
         self.assertEqual(load(self.h.output / 'knowledge-snapshot.json')['curated_catalog']['entries'], [])
         self.assertIn(entry['id'], json.dumps(inputs))
+        self.assertEqual(len(inputs), 3)
         self.assertNotIn('fixture-new', CreativeKnowledge(ROOT, none).items)
         # Replay is idempotent, and test membership cannot authorize activation.
         self.assertEqual(tx.maintain(self.repo, self.output, self.h.output, job), result)

@@ -108,7 +108,13 @@ def main():
         result = run(ROOT, args.output, host)
         print(json.dumps({"status": result["status"], "topics": len(result["topics"])}))
     else:
-        print(json.dumps(load(args.output / "checkpoint.json") if (args.output / "checkpoint.json").exists() else {"status": "prepared_not_started"}))
+        batch_path = args.output / "batch.json"
+        if batch_path.exists() and load(batch_path).get("schema") == "lha-unified-benchmark-v1":
+            from experiments.campaign import batch_status
+            result = batch_status(args.output)
+        else:
+            result = load(args.output / "checkpoint.json") if (args.output / "checkpoint.json").exists() else {"status": "prepared_not_started"}
+        print(json.dumps(result))
 
 
 if __name__ == "__main__":

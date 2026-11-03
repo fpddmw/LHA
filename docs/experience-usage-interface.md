@@ -136,7 +136,7 @@ The runtime binds each addition to a source case and the target's version/hash. 
 
 ## Discovery
 
-`browse('experience-map')` exposes current canonical summaries plus related contributions. `browse('contributions')` lists the contribution layer; `read(id)` opens the actual text and source case. `search(query)` searches both kinds of material. Reading an entry presents linked contributions as metadata on the first returned page, rather than appending objections to the end of its body. Curation status and target version remain visible. Adopted or declined records keep their history.
+`browse('experience-map')` exposes current canonical summaries plus related contributions. `browse('contributions')` lists the contribution layer; `read(id)` opens the actual text and source case. `search(query)` searches both kinds of material. Its opening action uses the receiving interface: online Planner gets `read {targets:[{id}]}`, while post-task maintenance gets `read {source:"knowledge",id}`. Maintenance can execute the returned action directly; both paths retain the same scoped knowledge and evidence. Reading an entry presents linked contributions as metadata on the first returned page, rather than appending objections to the end of its body. Curation status and target version remain visible. Adopted or declined records keep their history.
 
 Experience map and renderer entrance recommendations are derived from canonical catalog metadata. Detailed historical profiles remain source material. A curation change updates text and metadata together and regenerates those entrances. Professional manuals point to entries for revisable empirical claims; their general reading methods remain stable.
 

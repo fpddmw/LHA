@@ -24,16 +24,31 @@ full 的阅读指南进一步引导 Planner 把适用经验落实到输入选择
 
 ## 运行和恢复
 
-- 单任务入口：`scripts/run_planner_harness.py`。
+- Single-task entry: `scripts/run_planner_harness.py`; new tasks default to `creative_loop_v1` and loop mode. `run_agent_loop.py` delegates to the same entry. Historical proposal-only execution requires `--workflow legacy`; resumes use the saved workflow.
 - 生成工具 worker：`scripts/run_planner_worker.py`。
 - 实验入口：`scripts/run_experiment_campaign.py`。
 - 多任务服务：[server-runtime.md](server-runtime.md)。
 
-默认生成上限 4 次；在线期限为单次生成耗时 ×（次数上限＋0.5），Bernini 默认 90 分钟、Ditto 默认 180 分钟；token 仅作预估与计量；恢复使用原有计数和截止时间。已保存回答或工具回执应沿原调用恢复；明确失败返回可处理的结果，未知外部执行按原任务核实。运行中的配置变更使用新目录，不修改已有回执。
+The current experiment profile requires using all N generation attempts before final selection, with default N=4. Both knowledge arms can select an earlier candidate at the end. The task deadline is the renderer estimate multiplied by N+0.5: 90 minutes for Bernini and 180 minutes for Ditto at this N. Tokens are estimated and metered rather than capped by a default token limit. Resume retains the original counts and deadline and collects saved answers or receipts under their original call/job. Known failure and uncertain external execution retain their respective recovery paths. Configuration changes use a new run directory.
 
 Planner 调用明确失败时，结果登记沿用运行中已保存的候选选择，保留所有生成版本。原状态及 arm 回执保持 `execution_failed`；展示结果记录 `interrupted_delivery`、`partial=true`、`planner_confirmed=false`，同时保存原失败状态与选择依据。旧运行可用 `python scripts/settle_planner_failure.py --output 原run --topic SAMPLE__long --device 原worker编号` 检查，加 `--execute` 后登记。该入口只读取缓存，新增模型和 GPU 调用均为零，原 native 状态、调用回执和时钟保持原样。
 
 旧 proposal-only／RSI 实现在 `planner_harness.compat`，用于历史运行解析和对应兼容测试，不定义当前主实验协议。
+
+## Single-task launch configuration
+
+The single-task CLI and server runtime use `vlm.settings.create_client` to instantiate the configured role factory and options. New tasks use `configs/creative-loop-v1.json` unless `--profile` supplies another creative profile. An execution file can provide renderer settings and role clients, including the subscription factory. CLI model/effort overrides apply to the actual client and its recorded configuration. `--backend` must agree with an explicitly configured factory.
+
+```bash
+python scripts/run_planner_harness.py --source /path/source.mp4 \
+  --request-file /path/request.txt --execution-config /path/execution.json \
+  --output out/single-task
+python scripts/run_planner_harness.py --output out/single-task --resume
+```
+
+These are execution commands: starting a task calls its configured model. A render worker or service is still required to execute a returned `waiting_tool` job. For a complete experiment use the campaign entry instead of manually duplicating its workers.
+
+For a new task, `--max-generations N` updates both the resource limit and continuation guard. A profile's explicit wall-time limit remains explicit; otherwise time is derived from the effective N and renderer. Creative tasks have no `--max-turns` control. Resume constructs the saved client, preserves an explicit null reasoning effort, and retains the original generation limit, review mode and execution configuration. It never substitutes today's default profile for a historical run.
 
 ## 检索和工作记忆
 

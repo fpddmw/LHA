@@ -342,14 +342,57 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
         return summary
 
 
+def batch_status(output):
+    """Project existing live records and settlements; never mutate the queue."""
+    from collections import Counter
+
+    output = Path(output)
+    checkpoint_path = output / 'checkpoint.json'
+    dispatch_path = output / 'dispatch-status.json'
+    checkpoint = load(checkpoint_path) if checkpoint_path.exists() else {}
+    dispatch = load(dispatch_path) if dispatch_path.exists() else {}
+    rows = {}
+    for record in [checkpoint, *[load(p) for p in sorted((output / 'workers').glob('*/checkpoint.json'))]]:
+        for row in record.get('positions', record.get('settled', [])):
+            rows[(row['topic'], row.get('method'))] = row
+    # Durable per-method outcomes supersede a worker's partial summary.
+    for path in sorted((output / 'methods').glob('*/*/settlement.json')):
+        row = load(path)
+        rows[(row['topic'], row.get('method'))] = row
+    counts = dict(Counter(r['status'] for r in rows.values()))
+    claims = dispatch.get('claims', [])
+    claim_counts = dict(Counter(r['status'] for r in claims))
+    workers = dispatch.get('workers', {})
+    final_checkpoint = (checkpoint.get('status') in {'settled', 'complete', 'partial'}
+                        and (not dispatch_path.exists() or checkpoint_path.stat().st_mtime_ns >= dispatch_path.stat().st_mtime_ns))
+    unresolved_states = {'execution_unknown', 'topic_quarantined', 'recovery_required', 'gpu_quarantined', 'unexecuted'}
+    if final_checkpoint:
+        state, basis = checkpoint['status'], 'final_checkpoint'
+    elif dispatch:
+        active = any(code is None for code in workers.values()) or claim_counts.get('claimed', 0)
+        state = 'running' if active else 'partial' if any(r['status'] in unresolved_states | {'pending'} for r in claims) else 'settling'
+        basis = 'latest_dispatch_record'
+    elif checkpoint:
+        state, basis = checkpoint.get('status', 'incomplete'), 'serial_checkpoint'
+    elif rows:
+        state, basis = 'incomplete', 'method_settlements'
+    else:
+        state = 'prepared' if (output / 'batch.json').exists() else 'not_started'
+        basis = 'batch_manifest' if state == 'prepared' else 'no_run_records'
+    planned = None
+    if (output / 'batch.json').exists():
+        batch = load(output / 'batch.json')
+        planned = sum(len(t.get('methods', batch['arms'])) for t in batch['topics'])
+    return {'status': state, 'status_basis': basis,
+            'ready': counts.get('ready', 0), 'recorded': len(rows), 'planned': planned,
+            'outcome_counts': counts, 'claim_counts': claim_counts, 'claims': claims, 'workers': workers,
+            'unresolved': [r for r in rows.values() if r['status'] in unresolved_states],
+            'observation': 'Read-only saved progress; worker return codes are last recorded values, not a fresh process-liveness check.'}
+
+
 def status(output):
     output = Path(output)
-    answer = {}
-    for stage in STAGES:
-        path = output / stage / 'checkpoint.json'
-        rows = load(path).get('positions', []) if path.exists() else []
-        answer[stage] = {'status': load(path).get('status') if path.exists() else 'not_started',
-                         'ready': sum(r['status'] == 'ready' for r in rows), 'recorded': len(rows)}
+    answer = {stage: batch_status(output / stage) for stage in STAGES}
     answer['trained_snapshot'] = (output / 'trained-experience.json').exists()
     answer['self_review_trained_snapshot'] = (output / 'self-review-trained-experience.json').exists()
     answer['results'] = str(output / 'results/index.html')
