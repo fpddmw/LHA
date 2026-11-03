@@ -87,6 +87,8 @@ python scripts/run_experiment_campaign.py run --backend both --stage main \
 
 入口顺序执行 Bernini、Ditto，各自完成 `zero → knowledge → direct → pe-loop → score`。运行开始固定同一份预置知识；两模型的维护增量、视频与评分缓存分别进入 `out/main-all67-n4/bernini` 和 `out/main-all67-n4/ditto`。每模型主实验上限 1742 个视频，双模型上限 3484；已完成结果和同视频评分继续复用。
 
+PE 随渲染器自动适配：Ditto 使用[专用编辑指令模板](pe-loop.md#ditto-的编辑指令适配)，将短风格要求具体展开、保全长任务条款，并吸收逐轮 Critic 反馈；Bernini 使用自己的模板。沿用本页命令即可，单独执行 Ditto PE 时使用 `--backend ditto --stage pe-loop` 和 Ditto 主机配置。`pe-loop` 的渲染设置中 `prompt_enhancer=false` 表示渲染器直接接收已增强的文本，增强由 Loop 负责。
+
 分批运行时，保留同一输出目录，把 `--stage main` 换成下表的阶段：
 
 | 批次 | 阶段参数 | 前置条件／产出 |

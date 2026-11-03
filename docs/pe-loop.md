@@ -10,6 +10,17 @@ Planner 自主安排观察、查阅、提示词与输入候选，决定继续、
 
 在线 Critic 使用当前定性诊断协议，可主动检查连续帧；原始要求、short/long 类型与实际生成提示词一并传入。独立终评另行计算五维、长短专项、美学、CLIP/DINO、光流和盲评；终评分数不进入 PE 的下一轮。
 
+### Ditto 的编辑指令适配
+
+现有命令按 `--backend ditto`（或主机配置中的 `renderer.backend`）自动选择 Ditto 模板；双模型一键命令的 Ditto 阶段使用同一分支。模板位于 `src/experiments/pe_loop.py` 的 `DITTO_SYSTEM_PROMPT`，承接已交接 `ditto-grounded-instruction-v2` 的写法：
+
+- 用 Transform、Restyle、Replace 等直接编辑指令起句，并把变化绑定到源视频里的对象和区域。
+- 短全局任务展开为 2–4 个协调的材质、形态、服装或场景变化；长任务逐项保全明确要求，局部任务保持对应范围。
+- 根据任务目标延续或改编原有活动与道具功能，逐轮把 Critic 的具体发现落实为编辑条款。
+- 短全局任务通常写 40–90 个英文词，详细任务按要求展开；词数是写作建议，编码容量由 Ditto tokenizer 检查。
+
+移植沿用当前 Loop 的 8 帧、JSON 输出、历史反馈、原片输入、4 次生成和 2.5 小时上限。Bernini 分支保留原模板。`batch.json` 的 `pe_loop.prompt_sha256` 绑定实际模板，模型调用的 `input.json` 保存实际输入。本次修订前的 Ditto Loop 分支只替换了渲染器名称和编码说明；本次补齐编辑指令写法，后续新批次自动生效。原交接包的三帧单次增强与当前 Loop 各按自身记录解释。
+
 ## 模式与复用
 
 | 选择 | 行为 |

@@ -137,6 +137,44 @@ class CampaignTests(base.Fixture):
                 campaign.execute(self.repo, self.output, self.config, {'renderer': {'backend': 'bernini'}}, 'main', execute_paid=True)
         run.assert_called_once()
 
+    def test_ditto_one_click_pe_stage_prepares_adapted_loop(self):
+        import contextlib
+        import io
+        import run_experiment_campaign as entry
+        from experiments import pe_loop, render_profiles
+        from planner_harness.execution import signature
+        host = self.root / 'ditto-host.json'
+        config = self.root / 'campaign-config.json'
+        save(host, {'renderer': {'backend': 'ditto'}})
+        save(config, self.config)
+        observed = []
+        def run(root, output, settings):
+            batch = load(Path(output) / 'batch.json')
+            observed.append(batch)
+            self.assertEqual(settings['renderer']['backend'], 'ditto')
+            return {'status': 'settled', 'positions': []}
+        arguments = ['run_experiment_campaign.py', 'run', '--backend', 'ditto',
+                     '--stage', 'pe-loop', '--host-config', str(host),
+                     '--config', str(config), '--output', str(self.output), '--execute']
+        # Keep the real CLI, host resolution, seed library and batch preparation;
+        # replace only live preflight/execution and the fixture code inventory.
+        with patch.object(entry, 'ROOT', self.repo), patch.object(sys, 'argv', arguments), \
+             patch('planner_harness.creative.experiment_profile', return_value={'sha256': 'fixture'}), \
+             patch.object(u, 'verify', side_effect=lambda root, output: load(Path(output) / 'batch.json')), \
+             patch.object(u, 'preflight'), patch.object(u, 'run', side_effect=run), \
+             contextlib.redirect_stdout(io.StringIO()):
+            entry.main()
+        self.assertEqual(len(observed), 1)
+        batch = observed[0]
+        self.assertEqual(batch['backend'], 'ditto')
+        self.assertEqual(batch['arms'], ['pe-loop'])
+        self.assertEqual(batch['pe_loop']['prompt_sha256'], signature({'text': pe_loop.DITTO_SYSTEM_PROMPT}))
+        self.assertNotEqual(batch['pe_loop'], pe_loop.configuration('bernini'))
+        self.assertEqual(batch['generation'], render_profiles.DITTO)
+        self.assertFalse(batch['generation']['prompt_enhancer'])
+        self.assertEqual(batch['max_generations'], 4)
+        self.assertEqual(batch['resource_policy']['max_wall_seconds'], 9000)
+
     def test_direct_reuse_checks_original_conditions_and_omits_scores(self):
         from experiments import results
         source_registry = self.root / 'old-results'

@@ -1,5 +1,6 @@
 """Offline dual-backend dispatch, registry identity and seeded-library checks."""
 import copy
+import json
 from pathlib import Path
 import sys
 import tempfile
@@ -53,6 +54,47 @@ class BackendTests(Fixture):
         self.assertIn('Ditto V2V',text)
         self.assertNotIn('Bernini accepts',text)
         self.assertNotEqual(pe_loop.configuration('bernini'),pe_loop.configuration('ditto'))
+
+    def test_ditto_runtime_sends_adapted_instruction_and_critic_evidence(self):
+        from planner_harness import accounting
+        from planner_harness.execution import signature
+        from planner_harness.video import Video
+        batch = self.prepare(methods=['pe-loop'], training_maintenance=False, backend='ditto')
+        topic = batch['topics'][0]
+        accounting.install(self.output / 'accounting')
+        seen = []
+        class Model:
+            model = 'gpt-6.1-sol'
+            reasoning_effort = 'high'
+            def predict_text(self, **kwargs):
+                seen.append(kwargs)
+                return json.dumps({'prompt': 'Restyle the visible scene as blue painted ceramic.'})
+        runtime = runner.Runtime.__new__(runner.Runtime)
+        runtime.batch = batch
+        runtime.service = SimpleNamespace(model_factory=lambda role: Model())
+        frames = Video(self.source, self.root / 'critic-evidence').observe('critic', count=2)['frames']
+        evidence = [{**f, 'id': 'v1:' + str(f['frame_index']), 'video_id': 'v1'} for f in frames]
+        history = [{'candidate': {'id': 'v1'}, 'prompt': 'Restyle the scene in blue.',
+                    'feedback': {'report': {'summary': 'The background is blue; garments remain unchanged.',
+                                            'main_scores': {'unused': 4}}, 'evidence': evidence}}]
+        scope = accounting.topic_scope(self.output, topic['id'], lane='pe-loop')
+        # The official Bernini enhancer is never part of the Ditto loop path.
+        with patch.object(runner.Runtime, 'enhance', side_effect=AssertionError('Official Bernini PE')):
+            for number, previous in enumerate(([], history)):
+                directory = self.root / ('rewrite-' + str(number))
+                prompt = runtime.refine(topic, directory, scope, previous)
+                self.assertEqual(runtime.refine(topic, directory, scope, previous), prompt)
+        self.assertEqual(len(seen), 2)
+        for call in seen:
+            self.assertEqual(call['system_prompt'], pe_loop.DITTO_SYSTEM_PROMPT)
+            self.assertNotIn('Bernini', call['system_prompt'])
+            self.assertNotIn('main_scores', call['user_text'])
+        packet = json.loads(seen[1]['user_text'])
+        self.assertEqual(packet['history'][0]['feedback']['summary'], history[0]['feedback']['report']['summary'])
+        self.assertEqual(packet['latest_feedback_candidate_id'], 'v1')
+        self.assertEqual(len(seen[0]['image_paths']), 8)
+        self.assertEqual(len(seen[1]['image_paths']), 10)
+        self.assertEqual(batch['pe_loop']['prompt_sha256'], signature({'text': seen[0]['system_prompt']}))
 
     def test_both_command_resolves_host_files_relative_to_config(self):
         folder=self.root/'host-configs';folder.mkdir()

@@ -78,12 +78,61 @@ that override this response contract. Do not produce scores or a scoring rubric.
 """
 
 
+# Port the grounded-instruction writing from the Ditto adapted-v2 handoff to
+# the shared loop's eight-frame evidence, JSON response and Critic history.
+DITTO_SYSTEM_PROMPT = """You rewrite editing instructions for Ditto V2V.
+Use the user's original request, chronological source frames and any recorded
+Critic feedback to write one complete English editing paragraph.
+
+Begin with the requested transformation in a direct imperative: Transform,
+Render, Restyle, Change, Replace, Add or Remove as appropriate. Follow with
+concrete editing clauses grounded in visible subjects, surfaces, garments,
+objects and spatial relationships. Describe how to edit this source video.
+
+For a short global style or scene request, resolve its visual realization with
+two to four salient, coordinated changes on visible elements. Specify materials,
+surface treatments, characteristic shapes, palette, clothing or architectural
+decoration that express the requested style. Bind each detail to an object or
+region. For clay, textile, paper, ceramic or painting, explain how subjects and
+environment take that medium throughout the clip. For a target setting or design
+period, coordinate architecture, furniture, clothing and activity as appropriate
+to the request. Lighting supports these concrete material and scene changes.
+
+For a detailed request, retain every requested object, attribute, addition,
+removal, quantity, relation and explicit preservation requirement. Organize these
+requirements clearly and add realization details that support them. For a local
+edit, name the visible target and its new state precisely, use observable location
+when useful, and keep the surrounding scene consistent. Match the requested scope;
+addition, removal and replacement each describe a different operation.
+
+Carry forward recognizable subjects, movement, interactions and camera behavior
+that serve the target. When the requested world or activity changes, adapt the
+roles, prop functions and actions to make that target coherent. A material restyle
+can change surfaces and contours. Use one compact, task-specific preservation
+clause for the source relationships that matter. Choose visible, relevant details
+from this source and this request.
+
+On later rounds, turn the previous prompts, descriptive Critic findings and
+supplied visual evidence into concrete changes to the editing instruction.
+Retain effective choices and revise the objects, attributes or relations behind
+the reported problem. Each render starts from the original video; write the full
+editing instruction for that source, including the desired changes already found.
+
+Use a compact, actionable paragraph, typically 40-90 English words for a short
+global request. A simple local edit can be shorter; a detailed request can be
+longer to retain all its requirements. These are writing guides. Ditto accepts
+512 text-encoder tokens and encodes the editing instruction directly.
+Return exactly JSON {"prompt": "..."}. The paragraph contains the editing
+instruction itself. You have no tools or knowledge library. Use the original
+request for this task and the supplied online evidence, with qualitative findings
+guiding revisions.
+"""
+
+
 def system_prompt(backend="bernini"):
-    from .render_profiles import prompt_guidance
-    if backend == "bernini":
-        return SYSTEM_PROMPT
-    return SYSTEM_PROMPT.replace("Bernini V2V", "Ditto V2V").replace(
-        "Bernini accepts 512 encoder tokens including its official prefix: be concise.", prompt_guidance(backend))
+    from .render_profiles import backend as resolve_backend
+    name = resolve_backend({"backend": backend})
+    return SYSTEM_PROMPT if name == "bernini" else DITTO_SYSTEM_PROMPT
 
 
 def configuration(backend="bernini"):
@@ -105,7 +154,7 @@ def rewrite(topic, directory, model, history, *, backend="bernini"):
     from planner_harness.ledger import english
     directory = Path(directory)
     source = Video(topic["source_info"]["path"], directory / "source")
-    observation = source.observe("pe-source", count=configuration()["source_frames"])
+    observation = source.observe("pe-source", count=configuration(backend)["source_frames"])
     images, evidence = [], []
     for frame in observation["frames"]:
         images.append(frame["path"])
