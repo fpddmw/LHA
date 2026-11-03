@@ -8,18 +8,19 @@ import math
 from pathlib import Path
 
 from .validation import validate_report
+from .registry import LOW_HIGH_FINAL_PROTOCOL, LOW_HIGH_RATING_TEXT
 from planner_harness.common import load, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.video import Video
 from planner_harness.report_call import call_report, verify_answer, verify_inputs, ReportUnavailable, FINAL_POLICY
 
-PROTOCOL = "lha-low-high-final-v3"
+PROTOCOL = LOW_HIGH_FINAL_PROTOCOL
 PLAN_PROTOCOL = "lha-low-high-task-plan-v3"
 POLICY = {"overview_frames_per_six_seconds": 20, "overview_minimum": 20,
           "event_selection": "fixed full source timeline unless an operator freezes explicit intervals", "event_frames": "all native consecutive frames",
           "event_source_segment_stride": 28, "decoder": "native-pts-v1",
           "time_mapping": "identity seconds; unequal durations retained as missing coverage",
-          "online_feedback": False, "single_score": "integer 0..4; missing=null"}
+          "online_feedback": False, "single_score": LOW_HIGH_RATING_TEXT}
 
 PLAN_PROMPT = "Original request verbatim and fixed evidence configuration; no additional task interpretation."
 EVENT_PROMPT = """Observe this source/candidate event under the original task.
@@ -44,7 +45,7 @@ def profile():
             "source_plan_prompt": PLAN_PROMPT, "event_prompt": EVENT_PROMPT,"execution_policy":FINAL_POLICY,
             "implementation": {name: sha(root / name) for name in
                 ("evaluation/low_high.py", "evaluation/final_suite.py", "evaluation/features.py", "evaluation/temporal.py", "evaluation/task_spec.py", "evaluation/task_metrics.py", "evaluation/final_projection.py", "evaluation/registry.py", "critic_harness/one_shot.py", "planner_harness/video.py",
-                 "critic_harness/evidence.py", "planner_harness/report_call.py", "planner_harness/model_call.py", "evaluation/creative.py", "evaluation/providers.py", "evaluation/validation.py", "vlm/openrouter.py", "vlm/settings.py", "evaluation/pairwise.py")}}
+                 "critic_harness/evidence.py", "planner_harness/report_call.py", "planner_harness/model_call.py", "evaluation/creative.py", "evaluation/providers.py", "evaluation/validation.py", "evaluation/low_high_summary.py", "vlm/openrouter.py", "vlm/settings.py", "evaluation/pairwise.py")}}
     from .providers import configuration
     body["judges"] = configuration()
     return {**body, "sha256": signature(body)}

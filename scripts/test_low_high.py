@@ -120,7 +120,7 @@ class Tests(unittest.TestCase):
         event_path.write_text(json.dumps(modified))
         with self.assertRaises(ValueError):lh.verify_event_records(self.root / "final",packet,judge)
 
-    def test_sparse_evidence_requires_unknown_and_rejects_fractional_scores(self):
+    def test_sparse_evidence_requires_unknown_and_accepts_tenths(self):
         packet,_=lh.prepare_final(self.request,self.source,self.source,self.root / "preview",plan=self.plan)
         report=review_fixture(packet["user_text"])
         self.assertEqual(report["main_scores"]["temporal_consistency"]["status"],"unknown")
@@ -129,6 +129,8 @@ class Tests(unittest.TestCase):
         with self.assertRaises(ValueError):validate_report(report,packet)
         report=review_fixture(packet["user_text"])
         report["main_scores"]["instruction_adherence"]["score"]=3.1
+        validate_report(report,packet)
+        report["main_scores"]["instruction_adherence"]["score"]=3.11
         with self.assertRaises(ValueError):validate_report(report,packet)
         with self.assertRaisesRegex(ValueError,"shared frozen"):judge_candidate(self.request,self.source,self.source,self.root / "invalid",model=Judge())
 

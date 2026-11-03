@@ -42,6 +42,8 @@ class EvaluationTests(unittest.TestCase):
             self.assertNotIn('calibration_status',result)
             if track=='long': self.assertEqual(metrics['joint_satisfaction']['score'],1)
             bad=copy.deepcopy(result['task_metrics']['report']);bad['aesthetics']['color_texture']['score']=3.1
+            task_metrics.validate(bad,packet)
+            bad['aesthetics']['color_texture']['score']=3.11
             with self.assertRaises(ValueError):task_metrics.validate(bad,packet)
             bad=copy.deepcopy(result['task_metrics']['report']);bad['items'][0]['completion']['label']='unknown'
             calculated=task_metrics.calculate(bad,track)['edit_completion']

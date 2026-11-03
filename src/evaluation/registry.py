@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import math
 
 VERSION = "lha-metrics-v3"
 SCORE_VERSION = "lha-score-v3"
@@ -144,14 +145,29 @@ def markdown():
 
 
 # Current creative metrics are versioned independently of the historical card contract.
-LOW_HIGH_VERSION = "lha-low-high-metrics-v3"
+LOW_HIGH_VERSION = "lha-low-high-metrics-v4"
+LOW_HIGH_FINAL_PROTOCOL = "lha-low-high-final-v4"
+LOW_HIGH_RATING_SCALE = (0.0, 4.0)
+LOW_HIGH_RATING_STEP = 0.1
+LOW_HIGH_RATING_TEXT = "0.0..4.0 in 0.1 steps; missing=null"
+
+
+def validate_low_high_rating(value):
+    if (type(value) not in (int, float) or not LOW_HIGH_RATING_SCALE[0] <= value <= LOW_HIGH_RATING_SCALE[1]
+            or not math.isfinite(value)
+            or not math.isclose(value / LOW_HIGH_RATING_STEP, round(value / LOW_HIGH_RATING_STEP),
+                                rel_tol=0, abs_tol=1e-8)):
+        raise ValueError("Ratings must be finite numbers from 0.0 through 4.0 in 0.1 steps")
+    return value
+
+
 LOW_HIGH_AESTHETICS = AESTHETICS
 LOW_HIGH_SPECIALTIES = ("style_realization", "scene_specific_design", "effective_creativity", "relative_originality")
 LOW_HIGH_METRICS = {
-    **{k:{"scale":[0,4],"unit":"ordinal","track":"all","direction":"higher"} for k in
+    **{k:{"scale":list(LOW_HIGH_RATING_SCALE),"raw_step":LOW_HIGH_RATING_STEP,"display_decimals":1,"unit":"ordinal","track":"all","direction":"higher"} for k in
        ("instruction_adherence","content_preservation","temporal_consistency","visual_integrity","aesthetic_coherence")},
-    **{k:{"scale":[0,4],"unit":"ordinal","track":"short","direction":"higher"} for k in LOW_HIGH_SPECIALTIES},
-    **{k:{"scale":[0,4],"unit":"ordinal","track":"all","direction":"higher"} for k in LOW_HIGH_AESTHETICS},
+    **{k:{"scale":list(LOW_HIGH_RATING_SCALE),"raw_step":LOW_HIGH_RATING_STEP,"display_decimals":1,"unit":"ordinal","track":"short","direction":"higher"} for k in LOW_HIGH_SPECIALTIES},
+    **{k:{"scale":list(LOW_HIGH_RATING_SCALE),"raw_step":LOW_HIGH_RATING_STEP,"display_decimals":1,"unit":"ordinal","track":"all","direction":"higher"} for k in LOW_HIGH_AESTHETICS},
     **{k:{"scale":[0,1],"unit":"score","track":"all","direction":"higher"} for k in
        ("edit_completion","required_correspondence")},
     "binding_accuracy":{"scale":[0,1],"unit":"score","track":"long","direction":"higher"},

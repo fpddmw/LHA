@@ -1,4 +1,4 @@
-# Low-to-high video scoring standard v3
+# Low-to-high video scoring standard v4
 
 ## Shared task interpretation
 
@@ -21,8 +21,9 @@ or contact defects. A source cut is contextual evidence, not itself an output de
 
 ## Status, scope and evidence
 
-Single judgments use integer 0, 1, 2, 3 or 4. Scores are ordinal anchors, not
-probabilities. Use status scored only with sufficient evidence. Otherwise use
+Single judgments use 0.0 through 4.0 in 0.1 steps. The integer levels below are
+anchors; intermediate tenths express the observed degree between adjacent anchors.
+Use status scored only with sufficient evidence. Otherwise use
 unknown (insufficient/ambiguous evidence), not_assessed (technical omission), or
 not_applicable (no meaningful application), with score null and a specific reason.
 Cite supplied frame IDs and state observed scope and uncovered intervals in
@@ -100,4 +101,4 @@ quality by itself. Requested stylistic success belongs to IA; craft belongs to A
 Score each dimension separately with its own evidence. An observation can affect
 multiple dimensions only with a specific explanation of each consequence. Do not
 apply a blanket penalty or average the five dimensions into a default overall score.
-Aggregate means may have decimals; individual model ratings remain integers.
+Individual model ratings use 0.1 steps. Computed means retain their full precision.

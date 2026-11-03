@@ -1,6 +1,6 @@
 # Bernini / Ditto 评分交接
 
-本交接复用当前 `lha-low-high-final-v3`，完整标准见 `docs/low-high-evaluation-v2.md`，逐档锚点见 `src/critic_harness/SCORE_DEFINITIONS.md`。不采用历史 1–4 分制，不新增加权总分。
+本交接复用当前 `lha-low-high-final-v4`，完整标准见 `docs/low-high-evaluation-v2.md`，逐档锚点见 `src/critic_harness/SCORE_DEFINITIONS.md`。不采用历史 1–4 分制，不新增加权总分。
 
 ## 评分对象与对照
 
@@ -14,11 +14,11 @@ Bernini 与 Ditto 分库存储。各自 PE 对各自 Direct 衡量增强收益�
 
 | 指标 | 取值与含义 |
 |---|---|
-| IA / CP / TC / VI / AC | 0–4 整数：指令遵循、应保留内容、时间一致性、视觉完整性、审美协调；逐档使用原评分锚点 |
+| IA / CP / TC / VI / AC | 0.0–4.0、0.1 步长：指令遵循、应保留内容、时间一致性、视觉完整性、审美协调；逐档使用原评分锚点 |
 | 编辑完成、必要对应关系 | pass=1 / partial=0.5 / fail=0；未知单列 |
 | 长提示词 | 定点绑定准确率、全部要求联合满足率 |
-| 短提示词 | 风格实现、场景针对性、有效创意 0–4；相对原创性仅在固定匿名参照集存在时评价 |
-| 审美细项 | 叙事情绪、风格世界一致性、构图光线、色彩质感、层次可读性；完整时才计算均值 |
+| 短提示词 | 风格实现、场景针对性、有效创意 0.0–4.0、0.1 步长；相对原创性仅在固定匿名参照集存在时评价 |
+| 审美细项 | 叙事情绪、风格世界一致性、构图光线、色彩质感、层次可读性，均为 0.0–4.0、0.1 步长；完整时才计算均值 |
 | 损伤 | 非请求损伤、重大损伤分别报告 |
 | 自动诊断 | CLIP-F、DINO-F、全帧光流重投影误差、运动量及低运动时长比例；按适用条件比较源动作 |
 | 双向盲评 | 任务完成与成片质量分别 A/B/tie/unknown；交换顺序冲突记 order_unstable |
@@ -27,14 +27,12 @@ Bernini 与 Ditto 分库存储。各自 PE 对各自 Direct 衡量增强收益�
 
 ## 从 GitHub 获取可运行版本
 
-本次发布目录为 `handoffs/scoring-20261102/`。下载其中的 `scoring-tools.zip` 和 `scoring-tools.zip.sha256`，与已有的 `benchmark.zip` 放在同一目录。请从同一个 GitHub 提交下载两个评分文件。GitHub 仓库其余代码可能处于不同开发阶段，本次运行入口是这个冻结快照。
+当前 v4 使用包含本次评分步长修复的完整仓库源码，并新建评价目录。`handoffs/scoring-20261102/` 中的旧包对应 v3 整数协议，保留原样。
 
-以下命令面向 Linux / WSL，在保存这三个文件的目录执行：
+以下命令面向 Linux / WSL，在保存 `benchmark.zip` 的目录获取新源码：
 
 ```bash
-sha256sum -c scoring-tools.zip.sha256
-mkdir -p lha-scoring
-unzip -q scoring-tools.zip -d lha-scoring
+git clone --depth 1 --branch codex/experience-curation-v1 https://github.com/fpddmw/LHA.git lha-scoring
 unzip -q benchmark.zip -d lha-scoring
 cd lha-scoring
 python3.12 -m venv .venv

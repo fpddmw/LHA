@@ -2,6 +2,7 @@
 
 import json
 import re
+from .registry import LOW_HIGH_FINAL_PROTOCOL, validate_low_high_rating
 
 DIMENSIONS = (
     "instruction_adherence",
@@ -29,7 +30,7 @@ def validate_report(report, packet):
     )
     _keys(report, fields)
     if (
-        visible["protocol_id"] != "lha-low-high-final-v3"
+        visible["protocol_id"] != LOW_HIGH_FINAL_PROTOCOL
         or report["protocol_id"] != visible["protocol_id"]
         or report["candidate_id"] != visible["candidate_id"]
     ):
@@ -55,8 +56,7 @@ def validate_report(report, packet):
     for dimension, row in report["main_scores"].items():
         _keys(row, ("status", "score", "reason", "evidence_refs", "limitations"))
         if row["status"] == "scored":
-            if type(row["score"]) is not int or not 0 <= row["score"] <= 4:
-                raise ValueError("Scores are integers from 0 through 4")
+            validate_low_high_rating(row["score"])
         elif (
             row["status"] not in {"unknown", "not_assessed", "not_applicable"}
             or row["score"] is not None

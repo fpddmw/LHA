@@ -3,7 +3,7 @@ from collections import defaultdict, Counter
 from statistics import mean
 from critic_harness.one_shot import DIMENSIONS
 from .low_high import PROTOCOL
-from .registry import LOW_HIGH_METRICS
+from .registry import LOW_HIGH_METRICS, validate_low_high_rating
 from .final_suite import ratings
 
 
@@ -43,7 +43,7 @@ def summarize(rows):
                 counts[status]=counts.get(status,0)+1
                 if status=="scored":
                     score=rating["score"]
-                    if spec["unit"]=="ordinal" and (type(score) is not int or not 0<=score<=4): raise ValueError("Single ratings must be integers 0..4")
+                    if spec["unit"]=="ordinal": validate_low_high_rating(score)
                     sources[row["source_id"]].append(score)
                 elif rating and rating["score"] is not None: raise ValueError("Unassessed scores must be null")
             columns[dimension]={"unit":spec["unit"],"scale":spec["scale"],"planned":len(group),"valid":counts["scored"],"statuses":counts,
@@ -90,7 +90,7 @@ def paired(rows):
                         if result.get("profile_sha256"):profiles.add(result["profile_sha256"])
                         rating=ratings(result).get(dim)
                         if rating and rating["status"]=="scored":
-                            if spec["unit"]=="ordinal" and (type(rating["score"]) is not int or not 0<=rating["score"]<=4): raise ValueError("Invalid ordinal score")
+                            if spec["unit"]=="ordinal": validate_low_high_rating(rating["score"])
                             values.append(rating["score"])
                 if len(values)==2: sources[row["source_id"]].append(values[1]-values[0])
             if len(profiles)>1: raise ValueError("Paired protocol mismatch")

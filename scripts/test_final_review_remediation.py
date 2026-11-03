@@ -406,7 +406,8 @@ save(output/(sys.argv[3]+'.json'),{'pid':os.getpid(),'topics':seen,'warm_initial
         from planner_harness.video import Video
         info=Video(self.source,self.root/'info').info
         packet,_=prepare_request('Make it blue.','candidate',{'source':info,'candidate':info},self.root/'main-evidence',frozen_profile())
-        visible=json.loads(packet['user_text']);visible['protocol_id']='lha-low-high-final-v3';packet['user_text']=json.dumps(visible)
+        from evaluation.low_high import PROTOCOL
+        visible=json.loads(packet['user_text']);visible['protocol_id']=PROTOCOL;packet['user_text']=json.dumps(visible)
         raw=loop.review_fixture(packet['user_text']);raw.pop('task_diagnostics',None)
         raw['main_scores']['aesthetic_coherence']['evidence_refs']=['candidate:missing:999']
         projected,errors=fp.project(raw,packet)
