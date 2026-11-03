@@ -19,6 +19,44 @@ from vlm.chatgpt_subscription import ChatGPTSubscriptionVisionModel, Subscriptio
 from planner_harness.accounting import ExternalExecutionUnknown  # noqa: E402
 
 
+class RelayTLSBoundaryTests(unittest.TestCase):
+    def test_handshake_retry_does_not_repeat_a_started_request(self):
+        from http.client import HTTPSConnection
+        import ssl
+        import urllib.error
+        import urllib.request
+        from vlm.chatgpt_relay import open_upstream
+
+        def send(connection, *args, **kwargs):
+            connection.connect()
+            raise ssl.SSLEOFError("request write interrupted")
+
+        request = urllib.request.Request("https://fixture.invalid/responses", data=b"{}")
+        with patch.object(HTTPSConnection, "connect", side_effect=[ssl.SSLEOFError("handshake"), None]) as connect:
+            with patch.object(HTTPSConnection, "request", autospec=True, side_effect=send) as dispatch:
+                with self.assertRaises(urllib.error.URLError) as raised:
+                    open_upstream(request, 5)
+        self.assertIsInstance(raised.exception.reason, ssl.SSLEOFError)
+        self.assertEqual(connect.call_count, 2)
+        self.assertEqual(dispatch.call_count, 1)
+        self.assertEqual(len(request.lha_connect_failures), 1)
+
+    def test_exhausted_handshake_is_proven_predispatch(self):
+        from http.client import HTTPSConnection
+        import ssl
+        import urllib.error
+        import urllib.request
+        from vlm.chatgpt_relay import open_upstream, UpstreamHandshakeFailed
+
+        request = urllib.request.Request("https://fixture.invalid/responses", data=b"{}")
+        with patch.object(HTTPSConnection, "connect", side_effect=ssl.SSLEOFError("handshake")) as connect:
+            with self.assertRaises(urllib.error.URLError) as raised:
+                open_upstream(request, 5)
+        self.assertIsInstance(raised.exception.reason, UpstreamHandshakeFailed)
+        self.assertEqual(connect.call_count, 2)
+        self.assertEqual(len(request.lha_connect_failures), 2)
+
+
 def stream(*items):
     return io.BytesIO(b"".join(b"data: " + json.dumps(x).encode() + b"\n\n" for x in items))
 

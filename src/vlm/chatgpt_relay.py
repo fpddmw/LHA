@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
-from http.client import HTTPException
+from http.client import HTTPException, HTTPSConnection
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import hashlib
 import json
 from pathlib import Path
 import re
+import ssl
+import time
 import urllib.error
 import urllib.request
 import uuid
@@ -16,8 +18,39 @@ from .chatgpt_auth import RESOURCE, access_token, credential_path
 from .responses_stream import StreamAudit, response_headers, safe_exception
 
 
+class UpstreamHandshakeFailed(OSError):
+    """TLS connection setup failed before sending the Responses request."""
+
+
 def open_upstream(request, timeout):
-    return urllib.request.urlopen(request, timeout=timeout)
+    deadline = time.monotonic() + timeout
+
+    class Connection(HTTPSConnection):
+        def connect(self):
+            for attempt in (1, 2):
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise UpstreamHandshakeFailed("TLS setup exhausted the request timeout")
+                self.timeout = remaining
+                try:
+                    # Includes TCP, optional proxy CONNECT, and TLS handshake.
+                    # HTTPConnection.send writes the Responses request only
+                    # after this method returns successfully.
+                    return super().connect()
+                except ssl.SSLEOFError as exc:
+                    self.close()
+                    request.lha_connect_failures.append(safe_exception(exc))
+                    if attempt == 2:
+                        raise UpstreamHandshakeFailed("TLS setup ended before sending the request") from exc
+
+    class Handler(urllib.request.HTTPSHandler):
+        def https_open(self, req):
+            if req is not request:
+                return super().https_open(req)
+            return self.do_open(Connection, req, context=self._context)
+
+    request.lha_connect_failures = []
+    return urllib.request.build_opener(Handler()).open(request, timeout=timeout)
 
 
 def make_server(port, credential_file=None, timeout=3600, audit_dir=None):
@@ -148,10 +181,16 @@ def make_server(port, credential_file=None, timeout=3600, audit_dir=None):
                 if isinstance(getattr(exc, "partial", None), bytes):
                     audit.received(exc.partial)
                 error = safe_exception(exc, secrets=(token,))
+                predispatch = isinstance(getattr(exc, "reason", exc), UpstreamHandshakeFailed)
+                if predispatch:
+                    stage = "upstream_tls_setup"
                 metadata.update(outcome="transport_error", failure_stage=stage, error=error)
                 if not stage.startswith("downstream_"):
                     try:
-                        if self.command == "POST":
+                        if predispatch and not sent_headers:
+                            metadata["outcome"] = "not_submitted"
+                            self.reply_error(502, "relay_tls_not_submitted", stage=stage, upstream_error=error)
+                        elif self.command == "POST":
                             self.reply_unknown(sent_headers, stage, error)
                         elif not sent_headers:
                             self.reply_error(502, "model_catalog_unavailable")
@@ -159,6 +198,9 @@ def make_server(port, credential_file=None, timeout=3600, audit_dir=None):
                         metadata["downstream_error"] = safe_exception(downstream)
                 self.close_connection = True
             finally:
+                failures = getattr(locals().get("request"), "lha_connect_failures", [])
+                if failures:
+                    metadata["upstream_tls_failures"] = failures
                 audit.close(stage=stage)
 
         def reply_unknown(self, sent_headers, stage, error):
