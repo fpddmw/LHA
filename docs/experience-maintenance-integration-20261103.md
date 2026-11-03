@@ -57,3 +57,11 @@ The fifteen original texts remain in `knowledge/experience/curated/evidence/supe
 | style-realization | [EX-P-medium-logic](../knowledge/experience/curated/entries/P-medium-logic.md) |
 | time-binding | [EX-P-worst-second](../knowledge/experience/curated/entries/P-worst-second.md) |
 | wanted-state | [EX-P-counterparts](../knowledge/experience/curated/entries/P-counterparts.md) |
+
+## Content follow-up
+
+The subsequent [content correction](experience-content-correction-20261103.md)
+revised the empirical case explanations and moved input-specific prompt preferences
+from the shared prompt guide into full-mode experience guidance. The common guide
+now carries submission semantics and encoder limits. The earlier verification
+above describes the integration commit; the follow-up records its own checks.

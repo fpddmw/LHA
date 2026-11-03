@@ -1,0 +1,1808 @@
+{
+  "sample_id": "005",
+  "split": "train",
+  "track": "long",
+  "renderer": "bernini",
+  "request": "Reimagine the temple as Tomb Raider-style jungle ruins. Ancient reliefs cover massive towers and layered terraces; roots climb through stone cracks among moss and remnants of gold ornament. Sunlight penetrates humid forest mist, creating strong tonal depth between dark entrances and upper walls. The original camera movement gradually reveals the temple's scale, creating a mysterious adventure atmosphere.",
+  "source": {
+    "path": "benchmark_data/train/005/video.mp4",
+    "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614"
+  },
+  "provenance": {
+    "path": "out/four_video_preview_20261102/glm-recast-v5-deliveries/005-long/all-page-data.json",
+    "sha256": "f9c609725f89a954bb1d6d95bfb5281e74fbec3335cb0167fc4deeb68a5a4153",
+    "assembled_on": "2026-11-03",
+    "scope": "Original extract rows plus the cited Direct output. Existing saved reports only; no new scoring."
+  },
+  "comparison_sheet": {
+    "id": "EV-V5-005-long-comparison",
+    "path": "knowledge/experience/curated/evidence/frames/v5-005-long-comparison.jpg",
+    "sha256": "1d6f1546801922a1c8a9d91571210b9a610fd087526e582d9c32ae9056ef717b",
+    "coverage": "Six evenly spaced samples per row, reused from the Opus review. This is not continuous motion evidence. The sheet omits some candidates; some interrupted attempts have a ? label. Match named rows to candidate IDs and the records below."
+  },
+  "candidates": [
+    {
+      "method": "full",
+      "candidate_id": "v1",
+      "output_sha256": "4620b4b9800a48276430fb8ea4e86a6a025097e8ae7a35875acff99e0b11e74f",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Reimagine this exact temple as cinematic Tomb Raider-style lost jungle ruins. Preserve the original camera movement, perspective and gradual reveal, the massive foreground tower right of center, smaller receding towers, long galleries and layered stone terraces. Photorealistic adventure-film environment, monumental and mysterious. Deeply carved ancient deity reliefs, worn faces and narrative friezes cover the towers and terrace walls. Fractured sandstone has damp dark crevices, emerald moss and small ferns in its joints. Thick twisting tree roots grip the foreground tower, descend through masonry cracks and spread across stair edges and lower terraces, leaving carved panels readable. Small remnants of weathered gold leaf cling to relief crowns and ornamental borders, catching restrained glints against aged stone. Replace the open lawn with an encroaching jungle floor of ferns, tangled roots, fallen stone and wet leaf litter. Tall tropical trees and hanging vines rise behind and around the temple, replacing the broad cloudy sky with a towering forest canopy and small luminous openings. Keep the temple silhouette clearly visible between foliage. Warm sunlight streams diagonally from upper left through humid forest mist, grazing upper carvings and broken cornices while doorways and deep galleries remain near-black. Cool green reflected fill in shadow, luminous layered haze behind towers and crisp textured foreground stone create strong tonal depth rather than flat fog. Thin mist drifts slowly across lower terraces; leaves stir subtly. Maintain coherent fixed masonry and attached roots throughout the continuous shot. No people or text.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/4620b4b9800a48276430fb8ea4e86a6a025097e8ae7a35875acff99e0b11e74f.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-full-9000-existing1-full-v2-r1-long-full-005/run/workers/1/tasks/005__long__full/run/videos/v1/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.9,
+            "reason": "The whole visible scene is rebuilt as a jungle-ruin environment across the entire reviewed duration, but ancient relief coverage on the towers and layered terraces is only partially visible. Dense canopy, root-wrapped carved shrines and towers, staircases, moss and ferns, gilded statue ornament, and god-rays with dark-entrance versus sunlit-wall contrast persist from the first to the last reviewed frame, realizing the jungle-ruins recast, the roots-moss-gold elements and the mist/tonal-depth requirement (r1, r3, r4). Carved ornament appears on pediments, niche framing and tower crowns, but wall-spanning reliefs covering massive towers and terraces are not clearly resolvable at the supplied scale and the structures read as shrine-scale rather than massive (r2 partial). The mysterious-adventure atmosphere is conveyed, while a gradual scale-revealing movement is observable in neither video; the source itself holds a locked-off framing in every supplied segment, so the described reveal cannot be verified against the source and exact motion retention was not declared required (r5 atmosphere realized, reveal unevidenced). Relative to the 3.0 anchor, clearly visible relief coverage across the tower and terrace surfaces would close the remaining gap.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:94",
+              "candidate:timelinep0:0",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:84",
+              "source:overview:0",
+              "source:timelinep0:0",
+              "source:timelinep0:28",
+              "source:timelinep3:84"
+            ],
+            "limitations": [
+              "Assessment covers overview frames 0.0-4.7s and consecutive-frame segments 0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-4.8s; candidate content beyond 4.8s is unseen (candidate duration 4.85s; overview target at 4.95s missing).",
+              "Fine relief carving on towers and terraces is not resolvable at the supplied resolution, so r2 is judged only from visibly apparent carved ornament.",
+              "Camera-motion analysis is qualitative from stills; the gradual reveal described in r5 cannot be confirmed or denied outside the supplied frames, where both videos are locked off."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.5,
+            "reason": "The recast keeps the moment recognizable at thematic level only: the temple-as-subject, the static wide establishing beat and the locked-off camera intent have counterparts, but the source's specific spatial arrangement is re-imagined rather than transformed per-region. The source shows a corner tower with dark doorway right-of-center, a long gallery, three distant lotus-bud towers, open lawn and sky with tiny visitor figures; the candidate replaces this panorama with a new composition, a central root-wrapped stepped shrine with stair flanked by side shrines beneath canopy, with no per-region mapping of gallery, lawn, horizon or sky. Translated counterparts do exist (stepped terraces to stepped shrine, dark doorway to dark shrine interiors, towers to tower shrines, clouds to mist), and the absent visitor figures are a minor ambient beat rather than a central character deletion, which keeps the correspondence recognizable; however, spatial staging is a core component of this static establishing moment and does not carry over, so the score sits below the 3.0 anchor, where per-region counterparts of the source arrangement would be expected.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "source:timelinep1:28",
+              "candidate:timelinep1:28",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84"
+            ],
+            "limitations": [
+              "Correspondence judged from supplied overview and consecutive frames only; no per-region mapping data was provided.",
+              "Visitor figures are tiny at the supplied resolution; their presence or absence is judged from visible frame areas only.",
+              "Staging correspondence is assessed qualitatively; no measured geometry comparison was possible."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.6,
+            "reason": "Across all reviewed candidate intervals (0-1.4s, 1.4-2.8s, 2.8-4.2s, 4.2-4.8s) the sequence holds one stable scene identity with no cuts, medium switches, popping elements, vanished props or identity drift. Shrines, the seated statue, stair treads, root strands and canopy keep position and shape between consecutive frames; visible motion is limited to drifting mist, foliage shimmer and small falling particles, which is coherent ambient progression for this establishing shot. A mild root-and-carving geometry morph is noted in the 0-1.4s segment with little impact on the focal subject. The 4.8-5.0s tail is unseen rather than observed as collapse. Relative to the 4.0 anchor, continuity confirmed across the full declared 5.0s span including the unseen tail, and absence of the early-segment micro-morph, would close the gap.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:11",
+              "candidate:timelinep0:22",
+              "candidate:timelinep1:29",
+              "candidate:timelinep1:55",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Reviewed intervals are 0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-4.8s of the candidate; 4.8-5.0s was not supplied.",
+              "Frame spacing of 0.05s limits detection of single-frame transients and high-frequency flicker.",
+              "The static appearance of structural elements could reflect a locked-off camera or near-still rendering; stills alone cannot distinguish these."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.2,
+            "reason": "No consequential structural defect affects focal structures: the central staircase, seated statue, shrine volumes and root wraps remain well formed and legible in every reviewed segment. Reviews found no warping, duplication, geometry collapse, popping or cutout seams; minor issues are confined to crushed shadow detail in deep recesses, dense soft detail in peripheral foliage and root regions, and slight frame-to-frame geometry softening in the opening segment, all outside the focal interaction path. Relative to the 4.0 anchor, crisp relief and edge definition with retained shadow detail would close the gap.",
+            "evidence_refs": [
+              "candidate:timelinep0:11",
+              "candidate:timelinep0:15",
+              "candidate:timelinep1:40",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:90",
+              "candidate:overview:63"
+            ],
+            "limitations": [
+              "Painterly rendering and the supplied resolution limit fine-detail verification of carvings, roots and statue surfaces.",
+              "Concealed regions such as deep shadows and dense foliage are unobserved rather than confirmed correct.",
+              "Defect detection at 0.05s sampling and available resolution may miss small local artifacts."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.3,
+            "reason": "The candidate forms one deliberate visual system appropriate to the requested world: a humid jungle palette, volumetric god-rays, weathered stone with gold accents, moss and ferns, with source elements adapted into fitting counterparts (open sky to canopy, clouds to mist, exposed temple to overgrown ruins). Lighting direction and palette remain consistent from the first to the last reviewed frame and match the requested mysterious-adventure mood, with no unrequested stylized/live-action mixture. Minor genericness of the concept-art treatment and a dense, slightly imbalanced composition keep it below the 4.0 anchor, where a more distinctive designed system with clearer compositional hierarchy would appear.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:52",
+              "candidate:overview:94",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Aesthetic judgment is based on supplied frames only; no audio was supplied and the atmosphere was judged visually.",
+              "The candidate's rendering origin is unknown; the treatment is judged as observed painterly/CG stylization."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "4620b4b9800a48276430fb8ea4e86a6a025097e8ae7a35875acff99e0b11e74f",
+        "method": "full",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": "source",
+        "prompt_words": 241,
+        "v5_scores": {
+          "instruction_adherence": 2.9,
+          "content_preservation": 2.5,
+          "temporal_consistency": 3.6,
+          "visual_integrity": 3.2,
+          "aesthetic_coherence": 3.3
+        },
+        "low_reasons": {
+          "content_preservation": "The recast keeps the moment recognizable at thematic level only: the temple-as-subject, the static wide establishing beat and the locked-off camera intent have counterparts, but the source's specific spatial arrangement is re-imagined rather than transformed per-region. The source shows a corner tower with dark doorway right-of-center, a long gallery, three distant lotus-bud towers, open lawn and sky with tiny visito"
+        },
+        "requirement_labels": [
+          "pass",
+          "partial",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "full",
+      "candidate_id": "v1",
+      "output_sha256": "2b2331eacb728f7d756d377ccc5779c6d3fdf6753ab54f4fe355317003ca7f75",
+      "seed": 42,
+      "input": {
+        "video_id": null,
+        "sha256": null,
+        "status": "not retained in the original extract"
+      },
+      "prompt": "Reimagine this temple as a lost jungle sanctuary in a photorealistic Tomb Raider adventure cinematic. Preserve the original temple's massive tower silhouettes, layered stone terraces, colonnades, perspective and original slow camera movement revealing its monumental scale. Transform the open lawn into an overgrown jungle floor of ferns, tangled roots and fallen leaves; dense tropical rainforest and towering trees surround the ruins and frame the sky. Enormous gnarled tree roots grip the stairways and climb through deep cracks in the towers. Weathered ancient deity reliefs and intricate carved friezes cover the stone walls, with wet emerald moss in joints and small remnants of tarnished gold ornament on carved borders. Warm directional sunlight breaks through the forest canopy and humid drifting mist, grazing the upper towers and catching gold flecks while entrances and lower galleries remain deeply shadowed. Strong atmospheric depth, rich dark greens, aged sandstone, luminous mist, mysterious archaeological adventure atmosphere. Keep the architecture solid and coherent throughout the continuous shot.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/2b2331eacb728f7d756d377ccc5779c6d3fdf6753ab54f4fe355317003ca7f75.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-20261102/runs/loops-b95d0514b5af/workers/1/tasks/005__long__full/run/videos/v1/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "The decisive observation is that the entire visible scene is rebuilt as Tomb Raider-style jungle ruins across every reviewed frame, with the construction logic of the target world visible throughout. Supporting observations: overgrown carved towers, layered terraces with a central stair, roots wrapping stone cracks, moss, a gilded ornament remnant above the dark entrance, fern undergrowth and god-rays through humid mist are all confirmed in the 0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-4.8s segment reviews (candidate:timelinep0:0, candidate:timelinep1:40, candidate:timelinep2:70, candidate:timelinep3:90), with no source-like lawn, open sky or unconverted region remaining in any reviewed frame. Carved/relief-like texture is visible on the massive towers and terraces, but individual relief figures cannot be resolved at the supplied resolution (candidate:timelinep1:56, candidate:timelinep2:72). The r5 camera element is only weakly realized: the composition stays essentially static with subtle mist/parallax drift across 0-4.8s, mirroring the near-static source in which cloud drift dominates over any visible scale-reveal move (source:timelinep0:0, source:timelinep0:28, candidate:timelinep1:28, candidate:timelinep1:56), while the atmospheric half of r5 (mysterious-adventure mood) is realized. The gap to the 4 anchor is the residual incompleteness of full relief coverage across all surfaces and the absence of a perceptible gradual camera reveal of scale.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:94",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:10",
+              "candidate:timelinep1:40",
+              "candidate:timelinep1:50",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:90",
+              "source:timelinep0:0",
+              "source:timelinep0:28"
+            ],
+            "limitations": [
+              "Observed scope is 0-4.8s of the candidate (four consecutive-frame segments) plus 19 of 20 overview targets; the 4.8-4.85s tail is unseen and the requested 4.85-5.0s interval has no candidate counterpart (candidate duration 4.85s).",
+              "Relief iconography and the 'remnant' condition of the gold ornament exceed what the supplied frame resolution reliably supports; only carved decoration, roots, moss and a golden element above the doorway are confirmed.",
+              "Camera behavior was judged from 0.05s-spaced stills; a drift below perceptual threshold between frames cannot be confirmed or excluded."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.8,
+            "reason": "The decisive observation is that the moment's central anchors survive the recast — the temple as subject, the dark ground-level entrance, stacked stone terraces, the wide establishing beat and the dramatic-light mood — while the source's distinctive spatial arrangement is replaced by a different composition. Supporting observations: at matched timestamps the source's long gallery, three distant lotus-bud towers, cruciform pavilion and open-lawn vista become a compact mossy tower cluster with stair and layered ruined masses framed by roots (source:timelinep3:84 vs candidate:timelinep3:84; source:timelinep2:84 vs candidate:timelinep2:84); lawn-to-undergrowth and cloudy-sky-to-canopy are world-implied translations, but the source's incidental distant visitors and drifting clouds have no counterpart in any reviewed candidate frame (source:timelinep2:79, source:timelinep3:91, candidate:timelinep3:96). No central character exists in the source, so the identity rule is not engaged. The gap to the 3 anchor is that this layout and viewpoint re-staging is a larger departure than a single minor weakened beat or prop, even though the moment remains recognizably the same establishing reveal.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "source:timelinep2:84",
+              "candidate:timelinep2:84",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "source:timelinep3:91",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Observed scope is 0-4.8s of the candidate; the 4.8-4.85s tail and the requested 4.85-5.0s interval are unrepresented on the candidate side.",
+              "Source visitor figures are near the resolution limit and their identification is tentative; their absence in the candidate is confirmed only for reviewed frames.",
+              "Correspondence was assessed visually; no quantitative trajectory or framing comparison was possible."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.9,
+            "reason": "The decisive observation is that across all four reviewed consecutive-frame segments (0-1.4s, 1.4-2.8s, 2.8-4.2s, 4.2-4.8s; 96 candidate frames) the painterly medium, scene identity, geometry and motion remain consistent with no cuts, flicker, popping elements, boiling background texture or structure drift. Supporting observations: the only motion is atmospheric (mist drift, god-ray shimmer, slight foliage movement and a small falling particle near bottom center), while the tower silhouette, stair, doorway, gold ornament, framing roots and foreground blocks stay spatially stable from candidate:timelinep0:0 through the last observed frame candidate:timelinep3:96; no identity swap, vanished prop or end-of-clip collapse appears in the reviewed interval. The gap to the 4 anchor is coverage-based: the final ~0.05s of the candidate (4.8-4.85s) is unseen, and 0.05s-spaced stills cannot fully verify sub-frame smoothness between samples.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Temporal scoring covers 0-4.8s of the 4.85s candidate; the 4.8-4.85s tail was not supplied and the requested 4.85-5.0s interval has no candidate frames.",
+              "Frames are discrete samples ~0.05s apart; inter-frame judder, micro-flicker and exact camera-path continuity between samples cannot be verified from stills."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "The decisive observation is that no consequential structural defect is visible in any reviewed frame: tower silhouettes, stair, doorway, gold ornament, framing roots and foreground stone blocks are well formed, legible and spatially stable for the painterly medium across all four segment reviews. Supporting observations: softness on the distant left tower and simplified, softened relief carving read as mist and intentional stylization rather than defects (candidate:timelinep1:55, candidate:timelinep3:90); no melting, merging of subject into background, cutout seams, blotches or illegible clutter was found at any reviewed timestamp, and the focal dark entrance with its gilded ornament stays cleanly rendered. No higher anchor exists; observed evidence shows no remaining visible defect, and residual uncertainty is coverage-based rather than a visible flaw.",
+            "evidence_refs": [
+              "candidate:timelinep0:4",
+              "candidate:timelinep0:16",
+              "candidate:timelinep1:41",
+              "candidate:timelinep1:55",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Stylized painterly rendering limits verification of fine relief iconography and precise material detail; absence of visible defects at supplied resolution does not guarantee absence below perceptual threshold.",
+              "Concealed or haze-obscured parts are unobserved, not evidence of correct geometry; observed scope is 0-4.8s of the candidate."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "The decisive observation is that the candidate reads as one deliberate visual system: a unified warm-gold and deep-green palette, consistent painterly rendering across the full reviewed duration, volumetric god-rays through mist, and a root-framed composition that directs the eye to the dark entrance and gilded ornament, matching the requested mysterious-adventure mood. Supporting observations: source elements are adapted into fitting counterparts (open cloudy sky to canopy light shafts, lawn to fern and rubble undergrowth, temple facade to overgrown carved ruins) with no unrequested stylized/live-action mixture, conflicting visual systems or cluttered hierarchy at any reviewed timestamp (candidate:overview:0, candidate:overview:42, candidate:overview:94, candidate:timelinep3:96); the tonal scheme keeps the entrance dark against lit upper walls as requested. No higher anchor exists; no integration clash or imbalance is observed in the reviewed evidence.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:94",
+              "candidate:timelinep2:66",
+              "candidate:timelinep3:96",
+              "source:overview:0"
+            ],
+            "limitations": [
+              "Observed scope is 0-4.8s of the candidate plus 19 overview targets; the final ~0.05s tail is unseen.",
+              "Atmosphere and design quality were judged visually only; no audio or generation metadata was supplied."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "2b2331eacb728f7d756d377ccc5779c6d3fdf6753ab54f4fe355317003ca7f75",
+        "method": "full",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": null,
+        "prompt_words": 160,
+        "v5_scores": {
+          "instruction_adherence": 3.1,
+          "content_preservation": 2.8,
+          "temporal_consistency": 3.9,
+          "visual_integrity": 4.0,
+          "aesthetic_coherence": 4.0
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "partial",
+          "pass",
+          "pass",
+          "partial"
+        ]
+      }
+    },
+    {
+      "method": "full",
+      "candidate_id": "v2",
+      "output_sha256": "4930405b4adc0ede2228aa544e3d77e450d340446df84692c014723092f691bd",
+      "seed": 43,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Cinematic photorealistic Tomb Raider-style jungle ruins, transforming the existing temple masonry and surroundings. Retain this temple's exact broad architectural masses: the huge blunt-topped carved tower right of center, two tapering towers receding left behind the long colonnaded gallery, the wide horizontally layered platform and low foreground stone blocks. Retain the original perspective and continuous camera trajectory, gradually revealing the monumental terraces. These are massive solid relief-covered towers, not small open shrines. On the large foreground tower, preserve and deepen the existing standing deity reliefs and stacked carved cornices; extend ancient narrative friezes along the terrace faces. Weathered ochre sandstone, chipped edges, damp cracks and emerald moss. Narrow twisting roots climb the tower corners through stone joints and trail over the layered terrace edges, leaving the broad carved wall faces exposed. Fragmentary dull gold leaf adheres to carved crowns and cornice bands, small irregular metallic flakes on stone rather than golden statues. Ferns, wet leaf litter and tangled roots reclaim the lawn below the long gallery. Tall tropical trees enclose the outer edges and rise behind the towers; foliage frames rather than hides the monumental silhouette. Warm sunlight enters from upper left through a canopy opening and humid mist, grazing the tower's upper reliefs and terrace ledges. Doorways and the long gallery remain deeply shadowed with restrained cool green fill. Dark crisp foreground blocks, warmly lit upper walls and pale mist behind receding towers create strong tonal depth. Thin mist slowly drifts between terrace levels, leaves stir gently. Stable stone geometry and attached roots, steady cinematic exposure throughout. Mysterious lost-civilization adventure atmosphere. No people, no text.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/4930405b4adc0ede2228aa544e3d77e450d340446df84692c014723092f691bd.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-full-9000-existing1-full-v2-r1-long-full-005/run/workers/1/tasks/005__long__full/run/videos/v2/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.9,
+            "reason": "The decisive observation is that every supplied candidate frame from 0.0s to 4.8s shows a fully rebuilt Tomb Raider-style jungle-ruin world, while the request's 'massive towers' covered in reliefs never reach matching prominence and gold ornament remnants are not discernible. Supporting observations: large standing-figure reliefs cover the right wall and midground carved bands (candidate:timelinep0:0, candidate:timelinep1:42, candidate:timelinep2:56); layered stone terraces with dark recessed doorways anchor the left (candidate:timelinep0:0, candidate:timelinep2:56); thick roots climb and drape over stonework among visible moss (candidate:timelinep0:8, candidate:timelinep2:64, candidate:timelinep3:90); warm sunlight penetrates drifting mist with strong tonal separation between the dark gopura entrance and lit upper relief wall (candidate:timelinep0:13, candidate:timelinep2:70, candidate:timelinep3:92); and the humid, overgrown setting sustains a mysterious adventure mood throughout. The candidate camera is near-static from 0.0-4.2s with a slow forward dolly at 4.2-4.8s (candidate:timelinep3:84-96), loosely compatible with the source's own essentially fixed framing (source:timelinep0:0-28), so the scale-reveal request is only partially served. The source's dominant lotus-bud towers and long gallery (source:overview:0, source:timelinep1:28) have no large tower counterpart in the candidate framing; the visible tower-like masses are secondary stepped ruins. Separating this score from 4.0 is the absence of prominent relief-covered massive towers and of any discernible gold ornament across the duration.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:94",
+              "candidate:timelinep0:8",
+              "candidate:timelinep1:42",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:96",
+              "source:overview:0",
+              "source:timelinep1:28"
+            ],
+            "limitations": [
+              "Observed scope is overview frames 0.0-4.7s plus event frames 0.0-4.8s; the candidate's final 4.8-4.85s is unseen.",
+              "Gold ornament remnants and fine relief carving detail cannot be resolved at supplied resolution; they are unconfirmed rather than established as absent.",
+              "Whether massive towers exist outside the candidate's framing cannot be inferred from the supplied frames."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.3,
+            "reason": "The decisive observation is that the candidate retains the temple subject and the single static ambient shot but abandons the source's spatial arrangement and viewing position, so the result reads as a different scene of the same temple rather than the same moment recast. Supporting observations: the source is a wide exterior establishing view with lotus-bud towers, a long gallery, layered terraces, open lawn and cloudy sky (source:overview:0, source:timelinep2:56), with tiny incidental visitor figures near the steps (source:timelinep2:63, source:timelinep3:93); the candidate replaces this with an enclosed jungle courtyard containing a relief wall, guardian statue, broken causeway and canopy (candidate:timelinep2:56, candidate:timelinep3:84), with no one-to-one structural mapping to source architecture and no human counterpart. Retained counterparts include the dark central doorway motif, weathered stone terraces, the ambient time-drift pacing of a single continuous shot, and a late slow dolly that loosely echoes a reveal. Separating this score from 3.0 is the absence of recognizable counterparts for the tower skyline, the gallery/lawn staging and the exterior establishing viewpoint.",
+            "evidence_refs": [
+              "source:overview:0",
+              "source:timelinep2:56",
+              "source:timelinep2:63",
+              "source:timelinep3:93",
+              "candidate:overview:0",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84"
+            ],
+            "limitations": [
+              "Correspondence was judged from overview pairs and event segments covering 0.0-4.8s; the candidate tail beyond 4.8s is unseen.",
+              "Motion preservation was not declared as required, so correspondence was assessed qualitatively rather than against a fixed motion constraint.",
+              "Tiny source visitor figures are resolvable only tentatively at supplied resolution; their incidental background role is inferred."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "The decisive observation is that across all four reviewed consecutive-frame segments covering 0.0-4.8s the candidate holds a single continuous scene with no cuts, popping, morphing, identity switches or vanishing props. Supporting observations: the relief figures, doorway, guardian statue, root placements, foreground slabs and causeway persist in position and identity frame-to-frame (candidate:timelinep0:0-28, candidate:timelinep1:29-56, candidate:timelinep2:57-84, candidate:timelinep3:84-96); only mist drift, foliage sway, subtle light variation and a slow late dolly animate; no medium switching occurs at any point. The one flagged irregularity is a set of small luminous specks near the relief wall in the final segment (4.5-4.8s) whose nature as intentional particles versus artifacts is unconfirmed (candidate:timelinep3:92-96). Separating this score from 4.0 is the unconfirmed status of those specks and the unseen final ~0.05s of the clip.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:29",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:57",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Reviewed intervals are 0.0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-4.8s at 0.05s sampling; 4.8-4.85s is unseen and sub-frame flicker below the sampling interval is unobservable.",
+              "Near-static versus repeated-still behavior between 1.4-2.8s cannot be conclusively distinguished at supplied resolution."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.9,
+            "reason": "The decisive observation is that no structural defect is visible in any reviewed candidate frame: relief figure anatomy, doorway edges, stone tier lines and root-to-stone contacts remain well formed throughout. Supporting observations: architecture edges and carved faces stay coherent across all segments (candidate:timelinep0:19, candidate:timelinep1:44, candidate:timelinep2:64, candidate:timelinep3:88, candidate:timelinep3:96); background softness reads as atmospheric depth haze rather than geometry breakdown; and no seams, halos or stylized/live-action boundaries exist because the conversion is full-frame. Separating this score from 4.0 is that the supplied resolution prevents excluding sub-frame artifacts and fine relief damage, and haze-obscured geometry is unobserved rather than confirmed correct.",
+            "evidence_refs": [
+              "candidate:timelinep0:19",
+              "candidate:timelinep1:44",
+              "candidate:timelinep2:64",
+              "candidate:timelinep3:88",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Fine relief detail, small ornament and possible sub-frame artifacts cannot be resolved at supplied resolution.",
+              "Concealed or mist-obscured geometry is unobserved, not confirmed correct."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.9,
+            "reason": "The decisive observation is that palette, volumetric lighting, materials and composition hold together as one deliberate jungle-ruin visual system across the entire clip. Supporting observations: warm red-brown weathered stone sits against teal-green foliage and cream mist, with god rays and strong tonal depth between the dark gopura and the lit relief wall (candidate:overview:0, candidate:overview:47, candidate:overview:94); decay styling (moss, roots, standing water, fallen slabs) is applied consistently and fits the mysterious adventure mood; there is no unrequested live-action mixture, conflicting visual system or generic theme decoration. Separating this score from 4.0 is the dense midground layering, where several carved and vegetal elements compete for attention, and the unconfirmed design intent of the late-appearing luminous specks.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:31",
+              "candidate:overview:47",
+              "candidate:overview:94",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Design intent for the late luminous specks cannot be confirmed from frames alone.",
+              "Judgments are limited to the supplied framing and resolution; no audio or production metadata was available."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "4930405b4adc0ede2228aa544e3d77e450d340446df84692c014723092f691bd",
+        "method": "full",
+        "round": "v2",
+        "seed": 43,
+        "planner_input": "source",
+        "prompt_words": 265,
+        "v5_scores": {
+          "instruction_adherence": 2.9,
+          "content_preservation": 2.3,
+          "temporal_consistency": 3.8,
+          "visual_integrity": 3.9,
+          "aesthetic_coherence": 3.9
+        },
+        "low_reasons": {
+          "content_preservation": "The decisive observation is that the candidate retains the temple subject and the single static ambient shot but abandons the source's spatial arrangement and viewing position, so the result reads as a different scene of the same temple rather than the same moment recast. Supporting observations: the source is a wide exterior establishing view with lotus-bud towers, a long gallery, layered terraces, open lawn and clo"
+        },
+        "requirement_labels": [
+          "pass",
+          "partial",
+          "partial",
+          "pass",
+          "partial"
+        ]
+      }
+    },
+    {
+      "method": "full",
+      "candidate_id": "v3",
+      "output_sha256": "2363d4dc239220021021fa5c64bb3bdd929c177a601f67dff3e7174fcdf4a53f",
+      "seed": 44,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Wide cinematic establishing shot of this monumental temple reimagined as Tomb Raider-style jungle ruins. Keep the source's wide exterior composition: a massive complete blunt-topped tower right of center, two tall towers receding left, a long dark colonnaded gallery and broad stacked stone terraces stretching across the image. The towers rise above an open overgrown clearing; their full silhouettes remain visible against distant rainforest. Ancient carved deity reliefs and narrative friezes cover the towering walls and terrace bands. Weathered grey sandstone with damp black cracks, thick emerald moss in joints, and twisting woody roots climbing tower corners and spilling down the stepped platforms. Broken gilded cornice strips and patches of metallic gold leaf remain on relief crowns, visibly distinct from grey stone. Ferns and tangled undergrowth replace the lawn. Tall tropical trees frame the far left and right and stand behind the temple, not across its facade. Strong warm sunlight from upper left grazes upper carvings and catches the gold fragments. Humid pale forest mist separates the distant towers from the dark foreground; entrances and gallery interiors stay almost black. Preserve the original continuous camera view with a subtle slow widening reveal of the terraces and immense towers. Gently drifting mist and moving leaves, solid stable masonry. Photorealistic adventure-film atmosphere, mysterious and abandoned. No people or text.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/2363d4dc239220021021fa5c64bb3bdd929c177a601f67dff3e7174fcdf4a53f.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-full-9000-existing1-full-v2-r1-long-full-005/run/workers/1/tasks/005__long__full/run/videos/v3/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.7,
+            "reason": "Decisive observation: across every reviewed frame (0.0–4.8s) the whole visible scene is rebuilt as Tomb Raider-style jungle ruins — foliage-framed overgrown stone, misty god-ray lighting, moss, draping roots and gold ornament — with no source-like or unconverted region remaining. Supporting observations: the overcast open-sky Angkor setting is replaced by humid canopy, jungle floor and hazy golden mist (candidate:timelinep0:0, candidate:timelinep0:28); massive towers and layered terraces carry carved/relief-like texture bands on the central tower face, gallery friezes and terrace parapets (candidate:timelinep0:10, candidate:timelinep2:75, candidate:timelinep3:90); roots and vines climb walls and roofs with moss coating terraces and gold ornament remnants stable as gilded bands on the tower, gold-capped finials along the gallery and vessel-like objects on ledges (candidate:timelinep1:28, candidate:timelinep2:65, candidate:timelinep3:84); sunlight penetrates humid mist as visible shafts with strong tonal depth between dark portals in the lower structures and brightly lit upper walls (candidate:timelinep0:8, candidate:timelinep2:70, candidate:timelinep3:87); a subtle gradual push-in revealing scale is visible across 2.8–4.2s mirroring the source's slow reveal (candidate:timelinep2:56, candidate:timelinep2:70, candidate:timelinep2:84 vs source:timelinep2:56, source:timelinep2:84), and the whole result reads as mysterious adventure. Remaining gaps to the 4.0 anchor: the source's slight incremental framing shift in 4.2–4.95s is not visibly reproduced in the candidate's final reviewed interval (source:timelinep3:84–99 vs candidate:timelinep3:84–96), fine relief iconography is only coarsely resolvable and partially vegetation-occluded, and the candidate evidence ends at 4.8s leaving the closing moments of the requested 5s span unobserved.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:8",
+              "candidate:timelinep0:10",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:65",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:75",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:87",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:96",
+              "source:timelinep2:56",
+              "source:timelinep2:84",
+              "source:timelinep3:84",
+              "source:timelinep3:99"
+            ],
+            "limitations": [
+              "Reviewed candidate scope is 0.0–4.8s via four contiguous segments of consecutive frames plus overview stills to 4.7s; the candidate duration is 4.85s, so roughly the final 0.05–0.15s relative to the declared 5.0s timeline is unseen.",
+              "Fine relief motifs and ornament craftsmanship are at or below the supplied resolution and partly occluded by vegetation; realization of r2 is judged from visible coarse carved-texture bands only.",
+              "Motion preservation was not declared required; camera-reveal correspondence (r5) was assessed qualitatively from discrete frames."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.6,
+            "reason": "Decisive observation: the candidate preserves the source moment's spatial staging and viewing position — dominant carved tower right of center, long gallery extending left, distant spire cluster behind, layered terraces with stairs, broken stonework lower right, slightly elevated wide shot — as a fully translated jungle-ruins counterpart. Supporting observations: the composition mapping is explicit across segments (source:timelinep1:28 vs candidate:timelinep1:28; source:timelinep2:56 vs candidate:timelinep2:56), the dark gopuram doorway maps to the moss-covered tower's dark portal with gold band, the atmospheric progression (drifting clouds → drifting mist/light) preserves the moment's slow evolution and order, and no discrete beat is lost. Weakened minor elements keeping the score below 4.0: the tiny visitor figures walking on the lawn and near the stair base in the source are absent in every supplied candidate frame (source:timelinep1:40, source:timelinep2:77, source:timelinep2:84 vs candidate:timelinep1:40, candidate:timelinep2:84), and toward the close the candidate recenters the tower so frame-level spatial correspondence becomes loose rather than one-to-one (source:timelinep3:84–99 vs candidate:timelinep3:84–96). Gap to the 4.0 anchor: recognizable counterparts for the small foreground occupants and tighter end-segment staging.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "source:timelinep1:28",
+              "source:timelinep1:40",
+              "source:timelinep2:56",
+              "source:timelinep2:77",
+              "source:timelinep3:84",
+              "source:timelinep3:99",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:40",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Correspondence judged at composition/layout level; exact geometric equivalence to Angkor Wat architecture cannot be verified from the supplied frames.",
+              "The absent source figures are minute and at the limit of legibility; occlusion of any counterpart behind candidate foliage cannot be fully excluded, though none is visible in supplied frames.",
+              "Candidate coverage ends at 4.8s; correspondence in the final uncovered moments is unobserved."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.9,
+            "reason": "Decisive observation: across all reviewed native consecutive frames from 0.0 to 4.8s the candidate is one continuous stylized sequence — tower silhouette, ornament placement, foliage masses, stairs and ruin walls remain geometrically stable with only gradual mist and light modulation, and no medium switch, pop-in, identity change or discontinuity appears. Supporting observations: continuity is confirmed within each contiguous segment (candidate:timelinep0:0–28, candidate:timelinep1:28–56, candidate:timelinep2:56–84, candidate:timelinep3:84–96) and the segments share boundary frames, giving seamless coverage; the golden bands persist without position change (candidate:timelinep2:65, candidate:timelinep2:80); the ending state matches the established tableau with no end-of-clip collapse (candidate:timelinep3:84, candidate:timelinep3:96); the only flagged artifact is mild softness and subtle shimmer in fine foliage outlines between adjacent frames (candidate:timelinep2:60–61, candidate:timelinep2:80–81), which is transient and outside focal structures. Gap to the 4.0 anchor: the final 4.8–4.85s of the candidate is unseen and sub-frame flicker cannot be measured from discrete stills, so start-to-end consistency through the very last frames is not fully verified.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:60",
+              "candidate:timelinep2:65",
+              "candidate:timelinep2:80",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Observed candidate interval is 0.0–4.8s (frames 0–96 in four contiguous consecutive-frame segments); 4.8–4.85s of the candidate and the source-relative remainder up to 5.0s are unseen.",
+              "Micro-flicker, sub-frame jitter and exact camera path cannot be measured from discrete stills; observations rest on frame-to-frame differences only.",
+              "The foliage shimmer noted in 2.8–4.2s is subtle and could partly reflect intended vegetation motion rather than a defect."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "Decisive observation: architectural geometry, vegetation-stone contacts and gold elements are well formed throughout the reviewed frames — no warping, melting, duplication, merging of subject into background, or stylized/live-action seams is visible, and the focal structures (central tower, staircase, gallery, portals) keep coherent edges. Supporting observations: the tower, stairs, gallery walls and statue-like element hold consistent form frame-to-frame (candidate:timelinep1:29, candidate:timelinep1:45, candidate:timelinep1:56); vines, roots and moss attach convincingly to stone surfaces across 2.8–4.2s and 4.2–4.8s (candidate:timelinep2:65, candidate:timelinep2:75, candidate:timelinep3:90); ruin geometry stays stable at the close (candidate:timelinep3:84, candidate:timelinep3:96). Keeping the score below 4.0: mild softness and subtle shimmer in fine foliage outlines between adjacent frames constitutes a minor local artifact outside focal structures (candidate:timelinep2:60–61), and fine relief/ornament geometry is below resolvable resolution with tower tops partially foliage-occluded, so complete structural correctness is unverifiable rather than confirmed.",
+            "evidence_refs": [
+              "candidate:timelinep0:10",
+              "candidate:timelinep1:29",
+              "candidate:timelinep1:45",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:60",
+              "candidate:timelinep2:65",
+              "candidate:timelinep2:75",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Fine carving, ornament and foliage geometry at or below supplied resolution are unverifiable; occluded regions (tower tops behind canopy) are unobserved, not confirmed correct.",
+              "Reviewed scope is 0.0–4.8s; structural state in the final uncovered frames is unknown.",
+              "Assessment of the stylized render is made against its own medium, not photorealism, but residual compression softness cannot be separated from rendering choices."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.9,
+            "reason": "Decisive observation: the candidate reads as one deliberate, integrated game-cinematic visual system — a consistent golden-mist palette with god rays, deep jungle greens, mossy weathered stone and gold accents unify architecture, vegetation and light across the entire reviewed duration, matching the requested mysterious-adventure mood. Supporting observations: source elements are adapted into fitting counterparts (grassy forecourt → overgrown jungle floor, overcast clouds → luminous mist, carved tower → moss-and-gold banded ruin) with stable visual logic from first to last reviewed frame (candidate:overview:0, candidate:overview:47, candidate:overview:94, candidate:timelinep3:84); lighting hierarchy (dark portals vs lit upper walls) is consistent with the tonal design; no unrequested stylized/live-action mixture or conflicting visual system appears. Gap to the 4.0 anchor: a minor generic, prop-like quality in some gold objects (lidded vessels and gold-capped blocks on the left terrace) and dense edge foliage that slightly competes with the architectural hierarchy are local imbalances rather than clashes.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:47",
+              "candidate:overview:94",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Judgment is based on supplied stills; subtle palette or lighting drift between frames cannot be fully characterized.",
+              "Fine texture and material detail are resolution-limited, so material-craft quality is assessed at the visible coarse level.",
+              "Candidate coverage ends at 4.8s; integration in the final uncovered moments is unobserved."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "2363d4dc239220021021fa5c64bb3bdd929c177a601f67dff3e7174fcdf4a53f",
+        "method": "full",
+        "round": "v3",
+        "seed": 44,
+        "planner_input": "source",
+        "prompt_words": 216,
+        "v5_scores": {
+          "instruction_adherence": 3.7,
+          "content_preservation": 3.6,
+          "temporal_consistency": 3.9,
+          "visual_integrity": 3.8,
+          "aesthetic_coherence": 3.9
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "full",
+      "candidate_id": "v4",
+      "output_sha256": "3f6162c1a8af4fc861eac558d1f2358f8b50f1e2b7f0f17961afcdf90a5e4ff6",
+      "seed": 45,
+      "input": {
+        "video_id": "v3",
+        "sha256": "2363d4dc239220021021fa5c64bb3bdd929c177a601f67dff3e7174fcdf4a53f",
+        "status": "recorded"
+      },
+      "prompt": "Cinematic Tomb Raider-style jungle ruins, photorealistic and mysterious. A massive weathered blunt-topped temple tower stands right of center, with two smaller towers receding toward the left above long galleries and layered stone terraces. Preserve this monumental arrangement and dense rainforest setting. Ancient reliefs cover all three towers: deeply cut figures, eroded faces and interlocking geometric carvings. Continuous bands of narrative bas-reliefs run along the broad terrace walls beneath the galleries. Thick twisting tree roots grip the main tower corners, visibly enter widened cracks between stone blocks, and emerge farther down through broken terrace joints. Emerald moss cushions the damp grey sandstone ledges; ferns crowd the foreground. Gold ornament survives only as scattered chipped gilding on carved crowns and short broken cornice fragments, with exposed grey stone between them, not complete bright gold bands. Warm sunlight from upper left grazes the upper reliefs and tiny gold remnants. Pale humid mist separates the receding towers and distant forest; entrances and lower gallery interiors remain deeply black. Keep foliage around the outer edges, leaving the tower silhouettes readable. During one continuous shot, the camera slowly tracks backward and slightly left, revealing more of the wide lower terraces and the temple's immense scale; nearby ferns shift against the distant towers through natural parallax. Subtle drifting mist and gently moving leaves, stable masonry and carvings. Abandoned adventure-film atmosphere, no people or text.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/3f6162c1a8af4fc861eac558d1f2358f8b50f1e2b7f0f17961afcdf90a5e4ff6.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-full-9000-existing1-full-v2-r1-long-full-005/run/workers/1/tasks/005__long__full/run/videos/v4/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "The decisive observation is that the entire observed candidate duration (0.0–4.8s) is rebuilt as Tomb Raider-style jungle ruins with no source-like or live-action region remaining, and every central requested element is visible. Dense canopy framing, ferns, vines and humid mist replace the source's open lawn-and-sky setting (r1); the massive right-hand tower carries a monumental carved face relief plus carved bands and niche panels, while the layered ruined galleries and terraces carry friezes and decorative carved panels (r2); woody roots and vines drape over and cling to towers, lintels and broken stone among pervasive moss, with gold trims and gold-capped remnant structures at mid-left and in tower niches (r3); warm light penetrates thick background mist while recessed doorways and window openings read as dark voids, producing the requested tonal depth between dark entrances and lit upper walls (r4); and a slow continuous push-in/drift modestly increases the temple's apparent scale across all segments, sustaining an overgrown, mist-veiled mysterious-adventure mood (r5). Vegetation and mist naturally occlude some stone surfaces, and the source's own camera is near-static, so the camera requirement is met through the candidate's gradual scale-revealing drift; no interval reverts to the source's live-action appearance.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:31",
+              "candidate:overview:63",
+              "candidate:overview:94",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Observed candidate coverage is 0.0–4.8s (overview to 4.7s, consecutive frames to 4.8s); the final ~0.05s tail to 4.85s is unobserved.",
+              "Relief coverage on surfaces hidden by vegetation, mist or darkness is only partially verifiable; occluded regions are not claimed as converted or unconverted.",
+              "Exact source-motion retention was not declared required and the source camera is near-static, so r5 was judged against the request's description of a gradual scale reveal rather than measured trajectory fidelity."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.3,
+            "reason": "The decisive observation is that the candidate preserves the source's core beat — one continuous establishing shot of an ancient temple complex whose scale is gradually revealed — while the source's distant visitors and its exact wide lawn-side framing have no counterpart. Element-level analogies persist across all segments: the carved face-relief tower stands right of frame where the source's carved tower dominates central-right; ruined layered galleries echo the source's gallery roofs and terraces; faint mist-shrouded silhouettes correspond to the source's distant lotus-bud towers; dark recessed entrances appear in both; the grassy forecourt is translated into jungle undergrowth and the dramatic cloud sky into enclosed canopy mist, which are the requested world's counterparts. What is not carried over: the tiny pedestrians visible on the source lawn, steps and galleries from ~1.25s onward are absent in every supplied candidate frame, and the viewing position is closer-in and jungle-enclosed rather than the source's open wide exterior, so correspondence is thematic rather than shot-matched. The gradual-reveal intent and the single-shot beat order remain readable.",
+            "evidence_refs": [
+              "source:overview:0",
+              "source:overview:47",
+              "source:overview:99",
+              "candidate:overview:0",
+              "candidate:overview:47",
+              "candidate:overview:94",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "source:timelinep0:25"
+            ],
+            "limitations": [
+              "Correspondence mapping is interpretive because the candidate reimagines the architecture; it is not a frame-aligned match.",
+              "Source figures are at the limit of resolution; their exact paths cannot be established, only their observed presence.",
+              "Observed coverage is 0.0–4.8s of the 0.0–5.0s timeline; the tail interval is unobserved."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.4,
+            "reason": "The decisive observation is that across all four supplied consecutive-frame segments (0.0–1.4s, 1.4–2.8s, 2.8–4.2s, 4.2–4.8s) the candidate holds one continuous shot with stable identities of the face relief, doorway, gold-capped structures, pillar carvings and background silhouettes, with no cuts, jumps, popping, duplication or geometry collapse, and only slight flicker/morphing of vines, leaves and distant tower silhouettes reported in the 2.8–4.2s segment. Mist density and foliage shadows shift gradually as ambient animation layered on the slow drift, which reads as controlled atmosphere rather than medium switching; the focal stone structures show no drift, teleportation or end-of-clip collapse in the observed range.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Sampling is 0.05s; sub-frame transients and micro-morphing below that spacing cannot be excluded.",
+              "The candidate tail 4.8–4.85s was not supplied and remains unobserved.",
+              "Foliage and mist vary frame-to-frame at the supplied resolution, limiting detection of subtle texture boiling."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "The decisive observation is that the focal structures — the monumental face relief, carved bands and friezes, the dark central doorway, the gold-capped elements, and the root/moss contacts on stone — are well formed and remain stable across all supplied frames, with no melting, merging of subject into background, duplication, halos or illegible clutter observed in any segment. Root placement, terrace edges and carved ornament persist coherently between first, middle and last frames of each segment; defects are confined to possible fine softness in relief detail in shadowed or vegetation-obscured areas and minor foliage-level morphing reported in one segment, which sit outside the focal structures.",
+            "evidence_refs": [
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:32",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:93",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Fine relief motifs in dark, misted or vegetation-obscured areas cannot be resolved at the supplied resolution; concealed parts are unobserved, not certified correct.",
+              "Interior spaces behind the dark doorways are never shown.",
+              "Sub-0.05s artifacts cannot be excluded from the stills-based review."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.9,
+            "reason": "The decisive observation is that the candidate forms one deliberate visual system sustained across the full observed duration: warm backlight penetrating humid mist, mossy verdant stone, consistent gold accent remnants, and a layered composition of foreground ferns, mid-ground ruined galleries and background tower silhouettes, with source elements adapted into fitting jungle counterparts (lawn into undergrowth, cloud sky into canopy mist, dark entrances reading as the requested tonal anchors). No stylized/live-action clash, conflicting palette or ornamental pastiche is observed at any point; the mood stays unified from the opening frame to the darker, shadowed closing frames, which read as a continuous lighting progression within the same system.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:83",
+              "candidate:overview:94",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "The lower gallery interiors read somewhat murky and soft, a minor imbalance within an otherwise integrated design; whether this hides defects is unobserved.",
+              "'Mysterious adventure atmosphere' was judged from visual tone, mist and lighting only; no audio or metadata was supplied."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "3f6162c1a8af4fc861eac558d1f2358f8b50f1e2b7f0f17961afcdf90a5e4ff6",
+        "method": "full",
+        "round": "v4",
+        "seed": 45,
+        "planner_input": "v3",
+        "prompt_words": 227,
+        "v5_scores": {
+          "instruction_adherence": 4.0,
+          "content_preservation": 3.3,
+          "temporal_consistency": 3.4,
+          "visual_integrity": 3.8,
+          "aesthetic_coherence": 3.9
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v1",
+      "output_sha256": "e309faff0fd28925f5ebdf5e162d25f2a3ed317dc73e6722d29038af593700d9",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Reimagine this temple as photorealistic Tomb Raider-style jungle ruins, an immense forgotten sanctuary reclaimed by tropical forest. Preserve the source composition, temple silhouette, dominant stepped tower right of center, smaller receding towers, long colonnaded gallery, layered stone terraces, stairways and foreground broken blocks. Retain the original continuous camera path and pacing, gradually revealing the monumental scale without cuts or sudden zooms. Cover tower faces and terrace bands with deeply carved ancient deities, serpents and weathered geometric reliefs. Massive tangled tree roots grip the tower corners, climb through masonry cracks and cascade across stairs; emerald moss, trailing vines and small ferns colonize damp stone joints. Flecks of worn gold leaf remain in recessed carvings and chipped ornamental borders, catching occasional warm highlights rather than coating the buildings. Replace the manicured lawn with an overgrown courtyard of ferns, leaf litter, creeping plants and partially buried stones. Dense jungle trees and canopy frame the background and upper edges while leaving the architecture clearly readable. Warm sunlight breaks through canopy gaps from the upper left, forming distinct shafts in slowly drifting humid mist. Strong tonal depth: near-black doorways and shaded galleries contrast with sunlit upper towers and softly receding forest. Detailed eroded sandstone, wet dark crevices, rich green vegetation, restrained antique gold, cinematic natural lighting. Subtle foliage movement and atmospheric haze; stable architecture and coherent textures throughout. Mysterious, abandoned adventure atmosphere, no added characters, modern structures, text or interface.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/e309faff0fd28925f5ebdf5e162d25f2a3ed317dc73e6722d29038af593700d9.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-20261102/runs/loops-b95d0514b5af/workers/1/baselines/005__long/pe-loop/0/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.4,
+            "reason": "The candidate rebuilds the entire visible scene as Tomb Raider-style jungle ruins across its whole reviewed duration (0.0-4.8 s), with the requested gradual camera-driven scale reveal not demonstrated in the reviewed frames and fine relief coverage only partially verifiable.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Fine ancient-relief carving on towers and terraces is partially obscured by the requested roots, foliage and mist and is not resolvable at supplied resolution; relief presence is partially confirmed (niche statues, finials, cornices, lintel carving) rather than fully verified.",
+              "Neither the source nor the candidate shows a clearly resolvable progressive camera move in the supplied 0.05 s-spaced frames; the r5 scale-reveal element is therefore recorded as incomplete/unverifiable rather than confirmed absent, and motion preservation was not declared required.",
+              "Candidate consecutive evidence ends at 4.8 s and the 4.95 s overview target is missing (19/20 supplied); the candidate's 4.8-4.85 s tail is unseen."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "The recast remains recognizably the same moment - a wide, near-static establishing view of an ancient temple complex with the main mass right of center, flanking structures and a foreground approach - while the source's long receding galleries, distant multi-tower skyline, open lawn and tiny visitor figures lack clear counterparts in the candidate's enclosed jungle-gate composition.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "source:timelinep1:28",
+              "candidate:timelinep1:28",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84"
+            ],
+            "limitations": [
+              "Approximate layout correspondence is preserved (gate tower with staircase right of center, lower structures extending, side pavilion with tower on the left), but the source's long horizontal gallery and beehive-tower skyline have no direct translated counterparts.",
+              "The tiny source visitor figures are near the resolvable limit; their absence from the candidate is weighed as a minor weakened element, and no central character is involved, so no identity cap applies.",
+              "Replacements of sky, lawn and visitors by canopy, undergrowth and empty ruins are authorized by the requested reimagining and are not counted as correspondence loss.",
+              "Assessment covers candidate 0.0-4.8 s; the final 0.05 s tail is unseen."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Every reviewed consecutive frame from 0.0 to 4.8 s belongs to one continuous take: the gate tower, stairway, root bundles, golden emblem and statues hold position and identity with no pops, flicker, warping or medium switching, and root-stone contacts persist to the last reviewed frame.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Boundary frames at 1.4 s, 2.8 s and 4.2 s align across the supplied segments, and frame-to-frame change is limited to ambient foliage, mist and ray variation; no boiling textures, identity drift or delayed conversion appear in any reviewed interval.",
+              "The candidate's final 0.05 s (4.8-4.85 s) and the requested tail to 5.0 s were not supplied; stability through the very last frame is unobserved, with no contradicting evidence.",
+              "Continuity rests on 0.05 s-spaced stills; sub-frame transients or fast flicker between frames cannot be detected.",
+              "Late-segment subtle foliage/mist shimmer could not be attributed between scene animation and compression noise."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.2,
+            "reason": "Structures, terraces, roots and contacts stay consistently well formed in the rendered jungle-ruins medium across all reviewed frames, with apparent faint glyph-like markings on the large bottom foreground stone in the final seconds as the only visible minor artifact.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96",
+              "candidate:overview:89",
+              "candidate:overview:94"
+            ],
+            "limitations": [
+              "No morphing, merging, blotches, cutout halos or geometry collapse was observed in any reviewed segment; roots wrap tower stones, the golden ornament adheres to the tower face, and the stairway meets the gate base with legible boundaries.",
+              "The glyph-like markings sit on a peripheral foreground boulder rather than the focal gate structure, and their nature (pseudo-text versus lichen or surface texture) cannot be determined at supplied resolution.",
+              "Fine relief carving detail is not resolvable; surfaces concealed behind roots and foliage are unobserved, not confirmed correctly formed.",
+              "The 4.8-4.85 s tail is unseen."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.7,
+            "reason": "Composition, warm ray-lit lighting, deep-green palette and the root/moss/gold material system read as one deliberate adventure-styled design with source elements adapted into fitting counterparts, held below 4.0 by slight ornamental accumulation and a small foreground blemish.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:21",
+              "candidate:overview:42",
+              "candidate:overview:83",
+              "candidate:overview:94"
+            ],
+            "limitations": [
+              "Sky becomes canopy, lawn becomes undergrowth, and the open stair approach becomes a root-draped stairway; lighting direction (upper-left god rays), the dark-portal versus upper-wall tonal scheme and the grade stay uniform from 0.0 to 4.8 s with no stylized/live-action mixture.",
+              "Multiple golden figurine groups, the emblem plaque and dense midground foliage add generic-adventure ornamentation and some visual busyness; the faint foreground markings slightly weaken the finish.",
+              "Texture-level polish beyond supplied resolution could not be evaluated; the 4.8-4.85 s tail is unseen."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "e309faff0fd28925f5ebdf5e162d25f2a3ed317dc73e6722d29038af593700d9",
+        "method": "pe-loop",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": null,
+        "prompt_words": 235,
+        "v5_scores": {
+          "instruction_adherence": 3.4,
+          "content_preservation": 3.1,
+          "temporal_consistency": 4.0,
+          "visual_integrity": 3.2,
+          "aesthetic_coherence": 3.7
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "partial",
+          "pass",
+          "pass",
+          "partial"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v1",
+      "output_sha256": "efd8c5d643ea41268913c4c4ad2d7e9d61e4cc2f75da1681e685ae852b313c36",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Reimagine the source temple as photorealistic Tomb Raider-style jungle ruins, an immense forgotten sanctuary reclaimed by tropical forest. Preserve the original composition, temple silhouette, dominant tower at center-right, smaller receding towers, long colonnaded gallery, layered stone terraces, stairways and foreground broken blocks. Retain the source camera path and pacing in one continuous shot, gradually revealing the monumental scale without cuts or added camera moves.\n\nCover the towers and terrace faces with intricate weathered bas-reliefs of ancient deities, serpents and ceremonial figures. Stone is cracked, chipped and darkened by centuries of moisture; thick twisting tree roots climb through masonry joints and wrap around terrace corners, with hanging vines, emerald moss and small ferns growing in crevices. Scattered remnants of worn gold leaf cling to carved borders and ornaments, catching subtle warm highlights. Keep carvings and architectural forms clearly readable beneath the growth.\n\nTransform the open lawn into an overgrown courtyard of damp earth, mossy paving, low ferns and encroaching jungle plants. Dense broadleaf trees and hanging foliage surround the ruins and frame the upper edges without obscuring the main towers. Humid mist drifts slowly between terraces and distant trees. Warm sunlight from the upper left penetrates canopy gaps in distinct volumetric shafts, grazing upper walls and gold traces while entrances and deep galleries remain near-black. Cool green shadows, luminous mist and warm stone highlights create strong tonal depth. Cinematic adventure realism, tactile wet stone, immense age, mysterious and quietly ominous atmosphere. Keep architecture, roots and relief patterns temporally stable; only mist and leaves move gently. No adventurer, modern objects, text or interface.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/efd8c5d643ea41268913c4c4ad2d7e9d61e4cc2f75da1681e685ae852b313c36.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing1-pe-r1-long-pe-005/run/workers/1/baselines/005__long/pe-loop/0/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.3,
+            "reason": "The Tomb Raider-style jungle-ruin conversion — overgrown carved towers on layered terraces, roots and moss with gold ornament remnants, and god-ray light through humid mist producing strong dark-entrance versus lit-upper-wall contrast — is realized consistently across all observed frames 0.0-4.8s, but the requested gradual camera reveal of the temple's scale never occurs because the framing stays locked in every observed segment.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:21",
+              "candidate:overview:47",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:34",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96",
+              "source:timelinep1:28",
+              "source:timelinep1:56"
+            ],
+            "limitations": [
+              "Relief carving on the towers is only partially resolvable at supplied resolution, so coverage of towers by reliefs is verified only to the visible extent.",
+              "The camera-reveal judgment rests on the observed 0.0-4.8s segments; candidate 4.8-4.85s is unseen.",
+              "The source's own camera movement within the clip is subtle (cloud timelapse drift plus slight drift), which limits how strongly the 'original camera movement' reference can be read.",
+              "The candidate's towers read smaller in scale than the source's massive prang towers; scale translation was treated as a counterpart, not a defect."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The recast remains recognizably the same moment — a wide establishing view of the temple with a central carved tower, dark entrance above a stairway, and layered terraces, all carried into jungle counterparts — while minor anchors weaken: the long gallery extending leftward and the tiny visitor figures visible in the source have no counterpart in the candidate.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "source:timelinep0:24",
+              "source:timelinep0:26",
+              "candidate:timelinep0:25",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84"
+            ],
+            "limitations": [
+              "Tiny human figures in the source are near the resolution limit; their presence timing is tentative.",
+              "Spatial correspondence was judged at whole-composition level; the painterly candidate versus photographic source limits pixel-level staging checks.",
+              "Replacing open sky and lawn with canopy and jungle floor was treated as a translated counterpart implied by the requested world, not a correspondence loss.",
+              "Candidate 4.8-4.85s is unseen; correspondence claims apply to 0.0-4.8s."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "Across the four observed consecutive-frame segments covering 0.0-4.8s, the candidate holds as one uninterrupted static tableau with no cuts, popping elements, geometry breaks or identity changes, and the only instability is intermittent fine-detail shimmer in mist, light rays and foliage edges plus a brief glow flicker near the central shrine around 0.45-0.55s.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:9",
+              "candidate:timelinep0:10",
+              "candidate:timelinep0:11",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:30",
+              "candidate:timelinep1:31",
+              "candidate:timelinep1:46",
+              "candidate:timelinep1:47",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:57",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Observed scope is 0.0-4.8s via four adjacent consecutive-frame segments; the final 4.8-4.85s of the candidate is unseen.",
+              "Sampling at ~0.05s spacing leaves sub-frame flicker or micro-drift between sampled frames unresolved.",
+              "The mist/ray shimmer and the brief shrine glow flicker could be intentional lighting animation or generative artifacts; they cannot be separated definitively from stills.",
+              "Static-framing behavior was confirmed per segment; drift below perceptual threshold cannot be excluded."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "Towers, stairway, doorway, terraces, statuary and foliage are well formed for the painterly jungle medium, with no melting, merging, warping or geometry collapse observed in any supplied frame; the only visible flaws are minor atmospheric shimmer, a brief glow flicker near the shrine, and a small indeterminate white element persisting in the upper-left canopy.",
+            "evidence_refs": [
+              "candidate:timelinep0:10",
+              "candidate:timelinep0:14",
+              "candidate:timelinep1:40",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Very dark regions (doorway, deep shadow) conceal surface detail; concealed parts are unobserved, not confirmed correct.",
+              "Fine relief and ornament detail cannot be fully resolved at supplied resolution.",
+              "Observed scope is 0.0-4.8s; candidate 4.8-4.85s is unseen.",
+              "The white canopy element's identity is indeterminate at this resolution; it was treated as a minor non-focal artifact."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "The candidate reads as one deliberately designed painterly system — consistent dim green-gold grade, upper-left god rays through humid mist, gold focal accents on the shrine, layered depth from foreground ferns to canopy, with the source's lawn translated to a jungle floor and open sky to canopy — matching the requested mysterious adventure mood, with only small local inconsistencies (the white canopy element, occasional glow flicker) preventing full integration.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:47",
+              "candidate:timelinep0:12",
+              "candidate:timelinep1:34",
+              "candidate:timelinep1:48",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Atmosphere and mood were judged from visual cues only; no audio or production metadata was supplied.",
+              "The stylized grade diverges strongly from the overcast photographic source; this divergence was treated as the requested world's design, not a clash, since the candidate is uniformly stylized with no live-action remnants.",
+              "Observed scope is 0.0-4.8s; candidate 4.8-4.85s is unseen."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "efd8c5d643ea41268913c4c4ad2d7e9d61e4cc2f75da1681e685ae852b313c36",
+        "method": "pe-loop",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": null,
+        "prompt_words": 261,
+        "v5_scores": {
+          "instruction_adherence": 3.3,
+          "content_preservation": 3.0,
+          "temporal_consistency": 3.1,
+          "visual_integrity": 3.1,
+          "aesthetic_coherence": 3.5
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "partial"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v2",
+      "output_sha256": "fa86e172ad25d803edbbcd1203d09f70361c6b9cfbc7779dede49c23b624f9de",
+      "seed": 43,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Transform the source temple into photorealistic Tomb Raider-style jungle ruins, preserving this specific building's architecture and perspective. Keep the massive broad solid tower right of center with its densely stacked scalloped stone tiers, small dark rectangular doorway, two narrower towers receding leftward, long uninterrupted colonnaded gallery, layered horizontal terraces, existing stairs and broken foreground blocks. Preserve their proportions and positions; do not replace solid towers with open shrines, add separate temples or obscure the gallery with vegetation.\nCover the broad tower faces, gallery walls and terrace bands with extensive clearly visible bas-relief panels: eroded deities, interlocking serpents, floral scrollwork and ancient narrative friezes carved directly into sandstone, not freestanding statues. Tiny irregular flakes of dull antique gold survive only inside selected recessed carvings and chipped borders; mostly bare weathered stone, no intact golden figures or bright central emblem.\nThick aged roots climb through masonry cracks and grip tower corners, branching over selected stair edges without hiding the relief-covered walls or architectural silhouette. Damp emerald moss follows stone joints; trailing vines and small ferns emerge from crevices. Replace the trimmed lawn with low tangled undergrowth, leaf litter and partly buried blocks. Dense tropical forest rises behind the temple and frames the upper edges, leaving the towers and long gallery legible.\nWarm sunlight enters from upper left through canopy gaps, casting distinct shafts through humid drifting forest mist. Illuminate upper stone tiers and relief edges against deeply shadowed entrances and cool dark galleries. Layered atmospheric depth, realistic eroded sandstone, damp crevices, restrained gold glints, cinematic mysterious adventure atmosphere.\nRetain the original continuous camera direction and gentle pacing, with a subtle gradual widening that reveals more terrace edges and the gallery's length, emphasizing monumental scale; no cuts, sudden zooms or orbit. Stable masonry, reliefs and roots across frames, slight leaf movement and slowly drifting mist. No tourists, added characters, modern objects, text or interface.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/fa86e172ad25d803edbbcd1203d09f70361c6b9cfbc7779dede49c23b624f9de.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-20261102/runs/loops-b95d0514b5af/workers/1/baselines/005__long/pe-loop/1/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The candidate rebuilds the entire visible scene as overgrown Tomb Raider-style jungle ruins for the full 0.0-4.8s observed duration - relief-covered towers and layered terraced walls (r2), moss, ferns and root-like growth in stone crevices, volumetric sunbeams through humid mist with strong tonal depth between the dark central doorway and lit upper carvings (r4), and a coherent adventure-mood setting (r1) - but remnants of gold ornament are not discernible in any supplied frame, roots appear only as root-like growth occupying crevices rather than visibly climbing through stone cracks, and the requested gradual scale-revealing camera movement is limited to a very slow reframing drift (r3, r5 partial).",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:92",
+              "source:timelinep1:28",
+              "source:timelinep2:84"
+            ],
+            "limitations": [
+              "Remnants of gold ornament are not discernible at the supplied frame resolution; this is reported as non-visibility in the supplied frames, not a confirmed absence elsewhere in the unseen 4.8-4.85s tail.",
+              "The observed source is likewise near-static over all supplied segments, so the 'original camera movement gradually reveals the temple's scale' (r5) could not be verified against an actual source camera path; only the candidate's slow drift was observed.",
+              "Candidate consecutive-frame evidence ends at 4.8s and the final overview target (frame_index 99, 4.95s) was not supplied (19/20 overview frames observed).",
+              "No audio was supplied; the mysterious adventure atmosphere was judged from visual cues only."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The candidate preserves the source moment's compositional skeleton - a wide, slightly low establishing view with monumental tower mass right of center, layered stepped terraces with stair runs and dark openings, conveying the temple's scale as a static reveal beat - but the source's distinctive lotus-bud prang towers, long colonnaded gallery and open lawn/sky forecourt are restructured into a closer three-part jungle arrangement, and the tiny visitor figures visible in the source do not carry over.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "source:timelinep1:28",
+              "source:timelinep2:56",
+              "source:timelinep3:84",
+              "source:timelinep2:84",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Correspondence was judged at scene-composition level because the candidate is a wholesale stylistic reimagining from a different, closer vantage; frame-level spatial registration was not possible.",
+              "The source's visitor figures are coarsely resolvable at supplied resolution; their non-appearance is observed within the supplied candidate frames of all four segments, not beyond them.",
+              "The candidate's 4.8-4.85s tail and the final source-mapped overview target are unseen."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "Across the four consecutive-frame segments covering 0.0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-4.8s the candidate holds a single scene identity with no cuts, pops, identity switches, structural displacement or end-of-clip collapse - tower silhouette, doorway, stairs, face relief and serpent frieze remain identifiable in every supplied frame - but mist and light shafts flicker and change shape between adjacent frames, fine relief and foliage micro-detail shows low-level boiling, and a dark vertical band appears at the right frame edge from about 4.55s with dark fronds entering the bottom-right corner.",
+            "evidence_refs": [
+              "candidate:timelinep0:4",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:91",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Observed intervals are 0.0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-4.8s; the candidate's 4.8-4.85s tail is unseen.",
+              "Mist/light flicker and micro-detail boiling were judged qualitatively from 50 ms-spaced stills, not measured.",
+              "The late right-edge dark band could be either an entering foreground element or an edge artifact; stills alone cannot disambiguate."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "Stone geometry, stair runs, relief panels and vegetation-stone contacts remain well formed across all supplied frames with no collapsing structures, merging, smearing or cutout seams, while illegible pseudo-glyph-like inscription marks at the lower right of the great tower, soft morphing of relief and foliage micro-detail, and an ambiguous dark band at the right frame edge from ~4.55s constitute minor local artifacts that do not impair the main subjects.",
+            "evidence_refs": [
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:46",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:91",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Dense relief micro-detail is comparatively soft at supplied resolution, limiting close inspection of carved geometry; concealed surfaces are unobserved rather than confirmed correct.",
+              "The right-edge dark band and bottom-right fronds in late frames remain ambiguous between foreground elements and edge artifacts.",
+              "Candidate evidence ends at 4.8s; the final ~0.05s is unseen."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "The candidate reads as one deliberate Tomb Raider-style visual system - a unified warm-stone and deep-green palette, volumetric god rays penetrating humid mist, strong tonal depth between dark entrances and sunlit upper carvings, moss-adapted stonework and a coherent composition with the great tower right and terraces receding left - with only minor local inconsistencies remaining: the late right-edge dark band, the pseudo-glyph marks, and subtle shimmer in fine detail.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:40",
+              "candidate:timelinep2:80",
+              "candidate:timelinep3:92",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Judgment covers 0.0-4.8s of the 4.85s candidate; the final tail is unseen.",
+              "No audio or ambience was supplied; mood integration was judged from visual composition and lighting only.",
+              "Palette and lighting consistency were characterized qualitatively from supplied frames, not measured."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "fa86e172ad25d803edbbcd1203d09f70361c6b9cfbc7779dede49c23b624f9de",
+        "method": "pe-loop",
+        "round": "v2",
+        "seed": 43,
+        "planner_input": null,
+        "prompt_words": 311,
+        "v5_scores": {
+          "instruction_adherence": 3.0,
+          "content_preservation": 3.0,
+          "temporal_consistency": 3.0,
+          "visual_integrity": 3.0,
+          "aesthetic_coherence": 3.5
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "partial",
+          "pass",
+          "partial"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v2",
+      "output_sha256": "84de76b2c653c3287268733a792cc7f339a434a44a2b3825ded13e566f0c93f4",
+      "seed": 43,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Transform this temple into photorealistic Tomb Raider-style jungle ruins while preserving its specific architecture and monumental proportions. Keep the massive blunt-topped tower at center-right, two smaller tapering towers receding leftward, the long uninterrupted colonnaded gallery, broad horizontal tiered platform, existing stairways, dark rectangular entrances and broken foreground blocks. Preserve their positions, silhouettes and relative sizes; no additional towers, separate shrines, new balconies or redesigned staircase.\n\nDense ancient bas-reliefs cover the tower faces and layered terrace risers: eroded deities, serpents, ceremonial processions and floral borders carved directly into the stone, not freestanding sculptures. Make these extensive narrative panels clearly readable in raking light. Only tiny, irregular remnants of tarnished gold leaf survive in recessed ornament; no intact golden figures or railings. Render rough porous sandstone with granular erosion, chipped edges, damp streaks and uneven mineral stains.\n\nTwisting woody roots climb through existing masonry cracks and curl around terrace corners. Patchy emerald moss and small ferns occupy joints, leaving most relief panels, columns and terrace profiles exposed. Replace the manicured lawn with damp mossy paving, leaf litter and scattered low jungle plants, preserving the broad courtyard and long architectural sightline. Dense tropical forest surrounds the temple; overhead leaves frame rather than hide its towers.\n\nWarm upper-left sunlight pierces canopy gaps and humid forest mist in distinct shafts. Upper walls catch textured amber highlights while entrances and gallery interiors remain deeply shadowed; cool green shadows and layered haze establish strong tonal depth. Mist slowly thins along the receding gallery, progressively exposing its full length and the temple's immense scale. Retain the original camera angle, pacing and subtle continuous movement throughout the shot, without cuts or abrupt reframing.\n\nNatural photographic textures, irregular foliage, restrained wet highlights, mysterious archaeological adventure atmosphere, not smooth game-render surfaces. Keep architecture, carvings, roots and gold traces fixed consistently across frames; only mist and foliage move gently. No adventurer, modern objects, text or interface.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/84de76b2c653c3287268733a792cc7f339a434a44a2b3825ded13e566f0c93f4.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing1-pe-r1-long-pe-005/run/workers/1/baselines/005__long/pe-loop/1/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.2,
+            "reason": "The entire visible scene is rebuilt as Tomb Raider-style jungle ruins from the first to the last reviewed frame, with relief-covered towers and terraces, climbing roots and moss, and mist-piercing sunlight all realized, while remnants of gold ornament are never discernible and the clip ends about 0.15s before the declared 5.0s timeline. r1: dense canopy, ground mist and overgrown weathered structures replace the source's open courtyard, lawn and cloudy sky throughout, with no residual open-courtyard elements or mid-clip style transition (candidate:overview:0 vs source:overview:0; candidate:timelinep1:28-56). r2: the dominant right tower carries large figurative relief carvings and terrace/gallery walls carry continuous carved panel bands across stacked levels (candidate:timelinep1:30, candidate:timelinep1:44, candidate:timelinep3:85-90). r3: root and vine strands cling to rooflines, cornices and stone cracks among moss patches, but gold ornament remnants stay below perceptible resolution in every supplied frame (candidate:timelinep0:6, candidate:timelinep1:48, candidate:timelinep2:76). r4: angled god-ray shafts penetrate humid mist and dark recessed doorways contrast strongly with sunlit upper carvings (candidate:timelinep0:0, candidate:timelinep0:14, candidate:timelinep0:28, candidate:timelinep3:86-96). r5: a slow, continuous push-in from frame 0 through about 4.8s progressively brings structural detail forward and, together with the deserted misted setting, builds the mysterious adventure mood (candidate:timelinep0:0-28, candidate:timelinep3:92-96). The gap to 4.0 is the gold-ornament element of r3, the only requested detail without visible realization, plus the slightly truncated tail of the declared timeline.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:14",
+              "candidate:timelinep1:30",
+              "candidate:timelinep1:44",
+              "candidate:timelinep2:76",
+              "candidate:timelinep3:85",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Gold ornament remnants cannot be confirmed present or absent at supplied frame resolution; they are reported as unconfirmed, not absent.",
+              "The candidate runs 4.85s against the declared 0.0-5.0s timeline; the final ~0.05-0.2s is unseen and the ~4.95s candidate overview target is missing (19/20 observed).",
+              "The subtle push-in fulfills the requested gradual reveal, but the source's own camera is a near-static timelapse, so the exact 'original camera movement' cannot be verified against a moving reference."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "The candidate preserves the source's composition and structural mapping - dominant tower right-of-center, long gallery/terrace band with stair flights, smaller background towers, foreground scattered stone blocks - while the source's intermittently visible tiny visitor figures have no counterpart in any candidate frame. Correspondence holds at translated-counterpart level as the task requires: prangs become moss-capped carved towers, the lawn becomes mossy ruined flooring, and the open sky becomes forest canopy per the requested world (source:overview:0 vs candidate:overview:0; source:timelinep2:56 vs candidate:timelinep2:56; source:timelinep3:84 vs candidate:timelinep3:84). Spatial staging, the quiet establishing-shot camera intent and the moment's reading survive across all four reviewed segments. The gap to 4.0 is this single missing minor element: the small human figures near stairs and galleries (source:timelinep1:30, source:timelinep3:90) that animate the source moment but are absent from the deserted candidate ruins - an absence consistent with the requested abandoned-ruin mood, but still a weakened minor beat.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "source:timelinep1:28",
+              "candidate:timelinep1:28",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep3:90",
+              "candidate:timelinep3:90"
+            ],
+            "limitations": [
+              "Source visitor figures are at the edge of resolvability; their count and paths cannot be enumerated, so the extent of their removal is approximate.",
+              "Correspondence is judged at layout/composition level; the restyle intentionally replaces sky, vegetation and ground, so per-object geometric identity with source structures is neither expected nor measurable.",
+              "Motion preservation was not declared required; camera-intent similarity is judged qualitatively only."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "The candidate plays as one continuous shot with stable architecture, lighting direction and mist level across 0.0-4.2s, while at 4.6-4.65s carving detail transiently smears into a soft painterly rendering before sharpness recovers at 4.7s, coinciding with a slight tightening of framing. Reviewed consecutive frames show no medium switching, popping, duplication, identity breaks or vanished elements in 0.0-1.4s (candidate:timelinep0:0-28), 1.4-2.8s (candidate:timelinep1:28-56) or 2.8-4.2s (candidate:timelinep2:56-84); gradual change is limited to mist drift, light-shaft intensity and a continuous subtle push-in. The soft interval (candidate:timelinep3:92-93) recovers by candidate:timelinep3:96 and the scene stays interpretable throughout. The gap to 4.0 is this transient focal softening plus the unresolved question of whether the end framing change is a continuous push-in or a small discontinuity; the final 0.05s of the clip is unseen.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:92",
+              "candidate:timelinep3:94",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "The cause of the 4.6-4.65s sharpness loss (motion blur during the push-in vs a rendering instability) cannot be disambiguated from the supplied frames.",
+              "Candidate frames are supplied only through 4.8s; the final ~0.05s to the 4.85s endpoint is unseen.",
+              "Event frames are spaced 0.05s apart; single-frame artifacts between sampled frames could go undetected.",
+              "Camera trajectory is inferred only from frame-to-frame framing changes; no motion-vector data was supplied."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.9,
+            "reason": "Towers, relief carvings, stairs, terraces and root-to-masonry contacts are well formed and anchored across all reviewed frames, except the brief 4.6-4.65s interval in which focal carving detail smears into a soft painterly rendering before recovering, momentarily impairing the legibility of the dominant tower's reliefs. No melting, merging, duplication, cutout halo or illegible clutter is visible in 0.0-4.2s (candidate:timelinep0:14, candidate:timelinep2:64, candidate:timelinep2:76); foreground pseudo-glyph panels read as stylized carving appropriate to the medium rather than as defects. The transient smear (candidate:timelinep3:92-93) is what keeps the score under 3.0, since it touches a focal structure rather than remaining outside it; full recovery by candidate:timelinep3:96 and intact geometry keep the scene interpretable, avoiding the lower band. Fine relief detail is soft/low-contrast overall, limiting verification of small-scale surface geometry.",
+            "evidence_refs": [
+              "candidate:timelinep0:14",
+              "candidate:timelinep2:64",
+              "candidate:timelinep2:76",
+              "candidate:timelinep3:92",
+              "candidate:timelinep3:93",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "The 4.6-4.65s defect could be natural motion blur during a camera move or a rendering instability; the supplied frames cannot distinguish the two.",
+              "Very fine relief detail is soft/low-contrast, so small-scale surface geometry is unobserved rather than confirmed correct.",
+              "Concealed or mist-obscured regions are treated as unobserved, not as evidence of correct geometry."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "Composition, lighting, palette, materials and effects form one deliberate jungle-ruin visual system - warm god-rays against green shade, moss-and-relief textures, dark entrances against lit upper walls - with every source structure adapted into a fitting counterpart, leaving only the brief end-of-clip painterly softening as a local inconsistency. Palette and lighting direction stay consistent from candidate:overview:0 through candidate:overview:94; source elements map to adapted counterparts (source:overview:0's prangs, gallery and lawn vs candidate:overview:0's carved towers, relief terraces and mossy ruined flooring). Hierarchy reads clearly with the dominant carved tower right-of-center and the light shaft as focal accent; minor density among the carved foreground blocks is the only compositional imbalance. The gap to 4.0 is the momentary loss of the designed finish at 4.6-4.65s (candidate:timelinep3:92) together with that minor foreground busyness.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "candidate:overview:47",
+              "candidate:overview:94",
+              "candidate:timelinep3:92"
+            ],
+            "limitations": [
+              "The transient end-of-clip softening is scored here as a local inconsistency of finish; its cause remains unresolved (see temporal_consistency).",
+              "Aesthetic judgments are limited to supplied frames; no full-motion playback was available."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "84de76b2c653c3287268733a792cc7f339a434a44a2b3825ded13e566f0c93f4",
+        "method": "pe-loop",
+        "round": "v2",
+        "seed": 43,
+        "planner_input": null,
+        "prompt_words": 314,
+        "v5_scores": {
+          "instruction_adherence": 3.2,
+          "content_preservation": 3.5,
+          "temporal_consistency": 3.1,
+          "visual_integrity": 2.9,
+          "aesthetic_coherence": 3.8
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "partial",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v3",
+      "output_sha256": "677645170332314ba8bdb87b57c252ced48a0a232b123654c25d9d85e0ae1db0",
+      "seed": 44,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Reimagine this exact temple as photorealistic Tomb Raider-style jungle ruins. Treat the transformation as weathering, carving and vegetation applied to the existing architecture, not a replacement building. Preserve the massive blunt-topped center-right tower, two tapering towers receding leftward, long uninterrupted roofed colonnade, broad horizontally layered platform, existing stairs, rectangular openings and foreground broken blocks. Keep their silhouettes, proportions and positions; no added shrines or redistributed stairways.\n\nCover existing tower surfaces and terrace risers with shallow, densely worked ancient bas-reliefs: eroded deities, serpents, processions and floral borders carved into the masonry. Keep the original horizontal stone courses visible. Relief edges are softened, chipped and pitted, never oversized projecting statues. Rough sandstone has granular pores, damp streaks and mineral discoloration. Clearly visible scattered flakes of old gold leaf cling to carved doorway borders and recessed motifs, catching small warm glints rather than forming intact golden sculptures.\n\nSeveral thick, bark-textured roots visibly climb the main tower's masonry cracks from the terrace to the upper ledges; branching roots grip the colonnade base and curl over terrace corners. Patchy moss and ferns surround them without hiding the carvings or architectural outlines. Replace the lawn with damp mossy paving, leaf litter and low tropical plants. Dense jungle trees rise behind the temple, with canopy leaves framing the sky while leaving all towers readable.\n\nWarm upper-left sunlight cuts through humid forest mist in distinct shafts, grazing upper walls and gold remnants. Entrances and gallery interiors remain nearly black; cool green shadows and progressively softer distant trees create strong tonal depth. Mysterious archaeological adventure atmosphere, natural photographic textures, restrained wet highlights.\n\nPreserve the original camera viewpoint, direction and gentle progression in one continuous shot, gradually revealing the temple's scale. Any widening is smooth throughout, never a late framing jump. Keep architecture, roots and reliefs stable; only mist and leaves drift gently. No adventurers, modern objects, text or interface.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/677645170332314ba8bdb87b57c252ced48a0a232b123654c25d9d85e0ae1db0.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing1-pe-r1-long-pe-005/run/workers/1/baselines/005__long/pe-loop/2/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "Decisive observation: the entire visible scene is rebuilt as Tomb Raider-style jungle ruins for the full observed duration, but relief carving is only coarsely suggested on the distant spires and gallery and no remnants of gold ornament are discernible, leaving two requested details incomplete.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:30",
+              "candidate:timelinep1:36",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:74",
+              "candidate:timelinep3:84",
+              "source:overview:0",
+              "source:timelinep1:28"
+            ],
+            "limitations": [
+              "Observed candidate scope is 0.0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-4.8s in event frames plus overviews to 4.7s; the candidate tail beyond 4.8s is unobserved.",
+              "Frame resolution and painterly stylization make fine relief iconography and gold ornament remnants unresolvable between absence and sub-resolution detail; they are scored as incomplete on visible evidence only.",
+              "No audio was supplied; the 'mysterious adventure atmosphere' was assessed through visible proxies (mist, tonal contrast, canopy light).",
+              "The candidate's rendering is painterly/stylized rather than photoreal; the request's 'Tomb Raider-style' label was treated primarily as a world/theme requirement, so rendering style was not scored as a separate medium failure."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.4,
+            "reason": "Decisive observation: the source's spatial staging and single continuous establishing shot are recognizably preserved (tower right-of-center with dark entrance, gallery extending left, layered terraces, distant lotus-bud silhouettes, foreground plane), while the source's roaming timelapse visitor figures have no counterpart in any supplied candidate frame.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "source:timelinep0:26",
+              "candidate:timelinep0:26",
+              "source:timelinep1:28",
+              "candidate:timelinep1:28",
+              "source:timelinep2:79",
+              "candidate:timelinep2:79",
+              "source:timelinep3:91",
+              "candidate:timelinep3:91"
+            ],
+            "limitations": [
+              "Candidate framing is slightly tighter and repositioned relative to the source; correspondence is structural rather than pixel-aligned.",
+              "The removed visitors are tiny timelapse background figures at the threshold of visibility; their absence was verified in the supplied frames only, and their removal was treated as consistent with the requested deserted-ruins world rather than a character-identity error.",
+              "Observed coverage is limited to the four supplied 1.4s segments (candidate ending at 4.8s); no inference was made about unobserved intervals.",
+              "World-implied transformations (broken tower crown, lawn replaced by root-covered slabs, sky replaced by canopy) were scored as translated counterparts, not correspondence losses."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "Decisive observation: across all reviewed consecutive frames (0.0-4.8s) the candidate holds one continuous shot with consistent structure positions, root layouts, canopy shape and light direction, while subtle inter-frame shimmer of relief patterns, foliage, root silhouettes and light-shaft luminance recurs between adjacent frames.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:29",
+              "candidate:timelinep1:31",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:57",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Reviewed intervals were 0.0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-4.8s; the candidate's 4.8-4.85s tail has no supplied event frames, so end-of-clip behaviour there is unobserved.",
+              "Motion was judged from 0.05s-spaced stills; sub-frame smoothness and any single-frame flicker cannot be fully verified.",
+              "Mist brightness and glow fluctuation could be intentional atmosphere; only the texture/outline shimmer was counted as uncontrolled boiling, and it was judged subtle in all segments.",
+              "No medium switching, popping, identity drift or vanished props were observed in the reviewed frames; conclusions are local to the reviewed intervals."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.3,
+            "reason": "Decisive observation: foreground roots meet the paving with ambiguous anchoring in several reviewed frames (appearing to merge into or hover over the slabs), a contact defect touching one of the most prominent requested elements, while the scene remains fully interpretable.",
+            "evidence_refs": [
+              "candidate:timelinep1:29",
+              "candidate:timelinep1:44",
+              "candidate:timelinep1:50",
+              "candidate:timelinep2:58",
+              "candidate:timelinep2:68",
+              "candidate:timelinep2:76",
+              "candidate:timelinep3:90",
+              "candidate:overview:0"
+            ],
+            "limitations": [
+              "The anchoring ambiguity is localized ('some roots', 'in places') and mild; broken crown, cracked slabs and displaced stones were read as intentional ruin styling, not defects.",
+              "Painterly soft edges, blobby carved detail on the pavilion, softened canopy-masonry boundaries, an uneven gallery roofline and generalized colonnade bays were assessed against the stylized medium rather than photorealism; where they blur into style they were not counted as structural defects.",
+              "Frame resolution limits confident judgement of fine root-stone intersections and relief definition.",
+              "Observed scope is the four supplied segments plus overviews; the candidate tail beyond 4.8s is unobserved, and concealed geometry (behind roots, moss and canopy) is unobserved rather than confirmed correct."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "Decisive observation: composition, palette (dark greens and ochre stone), misty god-ray lighting, moss/root integration and the source-adapted staging combine into one coherent mysterious-adventure visual system matching the requested world and moment.",
+            "evidence_refs": [
+              "candidate:overview:21",
+              "candidate:timelinep0:4",
+              "candidate:timelinep0:18",
+              "candidate:timelinep1:46",
+              "candidate:timelinep2:64",
+              "candidate:timelinep3:90",
+              "source:overview:0"
+            ],
+            "limitations": [
+              "Minor imbalances keep the score below the 4 anchor: a somewhat cluttered foreground hierarchy of roots, slabs and terrace steps, soft canopy-masonry boundaries, generalized colonnade bays, and light-shaft/relief shimmer recurring between frames (the shimmer also affects temporal_consistency as jitter; here it counts only as local visual inconsistency).",
+              "Mood and atmosphere were judged visually only; no audio was supplied.",
+              "Frame resolution limits verification of material detail (stone, moss, gilding), which affects assessment of finish quality.",
+              "Observed scope is the four supplied 1.4s segments and overviews to 4.7s; the candidate tail beyond 4.8s is unobserved."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "677645170332314ba8bdb87b57c252ced48a0a232b123654c25d9d85e0ae1db0",
+        "method": "pe-loop",
+        "round": "v3",
+        "seed": 44,
+        "planner_input": null,
+        "prompt_words": 310,
+        "v5_scores": {
+          "instruction_adherence": 3.1,
+          "content_preservation": 3.4,
+          "temporal_consistency": 3.1,
+          "visual_integrity": 2.3,
+          "aesthetic_coherence": 3.5
+        },
+        "low_reasons": {
+          "visual_integrity": "Decisive observation: foreground roots meet the paving with ambiguous anchoring in several reviewed frames (appearing to merge into or hover over the slabs), a contact defect touching one of the most prominent requested elements, while the scene remains fully interpretable."
+        },
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "partial",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v4",
+      "output_sha256": "9285745571bb01345d4c5c5871cbffcc4c9b41c7561cf9becfd94681290c26af",
+      "seed": 45,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Transform the source temple into photorealistic Tomb Raider-style jungle ruins, preserving its monumental architecture and original camera progression. Keep the blunt-topped center-right tower, two smaller towers receding leftward, continuous roofed colonnade, broad layered foundation, existing stairs, dark rectangular entrances and foreground broken blocks in their original positions and proportions. Apply surface changes rather than rebuilding: retain terrace outlines and courtyard ground level, without new ramps, platforms, towers or enlarged ornamental bands.\n\nAncient narrative bas-reliefs densely cover tower faces and terrace risers: shallow carved deities, intertwined serpents, ceremonial processions and floral borders. Make the terrace relief panels as readable as the tower carvings. Raking sunlight reveals their chipped, rounded edges and granular sandstone texture. Distinct irregular patches of surviving metallic gold leaf cling to doorway borders and carved motifs, with broken edges, tarnished recesses and small golden reflections; not orange paint or intact gold statues.\n\nBark-textured woody roots visibly follow vertical cracks up the main tower, continuing past the doorway to its upper cornices. Smaller branching roots grip terrace corners and gallery foundations. Patchy moss, hanging vines and crevice ferns leave relief panels and columns exposed. Replace manicured grass with low tangled groundcover, damp earth and leaf litter, preserving the open courtyard and scattered blocks rather than paving it over. Dense tropical trees surround the complex; canopy branches frame, never conceal, the towers.\n\nWarm upper-left sunlight penetrates humid mist in angled shafts, illuminating upper walls and gold fragments against deeply shadowed entrances. Cool forest shadows and layered haze create strong tonal depth and a mysterious archaeological-adventure atmosphere. Mist gradually clears along the distant gallery, revealing its full extent and scale. Maintain the source's nearly fixed wide composition and subtle continuous movement; no forward push, zoom or late framing jump. Stable masonry, carvings and roots throughout; only mist and foliage move gently. Natural photographic detail, no people, modern objects, text or interface.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/9285745571bb01345d4c5c5871cbffcc4c9b41c7561cf9becfd94681290c26af.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing1-pe-r1-long-pe-005/run/workers/1/baselines/005__long/pe-loop/3/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The candidate rebuilds the entire visible scene as overgrown Tomb Raider-style jungle ruins for essentially the whole reviewed duration with all central requested elements present, but the requested sunlit-mist lighting progressively fades to near-dusk darkness across roughly the final quarter (≈3.6–4.8 s).",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:8",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:44",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96",
+              "source:timelinep1:28"
+            ],
+            "limitations": [
+              "Judged from the four reviewed segment intervals (0.0–1.4 s, 1.4–2.8 s, 2.8–4.2 s, 4.2–4.8 s); the candidate interval 4.8–5.0 s is unobserved.",
+              "Gold ornament remnants are confirmed in 0–2.8 s frames but sit at or below resolution in the 2.8–4.2 s segment, so their presence there is unverified rather than confirmed or absent.",
+              "Camera behaviour is judged from framing changes between supplied stills; sub-pixel translation or a very slow push-in cannot be ruled in or out.",
+              "The mysterious-adventure atmosphere is judged visually only; no audio was supplied."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The candidate keeps the source moment recognizable — a wide establishing view of a grand ancient temple whose composition maps onto the source — while only peripheral beats are weakened.",
+            "evidence_refs": [
+              "source:timelinep1:28",
+              "candidate:timelinep1:28",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "source:timelinep1:33",
+              "source:timelinep1:40",
+              "candidate:timelinep1:56"
+            ],
+            "limitations": [
+              "Correspondence is assessed qualitatively from stills; no per-pixel alignment or optical flow was supplied.",
+              "Tiny source visitor figures are near the resolution limit; their exact number and paths are approximate, and their absence in the candidate is asserted only where the corresponding candidate ground area is visible.",
+              "The early segment reports the candidate camera slightly lower and closer than the source viewpoint; the degree of this offset cannot be measured from stills."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "Across the four reviewed segments covering 0.0–4.8 s the candidate sequence is continuous and stable, with only subtle texture shimmer and tiny intermittent specks as transient artifacts.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:20",
+              "candidate:timelinep0:22",
+              "candidate:timelinep0:25",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:29",
+              "candidate:timelinep1:45",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:63",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Observed intervals are 0.0–1.4 s, 1.4–2.8 s, 2.8–4.2 s and 4.2–4.8 s; the candidate interval 4.8–5.0 s is unobserved, so end-of-clip behaviour beyond 4.8 s is unknown.",
+              "The subtle boiling of foliage, mist and relief textures near 1.0–1.4 s could partly reflect compression rather than generative error.",
+              "The late progressive dimming is smooth within the reviewed frames; whether it continues, stabilizes or reverses after 4.8 s is unseen.",
+              "Frame spacing is 0.05 s; sub-frame micro-motion of mist, foliage and figures cannot be assessed."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "Subjects, geometry, boundaries and contacts are well formed for the photoreal-cinematic jungle-ruin medium, with only minor artifacts outside the focal structures.",
+            "evidence_refs": [
+              "candidate:timelinep0:8",
+              "candidate:timelinep0:20",
+              "candidate:timelinep1:44",
+              "candidate:timelinep2:60",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Distant gallery relief and the misty left background render with low definition; fine structural detail there is unverified rather than confirmed intact.",
+              "Relief iconography, thin vine strands and moss/lichen distinction sit at or below supplied resolution, so micro-level defects cannot be excluded.",
+              "The subtle shimmer and intermittent specks near the left causeway (≈1.0–1.4 s) could partly reflect compression."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "The result reads as one designed work — a unified warm-gold misty jungle system with canopy framing, god rays, dark portals and lit reliefs — while the late fade toward near-dark is a local lighting shift within an otherwise coherent system.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:8",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:96",
+              "source:timelinep2:56"
+            ],
+            "limitations": [
+              "Atmosphere and design quality are judged visually only; no audio or metadata was supplied.",
+              "The cause of the late dimming (time-of-day shift versus exposure change) is not determinable from stills.",
+              "Background adaptation of the source's multi-tower skyline is loose and could not be checked at fine detail below supplied resolution."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "005",
+        "prompt_form": "long",
+        "video_sha256": "9285745571bb01345d4c5c5871cbffcc4c9b41c7561cf9becfd94681290c26af",
+        "method": "pe-loop",
+        "round": "v4",
+        "seed": 45,
+        "planner_input": null,
+        "prompt_words": 310,
+        "v5_scores": {
+          "instruction_adherence": 3.0,
+          "content_preservation": 3.0,
+          "temporal_consistency": 3.1,
+          "visual_integrity": 3.0,
+          "aesthetic_coherence": 3.5
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "direct",
+      "candidate_id": "direct",
+      "output_sha256": "bc83db75f4d3fc409bd3a7ab72db12f6484c69a9b14f1a9b43c69735329e134c",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "85dcfdf68efce22cda75e744c3a0aed5b7de5cfda3d3eedabb8a3580772bb614",
+        "status": "recorded"
+      },
+      "prompt": "Reimagine the temple as Tomb Raider-style jungle ruins. Ancient reliefs cover massive towers and layered terraces; roots climb through stone cracks among moss and remnants of gold ornament. Sunlight penetrates humid forest mist, creating strong tonal depth between dark entrances and upper walls. The original camera movement gradually reveals the temple's scale, creating a mysterious adventure atmosphere.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/bc83db75f4d3fc409bd3a7ab72db12f6484c69a9b14f1a9b43c69735329e134c.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-20261102/results/media/bc83db75f4d3fc409bd3a7ab72db12f6484c69a9b14f1a9b43c69735329e134c.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.7,
+            "reason": "The decisive observation: the requested jungle-ruin world is realized across essentially the whole candidate duration with its construction logic visible (carved relief bands, layered terraces, descending roots, moss, gold emblems, canopy god rays and a dark portal), but the explicitly requested gradual scale-revealing camera movement is absent in every supplied segment, leaving one central request element unrealized. Supporting observations: the Tomb Raider-style jungle-ruins conversion (r1) is fully established from the first frame with massive framing trunks, hanging roots, mossy masonry, ferns and humid haze (candidate:timelinep0:0, candidate:timelinep1:28); reliefs, arched niches and layered terraces with a central stair (r2) cover the facade, although the massing reads more intimate than the source's sprawl and the tower top is cropped by the frame edge (candidate:timelinep0:10, candidate:timelinep1:49, candidate:timelinep2:84); roots gripping stone, moss on terraces and two gold ornaments (r3) are present (candidate:timelinep0:7, candidate:timelinep1:42); sunbeams through mist with strong dark-entrance versus lit-upper-wall tonal depth (r4) are clearly realized (candidate:timelinep0:20, candidate:timelinep1:56); the mysterious adventure mood (r5, second half) is present, but framing, scale and composition are unchanged from first to last supplied frame in all four segments, with no pan, track, zoom or progressive reveal observable (candidate:timelinep0:28, candidate:timelinep1:28, candidate:timelinep1:56, candidate:timelinep2:56, candidate:timelinep2:84, candidate:timelinep3:84, candidate:timelinep3:96). Gap to the next higher anchor: r5's first half would need an observable progressive framing or scale change across the clip; here the near-static tableau leaves that central element unrealized while the scene conversion itself is otherwise complete.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:10",
+              "candidate:timelinep0:20",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "The request describes an original camera movement that gradually reveals the temple's scale, but the supplied source frames show locked-off framing; the requirement is judged from the request text, and no reveal is observable in source evidence.",
+              "Candidate frames cover 0.0-4.8s; the 4.8-4.85s tail and the final overview target at source 4.95s are unsupplied, so a late reveal cannot be excluded from evidence.",
+              "Sub-threshold micro-motion cannot be confirmed or excluded from stills at the 0.05s sampling.",
+              "The mysterious-adventure atmosphere is a qualitative impression judged from visible content only."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The decisive observation: the source moment's central anchors survive the recast — a monumental carved temple with a dark doorway, ascending stair, layered terraces and relief-covered stone — while the source's timelapse texture (cloud drift, light shifts, tiny visitors) is flattened to faint ambient shimmer and the wide three-quarter courtyard vista is restaged as a frontal tree-framed tableau. Supporting observations: the source's corner tower with dark doorway, stair and tiered terraces is echoed by a frontal central tower with dark portal, stair and layered platforms (source:timelinep0:0 vs candidate:timelinep0:0); the subject role, massive scale and carved-stone material correspond thematically across all segments (source:timelinep1:56 vs candidate:timelinep1:56; source:timelinep2:84 vs candidate:timelinep2:84); the source's cloud-driven light changes have only a faint counterpart in low-amplitude ray/mist luminance variation with no directional trend, and the source's tiny visitor figures have no counterpart in the candidate (source:timelinep3:99 vs candidate:timelinep3:96). Gap to the next higher anchor: full correspondence would additionally require a recognizable counterpart for the timelapse progression and the visitor presence, which the near-static candidate does not supply; no central role, beat or interaction is unreadable, so the lower anchor is not reached.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "source:timelinep1:56",
+              "candidate:timelinep1:56",
+              "source:timelinep2:84",
+              "candidate:timelinep2:84",
+              "source:timelinep3:99",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Source-side correspondence for the request's described gradual camera reveal could not be checked because no reveal is observable in the supplied source frames.",
+              "Tiny visitor figures in the source are near the resolution limit; their absence in the candidate is reported as absent-from-evidence, not established for the unseen tail.",
+              "Candidate frames end at 4.8s; the 4.8-4.85s interval is unseen.",
+              "Both cameras are effectively locked-off in the supplied frames, so camera-intent correspondence rests on limited observable motion."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "The decisive observation: across the 96 supplied consecutive candidate frames spanning 0.0-4.8s, the jungle-ruin tableau holds structurally stable with no medium switching, element popping, identity drift, prop loss, geometry breakdown or end-of-clip collapse, and the only temporal irregularity is low-amplitude per-frame flicker in ray and mist luminance. Supporting observations: geometry, stair, portal, emblems, trunks and ferns persist unchanged frame-to-frame in the opening segment with minor ray/mist luminance variation (candidate:timelinep0:0, candidate:timelinep0:28); the middle segments report stable structures, light shafts and composition with no observable flicker, swaps or pops at the 0.05s sampling (candidate:timelinep1:28, candidate:timelinep1:56, candidate:timelinep2:56, candidate:timelinep2:84); the closing segment shows consistent structure identity, tree placement and lighting with no jumps (candidate:timelinep3:84, candidate:timelinep3:96). A static result is credited as stable here; the absence of the requested camera motion is scored under instruction adherence, not temporal consistency. Gap to the next higher anchor: a 4.0 would require absence of the noted per-frame luminance jitter and observed evidence through the end of the clip.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Consecutive-frame coverage is continuous from 0.0s to 4.8s via four segments sharing boundary frames; the 4.8-4.85s tail of the candidate is unseen.",
+              "Sub-threshold micro-motion such as mist drift, foliage sway or a very slow drift cannot be confirmed or excluded at the 0.05s sampling.",
+              "Minor ray/mist luminance flicker was noted in the opening segment and not in later segments; its persistence across the clip is unverified."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.6,
+            "reason": "The decisive observation: most structures in the stylized painterly scene are well formed for the medium, but visible irregularities concentrate near the focal portal zone — the central stair shows inconsistent step widths and an ambiguous junction into the dark doorway, an unresolved low-contrast brownish shape sits inside the portal, the left shrine's steps and rooflines do not connect clearly, and the upper gold medallion lacks clear architectural anchoring. Supporting observations: the flagged irregularities persist across the static scene (candidate:timelinep2:56, candidate:timelinep2:70, candidate:timelinep2:84, candidate:timelinep2:60); the ambiguous brownish shape appears in several frames (candidate:timelinep2:60, candidate:timelinep2:72); other segments found no warping, duplication or element loss in stairs, portal, emblems, trunks, roots and mossy blocks (candidate:timelinep0:0, candidate:timelinep0:7, candidate:timelinep3:84, candidate:timelinep3:96). Gap to the next higher anchor: the observed artifacts sit at or immediately around focal structures (stair, portal, medallion) rather than clearly outside them, so the minor-artifact anchor is not reached; the scene remains fully interpretable with no melting, merging or illegible clutter, so the defect-anchor is not reached either.",
+            "evidence_refs": [
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:60",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:72",
+              "candidate:timelinep2:84",
+              "candidate:timelinep0:7",
+              "candidate:timelinep0:0",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "No ground-truth geometry is available; the structural irregularities are perceptual judgments at supplied resolution.",
+              "Stylization was assessed against the painterly concept-art idiom, not photorealism; some irregular step and shrine geometry may be idiom-consistent.",
+              "The identity of the brownish shape inside the central doorway (door, object or rendering artifact) is unresolved at supplied resolution.",
+              "The same static scene appears in all segments, so defect visibility should be uniform; differing defect reports across segments were reconciled by treating the flagged items as the careful structural read."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "The decisive observation: the candidate reads as one deliberate painterly system — unified dark-green and warm-gold palette, consistent upper-left god-ray lighting with the dark portal as tonal anchor, and a tree-framed composition into which the requested elements (gold remnants, roots, moss, ferns) are adapted as design components. Supporting observations: the visual system is consistent from the opening frame onward with canopy replacing open sky and a jungle floor replacing the lawn as deliberate counterparts (candidate:overview:0, source:timelinep0:0); the stylized look never mixes with live-action regions and the atmosphere matches the requested mysterious adventure mood (candidate:timelinep1:42, candidate:timelinep2:70); minor local inconsistencies remain, including variable relief scale and alignment and loosely connected shrine geometry, within a fairly generic symmetric key-art composition (candidate:timelinep2:70, candidate:timelinep3:96). Gap to the next higher anchor: a 4.0 would require resolution of the local inconsistencies and a less generic compositional scheme; the lower anchor is not reached because no clashing visual systems, unrequested stylized/live-action mixture, or mood contradiction is present.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "source:timelinep0:0",
+              "candidate:timelinep1:42",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Atmosphere and mood were judged from visible content only; no audio or metadata was supplied.",
+              "The generic-composition judgment is a qualitative impression based on the supplied frames.",
+              "The candidate's static presentation limits the observable design of timing-based integration such as a reveal choreography."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": null
+    }
+  ]
+}

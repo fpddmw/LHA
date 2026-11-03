@@ -10,7 +10,7 @@ Write the source's skeleton in a sentence or two: who acts, what happens and in 
 
 ## 2. List the planes and give each a counterpart
 
-List every visible plane: each person, held props, furniture or vehicles, ground, middle distance, background, sky and light. For each, write what it becomes in the target world and how that world builds it. A plane you leave out stays source-like and the result reads as a collage. See [every plane](../experience/curated/entries/P-every-plane.md) and [counterparts](../experience/curated/entries/P-counterparts.md). Use the [meaning guide](../guides/meaning.md) for roles and event logic.
+List every visible plane: each person, held props, furniture or vehicles, ground, middle distance, background, sky and light. For each, write what it becomes in the target world and how that world builds it. Budget construction for the whole requested world. An explicitly described plane can also remain source-like; then rework its construction and input support rather than adding the same name again. See [every plane](../experience/curated/entries/P-every-plane.md) and [counterparts](../experience/curated/entries/P-counterparts.md). Use the [meaning guide](../guides/meaning.md) for roles and event logic.
 
 ## 3. Write the medium's construction logic
 

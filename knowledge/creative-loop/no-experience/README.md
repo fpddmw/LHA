@@ -3,7 +3,7 @@
 | Question | Resource |
 |---|---|
 | How do the tools and reading work? | [Reading manual](READING.md) |
-| What is the moment, which planes need rebuilding, and what does each become? | [Understand and design](UNDERSTAND_AND_DESIGN.md), [meaning](meaning.md) |
+| How should I understand this request and develop its visual proposal? | [Understand and design](UNDERSTAND_AND_DESIGN.md), [meaning](meaning.md) |
 | How do I interpret and compare the results? | [Understand and revise](UNDERSTAND_AND_REVISE.md) |
 | Which visual construction suits the request? | [Theme](../../guides/theme.md), [media](media.md), [time](../../guides/time.md), [combination](../../guides/combination.md), [design expression](design-expression.md) |
 | How do I express the design and review findings in a rendering prompt? | [Prompt-writing guide](../PROMPT_WRITING.md), also included in the Planner instructions |

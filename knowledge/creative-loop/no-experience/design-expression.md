@@ -1,6 +1,6 @@
 # From knowledge to a visual proposal
 
-[Knowledge map](../README.md) · [Reading manual](READING.md) · [Media](media.md) · [Combination](../../guides/combination.md)
+[Knowledge map](README.md) · [Reading manual](READING.md) · [Media](media.md) · [Combination](../../guides/combination.md)
 
 Knowledge becomes useful when it helps the model explain what a proposed image will look like and why its elements belong together. Complete cases supply relationships among subject, material, form, light, and time. The model selects and adapts those relationships to the current request, developing its own proposal where the request leaves choices open.
 

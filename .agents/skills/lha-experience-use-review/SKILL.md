@@ -14,12 +14,12 @@ Follow interpretation into action. Did the advice change which source meaning th
 Useful diagnoses include:
 
 - **Layer or ordering:** a principle was buried under a renderer or family entry, a renderer trap was written as a universal rule, or a condition entry claimed evidence it does not have. Propose where the entry belongs and how the map should order it.
-- **Plane coverage:** the model described the subject and not the other planes; check whether the guidance on rebuilding every plane was read and applied.
+- **Plane realization:** compare every failed region with its submitted clause. Distinguish an omitted region from an explicit construction the renderer failed to realize; check whether the guidance changed the next construction and input or only repeated existing wording.
 
 - **Goal inheritance:** guidance made an optional source function obligatory. Propose a corrected operative condition and summary before adding rendering workarounds.
 - **Discovery:** relevant guidance was available but its title, summary or route hid the useful distinction. Propose the precise entrance that would expose it.
 - **Weak explanation:** advice named competing risks without showing which condition favors which action. Supply the missing discriminator.
-- **Writing drift:** a new account replaced a practical preference with generic caution, copied the previous case's objects as a recipe, or buried the useful action in evidence bookkeeping. Compare it with the current library's representative entries and propose exact wording that restores the judgment and its explanation.
+- **Writing drift:** a new account replaced a practical preference with generic caution, treated an illustrative example as a required recipe, or buried the useful action in evidence bookkeeping. Compare it with the current library's representative entries and propose exact wording that restores the judgment and its explanation.
 - **Misapplication:** the scene did not satisfy the recommendation's condition, or the action kept the same failed construction. Clarify the boundary through the actual case.
 - **Useful adoption or rejection:** a distinction improved scope, input selection or retention of an earlier result. Preserve what it helped the model notice.
 - **Execution failure:** the proposal fit the condition but the renderer did not realize it. Keep sound guidance and sharpen the renderer account.

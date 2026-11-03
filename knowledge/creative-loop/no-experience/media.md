@@ -1,6 +1,6 @@
 # How different media form an image
 
-[Knowledge map](../README.md) · [Subject relationships](../../guides/theme.md) · [Time](../../guides/time.md) · [Combination](../../guides/combination.md)
+[Knowledge map](README.md) · [Subject relationships](../../guides/theme.md) · [Time](../../guides/time.md) · [Combination](../../guides/combination.md)
 
 Choose a medium by how it forms the image: what carries the marks, how edges and values develop, and how light belongs to the depicted scene or its physical support. The source cases below make these alternatives concrete.
 

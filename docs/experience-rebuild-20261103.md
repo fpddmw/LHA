@@ -21,3 +21,13 @@ The task is to recast a video into another world or medium. The older library wa
 - The evidence is one judge, one seed per condition, a handful of train tasks (001, 005, 026 preview; 002, 011 steady-train; plus older fewshot runs). Entries state their status. Family entries for anime, painting and comic have no scored runs and are marked as hypotheses.
 - No claim in this library has been tested by a new generation run. The effect of the library on the final score is to be measured by the full vs none comparison.
 - The repaired evaluation profile (`7f0d19f7…`) has not been used to re-score the evidence.
+
+## Subsequent content correction
+
+The [content correction](experience-content-correction-20261103.md) supersedes two
+parts of this initial rebuild: the omission explanation for 005/026, and the same
+empirical workflow in the none manuals. Current shared/none guidance retains task
+and tool semantics; operative experience preferences reside in the full library
+and full guidance. Full saved case records are available alongside the compact
+extract. Historical drawing evidence remains distinct from missing current v5
+family comparisons. Frozen earlier runs retain the initial version above.

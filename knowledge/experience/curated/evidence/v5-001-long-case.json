@@ -1,0 +1,1264 @@
+{
+  "sample_id": "001",
+  "split": "train",
+  "track": "long",
+  "renderer": "bernini",
+  "request": "Transform the bedroom into a hotel suite with the production design of The Grand Budapest Hotel: strawberry-pink walls, a cream carved headboard, and burgundy velvet create a refined, slightly storybook setting. The woman and child wear coordinated vintage pajamas and continue watching the laptop together on the bed. Soft, even lighting emphasizes pastel color blocks and orderly decorative layers, creating a warm, playful family moment.",
+  "source": {
+    "path": "benchmark_data/train/001/video.mp4",
+    "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b"
+  },
+  "provenance": {
+    "path": "out/four_video_preview_20261102/glm-recast-v5-deliveries/001-long/all-page-data.json",
+    "sha256": "9172515011608afd8e3365b0fbbdc4944b0a43333b02b59a023030a5be9cb3c5",
+    "assembled_on": "2026-11-03",
+    "scope": "Original extract rows plus the cited Direct output. Existing saved reports only; no new scoring."
+  },
+  "comparison_sheet": {
+    "id": "EV-V5-001-long-comparison",
+    "path": "knowledge/experience/curated/evidence/frames/v5-001-long-comparison.jpg",
+    "sha256": "30d0cf71eff260e2f94c1dd31aac683327ae9947ab7294ccc69698145ff02e60",
+    "coverage": "Six evenly spaced samples per row, reused from the Opus review. This is not continuous motion evidence. The sheet omits some candidates; some interrupted attempts have a ? label. Match named rows to candidate IDs and the records below."
+  },
+  "candidates": [
+    {
+      "method": "full",
+      "candidate_id": "v1",
+      "output_sha256": "e42773cc882698aeda2d7b0c1887ef2db2e11605fa7ff6636c4643d154b7247e",
+      "seed": 42,
+      "input": {
+        "video_id": null,
+        "sha256": null,
+        "status": "not retained in the original extract"
+      },
+      "prompt": "Transform this bedroom into an elegant storybook hotel suite with the production design of The Grand Budapest Hotel. Retain the same woman and child, their faces, their relaxed positions together on the bed, the open laptop at their right, and their gentle movements while watching it. The woman smiles, one hand resting on the child's hair and the other near the laptop keyboard. Keep the camera steady and the intimate side view.\n\nReplace the white walls with strawberry-pink painted panels framed by delicate cream moldings. Replace the gray upholstered headboard with a cream-painted carved wooden headboard, with scalloped edges and restrained floral scrollwork clearly visible behind their heads. Dress the bed with ivory linens, orderly blush pillows and deep burgundy velvet cushions; a burgundy velvet coverlet lies across the lower foreground. Add a small antique brass wall sconce with a cream shade on the pink wall at the right, and a neatly framed miniature landscape. The setting feels like a refined 1930s European grand hotel, arranged in precise decorative layers and clean pastel color blocks, not a modern bedroom.\n\nBoth the woman and child wear coordinated vintage blush-pink pajamas with burgundy piping, notched collars, long sleeves and small buttons. Soft, even warm lighting, gentle shadows, clear natural faces, rich velvet texture and delicate carved details. A warm, playful family moment in a live-action cinematic image. Maintain the suite decor and matching pajamas throughout the entire shot.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/e42773cc882698aeda2d7b0c1887ef2db2e11605fa7ff6636c4643d154b7247e.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-20261102/runs/loops-b95d0514b5af/workers/0/tasks/001__long__full/run/videos/v1/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Across every reviewed interval (0.0-1.4s, 1.4-2.8s, 2.8-4.2s, 4.2-5.0s) the whole visible scene is rebuilt in the requested hotel-suite world with no source-like region remaining: strawberry-pink walls with cream moldings, an ornate cream carved headboard, a burgundy velvet blanket, a brass sconce, a framed painting and striped pillows replace the grey headboard, white bedding and plain walls, and both figures wear matching pink satin pajamas with burgundy trim while continuing to watch the laptop on the bed. Soft, even warm lighting renders the requested pastel color blocks and orderly decorative layers throughout. All central requested elements and relations (r1-r3) are realized with the set-construction logic visible from first to last reviewed frame. No gap to a higher anchor remains within this scale.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:100",
+              "candidate:timelinep0:14",
+              "candidate:timelinep2:70"
+            ],
+            "limitations": [
+              "The final 0.05s (5.0-5.05s) of the declared event has no supplied frame.",
+              "Fine details such as the sconce lit-state, fabric weave and laptop screen content are at the limit of the supplied resolution."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.8,
+            "reason": "The moment stays recognizably the same - woman and child reclined together watching a laptop on the bed in the same left/center/right staging and held camera framing - but two continuous source interactions lack counterparts: the woman's hand resting on the child's head (raised near her own hair in the candidate, hair contact unverifiable) and the child's fingers-at-mouth gesture (open-mouthed smile instead), and both figures' likenesses visibly shift from curly auburn-blonde hair to straight dark brown for the woman and from curly blonde toddler hair to a smoother bob for the child. Roles, relationship, activity order and spatial arrangement remain readable, and the laptop-watching beat is preserved with hand-on-trackpad contact in both streams. The gap to 3.0 is the accumulation of more than one weakened minor interaction plus the likeness drift; the gap to 2.0 is that the central requested interaction, shared laptop watching on the bed, remains fully legible.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "source:timelinep2:70",
+              "candidate:timelinep2:70",
+              "source:timelinep3:92",
+              "candidate:timelinep3:92",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Hand-to-child's-hair contact in the candidate cannot be verified from stills.",
+              "Facial likeness comparison is limited by resolution and the child's partial occlusion.",
+              "The last 0.05s of the event is unseen."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "All four supplied consecutive-frame segments (0.0-1.4s, 1.4-2.8s, 2.8-4.2s, 4.2-5.0s) show one continuous held scene in which identities, wardrobe, contacts (hand-to-trackpad, child-against-woman), props and decor remain consistent, with no medium switching, flicker, popping, teleportation or end-of-clip collapse observed; only small micro-motions around the trackpad hand, heads and blanket folds occur. Segment seams are continuous, with matching frames at 1.4s, 2.8s and 4.2s across neighboring segments. The candidate's sparse, near-still motion is stable rather than discontinuous, and controlled stillness is not itself a defect. No gap to a higher anchor remains given the observed evidence.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "0.05s frame spacing leaves micro-motion, blinking and inter-frame smoothness only partially verifiable.",
+              "The 5.0-5.05s tail has no supplied frame.",
+              "Slight softness of the woman's raised hand in some late frames could not be confirmed as deformation."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.4,
+            "reason": "Subjects, furniture and contacts are well formed and legible for the medium - faces, hands, trackpad contact, headboard carving and wall paneling hold together across the reviewed frames - with minor local artifacts: slight softness in the woman's raised hand, mildly stiff facial rendering, and a small persistent reddish patch at the child's hairline. These blemishes sit near focal structures but do not impair the important subjects or interactions, and the scene remains fully interpretable. The gap to 4.0 is the presence of these small visible artifacts; the gap to 2.0 is that no consequential melting, merging or illegibility is observed.",
+            "evidence_refs": [
+              "candidate:timelinep0:5",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:92",
+              "candidate:timelinep3:100",
+              "candidate:overview:0"
+            ],
+            "limitations": [
+              "Fine finger articulation and carving edges are at the resolution limit of the supplied frames.",
+              "The child's hairline patch could be a deliberate mark or an artifact; intent is unverifiable.",
+              "Occluded regions (the child's left arm, off-frame areas) are unobserved, not confirmed correct."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.9,
+            "reason": "The result reads as one deliberately designed pastel system - pink and cream color blocks, burgundy velvet, brass and framed-art accents, pajamas piped to match the blanket, warm even light and symmetric decorative layers - with subjects and environment adapted into fitting counterparts and no unrequested live-action/stylized mixture. The retained modern laptop is a requested element and integrates without clash. The gap to 4.0 is a slight stylistic overstatement in the heavily ornate carving and flourish density, which reads a touch more maximalist than the refined, restrained Grand Budapest finish requested.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:84",
+              "candidate:timelinep1:42",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "The judgment of refined versus maximalist styling is qualitative at this resolution.",
+              "The final 0.05s of the event is unseen."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "long",
+        "video_sha256": "e42773cc882698aeda2d7b0c1887ef2db2e11605fa7ff6636c4643d154b7247e",
+        "method": "full",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": null,
+        "prompt_words": 236,
+        "v5_scores": {
+          "instruction_adherence": 4.0,
+          "content_preservation": 2.8,
+          "temporal_consistency": 4.0,
+          "visual_integrity": 3.4,
+          "aesthetic_coherence": 3.9
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "full",
+      "candidate_id": "v1",
+      "output_sha256": "4ce8e27b0a5ea1d72cb098165e4f6fd27091fb76d9184e5c925232f3be9dbfc3",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform the bedroom into a refined storybook hotel suite with the production design of The Grand Budapest Hotel. Preserve the same woman and child, their faces, curly hair, positions and gentle movements, nestled together watching the open silver laptop at the right of the bed. The woman smiles with one hand resting on the child's head and the other using the laptop. Retain the framing and steady continuous shot.\nReplace the white walls with strawberry-pink painted panels bordered by orderly cream moldings and slender gold trim. Directly behind their heads, replace the gray headboard with a tall cream-painted carved wooden headboard: scalloped crest, delicate floral scrollwork and a burgundy velvet inset. Burgundy velvet cushions and ivory pillows with burgundy piping frame their shoulders. A folded burgundy velvet coverlet crosses the lower bed, with cream bedding supporting the laptop. On the exposed right wall, two aligned small gilt-framed botanical prints and a petite brass sconce with a pleated cream shade form neat decorative layers.\nBoth wear coordinated vintage blush-pink cotton pajamas with burgundy piping, notched collars, button fronts and long sleeves. The child's visible chest and shoulder clearly show the same matching pajama fabric. Keep hands and faces unobstructed. Broad diffused light evenly illuminates both faces, pastel wall panels and cream carving, with gentle shadows and natural skin tones. Rich soft velvet pile contrasts with smooth painted wood and cotton. Clear pastel color blocks, meticulously dressed European hotel interior, warm playful family intimacy, realistic cinematic live action.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/4ce8e27b0a5ea1d72cb098165e4f6fd27091fb76d9184e5c925232f3be9dbfc3.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-full-9000-existing0-full-v2-r1-long-full-001/run/workers/0/tasks/001__long__full/run/videos/v1/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Across all reviewed consecutive frames (0.00–5.00s) the entire visible scene is rebuilt as the requested Grand Budapest-style hotel suite: strawberry-pink walls with cream-and-gold panel moldings, an ornate cream carved headboard, burgundy velvet duvet and pillows with gold trim, a brass sconce with cream shade and a gilt-framed botanical print, with both subjects in coordinated pink pajamas with burgundy piping continuing to watch the laptop on the bed. The decisive observation is that no source-like region or interval remains anywhere in the supplied candidate frames. Supporting: the soft, even warm lighting with pastel pink/cream blocks and orderly decorative layers (r3) is present from candidate:timelinep0:0 through candidate:timelinep3:100; wardrobe and continued laptop co-viewing (r2) are maintained in every reviewed segment (candidate:timelinep0:0–28, candidate:timelinep1:28–56, candidate:timelinep2:56–84, candidate:timelinep3:84–100), against a plain white bedroom with grey headboard in the source (source:timelinep0:0, source:timelinep2:56). The gap to the next higher anchor shows no incomplete secondary region or partial central element within the reviewed field of view.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100",
+              "source:timelinep0:0",
+              "source:timelinep2:56"
+            ],
+            "limitations": [
+              "Observed scope is the fixed frontal camera field over 0.00–5.00s; the final 0.05s of the declared 5.05s timeline is unseen, and room areas outside the frame are unseen rather than confirmed absent.",
+              "Material judgments (velvet texture, vintage pajama styling, storybook quality) rest on visible appearance at supplied frame resolution."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "The moment keeps recognizable counterparts for every central role, spatial relation and interaction — woman reclined left with one hand on the child's head and the other at the laptop, child beside her, laptop right, static camera, watching together throughout — while minor beats are weakened: the child's quiet fingers-at-mouth attention becomes a raised loose fist with an open smile from candidate:timelinep0:0 onward, the woman's broad smile is amplified into open laughter with eyes lowering/closing around 4.6–5.0s (candidate:timelinep3:90–100) where the source keeps eyes toward the screen, and the silver keyed laptop becomes a dark one with a glowing lid logo and mostly featureless deck (source:timelinep0:0 vs candidate:timelinep0:0). Supporting: frame-aligned blocking matches the source at matching timestamps (source:timelinep2:76 vs candidate:timelinep2:76; source:timelinep3:84 vs candidate:timelinep3:84), both identities are preserved, and no central role, beat or explicitly retained action (continue watching the laptop together) is lost or unreadable. The gap to 4.0 consists of these minor beat/prop weakenings; the gap to 3.0 is that no central correspondence breaks.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "source:timelinep2:76",
+              "candidate:timelinep2:76",
+              "source:timelinep3:92",
+              "candidate:timelinep3:92",
+              "source:timelinep3:100",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Motion preservation was not declared required; pose and expression deviations are reported descriptively without fidelity judgment.",
+              "The woman's gaze direction and micro-expressions cannot be pinned precisely at supplied resolution.",
+              "The child's raised-fist finger articulation is under-resolved, leaving that gesture's exact form uncertain."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "The 104 reviewed consecutive candidate frames spanning 0.00–5.00s show identities, wardrobe, set dressing (headboard crest, sconce, print, moldings, pillow placement) and contacts (hand-to-child's-head, hand-to-keyboard, child leaning on torso) continuous from start to end with no flicker, popping, prop vanishing, identity switch or medium switch, and no end-of-clip collapse. The decisive observation is clean continuity in all four segments with the shared boundary frames (28, 56, 84) matching between adjacent segments. Supporting: the expression build progresses coherently (closed smile at candidate:timelinep0:0, open laughter by mid-frames, settled smiling with blinks at candidate:timelinep3:90–100), micro-motion such as keyboard-hand shifts and blinks is present rather than frozen, and timestamps advance uniformly. The gap to the next higher anchor shows no observed discontinuity within the reviewed interval; only sub-sampling effects remain unverifiable.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Observed intervals are 0.00–1.40s, 1.40–2.80s, 2.80–4.20s and 4.20–5.00s at 0.05s steps; the final 0.05s of the 5.05s timeline is unseen.",
+              "Micro-flicker in carved or textured surfaces is not assessable at this sampling rate and resolution."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "Faces, hands, headboard carving, sconce, artwork and bedding render coherently with no confirmed melting, merging, warping, duplication or geometry break across any reviewed segment, while minor local imperfections remain at the resolution limit: the child's raised-fist finger articulation is not clearly resolved (candidate:timelinep0:0, candidate:timelinep2:64) and the laptop deck reads mostly featureless without clearly visible keys (candidate:timelinep0:0, candidate:timelinep0:28). The decisive observation is that no consequential defect impairing a focal structure was observed, but these small under-resolved or simplified details keep the result below the fully clean anchor. Supporting: hand-keyboard and hand-head contacts read correctly in all segments (candidate:timelinep1:28–56, candidate:timelinep3:84–100), and the scene is fully interpretable throughout. The gap to 4.0 is these minor local artifacts; the gap to 2.0 is that no defect affects the legibility of faces, hands or the central interaction.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep2:64",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Finger articulation, velvet pile and carving relief are near the limit of supplied frame resolution; concealed surfaces (laptop underside, areas behind subjects) are unobserved rather than confirmed correct.",
+              "Observed scope is 0.00–5.00s; the final 0.05s is unseen."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "The candidate reads as one deliberate visual system — pastel pink/cream color blocks, gold-trimmed burgundy velvet, carved cream headboard, brass sconce and framed botanical print under soft, even, warm light, with both subjects adapted into coordinated pajamas matching the palette and the warm, playful family mood requested. The decisive observation is convincing overall integration with one small local inconsistency: the glowing white laptop-lid emblem and the simplified dark deck, a modern brand flourish not derived from the requested design and drawing a bright accent within the ordered pastel composition (candidate:timelinep0:0, candidate:timelinep3:92). Supporting: the lighting stays even without harsh shadows across all segments (candidate:timelinep1:32, candidate:timelinep2:56, candidate:timelinep3:100), decorative layers are orderly and symmetric, and no unrequested stylized/live-action mixture or conflicting visual system appears. The gap to 4.0 is this minor emblem/deck inconsistency; the gap to 3.0 is that no consequential integration clash is present.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:32",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:92",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Storybook quality and material finish are judged on visible appearance at supplied resolution.",
+              "Decor beyond the fixed frontal frame is unseen; the final 0.05s of the timeline is unseen."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "long",
+        "video_sha256": "4ce8e27b0a5ea1d72cb098165e4f6fd27091fb76d9184e5c925232f3be9dbfc3",
+        "method": "full",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": "source",
+        "prompt_words": 246,
+        "v5_scores": {
+          "instruction_adherence": 4.0,
+          "content_preservation": 3.5,
+          "temporal_consistency": 4.0,
+          "visual_integrity": 3.5,
+          "aesthetic_coherence": 3.8
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v1",
+      "output_sha256": "58af942ba10da5adbcb2f60b4c2045bb206efc6d7272f26c31737abe347c6c61",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform the bedroom into a refined, slightly storybook hotel suite inspired by the production design of The Grand Budapest Hotel. Preserve the original fixed medium-wide side view, framing, woman and child's identities, curly hair, facial expressions, positions and natural movements. They remain nestled together on the bed, looking at the open silver laptop on the right; the woman smiles, rests one hand on the child's head and gently uses the laptop with the other, while the child keeps a hand near their mouth.\n\nReplace the plain white wall with strawberry-pink painted panels bordered by delicate cream molding, with a small ornate gilt-framed vintage print in the open wall area. Replace the gray upholstered headboard with an elegant cream-painted carved wooden headboard, featuring a scalloped crest, floral relief and subtle gold accents. Dress the bed in ivory linens with blush piping, orderly layered cream and dusty-pink pillows, burgundy velvet accent cushions and a rich burgundy velvet coverlet across the lower foreground. Keep the laptop and hands clearly visible.\n\nDress both woman and child in coordinated vintage blush-pink pajamas with burgundy piping, rounded notched collars, long sleeves and small pearl buttons; preserve their body proportions and poses. Use soft, even, warm lighting, gentle shadows and clean pastel color blocks. Emphasize tactile velvet, satin cotton and carved painted wood, creating a charming luxurious family moment. Maintain realistic faces and skin tones, consistent wardrobe and decor throughout, and the source timing without cuts or camera movement.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/58af942ba10da5adbcb2f60b4c2045bb206efc6d7272f26c31737abe347c6c61.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing0-pe-r1-long-pe-001/run/workers/0/baselines/001__long/pe-loop/0/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "Decisive observation: the requested Grand Budapest-style hotel suite — strawberry-pink paneled walls with moldings, ornate cream carved headboard, burgundy velvet coverlet, coordinated pink satin pajamas on both subjects, and soft even pastel lighting with orderly decorative layers — is present in every reviewed candidate frame from 0.0s to 5.0s, but the requested activity 'continue watching the laptop together' is only partially realized: both subjects' gaze is on the laptop through roughly the first half (per timelinep0), while from ~2.8s to the end the woman's gaze reads toward the viewer and the scene holds near-static. Supporting observations: the styled environment, wardrobe and lighting are consistent across all four reviewed segments with no relapse to the source bedroom (gray headboard, white walls, white duvet); the laptop, bed positioning and child's hand-at-mouth pose persist throughout. The gap to the 4.0 anchor is that the shared laptop-watching behavior would need to persist with living motion through the full duration rather than degrading into a camera-directed smile and a hold after ~2.8s.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:84",
+              "candidate:overview:100",
+              "candidate:timelinep0:0",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Laptop screen content is illegible in both videos, so 'watching' is judged only from eye and head orientation in stills.",
+              "The final 0.05s of the requested interval (5.0-5.05s) was not supplied in event frames.",
+              "Whether the stillness after ~2.8s reflects a static render or identical sampling cannot be distinguished from the supplied frames."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.0,
+            "reason": "Decisive observation: the source's central affectionate interaction — the woman's hand resting on the child's head continuously — is not reproduced; in the candidate her hand is raised to her own hair/head instead, which by itself places the score at the 2.0 anchor (one central interaction lost while staging remains recognizable). Supporting observations: roles (woman and child reclining in bed), left-to-right order (woman, child, laptop), the child's hand-at-mouth pose, the woman's hand at the laptop area and the general watching-on-the-bed beat all retain recognizable counterparts, and the woman's gaze additionally leaves the screen toward the viewer in the second half, further weakening the watching-together interaction. The candidate woman also reads as a visibly different-looking person filling the same role (darker, shoulder-length curls versus voluminous auburn curls, different facial features, added earrings), consistent with the segment observation that the subjects do not visibly match; the camera intent is likewise restaged from a tight side-profile shot to a wider frontal composition. The gap to the 3.0 anchor would require the touch contact and the laptop-directed gaze to survive with closer subject likeness.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "source:timelinep1:28",
+              "source:timelinep2:56",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56"
+            ],
+            "limitations": [
+              "Subject identity is judged only from visible appearance in supplied frames; no ground-truth identity reference was provided, so the degree of likeness drift versus a clearly different person cannot be conclusively determined.",
+              "The two adjacent segment reviews describe the woman's left-arm position differently at the shared 2.8s frame (raised near her own head versus around the child's shoulders), so the exact pose configuration at that timestamp is uncertain."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "Decisive observation: across all four reviewed consecutive-frame segments covering 0.0-5.0s (29+29+29+17 native frames at 0.05s spacing), the candidate holds a single continuous staging with no observed cuts, flicker, popping elements, identity switches, vanished props or detached contacts, while motion progressively ceases until the 4.2-5.0s frames are visually identical in pose, expression, fabric folds and lighting. Supporting observations: the smile develops gradually (visible from ~0.7-0.9s, teeth from ~2.2-2.3s) and the environment, wardrobe and prop positions remain fixed; the transition into stillness is a gradual slowdown rather than a jump, so the event remains interpretable throughout. The gap to the 4.0 anchor is that motion would need to remain consistent to the end instead of dying into a full hold over roughly the final 2.2s.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Visually identical frames could reflect identical sampling rather than a truly static render; the two are indistinguishable from this evidence.",
+              "The final 0.05s (5.0-5.05s) of the declared event was not supplied.",
+              "The left-arm position change around 2.65-2.9s is described as raised near the head in one segment review and around the child's shoulders in the adjacent review of the shared 2.8s frame; no jump was flagged in either segment, but whether that repositioning was smooth cannot be verified from the descriptions."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.0,
+            "reason": "Decisive observation: in the 2.8-4.2s segment the woman's extended hand shows softened, partially fused finger definition where it meets the laptop keyboard, and the arm passing behind the child shows a smoothed shoulder/elbow join — a visible defect on focal hand and contact structures, which caps the score at 2.0. Supporting observations: the rest of the frame holds coherent geometry — headboard carving, wall paneling, pillows and the framed picture show no warping or flicker across the reviewed frames, and the earlier (0-2.8s) and later (4.2-5.0s) segments report no anatomical breaks, duplications or fusions, with head overlaps reading as natural occlusions. The scene remains interpretable, matching the 2.0 anchor rather than 1.0; reaching 3.0 would require the hand-contact rendering defect to be absent.",
+            "evidence_refs": [
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Finger-level anatomy and fabric texture sit at the limit of resolvability in the supplied frames, so subtler defects at that scale cannot be ruled out.",
+              "Concealed regions (lower bodies under the velvet, areas outside the frame) are unobserved, not evidence of correct geometry."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "Decisive observation: the candidate's pink boiserie walls, cream rococo carved headboard, burgundy velvet, gilt-framed picture, ruffled pillow trim and matching satin pajamas form one cohesive, deliberately composed pastel storybook system under soft even light, with only minor imbalance from the held direct-to-camera broad smile and tableau-like stillness in the second half, which slightly soften the requested candid warm family-moment mood. Supporting observations: the palette is restricted and consistent (pink/cream/burgundy), the decorative layers are orderly, subjects are adapted into fitting counterparts via the coordinated pajamas, and no conflicting visual systems or unrequested stylized/live-action mixtures are visible; the modern laptop is explicitly retained by the request. The gap to the 4.0 anchor is a fully convincing integration of performance and moment — the woman engaging the viewer rather than the screen reads as a posed portrait layer on an otherwise unified design.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:84",
+              "candidate:overview:100",
+              "candidate:timelinep2:74",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Mood and 'warm, playful family moment' are judged visually only; no audio was supplied.",
+              "Design attribution to The Grand Budapest Hotel production design is a qualitative reading of visible elements (pink walls, cream carved headboard, burgundy velvet) rather than a verifiable match."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "long",
+        "video_sha256": "58af942ba10da5adbcb2f60b4c2045bb206efc6d7272f26c31737abe347c6c61",
+        "method": "pe-loop",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": null,
+        "prompt_words": 242,
+        "v5_scores": {
+          "instruction_adherence": 3.0,
+          "content_preservation": 2.0,
+          "temporal_consistency": 3.5,
+          "visual_integrity": 2.0,
+          "aesthetic_coherence": 3.5
+        },
+        "low_reasons": {
+          "content_preservation": "Decisive observation: the source's central affectionate interaction — the woman's hand resting on the child's head continuously — is not reproduced; in the candidate her hand is raised to her own hair/head instead, which by itself places the score at the 2.0 anchor (one central interaction lost while staging remains recognizable). Supporting observations: roles (woman and child reclining in bed), left-to-right order ",
+          "visual_integrity": "Decisive observation: in the 2.8-4.2s segment the woman's extended hand shows softened, partially fused finger definition where it meets the laptop keyboard, and the arm passing behind the child shows a smoothed shoulder/elbow join — a visible defect on focal hand and contact structures, which caps the score at 2.0. Supporting observations: the rest of the frame holds coherent geometry — headboard carving, wall panel"
+        },
+        "requirement_labels": [
+          "pass",
+          "partial",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v1",
+      "output_sha256": "59d7b759f63228ffd6458c6db355ae3c5d077ec225298d9a689e7c05f9ea440a",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform this bedroom into a refined, slightly storybook hotel suite inspired by the production design of The Grand Budapest Hotel. Preserve the original fixed medium side view, framing, woman and child’s identities, curly hair, facial expressions, body positions, and natural movements throughout. They remain nestled together on the bed, looking toward the open silver laptop on the right; the woman gently rests one hand on the child’s head and uses the laptop with the other as she smiles. Preserve the child’s small hand movements near the mouth.\n\nReplace the plain white walls with strawberry-pink walls divided into orderly panels by delicate cream moldings. Replace the gray upholstered headboard with an ornate cream-painted carved wooden headboard featuring a scalloped crest, floral relief, and subtle antique-gold accents. Add burgundy velvet cushions behind them and a rich burgundy velvet coverlet across the lower foreground, layered over ivory hotel linens with fine blush piping. Decorate the visible right wall with a small gilt-framed vintage illustration and a brass sconce with a pleated cream shade, neatly spaced within the wall panels.\n\nDress both woman and child in coordinated vintage blush-pink cotton pajamas with burgundy piping, notched collars, and small pearl buttons, naturally fitted to their existing poses. Keep the child comfortably tucked beside the woman and the laptop unobstructed. Soft, even warm lighting reveals pastel color blocks, carved details, and velvet texture without harsh shadows. Maintain realistic faces and fabric, stable décor and clothing across frames, and a warm, playful family atmosphere.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/59d7b759f63228ffd6458c6db355ae3c5d077ec225298d9a689e7c05f9ea440a.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-20261102/runs/loops-b95d0514b5af/workers/0/baselines/001__long/pe-loop/0/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "All central requested elements - strawberry-pink paneled walls, cream carved headboard, burgundy velvet with gold piping, coordinated pink vintage pajamas with burgundy trim, continued laptop co-viewing on the bed, and soft even lighting over pastel color blocks and orderly decorative layers - are visible and constant across the entire reviewed 0.0-5.0s duration, with construction logic (applied moldings, carved wood, contrast piping, sconce, gilt picture) clearly present. Supporting observations: the environment, bedding and wardrobe are fully rebuilt from the first supplied candidate frame with no source-like or unconverted live-action region in any reviewed segment; the sconce glow, picture and pillow stack produce the requested orderly decorative layering; the pair remains on the bed with the laptop attended by the woman's hand throughout. Gap to the next higher anchor: during roughly 2.8-4.2s the pair's gaze toward the laptop cannot be confirmed (eyes read closed or downcast, the child leaning against her cheek), so the central 'continue watching the laptop together' relation is less legible for that interval, keeping the score just below full realization.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:timelinep0:14",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:84",
+              "candidate:overview:100"
+            ],
+            "limitations": [
+              "Consecutive-frame evidence is delivered in four contiguous segments sampled at 0.05s covering 0.0-5.0s; the final 0.05s (5.0-5.05s) of the candidate has no supplied frame.",
+              "Laptop screen content is not visible (lid faces the camera); 'watching the laptop' is inferred from gaze and body orientation only, and gaze cannot be confirmed during ~2.8-4.2s.",
+              "Areas outside the camera view (other walls, window, door, wider suite furnishings) and garments occluded by the duvet are unseen; full pajama coverage below the visible torsos cannot be verified.",
+              "No reference imagery for the Grand Budapest Hotel design was supplied; the style match is judged only from decor elements visible in the supplied frames.",
+              "No generation prompt was supplied; requirements are taken solely from the original request."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.2,
+            "reason": "The same curly-haired woman and young child hold the same reclined co-viewing arrangement with the laptop at frame right, the same progressive smile beat, and the child's hand-at-mouth motif, but several interactions and poses are weakened or shifted in the candidate. Supporting observations: composition, casting and camera intent broadly match in the early and middle segments, with the woman's hand-on-laptop contact and smiling progression retained and the child's finger-at-mouth pose present early; divergences include the source's typing/trackpad finger travel reduced to a near-still hand around 2.8-4.2s, the woman's hand moving to her own temple instead of resting on the child's head and the child leaning laughing at her cheek in that interval, an added open-mouth speech- or song-like articulation from 0.0-0.7s with no source counterpart, and a wider, more angled framing by 4.2-5.0s. Motion preservation was not declared required, so these are correspondence observations. Gap to the next higher anchor: the reduced typing interaction, the mid-clip pose shifts and the added articulation leave more than one interaction or minor beat weakened, which prevents full correspondence.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84"
+            ],
+            "limitations": [
+              "Candidate likeness is approximate (generative restyling): the woman's face reads broader and the child's features altered relative to the source, but roles, apparent age groups and body types are consistent, so no identity-rule cap applies; identity equivalence cannot be confirmed to a verification standard.",
+              "Which of the woman's hands performs each contact is not always resolvable at the supplied resolution; contact findings describe visible hand positions only.",
+              "Motion correspondence is reported qualitatively from frames only, with no quantitative motion verification, and motion retention was not declared required.",
+              "Eye/gaze state at 2.8-4.2s is read from small facial regions at low resolution; the closed-vs-downcast reading carries uncertainty.",
+              "Source correspondence claims require the source evidence cited; source clothing for the child is largely occluded in the source frames."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Across the four contiguous reviewed segments covering 0.0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-5.0s at 0.05s steps, the styled scene, subject identities, wardrobe, props and contacts remain consistent with no flicker, morphing, popping, identity switch, vanished prop or layout jump observed. Supporting observations: the carved headboard, wall moldings, sconce, framed picture, pillow arrangement and duvet folds hold stable geometry, color and placement frame-to-frame in every segment; hand-on-laptop and hand-at-child's-head contacts persist with only the ambiguous hand-position description at the shared 2.8s frame (child's head vs own temple), which reflects resolution ambiguity rather than an observed discontinuity; expression changes (open-mouth articulation easing into smiles, the child's shift to laughing) progress coherently; and the clip ends at 5.0s with the styled scene intact, no focal end-of-clip collapse. The medium itself is uniform throughout, with no live-action/stylized switching. Gap to the next higher anchor: none observed within the reviewed intervals.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Reviewed intervals are exactly 0.0-1.4s (29 frames), 1.4-2.8s (29 frames), 2.8-4.2s (29 frames) and 4.2-5.0s (17 frames); the final 0.05s (5.0-5.05s) has no supplied frame and is unseen.",
+              "Sampling at 0.05s steps means sub-frame transient artifacts occurring between samples cannot be ruled out.",
+              "The hand-position descriptions differ between segment reports at the shared 2.8s frame; this is an evidence ambiguity, not an observed discontinuity.",
+              "The transformation is already complete at the first supplied frame (0.0s), so no on-screen transition into the styled environment exists to evaluate; the source likewise begins mid-moment."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Subjects, carved headboard detail, wall moldings, sconce, gilt-framed picture, velvet folds and both figures remain well formed and spatially coherent in every reviewed segment, with no melting, merging, duplicated limbs, blotches, clutter or stylized/live-action seams reported. Supporting observations: segment reviews at 0.0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-5.0s each explicitly report stable geometry and no warping or dissolving; hands (ring-adorned hand on the laptop, hand at the child's head) are formed and legible; faces are rendered more smoothly than the source but remain structurally plausible; the illuminated logo on the laptop lid is stable and well formed even though its origin is undetermined. Gap to the next higher anchor: no consequential defect was observed at the supplied resolution.",
+            "evidence_refs": [
+              "candidate:timelinep0:14",
+              "candidate:timelinep1:40",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:90",
+              "candidate:overview:84"
+            ],
+            "limitations": [
+              "Fine material texture (velvet pile, carving fidelity, fabric weave) and edge quality are limited by frame resolution and compression; sub-resolution artifacts may go undetected.",
+              "Consecutive-frame segments are sampled at 0.05s; single-frame glitches between samples cannot be excluded.",
+              "Faces are rendered more smoothly than the source; this is recorded as rendering character, and no focal structural defect was identified at the supplied resolution.",
+              "Portions of the subjects and set concealed by the duvet, pillows and frame edges are unobserved, not confirmed correct."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "The candidate forms one coordinated visual system - pink/cream/burgundy/gold palette, soft even warm light, orderly layered decor and pajama trim echoing the duvet - with source elements adapted into fitting counterparts (white duvet to burgundy velvet, gray headboard to cream carved headboard, blouse to pajama set). Supporting observations: pastel color blocks, the frilled sconce shade and gilt picture support the requested refined, slightly storybook mood; hierarchy stays legible with the pair and laptop as the focal cluster; no unrequested stylized/live-action mixture or conflicting visual system appears across the reviewed duration. Gap to the next higher anchor: the illuminated brand-style logo on the laptop lid is a generic modern-product detail that sits slightly outside the vintage storybook system, and the added open-mouth articulation in 0.0-0.7s reads marginally against the 'refined' tone, leaving minor local inconsistency rather than a deliberate wholly unified finish.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:timelinep1:34",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:96",
+              "candidate:overview:100"
+            ],
+            "limitations": [
+              "The origin of the illuminated logo on the laptop lid (intentional restyling vs artifact) cannot be determined from the supplied frames alone.",
+              "The Grand Budapest style characterization is judged from visible decor elements only, with no reference imagery supplied.",
+              "No audio was supplied; the 'warm, playful family moment' quality is judged from visual cues only.",
+              "Assessment is based on stills at supplied resolution; palette and lighting judged visually without measurement."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "long",
+        "video_sha256": "59d7b759f63228ffd6458c6db355ae3c5d077ec225298d9a689e7c05f9ea440a",
+        "method": "pe-loop",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": null,
+        "prompt_words": 247,
+        "v5_scores": {
+          "instruction_adherence": 3.8,
+          "content_preservation": 3.2,
+          "temporal_consistency": 4.0,
+          "visual_integrity": 4.0,
+          "aesthetic_coherence": 3.8
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v2",
+      "output_sha256": "2872a12c49cd14930c8a40be722472b12e61a4a29bf221c58d521b9ab84d8d32",
+      "seed": 43,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Restyle only the room surfaces, bedding and pajamas into a refined storybook hotel suite with the production design of The Grand Budapest Hotel. Preserve the original locked close side view and exact framing: woman large in the left foreground, child nestled beside her at center, open silver laptop on the bed at right. Keep the original people, facial features, ages, skin tones, body proportions and curly hair silhouettes: the woman's voluminous shoulder-length honey-brown curls and the child's small golden ringlets. No wider frontal view, recentering, camera movement or cuts.\n\nThroughout the shot, both continue looking right toward the laptop screen. Preserve their source expressions and small movements: the woman gradually smiles, one hand stays resting gently on the crown of the child's head, the other makes small movements on the laptop keyboard and trackpad. The child remains tucked against her with a hand near their mouth. Keep their original head angles, overlapping bodies and hand contacts; no looking at the camera or upward, no touching the woman's own hair.\n\nReplace the white wall with strawberry-pink panels edged in fine cream molding. Replace the gray headboard in its existing background position with cream-painted carved wood, a gently scalloped edge and delicate floral relief; retain the cropped side perspective rather than exposing a whole centered bed. Add a small gilt-framed vintage print in the open wall area. Layer ivory and blush pillows behind the subjects, trimmed with burgundy piping, with burgundy velvet accent cushions and a rich burgundy velvet coverlet across the lower foreground. Keep hands and laptop unobstructed.\n\nDress both in coordinated blush-pink vintage pajamas with burgundy piping, notched collars, long sleeves and small pearl buttons, following their existing poses. Soft, even warm light reveals pastel color blocks, orderly decorative layers, carved wood and tactile velvet. Natural realistic faces, warm playful family intimacy, stable identities and consistent decor throughout.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/2872a12c49cd14930c8a40be722472b12e61a4a29bf221c58d521b9ab84d8d32.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing0-pe-r1-long-pe-001/run/workers/0/baselines/001__long/pe-loop/1/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Across every supplied consecutive-frame segment (0.0-1.4s, 1.4-2.8s, 2.8-4.2s, 4.2-5.0s) the whole visible scene is rebuilt in the requested Grand Budapest-style hotel suite: strawberry-pink walls with a small gilt-framed picture, cream carved rococo headboard with shell/floral crest, burgundy crushed-velvet spread, pink pillows with burgundy ruffle trim and cream piping, coordinated pink vintage pajamas with red piping on both the woman and the child, and soft even warm lighting emphasizing pastel color blocks, while the woman and child continue watching the laptop together on the bed.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:14",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100",
+              "candidate:overview:0",
+              "candidate:overview:100"
+            ],
+            "limitations": [
+              "The declared timeline tail 5.0-5.05s has no supplied frames for either video; the realized state at 5.0s is the last observable evidence.",
+              "Framing is a medium close-up inherited from the source; broader hotel-suite context beyond the bed zone and one pink wall is not observable.",
+              "The laptop screen faces away from the camera, so the act of watching is inferred from gaze direction and hand placement."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "All central roles, beats and interactions keep recognizable counterparts — woman and child reclined together watching the laptop, her hand on the keyboard and her other hand on the child's head/hair, the child nestled against her torso — but the child's hand-at-mouth gesture weakens to a hand near chin/chest from about 2.8s onward and the woman's hand-on-head contact shifts to touching the child's curls near her own face in 4.2-5.0s.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:72",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100",
+              "candidate:timelinep1:53",
+              "candidate:timelinep1:56"
+            ],
+            "limitations": [
+              "Faces are deliberately restyled (red lipstick, made-up features, porcelain-smooth stylized child) consistent with the requested storybook world, so like-for-like identity and micro-expression comparison is approximate; age group and roles are retained.",
+              "Expression timing deviates descriptively (full smile already at 0.0s vs. built up around 0.35-0.6s in source; different blink pattern); exact source-motion retention was not declared a requirement, so these are not requirement failures.",
+              "The child's hand position at 2.8-4.2s is low-resolution and the at-mouth gesture is 'not clearly visible' rather than conclusively absent."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "All four reviewed consecutive-frame intervals (0.0-1.4s, 1.4-2.8s, 2.8-4.2s, 4.2-5.0s, 29/29/29/17 native frames) show a consistent stylized medium, stable identities, set dressing, wardrobe and contacts with no popping, flicker, prop morphing or medium switching; the only weakness is slight softness/smeared finger detail in the raised hands around 2.6-2.8s and localized softness at the hand-curls junction in some 4.4-4.8s frames.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:13",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:44",
+              "candidate:timelinep1:55",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:60",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:88",
+              "candidate:timelinep3:96",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "0.05s frame spacing leaves transient defects occurring between samples unverifiable.",
+              "The declared 5.0-5.05s tail has no supplied frames; continuity into that tail is unobserved.",
+              "Fine finger articulation during the ~2.6-2.8s arm raise is at the limit of frame resolution."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.2,
+            "reason": "Subjects, headboard carving, pillows, velvet spread and laptop are well formed and legible in the stylized pastiche rendering with no gross deformation, the only visible weakness being localized softness/blending where the woman's raised hand meets the child's curls in some 4.4-4.8s frames and smeared finger detail during the 2.6-2.8s arm raise, which do not impair legibility of the interaction.",
+            "evidence_refs": [
+              "candidate:timelinep1:55",
+              "candidate:timelinep1:56",
+              "candidate:timelinep3:88",
+              "candidate:timelinep3:92",
+              "candidate:timelinep3:96",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84"
+            ],
+            "limitations": [
+              "0.05s spacing prevents conclusive judgment of micro-artifacts at the hand-curls junction.",
+              "Heavily stylized faces (makeup, doll-like child features) read as intended restyle rather than defect, but limit fine structural assessment of facial features.",
+              "Material fine texture (velvet pile, fabric weave, carving relief) is at the limit of the supplied frame resolution."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "Composition, warm even lighting, pink/cream/burgundy palette, carved cream headboard, ruffled pillows, gilt-framed picture and vintage pajamas form one deliberate storybook pastiche system with source elements adapted into fitting counterparts (retained laptop, gold ring, matching staging and camera), leaving only minor imbalances such as the small modern Apple logo on the retained laptop lid and slightly exaggerated facial styling.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:100",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:96",
+              "source:timelinep2:56",
+              "candidate:timelinep2:70",
+              "source:timelinep2:70"
+            ],
+            "limitations": [
+              "No audio was supplied; the warm, playful mood is judged visually only.",
+              "The small Apple logo on the laptop lid is an added detail not visible on the source's plainer lid; its impact is limited to a minor prop detail.",
+              "Broader room design beyond the framed bed zone is unobservable, so integration of the wider suite cannot be judged."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "long",
+        "video_sha256": "2872a12c49cd14930c8a40be722472b12e61a4a29bf221c58d521b9ab84d8d32",
+        "method": "pe-loop",
+        "round": "v2",
+        "seed": 43,
+        "planner_input": null,
+        "prompt_words": 308,
+        "v5_scores": {
+          "instruction_adherence": 4.0,
+          "content_preservation": 3.5,
+          "temporal_consistency": 3.5,
+          "visual_integrity": 3.2,
+          "aesthetic_coherence": 3.8
+        },
+        "low_reasons": {},
+        "requirement_labels": []
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v2",
+      "output_sha256": "76854ecdbe5546a169bebfc5b9fd61ef7b2daa7838862e623d58c8b16ef46bd3",
+      "seed": 43,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform the bedroom into a refined, slightly storybook hotel suite with the production design of The Grand Budapest Hotel. Preserve the original fixed medium side view, framing, woman and child's identities, curly hair, facial expressions, body positions, and subtle movements. They remain nestled together on the bed watching the open silver laptop at right; the woman gradually smiles while the child makes small hand movements near the mouth.\n\nPreserve the source anatomy and hand placement precisely: the woman has exactly two arms and two hands, one resting on the crown of the child's head, the other ringed hand operating the laptop. Keep the foreground forearm extending naturally from her sleeve toward the keyboard. The child's hand near the mouth remains small and clearly belongs to the child. No additional hand touching the child's temple, no duplicated limbs or floating fingers.\n\nReplace the white walls with soft strawberry-pink panels bordered by slender cream moldings. Replace the gray upholstered headboard with cream-painted carved wood, a scalloped crest, delicate floral relief, and restrained antique-gold accents. Arrange burgundy velvet cushions behind the subjects, ivory hotel pillows, and a folded burgundy velvet coverlet along the lower edge of an ivory duvet with blush piping. Keep ample ivory bedding visible so burgundy remains an elegant accent rather than dominating the scene. Add a small gilt-framed vintage illustration and a brass wall sconce with a pleated cream shade, neatly separated on the right wall.\n\nDress both subjects in coordinated matte blush-pink cotton vintage pajamas with burgundy piping, notched collars, and small pearl buttons. Fit the clothing to their existing silhouettes and arm positions without creating new gestures. Use soft, even warm lighting, gentle shadows, clear pastel color blocks, and orderly decorative layers. Maintain realistic skin, softly textured velvet, non-glossy pajamas, stable faces, hands, clothing, and architecture throughout. Keep the laptop unobstructed and the family moment warm and playful.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/76854ecdbe5546a169bebfc5b9fd61ef7b2daa7838862e623d58c8b16ef46bd3.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-20261102/runs/loops-b95d0514b5af/workers/0/baselines/001__long/pe-loop/1/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.8,
+            "reason": "Every supplied candidate frame across 0–5.0 s shows the full requested conversion — strawberry-pink walls, cream carved tufted headboard, burgundy velvet pillows and throw, brass sconce with pleated shade, gilt portrait, coordinated pink vintage pajamas with burgundy piping on both subjects, and the retained laptop — with no region reverting to the source's gray headboard and white walls.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:21",
+              "candidate:overview:53",
+              "candidate:overview:84",
+              "candidate:overview:100",
+              "candidate:timelinep0:0",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84"
+            ],
+            "limitations": [
+              "Coverage ends at 5.0 s of the declared 5.05 s; the final 0.05 s has no supplied frames.",
+              "The hotel-suite reading rests entirely on the styled wall/bed dressing within a tight two-shot; any suite context outside the framed area is unseen rather than confirmed absent.",
+              "Pajama lower-body coverage under the velvet throw is not visible in any supplied frame."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "The same two people, their reclined staging, and the key contacts — the woman's hand on the child's head, her other hand on the laptop, the child beside her, both oriented toward the laptop — persist through all four reviewed segments, with the final segment showing minor deviations: the child's hand sits beside the cheek with a broad smile instead of fingers at the lips, the laptop sits lower and is partly occluded by the burgundy throw, and the framing is slightly tighter than the source.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Strict pixel-level correspondence for replaced background regions cannot be confirmed because set dressing replaces the source environment.",
+              "Micro-expression timing is judged from frames spaced 0.05 s apart; finer motion between frames cannot be verified.",
+              "Exact source-motion retention was not declared required, so the candidate's reduced micro-motion is reported descriptively, not scored as a correspondence failure."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.3,
+            "reason": "The reviewed native consecutive frames covering 0–5.0 s show stable identities, wardrobe, props, contacts and decor with no medium switching, popping, flicker or end-of-clip collapse; the sequence is a coherent hold, though the 1.4–2.8 s stretch is a fully static hold between live micro-motion at the start and end, and the last second shows small unresolved hand-shape and mouth changes between consecutive frames.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:14",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:42",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Intervals reviewed: 0.0–1.4 s, 1.4–2.8 s, 2.8–4.2 s and 4.2–5.0 s; the 5.0–5.05 s tail has no supplied frames.",
+              "Whether the child's hand-shape and woman's mouth changes at 4.2–5.0 s reflect genuine small motion or localized instability cannot be resolved from 0.05 s-spaced stills.",
+              "The static 1.4–2.8 s hold prevents verification of motion smoothness in that interval; its content state is observed, its hidden motion is unknown."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.4,
+            "reason": "No consequential structural defect appears in any reviewed frame — headboard carving, tufting, sconce, portrait, pillow edges, laptop hinge and limbs remain geometrically stable — with only minor local softness at the child's hand at the mouth and the woman's fingers in the child's hair around 2.8–4.2 s and a visibly smoothed skin rendering on both faces.",
+            "evidence_refs": [
+              "candidate:timelinep0:20",
+              "candidate:timelinep1:47",
+              "candidate:timelinep2:72",
+              "candidate:timelinep2:78",
+              "candidate:timelinep3:92"
+            ],
+            "limitations": [
+              "Regions occluded behind pillows, the throw, the headboard or the subjects' bodies cannot be verified.",
+              "Fine textures (pajama fabric, velvet nap, small hand geometry) are at the limit of the supplied frame resolution; softness there could not be confirmed as artifact versus resolution effect.",
+              "Assessment is based on stills; rendering defects that only appear in motion between frames are unobservable."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.7,
+            "reason": "The candidate reads as one deliberate visual system — matched pink, burgundy and cream across walls, carved headboard, velvet pillows with pom-pom trim, coverlet trim and pajama piping, symmetric decorative layering with the sconce and portrait, and soft even lighting consistent with the requested pastel color-block mood.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:47",
+              "candidate:overview:95",
+              "candidate:timelinep2:68",
+              "candidate:timelinep3:84"
+            ],
+            "limitations": [
+              "No audio was supplied; the 'warm, playful family moment' mood is assessed visually only.",
+              "The tightened crop concentrates the design on the bed wall, so integration of a wider suite environment is unobserved rather than judged.",
+              "Lighting evenness is judged from stills; temporal light flicker outside the supplied frames cannot be ruled out."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "long",
+        "video_sha256": "76854ecdbe5546a169bebfc5b9fd61ef7b2daa7838862e623d58c8b16ef46bd3",
+        "method": "pe-loop",
+        "round": "v2",
+        "seed": 43,
+        "planner_input": null,
+        "prompt_words": 311,
+        "v5_scores": {
+          "instruction_adherence": 3.8,
+          "content_preservation": 3.1,
+          "temporal_consistency": 3.3,
+          "visual_integrity": 3.4,
+          "aesthetic_coherence": 3.7
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v3",
+      "output_sha256": "0c8b272f78aa0d3685017ccf00a1f9772ed2c9f1a34d2f59545427d08d4a3bc7",
+      "seed": 44,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Restyle the original bedroom as a refined, slightly storybook hotel suite inspired by the production design of The Grand Budapest Hotel. Apply this aesthetic to decor and clothing only, not to faces, hair, acting or camera composition.\n\nRetain the exact source close side view, subject scale and positions: the woman fills the left foreground, the child nestles against her at center, and the open silver laptop sits at right. Preserve the original faces, ages, natural skin texture, unmade-up appearance and loose, slightly tousled curls. No added lipstick, eyeliner, sculpted hairstyles or facial reshaping. Keep the camera locked, without widening, frontal restaging or cuts.\n\nBoth continue watching the laptop throughout, their eyes directed right toward its screen, never above it or toward the viewer. Follow the original gentle smile and small keyboard/trackpad movements. The woman's upper hand maintains gentle contact with the child's crown; the child keeps a hand near their mouth. Preserve the original body overlaps and relaxed reclining poses.\n\nTurn the white wall strawberry pink with fine cream panel molding. Replace the gray headboard within its existing low, cropped footprint with cream-painted carved wood, delicate floral relief and a shallow scalloped top. Keep its upper edge behind the woman's hair, leaving the large open wall area above and to the right; do not introduce a towering centered headboard. Add one small gilt-framed vintage print on the open wall. Layer ivory and blush pillows neatly behind the bodies, with burgundy velvet cushions and a rich burgundy velvet coverlet following the foreground bedding folds. Leave hands and laptop unobstructed.\n\nDress both in coordinated blush cotton vintage pajamas with burgundy piping, notched collars and pearl buttons, fitted to their existing silhouettes. Soft, even warm lighting reveals pastel color blocks, carved cream wood and tactile velvet. Maintain natural skin tones, stable decor and the intimate, playful family moment across the entire shot.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/0c8b272f78aa0d3685017ccf00a1f9772ed2c9f1a34d2f59545427d08d4a3bc7.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing0-pe-r1-long-pe-001/run/workers/0/baselines/001__long/pe-loop/2/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.2,
+            "reason": "The decisive observation is that the entire visible scene is rebuilt in the requested Grand Budapest-style world across the full supplied duration (0.0–5.0s): strawberry-pink paneled walls, a cream headboard with raised trim, burgundy velvet bedding, coordinated pale-pink pajamas with burgundy piping on both subjects, and soft even pastel lighting, with only the 'carved' headboard detail reading as upholstered piping rather than visibly carved wood.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:100",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "The 'carved' quality of the cream headboard cannot be resolved at supplied resolution; it reads as molded/upholstered shaping with raised rails and piping (candidate:timelinep2:56, candidate:timelinep2:76), so this requested detail is only partially confirmed.",
+              "Only the framed bed area is visible; other areas of the 'hotel suite' (door, windows, rest of room) are outside the crop and their conversion cannot be verified.",
+              "The final 0.05s (5.00–5.05s) of the declared timeline is not represented in supplied frames."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The decisive observation is that all central roles, beats and key interactions have recognizable counterparts — woman reclined left with hand on the child's head, child's hand at the mouth, both watching the laptop on the bed throughout — while the source's woman-hand-on-laptop-keyboard contact is absent (laptop resting untouched on the blanket in fully visible frames) and the child's likeness is only approximate (flatter matted hair with a small tuft, slightly doll-like face).",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "source:timelinep2:60",
+              "candidate:timelinep2:60",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:92"
+            ],
+            "limitations": [
+              "The child's face is partially occluded by the hand at the mouth in all supplied frames, limiting likeness and expression assessment.",
+              "The woman's left hand is largely occluded in the 2.8–4.2s segment; whether a hand exists off-laptop there is unseen rather than confirmed absent, though at 4.2–5.0s the laptop region is fully visible with no hand on it.",
+              "Expression performance differs from the source (candidate starts open-mouthed/squinting at t=0, amplifies a laugh at ~3.4–3.7s, child smiles at the end where the source child stays neutral and focused); without audio, laughter versus speech cannot be distinguished.",
+              "Motion preservation was not declared for this task, so contact and performance differences are reported descriptively, not as retention failures."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "The decisive observation is that across all four consecutive-frame segments covering 0.0–1.4s, 1.4–2.8s, 2.8–4.2s and 4.2–5.0s the static camera framing, headboard, pillows, velvet drape, wall moldings, picture frame, laptop position and both identities remain continuous with no flicker, popping, warping, medium switching or identity drift, and both key contacts (woman's hand on child's head, child's hand at mouth) hold without interruption.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "The final 0.05s (5.00–5.05s) of the declared 0–5.05s timeline was not supplied and is not assessed.",
+              "Frame spacing of 0.05s means motion occurring between sampled frames cannot be assessed; the scene is near-static, which limits onset/progression inference.",
+              "The gold ring on the child's hand is a stable artifact rather than a discontinuity; it is scored under visual_integrity, not here."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.9,
+            "reason": "The decisive observation is that subjects, hands, contacts and set geometry are well formed with no melting, merging, blotches or seams, but a gold ring is visible on the child's finger at the mouth in every supplied segment (absent on that hand in the source, where the ring is on the woman's laptop hand) and the child's face reads slightly doll-like in some frames — small, stable artifacts sitting on focal structures.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:10",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:92",
+              "source:timelinep0:20",
+              "source:timelinep2:56"
+            ],
+            "limitations": [
+              "Occlusion of the child's mouth area prevents confirming the ring's exact attachment or origin; it is assessed visually only.",
+              "Fine texture detail (velvet weave, headboard material, laptop logo) is limited by supplied resolution.",
+              "The scene remains fully interpretable; no deformation of faces, hands or held props was observed beyond the described artifacts."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.3,
+            "reason": "The decisive observation is that the candidate reads as one deliberate visual system — pink walls, cream headboard, burgundy velvet, gold-framed picture, symmetric ruffled pink/cream pillows and coordinated burgundy-piped pajamas under soft even light forming consistent pastel color blocks — with source elements adapted into fitting counterparts and only minor imbalance from the laptop re-staged lower and further right with its logo facing the camera and the mild child-likeness artifact.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:100",
+              "candidate:timelinep1:45",
+              "candidate:timelinep2:60",
+              "candidate:timelinep3:90",
+              "source:timelinep2:56"
+            ],
+            "limitations": [
+              "Only the framed bed area is visible, so the designed system cannot be judged beyond the camera crop.",
+              "The child's slightly doll-like face and the ring artifact slightly weaken the finish but do not create a conflicting visual system.",
+              "Whether the headboard trim reads as carved wood or upholstered shaping cannot be resolved at supplied resolution."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "long",
+        "video_sha256": "0c8b272f78aa0d3685017ccf00a1f9772ed2c9f1a34d2f59545427d08d4a3bc7",
+        "method": "pe-loop",
+        "round": "v3",
+        "seed": 44,
+        "planner_input": null,
+        "prompt_words": 309,
+        "v5_scores": {
+          "instruction_adherence": 3.2,
+          "content_preservation": 3.0,
+          "temporal_consistency": 4.0,
+          "visual_integrity": 2.9,
+          "aesthetic_coherence": 3.3
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v4",
+      "output_sha256": "7da9e80a8141c1de58309af13dd9e44f2d690e9564cf95b826673c7306f9fef7",
+      "seed": 45,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform only the bedroom decor, bedding and pajamas into a refined storybook hotel suite inspired by The Grand Budapest Hotel. Preserve the source camera, close side-view framing, people and performance; do not restage this as a frontal hotel portrait.\n\nThe same woman remains large in the left foreground, reclining with the small curly-haired child tucked against her at center. The silver laptop stays at right, seen from the side at its original angle. Preserve their exact facial features, natural skin texture, ages, loose honey-brown and blond curls, head angles and body overlaps. Keep faces unretouched, without makeup or sculpted hairstyles. Both watch the laptop, with the woman's gentle smile developing as in the source. Her upper hand rests on the child's crown; her other forearm remains visible across the bedding, fingers making the original small keyboard/trackpad movements. The child's hand stays near their mouth. Do not hide the operating hand under blankets or change their gestures.\n\nPaint the white wall strawberry pink, adding slender cream rectangular moldings and one small gilt-framed vintage print in the open upper-right wall area. Replace the gray headboard in the same low, cropped outline with cream-painted carved wood: shallow floral relief and a narrow ornamental border. Its top remains below the crown of the woman's hair, not towering above her. Preserve the generous open wall above the laptop. Add neatly layered ivory and blush pillows behind the existing bodies, a burgundy velvet accent cushion, and a burgundy velvet coverlet over the lower foreground duvet, retaining its folds and leaving hands and laptop exposed.\n\nGive both coordinated matte blush cotton vintage pajamas with burgundy piping, small pearl buttons and notched collars, following their original clothing silhouettes. Soft, even warm light emphasizes strawberry, cream and burgundy color blocks, delicate carving and velvet texture. Maintain the intimate family moment, original shot scale, fixed camera and continuous source timing; no cuts, widening or identity changes.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/7da9e80a8141c1de58309af13dd9e44f2d690e9564cf95b826673c7306f9fef7.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing0-pe-r1-long-pe-001/run/workers/0/baselines/001__long/pe-loop/3/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "The requested Grand Budapest-style hotel suite is fully realized from the first to the last supplied frame with every central requested element present and no source-like region remaining. Strawberry-pink walls with gold-framed monochrome prints, an ornate cream carved headboard with relief carving, burgundy velvet pillows and throw, and cream patterned pillows in orderly layers appear throughout (candidate:overview:0, candidate:overview:42, candidate:timelinep0:0, candidate:timelinep2:56, candidate:timelinep3:100). Both subjects wear coordinated pink satin pajamas with burgundy piping in every reviewed segment and continue watching the laptop together on the bed with the source composition retained; lighting is soft, even and warm, emphasizing pastel pink/cream blocks with burgundy accents. Coverage spans 0.0–1.4s, 1.4–2.8s, 2.8–4.2s and 4.2–5.0s, and the restyle is fully established in each segment's first frame, so no interval shows an unconverted or partially converted region. No gap to a higher anchor exists; anchor 4 is met across all reviewed intervals.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:100",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:100",
+              "source:overview:0"
+            ],
+            "limitations": [
+              "Reviewed scope: 0.0–1.4s, 1.4–2.8s, 2.8–4.2s and 4.2–5.0s via supplied consecutive frames plus 20 overview samples; the final 0.05s (5.0–5.05s) is uncovered.",
+              "Areas outside the fixed camera frustum (rest of the bed, room periphery) are never visible, so off-frame set completeness is unknown.",
+              "The laptop screen faces away from camera; 'watching' is established by gaze direction only, and screen content cannot be verified."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.0,
+            "reason": "Both source individuals are replaced by regenerated persons — the source woman's face and long curly honey-blonde hair become a different face with a shorter darker waved bob, and the blonde-curled child becomes a ginger-curled child with altered facial structure and apparent age — which under the identity rule caps CP at 2. Beyond the persons, correspondence is otherwise strong: roles, staging, beat order and camera intent are retained, with the woman at left, child leaning against her, laptop at right, and the contacts of hand-on-child's-head, hand-on-laptop and body contact preserved throughout (source:overview:0 vs candidate:overview:0; source:overview:100 vs candidate:overview:100). Residual minor deviations remain on top of the identity replacement: the child's fist-at-mouth gesture becomes a hand raised near the head, the salient end-of-clip mouth opening shifts from the source child to the candidate woman, and framing is slightly tighter and lower. The gap to anchor 3 lies in the replaced individuals themselves; with the source persons retained, the remaining gesture and framing deviations would sit at anchor 3.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "source:overview:100",
+              "candidate:overview:100",
+              "source:timelinep0:27",
+              "candidate:timelinep0:27",
+              "source:timelinep1:28",
+              "candidate:timelinep1:28"
+            ],
+            "limitations": [
+              "Person-level correspondence is limited to role, pose, action and timing because both individuals are regenerated; facial identity cannot be matched.",
+              "Reviewed scope: 0.0–1.4s, 1.4–2.8s, 2.8–4.2s and 4.2–5.0s; the final 0.05s is uncovered.",
+              "Camera-intent comparison rests on the single fixed angle supplied."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Across contiguous native frames covering 0.0–5.0s, the candidate's medium, identities, props and contacts remain consistent with no observed discontinuity. Segment reviews at 0.05s spacing find no style switching, identity flicker, popping, warping, duplication or contact loss in 0.0–1.4s, 1.4–2.8s, 2.8–4.2s and 4.2–5.0s; the near-static 1.4–2.8s window is stable rather than broken, and the smile progression has a coherent onset and outcome through the final supplied frames (candidate:timelinep0:0 to candidate:timelinep0:28; candidate:timelinep3:84 to candidate:timelinep3:100). Boundary frames at 1.4s, 2.8s and 4.2s are shared between adjacent segments, confirming cross-segment continuity of headboard carving, picture frames, pillow arrangement, laptop position and both subjects. The gap to a higher anchor does not exist; anchor 4 is reached on the reviewed evidence.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "The final 0.05s (5.0–5.05s) is uncovered, so behaviour after 5.0s is unknown.",
+              "Sampling at 0.05s spacing means sub-frame flicker or micro-jitter between samples cannot be ruled out.",
+              "Reduced motion versus the source in 1.4–2.8s is noted as an observation; motion retention was not declared required and is not scored here."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "Structures are well formed throughout the reviewed frames, with the only noted irregularities being soft or ambiguous finger boundaries at the hand-on-head and hand-on-laptop contact regions in some frames. Faces, headboard carving, pillow edges, laptop outline and wall frames stay clean and stable across all four segments (candidate:timelinep0:0, candidate:timelinep1:47, candidate:timelinep2:84, candidate:timelinep3:100); no melting, merging, halo, blotching or illegible clutter is observed, and both interactions remain readable, including the ring visible on the hand at the laptop. The gap to anchor 4 is the localized softness and attribution ambiguity at these contact zones — the resting hand meeting the child's curls and the hand on the laptop rendering low-detail in several frames — which are minor and non-impairing but sit at focal contact structures.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:10",
+              "candidate:timelinep1:47",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:100",
+              "candidate:overview:84"
+            ],
+            "limitations": [
+              "Fine finger articulation at the head and laptop contact zones is limited by supplied resolution and compression.",
+              "Concealed surfaces (behind the subjects, beneath the velvet throw) are unobserved rather than confirmed correct.",
+              "Reviewed scope matches the four supplied sub-intervals; the final 0.05s is uncovered."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "The candidate composes one deliberate Grand Budapest-style visual system in which palette, materials, lighting, subjects and environment integrate as a single designed whole. Source elements are adapted into fitting counterparts: the gray upholstered headboard becomes the cream carved headboard, the plain white wall becomes saturated pink with gold-framed monochrome prints, white bedding becomes layered cream-patterned and burgundy velvet textiles, and the pale top becomes coordinated pink satin pajamas whose burgundy piping ties into the accent color (candidate:overview:0, candidate:overview:84, source:overview:0). Warm, even lighting, an orderly decorative hierarchy and the broadening smiles match the requested refined, storybook, warm-playful mood across the full reviewed span. The gap to a higher anchor does not exist; anchor 4 is reached on the reviewed evidence.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:84",
+              "candidate:overview:100",
+              "source:overview:0",
+              "source:overview:100"
+            ],
+            "limitations": [
+              "Mood and tone are judged visually only; no audio is supplied.",
+              "Coverage is limited to the fixed camera angle and the four supplied sub-intervals; the final 0.05s is uncovered."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "long",
+        "video_sha256": "7da9e80a8141c1de58309af13dd9e44f2d690e9564cf95b826673c7306f9fef7",
+        "method": "pe-loop",
+        "round": "v4",
+        "seed": 45,
+        "planner_input": null,
+        "prompt_words": 316,
+        "v5_scores": {
+          "instruction_adherence": 4.0,
+          "content_preservation": 2.0,
+          "temporal_consistency": 4.0,
+          "visual_integrity": 3.5,
+          "aesthetic_coherence": 4.0
+        },
+        "low_reasons": {
+          "content_preservation": "Both source individuals are replaced by regenerated persons — the source woman's face and long curly honey-blonde hair become a different face with a shorter darker waved bob, and the blonde-curled child becomes a ginger-curled child with altered facial structure and apparent age — which under the identity rule caps CP at 2. Beyond the persons, correspondence is otherwise strong: roles, staging, beat order and camera"
+        },
+        "requirement_labels": [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "direct",
+      "candidate_id": "direct",
+      "output_sha256": "c9a5f26e896b583103eb9eafa7a9c1eae43f8be4d9f368334ee3d769a99060d5",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform the bedroom into a hotel suite with the production design of The Grand Budapest Hotel: strawberry-pink walls, a cream carved headboard, and burgundy velvet create a refined, slightly storybook setting. The woman and child wear coordinated vintage pajamas and continue watching the laptop together on the bed. Soft, even lighting emphasizes pastel color blocks and orderly decorative layers, creating a warm, playful family moment.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/c9a5f26e896b583103eb9eafa7a9c1eae43f8be4d9f368334ee3d769a99060d5.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-20261102/results/media/c9a5f26e896b583103eb9eafa7a9c1eae43f8be4d9f368334ee3d769a99060d5.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Every central requested element — strawberry-pink paneled walls, cream carved tufted headboard with ornamental crest, burgundy velvet panel, coordinated vintage burgundy-and-pink pajamas on both figures, continued laptop co-viewing on the bed, and soft even lighting over pastel color blocks with orderly framed decorative layers — is visible across the entire observed 0.0–5.0s duration, with no region of the scene remaining source-like (plain white wall, grey headboard, pale blouse).",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:42",
+              "candidate:overview:84",
+              "candidate:overview:100",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Assessment covers the field of view of the static camera; areas outside the frame are unobserved rather than confirmed absent.",
+              "Supplied evidence ends at 5.0s of the 5.05s timeline; the final ~0.05s is unseen."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The two-figure laptop co-viewing beat, left/right spatial staging (adult left, child right, laptop at right in front), static camera intent and bed setting all have recognizable counterparts, but the source's toddler nestled at the woman's chest is replaced by a school-age boy seated beside her — a change in the child's apparent age group without a reason in the requested world — and the hand-on-child's-head contact becomes a hand on the shoulder.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "source:timelinep3:100",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Identity and age are judged from visible appearance only; no ground-truth identity reference is supplied.",
+              "In the timelinep0 event review the source material was not visually distinguishable, so source correspondence for 0–1.4s rests on overview frame pairs and the 1.4–5.0s segment comparisons.",
+              "Exact source-motion retention was not declared required, so micro-motion differences are descriptive, not scored separately."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Reviewed native consecutive frames spanning 0.0–1.4s, 1.4–2.8s, 2.8–4.2s and 4.2–5.0s show a single consistent medium and setting throughout, with stable wardrobe, lamp, wall art, laptop position and subject placement, only small continuous posture/mouth motion, and no flicker, popping, identity switch, detached contact or end-of-clip collapse.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Frames are sampled at 0.05s intervals; flicker or micro-motion shorter than one sample step cannot be measured.",
+              "The final ~0.05s (5.0–5.05s) is unobserved.",
+              "Cross-boundary continuity at 1.4s, 2.8s and 4.2s is supported by shared endpoint frames between adjacent segments."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Focal structures are well formed across the observed frames — the woman's and boy's faces, hands on the laptop and shoulder, the carved/tufted headboard, paneling seams, velvet texture and pajama pattern edges all hold consistently with no melting, merging, blotches, halos or duplicated limbs visible at the supplied resolution.",
+            "evidence_refs": [
+              "candidate:overview:32",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:88",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "Compression and resolution limit detection of fine texture (carving detail, fabric weave); absence of visible defects does not establish their absence.",
+              "No crops or region-of-interest masks were supplied; observations are whole-frame only.",
+              "Concealed parts (e.g., under the duvet) are unobserved, not confirmed correct."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "Composition, soft even lighting, palette and materials form one deliberate pastel system appropriate to the requested Grand Budapest-style hotel suite: the burgundy-pink swirl pajama pattern echoes the pink paneling and burgundy velvet, the cream headboard, brass lamp and aligned framed art supply orderly layers, and the retained laptop and subjects read as adapted counterparts rather than leftover source elements.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:53",
+              "candidate:overview:95",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:92",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Judgment is confined to the static camera's field of view; the room outside the frame is unobserved.",
+              "The final ~0.05s of the clip is unseen."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": null
+    }
+  ]
+}

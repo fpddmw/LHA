@@ -73,12 +73,65 @@ class LayeredCatalogTests(unittest.TestCase):
             for k in (full, none):
                 with self.assertRaises(ValueError): k.read(old)
 
-    def test_none_manuals_carry_method_without_experience_links(self):
+    def test_none_manuals_keep_task_tools_and_style_without_experience_links(self):
         for name in ("UNDERSTAND_AND_DESIGN.md", "UNDERSTAND_AND_REVISE.md", "README.md", "READING.md"):
             text = (ROOT / "knowledge/creative-loop/no-experience" / name).read_text()
             self.assertNotIn("experience/curated", text)
         design = (ROOT / "knowledge/creative-loop/no-experience/UNDERSTAND_AND_DESIGN.md").read_text()
-        self.assertIn("planes", design)
+        self.assertIn("original request", design)
+        self.assertIn("style knowledge", design)
+
+    def test_complete_case_resources_are_full_only_and_survive_freezing(self):
+        full = CreativeKnowledge(ROOT, experience_mode="full")
+        none = CreativeKnowledge(ROOT, experience_mode="none")
+        identities = [r["id"] for r in self.catalog["resources"]
+                      if r["id"].startswith("EV-V5-") and
+                      (r["id"].endswith("-case") or r["id"].endswith("-comparison"))]
+        self.assertEqual(len(identities), 12)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "snapshot.json"
+            full.freeze(path)
+            restored = CreativeKnowledge(ROOT, path)
+            for identity in identities:
+                with self.subTest(identity=identity):
+                    self.assertIn(identity, restored.items)
+                    self.assertNotIn(identity, none.items)
+                    with self.assertRaises(ValueError):
+                        none.resolve(identity)
+                    row = restored.items[identity]
+                    self.assertEqual(row["sha256"], builder.sha(ROOT / row["path"]))
+
+    def test_complete_cases_preserve_the_original_score_rows_and_known_ancestry(self):
+        evidence = CURATED / "evidence"
+        extract = json.loads((evidence / "v5-train-cases.json").read_text())
+        self.assertEqual(len(extract["preview_rows"]), 35)
+        for original in extract["preview_rows"]:
+            case = json.loads((evidence / ("v5-" + original["sample_id"] + "-" +
+                                          original["prompt_form"] + "-case.json")).read_text())
+            rows = {r["output_sha256"]: r for r in case["candidates"]}
+            row = rows[original["video_sha256"]]
+            self.assertEqual(row["original_extract_row"], original)
+            self.assertTrue(row["prompt"])
+            self.assertEqual({k: v["score"] for k, v in row["independent_review"]["main_scores"].items()},
+                             original["v5_scores"])
+            self.assertTrue(all(v["reason"] for v in row["independent_review"]["main_scores"].values()))
+            if row["input"]["sha256"]:
+                self.assertIn(row["input"]["sha256"], [case["source"]["sha256"], *rows])
+
+    def test_shared_and_none_entrances_do_not_link_the_empirical_construction_preferences(self):
+        none = CreativeKnowledge(ROOT, experience_mode="none")
+        full = CreativeKnowledge(ROOT, experience_mode="full")
+        for identity in ("manual", "prompt-writing", "review", "understand-and-design", "understand-and-revise"):
+            text = none.document(none.items[identity])["text"]
+            for target in re.findall(r"\]\(([^)]+)\)", text):
+                self.assertNotIn("experience/curated", target)
+            # These were the operative preferences that bypassed experience access.
+            for phrase in ("one short clause", "List every visible plane", "Look in this order",
+                           "state the new change and a short clause"):
+                self.assertNotIn(phrase, text)
+        self.assertIn("short keep clause", full.read("generation-input", max_chars=6000)["text"])
+        with self.assertRaises(ValueError):
+            none.read("generation-input")
 
     def test_no_entry_text_or_evidence_cites_a_heldout_source(self):
         blocked = builder.heldout_hashes()

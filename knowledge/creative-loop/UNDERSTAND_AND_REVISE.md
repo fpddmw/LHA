@@ -10,7 +10,7 @@ Compare the candidate with the original request, the actual editing input and th
 
 Ask whether the gap is a plane you never described, a counterpart you never assigned, a medium rule you left to the renderer, or an identity that was rebuilt. Check whether the input carried the problem or the latest pass introduced it. Separate a convincing motif from the requested construction: a new lamp may leave the illumination unchanged.
 
-When a needed relation was missing, specify it. When it was explicit and unrealized, change the construction, scope or input rather than strengthening synonyms. Judge a changed role, prop or movement by whether it serves the recast; an unnecessary preservation demand you wrote is yours to remove.
+When a needed relation was missing, specify it. Read the actual clause before diagnosing an omission. When it was explicit and unrealized, change the construction, scope or input rather than strengthening synonyms. For example, a stated building layout may need its distinctive silhouette and overlapping forms expressed together; select the relationships that identify this source, rather than borrowing another case's architecture. Judge a changed role, prop or movement by whether it serves the recast; an unnecessary preservation demand you wrote is yours to remove.
 
 ## 3. Choose the input for what it still holds
 

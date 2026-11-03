@@ -1,6 +1,6 @@
 # Video meaning and design possibilities
 
-[Knowledge map](../README.md) · [Subject and visual language](../../guides/theme.md) · [Composition, light, and time](../../guides/time.md)
+[Knowledge map](README.md) · [Subject and visual language](../../guides/theme.md) · [Composition, light, and time](../../guides/time.md)
 
 Understand the event before deciding how to redesign it. The cases below explain how actions, object roles, viewpoint and visual form carry meaning. Use these distinctions to identify which relationships a proposal needs to keep intelligible and where the request opens room for invention.
 

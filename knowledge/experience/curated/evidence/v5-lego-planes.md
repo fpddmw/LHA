@@ -14,4 +14,6 @@ Sources: `v5-train-cases.json` (v5 GLM scores and reasons), the frames of each v
 
 The judge named the same thing in each low-AC reason: an unrequested mixture of toy-styled subjects and live-action surroundings. The version that listed every plane removed it, and the remaining defect in round 2 was a photographic panel in the first 0.6 s.
 
-**What this supports.** Naming the construction of each visible plane changed the result from a converted figure in a real yard to a converted scene. **What it does not support.** One source video, one render per condition and a single judge; round 2 and round 4 also changed input, seed and other wording at the same time. Treat it as a strong working pattern, not a measured effect size.
+**Interpretation corrected against the exact prompts.** The first Planner and PE prompts already specified the truck and environmental construction. The later prompt changed their prominence and construction detail while continuing from an already converted candidate. The subsequent red-truck pass addressed the close opening panel and vehicle/cargo separation. This is useful evidence for revising an explicit but unrealized construction, not a missing-object comparison. Input and seed also changed.
+
+Read the [complete long case](v5-026-long-case.json), [short case](v5-026-short-case.json) and [case-reading index](v5-case-reading.md) for exact prompts, known inputs, full saved reasons and the original comparison sheets.

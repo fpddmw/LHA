@@ -1,6 +1,6 @@
 {
   "schema": "creative-experience-catalog-v2",
-  "revision": "layered-a909fff94880e5ba",
+  "revision": "layered-fddb14c3ad7e2a69",
   "entries": [
     {
       "id": "EX-P-compare-retained",
@@ -85,7 +85,7 @@
     {
       "id": "EX-P-every-plane",
       "title": "Rebuild every plane, not just the subject",
-      "summary": "List each visible plane (subject, props, ground, background, sky, light) and say how the target medium builds it. A rebuilt figure inside an untouched photographic scene reads as a collage, and a few theme props leave the old place intact.",
+      "summary": "Describe how the target medium builds each visible plane. If a named plane still stays photographic, revise its construction, visual relationships and input support instead of adding the same object name again.",
       "questions": [
         "Why does the result still look like the original place?",
         "Why does a stylized subject look pasted onto a real background?",
@@ -103,25 +103,26 @@
         "EV-F006",
         "EV-F007",
         "EV-D-FS4-full",
-        "EV-V5-LEGO-planes"
+        "EV-V5-LEGO-planes",
+        "EV-V5-case-reading"
       ],
       "stages": [
         "design",
         "inspect"
       ],
       "path": "knowledge/experience/curated/entries/P-every-plane.md",
-      "version": "1",
-      "sha256": "a779092bbf499b3b0e9db622f2d91b2c4bcdd37e33850f5f17e71398ebd1133d",
+      "version": "2",
+      "sha256": "3c9dd19623a8dbe3666a223e3bcecc816b756368fb6790bb21c2291b29e3f093",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md",
+      "review_reference": "docs/experience-content-correction-20261103.md",
       "aliases": [
         "Rebuild every plane, not just the subject",
         "Why does the result still look like the original place?",
         "Why does a stylized subject look pasted onto a real background?",
         "What do I need to describe besides the main character?"
       ],
-      "applicability": "List each visible plane (subject, props, ground, background, sky, light) and say how the target medium builds it. A rebuilt figure inside an untouched photographic scene reads as a collage, and a few theme props leave the old place intact.",
-      "recommendation": "List each visible plane (subject, props, ground, background, sky, light) and say how the target medium builds it. A rebuilt figure inside an untouched photographic scene reads as a collage, and a few theme props leave the old place intact."
+      "applicability": "Describe how the target medium builds each visible plane. If a named plane still stays photographic, revise its construction, visual relationships and input support instead of adding the same object name again.",
+      "recommendation": "Describe how the target medium builds each visible plane. If a named plane still stays photographic, revise its construction, visual relationships and input support instead of adding the same object name again."
     },
     {
       "id": "EX-P-identity",
@@ -471,7 +472,7 @@
     {
       "id": "EX-B-partial-default",
       "title": "Bernini converts what you describe and leaves the rest of the shot",
-      "summary": "When the prompt concentrates on a subject, Bernini converts it and keeps photographic scenery, including with a loop-written prompt that tells it to preserve the source. List the planes to rebuild and keep preservation to one clause.",
+      "summary": "Bernini can convert the subject while retaining photographic scenery, even when scenery was explicitly described. Cover the planes, then rework the construction and input support of the ones it still failed to realize.",
       "questions": [
         "Why is only my character converted?",
         "Why does a plain request leave the background alone?",
@@ -486,25 +487,26 @@
         "EV-V5-train-cases",
         "EV-F004",
         "EV-F005",
-        "EV-F006"
+        "EV-F006",
+        "EV-V5-case-reading"
       ],
       "stages": [
         "design",
         "inspect"
       ],
       "path": "knowledge/experience/curated/entries/B-partial-default.md",
-      "version": "1",
-      "sha256": "12b0337254ab7865f47067d0439cbd11621a800a1e1393891dee18672bf49ffb",
+      "version": "2",
+      "sha256": "8ef97f78f6996d308ef92435d846e638182222ee583f3660e08dd82a90d61ad1",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md",
+      "review_reference": "docs/experience-content-correction-20261103.md",
       "aliases": [
         "Bernini converts what you describe and leaves the rest of the shot",
         "Why is only my character converted?",
         "Why does a plain request leave the background alone?",
         "What does a preservation-heavy prompt cost?"
       ],
-      "applicability": "When the prompt concentrates on a subject, Bernini converts it and keeps photographic scenery, including with a loop-written prompt that tells it to preserve the source. List the planes to rebuild and keep preservation to one clause.",
-      "recommendation": "When the prompt concentrates on a subject, Bernini converts it and keeps photographic scenery, including with a loop-written prompt that tells it to preserve the source. List the planes to rebuild and keep preservation to one clause."
+      "applicability": "Bernini can convert the subject while retaining photographic scenery, even when scenery was explicitly described. Cover the planes, then rework the construction and input support of the ones it still failed to realize.",
+      "recommendation": "Bernini can convert the subject while retaining photographic scenery, even when scenery was explicitly described. Cover the planes, then rework the construction and input support of the ones it still failed to realize."
     },
     {
       "id": "EX-B-text-budget",
@@ -528,10 +530,10 @@
         "design"
       ],
       "path": "knowledge/experience/curated/entries/B-text-budget.md",
-      "version": "1",
-      "sha256": "ca612bc53dd208faf223cbf5af6122de0d5cb39363d19aeaaa98a27fd7eed5cf",
+      "version": "2",
+      "sha256": "5fc49a31293cb0973cc88720ac43205a92da83f7bfad69033785e4fae4d6202a",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md",
+      "review_reference": "docs/experience-content-correction-20261103.md",
       "aliases": [
         "The 512-token text limit makes every sentence compete",
         "How long can a Bernini prompt be?",
@@ -625,7 +627,8 @@
       "layer": "condition",
       "evidence_ids": [
         "EV-V5-LEGO-planes",
-        "EV-V5-train-cases"
+        "EV-V5-train-cases",
+        "EV-V5-case-reading"
       ],
       "families": [
         "手工与材料"
@@ -635,10 +638,10 @@
         "inspect"
       ],
       "path": "knowledge/experience/curated/entries/C-craft.md",
-      "version": "1",
-      "sha256": "1259fd66d92d6811f35623e6eba42fdbed70f86e13e2fc1976fcda1f6948f8dd",
+      "version": "2",
+      "sha256": "528baf49285db1fca9a1ca87459b1bd89c2209e1333667f5ee4fca0027944b61",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md",
+      "review_reference": "docs/experience-content-correction-20261103.md",
       "aliases": [
         "Craft and material worlds need a construction clause for every object",
         "How do I recast into a physical material such as bricks, paper or felt?",
@@ -689,8 +692,8 @@
     },
     {
       "id": "EX-C-hand-drawn",
-      "title": "Hand-drawn, painted and comic worlds: no scored train evidence yet; carry the principles",
-      "summary": "The train split holds anime, painting and comic requests but this library has no scored runs for them. Apply the shared principles and treat any style-specific guidance as a hypothesis to test.",
+      "title": "Carry historical drawing evidence into new medium-specific tasks",
+      "summary": "Use the historical etching and storybook evidence for concrete medium construction. Current anime, painting and comic families still need v5 training comparisons; transfer the construction relationship and choose the marks for the requested medium.",
       "questions": [
         "Is there guidance for anime, painting or comic worlds?",
         "What should I check first in a drawn or painted medium?"
@@ -701,6 +704,9 @@
       ],
       "layer": "condition",
       "evidence_ids": [
+        "EV-H-B-027__short__full_knowledge",
+        "EV-H-B-041__short__full_knowledge",
+        "EV-historical-score-extract",
         "EV-semantic-goal-review"
       ],
       "families": [
@@ -713,17 +719,17 @@
         "inspect"
       ],
       "path": "knowledge/experience/curated/entries/C-hand-drawn.md",
-      "version": "1",
-      "sha256": "18c4e0512047adb2fb8b3adcd57362a28bd0328f2b17c86092716c61cee4e048",
+      "version": "2",
+      "sha256": "95a96ff07b3843979264ff4a56b287fe429620a10daea303edc55f2e285e5c9d",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md",
+      "review_reference": "docs/experience-content-correction-20261103.md",
       "aliases": [
-        "Hand-drawn, painted and comic worlds: no scored train evidence yet; carry the principles",
+        "Carry historical drawing evidence into new medium-specific tasks",
         "Is there guidance for anime, painting or comic worlds?",
         "What should I check first in a drawn or painted medium?"
       ],
-      "applicability": "The train split holds anime, painting and comic requests but this library has no scored runs for them. Apply the shared principles and treat any style-specific guidance as a hypothesis to test.",
-      "recommendation": "The train split holds anime, painting and comic requests but this library has no scored runs for them. Apply the shared principles and treat any style-specific guidance as a hypothesis to test."
+      "applicability": "Use the historical etching and storybook evidence for concrete medium construction. Current anime, painting and comic families still need v5 training comparisons; transfer the construction relationship and choose the marks for the requested medium.",
+      "recommendation": "Use the historical etching and storybook evidence for concrete medium construction. Current anime, painting and comic families still need v5 training comparisons; transfer the construction relationship and choose the marks for the requested medium."
     },
     {
       "id": "EX-C-long",
@@ -741,7 +747,8 @@
       "evidence_ids": [
         "EV-V5-train-cases",
         "EV-V5-LEGO-planes",
-        "EV-PE-token-limit"
+        "EV-PE-token-limit",
+        "EV-V5-case-reading"
       ],
       "tracks": [
         "long"
@@ -752,10 +759,10 @@
         "deliver"
       ],
       "path": "knowledge/experience/curated/entries/C-long.md",
-      "version": "1",
-      "sha256": "17df236053ed16f74b505161a08d31c5007249b0e7240a8561f190a8f5adff4b",
+      "version": "2",
+      "sha256": "72053e7c8b75cfa3b302b07a72d259337e392d984a454e8099ff337a188a0c14",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md",
+      "review_reference": "docs/experience-content-correction-20261103.md",
       "aliases": [
         "Long requests list many details; carry the ones that define the world, within the text limit",
         "The request lists many details. Do I need to carry them all?",
@@ -766,8 +773,8 @@
     },
     {
       "id": "EX-C-short",
-      "title": "Short requests name the world only; decide the counterparts and layout yourself",
-      "summary": "A short request gives the target world and little else. Two preview short tasks lost the source's layout and camera position when the prompt followed the request's level of detail; write the source's arrangement and its counterparts into the prompt.",
+      "title": "Short requests need a source-specific realization of the target world",
+      "summary": "For a short request, anchor the target in the source's distinctive spatial relationships. When a detailed prompt still produces a generic scene, revise the discriminating geometry and staging rather than merely making the prompt longer.",
       "questions": [
         "The request is one sentence. What do I have to add?",
         "Why did a short-prompt result keep the theme but lose the scene?"
@@ -778,7 +785,8 @@
       ],
       "layer": "condition",
       "evidence_ids": [
-        "EV-V5-train-cases"
+        "EV-V5-train-cases",
+        "EV-V5-case-reading"
       ],
       "tracks": [
         "short"
@@ -788,17 +796,17 @@
         "inspect"
       ],
       "path": "knowledge/experience/curated/entries/C-short.md",
-      "version": "1",
-      "sha256": "01f2f8678373b81c91159c915900d31adcdf725ff6b00f8c864b30574f2612d2",
+      "version": "2",
+      "sha256": "ea5d49edfd6695f7130657811a54b8946ff097e02dbb44d21627eae4794958dc",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md",
+      "review_reference": "docs/experience-content-correction-20261103.md",
       "aliases": [
-        "Short requests name the world only; decide the counterparts and layout yourself",
+        "Short requests need a source-specific realization of the target world",
         "The request is one sentence. What do I have to add?",
         "Why did a short-prompt result keep the theme but lose the scene?"
       ],
-      "applicability": "A short request gives the target world and little else. Two preview short tasks lost the source's layout and camera position when the prompt followed the request's level of detail; write the source's arrangement and its counterparts into the prompt.",
-      "recommendation": "A short request gives the target world and little else. Two preview short tasks lost the source's layout and camera position when the prompt followed the request's level of detail; write the source's arrangement and its counterparts into the prompt."
+      "applicability": "For a short request, anchor the target in the source's distinctive spatial relationships. When a detailed prompt still produces a generic scene, revise the discriminating geometry and staging rather than merely making the prompt longer.",
+      "recommendation": "For a short request, anchor the target in the source's distinctive spatial relationships. When a detailed prompt still produces a generic scene, revise the discriminating geometry and staging rather than merely making the prompt longer."
     }
   ],
   "resources": [
@@ -1310,19 +1318,19 @@
       "id": "EV-V5-LEGO-planes",
       "title": "Brick-world case: planes converted and not converted",
       "path": "knowledge/experience/curated/evidence/v5-lego-planes.md",
-      "version": "1",
-      "sha256": "485f457d95e2c2d9b2012fe102ecb032778e0762ddfd380be6cf67e5156066f5",
+      "version": "2",
+      "sha256": "0ec86435967ea046237a78554ed71a242a689a9eb6b832a44ed292496dee47ed",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md"
+      "review_reference": "docs/experience-content-correction-20261103.md"
     },
     {
       "id": "EV-V5-train-cases",
       "title": "v5 scores and reasons for train-split cases",
       "path": "knowledge/experience/curated/evidence/v5-train-cases.json",
-      "version": "1",
-      "sha256": "f51ec8ab5595ba485c025fc5dc3a9ab3207e6776ce906eaae612c79fa0a3bb57",
+      "version": "2",
+      "sha256": "1da05c3ecf60543bb76f521a4295801e0ba20234215c9393dfa416a5b77ab942",
       "review_status": "approved",
-      "review_reference": "docs/experience-rebuild-20261103.md"
+      "review_reference": "docs/experience-content-correction-20261103.md"
     },
     {
       "id": "EV-PE-token-limit",
@@ -1334,11 +1342,137 @@
       "review_reference": "docs/experience-rebuild-20261103.md"
     },
     {
+      "id": "EV-V5-001-short-comparison",
+      "title": "001 short: source and candidate comparison, six sampled times",
+      "path": "knowledge/experience/curated/evidence/frames/v5-001-short-comparison.jpg",
+      "version": "1",
+      "sha256": "d01bc30197d88b1aa509cc6720dc4ceb09c6601d3695dd632468fb770b2474c3",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-001-short-case",
+      "title": "001 short: exact prompts, inputs and full saved v5 reasons",
+      "path": "knowledge/experience/curated/evidence/v5-001-short-case.json",
+      "version": "1",
+      "sha256": "75d979304ec01babaf15ab3e9349aab76fafe9a901d7f15c509bd7ea995a107d",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-001-long-comparison",
+      "title": "001 long: source and candidate comparison, six sampled times",
+      "path": "knowledge/experience/curated/evidence/frames/v5-001-long-comparison.jpg",
+      "version": "1",
+      "sha256": "30d0cf71eff260e2f94c1dd31aac683327ae9947ab7294ccc69698145ff02e60",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-001-long-case",
+      "title": "001 long: exact prompts, inputs and full saved v5 reasons",
+      "path": "knowledge/experience/curated/evidence/v5-001-long-case.json",
+      "version": "1",
+      "sha256": "c10630365397a79482249bcf85367c46950a5af07aff312c215be9f35796a5d7",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-005-short-comparison",
+      "title": "005 short: source and candidate comparison, six sampled times",
+      "path": "knowledge/experience/curated/evidence/frames/v5-005-short-comparison.jpg",
+      "version": "1",
+      "sha256": "b95e1c721e7bcbec08b441ca65230ac7e13bf0478e2eabc5e9a00dd921b131b2",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-005-short-case",
+      "title": "005 short: exact prompts, inputs and full saved v5 reasons",
+      "path": "knowledge/experience/curated/evidence/v5-005-short-case.json",
+      "version": "1",
+      "sha256": "92f0ce28250607256e5f68bcbff3691694e4500f9dd7df32a75b0e0fbefd084e",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-005-long-comparison",
+      "title": "005 long: source and candidate comparison, six sampled times",
+      "path": "knowledge/experience/curated/evidence/frames/v5-005-long-comparison.jpg",
+      "version": "1",
+      "sha256": "1d6f1546801922a1c8a9d91571210b9a610fd087526e582d9c32ae9056ef717b",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-005-long-case",
+      "title": "005 long: exact prompts, inputs and full saved v5 reasons",
+      "path": "knowledge/experience/curated/evidence/v5-005-long-case.json",
+      "version": "1",
+      "sha256": "7c098b991f1a94879c74188249a1859222bcdbe811834905e7c7e166eb4747c0",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-026-short-comparison",
+      "title": "026 short: source and candidate comparison, six sampled times",
+      "path": "knowledge/experience/curated/evidence/frames/v5-026-short-comparison.jpg",
+      "version": "1",
+      "sha256": "b005200022016a53045c194fb2609582c1bae0f70eeade11900ad258761345f5",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-026-short-case",
+      "title": "026 short: exact prompts, inputs and full saved v5 reasons",
+      "path": "knowledge/experience/curated/evidence/v5-026-short-case.json",
+      "version": "1",
+      "sha256": "d98a8f37a9802912c25cace361bc4806b314315cab46a48c2161512bf67d9b5f",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-026-long-comparison",
+      "title": "026 long: source and candidate comparison, six sampled times",
+      "path": "knowledge/experience/curated/evidence/frames/v5-026-long-comparison.jpg",
+      "version": "1",
+      "sha256": "6df391ec46fb05f32009f3477ba36f4b9d254825a0074c45ae94dbccb693b895",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-026-long-case",
+      "title": "026 long: exact prompts, inputs and full saved v5 reasons",
+      "path": "knowledge/experience/curated/evidence/v5-026-long-case.json",
+      "version": "1",
+      "sha256": "b08cf78f943ff8cba7e2f413a2a37597af13425f8f88ddf517b7354a6134ad95",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-steady-original-cases",
+      "title": "Original 002/011 steady-train observations with full saved reasons",
+      "path": "knowledge/experience/curated/evidence/v5-steady-original-cases.json",
+      "version": "1",
+      "sha256": "437c84414dd5caa310053ee5e099365a2e2ea7b308b834788e36cc84b3cdbac9",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
+      "id": "EV-V5-case-reading",
+      "title": "Read exact interventions and full saved v5 evidence",
+      "path": "knowledge/experience/curated/evidence/v5-case-reading.md",
+      "version": "1",
+      "sha256": "27b7bbd2b927627df22e95b47a57429f4ed283ecbe56f84bdf5183d0d771ed23",
+      "review_status": "approved",
+      "review_reference": "docs/experience-content-correction-20261103.md"
+    },
+    {
       "id": "EX-renderer-profiles",
       "title": "Renderer entrances",
       "path": "knowledge/experience/curated/renderers.md",
-      "version": "derived-e1a2b9e1d0b787ac",
-      "sha256": "e1a2b9e1d0b787acbc468754bf80dd8982eb203cd0892d76dfc013e009b46ca1",
+      "version": "derived-286c7ed9c16c9864",
+      "sha256": "286c7ed9c16c9864befd7886c4f03edadc76de61881386eaed0b3173f822baad",
       "review_status": "approved",
       "review_reference": "Derived from canonical entry metadata"
     }

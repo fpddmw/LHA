@@ -13,7 +13,7 @@ Read the nearest current account and a representative entry from the same layer 
 
 ## Place the judgment before writing it
 
-The library is layered. A judgment belongs in one of three: a **principle** that holds across renderers (about recasting itself), a **renderer** capability or trap (what Bernini or Ditto did under a given construction), or a **condition** of the task (short or long request, family of world or medium). Decide the layer first, and state the evidence status: train-split cases only, scores from the current evaluation protocol, how many tasks, how many renderings per condition. Evidence on one task is a working pattern; evidence on none is a hypothesis, and says so. Do not use held-out (test-split) videos, their scores or their prompts.
+The library is layered. A judgment belongs in one of three: a **principle** that holds across renderers (about recasting itself), a **renderer** capability or trap (what Bernini or Ditto did under a given construction), or a **condition** of the task (short or long request, family of world or medium). Decide the layer first, and state the evidence status: train-split cases only, the scoring protocol, how many tasks and how many renderings per condition. Use current-protocol comparisons for current scores; retain historical observations with their original protocol and task interpretation. Evidence on one task is a working pattern; evidence on none is a hypothesis, and says so. Do not use held-out (test-split) videos, their scores or their prompts.
 
 ## Understand the objective behind the attempt
 
@@ -23,7 +23,7 @@ Historical requirements and scores are attributed judgments. Keep their observat
 
 ## Explain the contrast through the actual construction
 
-Read the selected input and exact submitted prompt. Distinguish a missing instruction from an explicit instruction that failed, visual ornament from the requested structure, and a changed construction from stronger wording. An input carries a particular person's appearance, an activity, spatial relationships and existing gains; identify which of these made continuation useful or obstructed the next transformation.
+Read the selected input and exact submitted prompt. Check the relevant clauses before calling a failure an omission. The [005 and 026 contrasts](../../../knowledge/experience/curated/evidence/v5-case-reading.md) already contained instructions that later accounts mistakenly treated as absent. Identify what the subsequent attempt actually changed, including input and construction relationships. Distinguish a missing instruction from an explicit instruction that failed, visual ornament from the requested structure, and a changed construction from stronger wording. An input carries a particular person's appearance, an activity, spatial relationships and existing gains; identify which of these made continuation useful or obstructed the next transformation.
 
 Inspect useful and failed outcomes. Find the scene-level relationship behind the contrast: clothing covering a necessary contact, a theme retaining the old location's function, a global color treatment dominating skin, or a candidate repair constructing another object. Recommend a compatible realization or a better-supported input. Develop a renderer-specific working preference when that is the useful increment; support it with the actual setup and counterexamples.
 
@@ -31,7 +31,7 @@ Use the recorded continuation question, answer and subsequent action to locate t
 
 ## Contribute an account the next Planner can use
 
-State the condition, preference and explanation in natural prose. Keep action-changing boundaries beside the advice; put counts, source events and protocol details in the evidence footer. Distinguish a proposed repair from an observed successful repair once, clearly. Use counterexamples to refine the condition and retain successful choices as well as failures.
+State the condition, preference and explanation in natural prose. Introduce a concrete illustration with "for example" after the transferable judgment. Choose the objects and staging for the current task; a successful case explains a relationship rather than prescribing its plot. Keep action-changing boundaries beside the advice; put counts, source events and protocol details in the evidence footer. Distinguish a proposed repair from an observed successful repair once, clearly. Use counterexamples to refine the condition and retain successful choices as well as failures.
 
 Use saved-video observation for a new visual claim, or attribute an existing review. Separate frames seen online from frames inspected after the task. Sparse evidence can leave an event unresolved while supporting a local judgment. Consult the [observation contract](../../../docs/online-event-observation.md) when temporal coverage matters.
 

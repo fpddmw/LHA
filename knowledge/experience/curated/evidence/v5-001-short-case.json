@@ -1,0 +1,432 @@
+{
+  "sample_id": "001",
+  "split": "train",
+  "track": "short",
+  "renderer": "bernini",
+  "request": "Transform the family moment in the bedroom into a pastel hotel suite with the production design of The Grand Budapest Hotel.",
+  "source": {
+    "path": "benchmark_data/train/001/video.mp4",
+    "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b"
+  },
+  "provenance": {
+    "path": "out/four_video_preview_20261102/glm-recast-v5-deliveries/001-short/all-page-data.json",
+    "sha256": "9dcd09cebfd10783388fb8faf07b5cbcbace17a47c31d6345cce6cade8fd9a1b",
+    "assembled_on": "2026-11-03",
+    "scope": "Original extract rows plus the cited Direct output. Existing saved reports only; no new scoring."
+  },
+  "comparison_sheet": {
+    "id": "EV-V5-001-short-comparison",
+    "path": "knowledge/experience/curated/evidence/frames/v5-001-short-comparison.jpg",
+    "sha256": "d01bc30197d88b1aa509cc6720dc4ceb09c6601d3695dd632468fb770b2474c3",
+    "coverage": "Six evenly spaced samples per row, reused from the Opus review. This is not continuous motion evidence. The sheet omits some candidates; some interrupted attempts have a ? label. Match named rows to candidate IDs and the records below."
+  },
+  "candidates": [
+    {
+      "method": "full",
+      "candidate_id": "v1",
+      "output_sha256": "f68903a823ef0f02c8d39056ad7cbff2cb96692c987f9897f101ec972c82dd1b",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform this bedroom into a lavish pastel European hotel suite with the production design of The Grand Budapest Hotel. Preserve the same mother and small child cuddling in bed, their faces, natural smiles, gentle hand movements and interaction with the laptop. Keep the source framing and continuous shot. Replace the plain white wall with confectionery blush-pink damask wallpaper, ivory rectangular panel moldings and delicate gilded floral relief. Replace the gray rectangular headboard behind their heads with a scalloped powder-blue velvet headboard edged in carved ivory and gold. The bed has pristine cream hotel linens, pale rose satin piping and a folded dusty-lilac silk coverlet across the foreground. On the visible wall to the right of the family, arrange a small gilt-framed alpine landscape above a mint-green bedside cabinet with brass handles; a brass wall sconce with an ivory pleated shade casts a warm peach glow nearby. Pale pink and pistachio architectural panels create a meticulously ordered, jewel-box interior, ornate but uncluttered. Soft warm light flatters the family's skin and catches the gold moldings, balanced with creamy daylight across the bedding. Precise decorative geometry, tactile velvet and satin, whimsical 1930s luxury, restrained pastel colors, polished cinematic live action. Keep the family and laptop unobstructed; the suite decor remains stable throughout.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/f68903a823ef0f02c8d39056ad7cbff2cb96692c987f9897f101ec972c82dd1b.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-full-9000-existing0-full-v2-r1-short-full-001/run/workers/0/tasks/001__short__full/run/videos/v1/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 3.7,
+            "reason": "From the first supplied frame (0.0s) through 5.0s the entire visible scene is rebuilt as a pastel hotel suite in a Grand Budapest-style register: pink boiserie walls with gold bead moulding, an ornate cream-and-gold carved headboard with pink damask tufting, a gilt-framed landscape flanked by paired sconces, a mint-green nightstand with a red telephone/service bell, a lavender satin duvet with cream-and-gold pillows, and the woman restyled in cream satin pajamas with gold piping. Supporting observations: the construction logic of the requested world (panelling, moulding, symmetric fixture arrangement, period furnishings, warm practical lamps) is visible in every supplied segment (timelinep0-timelinep3), and the pastel palette, symmetry and hotel props match the requested production-design register; the source gray headboard, white walls and white bedding are fully replaced with no source-like region remaining. Remaining residues are minor: a modern white light-switch plate on the paneled wall, and in the 2.8-4.2s interval the subjects carry cooler daylight-style lighting against the warm suite background, so the light on the focal subjects is only partially adapted; the modern silver laptop is retained, but it is the preserved activity prop of the source moment and the request does not demand its removal. The gap to the 4.0 anchor is these small source-like/modern residues - the switch plate and the partially un-adapted subject lighting - rather than any unconverted region.",
+            "evidence_refs": [
+              "source:overview:0",
+              "candidate:overview:0",
+              "candidate:overview:21",
+              "candidate:overview:42",
+              "candidate:overview:84",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84"
+            ],
+            "limitations": [
+              "The Grand Budapest Hotel style match is judged only from the visible pastel palette, symmetry, ornamentation and hotel props in the supplied frames; no reference imagery was supplied.",
+              "Assessment is based on still frames at supplied resolution; regions of the suite outside the fixed camera view are unseen.",
+              "The final 0.05s of the declared event (after 5.0s) was not supplied."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.9,
+            "reason": "At matched timestamps across all four supplied intervals the candidate reproduces the source moment: the same woman and toddler in the same bed arrangement, her right hand on the laptop keyboard and left hand on the child's head, the child's fingers at the mouth, and the same expression arc from early frames through broad smile to the closed-eye, pursed-lip finish at the end. Supporting observations: contacts (hand-on-head, hand-on-keyboard, child against her torso, both on the bedding) hold in every supplied candidate frame, the downward glance near 2.05-2.25s recurs at the matched time, and the wardrobe/bedding changes are translated counterparts of the requested world rather than losses. Minor deviations remain: the candidate frames slightly tighter than the source, the laptop sits a little further to her right on the duvet in the late interval than in the source, and the woman's expression leads the source by roughly one to two frames at the start. These deviations leave every role, beat, spatial relation and key interaction with a recognizable counterpart, but the accumulated minor shifts keep the score just below the 4.0 anchor.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "source:timelinep1:44",
+              "candidate:timelinep1:44",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "source:timelinep3:100",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Expression-timing differences of one to two frames cannot be resolved precisely at the supplied 0.05s sampling.",
+              "Identity beyond visual resemblance and pose match cannot be verified from stills alone.",
+              "No crop metadata was supplied; full-frame comparison between source and candidate was assumed."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "Across all four supplied consecutive-frame intervals (0.0-1.4s, 1.4-2.8s, 2.8-4.2s and 4.2-5.0s at 0.05s steps) the suite environment, identities, wardrobe and all contacts remain continuous with no flicker, popping, medium switch or reversion, but a progressive rendering drift emerges late in the clip: the woman's face becomes progressively smoother and her features differ noticeably between 4.2s and 5.0s beyond the source's own expression change, and the laptop loses its detailed silver read, becoming a smooth pale slab with an indistinct logo in the final interval. Supporting observations: micro-motion (typing-hand shifts, small head tilts, the child's hand movements, the downward glance near 2.05-2.25s) tracks coherently frame-to-frame, and environment props (headboard carving, painting, sconces, nightstand, duvet folds) persist unchanged across all supplied frames. The drift is gradual rather than a discontinuity and the event stays fully interpretable, but it exceeds small transient jitter on the focal subject, keeping the score below the 4.0 anchor.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:14",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:32",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:60",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "The final 0.05s of the declared event (5.0-5.05s) was not supplied for either video.",
+              "Sub-frame shimmer or instability in fine ornamentation cannot be confirmed or excluded at the supplied resolution.",
+              "Drift magnitude is judged from stills; small inter-frame changes may be under- or over-reported."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.4,
+            "reason": "The suite geometry itself is well formed, but visible composite defects sit on the focal subjects: halo/cut-out edges around the hair with the woman's hair blending into the headboard crest in places, cooler daylight-style subject lighting against the warm background, progressively smoothed and slightly stylized faces toward the end of the clip, a laptop that degrades into a smooth pale slab with an indistinct logo in the final interval, and a narrow unresolved vertical seam along the right frame edge - while the scene remains interpretable throughout. Supporting observations: the environment structures (headboard carving, damask panel, painting, sconces, nightstand, bedding folds) are cleanly rendered and stable, and hands, keyboard contact and faces remain legible at supplied resolution in all four segments. The gap to the 3.0 anchor is that these artifacts affect focal structures (hair, faces, the held prop) rather than lying outside them.",
+            "evidence_refs": [
+              "candidate:timelinep1:42",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Fine edge, halo and hand-articulation details are limited by the supplied resolution; absence of further visible defects is not proof of their absence.",
+              "Concealed geometry (laptop underside, areas behind subjects) is unobserved, not evidence of correct form.",
+              "The final 0.05s of the declared event was not supplied."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 2.8,
+            "reason": "The pastel suite forms a deliberate, cohesive design system - coordinated pink/lavender/mint/gold palette, symmetric sconce-and-painting arrangement, ornate headboard, adapted satin wardrobe and bedding - but integration is weakened by a consequential composite clash: the subjects carry cooler daylight-style lighting and visible cut-out edges against the warm, lamp-lit background, with a modern white switch plate as an added local inconsistency. Supporting observations: the palette, materials and prop adaptations (satin pajamas with gold piping, lavender duvet, period telephone/bell) read as one designed world appropriate to the requested register, and the composition follows the source's intimate two-shot; no generic theme decoration or cluttered hierarchy is present. The gap to the 3.0 anchor is that the subject-background lighting and edge treatment keep a noticeable composite reading instead of a fully blended finish, while the underlying design choices themselves are adapted rather than generic.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:63",
+              "candidate:timelinep0:0",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:96"
+            ],
+            "limitations": [
+              "The Grand Budapest Hotel reference is judged only from the visible pastel, symmetric and ornamental cues; no reference imagery of the film was supplied.",
+              "Lighting and material integration are judged from stills at supplied resolution.",
+              "The final 0.05s of the declared event was not supplied."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "short",
+        "video_sha256": "f68903a823ef0f02c8d39056ad7cbff2cb96692c987f9897f101ec972c82dd1b",
+        "method": "full",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": "source",
+        "prompt_words": 209,
+        "v5_scores": {
+          "instruction_adherence": 3.7,
+          "content_preservation": 3.9,
+          "temporal_consistency": 3.0,
+          "visual_integrity": 2.4,
+          "aesthetic_coherence": 2.8
+        },
+        "low_reasons": {
+          "visual_integrity": "The suite geometry itself is well formed, but visible composite defects sit on the focal subjects: halo/cut-out edges around the hair with the woman's hair blending into the headboard crest in places, cooler daylight-style subject lighting against the warm background, progressively smoothed and slightly stylized faces toward the end of the clip, a laptop that degrades into a smooth pale slab with an indistinct logo i"
+        },
+        "requirement_labels": [
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v1",
+      "output_sha256": "a5a877a9fae94f880dfcdd073155b14b71b7af0d4adf09b851a03708a33c3e9c",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform the bedroom into an elegant pastel European hotel suite with the confectionery production design of The Grand Budapest Hotel. Preserve the original fixed camera, medium side view, framing, timing, and intimate family action: the curly-haired mother reclines on the left with her young child nestled beside her, one hand resting on the child's head and the other using the open silver laptop on the duvet at right. Retain their identities, facial features, natural expressions, hair, body proportions, and subtle movements throughout.\n\nReplace the plain white wall with blush-pink damask wallpaper inside ornate ivory wall panels, delicate gilded moldings, and pale peach trim. Replace the gray fabric headboard with a luxurious dusty-rose velvet headboard featuring deep button tufting, a curved ivory carved frame, and fine gold edging. In the visible wall space at right, add a small gilded landscape painting and a polished brass wall sconce with a pleated cream shade. Arrange these details with precise, orderly spacing appropriate to a lavish 1930s alpine hotel. Keep the existing room perspective and avoid obscuring the family or laptop.\n\nDress the bed in sumptuous ivory linens with rose-pink piping and a pale lavender satin coverlet, retaining the original folds and movement. Keep the mother's pale blush pajamas. Use soft peach daylight, warm glowing practical light, candy-colored pink, lavender, cream, and restrained gold accents. Photorealistic faces and tactile velvet, satin, carved wood, and wallpaper; polished storybook luxury rather than a simple pink color filter. Maintain stable architecture, patterns, props, and colors across every frame.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/a5a877a9fae94f880dfcdd073155b14b71b7af0d4adf09b851a03708a33c3e9c.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-existing0-pe-r1-short-pe-001/run/workers/0/baselines/001__short/pe-loop/0/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 4.0,
+            "reason": "The entire visible scene is rebuilt as a pastel hotel suite with Grand Budapest-style production design across every reviewed interval, with the source's grey/white bedroom fully replaced by pink damask wallpaper, gilt-molded paneling, a brass sconce with pleated shade, a gilt-framed landscape painting, an ornate white-and-gold headboard with magenta tufted velvet, and lavender satin bedding with peach piping.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:100",
+              "candidate:overview:0",
+              "candidate:overview:100"
+            ],
+            "limitations": [
+              "The transformation is already complete at the first supplied candidate frame (0.0s); no onset or transition is observable, and whether the source bedroom appears at any point outside the reviewed frames is unknown.",
+              "Grand Budapest Hotel resemblance is judged only from visible decor cues (pastel palette, gilt trim, damask wallpaper, sconce, framed painting); no ground-truth design assets were supplied.",
+              "The source laptop's silver finish survives in the candidate's first instants as a pale lid; the laptop is a source prop rather than a central requested element, so this is weighed under temporal consistency rather than as a world-realization shortfall."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.6,
+            "reason": "The same moment is recognizably preserved — mother and child hold matching poses against the headboard, the hand-on-child's-head and hand-on-keyboard contacts persist at matched timestamps, the blink (~0.4–0.45s) and smile onset (~0.9s) recur, and the static camera framing matches — while the heart-pendant necklace is no longer resolved and the child's torso reads as a brown garment where the source shows lighter skin tones.",
+            "evidence_refs": [
+              "source:timelinep0:8",
+              "candidate:timelinep0:8",
+              "source:timelinep0:18",
+              "candidate:timelinep0:18",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep2:84",
+              "candidate:timelinep2:84",
+              "source:timelinep2:60",
+              "candidate:timelinep2:60",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:20"
+            ],
+            "limitations": [
+              "Necklace loss, child's garment colour, and laptop appearance were read from compressed stills; finer confirmation was not possible.",
+              "The laptop's own appearance drifts in the candidate (scored under temporal consistency); its role as the attended object is unchanged.",
+              "Segments were reviewed separately; correspondence was verified within each supplied interval at matched timestamps."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.3,
+            "reason": "The main progression is coherent across all four reviewed segments — set dressing stays locked to the fixed camera, contacts hold, and the blink and smile recur at matching timestamps — but the laptop's finish changes within roughly the first 0.3s, from a pale silver-toned lid resembling the source to a darker lid with a visible circular logo, a drift on the hero prop both subjects attend to.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:5",
+              "candidate:timelinep0:10",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:57",
+              "candidate:timelinep2:76",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Observed scope: 0.0–1.4s, 1.4–2.8s, 2.8–4.2s and 4.2–5.0s as consecutive-frame segments plus overview frames to 5.0s; the final ~0.05s (5.00–5.05s) is not covered by supplied frames.",
+              "The exact frame of the laptop's appearance change could not be pinned down, and the laptop's later finish is described differently across segment reports (dark grey lid with logo vs pale pink lid); the change is bounded to the first ~0.3s either way.",
+              "Continuity across segment boundaries (1.4s, 2.8s, 4.2s) is supported by the overlapping endpoint frames but was not observed as a single continuous run.",
+              "The timelinep1 report contains internally inconsistent statements (describing the pastel suite while also claiming candidate frames are visually identical to the source); convergent overview frames and the neighbouring segments show the suite persisting through 1.4–2.8s, so no reversion was scored, with residual uncertainty noted."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.4,
+            "reason": "The scene's structures are well formed for the photographic recast — headboard, sconce, painting, wallpaper pattern, bedding and both subjects read cleanly with no melting, ghosting or tearing — but slight softness appears at composited edges (hair against damask, hand against bedding) and a small unresolved greyish patch sits under the woman's neckline where the pendant was.",
+            "evidence_refs": [
+              "candidate:timelinep2:66",
+              "candidate:timelinep2:78",
+              "candidate:timelinep2:83",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:20"
+            ],
+            "limitations": [
+              "Edge softness and the neckline patch were judged from compressed stills; finer seam or halo detail could not be resolved.",
+              "A small pale shape at the headboard edge beside the woman's cheek could not be identified as ornament or artifact; it persists without popping and is treated as a local ambiguity rather than a structural defect.",
+              "Elements outside the frame edges of the suite (rest of the room, door, windows) are unobserved, not evidence of correct or incorrect geometry."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.7,
+            "reason": "The result reads as one designed Grand Budapest-style system — unified pink/lavender/gold palette, gilt moldings and sconce, satin bedding, warm colour grade, and wardrobe adapted with pajama-collar piping — with only the laptop's mixed dark-body/light-lid finish and a small unidentified pale shape at the headboard edge as local inconsistencies.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:53",
+              "candidate:overview:100",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:80",
+              "candidate:timelinep0:0"
+            ],
+            "limitations": [
+              "Integration was judged from compressed stills; exact hues and material finishes could not be verified.",
+              "The child's brown torso garment is a wardrobe deviation from the source rather than a visual-system clash; its intended design role is uncertain.",
+              "Live-action subjects within the restyled set were treated as appropriate for a production-design recast, not as an unrequested stylized/live-action mixture."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "001",
+        "prompt_form": "short",
+        "video_sha256": "a5a877a9fae94f880dfcdd073155b14b71b7af0d4adf09b851a03708a33c3e9c",
+        "method": "pe-loop",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": null,
+        "prompt_words": 251,
+        "v5_scores": {
+          "instruction_adherence": 4.0,
+          "content_preservation": 3.6,
+          "temporal_consistency": 3.3,
+          "visual_integrity": 3.4,
+          "aesthetic_coherence": 3.7
+        },
+        "low_reasons": {},
+        "requirement_labels": [
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "direct",
+      "candidate_id": "direct",
+      "output_sha256": "f776d42f1568e36efb6eb289569fc5f51710aa2c56f680fe1888baf15a2c861a",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "87c0f14481597c28a295d1cb1b76987179110e94ce910ed899a06a92795b376b",
+        "status": "recorded"
+      },
+      "prompt": "Transform the family moment in the bedroom into a pastel hotel suite with the production design of The Grand Budapest Hotel.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/f776d42f1568e36efb6eb289569fc5f51710aa2c56f680fe1888baf15a2c861a.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/short-direct-existing-1/results/media/f776d42f1568e36efb6eb289569fc5f51710aa2c56f680fe1888baf15a2c861a.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.5,
+            "reason": "The pastel grand-hotel-suite environment is fully rebuilt and held across the entire duration, but the requested 'family moment' is broken because the child present in every source frame is absent from every candidate frame, so a central requested element is missing. Supporting observations: from candidate frame 0 through 5.0s the setting is consistently a stylized pastel hotel suite — patterned pink/lavender/mint mural wallpaper, coral/orange headboard, gilt-framed artworks, heavy drapes with purple tiebacks, blue-based lamp on a red-pink nightstand, and a warm wall sconce — replacing the source's plain white-wall bedroom with grey headboard (source:timelinep0:0 vs candidate:timelinep0:0; candidate:timelinep2:56; candidate:timelinep3:84). The decor vocabulary (pastel palette, geometric mural, gilded frames, symmetric drapery, period-style furnishings) reads as consistent with the requested Grand Budapest Hotel production design direction. No source-like or live-action bedroom region remains visible at any reviewed timestamp. The unrequested wardrobe change from pale pink to sage green and the child's replacement by a dark navy mass are secondary to the central omission. The gap to the next higher anchor is restoration of the child as a present counterpart in the suite, which would make the conversion near-complete.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:overview:100",
+              "source:overview:0"
+            ],
+            "limitations": [
+              "Coverage is the full 0-5.05s timeline sampled at 0.05s steps in four segments; sub-frame changes between samples cannot be ruled out.",
+              "Exact fidelity to The Grand Budapest Hotel's specific production design cannot be confirmed without reference imagery; only visible decor elements are reported.",
+              "The transformation is already complete at candidate frame 0; any staging of the change before the clip is not observable and not required by the request."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.0,
+            "reason": "The mother, her reclined staging, the laptop interaction and the synchronized smile ramp remain recognizable, but the child — a central role of the source moment — is deleted and replaced by a dark navy mass, which caps CP at 2 under the identity rule. Supporting observations: the source shows the woman's hand resting on the child's head with the child nestled against her chest and fist near its mouth in every source frame (source:timelinep0:0, source:timelinep2:60, source:timelinep3:84); in the candidate the child is absent in every supplied frame across all four segments, the hand-on-head contact is gone, and the region where the child rested is occupied by the headboard/mural and an unstructured dark mass (candidate:timelinep0:0, candidate:timelinep1:28, candidate:timelinep2:56, candidate:timelinep3:84). The retained counterpart anchors are the mother's screen position, typing/trackpad hand with ring, white bedding and the expression progression mirroring the source's smile ramp at matching timestamps (candidate:timelinep0:10, candidate:timelinep0:28). Wardrobe (pink to sage green) and hair volume are altered without a requested-world reason, additional deviations within the already-capped score.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "source:timelinep2:60",
+              "candidate:timelinep2:56",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep0:28"
+            ],
+            "limitations": [
+              "The dark mass at the woman's midsection cannot be definitively identified (object, garment, or inpainting residue) from the frames; only the absence of child features is observed.",
+              "Fine facial-identity judgment is limited by frame resolution and compression; similarity is based on visible cues (face shape, hair, position).",
+              "Whether the child appears between sampled frames cannot be excluded, though no sampled frame in 0-5.0s shows the child."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 2.8,
+            "reason": "Identity, set dressing and event framing stay stable across all four reviewed consecutive-frame segments, but the focal subject's motion stalls to a near-complete freeze across 2.8-4.2s before resuming at 4.2s, and a small pink sliver pops in at the lower-left from about 1.2s. Supporting observations: in 0-1.4s background elements stay locked to frame with the subject's expression ramp and typing continuing at source cadence and no flicker or jump observed (candidate:timelinep0:0, candidate:timelinep0:10, candidate:timelinep0:28); in 1.4-2.8s the mural, frames, lamp, nightstand, curtains and sconce show no popping or layout change and identity is constant (candidate:timelinep1:28, candidate:timelinep1:44, candidate:timelinep1:56); in 2.8-4.2s the 29 candidate frames are near-identical, reading as effectively frozen while the source carries gentle micro-motion (candidate:timelinep2:56, candidate:timelinep2:70, candidate:timelinep2:84 vs source:timelinep2:60, source:timelinep2:84); in 4.2-5.0s minor trackpad and head motion resumes with the suite unchanged (candidate:timelinep3:84, candidate:timelinep3:100). The dark mass remains continuously present rather than popping, and no medium switching or identity change occurs. The freeze covers roughly a quarter of the clip on the focal subject, which keeps the score below the 3.0 anchor, but interpretability is never disrupted, so it does not reach the 2.0 anchor's discontinuity list.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:24",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Sampling is 0.05s per frame; brief flicker or sub-frame artifacts between samples could go unobserved.",
+              "The final 5.00-5.05s tail of the declared event is not covered by supplied frames.",
+              "The freeze characterization relies on near-identical consecutive sampled frames; exact motion amplitude within the segment is not measurable from stills."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.0,
+            "reason": "The scene remains interpretable, but a dark unstructured mass sits at the woman's midsection in the focal bed area — the region the child occupied in the source — alongside composited hair-edge halos and head/body geometry mismatches, which are consequential defects touching the focal subject. Supporting observations: the woman reads as composited onto the new background with soft halos/blur at the hairline against the mural and reduced hair volume (candidate:timelinep1:28, candidate:timelinep1:56); a lighting/grain mismatch separates the cooler, softer figure from the warm sconce-lit background (candidate:timelinep2:56, candidate:timelinep2:84); in 4.2-5.0s the head position and scale do not fully match the body and pillow geometry behind her, and the dark mass reads as an unresolved compositing artifact rather than a coherent object (candidate:timelinep3:84, candidate:timelinep3:96). Secondary issues include a largely flat untextured coral headboard and an overexposed white laptop screen (candidate:timelinep0:0, candidate:timelinep1:28). The gap to the 3.0 anchor is removal of the focal-area mass and seam artifacts so that only minor non-focal imperfections remain.",
+            "evidence_refs": [
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:96",
+              "candidate:timelinep0:0"
+            ],
+            "limitations": [
+              "Fine matte fringing and grain matching are difficult to verify at the supplied frame resolution and compression; related notes are tentative.",
+              "The dark mass cannot be conclusively identified from frames alone; its classification as an artifact is based on its unstructured appearance and lack of source correspondence.",
+              "Concealed regions behind the subject and duvet are unobserved, not evidence of correct geometry."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 2.5,
+            "reason": "The rebuilt suite itself forms a coherent pastel design system, but the retained figure is not fully adapted into it: the cooler, composited subject with halo seams and the unexplained dark mass at her chest weaken integration at the focal center of the composition. Supporting observations: the environment is internally consistent — pastel mural, gilt frames, coral headboard, coordinated drapes with purple ties, lamp and sconce forming a unified warm-lit palette consistent with the requested hotel-suite direction (candidate:timelinep0:0, candidate:timelinep0:18, candidate:overview:84). Against this, the figure keeps near-source neutral lighting while the room uses warm practical light, producing a visible figure/background mismatch (candidate:timelinep1:28, candidate:timelinep2:56), and the dark navy mass occupies the visual center without an adapted counterpart, cluttering the hierarchy where the family interaction belonged (candidate:timelinep2:70, candidate:timelinep3:84). The wardrobe shift to sage green is not itself a palette clash. The gap to the 3.0 anchor is a figure that is lit and finished consistently with the suite and a resolved focal center.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:18",
+              "candidate:timelinep1:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:84",
+              "candidate:overview:84"
+            ],
+            "limitations": [
+              "Assessment of the production-design reference relies only on visible palette and ornament cues; no reference imagery was supplied.",
+              "Color-matching judgments are limited by compression and frame resolution.",
+              "The same dark-mass observation is used here as an integration finding (unadapted focal element) and in visual_integrity as a structural artifact; it is not double-penalized as a single blanket deduction."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": null
+    }
+  ]
+}

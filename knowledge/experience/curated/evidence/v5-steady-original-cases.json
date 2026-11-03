@@ -1,0 +1,329 @@
+[
+  {
+    "sample_id": "002",
+    "split": "train",
+    "track": "short",
+    "method": "direct",
+    "output_sha256": "0acb1feaebeb9d5d6f39a0ac4849a7c100d05517e3fb6e3fa96a830611170cd3",
+    "request": "Transform the reading scene into a Middle-earth scholar studying ancient books in the style of The Lord of the Rings.",
+    "source_sha256": "e2bd39613ab09168885308a3e935a832c70e97ad830f47367fa690db28b9eaa7",
+    "input_video": "source",
+    "prompt": "Transform the reading scene into a Middle-earth scholar studying ancient books in the style of The Lord of the Rings.",
+    "prompt_status": "exact Direct request",
+    "provenance": {
+      "path": "out/bernini-steady-train-20261103/002/page-data.json",
+      "sha256": "d4b0f576e930f29badb25e0aa5851d9c00a8e96747c3be843fdce08856ccc22a"
+    },
+    "independent_review": {
+      "status": "scored",
+      "protocol": "lha-low-high-final-v4",
+      "profile_sha256": "a8b071d6727a3cbbc739c63d9b11a2e8ac5a08cac8b7ea56f85142617d1ceab9",
+      "main_scores": {
+        "instruction_adherence": {
+          "status": "scored",
+          "score": 2.6,
+          "reason": "The candidate presents, across its full observed duration, an elderly bearded robed scholar reclining in an armchair studying a large ancient tome in a warm book-lined library, so the core requested target (a scholar studying ancient books) is recognizable and centrally realized. The explicitly requested Lord of the Rings styling is only partly realized: the environment retains modern-looking elements \u2014 uniform red-bound shelving, framed certificate-like documents, a lit screen, and the second figure's casual modern clothing \u2014 and no clearly period or fantasy props beyond the robe, the tome and the warm lamp glow are identifiable; the only Elvish-style cue is a garbled pseudo-runic text visible on a single frame. The result reads as a generic old-style scholar's library rather than distinctly Middle-earth.",
+          "evidence_refs": [
+            "candidate:timelinep0:0",
+            "candidate:timelinep0:10",
+            "candidate:timelinep2:60",
+            "candidate:timelinep2:80",
+            "candidate:overview:80"
+          ],
+          "limitations": [
+            "The degree of Lord of the Rings styling rests only on visible props, wardrobe and lighting in supplied frames; the intent of the frame-0 runic text (stylistic caption vs rendering artifact) is indeterminate.",
+            "The two supplied event reviews conflict on the environment's period reading (fantasy study cues vs contemporary library); the score reflects the observed mix of archaic subject cues and modern decor.",
+            "Text on book pages, certificates and the runic overlay is not legible at the supplied resolution."
+          ]
+        },
+        "content_preservation": {
+          "status": "scored",
+          "score": 3.0,
+          "reason": "The candidate preserves the source's reading function and book-filled warm interior through an authorized scene-level re-imagining: reading remains the central activity, an elderly reader remains the subject, and the staging echoes the source's library reading scene (armchair reader foreground-left, second figure at a screen/stool background-right, shelves surrounding). The source's dominant vaulted-study content (back-turned desk figure, fireplace, vase, cluttered desk) has no direct counterpart in the candidate; given the request's re-imagining of the scene as a scholar study, this is treated as authorized replacement rather than a correspondence error, with the retained reading behavior, two-figure staging and bookish setting carrying the correspondence.",
+          "evidence_refs": [
+            "source:timelinep0:0",
+            "source:timelinep2:56",
+            "source:timelinep1:46",
+            "candidate:timelinep0:0",
+            "candidate:timelinep2:56"
+          ],
+          "limitations": [
+            "The source's scene structure is ambiguous in the supplied evidence: one event review places a library reading scene at ~2.49-3.03s in the source, while the overview frame ordering indicates the vaulted study dominates and the library appears only late (~3.9-4.3s); correspondence under each reading differs.",
+            "Because the request re-imagines the scene, correspondence is judged on the preserved reading activity and setting rather than matched subjects; whether any specific source element was required to persist is not determinable from the request.",
+            "Whether the candidate's second figure derives from the source's second person or is newly introduced cannot be established from the supplied frames."
+          ]
+        },
+        "temporal_consistency": {
+          "status": "scored",
+          "score": 3.1,
+          "reason": "Reviewed consecutive frames show one continuous uncut scene with consistent identities, framing, lighting and spatial arrangement: a calm reading state through ~1.03s, a progressively broadening smile and open-mouthed laugh from ~1.03s through ~3.9s, and a calmer down-gaze toward the book by 4.1-4.33s; hand-to-book and body-to-chair contacts hold throughout with no jump cuts, identity switches or geometry breaks. The only temporal blemish observed is a garbled runic text overlay present on frame 0 and absent from every later frame \u2014 a single-frame flash at onset that does not break event interpretation.",
+          "evidence_refs": [
+            "candidate:timelinep0:0",
+            "candidate:timelinep0:18",
+            "candidate:timelinep0:28",
+            "candidate:timelinep2:56",
+            "candidate:timelinep2:76",
+            "candidate:timelinep2:80"
+          ],
+          "limitations": [
+            "Native consecutive-frame review covers 0.000-1.514s and 3.029-4.327s; the interval 1.514-3.029s is supported only by overview frames plus one event review whose candidate description conflicts with the other reviews; the final ~0.054s (4.327-4.381s) is not represented in supplied frames.",
+            "Sampling is ~18.5 fps; single-frame glitches or very fast inter-frame motion would be unsampled.",
+            "The second figure shows no visible movement in reviewed frames; its behavior in the thinly covered middle interval is unknown."
+          ]
+        },
+        "visual_integrity": {
+          "status": "scored",
+          "score": 3.2,
+          "reason": "No consequential structural defect is visible in the supplied frames: the scholar's anatomy, the open book's geometry, furniture, shelf arrangements and floor remain well formed, and hand-book and body-chair contacts are maintained across reviewed intervals. Minor local issues remain: the background figure's posture appears slightly awkward and its white clothing partially blends into the adjacent bright screen area, and the frame-0 garbled text overlay is a rendering blemish.",
+          "evidence_refs": [
+            "candidate:timelinep2:57",
+            "candidate:timelinep2:66",
+            "candidate:timelinep2:68",
+            "candidate:timelinep2:79",
+            "candidate:timelinep0:0"
+          ],
+          "limitations": [
+            "Regions occluded behind furniture, shelves and figures are unobserved; concealed geometry is not confirmed correct.",
+            "Whether the background figure's blending with the bright screen is deformation or low-contrast adjacency cannot be resolved at the supplied resolution.",
+            "Fine geometry (page edges, spine text) is not verifiable at supplied resolution; micro-artifacts cannot be ruled out."
+          ]
+        },
+        "aesthetic_coherence": {
+          "status": "scored",
+          "score": 3.2,
+          "reason": "The scene forms a coordinated warm whole: consistent lamp-lit palette, coherent composition with the scholar foreground-left and shelves framing the frame, and stable lighting and staging across the full duration. Minor imbalances remain: the bright background screen and the visually muddy background-figure area pull attention, and the mix of uniform modern red bindings and certificate-like documents with the archaic robe and tome creates mild stylistic tension within the frame.",
+          "evidence_refs": [
+            "candidate:overview:0",
+            "candidate:overview:38",
+            "candidate:overview:80",
+            "candidate:timelinep2:60"
+          ],
+          "limitations": [
+            "Period-style tension is judged from visible decor only; off-frame context and stylistic intent are unknown.",
+            "No audio track was supplied; any sound contribution to coherence is unknown.",
+            "Fine texture quality (book surfaces, wall documents) cannot be verified at the supplied resolution."
+          ]
+        }
+      }
+    }
+  },
+  {
+    "sample_id": "011",
+    "split": "train",
+    "track": "short",
+    "method": "pe-loop",
+    "output_sha256": "522a36cf177c5b7dd81998b2fe5c3a1e94fc11809c6c5a9ca2d5f03d594cb1ab",
+    "request": "Transform the courtyard figures into travelers in a Dune-style desert civilization's citadel.",
+    "source_sha256": "657b522e928100eefdc72392d7e7cb22ce212fe1cd06aefc04d77caebf35181f",
+    "input_video": "source",
+    "prompt": null,
+    "prompt_status": "not present in this saved first-round page; do not infer wording from the outcome",
+    "provenance": {
+      "path": "out/bernini-steady-train-20261103/011/page-data.json",
+      "sha256": "9555bfed6339a51a04e0ac6f12a48b5caaa2f812163596a35e84265159b22576"
+    },
+    "independent_review": {
+      "status": "scored",
+      "protocol": "lha-low-high-final-v4",
+      "profile_sha256": "a8b071d6727a3cbbc739c63d9b11a2e8ac5a08cac8b7ea56f85142617d1ceab9",
+      "main_scores": {
+        "instruction_adherence": {
+          "status": "scored",
+          "score": 3.0,
+          "reason": "Across all supplied frames (0.0\u20135.12s) both courtyard figures are realized as desert travelers: the left figure wears a tan hooded travel outfit with knee wraps and a bladed knife held at the waist, and the center-left figure wears a pale gray cape over dark layered gear with forearm guards, utility belt and wrapped legs; the environment is restyled with arid haze, ground dust, flagstone paving and a saturated red striated backdrop while the source courtyard layout is retained. The requested 'citadel' is conveyed only implicitly: no citadel architecture appears in any supplied frame, the backdrop reads as striated rock faces rather than built structure, and the setting is carried by garb, paving, backdrop and atmosphere, so the location component is realized at a stylistic read level rather than explicitly. The figure transformation itself is complete and coherent; the candidate is already fully transformed at its first frame, so no transition into the state is shown.",
+          "evidence_refs": [
+            "candidate:timelinep0:0",
+            "candidate:timelinep0:28",
+            "candidate:timelinep1:56",
+            "candidate:timelinep2:80",
+            "source:timelinep2:56"
+          ],
+          "limitations": [
+            "Assessment covers 0.0\u20135.12s; the final ~0.06s of the declared timeline was not supplied.",
+            "The candidate begins already transformed at 0.0s, so onset/transition behavior cannot be characterized.",
+            "'Dune-style' was judged from visible styling cues only; no ground-truth design reference was supplied."
+          ]
+        },
+        "content_preservation": {
+          "status": "scored",
+          "score": 3.5,
+          "reason": "Source correspondence holds one-to-one across all observed intervals: identical camera framing and two-figure placement (hooded traveler at left, caped traveler center-left), matching right-facing profiles and stances, the right figure's bald head shape, the same trunk cluster, red backdrop, stone platform with step edge, and the near-static standing behavior of the source persist in the candidate at matching timestamps. Non-central drift: the left figure's arms move from hanging at her sides holding a scroll to clasped hands holding a knife, the conical hat is replaced by a hood, the man's sash with hanging paper is replaced by belt straps, green undergrowth at the trunk bases is removed, and a third walking figure with no source counterpart passes through the background; none of these changes the meaning of the preserved two-figure scene.",
+          "evidence_refs": [
+            "source:timelinep0:0",
+            "candidate:timelinep0:0",
+            "source:timelinep2:56",
+            "candidate:timelinep2:56",
+            "candidate:timelinep2:80"
+          ],
+          "limitations": [
+            "The background walker has no source counterpart, so its origin and identity cannot be established from the supplied frames.",
+            "The walker's feet and ground contact are partially occluded by foreground figures and dust haze."
+          ]
+        },
+        "temporal_consistency": {
+          "status": "scored",
+          "score": 3.5,
+          "reason": "Reviewed consecutive-frame intervals cover 0.0\u20131.79s, 1.79\u20133.59s and 3.59\u20135.12s; the transformed tableau persists without regression, cuts, reframes or identity switches throughout, and the near-static two-figure staging mirrors the source over the same timestamps. The added background walker progresses coherently: it emerges gradually from behind the cloaked figure (~1.0\u20131.8s), advances leftward behind the travelers (1.8\u20133.6s), and moves toward and partly past the left frame edge by 5.12s, with smooth frame-to-frame advance observed in 4.48\u20134.74s. Only small transient variation is visible: subtle drift in backdrop texture and mist, slight rock-texture shimmer between adjacent frames, and small shape wobble in the knife grip and cape hem.",
+          "evidence_refs": [
+            "candidate:timelinep0:0",
+            "candidate:timelinep0:20",
+            "candidate:timelinep0:28",
+            "candidate:timelinep1:40",
+            "candidate:timelinep2:70",
+            "candidate:timelinep2:71",
+            "candidate:timelinep2:74",
+            "candidate:timelinep2:80"
+          ],
+          "limitations": [
+            "The final ~0.06s (after 5.122s) was unobserved.",
+            "The transformation onset is not observable; the candidate begins already transformed.",
+            "Assessment used all supplied native consecutive frames at the video's native ~15.6fps rate (one frame every ~0.064s)."
+          ]
+        },
+        "visual_integrity": {
+          "status": "scored",
+          "score": 3.5,
+          "reason": "Subjects, props and environment are well formed across all supplied frames: no limb duplication, identity flicker, face warping, object popping or broken geometry is visible from 0.0s to 5.12s, and body proportions, capes, belts and the knife remain coherent. Minor local artifacts persist without impairing the two main travelers: soft/interpolation blur on the hooded figure and background walker in some mid-segment frames, soft edges and small frame-to-frame shape wobble at the knife grip and cape hem, and slight shimmer of the background rock texture between adjacent frames.",
+          "evidence_refs": [
+            "candidate:timelinep1:33",
+            "candidate:timelinep1:44",
+            "candidate:timelinep2:60",
+            "candidate:timelinep2:74",
+            "candidate:timelinep2:80"
+          ],
+          "limitations": [
+            "Fine detail such as faces, the knife grip and fabric weave sits near the supplied frame resolution; micro-artifacts may be unresolvable.",
+            "The background walker's legs are largely occluded, so gait mechanics cannot be fully verified."
+          ]
+        },
+        "aesthetic_coherence": {
+          "status": "scored",
+          "score": 3.5,
+          "reason": "The candidate integrates as a deliberate Dune-style whole across all observed frames: a coordinated warm arid palette (tan hooded garments and pale gray cape against saturated red rock), consistent hazy dust-filled lighting, weathered material treatment of trunks and flagstone paving, and the retained source two-figure composition; the added background walker in desert garb blends into the same palette rather than clashing. Minor local inconsistency remains: slight backdrop texture shimmer between adjacent frames and frame-to-frame softness variation on some figures.",
+          "evidence_refs": [
+            "candidate:overview:0",
+            "candidate:overview:34",
+            "candidate:overview:63",
+            "candidate:overview:80",
+            "candidate:timelinep2:80"
+          ],
+          "limitations": [
+            "Styling was judged visually; no ground truth for the intended design was supplied.",
+            "The final ~0.06s of the timeline was unobserved."
+          ]
+        }
+      }
+    }
+  },
+  {
+    "sample_id": "011",
+    "split": "train",
+    "track": "short",
+    "method": "direct",
+    "output_sha256": "7949df2fdae79daa3f8f0eae64b0f22438ec4f3af61821278ac6e8c0225f2a6e",
+    "request": "Transform the courtyard figures into travelers in a Dune-style desert civilization's citadel.",
+    "source_sha256": "657b522e928100eefdc72392d7e7cb22ce212fe1cd06aefc04d77caebf35181f",
+    "input_video": "source",
+    "prompt": "Transform the courtyard figures into travelers in a Dune-style desert civilization's citadel.",
+    "prompt_status": "exact Direct request",
+    "provenance": {
+      "path": "out/bernini-steady-train-20261103/011/page-data.json",
+      "sha256": "9555bfed6339a51a04e0ac6f12a48b5caaa2f812163596a35e84265159b22576"
+    },
+    "independent_review": {
+      "status": "scored",
+      "protocol": "lha-low-high-final-v4",
+      "profile_sha256": "a8b071d6727a3cbbc739c63d9b11a2e8ac5a08cac8b7ea56f85142617d1ceab9",
+      "main_scores": {
+        "instruction_adherence": {
+          "status": "scored",
+          "score": 2.0,
+          "reason": "The environment transformation is realized: the courtyard is replaced throughout the candidate by a desert settlement with dunes, a domed sand-colored citadel with towers and an arched gate, and conical outbuildings. One of the two courtyard figures is recast as a traveler (blue head-wrap/veil, striped blue cloak, tall boots) who walks toward the citadel. However, the second figure \u2014 the woman \u2014 retains her exact source courtyard costume (white buttoned dress, teal-gradient cuffs, conical straw hat) with only the surroundings changed; she is not visibly recast as a traveler. Since the request targets 'figures' (plural) becoming travelers, this untransformed second figure is a consequential central omission, capping IA at 2.",
+          "evidence_refs": [
+            "source:overview:0",
+            "candidate:overview:0",
+            "candidate:overview:42",
+            "candidate:overview:80",
+            "candidate:timelinep0:0",
+            "candidate:timelinep2:80"
+          ],
+          "limitations": [
+            "Assessed over overview frames 0\u201380 (0\u20135.12 s) plus the supplied consecutive-frame reviews of 0\u20131.79 s and 3.59\u20135.12 s; the supplied p1 interval report (1.79\u20133.59 s) conflicts with the overview evidence (see unassessed).",
+            "Whether the woman's preserved conical hat and white dress could count as traveler attire is a stylistic interpretation; her observed appearance is unchanged from the source."
+          ]
+        },
+        "content_preservation": {
+          "status": "scored",
+          "score": 3.0,
+          "reason": "The woman is retained at her source left-foreground position, scale and costume, and the two-figure left/center blocking and fixed framing are initially preserved. Replacing the second figure with the new traveler is authorized reinterpretation under the request, and his initial position corresponds to the replaced figure's blocking spot. Minor non-central drift: the tan scroll/fan at the woman's side in the source is not identifiable in the candidate, and the walker's later departure and exit change the original two-figures-standing relationship (permitted behavior reinterpretation).",
+          "evidence_refs": [
+            "source:overview:0",
+            "candidate:overview:0",
+            "candidate:timelinep0:0",
+            "candidate:timelinep2:56",
+            "source:timelinep2:56",
+            "candidate:timelinep2:80"
+          ],
+          "limitations": [
+            "Identity mapping between the removed source man and the new walker cannot be verified; the walker's face is never visible (turned away, hat brim).",
+            "Observed scope: overview frames 0\u201380 and consecutive-frame reviews of 0\u20131.79 s and 3.59\u20135.12 s."
+          ]
+        },
+        "temporal_consistency": {
+          "status": "scored",
+          "score": 3.0,
+          "reason": "Observed intervals are internally continuous: the desert background plate, citadel geometry, dunes and mountain backdrop remain stable frame-to-frame with no visible flicker or geometry popping. The walker's progression is coherent \u2014 standing with feet together through ~0.83 s, walk onset around ~0.90 s, increasingly pronounced stride through ~1.79 s, continued crossing, and exit at the left edge between roughly 4.23\u20134.42 s \u2014 followed by a stable end state with only small terrace-figure drift and the woman's progressive head tilt. The gait reads stiff/slide-like and the boots merge in mid-stride, but the event remains interpretable with no identity switch or broken causal transition.",
+          "evidence_refs": [
+            "candidate:timelinep0:13",
+            "candidate:timelinep0:14",
+            "candidate:timelinep0:28",
+            "candidate:timelinep2:56",
+            "candidate:timelinep2:67",
+            "candidate:timelinep2:69",
+            "candidate:timelinep2:80",
+            "candidate:overview:0",
+            "candidate:overview:80"
+          ],
+          "limitations": [
+            "Consecutive-frame coverage exists for 0\u20131.79 s and 3.59\u20135.12 s; the 1.79\u20133.59 s interval's supplied report is internally inconsistent with the overview evidence (it claims courtyard frames 28\u201341 and a hard cut at frame 42, while overview frames 0\u201338 all show the transformed desert scene), so that interval's continuity is judged from the overview frames plus the consistent adjacent-segment behavior.",
+            "Sub-frame motion smoothness cannot be judged beyond consecutive-frame deltas from static frames."
+          ]
+        },
+        "visual_integrity": {
+          "status": "scored",
+          "score": 2.0,
+          "reason": "Consequential defects affect both key foreground subjects while the scene remains interpretable. The woman reads as a cut-out composite with hard/halo edges over the painted desert backdrop, with no visible grounding or cast shadow, standing above a flat untextured dark-gray band whose straight top edge forms a hard seam against the sand. The walker's boots and legs merge into an elongated dark mass in mid-stride frames. A residual fragment of source-courtyard foliage survives in the top-left corner of the otherwise desert scene.",
+          "evidence_refs": [
+            "candidate:timelinep0:0",
+            "candidate:timelinep0:20",
+            "candidate:timelinep2:56",
+            "candidate:timelinep2:62",
+            "candidate:timelinep2:70",
+            "candidate:timelinep1:44",
+            "candidate:overview:0"
+          ],
+          "limitations": [
+            "Edge-quality and lighting-mismatch readings are qualitative assessments of supplied compressed frames.",
+            "The woman's lower portion is clipped at the bottom frame edge, so her foot/ground contact geometry is unobserved, not confirmed correct."
+          ]
+        },
+        "aesthetic_coherence": {
+          "status": "scored",
+          "score": 2.0,
+          "reason": "The desert citadel scene has a recognizable stylized design intent (warm sand palette, red-magenta ridges, dusky sky, simplified sand architecture), but integration is broken by composited foreground elements: the woman retains the source's bright soft daylight illumination against the warmer, flatter desert light, her cutout edges and the untextured gray platform wedge clash with the surrounding sand, and leftover source foliage persists in the frame. The citadel's smooth, toy-like sandcastle styling also sits loosely against the requested Dune-style desert-civilization aesthetic.",
+          "evidence_refs": [
+            "candidate:overview:0",
+            "candidate:timelinep0:0",
+            "candidate:timelinep1:44",
+            "candidate:timelinep2:56",
+            "candidate:timelinep2:80"
+          ],
+          "limitations": [
+            "Style conformance to the 'Dune' label is judged from the visible architecture only; no reference imagery was supplied.",
+            "Observed scope: overview frames 0\u201380 plus consecutive-frame reviews of 0\u20131.79 s and 3.59\u20135.12 s."
+          ]
+        }
+      }
+    }
+  }
+]

@@ -9,18 +9,11 @@ recognizable while the visible scene is rebuilt, and the sequence should be stab
 clean. Read the actual generation prompt as process context; it does not replace the
 user's goal.
 
-Look in this order, and report each as description:
-1. Regions or intervals that remain source-like (background, ground, sky, props, the
-   first and last second).
-2. Focal faces, hands, held props and contacts: who they are, whether each source
-   person is still one person, and what is happening at each contact.
-3. Medium switches: places where the look changes between photographic and the target
-   medium, or where the light or style flips across a cut, a camera move or an occlusion.
-4. Each item the request names (for a detailed request) or the intended transformation
-   and its scene-level coordination (for a short request).
-
-A strong overview or opening can hide a failure in any of these. Describe what is seen;
-leave scoring and rewrites to the caller.
+Evaluate the requested transformation, correspondence to the source moment,
+temporal behavior, visual integrity and coherence. Describe how each relevant
+requirement appears in the actual result and identify consequential strengths,
+defects and unresolved questions. Choose the observation focus from this task and
+the supplied evidence. Leave numerical scoring and prompt rewrites to the caller.
 
 Start from the supplied overview. Use the shared `observe` tool when motion,
 a small feature, an input/output contrast or a reference needs a closer look.

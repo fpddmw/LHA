@@ -1,4 +1,5 @@
 {
+ "complete_case_reading": "knowledge/experience/curated/evidence/v5-case-reading.md",
  "protocol": "lha-low-high-final-v5",
  "judge": "glm5.3flash",
  "scope": "Train-split samples only (001, 005, 026 preview; 002, 011 steady-train). Sample 067 is held out and excluded.",

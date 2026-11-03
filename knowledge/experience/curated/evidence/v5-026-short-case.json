@@ -1,0 +1,749 @@
+{
+  "sample_id": "026",
+  "split": "train",
+  "track": "short",
+  "renderer": "bernini",
+  "request": "Transform the man unloading timber from a truck into brick animation in the style of The LEGO Movie.",
+  "source": {
+    "path": "benchmark_data/train/026/video.mp4",
+    "sha256": "2c2237f9759a749cbe295e897e4a159f1bf519421147bbb036226c16a39758c1"
+  },
+  "provenance": {
+    "path": "out/four_video_preview_20261102/glm-recast-v5-deliveries/026-short/all-page-data.json",
+    "sha256": "4e0d8a8bcc8bb408a346fccd53b4cfb1ec2eb8daf3fdc374c310ddf9c837e3de",
+    "assembled_on": "2026-11-03",
+    "scope": "Original extract rows plus the cited Direct output. Existing saved reports only; no new scoring."
+  },
+  "comparison_sheet": {
+    "id": "EV-V5-026-short-comparison",
+    "path": "knowledge/experience/curated/evidence/frames/v5-026-short-comparison.jpg",
+    "sha256": "b005200022016a53045c194fb2609582c1bae0f70eeade11900ad258761345f5",
+    "coverage": "Six evenly spaced samples per row, reused from the Opus review. This is not continuous motion evidence. The sheet omits some candidates; some interrupted attempts have a ? label. Match named rows to candidate IDs and the records below."
+  },
+  "candidates": [
+    {
+      "method": "full",
+      "candidate_id": "v1",
+      "output_sha256": "68adf9506ac2b11eb486e94a5ea869a8ee4696da3164eca6ef487d8f441257f1",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "2c2237f9759a749cbe295e897e4a159f1bf519421147bbb036226c16a39758c1",
+        "status": "recorded"
+      },
+      "prompt": "Transform the entire clip into cinematic LEGO brick animation in the style of The LEGO Movie. Preserve the camera's close view across the pickup bed and the man's recognizable timber-unloading action. Everything is a physical LEGO miniature, not live action. The man at the right is a classic yellow minifigure with a cylindrical head, simple printed face, molded black baseball cap, gray printed shirt on a rigid trapezoid torso, hinged arms, C-shaped gripping hands and black block legs. His left glove is a dark gray claw hand. He grips the long timber pieces, slides and lifts them from the truck bed, and steps backward with them as in the source; hands remain visibly connected to the carried pieces. The timber consists of rigid long tan and muted olive LEGO plates with studs and subtle printed woodgrain, retaining the horizontal stacked arrangement. Rebuild the foreground silver-white pickup from interlocking bricks and smooth tiles, with a black tiled bed and tailgate, visible seams, round studs and translucent red taillight bricks. Rebuild the white roadside barriers, signposts, green hedges, trees and flowers as chunky LEGO assemblies with plastic leaf pieces. Bright sunny miniature-set lighting creates crisp shadows between studs, glossy ABS highlights and soft bounced fill. Saturated toy colors, beveled molded edges, tiny surface scuffs, cinematic depth of field. Use snappy stop-motion-like articulated poses and rigid brick geometry throughout, with consistent character and object construction across the shot.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/68adf9506ac2b11eb486e94a5ea869a8ee4696da3164eca6ef487d8f441257f1.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-full-9000-additional0-full-v2-r1-short-full-026/run/workers/0/tasks/026__short__full/run/videos/v1/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.4,
+            "reason": "In every supplied candidate frame from 0.0s to 4.708s only the man (rendered as a yellow minifigure with gray cap, printed tan torso and one black glove) and the timber (segmented gray/olive plastic beams, including the stacked lumber in the bed) are rebuilt in the brick medium, while the truck, tailgate, bed liner, white retaining wall, hedge, trees, sign and sky remain photographic live-action. Supporting observations: the conversion of the focal subject and the handled timber is consistent across the full observed duration with visible brick construction logic (minifigure anatomy, beam segment seams), shadows from the source are partly carried onto the rendered rails, and the dark lower-right object takes on a glossy plastic finish near 4.2-4.7s; however, the requested The LEGO Movie brick world is not extended to the dominant environment, and the truck named in the request stays source-like throughout. The gap to anchor 3 is that main subjects plus the dominant environment would need to be converted and coherent; here only the subject and prop are converted, which places the score in the 2.0-2.4 sub-band at its upper end given the thoroughness and quality of the subject/prop conversion.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:63",
+              "candidate:overview:100",
+              "candidate:overview:113",
+              "source:overview:19"
+            ],
+            "limitations": [
+              "Candidate consecutive frames for 2.333-3.5s (timelinep2 delivery) were supplied but not visually resolvable in that pass; realization in that interval is supported only by overview frames at 2.625-3.375s, which show the same hybrid pattern.",
+              "Observed candidate coverage ends at 4.833s (consecutive frames) / 4.708s (overview); the remaining portion of the requested 5.0s scope has no candidate evidence.",
+              "Assessment is visual only from supplied stills; no audio was available."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "The candidate tracks the source beat-for-beat at matching timestamps - head emerging over the tailgate at 0.0s, plank lowered with one hand releasing while the gloved hand keeps hold, plank set on the bed around 1.9-2.0s, and the next plank carried and tilted toward the tailgate through 4.667s - with matched camera staging, occlusions and a translated counterpart set (minifigure with cap and gloved hand for the man, brick beams for the planks). Supporting observations: the man-to-minifigure change is an authorized replacement implied by the requested world, the black cap, gloved hand and shirt-to-printed-torso translations have counterparts, and spatial staging, framing and the handheld pan correspond frame-for-frame; minor weakenings are that the free hand's bracing contact around 4.4-4.667s lowers toward the plank without a clearly visible grip, the final grip contact at 4.667-4.833s is ambiguous with a detached glove-like element, and the wristwatch has no counterpart. The gap to anchor 4 is that these interactions would each need a clear, legible counterpart for every key interaction to be preserved.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:112",
+              "source:timelinep1:56"
+            ],
+            "limitations": [
+              "The figure's head is cropped by framing until about 2.0s, so facial correspondence is checkable only from roughly frame 49 onward.",
+              "Grip contact at 4.667-4.833s is ambiguous at supplied resolution; the figure's hands may be occluded behind the plank.",
+              "Candidate frames for 2.333-3.5s were not visually resolvable; correspondence in that interval rests on overview frames only.",
+              "Motion preservation was not declared required; pose correspondence is observational."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.3,
+            "reason": "All supplied consecutive-frame intervals (0.0-2.333s and 3.5-4.833s) show smooth continuity - consistent minifigure identity, cap, torso print and beam segmentation, maintained hand-to-beam contacts, and no flicker, popping, identity switch or pose jump - and overview frames spanning 2.333-3.5s show consistent states with gradual pose changes. Supporting observations: the hybrid composition itself is stable (no live-action/stylized alternation within the shot), the source's handheld drift and progressive reveals are reproduced, and the figure and beams persist across every observed interval; a dark glove-shaped element sits detached from the figure at the plank's far end during 4.667-4.833s, a persistent contact anomaly near the end that does not by itself break the interpretable progression. The gap to anchor 4 is contacts remaining consistent through the end plus full native-rate coverage of the middle interval.",
+            "evidence_refs": [
+              "candidate:timelinep0:6",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:32",
+              "candidate:timelinep1:56",
+              "candidate:timelinep3:88",
+              "candidate:timelinep3:112",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116",
+              "candidate:overview:63",
+              "candidate:overview:81"
+            ],
+            "limitations": [
+              "Observed consecutive-frame intervals are 0.0-1.1667s, 1.1667-2.3333s, 3.5-4.6667s and 4.6667-4.8333s; the 2.3333-3.5s interval lacks resolvable consecutive candidate frames, so its motion continuity is unverified and rests on overview frames at roughly 0.25-0.29s spacing, which do not establish motion continuity.",
+              "The candidate's final 4.833-4.875s is unseen; no end-of-clip collapse was observed in the last supplied frame, but the very end is unverified.",
+              "Sub-frame artifacts are undetectable from supplied 24fps stills; no audio was available."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.4,
+            "reason": "In the final observed segment (4.667-4.833s) a dark glove-shaped element sits at the plank's far end detached from the minifigure, whose visible arms terminate in yellow hands - a floating-prop defect on the hand/prop contact of the central interaction, while the scene remains interpretable. Supporting observations: elsewhere the composite is well formed for the medium - clean figure edges, stable plank segment seams, consistent occlusion relationships with the tailgate and retaining wall, and consistent printed-face rendering - with only minor local artifacts outside focal structures, namely smeared, softened edges of the white tarp/cord area around 1.375-1.583s and an ambiguously supported cantilevering plank end around 3.583-4.167s. The gap to anchor 3 is this focal contact defect; without it the remaining minor background artifacts would sit near anchor 3.",
+            "evidence_refs": [
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116",
+              "candidate:timelinep1:34",
+              "candidate:timelinep1:37",
+              "candidate:timelinep3:86",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Fine compositing quality (edge halos, shadow-match detail, hand-to-plank grip geometry) cannot be fully resolved at supplied frame resolution; absence of visible artifacts there is not asserted.",
+              "Connections hidden behind the plank or tailgate are unobserved rather than confirmed correct; the detachment finding rests on the visible separation of the glove element from the figure's yellow-handed arms.",
+              "Candidate frames for 2.333-3.5s were not visually resolvable; structural assessment for that interval rests on overview frames."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 2.4,
+            "reason": "The result is a persistent hybrid that composites a rendered plastic minifigure and brick beams into an otherwise photographic world - an unrequested mixture of stylized subjects and live-action surroundings for a request invoking The LEGO Movie's fully brick-built aesthetic. Supporting observations: within the hybrid the craft is careful - source cast shadows (including the filmer's shadow band) are carried onto the rendered rails and bed, the handheld camera drift matches frame-for-frame, figure edges are clean and the figure's rendering is consistent throughout - but the photographic and plastic-toy visual systems remain in conflict in every observed frame, and the figure's static printed face lacks the animated-facial treatment associated with the named style. The gap to anchor 3 is a single coherent visual system matching the requested brick world; the systemic conflict, not the execution quality, holds the score in band 2.",
+            "evidence_refs": [
+              "candidate:overview:56",
+              "candidate:overview:94",
+              "candidate:overview:113",
+              "candidate:timelinep1:45"
+            ],
+            "limitations": [
+              "Fidelity to The LEGO Movie style beyond directly observable traits (minifigure construction, plastic shading, compositing over live footage) is a qualitative judgment from stills.",
+              "Candidate frames for 2.333-3.5s were not visually resolvable; integration assessment for that interval rests on overview frames.",
+              "Assessment covers 0.0-4.833s of the candidate; the final portion of the requested scope is unseen."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "026",
+        "prompt_form": "short",
+        "video_sha256": "68adf9506ac2b11eb486e94a5ea869a8ee4696da3164eca6ef487d8f441257f1",
+        "method": "full",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": "source",
+        "prompt_words": 235,
+        "v5_scores": {
+          "instruction_adherence": 2.4,
+          "content_preservation": 3.1,
+          "temporal_consistency": 3.3,
+          "visual_integrity": 2.4,
+          "aesthetic_coherence": 2.4
+        },
+        "low_reasons": {
+          "instruction_adherence": "In every supplied candidate frame from 0.0s to 4.708s only the man (rendered as a yellow minifigure with gray cap, printed tan torso and one black glove) and the timber (segmented gray/olive plastic beams, including the stacked lumber in the bed) are rebuilt in the brick medium, while the truck, tailgate, bed liner, white retaining wall, hedge, trees, sign and sky remain photographic live-action. Supporting observati",
+          "visual_integrity": "In the final observed segment (4.667-4.833s) a dark glove-shaped element sits at the plank's far end detached from the minifigure, whose visible arms terminate in yellow hands - a floating-prop defect on the hand/prop contact of the central interaction, while the scene remains interpretable. Supporting observations: elsewhere the composite is well formed for the medium - clean figure edges, stable plank segment seams",
+          "aesthetic_coherence": "The result is a persistent hybrid that composites a rendered plastic minifigure and brick beams into an otherwise photographic world - an unrequested mixture of stylized subjects and live-action surroundings for a request invoking The LEGO Movie's fully brick-built aesthetic. Supporting observations: within the hybrid the craft is careful - source cast shadows (including the filmer's shadow band) are carried onto the"
+        },
+        "requirement_labels": [
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "full",
+      "candidate_id": "v2",
+      "output_sha256": "d8be81462f1ed20db8666db23c5cc33826430d712f25476e60d99b342f3b5dcf",
+      "seed": 43,
+      "input": {
+        "video_id": "v1",
+        "sha256": "68adf9506ac2b11eb486e94a5ea869a8ee4696da3164eca6ef487d8f441257f1",
+        "status": "recorded"
+      },
+      "prompt": "Recreate this entire shot as a fully brick-built animated miniature in the style of The LEGO Movie. The pickup truck dominating the foreground is constructed from rows of white LEGO bricks: clearly visible rectangular joints, stepped corners, exposed studs along the black rail, a black studded plate bed and tailgate, and a translucent red brick taillight. All broad truck surfaces have actual brick geometry rather than smooth photographic sheet metal. The stacked timber crossing the bed consists of straight rigid tan LEGO beams with regularly spaced top studs and clean aligned brick joints. At the right, a classic compact yellow LEGO minifigure unloads these beams, following the existing lifting, lowering and backward stepping action. His C-shaped hands contact the beam while moving it. He has a cylindrical printed smiling head, black molded baseball cap, short gray trapezoid shirt torso, hinged yellow arms, one dark glove claw, and black block legs. Rebuild the entire background at the same toy scale: the hedge is a wall of clustered green LEGO foliage elements; tall trees have stacked angular green brick canopies and brown brick trunks. White roadside barriers are stepped studded brick assemblies. Signposts are black cylindrical toy rods; the garden contains chunky green leaf stems and red and yellow plastic flower pieces. The pavement is gray interlocking tiles. Preserve the camera's changing view across the bed and the recognizable timber-handling sequence. Everything shares crisp molded ABS edges, visible construction seams, glossy plastic reflections and saturated toy colors. Bright miniature sunlight, soft bounced fill, contact shadows between bricks and cinematic shallow depth of field unify the scene. Snappy articulated stop-motion-like animation, rigid consistent pieces throughout; a complete LEGO set from foreground truck to distant greenery.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/d8be81462f1ed20db8666db23c5cc33826430d712f25476e60d99b342f3b5dcf.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-full-9000-additional0-full-v2-r1-short-full-026/run/workers/0/tasks/026__short__full/run/videos/v2/video.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.5,
+            "reason": "Most of the visible scene is rebuilt in brick — the minifigure subject, tan-brick timber, the rebuilt truck bed with white and gray bricks, brick trees, hedge and lamp post — but the real photographic silver truck body with its taillight fills the frame through the opening seconds and a live-action cloudy sky with photographic vegetation persists to the end of the clip. Supporting: the subject and much of the environment are converted while the truck exterior remains source-like, and the sky and right-side vegetation are never converted, which sits at the bottom of the 2.5-2.9 band rather than the 2.0-2.4 band. The unloading gesture is only partially restaged: the arm lowers to the bed around 1.9-2.0s, then the arms stay static with a small piece held in the gloved hand. The gap to the next anchor is that the truck body, sky and vegetation would all need brick conversion and the unloading action a fully readable restaging.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:1",
+              "candidate:overview:19",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116"
+            ],
+            "limitations": [
+              "Candidate interval 4.833-4.875s was not supplied; the closing 0.042s is unobserved for this dimension.",
+              "Regions occluded from the fixed viewpoints (inside the bed, behind the lamp post) are unobserved.",
+              "Whether the tan brick stack on the minifigure torso represents carried timber or the man's shirt cannot be determined from the supplied frames; this ambiguity is included in the action-restaging assessment."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.7,
+            "reason": "The man-to-minifigure role, the truck-bed staging, the rightward camera reveal and the framing drift all have recognizable brick counterparts, but the central plank-carrying interaction is lost from about 2.33s onward, where no discrete plank appears in the figure's hands and its arms remain essentially static. Supporting: the onset corresponds (head over the tailgate edge at 0s in both), the lowering beat has a readable analog around 1.9-2.0s as the arm descends to the brick row, and the planks-aloft pose is only partly mirrored by bricks lying along the bed edge. Minor weakenings include the absent Farmers Market banner, the missing wristwatch and no analog for the source man's apparent speech. The score sits between the anchors because overall correspondence stays recognizable while the central interaction is weakened or absent across most of the runtime; a readable timber-handling counterpart throughout would be needed for the next anchor.",
+            "evidence_refs": [
+              "source:timelinep0:0",
+              "candidate:timelinep0:0",
+              "source:timelinep1:28",
+              "candidate:timelinep1:28",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep3:84",
+              "candidate:timelinep3:84",
+              "source:timelinep4:112",
+              "candidate:timelinep4:112"
+            ],
+            "limitations": [
+              "The source interval 4.958-5.0s and candidate interval 4.833-4.875s are unobserved.",
+              "Occluded areas (inside the bed, behind the stacks) cannot be checked for further correspondence.",
+              "The minifigure torso mapping (timber versus shirt) is ambiguous and was treated as a translation choice, not an identity error."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "Every reviewed consecutive-frame interval from 0 to 4.833s shows one continuous medium with no cuts, no identity switch and no vanished prop; the only defects are small drift on the focal torso stack — plates shifting and rotating, a darker plate protruding at the figure's flank — plus brief arm-position jumps. Supporting: the same minifigure design, lighting direction and set placement carry across the p0 (0-1.167s), p1 (1.167-2.333s), p2 (2.333-3.5s), p3 (3.5-4.667s) and p4 (4.667-4.833s) passes, and the framing drift of the source is mirrored without discontinuity. The recurring focal drift and the unobserved final 0.042s keep the score below the next anchor.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:28",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:72",
+              "candidate:timelinep2:80",
+              "candidate:timelinep2:84",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116"
+            ],
+            "limitations": [
+              "Candidate final 0.042s (4.833-4.875s) and source final 0.042s (4.958-5.0s) were not supplied; end-of-clip state beyond 4.833s is unobserved.",
+              "Stills at ~24 fps cannot resolve sub-frame smoothness or stop-motion stepping.",
+              "The sky treatment difference between mid-video (dark overcast) and late frames (real cloudy sky) is not fully resolvable as a genuine background switch from the supplied stills."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.2,
+            "reason": "The focal timber build shows visible construction defects — misaligned and rotated bricks, uneven stud patterns, gaps and pieces floating above or overlapping the bed line — and the figure's torso plates shift and a darker plate protrudes at the flank, while the scene remains interpretable. Supporting: the figure itself, head, hands and the rebuilt bed walls stay clean and well formed, so the damage is concentrated in the timber rows and torso stack rather than spreading; this is a focal-structure defect band score rather than a widespread deformation score. Clean, well-fitted focal builds would be needed for the next anchor.",
+            "evidence_refs": [
+              "candidate:timelinep1:36",
+              "candidate:timelinep1:44",
+              "candidate:timelinep1:52",
+              "candidate:timelinep2:72",
+              "candidate:timelinep2:80"
+            ],
+            "limitations": [
+              "Shallow depth of field in mid-video frames blurs small background geometry; defects there are unobserved rather than confirmed absent.",
+              "Fine stud alignment on the dark tailgate interior could not be fully resolved at supplied resolution."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 2.0,
+            "reason": "The work composites a stylized LEGO figure and brick builds over live-action photographic regions — the real silver truck body and real plants in the opening seconds, a real cloudy sky with a real conifer and photographic hedge later — an unrequested stylized/live-action mixture that weakens integration throughout. Supporting: the tailgate interior keeps a realistic dark texture rather than a brick build, the sky reads dark and overcast in mid-video frames while late frames show a real photographic cloudy sky, and the brick-built core (figure, bed, trees, lamp) is internally coordinated, which is why the score rests at the anchor capped by this clash rather than lower. One coherent visual system across the whole frame would be needed for the next anchor.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:1",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116"
+            ],
+            "limitations": [
+              "The internal sky treatment difference (dark overcast backdrop around 2.3-4.7s versus a real cloudy sky in late frames) is observed but not fully resolvable from stills.",
+              "No candidate frames were supplied for 4.833-4.875s, so the closing look is unobserved."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "026",
+        "prompt_form": "short",
+        "video_sha256": "d8be81462f1ed20db8666db23c5cc33826430d712f25476e60d99b342f3b5dcf",
+        "method": "full",
+        "round": "v2",
+        "seed": 43,
+        "planner_input": "v1",
+        "prompt_words": 282,
+        "v5_scores": {
+          "instruction_adherence": 2.5,
+          "content_preservation": 2.7,
+          "temporal_consistency": 3.0,
+          "visual_integrity": 2.2,
+          "aesthetic_coherence": 2.0
+        },
+        "low_reasons": {
+          "instruction_adherence": "Most of the visible scene is rebuilt in brick — the minifigure subject, tan-brick timber, the rebuilt truck bed with white and gray bricks, brick trees, hedge and lamp post — but the real photographic silver truck body with its taillight fills the frame through the opening seconds and a live-action cloudy sky with photographic vegetation persists to the end of the clip. Supporting: the subject and much of the environ",
+          "visual_integrity": "The focal timber build shows visible construction defects — misaligned and rotated bricks, uneven stud patterns, gaps and pieces floating above or overlapping the bed line — and the figure's torso plates shift and a darker plate protrudes at the flank, while the scene remains interpretable. Supporting: the figure itself, head, hands and the rebuilt bed walls stay clean and well formed, so the damage is concentrated i",
+          "aesthetic_coherence": "The work composites a stylized LEGO figure and brick builds over live-action photographic regions — the real silver truck body and real plants in the opening seconds, a real cloudy sky with a real conifer and photographic hedge later — an unrequested stylized/live-action mixture that weakens integration throughout. Supporting: the tailgate interior keeps a realistic dark texture rather than a brick build, the sky rea"
+        },
+        "requirement_labels": [
+          "partial"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v1",
+      "output_sha256": "bbe12076bb5589bce9632df722569d5d782772fe9c11c588b0954e856813af6a",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "2c2237f9759a749cbe295e897e4a159f1bf519421147bbb036226c16a39758c1",
+        "status": "recorded"
+      },
+      "prompt": "Transform the entire clip into cinematic LEGO brick animation in the style of The LEGO Movie. Preserve the original camera movement, framing, action timing, and outdoor truck-unloading scene. Replace the man with a recognizable LEGO minifigure: yellow cylindrical head with printed focused facial features, molded brown hair under a black baseball cap, gray short-sleeve shirt printed on a blocky torso, dark legs, yellow right claw hand and gray work-glove left claw hand with a wristwatch detail. Animate his shoulders, elbows and hips with crisp, slightly stepped toy articulation as he grips the long timber, slides and lowers it across the open tailgate, releases his right hand and steps back while guiding the boards with his left. Maintain contact between hands and boards.\nBuild everything from physical-looking LEGO pieces: silver-white pickup with black tiled bed and lowered tailgate, translucent red taillights, long tan and muted green timber beams assembled from aligned rectangular bricks with subtle printed wood grain. Recreate the white roadside barriers, green hedges, tall trees, flower beds, black lampposts and overhead market sign as detailed brick-built scenery in their original positions. Visible studs, tile seams, molded edges, glossy ABS plastic, tiny scuffs and realistic miniature construction throughout. Bright warm sunlight, crisp directional shadows, rich green foliage, cinematic global illumination and subtle depth of field. Keep the same continuous shot and stable character and vehicle designs across all frames; no live-action skin, fabric, natural foliage or photoreal wood remains.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/bbe12076bb5589bce9632df722569d5d782772fe9c11c588b0954e856813af6a.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-additional0-pe-r1-short-pe-026/run/workers/0/baselines/026__short/pe-loop/0/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.4,
+            "reason": "The brick conversion is limited to the man and the timber: a classic LEGO minifigure (yellow printed head, cap, printed torso, gray glove hand) and segmented green beam elements for both the handled boards and the bed stack appear across the full reviewed duration, while the truck's tailgate, bed and taillight and the entire hedge-and-garden environment remain photographic live-action in every reviewed frame from 0 to 4.833s. The unloading activity itself is realized in the medium: the lift onset at ~0.125-0.208s, the leftward carry past the taillight, and the gradual lowering over the bed all track the source, and the figure is rendered in a glossy CG style read as consistent with The LEGO Movie. What separates this from anchor 3 is that anchor 3 requires the dominant environment to be converted as well; here the named truck and the whole background stay source-like for the entire clip, leaving only subject and props rebuilt, which places the score at the top of the 2.0-2.4 band.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:timelinep0:24",
+              "candidate:timelinep1:35",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep4:112",
+              "source:timelinep1:35"
+            ],
+            "limitations": [
+              "Coverage ends at 4.833s (frame 116); the candidate's final ~0.04s and the tail of the requested 0-5s interval are unobserved.",
+              "Interpretation basis: the request text names the man, the timber and the truck; the truck is treated as a named central element, and the request does not explicitly state whether the whole scene must be brick-built."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.4,
+            "reason": "Frame-matched staging, the two-point grip on the timber, the lift-carry-lower progression and the camera drift all have recognizable minifigure counterparts at every reviewed timestamp. The figure mirrors the man's stance, lean, head orientation and hand placement, and translated counterparts (gloved hand to gray minifigure hand, wooden boards to green beams, bed lumber stack to green segmented pieces) count as full correspondence under the world recast. The gap to anchor 4 is a set of small attribute deviations rather than a clean one-to-one mapping: the cap reads black in the opening segment but brown from about 2.33s onward against the source's black cap, the wristwatch is not reproduced, a gray shoulder-pad element is added without a source counterpart, the gray shirt becomes a cream printed torso, and the mid-section framing is slightly tighter than the source.",
+            "evidence_refs": [
+              "source:timelinep0:3",
+              "candidate:timelinep0:3",
+              "source:timelinep1:49",
+              "candidate:timelinep1:49",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep3:96",
+              "candidate:timelinep3:96",
+              "source:timelinep4:112",
+              "candidate:timelinep4:112"
+            ],
+            "limitations": [
+              "The candidate tail beyond 4.833s is unobserved, so the final state of the unload cannot be compared; the source itself still shows the action in progress at 4.958s, so no beat is established as lost.",
+              "The cap-color readings differ between segment reviews (black at 0-1.17s, brown from 2.33s onward), so the exact window of that deviation is approximate."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.5,
+            "reason": "All five reviewed consecutive-frame intervals (0-1.167s, 1.167-2.333s, 2.333-3.5s, 3.5-4.667s and 4.667-4.833s) show one consistent minifigure design, stable beams and contacts, and no flicker, popping, teleportation, identity change or live-action/stylized switching. Motion is continuous and frame-coherent, tracking the source's timing rather than stepping, with occlusion by the tailgate and taillight consistent frame to frame. The gap to anchor 4 consists of small drift signals: the headwear reads black in the opening frames and brown from the mid-clip onward, the glove hand changes shape subtly between adjacent frames in the 1.167-2.333s interval, and the raised claw hand occasionally hovers with ambiguous plank contact near 3.75s; the final candidate frames beyond 4.833s are unobserved.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:timelinep1:30",
+              "candidate:timelinep1:46",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:90",
+              "candidate:timelinep3:112",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116",
+              "candidate:overview:0",
+              "candidate:overview:106"
+            ],
+            "limitations": [
+              "Consecutive-frame review covers 0-4.833s in five intervals; frames beyond that (to the candidate's 4.875s duration) are unobserved, so any end-of-clip behavior there is unknown, not established as absent.",
+              "Sub-frame artifacts between the 24fps samples cannot be excluded.",
+              "The black-to-brown cap reading discrepancy may be a lighting or visibility artifact rather than true costume drift; this is unresolved from the supplied frames."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 3.4,
+            "reason": "The minifigure and the green beams are well formed for the LEGO medium, with clean composite boundaries against the tailgate edge and cap-to-head seam, and no broken geometry, clipping, merging or clutter visible in any reviewed frame. The gap to anchor 4 is a set of minor local quirks rather than a consequential focal defect: subtle shape shifts in the glove hand at a grip point between adjacent frames in the 1.167-2.333s interval, an ambiguous white curved form beside the gripping hand in the final frames without a clear source counterpart, and occasional ambiguous hover of the raised claw hand; the segmented beam seams and slightly varying segment lengths are medium-appropriate construction logic rather than defects.",
+            "evidence_refs": [
+              "candidate:timelinep0:4",
+              "candidate:timelinep0:17",
+              "candidate:timelinep1:32",
+              "candidate:timelinep1:38",
+              "candidate:timelinep1:46",
+              "candidate:timelinep3:90",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:113"
+            ],
+            "limitations": [
+              "Fine matte edges, halo and shadow fidelity cannot be conclusively judged at the supplied resolution and sampling.",
+              "Geometry hidden behind the tailgate, bed side and the figure's lower body, including hidden grip points, is unobserved rather than confirmably correct."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 3.2,
+            "reason": "The composited minifigure and green beams read as one deliberate subject-focused design with convincing daylight shading and thoughtful adaptations, including the gray glove hand mirroring the source glove, a torso print echoing the henley placket, and a cap piece matching the man's headwear placement. The gap to anchor 4 is a set of minor grounding and consistency gaps rather than a consequential clash: contact shadows from the figure onto the tailgate or bed could not be confirmed in the supplied frames, the background takes on a smoothed, illustrated finish in the final segment while reading as straight photography earlier, the banner text becomes partially illegible there, and the mid-section framing drifts slightly tighter than the source composition.",
+            "evidence_refs": [
+              "candidate:timelinep0:9",
+              "candidate:timelinep0:27",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:84",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116"
+            ],
+            "limitations": [
+              "Cast-shadow and grounding of the figure could not be confirmed at the supplied resolution, so lighting integration is judged only from visible shading.",
+              "No style reference assets were supplied; integration and style are judged only from the visible frame content."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "026",
+        "prompt_form": "short",
+        "video_sha256": "bbe12076bb5589bce9632df722569d5d782772fe9c11c588b0954e856813af6a",
+        "method": "pe-loop",
+        "round": "v1",
+        "seed": 42,
+        "planner_input": null,
+        "prompt_words": 239,
+        "v5_scores": {
+          "instruction_adherence": 2.4,
+          "content_preservation": 3.4,
+          "temporal_consistency": 3.5,
+          "visual_integrity": 3.4,
+          "aesthetic_coherence": 3.2
+        },
+        "low_reasons": {
+          "instruction_adherence": "The brick conversion is limited to the man and the timber: a classic LEGO minifigure (yellow printed head, cap, printed torso, gray glove hand) and segmented green beam elements for both the handled boards and the bed stack appear across the full reviewed duration, while the truck's tailgate, bed and taillight and the entire hedge-and-garden environment remain photographic live-action in every reviewed frame from 0 t"
+        },
+        "requirement_labels": [
+          "partial"
+        ]
+      }
+    },
+    {
+      "method": "pe-loop",
+      "candidate_id": "v2",
+      "output_sha256": "ca2a0943f7270bec028f2272873e26c7ea091095739fbccc09d6063b21fea292",
+      "seed": 43,
+      "input": {
+        "video_id": "source",
+        "sha256": "2c2237f9759a749cbe295e897e4a159f1bf519421147bbb036226c16a39758c1",
+        "status": "recorded"
+      },
+      "prompt": "Transform the entire five-second video into a fully brick-built animated world in the style of The LEGO Movie. Preserve source camera movement, framing, layout, timing and lumber positions in one continuous shot. Everything is LEGO from frame one, never toys composited over live action.\nThe pickup has a silver-white tiled body with curved slopes and visible seams, black studded bed, lowered tailgate, translucent red taillights, brick bumper and cord tailgate supports. Build white roadside barriers from bricks, pavement from gray tiles, lampposts from black cylinders and the market sign from a printed tile. Trees and hedges use layered green leaf pieces and brick trunks; grass uses plant pieces, flowers yellow and orange studs, planters dark bricks.\nThe worker is a rigid LEGO minifigure: yellow cylindrical head, focused printed face, black baseball cap over molded brown hair, medium-gray shirt torso with printed collar and buttons, dark legs, yellow right claw hand, gray left glove claw and printed wristwatch. Keep colors consistent; animate with slightly stepped toy joints, never flexible human anatomy.\nTan boards and distinct faded-green lumber are long rectangular bricks and plates with selected exposed studs, visible joints and printed wood knots. He draws the upper tan board across the open tailgate, lowers it onto the stack, releases his right hand, then steps back while his left glove keeps guiding the board end. Preserve hand contact and source timing.\nUse glossy ABS plastic, molded edges, tiny scuffs, intricate miniature construction, warm sunlight, crisp shadows and cinematic bounce light. Maintain stable brick geometry; no photographic skin, fabric, wood, metal or foliage.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/ca2a0943f7270bec028f2272873e26c7ea091095739fbccc09d6063b21fea292.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/eight-9000-additional0-pe-r1-short-pe-026/run/workers/0/baselines/026__short/pe-loop/1-prompt-1-retry-1/native.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.3,
+            "reason": "The man is rebuilt as a LEGO-style minifigure and the timber as smooth orange brick-style planks across the whole supplied duration, while the truck, tailgate and every background element remain live-action photographic. Supporting observations: the figure carries the man's cap, a printed collar torso echoing the gray henley, a smiling printed face and a gray glove-hand surrogate from frame 0 (candidate:timelinep0:0, candidate:overview:0) through 4.833s (candidate:timelinep4:116); the carried boards and the stacked lumber at the bed's far end are restyled as orange bars (candidate:overview:19, candidate:overview:31); no corroborated frame shows the unconverted man. The gap to the 3.0 anchor is the unconverted dominant environment: the truck bed, tailgate and background carry roughly half the frame's visual prominence for the full duration and remain a live-action plate rather than a rebuilt brick world, matching the band condition in which only a subject and prop are converted.",
+            "evidence_refs": [
+              "candidate:overview:0",
+              "candidate:overview:13",
+              "candidate:overview:31",
+              "candidate:overview:56",
+              "candidate:overview:113",
+              "candidate:timelinep0:0",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:84",
+              "candidate:timelinep4:112",
+              "source:overview:0"
+            ],
+            "limitations": [
+              "One segment report (timelinep1) describes a live-action man until ~1.75s with an abrupt switch; this is contradicted by overview frames at 1.041s, 1.291s and 1.583s showing the minifigure, so it was not credited, but it leaves the 1.167-2.333s conversion continuity resting on overview evidence plus the adjacent segment reports.",
+              "Corroborated consecutive-frame coverage is 0-1.167s and 2.333-4.833s; the candidate ends at 4.833s, so the final ~0.17s of the requested 0-5.0s interval is unobserved.",
+              "Conformity to The LEGO Movie's specific CGI rendering treatment beyond minifigure conventions could not be conclusively established from stills."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 3.1,
+            "reason": "At matched timestamps the minifigure stands where the man stands and performs the same plank-lifting, carrying, placing and adjusting beats under the same camera drift, so the moment stays recognizably the same. Supporting observations: grips occur at the man's hand positions on the planks (source:timelinep0:8 / candidate:timelinep0:8; source:timelinep3:111 / candidate:timelinep3:111), the progressive lean-back and head-turn is mirrored across 2.333-3.5s (source:timelinep2:56 / candidate:timelinep2:56 to frame 84), and the plank passes behind the same foreground tonneau piece in the closing frames (source:timelinep4:112-116 / candidate:timelinep4:112-116). The gap to the 4.0 anchor consists of weakened secondary details: the wrist watch has no counterpart, the printed face is static and frontal where the man speaks and turns his head in three-quarter view, and the glove-hand grip is intermittently legible; all central roles, beats and spatial relations nonetheless retain counterparts, and the person-to-minifigure change is the change the requested world implies.",
+            "evidence_refs": [
+              "source:timelinep0:8",
+              "candidate:timelinep0:8",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep3:111",
+              "candidate:timelinep3:111",
+              "source:timelinep4:112",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116"
+            ],
+            "limitations": [
+              "The 1.75-2.04s window is covered only by an internally inconsistent segment report and by overview frames whose head region is cropped, so fine interaction detail there is uncertain.",
+              "Judged from stills sampled at 24fps; no audio was supplied, so the source speech indicated by mouth movement cannot be evaluated.",
+              "Lower-body pose correspondence is unobservable where the tailgate and planks occlude the figure, matching the source occlusion."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 2.8,
+            "reason": "Identity, props and medium persist across all corroborated consecutive-frame segments, but the figure's gray glove-hand element visibly morphs silhouette and at times merges into the white barrier wall during the 2.333-3.5s segment. Supporting observations: frames advance monotonically with the figure present from 0.0s (candidate:timelinep0:0) and no relapse to the live-action man at overview timestamps 1.291s, 1.583s and 1.833s (candidate:overview:31, candidate:overview:38, candidate:overview:44); plank count and grip handedness stay constant (candidate:timelinep0:10, candidate:timelinep0:28); no flicker, dropout or identity change appears in 3.5-4.833s (candidate:timelinep3:84-112, candidate:timelinep4:112-116). The gap to the 3.0 anchor is that the hand instability is recurring rather than transient and sits on the focal contact area, alongside subtle frame-to-frame variation of the face print; an uncorroborated report of a headless figure around 1.79-2.04s remains unresolved and is not counted as a confirmed discontinuity.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:28",
+              "candidate:overview:31",
+              "candidate:overview:38",
+              "candidate:overview:44",
+              "candidate:timelinep2:66",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:76",
+              "candidate:timelinep3:84",
+              "candidate:timelinep3:112",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116"
+            ],
+            "limitations": [
+              "The reported headless interval (~1.79-2.04s) and head fade-in (~2.08-2.33s) come from the same segment report whose live-action claim is contradicted by overview frames; they remain unconfirmed, and if real they would lower this score.",
+              "Candidate coverage ends at 4.833s, so no end-of-clip check is possible for the final ~0.17s of the requested interval.",
+              "Inter-frame motion smoothness and sub-frame timing are judged only from the sampled consecutive frames; contacts under fast motion were not verifiable."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.3,
+            "reason": "The only consequential structural defect is the figure's gray glove-hand surrogate, which is amorphous, changes silhouette between frames and at times blends into the white barrier wall, while the rest of the figure, the planks and the composite are well formed. Supporting observations: the mitt reads as adjacent to rather than clasping the plank in several frames (candidate:timelinep2:64, candidate:timelinep2:70, candidate:timelinep2:76), whereas the head, torso, cap and orange planks show no melting, popping, duplicated limbs or seams in 0-1.167s and 3.5-4.833s (candidate:timelinep0:10, candidate:timelinep3:96, candidate:timelinep4:112), and the plank segment seam reads as defensible stylization. The gap to the 3.0 anchor is that the defect sits on a focal structure (the hand at the grip contact) rather than outside focal structures, intermittently weakening the legibility of the central holding interaction; the scene remains interpretable, so this stays within the band rather than collapsing it.",
+            "evidence_refs": [
+              "candidate:timelinep0:10",
+              "candidate:timelinep2:64",
+              "candidate:timelinep2:66",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:76",
+              "candidate:timelinep3:96",
+              "candidate:overview:113",
+              "candidate:timelinep4:112"
+            ],
+            "limitations": [
+              "Fine compositing edges, contact shadows and exact grip geometry could not be verified at the supplied frame resolution.",
+              "If the reported headless interval (~1.79-2.04s) were confirmed, it would constitute an additional focal structural defect not observable in the supplied overview frames.",
+              "Coverage ends at 4.833s; the final ~0.17s is unobserved."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 2.2,
+            "reason": "A rendered minifigure and smooth orange planks are placed into otherwise photographic live-action surroundings, leaving two unreconciled visual systems across the whole clip. Supporting observations: the truck bed, tailgate, hedge, sign, lamppost and white barrier keep their source photographic texture and lighting while the figure carries clean plastic shading and a consistent design echoing the man's cap, collar shirt and glove (candidate:overview:13, candidate:overview:31, candidate:overview:100, candidate:timelinep3:84), so the composite craft, scale and camera match are competent. The gap to the 3.0 anchor is the pervasive unrequested stylized/live-action mixture itself: no unifying treatment, adapted brick counterparts or shared lighting system reconciles the rendered figure with the photographic environment, which is the band-defining clash and caps this dimension.",
+            "evidence_refs": [
+              "candidate:overview:13",
+              "candidate:overview:31",
+              "candidate:overview:100",
+              "candidate:timelinep3:84",
+              "source:timelinep3:84",
+              "candidate:timelinep4:112"
+            ],
+            "limitations": [
+              "Lighting match and shadow integration of the composited figure onto the truck and planks could not be precisely verified at the supplied resolution.",
+              "Some background elements appear AI-regenerated (softened foliage, illegible sign), so the degree of photographic versus regenerated background treatment is only qualitatively described.",
+              "Coverage ends at 4.833s; the final ~0.17s is unobserved."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": {
+        "sample_id": "026",
+        "prompt_form": "short",
+        "video_sha256": "ca2a0943f7270bec028f2272873e26c7ea091095739fbccc09d6063b21fea292",
+        "method": "pe-loop",
+        "round": "v2",
+        "seed": 43,
+        "planner_input": null,
+        "prompt_words": 260,
+        "v5_scores": {
+          "instruction_adherence": 2.3,
+          "content_preservation": 3.1,
+          "temporal_consistency": 2.8,
+          "visual_integrity": 2.3,
+          "aesthetic_coherence": 2.2
+        },
+        "low_reasons": {
+          "instruction_adherence": "The man is rebuilt as a LEGO-style minifigure and the timber as smooth orange brick-style planks across the whole supplied duration, while the truck, tailgate and every background element remain live-action photographic. Supporting observations: the figure carries the man's cap, a printed collar torso echoing the gray henley, a smiling printed face and a gray glove-hand surrogate from frame 0 (candidate:timelinep0:0,",
+          "visual_integrity": "The only consequential structural defect is the figure's gray glove-hand surrogate, which is amorphous, changes silhouette between frames and at times blends into the white barrier wall, while the rest of the figure, the planks and the composite are well formed. Supporting observations: the mitt reads as adjacent to rather than clasping the plank in several frames (candidate:timelinep2:64, candidate:timelinep2:70, ca",
+          "aesthetic_coherence": "A rendered minifigure and smooth orange planks are placed into otherwise photographic live-action surroundings, leaving two unreconciled visual systems across the whole clip. Supporting observations: the truck bed, tailgate, hedge, sign, lamppost and white barrier keep their source photographic texture and lighting while the figure carries clean plastic shading and a consistent design echoing the man's cap, collar sh"
+        },
+        "requirement_labels": [
+          "pass"
+        ]
+      }
+    },
+    {
+      "method": "direct",
+      "candidate_id": "direct",
+      "output_sha256": "dd284a0541dccbaae70b1d99c944bcb1d02632434caaaa569b366b8343e8b639",
+      "seed": 42,
+      "input": {
+        "video_id": "source",
+        "sha256": "2c2237f9759a749cbe295e897e4a159f1bf519421147bbb036226c16a39758c1",
+        "status": "recorded"
+      },
+      "prompt": "Transform the man unloading timber from a truck into brick animation in the style of The LEGO Movie.",
+      "saved_video_path": "/mnt/c/Users/17919/Documents/Codex/2026-11-01/lha-fewshot-execution/outputs/four-video-preview/media/dd284a0541dccbaae70b1d99c944bcb1d02632434caaaa569b366b8343e8b639.mp4",
+      "raw_run_path": "/root/autodl-tmp/LHA-four-video-preview-recovery-20261103/jobs/short-direct-existing-0/results/media/dd284a0541dccbaae70b1d99c944bcb1d02632434caaaa569b366b8343e8b639.mp4",
+      "independent_review": {
+        "status": "scored",
+        "protocol": "lha-low-high-final-v5",
+        "profile_sha256": "b642de6906964163b436fac1af8ce77c37b84c0026b9812f49985b750a5b1c72",
+        "main_scores": {
+          "instruction_adherence": {
+            "status": "scored",
+            "score": 2.4,
+            "reason": "The decisive observation is that the brick-animation treatment is applied only to the man (a LEGO minifigure present from the first frame through the last supplied frame) and to the timber (dark gray bar-like pieces), while the truck, tailgate, bed liner, hedges, market sign and garden remain live-action photographic across the entire duration. Supporting observations: the named subject conversion is complete and sustained with correct occlusion behind the tailgate and matched pose timing (candidate:timelinep0:0, candidate:timelinep0:24, candidate:timelinep1:56, candidate:timelinep2:56, candidate:timelinep3:112, candidate:timelinep4:112); the timber is restyled as gray plastic bars with stud-like markings (candidate:timelinep2:56, candidate:timelinep3:84), though one lower bar develops a serrated, yellow-marked edge that reads as a saw blade rather than lumber (candidate:timelinep0:15, candidate:timelinep0:25). The gap to the next anchor is that the dominant environment, including the truck central to the unloading action, is never rebuilt in the medium, so the scene is not realized as brick animation beyond subject and prop.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:24",
+              "source:timelinep0:24",
+              "candidate:timelinep1:56",
+              "candidate:timelinep2:56",
+              "candidate:timelinep3:112",
+              "candidate:timelinep4:112",
+              "candidate:timelinep0:15",
+              "candidate:timelinep0:25"
+            ],
+            "limitations": [
+              "Observed candidate coverage ends at 4.833 s of the 4.875 s video; the final ~0.17 s is unseen.",
+              "Whether the serrated lower bar is intended as stylized lumber or a saw cannot be confirmed from the frames.",
+              "No reference material defines 'The LEGO Movie' style beyond the visible minifigure and bar characteristics."
+            ]
+          },
+          "content_preservation": {
+            "status": "scored",
+            "score": 2.6,
+            "reason": "The decisive observation is that roles, spatial staging, camera movement and the timber-pulling and lowering beats correspond with matched timing through about 3.5 s, but in the final third the figure largely stops performing the unloading while the source's plank-handling interaction loses its counterpart. Supporting observations: the figure mirrors the pull of the first timber (~0.17-0.42 s) and the lift of the second plank at the same timestamps (source:timelinep0:4, candidate:timelinep0:4, source:timelinep0:10, candidate:timelinep0:10); the lowering-and-shifting progression and gaze change track the source frame-to-frame through 2.333-3.5 s (source:timelinep2:56, candidate:timelinep2:56, source:timelinep2:84, candidate:timelinep2:84); from 3.5-4.667 s the figure is largely static with arms hanging and one hand on the rail while the source man actively shifts the boards (source:timelinep3:96, candidate:timelinep3:96, source:timelinep3:108, candidate:timelinep3:108); in the final supplied frames the two-handed plank-across-tailgate contact and the stacked bed timber have no direct counterpart, the bed showing only a smooth dark bar and black panels (source:timelinep4:112, candidate:timelinep4:112, candidate:timelinep4:116). The gap to the next anchor is that more than one late beat or interaction is weakened or lost rather than a single minor one.",
+            "evidence_refs": [
+              "source:timelinep0:4",
+              "candidate:timelinep0:4",
+              "source:timelinep0:10",
+              "candidate:timelinep0:10",
+              "source:timelinep2:56",
+              "candidate:timelinep2:56",
+              "source:timelinep2:84",
+              "candidate:timelinep2:84",
+              "source:timelinep3:96",
+              "candidate:timelinep3:96",
+              "source:timelinep3:108",
+              "candidate:timelinep3:108",
+              "source:timelinep4:112",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116"
+            ],
+            "limitations": [
+              "Candidate frames after 4.833 s are not supplied, so end-of-clip correspondence is unobserved.",
+              "Exact motion retention was not declared required; correspondence is judged at beat and interaction level.",
+              "Whether the late dark bed-edge bar is the transformed plank is ambiguous in the supplied frames."
+            ]
+          },
+          "temporal_consistency": {
+            "status": "scored",
+            "score": 3.0,
+            "reason": "The decisive observation is that the minifigure's identity, the converted medium, the grip contacts and the event progression remain continuous across all reviewed consecutive candidate frames from 0 to 4.833 s, with no medium switching, identity change, popping or vanished focal prop, while transient artifacts appear only locally in the late frames. Supporting observations: the figure stays locked to the source silhouette through the opening pan with grip maintained and correct foreground occlusion (candidate:timelinep0:0, candidate:timelinep0:14, candidate:timelinep0:28); identity, shirt pattern, wristband and bar color are stable across 2.333-3.5 s (candidate:timelinep2:56, candidate:timelinep2:70, candidate:timelinep2:84) and 3.5-4.667 s; the left-hand grip on the bar end is maintained in every supplied frame of 2.333-3.5 s; the final small-motion phase shows gradual head and torso changes with no jumps (candidate:timelinep4:112, candidate:timelinep4:116). Against this, black scribble-like smears appear and disappear on the head region between consecutive frames around 4.0-4.08 s (candidate:timelinep3:96, candidate:timelinep3:97, candidate:timelinep3:98) and soft ghosting halos appear around the figure's edges in several late frames (candidate:timelinep3:106, candidate:timelinep3:110, candidate:timelinep3:112); these are transient and localized rather than listed important discontinuities, which is the gap to a lower anchor, while their presence on the focal figure keeps the score below 3.3.",
+            "evidence_refs": [
+              "candidate:timelinep0:0",
+              "candidate:timelinep0:14",
+              "candidate:timelinep0:28",
+              "candidate:timelinep2:56",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:84",
+              "candidate:timelinep3:96",
+              "candidate:timelinep3:97",
+              "candidate:timelinep3:98",
+              "candidate:timelinep3:106",
+              "candidate:timelinep3:110",
+              "candidate:timelinep3:112",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:116"
+            ],
+            "limitations": [
+              "Reviewed intervals are 0-1.167 s, 1.167-2.333 s, 2.333-3.5 s, 3.5-4.667 s and 4.667-4.833 s; the final ~0.04-0.17 s is unseen.",
+              "Sub-frame artifacts and full motion smoothness cannot be judged from sampled stills.",
+              "Whether the stacked converted timber vanishes or moves out of the tighter late framing between 4.625 s and 4.667 s is unresolved."
+            ]
+          },
+          "visual_integrity": {
+            "status": "scored",
+            "score": 2.3,
+            "reason": "The decisive observation is that the minifigure, its grip and the converted bars are mostly well formed, but confirmed rendering artifacts affect focal structures: scribble-like smears on the head region and soft ghosting halos around the figure's edges. Supporting observations: early frames show stable, artifact-free edges with no double outlines or halos (candidate:timelinep0:2, candidate:timelinep0:12, candidate:timelinep0:27); from 3.5 s onward black smears appear and disappear on the head/face region (candidate:timelinep3:96, candidate:timelinep3:97, candidate:timelinep3:98) and blur/ghosting halos surround the figure's edges (candidate:timelinep3:106, candidate:timelinep3:110, candidate:timelinep3:112); the lower legs are cut off at the frame edge or read as merged into the dark tailgate/shadow region (candidate:timelinep2:60, candidate:timelinep2:70, candidate:timelinep2:78); the right forearm/hand merges ambiguously with the dark bed-edge bar in the final frames (candidate:timelinep4:112, candidate:timelinep4:114). The scene remains interpretable throughout, which is why the score sits inside the 2 band rather than lower; the focal face defect is what prevents a 3.",
+            "evidence_refs": [
+              "candidate:timelinep0:2",
+              "candidate:timelinep0:12",
+              "candidate:timelinep0:27",
+              "candidate:timelinep3:96",
+              "candidate:timelinep3:97",
+              "candidate:timelinep3:98",
+              "candidate:timelinep3:106",
+              "candidate:timelinep3:110",
+              "candidate:timelinep3:112",
+              "candidate:timelinep2:60",
+              "candidate:timelinep2:70",
+              "candidate:timelinep2:78",
+              "candidate:timelinep4:112",
+              "candidate:timelinep4:114"
+            ],
+            "limitations": [
+              "The leg-tailgate junction and hand-bar overlap are dark-on-dark and partially frame-cropped, so merging versus occlusion is uncertain.",
+              "The early left-hand grip appearing to pass behind the board (1.167-1.375 s) could not be confirmed as a defect at the supplied resolution.",
+              "Fine texture judgments are limited by composite softness and motion blur in later frames."
+            ]
+          },
+          "aesthetic_coherence": {
+            "status": "scored",
+            "score": 2.6,
+            "reason": "The decisive observation is that the result holds one consistent hybrid visual system - a glossy CG minifigure with converted gray timber bars composited into the live-action plate at matched camera, scale, timing and occlusion - but integration craft is weakened by persistent lighting and counterpart inconsistencies. Supporting observations: the figure is correctly occluded by the foreground tailgate and tracks the plate's camera pan from the first frame (candidate:timelinep0:5, candidate:timelinep0:20); however, the source's human-proportioned shadow on the tailgate persists with no matching re-rendered minifigure shadow, leaving the character-to-plate lighting interaction inconsistent (source:timelinep2:62, candidate:timelinep2:62, candidate:timelinep2:70), and soft ghosting edges recur around the composite late in the clip (candidate:timelinep3:106, candidate:timelinep3:110, candidate:timelinep3:112); the timber counterpart is partly unreadable as adapted lumber, its serrated yellow-marked bar reading as a saw (candidate:timelinep0:25, candidate:timelinep3:100). The unconverted photographic environment is scored under instruction adherence; here it is the integration defects and the mistranslated prop counterpart that keep the score below the 3 anchor.",
+            "evidence_refs": [
+              "candidate:timelinep0:5",
+              "candidate:timelinep0:20",
+              "source:timelinep2:62",
+              "candidate:timelinep2:62",
+              "candidate:timelinep2:70",
+              "candidate:timelinep3:106",
+              "candidate:timelinep3:110",
+              "candidate:timelinep3:112",
+              "candidate:timelinep0:25",
+              "candidate:timelinep3:100"
+            ],
+            "limitations": [
+              "Shadow geometry and lighting interaction are judged at limited resolution and described as uncertain where noted.",
+              "No style ground truth for 'The LEGO Movie' is supplied, so palette and material choices are judged only against the visible plate.",
+              "Final ~0.17 s of the candidate is unobserved, so end-state integration is unknown."
+            ]
+          }
+        }
+      },
+      "review_status": "saved v5 report",
+      "original_extract_row": null
+    }
+  ]
+}
