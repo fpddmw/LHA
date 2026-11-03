@@ -16,8 +16,8 @@ catalog. A ZIP alone is therefore not a complete runtime knowledge checkout.
 ```bash
 git clone --branch codex/experience-curation-v1 https://github.com/fpddmw/LHA.git
 cd LHA
-python3 -m venv .venv-controller
-source .venv-controller/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 python -m pip install -r requirements.server-runtime.txt
 python scripts/run_experiment_campaign.py plan --backend both
 python scripts/smoke_experiment_campaign.py --output out/public-smoke

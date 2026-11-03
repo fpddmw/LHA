@@ -1,6 +1,6 @@
 # Public experiment entry points and offline smoke verification
 
-Status: implementation and offline verification complete; GitHub synchronization follows.
+Status: implementation, offline verification and GitHub delivery complete.
 No live experiment is authorized by this work.
 
 ## Scope
@@ -27,7 +27,7 @@ development workstation is not a missing experiment mechanism.
 - [x] Test public entry points and documented commands, then run the relevant
   regression modules. Record failures and limits without changing experimental
   policy to make tests pass.
-- [ ] Commit scoped changes, push the existing GitHub branch and verify its commit.
+- [x] Commit scoped changes, push the existing GitHub branch and verify its commit.
 
 ## Completion
 
@@ -66,3 +66,8 @@ CUDA compatibility, model quality or a completed research experiment.
 - Experience prose, experiment budgets/groups and scoring standards are unchanged.
   Live provider access, GPU environments and quality measurements remain the
   receiving operator's deployment verification, separate from this smoke.
+
+Implementation commit `8fe19ad6099aa8249051dd893dba58be10ff0644` was pushed to
+`origin/codex/experience-curation-v1` and verified with `git ls-remote`. This final
+documentation update records the delivery. No paid call, GPU task, live provider
+probe or experiment was started.
