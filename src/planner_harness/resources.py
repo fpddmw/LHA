@@ -9,7 +9,34 @@ from .common import load, save
 from .lock import RunLock
 
 MAX_GENERATIONS = 4
-MAX_WALL_SECONDS = 9000
+GENERATION_SECONDS = {"bernini": 20 * 60, "ditto": 40 * 60}
+TOKENS_PER_GENERATION = 1000000
+HEADROOM_GENERATIONS = 0.5
+
+
+def estimate_budget(backend="bernini", max_generations=MAX_GENERATIONS, *, generation_seconds=None,
+                    tokens_per_generation=TOKENS_PER_GENERATION, headroom_generations=HEADROOM_GENERATIONS):
+    """Time is a submission deadline; tokens are a planning estimate only."""
+    if backend not in GENERATION_SECONDS or type(max_generations) is not int or max_generations < 1:
+        raise ValueError("Choose a renderer and a positive generation count")
+    seconds = GENERATION_SECONDS[backend] if generation_seconds is None else generation_seconds
+    if isinstance(seconds, dict):
+        seconds = seconds[backend]
+    if type(seconds) is not int or seconds <= 0 or type(tokens_per_generation) is not int or tokens_per_generation <= 0:
+        raise ValueError("Per-generation time and token estimates must be positive integers")
+    if type(headroom_generations) not in (int, float) or not math.isfinite(headroom_generations) or headroom_generations < 0:
+        raise ValueError("Generation headroom must be finite and nonnegative")
+    factor = max_generations + headroom_generations
+    return {"backend": backend, "max_generations": max_generations,
+            "generation_seconds": seconds, "tokens_per_generation": tokens_per_generation,
+            "headroom_generations": headroom_generations,
+            "max_wall_seconds": math.ceil(seconds * factor),
+            "estimated_total_tokens": math.ceil(tokens_per_generation * factor),
+            "token_policy": "estimate_only"}
+
+
+# Backward-compatible name for the default Bernini allowance, not a global cap.
+MAX_WALL_SECONDS = estimate_budget()["max_wall_seconds"]
 DEFAULTS = {
     "version": "creative-resources-v2",
     "max_turns": None,
@@ -34,14 +61,17 @@ class TaskDeadline(ResourceExhausted):
         self.cleanup = cleanup
 
 
-def configure(state, supplied=None, *, continuation=None):
+def configure(state, supplied=None, *, continuation=None, backend=None):
     if (
         (continuation or {}).get("hard_generation_limit") is not None
         and state["config"].get("max_generations") is None
         and not (supplied or {}).get("max_generations")
     ):
         supplied = {**(supplied or {}), "max_generations": continuation["hard_generation_limit"]}
-    policy = {**DEFAULTS, **(supplied or {})}
+    renderer = backend or state["config"].get("execution", {}).get("renderer", {}).get("backend", "bernini")
+    count = state["config"].get("max_generations") or (supplied or {}).get("max_generations", MAX_GENERATIONS)
+    estimate = estimate_budget(renderer, count)
+    policy = {**DEFAULTS, "max_wall_seconds": estimate["max_wall_seconds"], **(supplied or {})}
     for field in ("max_generations",):
         top = state["config"].get(field)
         if top is not None:
@@ -53,8 +83,6 @@ def configure(state, supplied=None, *, continuation=None):
     for key in ("max_generations", "max_wall_seconds"):
         if type(policy[key]) is not int or policy[key] <= 0:
             raise ValueError("Generation and wall guards require positive integer limits")
-    if policy["max_wall_seconds"] > MAX_WALL_SECONDS:
-        raise ValueError("Online tasks have a hard maximum of 2.5 hours")
     # These fields remain in records for compatibility, with no task stop semantics.
     for key in ("max_turns", "max_model_calls", "max_total_tokens"):
         policy[key] = None

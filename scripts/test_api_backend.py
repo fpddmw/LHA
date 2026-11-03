@@ -154,7 +154,7 @@ class APITests(unittest.TestCase):
         self.assertEqual(frozen['model'],'configured/critic');self.assertIsNone(frozen['reasoning_effort'])
         source=self.root/'source.mp4';source.write_bytes(b'configuration fixture')
         service.submit({'id':'fixture','source':str(source),'source_sha256':sha(source),
-            'request':'Edit the video','max_generations':5,'execution':{'renderer':{'backend':'fixture'}}})
+            'request':'Edit the video','max_generations':5,'execution':{'renderer':{'backend':'bernini'}}})
         task=queue.enqueue.call_args.args[3]['task']
         self.assertEqual(role_settings(task['execution'],'online_critic'),{'model':'configured/critic','reasoning_effort':None})
 

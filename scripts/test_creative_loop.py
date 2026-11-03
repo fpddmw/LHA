@@ -347,7 +347,7 @@ class CreativeTests(unittest.TestCase):
                           model_factory=lambda role: model, renderer=object())
         task = {"id": "fixture", "source": str(self.source), "source_sha256": sha(self.source),
                 "request": "Make it blue.", "max_generations": 1,
-                "execution": {"mode": "live", "renderer": {"backend": "fixture"}}}
+                "execution": {"mode": "live", "renderer": {"backend": "bernini"}}}
         service.submit(task)
         job = q.claim("llm", "fixture-owner")
         result = service(job, self.root / "service/job-test")

@@ -373,6 +373,18 @@ def _score_key(position, judge):
                       "track": position["prompt_form"], "candidate": position["video_sha256"], "judge": judge})
 
 
+def ensure_evaluation(repository, root, *, evaluation_id=None):
+    """Use the current protocol session, or prepare one for the collected videos."""
+    active = current_evaluation(root)
+    if active is not None:
+        return active
+    if evaluation_id and (Path(root) / 'evaluations' / evaluation_id).exists():
+        # A previous protocol can retain the requested label and all its receipts.
+        evaluation_id = evaluation_id + '-' + uuid.uuid4().hex[:8]
+    prepare_evaluation(repository, root, evaluation_id=evaluation_id)
+    return current_evaluation(root)
+
+
 def score_evaluation(repository, root, budget=None, *, models=None):
     """Explicit live entry using the current evaluator, confined to the fresh session."""
     from evaluation.creative import JUDGES, judge_identity, make_judge, judge_candidate
@@ -381,6 +393,7 @@ def score_evaluation(repository, root, budget=None, *, models=None):
     from planner_harness import accounting
     from planner_harness.report_call import ReportUnavailable
     repository, root = Path(repository).resolve(), Path(root).resolve()
+    ensure_evaluation(repository, root)
     append_evaluation(repository, root)
     active = current_evaluation(root)
     if active is None:
@@ -544,6 +557,50 @@ def register_plan(root, batch):
     immutable(Path(root) / "plans" / (signature(body) + ".json"), {**body, "sha256": signature(body)})
 
 
+def evaluation_coverage(directory, evaluation):
+    """Expose every metric family and its actual status across unique judgments."""
+    from collections import Counter
+    from evaluation.final_suite import ratings
+    from evaluation.registry import LOW_HIGH_AESTHETICS, LOW_HIGH_SPECIALTIES
+    from evaluation.validation import DIMENSIONS
+    families = {
+        'main': tuple(DIMENSIONS),
+        'short': LOW_HIGH_SPECIALTIES,
+        'long_and_requirements': ('edit_completion', 'binding_accuracy', 'joint_satisfaction',
+                                  'required_correspondence', 'unrequested_damage', 'major_damage'),
+        'aesthetics': (*LOW_HIGH_AESTHETICS, 'aesthetic_mean'),
+        'objective_and_motion': ('clip_f', 'dino_f', 'flow_warp_l1', 'motion_diagonals_per_second',
+                                 'low_motion_duration_fraction', 'flow_velocity_error'),
+    }
+    counts = {group: {name: Counter() for name in names} for group, names in families.items()}
+    seen, event_reviews = set(), 0
+    for position in evaluation['positions']:
+        for judge in evaluation['judges']:
+            key = _score_key(position, judge['model'])
+            if key in seen:
+                continue
+            seen.add(key)
+            link = directory / 'scores' / (key + '.json')
+            result = _read_score(directory, link, evaluation) if link.exists() else {}
+            metrics = ratings(result)
+            absent = 'pending' if not link.exists() else 'missing' if result.get('status') == 'missing' else 'not_measured'
+            event_reviews += result.get('event_reviews', 0)
+            for group, names in families.items():
+                for name in names:
+                    counts[group][name][metrics.get(name, {}).get('status', absent)] += 1
+    blind = Counter()
+    index = directory / 'comparison-index.json'
+    if index.exists():
+        for record in load(index)['records']:
+            for question in ('task_completion', 'production_quality'):
+                judgment = (record['result'].get('judgments') or {}).get(question)
+                blind[(judgment or {}).get('outcome', 'missing')] += 1
+    return {'scope': 'current evaluation collection; duplicate video/task/judge calls counted once',
+            'unique_judgments': len(seen), 'metric_families': counts,
+            'continuous_event_reviews': event_reviews, 'blind_question_outcomes': dict(blind),
+            'blind_comparisons_finished': index.exists()}
+
+
 def report(repository, root, *, methods=None, seeds=None, splits=None, forms=None, review_modes=None, analysis_population=None, output_name="index"):
     root = Path(root).resolve()
     if not SAFE.fullmatch(output_name):raise ValueError('Use a safe report name')
@@ -638,6 +695,7 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
     if active:
         from evaluation.low_high_summary import summarize
         summary['metrics']=summarize(metric_rows)
+        summary['evaluation_coverage'] = evaluation_coverage(*active)
         index_path = active[0] / "comparison-index.json"
         if index_path.exists():
             index = load(index_path)
@@ -678,6 +736,8 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
         '<style>body{font:16px system-ui;max-width:1200px;margin:auto;padding:24px}section{border-top:1px solid #ccc;padding:16px 0}video{max-width:100%;max-height:360px}p{white-space:pre-wrap}</style>',
         '<h1>LHA 视频结果</h1><p>已就绪 ' + str(summary["ready"]) + ' / ' + str(summary["planned"]) + '；按当前评价会话显示评分。</p>']
     body.append('<p>统计范围：'+{'main':'全量主实验','rsi':'RSI 后段测试集','test':'当前筛选范围'}[analysis_population]+'</p>')
+    if summary.get('evaluation_coverage'):
+        body.append('<details><summary>全量评分执行情况</summary><pre>' + html.escape(json.dumps(summary['evaluation_coverage'], ensure_ascii=False, indent=2)) + '</pre></details>')
     if analysis_population=='main' and (root/'rsi.html').exists():body.append('<a href="rsi.html">RSI 测试集对照</a>')
     if summary.get("blind_comparisons"):
         body.append('<details><summary>当前盲比较</summary><pre>' + html.escape(json.dumps(summary["blind_comparisons"], ensure_ascii=False, indent=2)) + '</pre></details>')

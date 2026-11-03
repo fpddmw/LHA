@@ -196,7 +196,7 @@ class ServiceTests(unittest.TestCase):
     def task(self):
         return {"id": "fixture", "source": str(self.source), "source_sha256": sha(self.source),
                 "request": "Make the scene blue.", "max_generations": 2,
-                "execution": {"mode": "live", "renderer": {"backend": "fixture", "generation": {"steps": 50}, "seed": 42,
+                "execution": {"mode": "live", "renderer": {"backend": "bernini", "generation": {"steps": 50}, "seed": 42,
                     "output": {"frames": 20, "fps": 10, "width": 80, "height": 60}}, "critic": {"max_calls": 3}}}
 
     def test_real_harness_queue_two_generations_critic_and_finish(self):

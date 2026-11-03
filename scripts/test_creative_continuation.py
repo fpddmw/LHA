@@ -178,7 +178,7 @@ class ContinuationTests(unittest.TestCase):
         service=Service(queue,directory,ROOT,{'workflow':'creative_loop_v1','continuation_policy':{'hard_generation_limit':1}},
                         model_factory=lambda role:model,renderer=object())
         service.submit({'id':'policy-fixture','source':str(self.source),'source_sha256':sha(self.source),'request':'Make it blue.',
-                        'execution':{'mode':'live','renderer':{'backend':'fixture'}}})
+                        'execution':{'mode':'live','renderer':{'backend':'bernini'}}})
         job=queue.claim('llm','software-fixture')
         result=service(job,directory/'job-result')
         self.assertEqual(result['state']['config']['continuation_policy']['hard_generation_limit'],1)

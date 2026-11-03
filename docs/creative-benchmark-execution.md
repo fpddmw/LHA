@@ -15,19 +15,17 @@ python scripts/run_creative_benchmark.py prepare --output /path/new-batch \
 
 独立终评使用 [Low→High 协议](low-high-evaluation-v2.md)的原始提示词、源视频和生成视频，以及独立固定的连续片段与概览，各方法共用，在线关注区间不传入终评。新手册、知识快照或协议使用新的输出目录；历史批次保留原运行版本。模型调用和 GPU 执行仍依当前授权状态开展。具体启动与恢复状态见 [current-status.md](current-status.md)。
 
-真实模型/渲染使用统一预算账本。服务的 `budget` 需要明确 live 模式与独立方法范围；默认使用 `count_limits_only` 保留未知金额，显式金额保护需提供费用报价。在线任务按独立 N 次生成与最多 2.5 小时执行，调用和 token 仅计量；维护与独立终评分别配置账本，见 [accounting.py](../src/planner_harness/accounting.py)；示例配置中的模型名与资源数量本身不构成费用授权。
+真实模型/渲染使用统一预算账本。服务的 `budget` 需要明确 live 模式与独立方法范围；默认使用 `count_limits_only` 保留未知金额，显式金额保护需提供费用报价。在线任务按独立 N 次生成执行，期限为单次生成耗时 ×（N＋0.5）：Bernini 按 20 分钟/次、Ditto 按 40 分钟/次。token 预估为 100 万 ×（N＋0.5），调用和 token 仅计量；维护与独立终评分别配置账本，见 [accounting.py](../src/planner_harness/accounting.py)；示例配置中的模型名与资源数量本身不构成费用授权。
 
-独立终评按 track／prompt_form 分流长短专项，同时计算五维、逐项语义、美学、CLIP/DINO 与全帧光流；编码器精确版本已固定，重复候选复用计算。当前四组默认实验追加交换顺序的匿名盲评，汇总长／短／全部的逐指标均值、配对统计和有效题数。PE Loop 保存首轮、末轮和选中结果；单轮对照直接使用首轮。benchmark 与已有视频保持原样，逐题意图审批已退出评价流程。运行前提供 compute:features 与 compute:temporal 的预算配置和依赖；缺项明确记录 null 与原因。
+独立终评按 track／prompt_form 分流长短专项，同时计算五维、逐项语义、美学、CLIP/DINO 与全帧光流；编码器精确版本已固定，重复候选复用计算。当前四组默认实验追加交换顺序的匿名盲评，汇总长／短／全部的逐指标均值、配对统计和有效题数。PE Loop 保存首轮、末轮和选中结果；单轮对照直接使用首轮。benchmark 与已有视频保持原样，逐题意图审批已退出评价流程。运行前安装评分依赖并准备编码器权重；默认无需额度配置，缺项记录 null 与原因。
 
 ## 统一结果目录的独立评分
 
 ```bash
-python scripts/benchmark_results.py prepare-evaluation --root /path/results --evaluation-id eval-v2
-python scripts/benchmark_results.py score-evaluation --root /path/results \
-  --execute --budget-config /path/live-budget.json
+python scripts/benchmark_results.py score-evaluation --root /path/results --execute
 ```
 
-第一步只冻结新的评价身份，不调用模型；第二步在授权运行时计算五维、专项、美学、特征和光流，并更新统一页面。同视频同任务跨方法复用评分，两位判官分别保留。旧分数不导入新会话，缺项列状态与有效数。单独的盲评命令、原三组的首轮／最终对照及通用长短分组汇总见 [当前指标手册](low-high-evaluation-v2.md)。
+命令自动准备或续接当前评价，计算五维、专项、美学、特征和光流，执行匿名交换顺序盲评，再更新统一页面。同视频同任务跨方法复用评分，两位判官分别保留。旧分数不导入新会话，缺项列状态与有效数。单独的盲评命令、原三组的首轮／最终对照及通用长短分组汇总见 [当前指标手册](low-high-evaluation-v2.md)。
 
 ## 当前默认矩阵与资源
 
@@ -39,4 +37,4 @@ python scripts/benchmark_results.py score-evaluation --root /path/results \
 
 完整单题训练 smoke 沿 prepare_creative_smoke → run_server_pipeline init/submit/run --once → close_creative_smoke。最后的 close 会实际运行独立训练维护；只有维护状态 activated/no_increment 才通过，失败不改变在线结果。三卡独立 smoke 是三个私有训练流，不声称彼此按序学习。
 
-独立 GLM/Sonnet 终评使用 live_meter_only，不要求调用、token或费用额度。GLM不传 max_tokens；Sonnet Native Messages 的必填容量使用官方模型最大128000，保持 adaptive/high。实际 usage、超时未知、原回答和有限故障恢复都留回执。若评分CLI提供 --budget-config，该配置只给 features/temporal 的 compute 调用，模型调用不受其额度准入。终评与在线 N/2.5 小时保持独立。
+独立 GLM/Sonnet 终评使用 live_meter_only，不要求调用、token或费用额度。GLM不传 max_tokens；Sonnet Native Messages 的必填容量使用官方模型最大128000，保持 adaptive/high。实际 usage、超时未知、原回答和有限故障恢复都留回执。若评分CLI提供 --budget-config，该配置只给 features/temporal 的 compute 调用，模型调用不受其额度准入。终评与在线生成次数和时间预算保持独立。

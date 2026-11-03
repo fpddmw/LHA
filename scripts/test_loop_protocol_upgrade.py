@@ -30,6 +30,7 @@ def fake_renderer_owner(connection, lock):
 class ProtocolTests(unittest.TestCase):
     def state(self, n=5, used=0, fraction=0):
         now = time.time()
+        wall = r.estimate_budget(max_generations=n)['max_wall_seconds']
         s = {
             "created_at": "2026-11-02T00:00:00Z",
             "config": {"max_generations": n},
@@ -37,8 +38,8 @@ class ProtocolTests(unittest.TestCase):
             "videos": {},
             "submitted_generation_ids": [],
             "online_clock": {
-                "started_unix": now - r.MAX_WALL_SECONDS * fraction,
-                "deadline_unix": now + r.MAX_WALL_SECONDS * (1 - fraction),
+                "started_unix": now - wall * fraction,
+                "deadline_unix": now + wall * (1 - fraction),
             },
         }
         r.configure(s)
@@ -796,7 +797,7 @@ class IntegrationTests(unittest.TestCase):
                 "budget_topic": "same",
                 "execution": {
                     "mode": "live",
-                    "renderer": {"backend": "fixture"},
+                    "renderer": {"backend": "bernini"},
                     "resource_policy": {"max_wall_seconds": 2},
                 },
             }

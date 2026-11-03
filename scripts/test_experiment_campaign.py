@@ -173,7 +173,7 @@ class CampaignTests(base.Fixture):
         self.assertEqual(batch['generation'], render_profiles.DITTO)
         self.assertFalse(batch['generation']['prompt_enhancer'])
         self.assertEqual(batch['max_generations'], 4)
-        self.assertEqual(batch['resource_policy']['max_wall_seconds'], 9000)
+        self.assertEqual(batch['resource_policy']['max_wall_seconds'], 10800)
 
     def test_direct_reuse_checks_original_conditions_and_omits_scores(self):
         from experiments import results

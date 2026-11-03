@@ -344,7 +344,7 @@ class PELoopTests(Fixture):
         policy = u.policy(batch, supplied)
         self.assertEqual(policy['online_task_budget']['lanes'], ['pe-loop'])
         self.assertEqual(policy['online_task_budget']['max_generations'], 3)
-        self.assertEqual(policy['online_task_budget']['wall_seconds'], 9000)
+        self.assertEqual(policy['online_task_budget']['wall_seconds'], 4200)
 
     def test_prompt_compaction_is_cached_and_uses_original_scope(self):
         batch, _ = self.setup_loop(n=2)

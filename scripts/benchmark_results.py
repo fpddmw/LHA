@@ -44,9 +44,8 @@ def main():
         if not args.execute: p.error("Live scoring requires --execute")
         from planner_harness.common import load
         from planner_harness import accounting
-        from experiments.results import current_evaluation
-        active = current_evaluation(args.root)
-        if active is None: p.error("Prepare a fresh current evaluation first")
+        from experiments.results import ensure_evaluation
+        active = ensure_evaluation(ROOT, args.root, evaluation_id=args.evaluation_id)
         from planner_harness.supervisor import maybe_supervise_cli
         if maybe_supervise_cli(active[0], [__file__, *sys.argv[1:]]): return
         score_evaluation(ROOT, args.root, load(args.budget_config) if args.budget_config else None)

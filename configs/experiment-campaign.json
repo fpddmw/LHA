@@ -1,5 +1,5 @@
 {
-  "version": "lha-experiment-campaign-v2",
+  "version": "lha-experiment-campaign-v3",
   "max_generations": 4,
   "prompt_forms": [
     "short",
@@ -7,7 +7,6 @@
   ],
   "seed_start": 42,
   "seed_step": 1,
-  "task_wall_seconds": 9000,
   "model": "openai/gpt-6.1-sol",
   "reasoning_effort": "high",
   "evaluation_id": "all67-critic-v2",
@@ -25,5 +24,13 @@
   "rsi_partition": {
     "train_count": 40,
     "test_count": 27
+  },
+  "task_budget": {
+    "generation_seconds": {
+      "bernini": 1200,
+      "ditto": 2400
+    },
+    "tokens_per_generation": 1000000,
+    "headroom_generations": 0.5
   }
 }

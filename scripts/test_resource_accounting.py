@@ -278,7 +278,7 @@ accounting_worker.main()"""
              'budget':{'version':a.VERSION,'mode':'offline','max_call_seconds':.08}}
         service=Service(queue,directory,ROOT,cfg,model_factory=lambda role:model,renderer=renderer)
         task={'id':'slow','workflow':'creative_loop_v1','source':str(helper.source),'source_sha256':__import__('planner_harness.common',fromlist=['sha']).sha(helper.source),
-              'request':'Change color.','max_turns':3,'execution':{'mode':'live','renderer':{'backend':'fixture'}}}
+              'request':'Change color.','max_turns':3,'execution':{'mode':'live','renderer':{'backend':'bernini'}}}
         service.submit(task);started=time.monotonic();Engine(queue,directory,service,service.expand,interval=.01).run(once=True)
         self.assertLess(time.monotonic()-started,5);self.assertEqual(verify_settlement(directory/'tasks/slow/run')['outcome'],'execution_unknown')
         self.assertEqual(calls,[1]);self.assertEqual(len(model.inputs),1);self.assertTrue(a.active(service.accounting_root))

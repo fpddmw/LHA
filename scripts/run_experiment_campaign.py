@@ -58,7 +58,7 @@ def main():
             if not args.execute:
                 parser.error('run requires --execute; plan prints the matrix without running it')
             if both and not args.host_config and args.stage == 'score':
-                hosts = {n: load(args.output / n / 'host-input.json') for n in ('bernini', 'ditto')}
+                hosts = {n: {'renderer': {'backend': n}} for n in ('bernini', 'ditto')}
             else:
                 hosts = load_hosts(args.host_config, args.backend) if args.host_config else None
             if both or (hosts and len(hosts) > 1):

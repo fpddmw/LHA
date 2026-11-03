@@ -40,6 +40,8 @@ CURRENT = (
     "test_experiment_engineering",
     "test_experiment_campaign",
     "test_pe_loop",
+    "test_dual_model_campaign",
+    "test_pe_budget_scoring_entry",
     "test_unified_results",
     "test_creative_benchmark",
     "test_creative_benchmark_schedule",

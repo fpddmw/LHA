@@ -45,7 +45,7 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
             seed_start=42, seed_step=1, max_generations=MAX_GENERATIONS, max_turns=None,
             best_of_n=None, results_root=None, planner=None, resource_policy=None, experience_snapshot=None,
             review=None, models=None, training_maintenance=None, sample_ids=None, backend="bernini", output_dimensions=None,
-            experience_owner=None):
+            experience_owner=None, budget_settings=None):
     root, output = Path(root).resolve(), Path(output).resolve()
     backend = render_profiles.backend({"backend": backend})
     if str(root / "scripts") not in sys.path:
@@ -81,9 +81,11 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
         for role in (planner, critic):
             if role['model'] not in {'gpt-6.1-sol', 'openai/gpt-6.1-sol'} or role['reasoning_effort'] != 'high':
                 raise ValueError('PE Loop uses GPT-6.1-sol high for enhancement, selection and Critic')
-    from planner_harness.resources import configure as configure_resources
+    from planner_harness.resources import configure as configure_resources, estimate_budget
     resource_state = {"config": {"max_turns": max_turns, "max_generations": max_generations}}
-    resource_policy = configure_resources(resource_state, resource_policy)
+    budget_estimate = estimate_budget(backend, max_generations, **(budget_settings or {}))
+    resource_policy = configure_resources(resource_state,
+        {"max_wall_seconds": budget_estimate["max_wall_seconds"], **(resource_policy or {})}, backend=backend)
     # Reuse existing native-frame/prompt/split/hash preparation, not an alternate
     # dataset reader. The intermediate plan makes its exact source checks auditable.
     with RunLock(output / "batch-owner"):
@@ -147,7 +149,7 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
             "seed_sequence": {"start": seed_start, "step": seed_step}, "max_generations": max_generations,
             "max_turns": max_turns, "best_of_n": best_of_n, "selector": SELECTOR,
             "planner": planner, "critic":critic, "models":model_config, "review":review,
-            "selection":selection_config(), "resource_policy": resource_policy, "completion_mode": "delivery",
+            "selection":selection_config(), "resource_policy": resource_policy, "budget_estimate":budget_estimate, "completion_mode": "delivery",
             "requested_splits": list(splits), "requested_prompt_forms": list(prompt_forms),
             "results_root": str(Path(results_root or root / "out/benchmark_results").resolve()),
             "profile_sha256": profile["sha256"], "input_plan_sha256": inputs["sha256"],

@@ -69,7 +69,7 @@ python scripts/run_low_high_eval.py score --source /path/source.mp4 \
 
 每题保存 `judgment.json`（五维＋专项原始评分）、`suite.json`（附自动指标）、`task-metrics/`（原始输入、回答及计算）、自动指标的明细帧对及共享缓存。批次归档补齐同样结果与盲评；`summary.json` 含全部指标的配对差值和有效题数。汇总器 [low_high_summary.py](../src/evaluation/low_high_summary.py) 分长／短／全部及判官、方法输出，先在源视频内求均值，再等权平均源视频；单次评分使用 0.1 步长，计算均值保留完整精度。未知、不适用、未测和失败各列计数。
 
-统一视频结果目录使用 `benchmark_results.py prepare-evaluation` 和 `score-evaluation`，评分默认包含全部共同／专项与自动指标；生成与评测分开启动。具体命令见[执行入口](creative-benchmark-execution.md)。
+统一视频结果目录直接使用 `benchmark_results.py score-evaluation --root <结果目录> --execute`，自动准备或续接当前协议会话、补入新视频、执行全部指标与盲评并汇总。`prepare-evaluation` 仍可用于显式新建会话。生成与评测分开启动。完整命令与指标覆盖见[一键评分](experiment-campaign.md#一键全量评分)。
 
 独立主分按维度、专项按字段执行确定性证据校验：合法字段保留原判断，缺失/非法引用字段标unknown，原字段及错误保存在投影回执，verify_answer核验原回答与真正selected-answer绑定。结构不可解析仍作有限恢复，重试输入包含前次输入/回答hash和中性的结构错误反馈。HTTP诊断保留status及脱敏code/message；单请求400/413不自动封禁整个服务，状态码本身也不证明重试安全。
 

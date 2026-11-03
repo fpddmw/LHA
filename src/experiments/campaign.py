@@ -2,7 +2,7 @@
 from pathlib import Path
 import copy
 
-from planner_harness.resources import MAX_WALL_SECONDS
+from planner_harness.resources import estimate_budget
 from planner_harness.common import load, save, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.lock import RunLock
@@ -17,7 +17,7 @@ STAGES = {
     'self-review-knowledge': (('full',), 'planner', False),
 }
 MAIN = ('zero', 'knowledge', 'direct', 'pe-loop', 'score')
-VERSION = 'lha-experiment-campaign-v2'
+VERSION = 'lha-experiment-campaign-v3'
 
 
 def seed_library(root, output, initial=None):
@@ -70,7 +70,7 @@ def execute_models(root, output, config, hosts, stage, *, execute_paid=False):
             raise ValueError('Host backend does not match model key: ' + name)
     output = Path(output)
     with RunLock(output / 'models-owner'):
-        seed = seed_library(root, output)
+        seed = None if stage == 'score' else seed_library(root, output)
         return {name: execute(root, output / name, config, host, stage,
                               execute_paid=True, initial_snapshot=seed)
                 for name, host in hosts.items()}
@@ -79,14 +79,16 @@ def execute_models(root, output, config, hosts, stage, *, execute_paid=False):
 def configuration(path):
     value = load(path)
     expected = {'version', 'max_generations', 'prompt_forms', 'seed_start', 'seed_step',
-                'task_wall_seconds', 'model', 'reasoning_effort', 'evaluation_id', 'maintenance', 'reuse_direct_results', 'pe_max_generations', 'rsi_partition'}
+                'task_budget', 'model', 'reasoning_effort', 'evaluation_id', 'maintenance', 'reuse_direct_results', 'pe_max_generations', 'rsi_partition'}
     if set(value) != expected or value['version'] != VERSION:
         raise ValueError('Use the versioned campaign configuration')
-    for key in ('max_generations', 'pe_max_generations', 'seed_step', 'task_wall_seconds'):
+    for key in ('max_generations', 'pe_max_generations', 'seed_step'):
         if type(value[key]) is not int or value[key] < 1:
             raise ValueError(key + ' must be positive')
-    if type(value['seed_start']) is not int or value['seed_start'] < 0 or value['task_wall_seconds'] > MAX_WALL_SECONDS:
-        raise ValueError('Invalid seed or online time allowance')
+    if type(value['seed_start']) is not int or value['seed_start'] < 0:
+        raise ValueError('Invalid seed')
+    for backend in ('bernini', 'ditto'):
+        estimate_budget(backend, value['max_generations'], **value['task_budget'])
     forms = value['prompt_forms']
     if not forms or len(set(forms)) != len(forms) or set(forms) - {'short', 'long'}:
         raise ValueError('Choose distinct short/long conditions')
@@ -121,9 +123,11 @@ def population(root, config):
             'rsi_train_ids': [r['sample_id'] for r in training], 'rsi_test_ids': [r['sample_id'] for r in heldout]}
 
 
-def stage_config(config, stage):
-    return {**config, 'max_generations': 1 if stage == 'direct' else
-            config['pe_max_generations'] if stage == 'pe-loop' else config['max_generations']}
+def stage_config(config, stage, backend='bernini'):
+    count = 1 if stage == 'direct' else config['pe_max_generations'] if stage == 'pe-loop' else config['max_generations']
+    estimate = estimate_budget(backend, count, **config['task_budget'])
+    return {**config, 'max_generations': count, 'budget_estimate': estimate,
+            'task_wall_seconds': estimate['max_wall_seconds']}
 
 
 def plan(root, config):
@@ -136,6 +140,7 @@ def plan(root, config):
         batches.append({'stage': stage, 'scope': 'all', 'methods': list(methods), 'review_mode': review,
                         'conditions': count, 'trajectories': count * len(methods),
                         'max_generations': count * n * len(methods), 'generations_per_condition': n * len(methods),
+                        'task_budgets': {name: estimate_budget(name, n, **config['task_budget']) for name in ('bernini', 'ditto')},
                         'post_task_maintenance': train_count if maintain else 0,
                         'rsi_train_conditions': train_count, 'rsi_test_conditions': count - train_count,
                         'additional_ablation': stage.startswith('self-review')})
@@ -182,12 +187,14 @@ def online_budget(config, methods, conditions):
     from planner_harness import accounting
     # Online policy owns N/time stopping. Count fields are explicit inputs to the
     # existing normalizer, which meters API calls/tokens without extra task caps.
+    estimate = config.get('budget_estimate') or estimate_budget('bernini', config['max_generations'], **config['task_budget'])
     lane = {**accounting.LIMITS, 'render_requests': config['max_generations'],
-            'wall_seconds': config['task_wall_seconds'], 'amount': None}
+            'tokens': estimate['estimated_total_tokens'],
+            'wall_seconds': estimate['max_wall_seconds'], 'amount': None}
     topic = {k: None if k == 'amount' else v * len(methods) for k, v in lane.items()}
     batch = {k: None if k == 'amount' else v * max(conditions, 1) for k, v in topic.items()}
     return {'version': accounting.VERSION, 'mode': 'live', 'cost_control': 'count_limits_only',
-            'max_call_seconds': config['task_wall_seconds'], 'batch': batch, 'topic': topic,
+            'max_call_seconds': estimate['max_wall_seconds'], 'budget_estimate': estimate, 'batch': batch, 'topic': topic,
             'lanes': list(methods), 'allocations': {m: copy.deepcopy(lane) for m in methods}}
 
 
@@ -239,6 +246,18 @@ def freeze_training(root, output, *, review_mode="critic"):
     return output / (name + '.json')
 
 
+def score_stage(root, output, config, summary):
+    """Score collected videos independently of generation settings and seed libraries."""
+    from . import results
+    registry = output / 'results'
+    results.ensure_evaluation(root, registry, evaluation_id=config['evaluation_id'])
+    budget = evaluation_budget(config, next(b['conditions'] for b in summary['batches'] if b['stage'] == 'zero'))
+    results.score_evaluation(root, registry, budget)
+    results.report(root, registry, splits=['test'], methods=['none', 'full'], review_modes=['critic'],
+                   analysis_population='rsi', output_name='rsi')
+    return results.report(root, registry)
+
+
 def execute(root, output, config, host, stage, *, execute_paid=False, initial_snapshot=None):
     if not execute_paid:
         raise ValueError('Execution requires --execute; use plan to inspect counts without calls')
@@ -248,6 +267,9 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
     from planner_harness import accounting
     from planner_harness.training_experience import validate_snapshot
     root, output = Path(root).resolve(), Path(output).resolve()
+    if stage == 'score':
+        with RunLock(output / 'campaign-owner'):
+            return score_stage(root, output, config, plan(root, config))
     if stage != 'score' and not host:
         raise ValueError('Generation requires --host-config with verified renderer assets/devices')
     if host and (host.get('local_results_root') or host.get('shard_count', 1) != 1):
@@ -268,22 +290,10 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
         seed_snapshot = seed_library(root, output, initial_snapshot)
         for item in stages:
             if item == 'score':
-                if not (output / 'knowledge/batch.json').exists():
-                    raise ValueError('Prepare/run the knowledge batch before main evaluation')
-                active = results.current_evaluation(registry)
-                if active is None:
-                    results.prepare_evaluation(root, registry, evaluation_id=config['evaluation_id'])
-                elif active[1]['evaluation_id'] != config['evaluation_id']:
-                    raise ValueError('Current evaluation ID differs from the campaign')
-                budget = evaluation_budget(config, next(b['conditions'] for b in summary['batches'] if b['stage'] == 'zero'))
-                immutable(output / 'evaluation-budget.json', budget)
-                results.score_evaluation(root, registry, budget)
-                results.report(root, registry, splits=['test'], methods=['none','full'], review_modes=['critic'],
-                               analysis_population='rsi', output_name='rsi')
-                results.report(root,registry)
+                score_stage(root, output, config, summary)
                 continue
             methods, review, maintain = STAGES[item]
-            local_config = stage_config(config, item)
+            local_config = stage_config(config, item, name)
             snapshot = seed_snapshot
             owner = None
             if item in {'knowledge', 'self-review-knowledge'}:
@@ -300,7 +310,7 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
                                seed_start=config['seed_start'], seed_step=config['seed_step'], max_generations=local_config['max_generations'],
                                results_root=registry,
                                planner=settings, models=roles, review={'mode': review}, experience_snapshot=snapshot, experience_owner=owner,
-                               resource_policy={'max_wall_seconds': config['task_wall_seconds']}, training_maintenance=maintain,
+                               budget_settings=config['task_budget'], training_maintenance=maintain,
                                backend=name, output_dimensions=host['renderer'].get('output'))
             batch = runner.verify(root, folder)
             immutable(output/'runtime-profile.json',{'profile_sha256':batch['profile_sha256']})

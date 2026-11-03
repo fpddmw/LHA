@@ -11,6 +11,7 @@ LHA 研究 Planner 如何结合视频观察、生成反馈和编辑经验完成 
 | 准备并运行主实验、经验训练及消融 | [实验运行安排](docs/experiment-campaign.md) |
 | 部署服务、并发调度、停止与恢复 | [服务运行说明](docs/server-runtime.md) |
 | 阅读评分标准、自动指标及盲评 | [独立终评](docs/low-high-evaluation-v2.md) |
+| 对已有视频一键完成全量评分 | [评分命令与指标范围](docs/experiment-campaign.md#一键全量评分) |
 | 查看当前验证结果与真实服务限制 | [当前状态](docs/current-status.md) |
 | 查找全部文档及历史方案 | [文档索引](docs/README.md) |
 
@@ -28,7 +29,7 @@ python scripts/check_repository.py --suite current
 
 唯一当前清单是 [benchmark_data/benchmark.json](benchmark_data/benchmark.json)：67 条源视频，训练 40、测试 27，不设验证集；保留原编号和 short/long 两种独立任务条件，共 134 个条件。数据视频与模型权重需另行准备；任务定义、分布和示例见 [数据说明](benchmark_data/README.md)，清单读取见 [代码](scripts/inspect_benchmark.py)。
 
-主实验四组覆盖全量：Direct、PE Loop、无经验 Planner、有经验 Planner。无经验组先运行 RSI 训练部分并在任务后维护经验，再运行 RSI 测试部分；冻结后，有经验组运行全量。RSI 分析取测试子集，复用主实验视频与评分。Planner 与 PE 默认最多 4 次生成，每条在线任务最长 2.5 小时；Planner 获得模糊资源提醒。自评作为追加消融。
+主实验四组覆盖全量：Direct、PE Loop、无经验 Planner、有经验 Planner。无经验组先运行 RSI 训练部分并在任务后维护经验，再运行 RSI 测试部分；冻结后，有经验组运行全量。RSI 分析取测试子集，复用主实验视频与评分。Planner 与 PE 默认最多 4 次生成，在线期限按单次生成耗时 ×（次数上限＋0.5）计算：Bernini 默认 90 分钟，Ditto 默认 180 分钟；Planner 获得模糊资源提醒。自评作为追加消融。
 
 ## 代码边界
 

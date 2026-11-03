@@ -67,7 +67,16 @@ validated offline and did not launch it.
 
 ## 双模型一键命令与配置
 
-在自己的 LHA 仓库根目录执行。通用实验参数见 [experiment-campaign.json](../configs/experiment-campaign.json)：Planner／PE 含首轮最多 4 次，seed42 起步，每条在线任务最多 2.5 小时；Planner 与 Critic 使用 6.1-sol high。模型资产、设备和凭据放在各自主机配置里。
+在自己的 LHA 仓库根目录执行。通用实验参数见 [experiment-campaign.json](../configs/experiment-campaign.json)：Planner／PE 含首轮最多 4 次，seed42 起步，每条在线任务的时间与 token 预估按下述公式计算；Planner 与 Critic 使用 6.1-sol high。模型资产、设备和凭据放在各自主机配置里。
+
+时间上限 = `单次生成秒数 ×（本阶段生成次数上限＋0.5）`；token 预估 = `每次 token 基数 ×（本阶段生成次数上限＋0.5）`。配置集中在 `task_budget`，Planner 与 PE 的次数可分别设置。当前 token 基数为 100 万，沿此前 4 次／400 万配置折算，用于规划；没有 token 硬上限。它包含在线 Planner／PE、Critic 和选片的输入与输出用量；维护和独立终评分开记录。Planner 继续获得模糊资源提醒。
+
+| 阶段 | 次数上限 | Bernini（20 分钟/次） | Ditto（40 分钟/次） | token 预估 |
+|---|---:|---:|---:|---:|
+| Planner／PE Loop | 4 | 90 分钟 | 180 分钟 | 450 万 |
+| Direct | 1 | 30 分钟 | 60 分钟 | 无在线模型调用；通用公式预留 150 万 |
+
+`plan` 展示各阶段、各渲染器的计算值，批次记录 `budget_estimate`。实际时间从设备和服务就绪、任务开始执行时计算；恢复沿用原截止时间。
 
 首次复制三个示例，然后填写两份主机配置的实际设备、已验证资产清单及哈希。`*.local.json` 已加入 Git 排除。两模型若部署在同一主机，可直接使用 `both`；分处两台主机时，各自在本机用对应单模型命令。
 
@@ -118,3 +127,38 @@ python scripts/run_experiment_campaign.py status --backend both --output out/mai
 独立评分复用 [results.py](../src/experiments/results.py) 中的五维、长短专项、CLIP/DINO、光流和匿名交换顺序盲评；原始提示词与源视频是共同评价依据。主实验统计覆盖全部源组，RSI 单独覆盖后段源组。Direct 从 `reuse_direct_results` 指定的历史注册目录核验后导入，旧分数不导入；同一视频的首轮／末轮／选中角色共用新评分。真实调用数、维护费用和 GPU 请求单独记录。
 
 相同目录接续会复用已完成阶段。切换这版 67 条全流程、生成次数或协议时使用新的输出目录；原实验结果继续保留。没有 `--execute` 不启动实际调用。
+
+## 一键全量评分
+
+已有视频注册到结果目录后，直接执行：
+
+```bash
+python scripts/benchmark_results.py score-evaluation \
+  --root out/main-all67-n4/bernini/results --execute
+```
+
+Ditto 将路径中的 `bernini` 换为 `ditto`。命令自动创建当前协议评价会话、追加新视频、评分、盲评和汇总；再次执行复用已完成调用。协议改变时自动使用新评分目录，旧原始评分保留。想主动另起同协议评价，仍可使用 `prepare-evaluation --evaluation-id ...`。
+
+已启动过的双模型 campaign 也可一次评分两个结果目录：
+
+```bash
+python scripts/run_experiment_campaign.py run --backend both --stage score \
+  --output out/main-all67-n4 --execute
+```
+
+单模型使用相应 `--backend` 和它的输出目录。评分阶段直接读取已有视频，即使知识组尚未生成也可开始。
+
+| 默认执行部分 | 内容 |
+|---|---|
+| 独立五维 | 指令遵循、内容保留、时序一致性、视觉完整性、美学协调；0–4 分、0.1 步长 |
+| 短任务专项 | 风格实现、场景针对性设计、有效创造性、相对原创性 |
+| 长任务与要求核对 | 逐条完成、对象／属性绑定、联合满足、必要对应、非预期及重大损伤 |
+| 美学 | 五项美学诊断及计算均值 |
+| 客观指标 | CLIP-F、DINO-F、光流补偿误差 |
+| 连续性与运动 | 全原生连续帧分段观察、运动强度、低运动时长比例、条件性源运动对应 |
+| 独立盲评 | 两位判官分别评任务完成与制作质量；匿名 A/B 随机顺序后交换再评 |
+| 汇总 | 当前结果页、长短条件及判官分组、首轮／末轮／选中结果、配对差值与既定统计；campaign 另出 RSI 子集 |
+
+执行当前注册指标的全部管线；相对原创性需要对应参考条件，精确源运动保留需要适用任务、区域和配准条件，缺少时记录相应状态。可选人工轨迹误差需要另行提供注册轨迹。结果页的“全量评分执行情况”和 `results.json` 的 `evaluation_coverage` 按指标列出已评分、未知、不适用、未测及失败，显示连续片段评审数和盲评结果。
+
+环境安装 `requirements.evaluation.txt`，准备 `configs/evaluation.json` 指定判官的凭据；CLIP/DINO 首次运行需要相应权重。默认无需费用或 token 额度配置。`--budget-config` 若显式提供，仅用于客观指标计算任务。此命令会调用独立判官并计算指标。

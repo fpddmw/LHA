@@ -33,7 +33,5 @@
       }
     }
   },
-  "resource_policy": {
-    "max_wall_seconds": 9000
-  }
+  "resource_policy": {}
 }

@@ -86,7 +86,7 @@ def validate_policy(supplied=None, *, require_live=False, required_quotes=()):
         or type(online.get("max_generations")) is not int
         or online["max_generations"] < 1
         or type(online.get("wall_seconds")) is not int
-        or not 1 <= online["wall_seconds"] <= MAX_WALL_SECONDS
+        or online["wall_seconds"] < 1
         or not set(online.get("lanes", [])) <= set(LANES + OPTIONAL_LANES)
     ):
         raise BudgetConfigurationError("Invalid per-task online generation/time policy")
@@ -316,8 +316,11 @@ def checked(binding, *, require_live=False):
     return root, p
 
 
-def default_online_policy(*, max_generations=MAX_GENERATIONS, wall_seconds=MAX_WALL_SECONDS, lanes=("full",)):
+def default_online_policy(*, max_generations=MAX_GENERATIONS, wall_seconds=None, lanes=("full",), backend="bernini"):
     """Online execution meters usage; each task owns its N/time allowance."""
+    from .resources import estimate_budget
+    if wall_seconds is None:
+        wall_seconds = estimate_budget(backend, max_generations)["max_wall_seconds"]
     limits = {key: wall_seconds if key == "wall_seconds" else None for key in LIMITS}
     return {
         "version": VERSION,
@@ -338,11 +341,11 @@ def default_online_policy(*, max_generations=MAX_GENERATIONS, wall_seconds=MAX_W
 
 
 def default_api_scope(
-    directory, model=None, *, max_generations=MAX_GENERATIONS, wall_seconds=MAX_WALL_SECONDS, lane="full", topic=None
+    directory, model=None, *, max_generations=MAX_GENERATIONS, wall_seconds=None, lane="full", topic=None, backend="bernini"
 ):
     directory = Path(directory).resolve()
     policy = default_online_policy(
-        max_generations=max_generations, wall_seconds=wall_seconds, lanes=(lane,)
+        max_generations=max_generations, wall_seconds=wall_seconds, lanes=(lane,), backend=backend
     )
     root = install(directory / "accounting", policy)
     binding = scope(root, topic or directory.name, lane)
@@ -942,7 +945,7 @@ def summary(root):
 
 def validate_cohort(policy, *, max_generations=None, max_model_calls=None, topics=()):
     """Validate explicit independent per-arm protection, without choosing money."""
-    from .resources import MAX_GENERATIONS
+    from .resources import MAX_GENERATIONS, estimate_budget
 
     if max_generations is None:
         max_generations = MAX_GENERATIONS
@@ -951,7 +954,7 @@ def validate_cohort(policy, *, max_generations=None, max_model_calls=None, topic
         "version": "online-task-v2",
         "lanes": ["direct", "full", "none"],
         "max_generations": max_generations,
-        "wall_seconds": MAX_WALL_SECONDS,
+        "wall_seconds": estimate_budget(max_generations=max_generations)["max_wall_seconds"],
     }
     p = validate_policy(
         policy,
@@ -1120,8 +1123,8 @@ def start_task(binding, *, wall_seconds=None):
         wall_seconds = limits["wall_seconds"] if limits else MAX_WALL_SECONDS
     if limits and wall_seconds != limits["wall_seconds"]:
         raise BudgetConfigurationError("Task clock must match the frozen online wall allowance")
-    if wall_seconds <= 0 or wall_seconds > MAX_WALL_SECONDS:
-        raise BudgetConfigurationError("Online task clock must fit within 2.5 hours")
+    if type(wall_seconds) is not int or wall_seconds <= 0:
+        raise BudgetConfigurationError("Online task clock requires a positive wall allowance")
     with RunLock(root / "accounting-lock", timeout=10):
         ledger = load_ledger(root)
         now = time.time()

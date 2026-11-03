@@ -209,6 +209,7 @@ class Service:
             {"config": {"max_generations": task.get("max_generations")}},
             execution.get("resource_policy"),
             continuation=execution.get("continuation_policy"),
+            backend=execution.get("renderer", {}).get("backend", "bernini"),
         )
         return default_api_scope(
             run,

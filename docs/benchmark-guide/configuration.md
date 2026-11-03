@@ -16,7 +16,7 @@
 | `configs/chatgpt-subscription-models.json` | Planner／Critic 使用官方 ChatGPT 订阅授权的 Responses 后端 |
 | 仓库外 `~/.config/lha/openrouter.env` | 调用密钥、共享 API 地址、可选网络转发 |
 
-在线 review 与独立终评分别配置。修改 `configs/evaluation.json` 会进入正式评分身份；它不会把评分指标发送给在线 Planner／Critic。不要将任务后维护预算混入在线 2.5 小时。
+在线 review 与独立终评分别配置。修改 `configs/evaluation.json` 会进入正式评分身份；它不会把评分指标发送给在线 Planner／Critic。不要将任务后维护预算混入在线任务期限。
 
 ## API 和角色
 
@@ -41,7 +41,7 @@ OPENROUTER_REASONING_EFFORT=high
 
 ## 生成、时间与维护
 
-Planner 使用 `max_generations`，默认 4；PE Loop 使用 `pe_max_generations`，当前为 4。每条在线任务最长 9000 秒。模型调用与 token 记录真实消耗，不再以 64 回合、96 调用或 400 万 token 作为默认提前停止条件。Planner 继续获得模糊资源提示。
+Planner 使用 `max_generations`，默认 4；PE Loop 使用 `pe_max_generations`，当前为 4。每条在线任务期限按单次生成耗时 ×（N＋0.5）计算；默认 Bernini 为 5400 秒，Ditto 为 10800 秒。`task_budget` 配置单次耗时、token 基数及余量；token 预估为 100 万 ×（N＋0.5），不设硬上限。模型调用与 token 记录真实消耗，不再以 64 回合、96 调用或 400 万 token 作为默认提前停止条件。Planner 继续获得模糊资源提示。
 
 任务后维护使用 `experiment-campaign.json` 中自己的设置；它不追加生成视频。独立终评默认 `max_output_tokens: null`，由供应商处理输出容量；不要求人工填写 GLM／Sonnet 费用额度。显式计算预算只用于相应自动指标账本，不能把旧冻结包的报价模板套成当前在线任务的必填门槛。
 

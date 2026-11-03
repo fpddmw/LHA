@@ -19,24 +19,23 @@ import test_creative_loop as fixtures
 
 class BudgetTests(unittest.TestCase):
     def test_defaults_campaign_and_accounting_agree(self):
-        from experiments.campaign import configuration
+        from experiments.campaign import configuration, stage_config
         state = {"config": {}}
         policy = resources.configure(state)
-        self.assertEqual((policy["max_generations"], policy["max_wall_seconds"]), (4, 9000))
+        self.assertEqual((policy["max_generations"], policy["max_wall_seconds"]), (4, 5400))
         budget = accounting.validate_policy(accounting.default_online_policy())
         self.assertEqual(budget["online_task_budget"]["max_generations"], 4)
-        self.assertEqual(budget["online_task_budget"]["wall_seconds"], 9000)
+        self.assertEqual(budget["online_task_budget"]["wall_seconds"], 5400)
         config = configuration(ROOT / "configs/experiment-campaign.json")
-        self.assertEqual((config["max_generations"], config["task_wall_seconds"]), (4, 9000))
-        with self.assertRaises(ValueError):
-            resources.configure({"config": {}}, {"max_wall_seconds": 9001})
+        self.assertEqual((config["max_generations"], stage_config(config, "zero")["task_wall_seconds"]), (4, 5400))
+        self.assertEqual(resources.configure({"config": {}}, backend="ditto")["max_wall_seconds"], 10800)
 
     def test_late_generation_needs_no_extra_explanation_and_hints_hide_numbers(self):
         state = {"config": {}, "videos": {}, "jobs": {}, "submitted_generation_ids": []}
         resources.configure(state)
         continuation.configure(state)
         for fraction in (0, .45, .65, .85):
-            state["online_clock"] = {"started_unix": time.time() - 9000 * fraction}
+            state["online_clock"] = {"started_unix": time.time() - resources.MAX_WALL_SECONDS * fraction}
             view = continuation.view(state)
             self.assertFalse(view["justification_required"])
             self.assertEqual(view["continuation_questions"], [])
@@ -50,7 +49,7 @@ class BudgetTests(unittest.TestCase):
             state["submitted_generation_ids"].append(str(n))
         self.assertEqual(continuation.authorize(state, {}, "extra")["status"], "generation_unavailable")
         resources.check_wall(state)  # Reading and delivery are still available.
-        state["online_clock"]["started_unix"] = time.time() - 9001
+        state["online_clock"]["started_unix"] = time.time() - resources.MAX_WALL_SECONDS - 1
         with self.assertRaises(resources.TaskDeadline):
             resources.check_wall(state)
 

@@ -27,7 +27,8 @@ def configure(harness, execution):
 
     resource = profile.pop("resource_policy", None)
     continuation = profile.pop("continuation_policy", None)
-    configure_resources(harness.state, resource, continuation=continuation)
+    configure_resources(harness.state, resource, continuation=continuation,
+                        backend=profile.get("renderer", {}).get("backend", "bernini"))
     from .continuation import configure as configure_continuation
 
     configure_continuation(harness.state, continuation)

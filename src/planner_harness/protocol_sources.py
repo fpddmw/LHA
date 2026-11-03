@@ -14,7 +14,7 @@ MODULES = {
     "critic_harness": "__init__ adapter one_shot qualitative",
     "server_runtime": "__init__ queue engine service renderers ditto media_cache lifecycle",
     "vlm": "__init__ openrouter settings chatgpt_subscription chatgpt_auth chatgpt_relay responses_stream",
-    "experiments": "__init__ creative_benchmark unified_benchmark pe_loop render_profiles device_scheduler results preflight recovery",
+    "experiments": "__init__ creative_benchmark unified_benchmark pe_loop bernini_pe render_profiles device_scheduler results preflight recovery",
 }
 SCRIPTS = (
     "scripts/benchmark_device_worker.py",

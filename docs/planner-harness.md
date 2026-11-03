@@ -29,7 +29,7 @@ full 的阅读指南进一步引导 Planner 把适用经验落实到输入选择
 - 实验入口：`scripts/run_experiment_campaign.py`。
 - 多任务服务：[server-runtime.md](server-runtime.md)。
 
-默认生成上限 4 次、在线期限 2.5 小时；恢复使用原有计数和截止时间。已保存回答或工具回执应沿原调用恢复；明确失败返回可处理的结果，未知外部执行按原任务核实。运行中的配置变更使用新目录，不修改已有回执。
+默认生成上限 4 次；在线期限为单次生成耗时 ×（次数上限＋0.5），Bernini 默认 90 分钟、Ditto 默认 180 分钟；token 仅作预估与计量；恢复使用原有计数和截止时间。已保存回答或工具回执应沿原调用恢复；明确失败返回可处理的结果，未知外部执行按原任务核实。运行中的配置变更使用新目录，不修改已有回执。
 
 Planner 调用明确失败时，结果登记沿用运行中已保存的候选选择，保留所有生成版本。原状态及 arm 回执保持 `execution_failed`；展示结果记录 `interrupted_delivery`、`partial=true`、`planner_confirmed=false`，同时保存原失败状态与选择依据。旧运行可用 `python scripts/settle_planner_failure.py --output 原run --topic SAMPLE__long --device 原worker编号` 检查，加 `--execute` 后登记。该入口只读取缓存，新增模型和 GPU 调用均为零，原 native 状态、调用回执和时钟保持原样。
 
