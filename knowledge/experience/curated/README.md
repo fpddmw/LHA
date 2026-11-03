@@ -1,23 +1,60 @@
-# Experience for video design and revision
+# Experience for recasting a video into another world or medium
 
-Choose the condition that matters to the target, then read its explanation and evidence. This navigation is generated from the frozen entry catalog. Related task contributions appear beside each entry in browse/read; their source cases and curation decisions remain distinct.
+Entries are grouped by what they are about. Start with the common principles, then read the section for the renderer you are using, then the section that matches the prompt length and the kind of world or medium you were asked for. Each line is the entry's own summary; open the entry for its conditions, exceptions and evidence. Related task contributions appear beside each entry; their source cases and curation decisions remain distinct.
+
+## Common principles
 
 | Question | Working judgment |
 |---|---|
-| Which preservation commitments prevent the target scene from working? | [EX-semantic-reconstruction](entries/semantic-reconstruction.md): When the target world changes the event, rebuild its purpose and causal relationships. Use useful source performance material and remove preservation demands that keep the old activity in place. |
-| Does this conflict come from a required action or an unnecessary preservation demand? | [EX-design-conflict](entries/design-conflict.md): Remove an unnecessary preservation demand before sacrificing a requested design feature. When appearance and action are both central, stage them together so the target interaction remains readable. |
-| Which activity relationships should the target retain or reinterpret? | [EX-activity-relations](entries/activity-relations.md): Organize participants and object functions around the target event. Preserve a required interaction; reconstruct an obsolete purpose with a readable new exchange rather than merely retaining the same nouns. |
-| How can the same person take a new role without becoming a different individual? | [EX-instance-identity](entries/instance-identity.md): For identity-sensitive edits, preserve individual correspondence through useful input evidence and scoped design. Allow the role and behavior to change when requested; concise identity wording avoids constructing a substitute face. |
-| What must stay involved as the target interaction develops? | [EX-object-continuity](entries/object-continuity.md): Bind continuity to the target participant and event. Use source-linked roles for retained action; establish new contacts and progression for adapted action, and inspect occlusion and release where they matter. |
-| Which visual and behavioral relationships need to change together? | [EX-connected-scope](entries/connected-scope.md): Group changes that share a structural, optical or semantic dependency. An adapted event can connect people, prop functions and environment; unrelated repairs may need a different scope or input. |
-| Which input supports the target without reinstating an obsolete source function? | [EX-input-conditioning](entries/input-conditioning.md): Continue a candidate with useful target achievements. Recover required lost information from an earlier input; an authorized change of source activity can be progress rather than damage. |
-| Did the attempt change the required construction, its function, or only its wording? | [EX-realization-change](entries/realization-change.md): Reconsider an unnecessary commitment before retrying its execution. For a required operation, prefer a changed construction or input after explicit failure; a new material can still preserve the old function. |
-| Which target part or function should carry this effect? | [EX-part-binding](entries/part-binding.md): Clarify the intended carrier relative to its neighbors. Anchor an existing instance for a required repair; describe the new construction when the task replaces its form or function. |
-| What new arrangement and function should replace the unwanted effect? | [EX-wanted-state](entries/wanted-state.md): Specify the positive visual relationship and, for event reconstruction, the purpose that should replace the old one. Resolve the surrounding conflict instead of repeatedly suppressing its symptom. |
-| Does the proposal realize a medium, a new world, or both? | [EX-style-realization](entries/style-realization.md): Choose a coherent visible system and the event logic required by the request. World reconstruction can need new behavior; atmosphere and ornament do not substitute for required structures or relationships. |
-| Which structures and uses keep the old place recognizable? | [EX-environment-replacement](entries/environment-replacement.md): Transform the location-defining planes, sightlines and functions together. Replace an obsolete use when the target needs it; additional theme objects or new materials can leave the old scene intact. |
-| How should illumination support the target scene and event? | [EX-lighting-integration](entries/lighting-integration.md): Design receiving surfaces, fill and reflections that produce the desired atmosphere. Use light to make the target event readable; lamps alone can leave old illumination or obsolete action emphasis intact. |
-| Does the intended event remain coherent through meaningful transitions? | [EX-time-binding](entries/time-binding.md): Inspect the target event and appearance through turns, contacts and responses. Preserve original timing where required; evaluate adapted behavior on its own progression rather than its resemblance to the old action. |
-| Would another attempt improve the requested result or merely restore an obsolete commitment? | [EX-continuation-value](entries/continuation-value.md): Favor delivery when the target is adequately realized. Reassess inherited preservation complaints; spend another attempt on an important target gap and compare against retained alternatives. |
+| Which candidate should I deliver?; Is the latest repair better than an earlier version?; How do I weigh conversion against stability? | [EX-P-compare-retained](entries/P-compare-retained.md): Compare every retained candidate on how fully the world was rebuilt, whether the moment is still recognizable, and how stable and clean it is. The newest or the most repaired version is not automatically the best, and a polished result that kept the old scene is not finished. |
+| How do I translate source objects and actions into another world?; Why did the effect appear on the wrong part?; Why does the result look like decoration rather than adaptation? | [EX-P-counterparts](entries/P-counterparts.md): Map each important source element to a specific, fitting counterpart (a glove to a C-shaped brick hand, a plank to a stack of tan plates) and name the carrier of each effect. Generic theme decoration does not do this work. |
+| Why does the result still look like the original place?; Why does a stylized subject look pasted onto a real background?; What do I need to describe besides the main character? | [EX-P-every-plane](entries/P-every-plane.md): List each visible plane (subject, props, ground, background, sky, light) and say how the target medium builds it. A rebuilt figure inside an untouched photographic scene reads as a collage, and a few theme props leave the old place intact. |
+| How do I keep the same person in a different world?; Why did the person change into someone else?; When is changing a character's look part of the task? | [EX-P-identity](entries/P-identity.md): Preserve the person at role level and keep salient attributes (age group, skin tone, build) unless the new world changes them. Keep identity wording short and spend design effort around the face; long facial inventories rebuild a different person. |
+| How do I make a style read as that medium rather than a color filter?; Why did added lamps not change the atmosphere?; What should I write instead of a list of style adjectives? | [EX-P-medium-logic](entries/P-medium-logic.md): Write the construction rules of the target medium (what makes a mark, a surface, a shadow) and what the light does to each plane. Style names and adjectives alone leave the renderer to guess, and lamps alone do not change the lighting. |
+| What must stay recognizable when the video moves into another world or medium?; Which source actions are performance material and which are old-world functions to replace? | [EX-P-moment](entries/P-moment.md): Before the first generation, write down who acts, what happens, in what order, where, and from which camera position. Keep that skeleton recognizable and rebuild everything else in the target world. |
+| What should I change when a second attempt fails the same way?; How do I use my remaining generations?; Should I stop after one good result? | [EX-P-spend-attempts](entries/P-spend-attempts.md): Use remaining generations to try a genuinely different construction, input or scope, not a restated version of what failed. Keep earlier candidates as options. In a fixed-budget task, use the full allowance before choosing. |
+| Which part of the video should I inspect before accepting it?; Why did a good-looking candidate get marked down?; What do reviewers tend to miss? | [EX-P-worst-second](entries/P-worst-second.md): Look closely at focal faces, hands, held props and contacts, the first and last second, and the planes you never described. A strong opening or a clean overview can hide melted keys, fused fingers, a source-like first half-second or a collapsing end. |
+
+## Bernini capabilities and traps
+
+| Question | Working judgment |
+|---|---|
+| Should I continue from my last candidate or restart from the source?; Why did a repair make other things worse?; Which input keeps the information I need? | [EX-B-chain-drift](entries/B-chain-drift.md): On Bernini, five train-sample continuations from an earlier candidate moved stability by -1.0 to +1.1 with no consistent direction. Continue from a candidate only when it holds what you need next; otherwise restart from the source with a rewritten full prompt. |
+| Why does the glow appear on the wrong object?; How do I make only one edge emit light? | [EX-B-emission-binding](entries/B-emission-binding.md): On Bernini, requested emission appeared under a table or on arches instead of on the intended perimeter. Describe the glowing edge and the unlit support as a contrast, and look at where the light lands. |
+| Why does the carried object bend or change shape?; Why do fingers merge into the keyboard or the headboard?; What should I specify to keep a grip clean? | [EX-B-held-props](entries/B-held-props.md): Under heavy conversion Bernini softens fingers into keyboards, bends or reshapes carried objects, flips face prints between frames, and lets a prop detach from the hand. Describe the grip and the prop's rigid shape, and inspect them closely. |
+| Why does the person look different after I described them in detail?; Which input recovers a lost face?; How do I keep several people recognizable? | [EX-B-identity-rebuild](entries/B-identity-rebuild.md): Detailed hair, age and glasses descriptions reconstructed different people on Bernini across several tasks, and heavy scene-wide rewrites did too. Keep identity wording short, favor a source that still shows the person, and check every person after each pass. |
+| Why is only my character converted?; Why does a plain request leave the background alone?; What does a preservation-heavy prompt cost? | [EX-B-partial-default](entries/B-partial-default.md): When the prompt concentrates on a subject, Bernini converts it and keeps photographic scenery, including with a loop-written prompt that tells it to preserve the source. List the planes to rebuild and keep preservation to one clause. |
+| How long can a Bernini prompt be?; What should I cut when the prompt is too long?; What happens when the prompt exceeds the limit? | [EX-B-text-budget](entries/B-text-budget.md): Bernini accepts 512 encoder tokens including its official prefix. Long preservation clauses use space that construction clauses need, and prompts over the limit are refused before any render. |
+
+## Ditto capabilities and traps
+
+| Question | Working judgment |
+|---|---|
+| Where does Ditto put its effort?; What should I specify first for Ditto?; Why did the setting work while the people changed? | [EX-D-env-strong-foreground-weak](entries/D-env-strong-foreground-weak.md): In the historical Ditto runs, space-station walls and Earth views arrived early while faces and eyewear changed. Spend early attention on foreground identity and structure; do not escalate background instructions once the setting is already convincing. |
+| Why did my correction add another object?; How do I repair the shape of one object on Ditto? | [EX-D-shape-repair-adds](entries/D-shape-repair-adds.md): A request to make a dome compact produced a second dome. For an important instance repair, anchor the existing object to its neighbors and footprint, or restart from an intact earlier input, rather than continuing to sculpt a duplicated one. |
+
+## Conditions of the task
+
+Prompt length and the kind of world or medium change what a good proposal contains.
+
+### Short prompts
+
+| Question | Working judgment |
+|---|---|
+| The request is one sentence. What do I have to add?; Why did a short-prompt result keep the theme but lose the scene? | [EX-C-short](entries/C-short.md): A short request gives the target world and little else. Two preview short tasks lost the source's layout and camera position when the prompt followed the request's level of detail; write the source's arrangement and its counterparts into the prompt. |
+
+### Long prompts
+
+| Question | Working judgment |
+|---|---|
+| The request lists many details. Do I need to carry them all?; How do I check a long request against the result? | [EX-C-long](entries/C-long.md): A long request names planes, costume, light and a camera behavior. Carry them in order of what makes the world recognizable, and check each named item in the delivered video, because a long list can exceed what one prompt carries. |
+
+### By family of world or medium
+
+| Question | Working judgment |
+|---|---|
+| How do I recast into a physical material such as bricks, paper or felt?; Why does my character look like a toy placed in a real scene? | [EX-C-craft](entries/C-craft.md): In a brick, paper, felt or cut-paper world the medium is made of pieces. A subject built from the material in a photographic scene reads as a collage; name how each plane is assembled from the material. |
+| The set is convincing but the people are wrong. Where did it fail?; How do I recast into a film's world without replacing the people? | [EX-C-film-world](entries/C-film-world.md): In recasts into a film's production design, the environment converted readily. The failures in the train evidence were on the people: replaced, left in source look as cut-outs, or mismatched in light. |
+| Is there guidance for anime, painting or comic worlds?; What should I check first in a drawn or painted medium? | [EX-C-hand-drawn](entries/C-hand-drawn.md): The train split holds anime, painting and comic requests but this library has no scored runs for them. Apply the shared principles and treat any style-specific guidance as a hypothesis to test. |
 
 [Reading guide](../../creative-loop/READING.md) · [Working routes](../../creative-loop/README.md) · [Renderer entrances](renderers.md)

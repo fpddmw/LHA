@@ -32,7 +32,7 @@ An open request leaves legitimate design alternatives. Compare results against w
 
 A previous Planner may have invented the very requirement its later prompts tried to repair. In the [F001 goal review](../experience/curated/evidence/semantic-goal-review-20261102.md), basketball choreography became a core obligation even though the request called for a new cinematic world. A later proposal protected that activity while transforming its surfaces. Use the original request to decide whether the event should continue, change purpose, or give way to a new performance. Preserve useful source correspondence at that chosen level.
 
-This changes how the older preservation lessons apply. Keep their execution observations, and ask which target they served. A visible loss can be a defect when the interaction is required, or progress when an obsolete activity prevented the adaptation. The [semantic reconstruction account](../experience/curated/entries/semantic-reconstruction.md) develops the practical preference; the other experience entries address how to realize and inspect the chosen event.
+This changes how the older preservation lessons apply. Keep their execution observations, and ask which target they served. A visible loss can be a defect when the interaction is required, or progress when an obsolete activity prevented the adaptation. The [moment account](../experience/curated/entries/P-moment.md) develops the practical preference; the other experience entries address how to realize and inspect the chosen event.
 
 ## Execution and recording can change what happens after text generation
 

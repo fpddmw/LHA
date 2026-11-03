@@ -1,41 +1,31 @@
-# Understand results and revise the proposal
+# Read the result, revise the design, choose the delivery
 
-Use this manual to interpret a candidate, compare alternatives and decide whether another attempt can improve the delivery.
+Use this manual to interpret a candidate, decide what another attempt could change and choose what to deliver. Judge the result as a recast: how fully the world was rebuilt, whether the moment is still recognizable, and how stable and clean it is.
 
-## Explain the consequential gap
+## 1. Check the result where it is most likely to fail
 
-Compare the candidate with the original request, actual editing input and exact submitted prompt. Check whether the prompt pursued the right event: a faithful realization of an unnecessary preservation demand can still miss the task. Judge changed roles, props and motion by whether they serve the authorized adaptation. Locate the target relationship that remains incomplete. An omitted orientation, an explicit but unrealized shape, a transformation assigned to the wrong part and a costume that hides an action call for different changes.
+Compare the candidate with the original request, the actual editing input and the exact prompt. Then look in this order: any region that did not convert; every person, held prop and contact; the first and last second; the points where the medium might switch (camera moves, occlusions, fast motion). Check each item the request names. Whole-clip impressions and attractive openings hide local failures.
 
-Check whether the problem was inherited from the input or introduced by the latest pass. Separate a convincing motif from the requested construction: a new lamp may leave the illumination unchanged; a futuristic prop may leave the old environment recognizable.
+## 2. Explain the gap in terms of the design
 
-When a required target relation was missing, direct specification can resolve the open choice. When an explicit but unnecessary constraint causes the conflict, revise the constraint. When a needed relation was already explicit, prioritize a changed visual realization, scope or input over stronger synonyms. Use the actual earlier prompt to decide what has changed in the proposal.
+Ask whether the gap is a plane you never described, a counterpart you never assigned, a medium rule you left to the renderer, or an identity that was rebuilt. Check whether the input carried the problem or the latest pass introduced it. Separate a convincing motif from the requested construction.
 
-## Revisit the judgment behind the attempt
+When a needed relation was missing, specify it. When it was explicit and unrealized, change the construction, scope or input rather than strengthening synonyms. Judge a changed role, prop or movement by whether it serves the recast; an unnecessary preservation demand you wrote is yours to remove.
 
-When a result returns, compare it with the reason you chose that attempt. Open the earlier operation through history when needed: check the actual input and prompt, then locate the visual change you expected to matter. Keep a useful explanation, revise one the result challenges, and recognize a resample on its own terms. Notes/workspace can carry the resulting judgment into the next choice.
+## 3. Choose the input for what it still holds
 
-## Choose the input and scope that fit the proposal
+Keep the delivery you intend separate from the next editing input. Continue from a candidate when it holds what the next change needs; go back to the source or an earlier candidate when the current one lost something you need. Group dependent changes in one revision.
 
-Keep your intended delivery separate from the next editing input. Identify which information the target still needs before treating a source difference as damage. A candidate that supports the intended new event can be more useful than a source that reinstates the old function. A useful candidate is attractive when the remaining transformation can build on its appearance. An earlier candidate or source deserves priority when the current result has lost information central to the next proposal.
+## 4. Use the attempts
 
-Design the revision as a coherent visual change. Group elements that depend on each other: an opening, its view, frame and reflected light; an emitting perimeter and the dark supports beneath it. Reconsider unrelated additions that complicate the attempt without helping its main goal. A whole-image change can be coherent when the intended medium or lighting relationship spans the image.
+An attempt should try a genuinely different construction, input or scope. A restated prompt is a resample; weigh it on those terms. If a clear defect remains and attempts are left, spend them.
 
-State the wanted arrangement and its important boundaries. If the new attempt is a resample rather than a changed realization, weigh it on that basis. Preserve useful branches so a later regression does not displace the best answer.
+## 5. Compare every retained candidate
 
-## Understand Critic evidence and compare retained alternatives
+Compare plausible candidates, including the earliest. The latest or most repaired is not automatically the best, and a polished result that kept the old scene is not finished. Weigh world conversion, recognizability of the moment and stability together.
 
-When motion matters, inspect preparation, transition and outcome through [complete-event observation](../OBSERVE_EVENTS.md). Reviewers choose overviews, consecutive-frame pages, crops and further views as needed. Check the evidence that supports consequential findings.
+## Critic and Planner checks
 
-In Critic mode, the reviewer receives the original task, submitted and actual generation prompts, focus, source, actual input, candidate and relevant references. It returns descriptive evaluation and evidence. In Planner mode, make that check in your current task context and include it beside your next action. The [review guide](../../../.agents/skills/lha-video-review/SKILL.md) supports both modes without fixed grades or compulsory report columns.
+In Critic mode, the reviewer receives the task, prompts, focus, source, input and candidate, and returns descriptive evidence. In Planner mode, make the same check in your own context. The [review guide](../../../.agents/skills/lha-video-review/SKILL.md) supports both. Treat unknown as a coverage gap. When motion matters, use [complete-event observation](../OBSERVE_EVENTS.md).
 
-Treat unknown as a coverage gap. A clear local observation can still inform the choice; a missing whole-clip judgment can motivate targeted observation when that issue is important. Inspect around relevant turns, contacts and occlusions rather than relying entirely on attractive opening frames. For an adapted event, examine its preparation, development and response on its own terms. Use source timing as required by the task; an altered trajectory can be intentional. Less visible motion is not by itself successful behavior, and natural occlusion leaves concealed details unobserved.
-
-Compare plausible retained candidates, including the best earlier answer. Repairing the latest parent's defect may still leave a result worse for the user's task. Weigh the requested transformation, necessary source correspondence and visual quality together. Check the report's task interpretation against the original request and video. Your earlier prompt and a historical case's requirements do not add obligations to this task.
-
-## Decide what another attempt is worth
-
-Choose continuation or delivery by comparing the actual result with the original task. A further attempt can develop an unresolved requirement or compare a plausible alternative; a satisfactory candidate can be delivered. Budget hints describe resource availability and do not determine whether a defect matters.
-
-An optional generation justification can connect the actual input and prompt with the change or comparison you intend. At delivery, use the checks already made to choose the retained candidate and explain accepted tradeoffs. Final delivery starts no additional review.
-
-If no promising path remains for an unsuitable result, retain the best provisional candidate and explain the blockage through the operating interface. Use notes/workspace to carry forward the useful interpretation, alternative or rejected explanation. The recorded reads and operations preserve the underlying evidence.
+Keep the useful interpretation in notes/workspace. Delivery starts no additional review; the recorded reads and operations preserve the evidence.

@@ -30,7 +30,7 @@ def main():
     planner = Scripted([
         action("read", targets=[{"id": "manual"}, {"id": "meaning"}]),
         action("search", query="science fiction material blue edge"),
-        action("read", targets=[{"id": "design-expression"}, {"id": "domain-sci_fi_modern"}, {"id": "express-edits"}]),
+        action("read", targets=[{"id": "design-expression"}, {"id": "domain-sci_fi_modern"}, {"id": "experience-map"}]),
         action("workspace", summary="Scripted demonstration: inspect object/part bindings using the existing materials."),
         action("generate", input_video="source", prompt=sample["instruction"]),
     ])

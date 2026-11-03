@@ -147,7 +147,7 @@ class SearchTests(unittest.TestCase):
             if mode == "none":
                 self.assertEqual(experience["matches"], [])
             else:
-                self.assertEqual(experience["matches"][0]["id"], "EX-instance-identity")
+                self.assertEqual(experience["matches"][0]["id"], "EX-B-identity-rebuild")
 
 
 class LoopTests(unittest.TestCase):
@@ -155,8 +155,8 @@ class LoopTests(unittest.TestCase):
     start, respond, resume = fixtures.CreativeTests.start, fixtures.CreativeTests.respond, fixtures.CreativeTests.resume
 
     def test_actual_case_reads_survive_search_generation_and_finish(self):
-        ids = ["understand-and-design", "experience-map", "EX-environment-replacement",
-               "EX-renderer-profiles", "review", "understand-and-revise", "EX-instance-identity"]
+        ids = ["understand-and-design", "experience-map", "EX-P-every-plane",
+               "EX-renderer-profiles", "review", "understand-and-revise", "EX-P-identity"]
         self.start([
             fixtures.action("read", targets=[{"id": i} for i in ids[:4]]),
             fixtures.action("read", targets=[{"id": i} for i in ids[4:]]),

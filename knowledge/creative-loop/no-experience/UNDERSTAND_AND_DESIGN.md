@@ -1,25 +1,31 @@
-# Understand the task and form a visual proposal
+# Recast the source into another world or medium
 
-Use this manual to interpret the event, weigh user priorities and develop a coherent visual direction. Retain the distinction that makes a proposal promising in optional notes when it will help interpret the result. A later continuation explanation can develop that judgment as the actual video reveals what worked.
+The task is a recast: take an existing video and make it a coherent work in the world or medium the request names. The result should read as that world or medium from its first second to its last, while still being recognizably this moment. It is neither a faithful edit nor a new scene. Both ends are scored: how fully the world was rebuilt, and how stable and clean the video is.
 
-## Identify what makes this task distinctive
+Use this manual before the first generation and whenever the design changes. Keep the working design in notes/workspace in the order below.
 
-Read the original request alongside the source. Determine what the target scene should mean, and which source information helps it remain a coherent adaptation. Distinguish individual identity, screen relationships, bodily movement, interaction roles and literal activity; the task can preserve one while transforming another. A short request can leave room for interpretation; a detailed request may already define the realization.
+## 1. Fix the moment
 
-Understand the activity through its relations: who acts on whom, what an object enables, and which contact, support, gaze or timing makes the event legible. A microphone's recipient distinguishes one performance from another; the arrangement of a playing surface shapes what the players are doing. Use the [meaning guide](meaning.md) when these relations or narrative emphasis need development.
+Write the source's skeleton in a sentence or two: who acts, what happens and in what order, how the space is arranged, where the camera is and how it moves. A viewer who knows the source should find this moment in the result. Roles, arrangement and key contacts are the skeleton. Poses and gestures are performance material. Old-world functions are yours to replace when the new world gives the action another form.
 
-An appearance or medium treatment normally builds on the existing event. A requested world or narrative reconstruction can require new behavior and object functions even when the user has not supplied a replacement script. Develop a purpose and relationship that fit the target, using source poses, movement and framing as performance material. A hand reaching outward can support different exchanges; the requested scene determines what the gesture means. Explicit preservation instructions take priority. Choose the needed correspondence from the request rather than importing every source relation as a requirement.
+## 2. List the planes and give each a counterpart
 
-Read setting knowledge for how roles, spaces and actions make a world intelligible, alongside its materials and light. Keeping a source object's function can preserve the old event despite a new surface. Decide whether that function belongs in the target before elaborating its appearance. Make a coherent creative choice; a genre name does not prescribe a particular plot, weapon or prop substitution.
+List every visible plane: each person, held props, furniture or vehicles, ground, middle distance, background, sky and light. For each, write what it becomes in the target world and how that world builds it. Use the [meaning guide](meaning.md) for roles and event logic.
 
-## Construct the style through visible relationships
+## 3. Write the medium's construction logic
 
-Explore [theme](../../guides/theme.md), [media](media.md), [time](../../guides/time.md), [combination](../../guides/combination.md) and [design expression](design-expression.md). Read complete entries for how marks, materials, space and staging produce an effect. Adapt those relationships to this source.
+Name what makes a mark, a surface and a shadow in the medium, and what the light does to each plane. Use [theme](../../guides/theme.md), [media](media.md), [time](../../guides/time.md), [combination](../../guides/combination.md) and [design expression](design-expression.md) for relationships you can adapt. Transfer the relationship, not the source work's setting.
 
-For broad style requests, choose a visual system: how contours and tone work together, how material receives light, or how space and atmosphere express the setting. For detailed requests, distinguish structural requirements from surface ornament. A requested collar shape, glowing boundary or event relation deserves attention even when the overall style is convincing.
+## 4. Keep the people the same people
 
-Consider dependencies within the design. A costume's silhouette can cover a needed contact; a new opening can require a new view and reflected light. When commitments conflict, compare their importance to the requested result. Remove a preservation demand you added unnecessarily before sacrificing a requested feature. When both are central, find compatible staging, placement or construction. Spend precision on the target's decisive interactions; let natural occlusion and source movement serve the performance without treating hidden required detail as established.
+Preserve people at role level and keep identity wording short. A costume change is part of the task.
 
-## Carry the proposal forward
+## 5. Decide the checks before you generate
 
-Use the style library to develop alternatives suited to the source and request. Keep a concise proposal or unresolved alternative in notes/workspace when it helps continuity. Submit a concrete English prompt, then inspect the actual result.
+Decide in advance what you will look at in the result: each person, held props and contacts, the first and last second, the planes you did not describe, and every item the request names.
+
+## A short or long request
+
+A short request names the world and leaves the layout, counterparts and planes to you. A long request lists planes, costume, light and camera behavior; treat the list as the checklist you will be held to.
+
+Keep a concise working design in notes/workspace. Submit a concrete English prompt, then inspect the actual result.

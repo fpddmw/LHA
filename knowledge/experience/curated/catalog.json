@@ -1,461 +1,804 @@
 {
-  "schema": "creative-experience-catalog-v1",
-  "revision": "20261103-contribution-discovery-v1",
+  "schema": "creative-experience-catalog-v2",
+  "revision": "layered-a909fff94880e5ba",
   "entries": [
     {
-      "id": "EX-semantic-reconstruction",
-      "path": "knowledge/experience/curated/entries/semantic-reconstruction.md",
-      "version": "1",
-      "renderers": [
-        "bernini"
-      ],
-      "evidence_ids": [
-        "EV-semantic-goal-review",
-        "EV-F001",
-        "EV-F001-creative-first"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "title": "Remove preservation commitments that defeat the target",
-      "summary": "When the target world changes the event, rebuild its purpose and causal relationships. Use useful source performance material and remove preservation demands that keep the old activity in place.",
+      "id": "EX-P-compare-retained",
+      "title": "Choose the delivery among all retained candidates, judged on the whole recast",
+      "summary": "Compare every retained candidate on how fully the world was rebuilt, whether the moment is still recognizable, and how stable and clean it is. The newest or the most repaired version is not automatically the best, and a polished result that kept the old scene is not finished.",
       "questions": [
-        "Which preservation commitments prevent the target scene from working?"
-      ],
-      "sha256": "a20db01292e62f924b60dbb133584693f4dec8790a76a6abdf0b3ce81d61545c",
-      "aliases": [
-        "semantic reconstruction",
-        "Which preservation commitments prevent the target scene from working?"
-      ],
-      "applicability": "When the target world changes the event, rebuild its purpose and causal relationships.",
-      "recommendation": "When the target world changes the event, rebuild its purpose and causal relationships. Use useful source performance material and remove preservation demands that keep the old activity in place."
-    },
-    {
-      "id": "EX-design-conflict",
-      "title": "Resolve conflicts between the target design and necessary action",
-      "path": "knowledge/experience/curated/entries/design-conflict.md",
-      "version": "5",
-      "sha256": "4ad9030e23f79540fb1895d869b91fdbf6e41b2b51cfe3a7b5711f8745e0c9f4",
-      "summary": "Remove an unnecessary preservation demand before sacrificing a requested design feature. When appearance and action are both central, stage them together so the target interaction remains readable.",
-      "questions": [
-        "Does this conflict come from a required action or an unnecessary preservation demand?"
-      ],
-      "renderers": [
-        "bernini"
-      ],
-      "evidence_ids": [
-        "EV-B-003",
-        "EV-F003",
-        "EV-F001",
-        "EV-semantic-goal-review"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "design conflict",
-        "Does this conflict come from a required action or an unnecessary preservation demand?"
-      ],
-      "applicability": "Remove an unnecessary preservation demand before sacrificing a requested design feature.",
-      "recommendation": "Remove an unnecessary preservation demand before sacrificing a requested design feature. When appearance and action are both central, stage them together so the target interaction remains readable."
-    },
-    {
-      "id": "EX-activity-relations",
-      "title": "Organize the activity around the requested world",
-      "path": "knowledge/experience/curated/entries/activity-relations.md",
-      "version": "4",
-      "sha256": "3e2fa087598b0b7d20488b8c9c4ca995680e4e98f875adfab523ab873207500c",
-      "summary": "Organize participants and object functions around the target event. Preserve a required interaction; reconstruct an obsolete purpose with a readable new exchange rather than merely retaining the same nouns.",
-      "questions": [
-        "Which activity relationships should the target retain or reinterpret?"
-      ],
-      "renderers": [
-        "bernini"
-      ],
-      "evidence_ids": [
-        "EV-F003",
-        "EV-F005",
-        "EV-F001",
-        "EV-visual-inspection",
-        "EV-semantic-goal-review"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "activity relations",
-        "Which activity relationships should the target retain or reinterpret?"
-      ],
-      "applicability": "Organize participants and object functions around the target event.",
-      "recommendation": "Organize participants and object functions around the target event. Preserve a required interaction; reconstruct an obsolete purpose with a readable new exchange rather than merely retaining the same nouns."
-    },
-    {
-      "id": "EX-instance-identity",
-      "title": "Protect the individual by reducing competing reconstruction",
-      "path": "knowledge/experience/curated/entries/instance-identity.md",
-      "version": "5",
-      "sha256": "1af021017212f2c85e03a77d7a6f04931b2f195e412004f25bb3dd145e7ee7dd",
-      "summary": "For identity-sensitive edits, preserve individual correspondence through useful input evidence and scoped design. Allow the role and behavior to change when requested; concise identity wording avoids constructing a substitute face.",
-      "questions": [
-        "How can the same person take a new role without becoming a different individual?"
+        "Which candidate should I deliver?",
+        "Is the latest repair better than an earlier version?",
+        "How do I weigh conversion against stability?"
       ],
       "renderers": [
         "bernini",
         "ditto"
       ],
+      "layer": "principle",
       "evidence_ids": [
-        "EV-D-FS4-no",
-        "EV-D-FS4-full",
-        "EV-F002",
-        "EV-F003",
-        "EV-F004",
-        "EV-F005",
-        "EV-F006",
-        "EV-visual-inspection"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "instance identity",
-        "How can the same person take a new role without becoming a different individual?"
-      ],
-      "applicability": "For identity-sensitive edits, preserve individual correspondence through useful input evidence and scoped design.",
-      "recommendation": "For identity-sensitive edits, preserve individual correspondence through useful input evidence and scoped design. Allow the role and behavior to change when requested; concise identity wording avoids constructing a substitute face."
-    },
-    {
-      "id": "EX-object-continuity",
-      "title": "Keep the target interaction coherent through transitions",
-      "path": "knowledge/experience/curated/entries/object-continuity.md",
-      "version": "4",
-      "sha256": "05ee8f2f7d582760407a7dc74c5090a12966934c1bfd92d07b5445e82e99d0a6",
-      "summary": "Bind continuity to the target participant and event. Use source-linked roles for retained action; establish new contacts and progression for adapted action, and inspect occlusion and release where they matter.",
-      "questions": [
-        "What must stay involved as the target interaction develops?"
-      ],
-      "renderers": [
-        "bernini"
-      ],
-      "evidence_ids": [
-        "EV-F001",
-        "EV-F006",
-        "EV-semantic-goal-review"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "object continuity",
-        "What must stay involved as the target interaction develops?"
-      ],
-      "applicability": "Bind continuity to the target participant and event.",
-      "recommendation": "Bind continuity to the target participant and event. Use source-linked roles for retained action; establish new contacts and progression for adapted action, and inspect occlusion and release where they matter."
-    },
-    {
-      "id": "EX-connected-scope",
-      "title": "Revise a coherent visual field",
-      "path": "knowledge/experience/curated/entries/connected-scope.md",
-      "version": "5",
-      "sha256": "bd5d271f4dd86dba6f3ff96b62816013b38a458a2cb93ad04c0224da2709e4a5",
-      "summary": "Group changes that share a structural, optical or semantic dependency. An adapted event can connect people, prop functions and environment; unrelated repairs may need a different scope or input.",
-      "questions": [
-        "Which visual and behavioral relationships need to change together?"
-      ],
-      "renderers": [
-        "bernini"
-      ],
-      "evidence_ids": [
-        "EV-B-FS4-full",
-        "EV-F006",
-        "EV-F007",
-        "EV-F004"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "connected scope",
-        "Which visual and behavioral relationships need to change together?"
-      ],
-      "applicability": "Group changes that share a structural, optical or semantic dependency.",
-      "recommendation": "Group changes that share a structural, optical or semantic dependency. An adapted event can connect people, prop functions and environment; unrelated repairs may need a different scope or input."
-    },
-    {
-      "id": "EX-input-conditioning",
-      "title": "Choose the input that best supports the target transformation",
-      "path": "knowledge/experience/curated/entries/input-conditioning.md",
-      "version": "5",
-      "sha256": "0f8c505840507ec3a48d599bcb645994c7017ee1b3fb174c74476407b2b10c97",
-      "summary": "Continue a candidate with useful target achievements. Recover required lost information from an earlier input; an authorized change of source activity can be progress rather than damage.",
-      "questions": [
-        "Which input supports the target without reinstating an obsolete source function?"
-      ],
-      "renderers": [
-        "bernini",
-        "ditto"
-      ],
-      "evidence_ids": [
-        "EV-batch-facts",
-        "EV-F002",
-        "EV-F003",
-        "EV-F004",
-        "EV-F006",
-        "EV-F007",
-        "EV-H-D-024__long__full_knowledge",
-        "EV-D-027-full",
-        "EV-B-024-full",
         "EV-historical-score-extract",
-        "EV-semantic-goal-review"
+        "EV-batch-facts",
+        "EV-F003",
+        "EV-F004",
+        "EV-F006",
+        "EV-F007",
+        "EV-V5-train-cases"
       ],
+      "stages": [
+        "deliver",
+        "revise"
+      ],
+      "path": "knowledge/experience/curated/entries/P-compare-retained.md",
+      "version": "1",
+      "sha256": "273ecabddf35f0bf07a605322a4fa333495adb445735d9992e746cd98e6a0cec",
       "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "review_reference": "docs/experience-rebuild-20261103.md",
       "aliases": [
-        "input conditioning",
-        "Which input supports the target without reinstating an obsolete source function?"
+        "Choose the delivery among all retained candidates, judged on the whole recast",
+        "Which candidate should I deliver?",
+        "Is the latest repair better than an earlier version?",
+        "How do I weigh conversion against stability?"
       ],
-      "applicability": "Continue a candidate with useful target achievements.",
-      "recommendation": "Continue a candidate with useful target achievements. Recover required lost information from an earlier input; an authorized change of source activity can be progress rather than damage."
+      "applicability": "Compare every retained candidate on how fully the world was rebuilt, whether the moment is still recognizable, and how stable and clean it is. The newest or the most repaired version is not automatically the best, and a polished result that kept the old scene is not finished.",
+      "recommendation": "Compare every retained candidate on how fully the world was rebuilt, whether the moment is still recognizable, and how stable and clean it is. The newest or the most repaired version is not automatically the best, and a polished result that kept the old scene is not finished."
     },
     {
-      "id": "EX-realization-change",
-      "title": "Change the failed proposition, not just its emphasis",
-      "path": "knowledge/experience/curated/entries/realization-change.md",
-      "version": "4",
-      "sha256": "5cb1e3c8060bdf6ea8f4835bec2086d9979ce5871457061d7c8e4f3ec700534d",
-      "summary": "Reconsider an unnecessary commitment before retrying its execution. For a required operation, prefer a changed construction or input after explicit failure; a new material can still preserve the old function.",
+      "id": "EX-P-counterparts",
+      "title": "Give each source element a counterpart in the new world",
+      "summary": "Map each important source element to a specific, fitting counterpart (a glove to a C-shaped brick hand, a plank to a stack of tan plates) and name the carrier of each effect. Generic theme decoration does not do this work.",
       "questions": [
-        "Did the attempt change the required construction, its function, or only its wording?"
+        "How do I translate source objects and actions into another world?",
+        "Why did the effect appear on the wrong part?",
+        "Why does the result look like decoration rather than adaptation?"
       ],
       "renderers": [
         "bernini",
         "ditto"
       ],
+      "layer": "principle",
+      "evidence_ids": [
+        "EV-F004",
+        "EV-B-FS4-full",
+        "EV-D-027-full",
+        "EV-H-B-fewshot_004__long__no_knowledge",
+        "EV-V5-LEGO-planes"
+      ],
+      "stages": [
+        "design",
+        "revise"
+      ],
+      "path": "knowledge/experience/curated/entries/P-counterparts.md",
+      "version": "1",
+      "sha256": "7c8d9a270a60f61eac2d6972bbb361a0173be74a46b388f20209ec51c4b2cce3",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Give each source element a counterpart in the new world",
+        "How do I translate source objects and actions into another world?",
+        "Why did the effect appear on the wrong part?",
+        "Why does the result look like decoration rather than adaptation?"
+      ],
+      "applicability": "Map each important source element to a specific, fitting counterpart (a glove to a C-shaped brick hand, a plank to a stack of tan plates) and name the carrier of each effect. Generic theme decoration does not do this work.",
+      "recommendation": "Map each important source element to a specific, fitting counterpart (a glove to a C-shaped brick hand, a plank to a stack of tan plates) and name the carrier of each effect. Generic theme decoration does not do this work."
+    },
+    {
+      "id": "EX-P-every-plane",
+      "title": "Rebuild every plane, not just the subject",
+      "summary": "List each visible plane (subject, props, ground, background, sky, light) and say how the target medium builds it. A rebuilt figure inside an untouched photographic scene reads as a collage, and a few theme props leave the old place intact.",
+      "questions": [
+        "Why does the result still look like the original place?",
+        "Why does a stylized subject look pasted onto a real background?",
+        "What do I need to describe besides the main character?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "principle",
+      "evidence_ids": [
+        "EV-F001",
+        "EV-F004",
+        "EV-F005",
+        "EV-F006",
+        "EV-F007",
+        "EV-D-FS4-full",
+        "EV-V5-LEGO-planes"
+      ],
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/P-every-plane.md",
+      "version": "1",
+      "sha256": "a779092bbf499b3b0e9db622f2d91b2c4bcdd37e33850f5f17e71398ebd1133d",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Rebuild every plane, not just the subject",
+        "Why does the result still look like the original place?",
+        "Why does a stylized subject look pasted onto a real background?",
+        "What do I need to describe besides the main character?"
+      ],
+      "applicability": "List each visible plane (subject, props, ground, background, sky, light) and say how the target medium builds it. A rebuilt figure inside an untouched photographic scene reads as a collage, and a few theme props leave the old place intact.",
+      "recommendation": "List each visible plane (subject, props, ground, background, sky, light) and say how the target medium builds it. A rebuilt figure inside an untouched photographic scene reads as a collage, and a few theme props leave the old place intact."
+    },
+    {
+      "id": "EX-P-identity",
+      "title": "Keep who they are, change what they are wearing and doing",
+      "summary": "Preserve the person at role level and keep salient attributes (age group, skin tone, build) unless the new world changes them. Keep identity wording short and spend design effort around the face; long facial inventories rebuild a different person.",
+      "questions": [
+        "How do I keep the same person in a different world?",
+        "Why did the person change into someone else?",
+        "When is changing a character's look part of the task?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "principle",
+      "evidence_ids": [
+        "EV-F002",
+        "EV-F003",
+        "EV-F004",
+        "EV-F005",
+        "EV-F006",
+        "EV-D-FS4-full",
+        "EV-D-FS4-no"
+      ],
+      "stages": [
+        "design",
+        "revise"
+      ],
+      "path": "knowledge/experience/curated/entries/P-identity.md",
+      "version": "1",
+      "sha256": "6371c7dc4b61807a10a45fb1bf05033221aaf271e35fb7d35b24b8c779bef820",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Keep who they are, change what they are wearing and doing",
+        "How do I keep the same person in a different world?",
+        "Why did the person change into someone else?",
+        "When is changing a character's look part of the task?"
+      ],
+      "applicability": "Preserve the person at role level and keep salient attributes (age group, skin tone, build) unless the new world changes them. Keep identity wording short and spend design effort around the face; long facial inventories rebuild a different person.",
+      "recommendation": "Preserve the person at role level and keep salient attributes (age group, skin tone, build) unless the new world changes them. Keep identity wording short and spend design effort around the face; long facial inventories rebuild a different person."
+    },
+    {
+      "id": "EX-P-medium-logic",
+      "title": "Describe how the medium builds the picture, and light as part of it",
+      "summary": "Write the construction rules of the target medium (what makes a mark, a surface, a shadow) and what the light does to each plane. Style names and adjectives alone leave the renderer to guess, and lamps alone do not change the lighting.",
+      "questions": [
+        "How do I make a style read as that medium rather than a color filter?",
+        "Why did added lamps not change the atmosphere?",
+        "What should I write instead of a list of style adjectives?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "principle",
+      "evidence_ids": [
+        "EV-F002",
+        "EV-F004",
+        "EV-F005",
+        "EV-F007",
+        "EV-H-B-027__short__full_knowledge",
+        "EV-V5-LEGO-planes",
+        "EV-H-D-benchmark__001__short"
+      ],
+      "stages": [
+        "design"
+      ],
+      "path": "knowledge/experience/curated/entries/P-medium-logic.md",
+      "version": "1",
+      "sha256": "4713973fb2402a015f7d51a6537cbfc011518beb52bc0dbd196f292966d38b92",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Describe how the medium builds the picture, and light as part of it",
+        "How do I make a style read as that medium rather than a color filter?",
+        "Why did added lamps not change the atmosphere?",
+        "What should I write instead of a list of style adjectives?"
+      ],
+      "applicability": "Write the construction rules of the target medium (what makes a mark, a surface, a shadow) and what the light does to each plane. Style names and adjectives alone leave the renderer to guess, and lamps alone do not change the lighting.",
+      "recommendation": "Write the construction rules of the target medium (what makes a mark, a surface, a shadow) and what the light does to each plane. Style names and adjectives alone leave the renderer to guess, and lamps alone do not change the lighting."
+    },
+    {
+      "id": "EX-P-moment",
+      "title": "Define the moment before choosing what to rebuild",
+      "summary": "Before the first generation, write down who acts, what happens, in what order, where, and from which camera position. Keep that skeleton recognizable and rebuild everything else in the target world.",
+      "questions": [
+        "What must stay recognizable when the video moves into another world or medium?",
+        "Which source actions are performance material and which are old-world functions to replace?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "principle",
+      "evidence_ids": [
+        "EV-F001",
+        "EV-F001-creative-first",
+        "EV-semantic-goal-review",
+        "EV-F003",
+        "EV-F005"
+      ],
+      "stages": [
+        "design"
+      ],
+      "path": "knowledge/experience/curated/entries/P-moment.md",
+      "version": "1",
+      "sha256": "cd77d3a0e5e94d141563ebf1ae69cd5cffe738655296533562453faaaa77d5f5",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Define the moment before choosing what to rebuild",
+        "What must stay recognizable when the video moves into another world or medium?",
+        "Which source actions are performance material and which are old-world functions to replace?"
+      ],
+      "applicability": "Before the first generation, write down who acts, what happens, in what order, where, and from which camera position. Keep that skeleton recognizable and rebuild everything else in the target world.",
+      "recommendation": "Before the first generation, write down who acts, what happens, in what order, where, and from which camera position. Keep that skeleton recognizable and rebuild everything else in the target world."
+    },
+    {
+      "id": "EX-P-spend-attempts",
+      "title": "Spend attempts on different realizations, and keep what you had",
+      "summary": "Use remaining generations to try a genuinely different construction, input or scope, not a restated version of what failed. Keep earlier candidates as options. In a fixed-budget task, use the full allowance before choosing.",
+      "questions": [
+        "What should I change when a second attempt fails the same way?",
+        "How do I use my remaining generations?",
+        "Should I stop after one good result?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "principle",
       "evidence_ids": [
         "EV-B-003",
         "EV-H-D-benchmark__003__short",
         "EV-H-D-024__long__full_knowledge",
-        "EV-H-D-benchmark__001__long",
-        "EV-H-B-benchmark__001__long",
-        "EV-F001",
         "EV-F003",
         "EV-F005",
-        "EV-historical-score-extract",
-        "EV-semantic-goal-review"
+        "EV-V5-train-cases"
       ],
+      "stages": [
+        "revise",
+        "deliver"
+      ],
+      "path": "knowledge/experience/curated/entries/P-spend-attempts.md",
+      "version": "1",
+      "sha256": "c00e8f35c37b79cffb44b9243172d59669d55a1c8e86e36f5c4eb1b57495259b",
       "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "review_reference": "docs/experience-rebuild-20261103.md",
       "aliases": [
-        "realization change",
-        "Did the attempt change the required construction, its function, or only its wording?"
+        "Spend attempts on different realizations, and keep what you had",
+        "What should I change when a second attempt fails the same way?",
+        "How do I use my remaining generations?",
+        "Should I stop after one good result?"
       ],
-      "applicability": "Reconsider an unnecessary commitment before retrying its execution.",
-      "recommendation": "Reconsider an unnecessary commitment before retrying its execution. For a required operation, prefer a changed construction or input after explicit failure; a new material can still preserve the old function."
+      "applicability": "Use remaining generations to try a genuinely different construction, input or scope, not a restated version of what failed. Keep earlier candidates as options. In a fixed-budget task, use the full allowance before choosing.",
+      "recommendation": "Use remaining generations to try a genuinely different construction, input or scope, not a restated version of what failed. Keep earlier candidates as options. In a fixed-budget task, use the full allowance before choosing."
     },
     {
-      "id": "EX-part-binding",
-      "title": "Bind the effect to the intended part and distinguish its neighbor",
-      "path": "knowledge/experience/curated/entries/part-binding.md",
-      "version": "4",
-      "sha256": "9f7c49df4a1e358a72f7cebfd61c9d2f574ba5fb0c40c1e4347d998691c293fa",
-      "summary": "Clarify the intended carrier relative to its neighbors. Anchor an existing instance for a required repair; describe the new construction when the task replaces its form or function.",
+      "id": "EX-P-worst-second",
+      "title": "Judge the work by its worst second and its faces, hands and held props",
+      "summary": "Look closely at focal faces, hands, held props and contacts, the first and last second, and the planes you never described. A strong opening or a clean overview can hide melted keys, fused fingers, a source-like first half-second or a collapsing end.",
       "questions": [
-        "Which target part or function should carry this effect?"
+        "Which part of the video should I inspect before accepting it?",
+        "Why did a good-looking candidate get marked down?",
+        "What do reviewers tend to miss?"
       ],
       "renderers": [
         "bernini",
         "ditto"
       ],
+      "layer": "principle",
       "evidence_ids": [
+        "EV-F006",
+        "EV-F006-v3-000112",
+        "EV-F001",
+        "EV-V5-LEGO-planes",
+        "EV-V5-train-cases"
+      ],
+      "stages": [
+        "inspect",
+        "deliver"
+      ],
+      "path": "knowledge/experience/curated/entries/P-worst-second.md",
+      "version": "1",
+      "sha256": "887d740792734574d47af629d877757cc6d840d171bbcaa47bc8abe5b0482ad0",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Judge the work by its worst second and its faces, hands and held props",
+        "Which part of the video should I inspect before accepting it?",
+        "Why did a good-looking candidate get marked down?",
+        "What do reviewers tend to miss?"
+      ],
+      "applicability": "Look closely at focal faces, hands, held props and contacts, the first and last second, and the planes you never described. A strong opening or a clean overview can hide melted keys, fused fingers, a source-like first half-second or a collapsing end.",
+      "recommendation": "Look closely at focal faces, hands, held props and contacts, the first and last second, and the planes you never described. A strong opening or a clean overview can hide melted keys, fused fingers, a source-like first half-second or a collapsing end."
+    },
+    {
+      "id": "EX-B-chain-drift",
+      "title": "Continuing from a candidate did not reliably help on Bernini; choose the input for what it still contains",
+      "summary": "On Bernini, five train-sample continuations from an earlier candidate moved stability by -1.0 to +1.1 with no consistent direction. Continue from a candidate only when it holds what you need next; otherwise restart from the source with a rewritten full prompt.",
+      "questions": [
+        "Should I continue from my last candidate or restart from the source?",
+        "Why did a repair make other things worse?",
+        "Which input keeps the information I need?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "layer": "renderer",
+      "evidence_ids": [
+        "EV-V5-train-cases",
+        "EV-batch-facts",
+        "EV-F002",
+        "EV-F003",
         "EV-F004",
-        "EV-H-B-fewshot_004__long__no_knowledge",
-        "EV-D-027-full",
-        "EV-H-B-027__short__no_knowledge"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "part binding",
-        "Which target part or function should carry this effect?"
-      ],
-      "applicability": "Clarify the intended carrier relative to its neighbors.",
-      "recommendation": "Clarify the intended carrier relative to its neighbors. Anchor an existing instance for a required repair; describe the new construction when the task replaces its form or function."
-    },
-    {
-      "id": "EX-wanted-state",
-      "title": "Replace an unwanted effect with a coherent visual alternative",
-      "path": "knowledge/experience/curated/entries/wanted-state.md",
-      "version": "4",
-      "sha256": "2121849dda25d3ca0d7e85034b51b636a080c7d89e8ae6b750efa758b185d558",
-      "summary": "Specify the positive visual relationship and, for event reconstruction, the purpose that should replace the old one. Resolve the surrounding conflict instead of repeatedly suppressing its symptom.",
-      "questions": [
-        "What new arrangement and function should replace the unwanted effect?"
-      ],
-      "renderers": [
-        "bernini",
-        "ditto"
-      ],
-      "evidence_ids": [
-        "EV-H-D-benchmark__001__short",
-        "EV-H-D-027__short__no_knowledge",
-        "EV-F004",
-        "EV-H-B-fewshot_004__long__no_knowledge"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "wanted state",
-        "What new arrangement and function should replace the unwanted effect?"
-      ],
-      "applicability": "Specify the positive visual relationship and, for event reconstruction, the purpose that should replace the old one.",
-      "recommendation": "Specify the positive visual relationship and, for event reconstruction, the purpose that should replace the old one. Resolve the surrounding conflict instead of repeatedly suppressing its symptom."
-    },
-    {
-      "id": "EX-style-realization",
-      "title": "Choose a visible system that makes the style legible",
-      "path": "knowledge/experience/curated/entries/style-realization.md",
-      "version": "4",
-      "sha256": "25d452125899a53c9ec5ac6de54a4a5061e8d5d46d4edd5ead2a3cafe7c92df6",
-      "summary": "Choose a coherent visible system and the event logic required by the request. World reconstruction can need new behavior; atmosphere and ornament do not substitute for required structures or relationships.",
-      "questions": [
-        "Does the proposal realize a medium, a new world, or both?"
-      ],
-      "renderers": [
-        "bernini",
-        "ditto"
-      ],
-      "evidence_ids": [
-        "EV-H-D-benchmark__001__long",
-        "EV-F003"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "style realization",
-        "Does the proposal realize a medium, a new world, or both?"
-      ],
-      "applicability": "Choose a coherent visible system and the event logic required by the request.",
-      "recommendation": "Choose a coherent visible system and the event logic required by the request. World reconstruction can need new behavior; atmosphere and ornament do not substitute for required structures or relationships."
-    },
-    {
-      "id": "EX-environment-replacement",
-      "title": "Transform the structures that make the place recognizable",
-      "path": "knowledge/experience/curated/entries/environment-replacement.md",
-      "version": "4",
-      "sha256": "cfcce32521aa233650035089a1fccce7ad93bb473b6bb4dc913df6990082df7a",
-      "summary": "Transform the location-defining planes, sightlines and functions together. Replace an obsolete use when the target needs it; additional theme objects or new materials can leave the old scene intact.",
-      "questions": [
-        "Which structures and uses keep the old place recognizable?"
-      ],
-      "renderers": [
-        "bernini",
-        "ditto"
-      ],
-      "evidence_ids": [
-        "EV-F004",
-        "EV-F005",
         "EV-F006",
         "EV-F007",
-        "EV-F001",
-        "EV-D-FS4-full",
-        "EV-semantic-goal-review"
+        "EV-B-024-full"
       ],
+      "stages": [
+        "revise"
+      ],
+      "path": "knowledge/experience/curated/entries/B-chain-drift.md",
+      "version": "1",
+      "sha256": "2bfac5f5c04038ec0f4cef79933e837d6f70bc183064f32b90c0b579c2bf8120",
       "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
+      "review_reference": "docs/experience-rebuild-20261103.md",
       "aliases": [
-        "environment replacement",
-        "Which structures and uses keep the old place recognizable?"
+        "Continuing from a candidate did not reliably help on Bernini; choose the input for what it still contains",
+        "Should I continue from my last candidate or restart from the source?",
+        "Why did a repair make other things worse?",
+        "Which input keeps the information I need?"
       ],
-      "applicability": "Transform the location-defining planes, sightlines and functions together.",
-      "recommendation": "Transform the location-defining planes, sightlines and functions together. Replace an obsolete use when the target needs it; additional theme objects or new materials can leave the old scene intact."
+      "applicability": "On Bernini, five train-sample continuations from an earlier candidate moved stability by -1.0 to +1.1 with no consistent direction. Continue from a candidate only when it holds what you need next; otherwise restart from the source with a rewritten full prompt.",
+      "recommendation": "On Bernini, five train-sample continuations from an earlier candidate moved stability by -1.0 to +1.1 with no consistent direction. Continue from a candidate only when it holds what you need next; otherwise restart from the source with a rewritten full prompt."
     },
     {
-      "id": "EX-lighting-integration",
-      "title": "Design what the light does to the scene",
-      "path": "knowledge/experience/curated/entries/lighting-integration.md",
-      "version": "4",
-      "sha256": "59609e0bf50489c0d5af3fb12ee8aec9af91e2a47d9470d5e778e6d1c38d6f57",
-      "summary": "Design receiving surfaces, fill and reflections that produce the desired atmosphere. Use light to make the target event readable; lamps alone can leave old illumination or obsolete action emphasis intact.",
+      "id": "EX-B-emission-binding",
+      "title": "Glow can attach to the nearest support instead of the intended edge",
+      "summary": "On Bernini, requested emission appeared under a table or on arches instead of on the intended perimeter. Describe the glowing edge and the unlit support as a contrast, and look at where the light lands.",
       "questions": [
-        "How should illumination support the target scene and event?"
+        "Why does the glow appear on the wrong object?",
+        "How do I make only one edge emit light?"
       ],
       "renderers": [
-        "bernini",
-        "ditto"
+        "bernini"
       ],
+      "layer": "renderer",
+      "evidence_ids": [
+        "EV-F004",
+        "EV-F007"
+      ],
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/B-emission-binding.md",
+      "version": "1",
+      "sha256": "54398e246be981adf0e620422b75ecf8bf0a8f9767ff1a50db08a2dc9f809409",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Glow can attach to the nearest support instead of the intended edge",
+        "Why does the glow appear on the wrong object?",
+        "How do I make only one edge emit light?"
+      ],
+      "applicability": "On Bernini, requested emission appeared under a table or on arches instead of on the intended perimeter. Describe the glowing edge and the unlit support as a contrast, and look at where the light lands.",
+      "recommendation": "On Bernini, requested emission appeared under a table or on arches instead of on the intended perimeter. Describe the glowing edge and the unlit support as a contrast, and look at where the light lands."
+    },
+    {
+      "id": "EX-B-held-props",
+      "title": "Hands, held props and contact points are where heavy conversions break",
+      "summary": "Under heavy conversion Bernini softens fingers into keyboards, bends or reshapes carried objects, flips face prints between frames, and lets a prop detach from the hand. Describe the grip and the prop's rigid shape, and inspect them closely.",
+      "questions": [
+        "Why does the carried object bend or change shape?",
+        "Why do fingers merge into the keyboard or the headboard?",
+        "What should I specify to keep a grip clean?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "layer": "renderer",
+      "evidence_ids": [
+        "EV-V5-train-cases",
+        "EV-V5-LEGO-planes",
+        "EV-F001",
+        "EV-F006",
+        "EV-F006-v3-000112"
+      ],
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/B-held-props.md",
+      "version": "1",
+      "sha256": "f4bcaa0dfc639c93692b0a5edd8a296bb643ceaf0117066fb29720150e1387bf",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Hands, held props and contact points are where heavy conversions break",
+        "Why does the carried object bend or change shape?",
+        "Why do fingers merge into the keyboard or the headboard?",
+        "What should I specify to keep a grip clean?"
+      ],
+      "applicability": "Under heavy conversion Bernini softens fingers into keyboards, bends or reshapes carried objects, flips face prints between frames, and lets a prop detach from the hand. Describe the grip and the prop's rigid shape, and inspect them closely.",
+      "recommendation": "Under heavy conversion Bernini softens fingers into keyboards, bends or reshapes carried objects, flips face prints between frames, and lets a prop detach from the hand. Describe the grip and the prop's rigid shape, and inspect them closely."
+    },
+    {
+      "id": "EX-B-identity-rebuild",
+      "title": "Bernini rebuilds a face from a long description of it",
+      "summary": "Detailed hair, age and glasses descriptions reconstructed different people on Bernini across several tasks, and heavy scene-wide rewrites did too. Keep identity wording short, favor a source that still shows the person, and check every person after each pass.",
+      "questions": [
+        "Why does the person look different after I described them in detail?",
+        "Which input recovers a lost face?",
+        "How do I keep several people recognizable?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "layer": "renderer",
       "evidence_ids": [
         "EV-F002",
-        "EV-F004",
-        "EV-F005",
-        "EV-F007",
-        "EV-H-D-benchmark__001__short"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "lighting integration",
-        "How should illumination support the target scene and event?"
-      ],
-      "applicability": "Design receiving surfaces, fill and reflections that produce the desired atmosphere.",
-      "recommendation": "Design receiving surfaces, fill and reflections that produce the desired atmosphere. Use light to make the target event readable; lamps alone can leave old illumination or obsolete action emphasis intact."
-    },
-    {
-      "id": "EX-time-binding",
-      "title": "Inspect the transitions that can undo a convincing opening",
-      "path": "knowledge/experience/curated/entries/time-binding.md",
-      "version": "4",
-      "sha256": "bf20f71b7fa158b0eb2ed9e5516722e166be77f000d020d615a9e0897f9f8942",
-      "summary": "Inspect the target event and appearance through turns, contacts and responses. Preserve original timing where required; evaluate adapted behavior on its own progression rather than its resemblance to the old action.",
-      "questions": [
-        "Does the intended event remain coherent through meaningful transitions?"
-      ],
-      "renderers": [
-        "bernini",
-        "ditto"
-      ],
-      "evidence_ids": [
-        "EV-F006",
-        "EV-F005",
-        "EV-F001",
-        "EV-H-B-benchmark__001__long",
-        "EV-batch-facts",
-        "EV-visual-inspection"
-      ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "time binding",
-        "Does the intended event remain coherent through meaningful transitions?"
-      ],
-      "applicability": "Inspect the target event and appearance through turns, contacts and responses.",
-      "recommendation": "Inspect the target event and appearance through turns, contacts and responses. Preserve original timing where required; evaluate adapted behavior on its own progression rather than its resemblance to the old action."
-    },
-    {
-      "id": "EX-continuation-value",
-      "title": "Spend another attempt on a gap that can change the delivery",
-      "path": "knowledge/experience/curated/entries/continuation-value.md",
-      "version": "4",
-      "sha256": "3377d34a3a4ea0ce27147d77727ff0180a610713a5dc0fc779ccef6f69424ce9",
-      "summary": "Favor delivery when the target is adequately realized. Reassess inherited preservation complaints; spend another attempt on an important target gap and compare against retained alternatives.",
-      "questions": [
-        "Would another attempt improve the requested result or merely restore an obsolete commitment?"
-      ],
-      "renderers": [
-        "bernini",
-        "ditto"
-      ],
-      "evidence_ids": [
-        "EV-historical-score-extract",
-        "EV-B-FS4-full",
-        "EV-H-B-027__short__full_knowledge",
         "EV-F003",
-        "EV-F004",
+        "EV-F005",
         "EV-F006",
-        "EV-F007",
-        "EV-batch-facts",
+        "EV-V5-train-cases"
+      ],
+      "stages": [
+        "design",
+        "revise"
+      ],
+      "path": "knowledge/experience/curated/entries/B-identity-rebuild.md",
+      "version": "1",
+      "sha256": "addc0f3c8ed778ee2b508ab5dd317475279cef7592dd90a810970ee96d5de6b1",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Bernini rebuilds a face from a long description of it",
+        "Why does the person look different after I described them in detail?",
+        "Which input recovers a lost face?",
+        "How do I keep several people recognizable?"
+      ],
+      "applicability": "Detailed hair, age and glasses descriptions reconstructed different people on Bernini across several tasks, and heavy scene-wide rewrites did too. Keep identity wording short, favor a source that still shows the person, and check every person after each pass.",
+      "recommendation": "Detailed hair, age and glasses descriptions reconstructed different people on Bernini across several tasks, and heavy scene-wide rewrites did too. Keep identity wording short, favor a source that still shows the person, and check every person after each pass."
+    },
+    {
+      "id": "EX-B-partial-default",
+      "title": "Bernini converts what you describe and leaves the rest of the shot",
+      "summary": "When the prompt concentrates on a subject, Bernini converts it and keeps photographic scenery, including with a loop-written prompt that tells it to preserve the source. List the planes to rebuild and keep preservation to one clause.",
+      "questions": [
+        "Why is only my character converted?",
+        "Why does a plain request leave the background alone?",
+        "What does a preservation-heavy prompt cost?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "layer": "renderer",
+      "evidence_ids": [
+        "EV-V5-LEGO-planes",
+        "EV-V5-train-cases",
+        "EV-F004",
+        "EV-F005",
+        "EV-F006"
+      ],
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/B-partial-default.md",
+      "version": "1",
+      "sha256": "12b0337254ab7865f47067d0439cbd11621a800a1e1393891dee18672bf49ffb",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Bernini converts what you describe and leaves the rest of the shot",
+        "Why is only my character converted?",
+        "Why does a plain request leave the background alone?",
+        "What does a preservation-heavy prompt cost?"
+      ],
+      "applicability": "When the prompt concentrates on a subject, Bernini converts it and keeps photographic scenery, including with a loop-written prompt that tells it to preserve the source. List the planes to rebuild and keep preservation to one clause.",
+      "recommendation": "When the prompt concentrates on a subject, Bernini converts it and keeps photographic scenery, including with a loop-written prompt that tells it to preserve the source. List the planes to rebuild and keep preservation to one clause."
+    },
+    {
+      "id": "EX-B-text-budget",
+      "title": "The 512-token text limit makes every sentence compete",
+      "summary": "Bernini accepts 512 encoder tokens including its official prefix. Long preservation clauses use space that construction clauses need, and prompts over the limit are refused before any render.",
+      "questions": [
+        "How long can a Bernini prompt be?",
+        "What should I cut when the prompt is too long?",
+        "What happens when the prompt exceeds the limit?"
+      ],
+      "renderers": [
+        "bernini"
+      ],
+      "layer": "renderer",
+      "evidence_ids": [
+        "EV-V5-train-cases",
+        "EV-PE-token-limit",
+        "EV-H-B-benchmark__001__long"
+      ],
+      "stages": [
+        "design"
+      ],
+      "path": "knowledge/experience/curated/entries/B-text-budget.md",
+      "version": "1",
+      "sha256": "ca612bc53dd208faf223cbf5af6122de0d5cb39363d19aeaaa98a27fd7eed5cf",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "The 512-token text limit makes every sentence compete",
+        "How long can a Bernini prompt be?",
+        "What should I cut when the prompt is too long?",
+        "What happens when the prompt exceeds the limit?"
+      ],
+      "applicability": "Bernini accepts 512 encoder tokens including its official prefix. Long preservation clauses use space that construction clauses need, and prompts over the limit are refused before any render.",
+      "recommendation": "Bernini accepts 512 encoder tokens including its official prefix. Long preservation clauses use space that construction clauses need, and prompts over the limit are refused before any render."
+    },
+    {
+      "id": "EX-D-env-strong-foreground-weak",
+      "title": "Ditto replaces settings strongly and tends to reconstruct people and shapes",
+      "summary": "In the historical Ditto runs, space-station walls and Earth views arrived early while faces and eyewear changed. Spend early attention on foreground identity and structure; do not escalate background instructions once the setting is already convincing.",
+      "questions": [
+        "Where does Ditto put its effort?",
+        "What should I specify first for Ditto?",
+        "Why did the setting work while the people changed?"
+      ],
+      "renderers": [
+        "ditto"
+      ],
+      "layer": "renderer",
+      "evidence_ids": [
+        "EV-D-FS4-full",
+        "EV-D-FS4-no",
+        "EV-renderer-profile-20261102"
+      ],
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/D-env-strong-foreground-weak.md",
+      "version": "1",
+      "sha256": "5334a7c8c409c1d37ec5b087b202dc9392afa5074a516ae8ad7a274c7a58c80a",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Ditto replaces settings strongly and tends to reconstruct people and shapes",
+        "Where does Ditto put its effort?",
+        "What should I specify first for Ditto?",
+        "Why did the setting work while the people changed?"
+      ],
+      "applicability": "In the historical Ditto runs, space-station walls and Earth views arrived early while faces and eyewear changed. Spend early attention on foreground identity and structure; do not escalate background instructions once the setting is already convincing.",
+      "recommendation": "In the historical Ditto runs, space-station walls and Earth views arrived early while faces and eyewear changed. Spend early attention on foreground identity and structure; do not escalate background instructions once the setting is already convincing."
+    },
+    {
+      "id": "EX-D-shape-repair-adds",
+      "title": "On Ditto, a shape-repair pass can add an object instead of fixing one",
+      "summary": "A request to make a dome compact produced a second dome. For an important instance repair, anchor the existing object to its neighbors and footprint, or restart from an intact earlier input, rather than continuing to sculpt a duplicated one.",
+      "questions": [
+        "Why did my correction add another object?",
+        "How do I repair the shape of one object on Ditto?"
+      ],
+      "renderers": [
+        "ditto"
+      ],
+      "layer": "renderer",
+      "evidence_ids": [
+        "EV-D-027-full",
+        "EV-H-D-024__long__full_knowledge",
+        "EV-H-D-027__short__no_knowledge"
+      ],
+      "stages": [
+        "revise"
+      ],
+      "path": "knowledge/experience/curated/entries/D-shape-repair-adds.md",
+      "version": "1",
+      "sha256": "075f7e0001ce717852384a6dc229cf6c9d81c2c70d00e0d277d314303a8b7ec3",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "On Ditto, a shape-repair pass can add an object instead of fixing one",
+        "Why did my correction add another object?",
+        "How do I repair the shape of one object on Ditto?"
+      ],
+      "applicability": "A request to make a dome compact produced a second dome. For an important instance repair, anchor the existing object to its neighbors and footprint, or restart from an intact earlier input, rather than continuing to sculpt a duplicated one.",
+      "recommendation": "A request to make a dome compact produced a second dome. For an important instance repair, anchor the existing object to its neighbors and footprint, or restart from an intact earlier input, rather than continuing to sculpt a duplicated one."
+    },
+    {
+      "id": "EX-C-craft",
+      "title": "Craft and material worlds need a construction clause for every object",
+      "summary": "In a brick, paper, felt or cut-paper world the medium is made of pieces. A subject built from the material in a photographic scene reads as a collage; name how each plane is assembled from the material.",
+      "questions": [
+        "How do I recast into a physical material such as bricks, paper or felt?",
+        "Why does my character look like a toy placed in a real scene?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "condition",
+      "evidence_ids": [
+        "EV-V5-LEGO-planes",
+        "EV-V5-train-cases"
+      ],
+      "families": [
+        "手工与材料"
+      ],
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/C-craft.md",
+      "version": "1",
+      "sha256": "1259fd66d92d6811f35623e6eba42fdbed70f86e13e2fc1976fcda1f6948f8dd",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Craft and material worlds need a construction clause for every object",
+        "How do I recast into a physical material such as bricks, paper or felt?",
+        "Why does my character look like a toy placed in a real scene?"
+      ],
+      "applicability": "In a brick, paper, felt or cut-paper world the medium is made of pieces. A subject built from the material in a photographic scene reads as a collage; name how each plane is assembled from the material.",
+      "recommendation": "In a brick, paper, felt or cut-paper world the medium is made of pieces. A subject built from the material in a photographic scene reads as a collage; name how each plane is assembled from the material."
+    },
+    {
+      "id": "EX-C-film-world",
+      "title": "Film-world recasts: the setting is easy, the people are where it fails",
+      "summary": "In recasts into a film's production design, the environment converted readily. The failures in the train evidence were on the people: replaced, left in source look as cut-outs, or mismatched in light.",
+      "questions": [
+        "The set is convincing but the people are wrong. Where did it fail?",
+        "How do I recast into a film's world without replacing the people?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "condition",
+      "evidence_ids": [
+        "EV-V5-train-cases",
+        "EV-F001",
+        "EV-F003",
+        "EV-F005",
+        "EV-D-FS4-full"
+      ],
+      "families": [
+        "电影与影视世界"
+      ],
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/C-film-world.md",
+      "version": "1",
+      "sha256": "8f93e1f159661d9116bf3153930a3631c61c9638fb61711c67b9fceac72afaff",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Film-world recasts: the setting is easy, the people are where it fails",
+        "The set is convincing but the people are wrong. Where did it fail?",
+        "How do I recast into a film's world without replacing the people?"
+      ],
+      "applicability": "In recasts into a film's production design, the environment converted readily. The failures in the train evidence were on the people: replaced, left in source look as cut-outs, or mismatched in light.",
+      "recommendation": "In recasts into a film's production design, the environment converted readily. The failures in the train evidence were on the people: replaced, left in source look as cut-outs, or mismatched in light."
+    },
+    {
+      "id": "EX-C-hand-drawn",
+      "title": "Hand-drawn, painted and comic worlds: no scored train evidence yet; carry the principles",
+      "summary": "The train split holds anime, painting and comic requests but this library has no scored runs for them. Apply the shared principles and treat any style-specific guidance as a hypothesis to test.",
+      "questions": [
+        "Is there guidance for anime, painting or comic worlds?",
+        "What should I check first in a drawn or painted medium?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "condition",
+      "evidence_ids": [
         "EV-semantic-goal-review"
       ],
-      "review_status": "approved",
-      "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "aliases": [
-        "continuation value",
-        "Would another attempt improve the requested result or merely restore an obsolete commitment?"
+      "families": [
+        "日漫与手绘动画",
+        "绘画与版画",
+        "欧美动画与漫画"
       ],
-      "applicability": "Favor delivery when the target is adequately realized.",
-      "recommendation": "Favor delivery when the target is adequately realized. Reassess inherited preservation complaints; spend another attempt on an important target gap and compare against retained alternatives."
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/C-hand-drawn.md",
+      "version": "1",
+      "sha256": "18c4e0512047adb2fb8b3adcd57362a28bd0328f2b17c86092716c61cee4e048",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Hand-drawn, painted and comic worlds: no scored train evidence yet; carry the principles",
+        "Is there guidance for anime, painting or comic worlds?",
+        "What should I check first in a drawn or painted medium?"
+      ],
+      "applicability": "The train split holds anime, painting and comic requests but this library has no scored runs for them. Apply the shared principles and treat any style-specific guidance as a hypothesis to test.",
+      "recommendation": "The train split holds anime, painting and comic requests but this library has no scored runs for them. Apply the shared principles and treat any style-specific guidance as a hypothesis to test."
+    },
+    {
+      "id": "EX-C-long",
+      "title": "Long requests list many details; carry the ones that define the world, within the text limit",
+      "summary": "A long request names planes, costume, light and a camera behavior. Carry them in order of what makes the world recognizable, and check each named item in the delivered video, because a long list can exceed what one prompt carries.",
+      "questions": [
+        "The request lists many details. Do I need to carry them all?",
+        "How do I check a long request against the result?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "condition",
+      "evidence_ids": [
+        "EV-V5-train-cases",
+        "EV-V5-LEGO-planes",
+        "EV-PE-token-limit"
+      ],
+      "tracks": [
+        "long"
+      ],
+      "stages": [
+        "design",
+        "inspect",
+        "deliver"
+      ],
+      "path": "knowledge/experience/curated/entries/C-long.md",
+      "version": "1",
+      "sha256": "17df236053ed16f74b505161a08d31c5007249b0e7240a8561f190a8f5adff4b",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Long requests list many details; carry the ones that define the world, within the text limit",
+        "The request lists many details. Do I need to carry them all?",
+        "How do I check a long request against the result?"
+      ],
+      "applicability": "A long request names planes, costume, light and a camera behavior. Carry them in order of what makes the world recognizable, and check each named item in the delivered video, because a long list can exceed what one prompt carries.",
+      "recommendation": "A long request names planes, costume, light and a camera behavior. Carry them in order of what makes the world recognizable, and check each named item in the delivered video, because a long list can exceed what one prompt carries."
+    },
+    {
+      "id": "EX-C-short",
+      "title": "Short requests name the world only; decide the counterparts and layout yourself",
+      "summary": "A short request gives the target world and little else. Two preview short tasks lost the source's layout and camera position when the prompt followed the request's level of detail; write the source's arrangement and its counterparts into the prompt.",
+      "questions": [
+        "The request is one sentence. What do I have to add?",
+        "Why did a short-prompt result keep the theme but lose the scene?"
+      ],
+      "renderers": [
+        "bernini",
+        "ditto"
+      ],
+      "layer": "condition",
+      "evidence_ids": [
+        "EV-V5-train-cases"
+      ],
+      "tracks": [
+        "short"
+      ],
+      "stages": [
+        "design",
+        "inspect"
+      ],
+      "path": "knowledge/experience/curated/entries/C-short.md",
+      "version": "1",
+      "sha256": "01f2f8678373b81c91159c915900d31adcdf725ff6b00f8c864b30574f2612d2",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md",
+      "aliases": [
+        "Short requests name the world only; decide the counterparts and layout yourself",
+        "The request is one sentence. What do I have to add?",
+        "Why did a short-prompt result keep the theme but lose the scene?"
+      ],
+      "applicability": "A short request gives the target world and little else. Two preview short tasks lost the source's layout and camera position when the prompt followed the request's level of detail; write the source's arrangement and its counterparts into the prompt.",
+      "recommendation": "A short request gives the target world and little else. Two preview short tasks lost the source's layout and camera position when the prompt followed the request's level of detail; write the source's arrangement and its counterparts into the prompt."
     }
   ],
   "resources": [
@@ -937,22 +1280,13 @@
       "review_reference": "docs/creative-fewshot-three-arm-plan.md#experimental-contract"
     },
     {
-      "id": "EX-renderer-profiles",
-      "title": "Bernini and Ditto: starting preferences and recurring traps",
-      "path": "knowledge/experience/curated/renderers.md",
-      "version": "4",
-      "sha256": "6095e75c0c8665eae63d227d2679f2b8c2e45081bdd1361c4837a1067c913d37",
-      "review_status": "approved",
-      "review_reference": "docs/experience-system-refactor-20261103.md"
-    },
-    {
       "id": "EV-semantic-goal-review",
       "title": "Goal interpretation and inherited preservation commitments",
       "path": "knowledge/experience/curated/evidence/semantic-goal-review-20261102.md",
       "version": "1",
       "review_status": "approved",
       "review_reference": "docs/semantic-experience-revision-plan-20261102.md#intended-change",
-      "sha256": "0ef3904389db5103703cb24e2935b61a4fad257e48e7901bd1bddb40b3cadce9"
+      "sha256": "6242bcd1e33a277b9c3d228fa4482673f9c3eaf6ee77aa8aaa17dbc61c2cbdba"
     },
     {
       "id": "EV-F001-creative-first",
@@ -968,9 +1302,45 @@
       "title": "Historical renderer profiles and recorded setups (2026-11-02)",
       "path": "knowledge/experience/curated/evidence/renderer-profile-20261102.md",
       "version": "1",
-      "sha256": "27c170eabbcda93eea35bd3287878f044f6c68df4076404dd81117c798b7c0a2",
+      "sha256": "627d14d9e31fdd0acd8c1c4558f41aff3878c98e5e3a4a7a592b075ca42ac90a",
       "review_status": "approved",
       "review_reference": "docs/experience-system-refactor-20261103.md"
+    },
+    {
+      "id": "EV-V5-LEGO-planes",
+      "title": "Brick-world case: planes converted and not converted",
+      "path": "knowledge/experience/curated/evidence/v5-lego-planes.md",
+      "version": "1",
+      "sha256": "485f457d95e2c2d9b2012fe102ecb032778e0762ddfd380be6cf67e5156066f5",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md"
+    },
+    {
+      "id": "EV-V5-train-cases",
+      "title": "v5 scores and reasons for train-split cases",
+      "path": "knowledge/experience/curated/evidence/v5-train-cases.json",
+      "version": "1",
+      "sha256": "f51ec8ab5595ba485c025fc5dc3a9ab3207e6776ce906eaae612c79fa0a3bb57",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md"
+    },
+    {
+      "id": "EV-PE-token-limit",
+      "title": "PE prompts refused for length",
+      "path": "knowledge/experience/curated/evidence/pe-token-limit.md",
+      "version": "1",
+      "sha256": "e6c054a731545cb19705d34d06b4ef15def7548fe5c881d6b01928824c9aa978",
+      "review_status": "approved",
+      "review_reference": "docs/experience-rebuild-20261103.md"
+    },
+    {
+      "id": "EX-renderer-profiles",
+      "title": "Renderer entrances",
+      "path": "knowledge/experience/curated/renderers.md",
+      "version": "derived-e1a2b9e1d0b787ac",
+      "sha256": "e1a2b9e1d0b787acbc468754bf80dd8982eb203cd0892d76dfc013e009b46ca1",
+      "review_status": "approved",
+      "review_reference": "Derived from canonical entry metadata"
     }
   ]
 }

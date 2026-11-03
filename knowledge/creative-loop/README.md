@@ -1,13 +1,13 @@
-# Knowledge for a continuing video task
+# Knowledge for recasting a video into another world or medium
 
 | Current question | Useful entrance |
 |---|---|
 | How do the tools and continuing workspace work? | [Operating manual](../../src/planner_harness/CREATIVE_LOOP.md), [reading guide](READING.md) |
-| Which source meanings should the target retain or reinterpret? | [Task and design manual](UNDERSTAND_AND_DESIGN.md), [meaning guide](../guides/meaning.md) |
+| What is the moment, which planes need rebuilding, and what does each become? | [Recast design manual](UNDERSTAND_AND_DESIGN.md), [meaning guide](../guides/meaning.md) |
 | How can the proposed visual direction be realized? | [Theme](../guides/theme.md), [media](../guides/media.md), [time](../guides/time.md), [combination](../guides/combination.md), [design expression](../guides/design-expression.md); full entries and domain references |
 | How do I turn this design and feedback into a rendering prompt? | [Prompt-writing guide](PROMPT_WRITING.md), also included in the Planner instructions |
 | What should this renderer make me anticipate? | [Renderer profiles](../experience/curated/renderers.md), then relevant [experience entries](../experience/curated/README.md) |
-| Why did this result occur, and what is worth changing? | [Revision manual](UNDERSTAND_AND_REVISE.md), [experience map](../experience/curated/README.md) |
+| Why did this result occur, what is worth changing, and which candidate do I deliver? | [Revision manual](UNDERSTAND_AND_REVISE.md), [experience map](../experience/curated/README.md) |
 | How should I check the generated result? | [Qualitative review guide](../../.agents/skills/lha-video-review/SKILL.md) |
 
 
@@ -24,7 +24,7 @@
 | Revise, compare and deliver | [Revision and delivery](UNDERSTAND_AND_REVISE.md) |
 | Judge applicability and read complete evidence | [Experience use](READING.md) |
 
-Use either a working question or a [model profile](../experience/curated/renderers.md) to reach the same experience account. Search natural questions such as “Why did another wording change leave the room recognizable?” or “Which input can recover a lost face?”; inspect the returned conditions and follow the full text and evidence links.
+Use either a working question or a [model profile](../experience/curated/renderers.md) to reach the same experience account. Search natural questions such as “Why does the result still look like the original place?” or “Which input can recover a lost face?”; inspect the returned conditions and follow the full text and evidence links.
 
 [Shared operating reference](OPERATING_REFERENCE.md) (knowledge id `operating-reference`).
 

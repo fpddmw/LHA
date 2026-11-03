@@ -1,10 +1,10 @@
 # Read to improve the current judgment
 
-Use `understand-and-design` for task meaning and visual proposals, and `understand-and-revise` for interpreting results and choosing another attempt or delivery.
+Use `understand-and-design` to plan the recast (the moment, the planes, the counterparts, the medium's construction) and `understand-and-revise` to read results, choose another attempt and select the delivery.
 
 The style library supplies knowledge maps, thematic guides, complete entries and original sources. Read it for relationships that can construct a visual direction. The meaning guide develops action, object roles and narrative emphasis within that library.
 
-The [experience map](../experience/curated/README.md) and [renderer profiles](../experience/curated/renderers.md) supply practical preferences for recurring task-scene-renderer conditions. Start with a summary that matches a consequential question. Read the full account for its explanation and alternatives; open linked evidence when it could change how you apply the advice. Style knowledge remains useful during revision, and experience can improve the initial proposal.
+The [experience map](../experience/curated/README.md) and [renderer profiles](../experience/curated/renderers.md) supply practical preferences. The map orders entries as common principles, then the renderer you are using, then the conditions of this task (short or long request, family of world). Start with a summary that matches a consequential question. Read the full account for its explanation and alternatives; open linked evidence when it could change how you apply the advice. Style knowledge remains useful during revision, and experience can improve the initial proposal.
 
 Apply relevant experience to the actual scene and renderer: use its conditions to choose the editing input, visual construction and wording. Express the adopted choice in the generation prompt through the affected subjects, surfaces, surroundings or action relationships. The [prompt-writing guide](PROMPT_WRITING.md), included in your instructions, develops this visual translation. Optional notes/workspace can retain a useful explanation and source ID.
 

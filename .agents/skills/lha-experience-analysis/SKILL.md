@@ -9,9 +9,15 @@ Use the [shared writing standard](../../../docs/experience-authoring-standard.md
 
 Start from the distinction that changes a decision. A useful experience explains why a plausible design failed, why a neighboring case differed, and which condition should favor a different choice. Lead with the practical preference. A sequence of events or a reminder to consider all risks adds little.
 
+Read the nearest current account and a representative entry from the same layer before drafting. The maintenance context supplies writing references from its frozen private library. Follow their level of explanation: **name the action, explain what in the scene or renderer makes it work, and show how to express or inspect it**. For example, the emission account teaches the relation between the glowing perimeter and its unlit support; "check whether the light is correct" would lose the useful judgment. Keep a recommendation direct even when its evidence is a small set of cases, and identify that evidence in the footer. Use the case to develop a new judgment, not to copy its objects into a new task.
+
+## Place the judgment before writing it
+
+The library is layered. A judgment belongs in one of three: a **principle** that holds across renderers (about recasting itself), a **renderer** capability or trap (what Bernini or Ditto did under a given construction), or a **condition** of the task (short or long request, family of world or medium). Decide the layer first, and state the evidence status: train-split cases only, scores from the current evaluation protocol, how many tasks, how many renderings per condition. Evidence on one task is a working pattern; evidence on none is a hypothesis, and says so. Do not use held-out (test-split) videos, their scores or their prompts.
+
 ## Understand the objective behind the attempt
 
-Compare the user's request, source performance, Planner's added commitments and the reviewer's interpretation. An exact prompt can pursue the wrong event. Retaining an obsolete source activity can defeat a world transformation; replacing it can be the intended achievement. Decide what the target needs before explaining a difference as damage.
+Compare the user's request, source performance, Planner's added commitments and the reviewer's interpretation. An exact prompt can pursue the wrong event. Retaining an obsolete source activity can defeat a world transformation; replacing it can be the intended achievement. A task is scored on how fully the world was rebuilt, whether the moment is recognizable, and how stable and clean the video is; describe methods that move these, and keep judge rubric details out of the guidance. Decide what the target needs before explaining a difference as damage.
 
 Historical requirements and scores are attributed judgments. Keep their observations while revising a mistaken interpretation. The [semantic goal review](../../../knowledge/experience/curated/evidence/semantic-goal-review-20261102.md) illustrates this operation without making its particular adaptation a genre rule.
 

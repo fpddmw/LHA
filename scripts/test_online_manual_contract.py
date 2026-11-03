@@ -115,7 +115,7 @@ class ManualContractTests(unittest.TestCase):
         guide = ROOT / "knowledge/creative-loop/PROMPT_WRITING.md"
         for mode in ("full", "none"):
             with self.subTest(mode=mode):
-                ids = ["theme"] + (["EX-lighting-integration"] if mode == "full" else [])
+                ids = ["theme"] + (["EX-P-medium-logic"] if mode == "full" else [])
                 model = fixtures.Scripted([
                     fixtures.action("read", targets=[{"id": identity} for identity in ids]),
                     fixtures.action("generate", input_video="source", prompt="Blue light falls across the scene."),

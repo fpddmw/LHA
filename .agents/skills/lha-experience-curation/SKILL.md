@@ -17,7 +17,11 @@ Compare the new contribution with its target version and current text. Keep info
 
 ## Put each change in its proper place
 
+Every canonical entry carries a layer (`principle`, `renderer` or `condition`), the renderers it applies to, optional `tracks` (short, long), `families` and `stages`. The map orders entries by layer; this is a soft partition, so a principle is never hidden behind a renderer or a family. Do not hard-filter. Keep the shared lesson in a principle and the renderer-specific consequence in a renderer entry that links to it. Include placement in new contributions and explicit curation decisions; linked comments inherit their target's placement. The private curation interface updates text, metadata and navigation together. `scripts/build_experience_catalog.py` is the separately authorized repository publication tool for file-backed entries, not a task-maintenance action. It checks declared evidence provenance, hashes and generated navigation. Entries whose evidence is thin should say so in their evidence status.
+
 Canonical entries own revisable judgments. Their title, summary, questions and renderer scope must express the same operative condition as their body. Maps and renderer entrances derive their entry recommendations from this metadata. Cases retain actual interventions and outcomes; comments and proposed revisions remain linked records, including after a curation decision.
+
+Compare the proposed text with a good current entry at the same layer. Preserve the useful action and explanation when merging; do not replace them with a list of risks. Keep the summary actionable on its own, develop the visual relationship in the body, and put counts and protocol details in a short evidence footer. Retain an informative disagreement beside the condition it changes. A short clarification should stay a clarification; a new full entry should teach a distinct judgment rather than repeat the task log.
 
 Professional manuals teach how to understand a task, inspect evidence and use knowledge. Operating manuals describe tools. Skills teach maintenance methods. Propose changes to these in a development report; the contribution and library-curation interfaces cannot edit them. A shared-library publication also needs its own explicit authorization.
 

@@ -57,8 +57,8 @@ class ScopeTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             full = CreativeKnowledge(ROOT, experience_mode="full")
             none = CreativeKnowledge(ROOT, experience_mode="none")
-            self.assertEqual(len(full.curated_catalog["entries"]), 15)
-            self.assertIn("EX-semantic-reconstruction", full.items)
+            self.assertEqual(len(full.curated_catalog["entries"]), 21)
+            self.assertIn("EX-P-moment", full.items)
             self.assertEqual(full.manifest["entries"], none.manifest["entries"])
             self.assertEqual(full.manifest["domain_references"], none.manifest["domain_references"])
             for entry in full.curated_catalog["entries"] + full.curated_catalog["resources"]:
@@ -214,7 +214,7 @@ class LoopTests(unittest.TestCase):
             self.assertEqual(len(state["evaluations"]), 4)
             self.assertEqual(self.h.knowledge.experience_mode, mode)
             if mode == "none":
-                self.assertNotIn("EX-design-conflict", json.dumps(self.h.knowledge.overview()))
+                self.assertNotIn("EX-P-spend-attempts", json.dumps(self.h.knowledge.overview()))
 
     def test_failed_render_does_not_advance_seed(self):
         self.h = PlannerHarness(

@@ -155,6 +155,7 @@ def snapshot_index(snapshot):
                 + snapshot.get("experience_contributions", {}).get("items", [])
                 + snapshot.get("experience_contributions", {}).get("cases", [])):
         result[row["id"]] = {k: row.get(k) for k in ("id", "path", "title", "version", "sha256")}
+        result[row["id"]].update({k: row[k] for k in ("layer", "tracks", "families", "stages", "renderers") if k in row})
     for row in result.values():
         row["sha256"] = row.get("sha256") or snapshot.get("documents", {}).get(row["path"], {}).get(
             "sha256"

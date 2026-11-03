@@ -48,6 +48,10 @@ Use these lenses to discover a useful account. Let a different distinction emerg
 
 ## Write for progressive reading
 
+Use the current library as the writing reference. Read the nearest account and a representative entry at the same layer: [P-every-plane](../knowledge/experience/curated/entries/P-every-plane.md) develops a construction judgment, [B-emission-binding](../knowledge/experience/curated/entries/B-emission-binding.md) turns a renderer failure into a precise spatial instruction, and [C-long](../knowledge/experience/curated/entries/C-long.md) explains what a task condition changes. Maintenance resolves these examples from its own frozen library. Match their useful specificity and direct recommendations; use the structure that explains the new phenomenon rather than copying their scene or headings.
+
+"Consider all risks and inspect the result" leaves the next decision unchanged. "Describe the glowing perimeter together with its unlit support" supplies a construction the Planner can use. Develop that kind of increment: a practical preference, why the observed visual relationship calls for it, and a concrete application. Give evidence and any untested repair proposal their proper status once, without repeatedly weakening the recommendation. A comment can add one sharp correction; a standalone entry needs enough explanation to guide a reader who did not run the task.
+
 The title and discovery summary should already communicate the condition and practical implication. Open the entry with its operative judgment. Develop the mechanism or explanatory distinction, the cues that make it relevant, and the actions it favors. Keep examples specific enough to make those actions imaginable. Use structure suited to the phenomenon rather than filling the same template in every entry.
 
 Keep decision-changing conditions beside the recommendation: requested wide sleeves, a close-up whose expression is the point, a renderer-specific failure, or an input that has already lost a face. Put detailed counts, protocol history, coverage and non-isolation notes in a compact **Evidence** footer. A limitation that changes the recommended action belongs in the main explanation; repeating general uncertainty throughout the entry consumes attention without improving judgment.
@@ -89,3 +93,19 @@ The shared tool instructions are exposed as `observe-events` in both experience 
 Lead with the useful judgment and explain it through the actual intervention. Challenge your own choice, reviewer or old guidance when the record warrants it. Say which decision useful guidance improved; for disagreement supply a precise correction. Ordinary prose and source links suffice. Runtime binds the source case and target version, and exposes related contributions at the entry entrance. Comments remain identifiable instead of silently becoming the entry author's advice.
 
 Read the settled task's protocol before interpreting its reviews or choices. Maintenance may inspect additional saved intervals; identify these as post-task observations. Available independent outcomes remain attributed to their evaluator. This task introduces no new render or new independent score.
+
+## Place each entry in the layered library (catalog v2)
+
+The task is a recast: the source moment is rebuilt as part of another world or medium, and the result is read on how fully the world was rebuilt, whether the moment is recognizable, and how stable and clean it is. Experience records methods that move these, not judge rubric details or score caps.
+
+Each canonical entry belongs to one layer:
+
+- **principle**: holds across renderers and tasks (keep the moment, rebuild every plane, give counterparts, write the medium's construction rules, check the worst second, compare retained candidates, spend attempts differently).
+- **renderer**: a capability or trap of Bernini or Ditto, written with the shared lesson linked.
+- **condition**: depends on the task (`tracks`: short or long request; `families`: the kind of world or medium, such as craft, film world, hand-drawn).
+
+The map orders entries principle, renderer, then condition. This is a soft partition: nothing is hidden by filtering, and a reader of a Bernini long craft task sees all three layers. Metadata lives in the `<!-- meta {...} -->` line at the top of each file; `scripts/build_experience_catalog.py` builds the catalog, README and renderer entrance from it and checks evidence ids and hashes.
+
+State the evidence status in every entry: how many tasks, which split, which judge and protocol, how many renderings per condition. Train-split material only; held-out (test) videos, scores and prompts never enter the library, and the builder rejects evidence that cites a held-out source. An entry resting on one task is a working pattern. A family with no scored run is a hypothesis and is labelled one.
+
+The no-experience arm receives the same task definition and method guidance in its manuals, without empirical conclusions drawn from earlier runs.

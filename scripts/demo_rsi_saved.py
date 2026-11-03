@@ -22,7 +22,7 @@ class DemonstrationModel:
     def predict_text(self, **kwargs):
         self.calls += 1
         if self.calls == 1:
-            return json.dumps({"action": "read", "arguments": {"targets": [{"id": "choose-editing-input", "section": "I3"}, {"id": "express-edits", "section": "X6"}]}})
+            return json.dumps({"action": "read", "arguments": {"targets": [{"id": "experience-map", "section": "I3"}, {"id": "express-edits", "section": "X6"}]}})
         return json.dumps({"action": "finish", "arguments": {"video": "v2", "stop_reason": "no_promising_attempt",
             "message": "Scripted interface fixture only; this is not a new model judgment or a measured policy improvement."}})
 

@@ -52,7 +52,7 @@ class ContinuousTests(unittest.TestCase):
         self.assertEqual(state["proposal"]["self_review"], "")
 
     def test_continuity_arbitrary_candidate_and_no_acceptance_stage(self):
-        state = self.start([call("read", targets=[{"id": "choose-editing-input"}]),
+        state = self.start([call("read", targets=[{"id": "experience-map"}]),
                             call("note", text="A useful direction remains open."),
                             call("generate", input_video="source", prompt="Make it blue.")])
         self.assertEqual(state["status"], "waiting_tool")

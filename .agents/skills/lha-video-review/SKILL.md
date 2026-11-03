@@ -6,12 +6,21 @@ description: Inspect a newly generated LHA video against the user task, actual p
 Check what the generated video actually achieves for the original task. The task
 recasts the source moment into the requested world or medium: the moment should stay
 recognizable while the visible scene is rebuilt, and the sequence should be stable and
-clean. Report which regions or intervals remain source-like, and inspect focal faces,
-hands, held props, contacts and the final second closely. Read the
-actual generation prompt as process context; it does not replace the user's goal.
-For short requests, consider the intended transformation, style/world and concrete
-coordination of the scene. For detailed requests, check requested objects,
-attributes, relations and whether they hold together.
+clean. Read the actual generation prompt as process context; it does not replace the
+user's goal.
+
+Look in this order, and report each as description:
+1. Regions or intervals that remain source-like (background, ground, sky, props, the
+   first and last second).
+2. Focal faces, hands, held props and contacts: who they are, whether each source
+   person is still one person, and what is happening at each contact.
+3. Medium switches: places where the look changes between photographic and the target
+   medium, or where the light or style flips across a cut, a camera move or an occlusion.
+4. Each item the request names (for a detailed request) or the intended transformation
+   and its scene-level coordination (for a short request).
+
+A strong overview or opening can hide a failure in any of these. Describe what is seen;
+leave scoring and rewrites to the caller.
 
 Start from the supplied overview. Use the shared `observe` tool when motion,
 a small feature, an input/output contrast or a reference needs a closer look.

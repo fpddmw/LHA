@@ -131,7 +131,7 @@ def present(payload, state, knowledge):
         # Explicit operational projection: never dump operator limits or pressure settings.
         payload["execution_profile"] = {
             k: copy.deepcopy(execution[k])
-            for k in ("mode", "experience_mode", "seed_sequence")
+            for k in ("mode", "experience_mode", "seed_sequence", "task_track")
             if k in execution
         }
         payload["execution_profile"]["renderer"] = {
@@ -326,6 +326,11 @@ def fit_creative(payload, state, system_chars):
                 "open": {"action": "history", "arguments": {"event_id": newest["event_id"]}},
             }
         ]
+    if not fits():
+        # At tight capacity, directory descriptions duplicate the system reading
+        # guide. Keep the browse entrance and spend the space on actual reading.
+        payload["knowledge_entrances"] = {"open": {"action": "browse", "arguments": {"id": "map"}}}
+        payload["context_policy"] = "Exact records and complete read pages remain available through history; visible pages are shortened only to fit capacity."
     if not fits():
         from .working_memory import fit_display
 

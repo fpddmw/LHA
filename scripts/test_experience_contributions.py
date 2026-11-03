@@ -144,6 +144,71 @@ class ContributionTests(unittest.TestCase):
         for path, text in navigation_documents(self.seed['curated_catalog']).items():
             self.assertEqual((ROOT/path).read_text(), text)
 
+    def test_layered_create_comment_curate_search_and_freeze(self):
+        scope = {'layer':'condition', 'tracks':['long'], 'families':['layered-fixture-family'], 'stages':['revise']}
+        change = {'op':'create', 'id':'proposal-layered', 'title':'Layered fixture', 'text':'A concrete fixture account.',
+                  'summary':'Use the fixture construction.', 'questions':['Which fixture?'], 'renderers':['bernini'], **scope}
+        contributed, ids = tx.changeset(ROOT, self.seed, [change], self.source)
+        linked, note_ids = tx.changeset(ROOT, contributed, [{'op':'comment', 'id':ids[0], 'text':'An explicit boundary.'}], self.source)
+        for row in linked['experience_contributions']['items']:
+            self.assertEqual({k:row[k] for k in scope}, scope)
+        decision = {'contribution_ids':ids, 'disposition':'accept', 'reason':'Fixture curation.',
+                    'expected_entry_sha256':None,
+                    'entry':{'id':'EX-layered-fixture', 'title':'Layered fixture', 'text':'The curated account.',
+                             'summary':'Use the fixture construction.', 'questions':['Which fixture?'], 'renderers':['bernini']}}
+        revised = curate(linked, [decision], authorization='software-fixture-review')
+        k = CreativeKnowledge(ROOT, revised)
+        self.assertEqual({key:k.items['EX-layered-fixture'][key] for key in scope}, scope)
+        self.assertIn('EX-layered-fixture', [v['id'] for v in k.search('layered-fixture-family',scope='experience')['matches']])
+        map_text = revised['documents']['knowledge/experience/curated/README.md']['text']
+        self.assertGreater(map_text.index('[EX-layered-fixture]'), map_text.index('## Conditions of the task'))
+        self.assertEqual(k.read(note_ids[0])['target_id'], ids[0])
+        saved = self.folder/'layered.json'; k.freeze(saved)
+        restored = CreativeKnowledge(ROOT,saved)
+        self.assertEqual({key:restored.read('EX-layered-fixture')[key] for key in scope},scope)
+        self.assertEqual({key:restored.usage_index()['items']['EX-layered-fixture'][key] for key in scope},scope)
+        self.assertEqual({key:snapshot_index(load(saved))['EX-layered-fixture'][key] for key in scope},scope)
+        self.assertEqual(self.seed['curated_catalog'], contributed['curated_catalog'])
+
+    def test_placement_revision_and_conflicting_merge(self):
+        result, ids = self.add(); decision = self.decision(ids[0])
+        decision['entry'].update(layer='renderer',tracks=['short'],families=['fixture'],stages=['inspect'])
+        revised = curate(result,[decision],authorization='fixture-review')
+        self.assertEqual(CreativeKnowledge(ROOT,revised).items[self.entry['id']]['layer'],'renderer')
+        changes = [{'op':'create','id':'proposal-'+track,'title':'Fixture','summary':'Fixture.', 'text':'Fixture.',
+                    'layer':'condition','tracks':[track]} for track in ('short','long')]
+        result, ids = tx.changeset(ROOT,self.seed,changes,self.source)
+        decision = {'contribution_ids':ids,'disposition':'merge','reason':'Fixture merge.',
+                    'expected_entry_sha256':None,'entry':{'id':'EX-merged','title':'Fixture','summary':'Fixture.',
+                     'text':'Fixture.','questions':[],'renderers':['bernini']}}
+        with self.assertRaisesRegex(ValueError,'disagree on tracks'):
+            curate(result,[decision],authorization='fixture-review')
+        decision['entry']['tracks']=['short','long']
+        revised=curate(result,[decision],authorization='fixture-review')
+        self.assertEqual(CreativeKnowledge(ROOT,revised).items['EX-merged']['tracks'],['short','long'])
+
+    def test_invalid_placement_is_rejected_before_ingestion(self):
+        for fields in ({'layer':'unknown'}, {'tracks':['medium']}, {'families':'craft'}, {'stages':['win']},
+                       {'layer':'renderer','renderers':[]}):
+            with self.subTest(fields=fields),self.assertRaises(ValueError):
+                tx.changeset(ROOT,self.seed,[{**self.comment(),**fields}],self.source)
+
+    def test_writing_references_use_private_frozen_versions(self):
+        references=m.writing_references(CreativeKnowledge(ROOT,self.seed))
+        self.assertEqual(len(references),3)
+        result, ids=tx.changeset(ROOT,self.seed,[{'op':'comment','id':'EX-B-emission-binding','text':'Fixture.'}],self.source)
+        entry=next(r for r in result['curated_catalog']['entries'] if r['id']=='EX-B-emission-binding')
+        decision={'contribution_ids':ids,'disposition':'merge','reason':'Private fixture revision.',
+                  'expected_entry_sha256':entry['sha256'], 'entry':{'id':entry['id'],'title':'Private emission',
+                  'text':'Private construction judgment.','summary':'Private preference.','questions':[],'renderers':['bernini']}}
+        revised=curate(result,[decision],authorization='fixture-review')
+        k=CreativeKnowledge(ROOT,revised)
+        reference=next(r for r in m.writing_references(k) if r['id']==entry['id'])
+        self.assertEqual(reference['sha256'],k.items[entry['id']]['sha256'])
+        self.assertEqual(reference['title'],'Private emission')
+        self.assertNotEqual(reference['sha256'],entry['sha256'])
+        self.assertEqual(m.writing_references(CreativeKnowledge(ROOT,experience_mode='none')),[])
+
     def video(self):
         import cv2
         import numpy as np
@@ -190,6 +255,9 @@ class ContributionTests(unittest.TestCase):
                     {'op':'create','id':'proposal-observation','title':'Fixture','summary':'A fixture judgment.','text':'A fixture observation.'}]}})
         status = tx.maintain(ROOT,self.folder,run,jid,{'model_calls':3,'attempts':1,'wall_seconds':30},model_factory=Model)
         self.assertEqual(status['status'],'activated',status)
+        initial=json.loads(seen[0]['user_text'])
+        self.assertEqual(len(initial['writing_references']),3)
+        self.assertIn('current library',seen[0]['system_prompt'])
         self.assertTrue(seen[1]['image_paths'])
         k=CreativeKnowledge(ROOT,tx.current(ROOT,self.folder)['snapshot'])
         case=k.read(k.read('proposal-observation')['case_id'],max_chars=8000)

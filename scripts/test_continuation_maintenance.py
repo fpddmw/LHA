@@ -33,12 +33,12 @@ class MaintenanceTests(unittest.TestCase):
         self.respond()
         self.resume(
             [
-                action("read", targets=[{"id": "EX-input-conditioning"}]),
+                action("read", targets=[{"id": "EX-B-chain-drift"}]),
                 action(
                     "generate",
                     input_video="v2",
                     prompt="Blue contours around the retained arrangement.",
-                    justification="EX-input-conditioning favors v2: retain its arrangement while developing the contours.",
+                    justification="EX-B-chain-drift favors v2: retain its arrangement while developing the contours.",
                 ),
             ]
         )
@@ -57,7 +57,7 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(generation["call_status"], "response_recorded")
         self.assertTrue(
             any(
-                s["id"] == "EX-input-conditioning" and s["surface"] == "text_page"
+                s["id"] == "EX-B-chain-drift" and s["surface"] == "text_page"
                 for s in generation["experience_exposure"]
             )
         )
@@ -79,7 +79,7 @@ class MaintenanceTests(unittest.TestCase):
             },
         )
         summary = export_batch(manifest, self.root / "export")
-        entry = next(r for r in summary["experience_usage"] if r["id"] == "EX-input-conditioning")
+        entry = next(r for r in summary["experience_usage"] if r["id"] == "EX-B-chain-drift")
         self.assertEqual(entry["literal_reference_events"], 1)
         self.assertTrue((self.root / "export/runs/full.md").is_file())
         readable = (self.root / "export/runs/full.md").read_text()

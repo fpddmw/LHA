@@ -166,7 +166,7 @@ class CreativeTests(unittest.TestCase):
         self.assertIn('.agents/skills/lha-video-review/SKILL.md',k.snapshot['documents'])
         approved_images = {r["path"] for r in k.curated_catalog["resources"] if Path(r["path"]).suffix in {".png", ".jpg", ".jpeg", ".webp"}}
         self.assertEqual(set(k.snapshot["asset_hashes"]) - set(original_assets), approved_images)
-        for identity in ("manual", "meaning", "opuscar-053", "choose-editing-input"):
+        for identity in ("manual", "meaning", "opuscar-053", "experience-map"):
             self.assertIn("text", k.read(identity))
         for identity in ("wiki-map", "wiki-scene-identity", "case-bernini-027-after-v1",
                          "knowledge/INTEGRATION.md", "knowledge/staged/e1-20261030/README.md", "../../.env"):

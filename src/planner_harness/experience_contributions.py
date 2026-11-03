@@ -15,24 +15,73 @@ from .execution import signature
 VERSION = "experience-contributions-v1"
 PREFIX = "knowledge/experience/contributions/"
 OPS = {"create", "comment", "clarify", "recommend", "propose_revision"}
+PLACEMENT_FIELDS = ("layer", "tracks", "families", "stages")
+
+
+def placement(update, inherited=None):
+    """Keep discovery placement with the account; older records default to principles."""
+    from .creative_knowledge import layered_fields
+    result = {key: copy.deepcopy(update.get(key, (inherited or {}).get(key, "principle" if key == "layer" else [])))
+              for key in PLACEMENT_FIELDS}
+    layered_fields(result)
+    return result
 
 
 def navigation_documents(catalog):
-    """One recommendation source for entry, question-map and renderer routes."""
+    """One recommendation source for entry, question-map and renderer routes.
+
+    A v1 catalog keeps the flat map. A v2 catalog groups entries by layer: common
+    principles first, then renderer capability, then task conditions by prompt length
+    and family. Every line is a catalog summary, so curation updates text and map together.
+    """
     def link(row):
         return f"[{row['id']}]({row['path'].removeprefix('knowledge/experience/curated/')})"
     def clean(text):
         return text.replace('|', '\\|').replace('\n', ' ')
     rows = catalog['entries']
-    text = ('# Experience for video design and revision\n\n'
-            'Choose the condition that matters to the target, then read its explanation and evidence. '
-            'This navigation is generated from the frozen entry catalog. Related task contributions '
-            'appear beside each entry in browse/read; their source cases and curation decisions remain distinct.\n\n'
-            '| Question | Working judgment |\n|---|---|\n')
-    for row in rows:
-        text += f"| {clean('; '.join(row['questions']))} | {link(row)}: {clean(row['summary'])} |\n"
-    text += ('\n[Reading guide](../../creative-loop/READING.md) · [Working routes](../../creative-loop/README.md) '
-             '· [Renderer entrances](renderers.md)\n')
+    layered = catalog.get('schema') == 'creative-experience-catalog-v2'
+    footer = ('\n[Reading guide](../../creative-loop/READING.md) · [Working routes](../../creative-loop/README.md) '
+              '· [Renderer entrances](renderers.md)\n')
+    if not layered:
+        text = ('# Experience for video design and revision\n\n'
+                'Choose the condition that matters to the target, then read its explanation and evidence. '
+                'This navigation is generated from the frozen entry catalog. Related task contributions '
+                'appear beside each entry in browse/read; their source cases and curation decisions remain distinct.\n\n'
+                '| Question | Working judgment |\n|---|---|\n')
+        for row in rows:
+            text += f"| {clean('; '.join(row['questions']))} | {link(row)}: {clean(row['summary'])} |\n"
+        text += footer
+    else:
+        def table(selected):
+            body = '| Question | Working judgment |\n|---|---|\n'
+            for row in selected:
+                body += f"| {clean('; '.join(row['questions']))} | {link(row)}: {clean(row['summary'])} |\n"
+            return body
+        text = ('# Experience for recasting a video into another world or medium\n\n'
+                'Entries are grouped by what they are about. Start with the common principles, then read the '
+                'section for the renderer you are using, then the section that matches the prompt length and '
+                'the kind of world or medium you were asked for. Each line is the entry\'s own summary; '
+                'open the entry for its conditions, exceptions and evidence. Related task contributions appear '
+                'beside each entry; their source cases and curation decisions remain distinct.\n\n'
+                '## Common principles\n\n' + table([r for r in rows if r.get('layer', 'principle') == 'principle']))
+        for renderer in sorted({v for r in rows if r.get('layer') == 'renderer' for v in r['renderers']}):
+            text += f'\n## {renderer.title()} capabilities and traps\n\n' + table(
+                [r for r in rows if r.get('layer') == 'renderer' and renderer in r['renderers']])
+        conditions = [r for r in rows if r.get('layer') == 'condition']
+        if conditions:
+            text += ('\n## Conditions of the task\n\nPrompt length and the kind of world or medium '
+                     'change what a good proposal contains.\n')
+            shown = set()
+            for label, picked in (
+                    ('Short prompts', [r for r in conditions if r.get('tracks') == ['short'] and not r.get('families')]),
+                    ('Long prompts', [r for r in conditions if r.get('tracks') == ['long'] and not r.get('families')]),
+                    ('By family of world or medium', [r for r in conditions if r.get('families')]),
+                    ('Other conditions', [r for r in conditions if not r.get('families') and r.get('tracks') not in (['short'], ['long'])])):
+                picked = [r for r in picked if r['id'] not in shown]
+                if picked:
+                    text += f'\n### {label}\n\n' + table(picked)
+                    shown.update(r['id'] for r in picked)
+        text += footer
     profiles = ('# Renderer entrances\n\n'
                 'Current recommendations below come from the same entry summaries as the question map. '
                 'Read the complete account for renderer-specific evidence and counterexamples. '
@@ -106,6 +155,7 @@ def validate(snapshot):
         if row.get("target_id") and row["target_id"] not in entry_ids | contribution_ids:
             raise ValueError("Contribution target is not an entry or another contribution")
         _strings(row.get("questions", [])); _strings(row.get("renderers", []))
+        placement(row)
     return content
 
 
@@ -138,7 +188,7 @@ def append(snapshot, changes, provenance, case=None):
     for change in changes:
         if not isinstance(change, dict) or change.get("op") not in OPS:
             raise ValueError("Task contributions use create/comment/clarify/recommend/propose_revision; replacement is curator-only")
-        if set(change) - {"op", "id", "text", "title", "summary", "questions", "renderers"}:
+        if set(change) - {"op", "id", "text", "title", "summary", "questions", "renderers", *PLACEMENT_FIELDS}:
             raise ValueError("Unknown contribution fields")
         op = change["op"]
         text = _text(change.get("text"), "text")
@@ -167,6 +217,9 @@ def append(snapshot, changes, provenance, case=None):
                "questions": _strings(change.get("questions", target.get("questions", []) if target else [])),
                "renderers": _strings(change.get("renderers", target.get("renderers", []) if target else [])),
                "operation_sha256": operation_hash, "kind": "experience_contribution"}
+        row.update(placement(change, target))
+        if row["layer"] == "renderer" and not row["renderers"]:
+            raise ValueError("Renderer-layer contributions must name their renderer")
         body = text + f"\n\nSource case: [{case_id}]({case_id}.md)\n"
         row["sha256"] = digest(body)
         result["documents"][row["path"]] = {"text": body, "sha256": row["sha256"]}
@@ -200,7 +253,9 @@ def curate(snapshot, decisions, *, authorization):
             raise ValueError("Superseding needs an existing successor contribution")
         update = decision.get("entry")
         if disposition in {"accept", "merge"}:
-            if not isinstance(update, dict) or set(update) != {"id", "title", "text", "summary", "questions", "renderers"}:
+            required = {"id", "title", "text", "summary", "questions", "renderers"}
+            if (not isinstance(update, dict) or not required <= set(update)
+                    or set(update) - required - set(PLACEMENT_FIELDS)):
                 raise ValueError("Curate complete entry text and discovery metadata together")
             identity = update["id"]
             if not isinstance(identity, str) or not re.fullmatch(r"EX-[A-Za-z0-9_.-]+", identity):
@@ -210,6 +265,16 @@ def curate(snapshot, decisions, *, authorization):
                 raise ValueError("Canonical entry changed since curation was prepared")
             if not old and any(r["id"] == identity for r in result["curated_catalog"]["resources"] + content["items"]):
                 raise ValueError("Choose a distinct canonical entry ID")
+            inherited = old or {}
+            if not old:
+                # A new account inherits unambiguous placement from its accepted
+                # contributions. Merging conflicting scopes is a curator decision.
+                inherited = {}
+                for key in PLACEMENT_FIELDS:
+                    values = [placement(items[i])[key] for i in ids]
+                    if key not in update and any(v != values[0] for v in values[1:]):
+                        raise ValueError(f"Merged contributions disagree on {key}; specify the curated placement")
+                    inherited[key] = values[0]
             path = old["path"] if old else "knowledge/experience/curated/entries/" + identity + ".md"
             text = _text(update["text"], "entry text")
             row = {**(old or {}), **{k: update[k] for k in ("id", "title", "summary", "questions", "renderers")},
@@ -217,6 +282,9 @@ def curate(snapshot, decisions, *, authorization):
                    "review_status": "approved", "review_reference": authorization,
                    "evidence_ids": (old or {}).get("evidence_ids", []),
                    "contribution_ids": list(dict.fromkeys([*(old or {}).get("contribution_ids", []), *ids]))}
+            row.update(placement(update, inherited))
+            if row["layer"] == "renderer" and not row["renderers"]:
+                raise ValueError("Renderer-layer entries must name their renderer")
             for key in ("title", "summary"):
                 _text(row[key], key, 2000)
             for key in ("questions", "renderers"):
@@ -235,6 +303,9 @@ def curate(snapshot, decisions, *, authorization):
         content["decisions"].append({**copy.deepcopy(decision), "authorization": authorization})
         resolved.update(ids)
     result["curated_catalog"]["revision"] = "curation-" + signature(content["decisions"])[:20]
+    if result["curated_catalog"]["schema"] == "creative-experience-catalog-v2":
+        order = {"principle": 0, "renderer": 1, "condition": 2}
+        result["curated_catalog"]["entries"].sort(key=lambda row: (order[row.get("layer", "principle")], row["id"]))
     refresh_navigation(result)
     validate(result)
     return result

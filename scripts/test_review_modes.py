@@ -140,7 +140,7 @@ class ReviewModes(unittest.TestCase):
             self.assertIn('original task',knowledge.read('review')['text'])
             with self.assertRaises(ValueError):knowledge.read('score-definitions')
             if mode=='none':
-                with self.assertRaises(ValueError):knowledge.read('EX-semantic-reconstruction')
+                with self.assertRaises(ValueError):knowledge.read('EX-P-moment')
 
     def test_standalone_api_fixture_uses_live_whole_task_metering_without_old_count_caps(self):
         class APIPlanner(Planner):

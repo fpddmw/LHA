@@ -8,15 +8,15 @@ STOP = set("the a an and or to for of in how what with is can this that it as on
 STYLE_KINDS = {"entries", "domain_references", "guides"}
 EXPERIENCE_KINDS = {"experience", "experience_evidence", "model_experience", "experience_contribution", "experience_case"}
 ALIASES = {
-    "lost face": "instance identity input conditioning",
-    "same room": "environment replacement",
-    "wording": "realization change",
-    "budget": "continuation value planning resources",
-    "omission": "requirements binding",
-    "camera turn": "time binding object continuity",
-    "人脸": "instance identity", "输入": "input conditioning",
-    "光照": "lighting integration", "改写": "realization change",
-    "场景": "environment replacement", "水彩": "watercolor paper wash",
+    "lost face": "face identity person rebuilt source input",
+    "same room": "original place every plane rebuild",
+    "wording": "construction restated prompt",
+    "budget": "attempts spend remaining generations",
+    "omission": "plane counterpart missing",
+    "camera turn": "first last second inspect",
+    "人脸": "face identity person", "输入": "input continue restart source",
+    "光照": "light medium logic", "改写": "construction restated prompt",
+    "场景": "original place every plane", "水彩": "watercolor paper wash",
     "版画": "printmaking engraving woodcut", "丛林": "jungle forest vegetation roots",
     "粉彩": "pastel", "对称": "symmetry", "遗迹": "ruins weathered stone",
 }
@@ -75,7 +75,9 @@ def search(knowledge, query, limit=8, scope="all"):
             continue
         seen.add(row["path"])
         text = knowledge.document(row)["text"]
-        metadata = " ".join([row["title"], row.get("summary", ""), *row.get("questions", []), *row.get("aliases", [])])
+        metadata = " ".join([row["title"], row.get("summary", ""), *row.get("questions", []), *row.get("aliases", []),
+                             row.get("layer", ""), *row.get("tracks", []), *row.get("families", []),
+                             *row.get("stages", []), *row.get("renderers", [])])
         counts = Counter(terms(text))
         meta = set(terms(metadata))
         documents.append((row, text, counts, meta))

@@ -10,6 +10,27 @@ from .common import load, save, sha
 from .knowledge import Knowledge
 
 
+CATALOG_SCHEMAS = ("creative-experience-catalog-v1", "creative-experience-catalog-v2")
+LAYERS = ("principle", "renderer", "condition")
+TRACKS = ("short", "long")
+STAGES = ("design", "inspect", "revise", "deliver")
+
+
+def layered_fields(row):
+    """Validate the optional v2 placement fields; v1 entries default to common principles."""
+    layer = row.get("layer", "principle")
+    if layer not in LAYERS:
+        raise ValueError("Experience layer must be principle, renderer or condition")
+    for key, allowed in (("tracks", TRACKS), ("stages", STAGES)):
+        values = row.get(key, [])
+        if not isinstance(values, list) or any(v not in allowed for v in values):
+            raise ValueError(f"Experience {key} use only {', '.join(allowed)}")
+    families = row.get("families", [])
+    if not isinstance(families, list) or any(not isinstance(v, str) or not v.strip() for v in families):
+        raise ValueError("Experience families are lists of nonempty labels")
+    return layer
+
+
 class CreativeKnowledge(Knowledge):
     NAV_ALIASES = {"knowledge/README.md": "map", "knowledge/READING.md": "manual",
                    "knowledge/experience/README.md": "experience-map"}
@@ -103,7 +124,7 @@ class CreativeKnowledge(Knowledge):
 
     def _add_curated(self, frozen):
         catalog = self.curated_catalog
-        if (catalog.get("schema") != "creative-experience-catalog-v1"
+        if (catalog.get("schema") not in CATALOG_SCHEMAS
                 or not isinstance(catalog.get("revision"), str)
                 or not isinstance(catalog.get("entries"), list)
                 or not isinstance(catalog.get("resources"), list)):
@@ -135,6 +156,9 @@ class CreativeKnowledge(Knowledge):
                         raise ValueError("Entry navigation fields must be lists of strings")
                 if any(i not in resource_ids for i in row["evidence_ids"]):
                     raise ValueError("Experience evidence must be explicitly cataloged")
+                row_layer = layered_fields(row)
+                if catalog["schema"] == "creative-experience-catalog-v2" and row_layer == "renderer" and not row["renderers"]:
+                    raise ValueError("Renderer-layer experience must name its renderer")
             if frozen:
                 recorded = (self.snapshot or {}).get("documents", {}).get(row["path"], {}).get("sha256")
                 recorded = recorded or (self.snapshot or {}).get("asset_hashes", {}).get(row["path"])
@@ -159,6 +183,7 @@ class CreativeKnowledge(Knowledge):
                 text_hash = self.document(row)["sha256"]
             records[identity] = {k: row[k] for k in ("id", "path", "title", "kind")}
             records[identity].update(sha256=text_hash, version=row.get("version", "static-source"))
+            records[identity].update({k: copy.deepcopy(row[k]) for k in ("layer", "tracks", "families", "stages", "renderers") if k in row})
         return {"catalog_revision": self.curated_catalog["revision"], "items": records}
 
     def freeze(self, path):
@@ -211,7 +236,9 @@ class CreativeKnowledge(Knowledge):
                 "contribution_scope": "Linked contributions retain their author and case; curation records show adoption. Browse contributions or search for more."} if rows else {}
 
     def entry_index(self):
-        return [{k: self.items[r["id"]][k] for k in ("id", "title", "summary", "questions", "renderers")}
+        keys = ("id", "title", "summary", "questions", "renderers")
+        return [{**{k: self.items[r["id"]][k] for k in keys},
+                 **{k: r[k] for k in ("layer", "tracks", "families", "stages") if k in r}}
                 for r in self.curated_catalog["entries"]]
 
     def browse(self, target="map"):

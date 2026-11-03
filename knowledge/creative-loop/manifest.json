@@ -9,11 +9,7 @@
     "supporting_sources"
   ],
   "static_topics": {
-    "experience-map": "knowledge/experience/curated/README.md",
-    "choose-editing-input": "knowledge/experience/choose-editing-input.md",
-    "express-edits": "knowledge/experience/express-edits.md",
-    "inspect-and-compare": "knowledge/experience/inspect-and-compare.md",
-    "use-design-knowledge": "knowledge/experience/use-design-knowledge.md"
+    "experience-map": "knowledge/experience/curated/README.md"
   },
   "navigation": {
     "map": "knowledge/creative-loop/README.md",

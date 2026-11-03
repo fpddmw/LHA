@@ -20,6 +20,16 @@ original online exposure from the full library available only in this maintenanc
 session. Challenge your own choices, reviews and old guidance where the case warrants
 it. State the practical preference, its explanation and the conditions that change it.
 
+Write in the style of the current library. Read the relevant maintenance Skill,
+the authoring standard, and a nearby entry before drafting. The writing references
+point to representative entries in this private snapshot. Learn their decisiveness
+and explanatory detail, not their particular scene or a fixed section template.
+Lead with what the next Planner should do. Explain the visual construction or
+renderer behavior that makes the advice useful, give a concrete way to apply it,
+and keep exact cases and evidence status in a compact footer. Use an exception to
+change the decision, not to retreat into generic cautions. Comments can be short;
+a new account should be readable and useful without the maintainer's conversation.
+
 You may create a new experience, recommend, clarify, comment or propose an exact
 revision. These become linked, searchable contributions in an authorized private
 library. Existing entries, summaries, manuals and Skills remain unchanged. Library
@@ -34,9 +44,15 @@ read {source:run|knowledge|reference,id,start_line?,start_char?,max_chars?};
 view_image {ids}; observe {video_id,start?,end?,count?,crop?}; note {text};
 contribute {text,changes?}.
 
-A change uses op=create with id,title,text,summary,questions?,renderers?;
+A change uses op=create with id,title,text,summary,questions?,renderers?,
+layer?,tracks?,families?,stages?;
 or op=comment|clarify|recommend|propose_revision with id (existing experience or
-contribution),text,summary?,title?,questions?,renderers?. A proposed revision describes
+contribution),text,summary?,title?,questions?,renderers?,layer?,tracks?,families?,stages?.
+For new accounts choose layer=principle|renderer|condition, tracks=[short,long] as
+applicable, families as task-family labels, and stages from design|inspect|revise|deliver.
+Linked comments inherit placement unless explicitly qualified. Renderer accounts
+name their renderer. These fields organize discovery; the account itself is prose.
+A proposed revision describes
 the exact improvement; it does not replace the target. Manuals/Skills cannot be
 mutation targets. Put suggestions about those in the contribution's prose for a
 separate development review. Runtime adds source cases, target versions and inspected
@@ -58,6 +74,22 @@ def configuration(value=None):
 
 
 REFERENCES=('docs/experience-authoring-standard.md','docs/experience-usage-interface.md','docs/online-event-observation.md')
+
+
+def writing_references(knowledge):
+    """Resolve examples from the bound private library, never today's mutable files."""
+    preferred = (('principle', 'EX-P-every-plane', 'A decisive construction judgment developed through a contrast.'),
+                 ('renderer', 'EX-B-emission-binding', 'A renderer-specific recommendation with an exact spatial relation.'),
+                 ('condition', 'EX-C-long', 'A task-conditioned method connected to observed outcomes.'))
+    entries = knowledge.curated_catalog['entries']
+    result = []
+    for layer, identity, purpose in preferred:
+        row = next((r for r in entries if r['id'] == identity), None)
+        row = row or next((r for r in entries if r.get('layer') == layer), None)
+        if row:
+            result.append({**{key:row[key] for key in ('id','title','sha256','version')},
+                           'purpose':purpose, 'read':{'source':'knowledge','id':row['id']}})
+    return result
 
 
 @lru_cache(maxsize=16)
@@ -243,6 +275,7 @@ def _execute(root,folder,job,cfg,model):
     result={'job':{k:job[k] for k in ('id','topic','method','split','settlement','experience_mode','entry_versions')},
             'skills':[{"id":name,"description":job['skills'][name]['text'].split('description:',1)[1].split('---',1)[0].strip()} for name in SKILLS],
             'run_sources':source_index,'maintenance_references':{k:{'sha256':v['sha256'],'scope':'Post-task writing/usage guidance, not original online exposure'} for k,v in job.get('references',{}).items()},'image_catalog':image_catalog,'video_catalog':video_catalog,'knowledge_entrances':knowledge.overview(), 'library_scope':'Post-task private library; online exposure remains the run knowledge-snapshot', 'maintenance_snapshot':library}
+    result['writing_references'] = writing_references(knowledge)
     loaded_skills={};reading_cache=[];notes=''
     task_identity=copy.deepcopy(result['job'])
     for number in range(cfg['model_calls']):
@@ -314,6 +347,7 @@ def _execute(root,folder,job,cfg,model):
             while reading_cache and len(json.dumps(reading_cache,ensure_ascii=False))>24000:reading_cache.pop(0)
         result={'current_result':result,'task':task_identity,'original_request':load(run/'state.json')['request']['text'],
                 'knowledge_mode':job['experience_mode'],'loaded_skills':loaded_skills,'retained_reading':reading_cache,
+                'writing_references':writing_references(knowledge),
                 'notes':notes,'available_skills':list(SKILLS),'run_sources':source_index,'maintenance_references':{k:v['sha256'] for k,v in job.get('references',{}).items()},'image_catalog':image_catalog,'video_catalog':video_catalog,'observations':observations,'attached_images':image_focus,
                 'archive_scope':'Older exact pages remain available through read; only the bounded cache is omitted.'}
     raise RuntimeError('Maintenance call allowance exhausted')

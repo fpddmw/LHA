@@ -1,0 +1,930 @@
+{
+ "protocol": "lha-low-high-final-v5",
+ "judge": "glm5.3flash",
+ "scope": "Train-split samples only (001, 005, 026 preview; 002, 011 steady-train). Sample 067 is held out and excluded.",
+ "note": "Single judge, one seed per condition, Bernini only. Direct rows scored under the v5 profile are present only where the re-evaluation reached them. Scores are descriptive evidence, not significance tests. The first Planner attempts of a task from its earlier interrupted run are labeled full with their own seed. Steady-train rows: only 002 Direct, 011 Direct and 011 PE first round had been scored when this record was written; no 002 PE or Planner scores exist yet.",
+ "preview_rows": [
+  {
+   "sample_id": "001",
+   "prompt_form": "long",
+   "video_sha256": "e42773cc882698aeda2d7b0c1887ef2db2e11605fa7ff6636c4643d154b7247e",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 236,
+   "v5_scores": {
+    "instruction_adherence": 4.0,
+    "content_preservation": 2.8,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 3.4,
+    "aesthetic_coherence": 3.9
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "long",
+   "video_sha256": "4ce8e27b0a5ea1d72cb098165e4f6fd27091fb76d9184e5c925232f3be9dbfc3",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": "source",
+   "prompt_words": 246,
+   "v5_scores": {
+    "instruction_adherence": 4.0,
+    "content_preservation": 3.5,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 3.5,
+    "aesthetic_coherence": 3.8
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "long",
+   "video_sha256": "58af942ba10da5adbcb2f60b4c2045bb206efc6d7272f26c31737abe347c6c61",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 242,
+   "v5_scores": {
+    "instruction_adherence": 3.0,
+    "content_preservation": 2.0,
+    "temporal_consistency": 3.5,
+    "visual_integrity": 2.0,
+    "aesthetic_coherence": 3.5
+   },
+   "low_reasons": {
+    "content_preservation": "Decisive observation: the source's central affectionate interaction — the woman's hand resting on the child's head continuously — is not reproduced; in the candidate her hand is raised to her own hair/head instead, which by itself places the score at the 2.0 anchor (one central interaction lost while staging remains recognizable). Supporting observations: roles (woman and child reclining in bed), left-to-right order ",
+    "visual_integrity": "Decisive observation: in the 2.8-4.2s segment the woman's extended hand shows softened, partially fused finger definition where it meets the laptop keyboard, and the arm passing behind the child shows a smoothed shoulder/elbow join — a visible defect on focal hand and contact structures, which caps the score at 2.0. Supporting observations: the rest of the frame holds coherent geometry — headboard carving, wall panel"
+   },
+   "requirement_labels": [
+    "pass",
+    "partial",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "long",
+   "video_sha256": "59d7b759f63228ffd6458c6db355ae3c5d077ec225298d9a689e7c05f9ea440a",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 247,
+   "v5_scores": {
+    "instruction_adherence": 3.8,
+    "content_preservation": 3.2,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 4.0,
+    "aesthetic_coherence": 3.8
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "long",
+   "video_sha256": "2872a12c49cd14930c8a40be722472b12e61a4a29bf221c58d521b9ab84d8d32",
+   "method": "pe-loop",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": null,
+   "prompt_words": 308,
+   "v5_scores": {
+    "instruction_adherence": 4.0,
+    "content_preservation": 3.5,
+    "temporal_consistency": 3.5,
+    "visual_integrity": 3.2,
+    "aesthetic_coherence": 3.8
+   },
+   "low_reasons": {},
+   "requirement_labels": []
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "long",
+   "video_sha256": "76854ecdbe5546a169bebfc5b9fd61ef7b2daa7838862e623d58c8b16ef46bd3",
+   "method": "pe-loop",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": null,
+   "prompt_words": 311,
+   "v5_scores": {
+    "instruction_adherence": 3.8,
+    "content_preservation": 3.1,
+    "temporal_consistency": 3.3,
+    "visual_integrity": 3.4,
+    "aesthetic_coherence": 3.7
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "long",
+   "video_sha256": "0c8b272f78aa0d3685017ccf00a1f9772ed2c9f1a34d2f59545427d08d4a3bc7",
+   "method": "pe-loop",
+   "round": "v3",
+   "seed": 44,
+   "planner_input": null,
+   "prompt_words": 309,
+   "v5_scores": {
+    "instruction_adherence": 3.2,
+    "content_preservation": 3.0,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 2.9,
+    "aesthetic_coherence": 3.3
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "long",
+   "video_sha256": "7da9e80a8141c1de58309af13dd9e44f2d690e9564cf95b826673c7306f9fef7",
+   "method": "pe-loop",
+   "round": "v4",
+   "seed": 45,
+   "planner_input": null,
+   "prompt_words": 316,
+   "v5_scores": {
+    "instruction_adherence": 4.0,
+    "content_preservation": 2.0,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 3.5,
+    "aesthetic_coherence": 4.0
+   },
+   "low_reasons": {
+    "content_preservation": "Both source individuals are replaced by regenerated persons — the source woman's face and long curly honey-blonde hair become a different face with a shorter darker waved bob, and the blonde-curled child becomes a ginger-curled child with altered facial structure and apparent age — which under the identity rule caps CP at 2. Beyond the persons, correspondence is otherwise strong: roles, staging, beat order and camera"
+   },
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "short",
+   "video_sha256": "f68903a823ef0f02c8d39056ad7cbff2cb96692c987f9897f101ec972c82dd1b",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": "source",
+   "prompt_words": 209,
+   "v5_scores": {
+    "instruction_adherence": 3.7,
+    "content_preservation": 3.9,
+    "temporal_consistency": 3.0,
+    "visual_integrity": 2.4,
+    "aesthetic_coherence": 2.8
+   },
+   "low_reasons": {
+    "visual_integrity": "The suite geometry itself is well formed, but visible composite defects sit on the focal subjects: halo/cut-out edges around the hair with the woman's hair blending into the headboard crest in places, cooler daylight-style subject lighting against the warm background, progressively smoothed and slightly stylized faces toward the end of the clip, a laptop that degrades into a smooth pale slab with an indistinct logo i"
+   },
+   "requirement_labels": [
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "001",
+   "prompt_form": "short",
+   "video_sha256": "a5a877a9fae94f880dfcdd073155b14b71b7af0d4adf09b851a03708a33c3e9c",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 251,
+   "v5_scores": {
+    "instruction_adherence": 4.0,
+    "content_preservation": 3.6,
+    "temporal_consistency": 3.3,
+    "visual_integrity": 3.4,
+    "aesthetic_coherence": 3.7
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "4620b4b9800a48276430fb8ea4e86a6a025097e8ae7a35875acff99e0b11e74f",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": "source",
+   "prompt_words": 241,
+   "v5_scores": {
+    "instruction_adherence": 2.9,
+    "content_preservation": 2.5,
+    "temporal_consistency": 3.6,
+    "visual_integrity": 3.2,
+    "aesthetic_coherence": 3.3
+   },
+   "low_reasons": {
+    "content_preservation": "The recast keeps the moment recognizable at thematic level only: the temple-as-subject, the static wide establishing beat and the locked-off camera intent have counterparts, but the source's specific spatial arrangement is re-imagined rather than transformed per-region. The source shows a corner tower with dark doorway right-of-center, a long gallery, three distant lotus-bud towers, open lawn and sky with tiny visito"
+   },
+   "requirement_labels": [
+    "pass",
+    "partial",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "2b2331eacb728f7d756d377ccc5779c6d3fdf6753ab54f4fe355317003ca7f75",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 160,
+   "v5_scores": {
+    "instruction_adherence": 3.1,
+    "content_preservation": 2.8,
+    "temporal_consistency": 3.9,
+    "visual_integrity": 4.0,
+    "aesthetic_coherence": 4.0
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "partial",
+    "pass",
+    "pass",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "4930405b4adc0ede2228aa544e3d77e450d340446df84692c014723092f691bd",
+   "method": "full",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": "source",
+   "prompt_words": 265,
+   "v5_scores": {
+    "instruction_adherence": 2.9,
+    "content_preservation": 2.3,
+    "temporal_consistency": 3.8,
+    "visual_integrity": 3.9,
+    "aesthetic_coherence": 3.9
+   },
+   "low_reasons": {
+    "content_preservation": "The decisive observation is that the candidate retains the temple subject and the single static ambient shot but abandons the source's spatial arrangement and viewing position, so the result reads as a different scene of the same temple rather than the same moment recast. Supporting observations: the source is a wide exterior establishing view with lotus-bud towers, a long gallery, layered terraces, open lawn and clo"
+   },
+   "requirement_labels": [
+    "pass",
+    "partial",
+    "partial",
+    "pass",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "2363d4dc239220021021fa5c64bb3bdd929c177a601f67dff3e7174fcdf4a53f",
+   "method": "full",
+   "round": "v3",
+   "seed": 44,
+   "planner_input": "source",
+   "prompt_words": 216,
+   "v5_scores": {
+    "instruction_adherence": 3.7,
+    "content_preservation": 3.6,
+    "temporal_consistency": 3.9,
+    "visual_integrity": 3.8,
+    "aesthetic_coherence": 3.9
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "3f6162c1a8af4fc861eac558d1f2358f8b50f1e2b7f0f17961afcdf90a5e4ff6",
+   "method": "full",
+   "round": "v4",
+   "seed": 45,
+   "planner_input": "v3",
+   "prompt_words": 227,
+   "v5_scores": {
+    "instruction_adherence": 4.0,
+    "content_preservation": 3.3,
+    "temporal_consistency": 3.4,
+    "visual_integrity": 3.8,
+    "aesthetic_coherence": 3.9
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "e309faff0fd28925f5ebdf5e162d25f2a3ed317dc73e6722d29038af593700d9",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 235,
+   "v5_scores": {
+    "instruction_adherence": 3.4,
+    "content_preservation": 3.1,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 3.2,
+    "aesthetic_coherence": 3.7
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "partial",
+    "pass",
+    "pass",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "efd8c5d643ea41268913c4c4ad2d7e9d61e4cc2f75da1681e685ae852b313c36",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 261,
+   "v5_scores": {
+    "instruction_adherence": 3.3,
+    "content_preservation": 3.0,
+    "temporal_consistency": 3.1,
+    "visual_integrity": 3.1,
+    "aesthetic_coherence": 3.5
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "fa86e172ad25d803edbbcd1203d09f70361c6b9cfbc7779dede49c23b624f9de",
+   "method": "pe-loop",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": null,
+   "prompt_words": 311,
+   "v5_scores": {
+    "instruction_adherence": 3.0,
+    "content_preservation": 3.0,
+    "temporal_consistency": 3.0,
+    "visual_integrity": 3.0,
+    "aesthetic_coherence": 3.5
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "partial",
+    "pass",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "84de76b2c653c3287268733a792cc7f339a434a44a2b3825ded13e566f0c93f4",
+   "method": "pe-loop",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": null,
+   "prompt_words": 314,
+   "v5_scores": {
+    "instruction_adherence": 3.2,
+    "content_preservation": 3.5,
+    "temporal_consistency": 3.1,
+    "visual_integrity": 2.9,
+    "aesthetic_coherence": 3.8
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "partial",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "677645170332314ba8bdb87b57c252ced48a0a232b123654c25d9d85e0ae1db0",
+   "method": "pe-loop",
+   "round": "v3",
+   "seed": 44,
+   "planner_input": null,
+   "prompt_words": 310,
+   "v5_scores": {
+    "instruction_adherence": 3.1,
+    "content_preservation": 3.4,
+    "temporal_consistency": 3.1,
+    "visual_integrity": 2.3,
+    "aesthetic_coherence": 3.5
+   },
+   "low_reasons": {
+    "visual_integrity": "Decisive observation: foreground roots meet the paving with ambiguous anchoring in several reviewed frames (appearing to merge into or hover over the slabs), a contact defect touching one of the most prominent requested elements, while the scene remains fully interpretable."
+   },
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "partial",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "long",
+   "video_sha256": "9285745571bb01345d4c5c5871cbffcc4c9b41c7561cf9becfd94681290c26af",
+   "method": "pe-loop",
+   "round": "v4",
+   "seed": 45,
+   "planner_input": null,
+   "prompt_words": 310,
+   "v5_scores": {
+    "instruction_adherence": 3.0,
+    "content_preservation": 3.0,
+    "temporal_consistency": 3.1,
+    "visual_integrity": 3.0,
+    "aesthetic_coherence": 3.5
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "short",
+   "video_sha256": "47779d22eef5c5f6f09bf059fec16f50fa861e451e7a377140cbf6a68ee69e70",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": "source",
+   "prompt_words": 227,
+   "v5_scores": {
+    "instruction_adherence": 4.0,
+    "content_preservation": 2.0,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 4.0,
+    "aesthetic_coherence": 4.0
+   },
+   "low_reasons": {
+    "content_preservation": "Decisive observation: the candidate presents a different, smaller single-ruin structure seen from a closer, lower angle than the source's wide multi-tower gallery complex, so the source's spatial staging and camera framing are lost while only broad motifs (stepped entry, tower-like superstructure, weathered Khmer-style stonework) remain recognizable. Supporting observations: source:overview:0 and source:timelinep1:28"
+   },
+   "requirement_labels": [
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "short",
+   "video_sha256": "69c4b67f9845619253759123dffff8694085dafa1775ab756759cf0f81726c87",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 203,
+   "v5_scores": {
+    "instruction_adherence": 3.6,
+    "content_preservation": 2.4,
+    "temporal_consistency": 3.8,
+    "visual_integrity": 3.4,
+    "aesthetic_coherence": 3.5
+   },
+   "low_reasons": {
+    "content_preservation": "The decisive observation is that the candidate's composition is a re-imagined scene in which the source's distinctive tiered lotus towers, long gallery, lawn forecourt and camera position have no identifiable counterparts, so the central subject's recognizable identity is lost while only generic temple-type correspondence remains. Supporting observations: a thematic counterpart survives - an exterior wide, locked vie"
+   },
+   "requirement_labels": [
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "005",
+   "prompt_form": "short",
+   "video_sha256": "fdbb98a4f8ceb45f7baf603ef36c01989885ba681b21682c4c3ce30786e3e914",
+   "method": "pe-loop",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": null,
+   "prompt_words": 283,
+   "v5_scores": {
+    "instruction_adherence": 4.0,
+    "content_preservation": 3.3,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 3.1,
+    "aesthetic_coherence": 3.5
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "long",
+   "video_sha256": "4b3dd39216e86de61a38f8d257164926ef1b98b56ce1a576244684d75914e0e0",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 191,
+   "v5_scores": {
+    "instruction_adherence": 2.0,
+    "content_preservation": 2.8,
+    "temporal_consistency": 2.7,
+    "visual_integrity": 2.0,
+    "aesthetic_coherence": 2.0
+   },
+   "low_reasons": {
+    "instruction_adherence": "Decisive observation: the surroundings and major truck surfaces remain live-action in every supplied candidate frame, so only the subject and selected props are brick-converted. The man is a persistent yellow minifigure with claw hands (candidate:timelinep0:0, candidate:timelinep4:112), the bed floor/tailgate become gray studded plates (candidate:timelinep0:9, candidate:timelinep1:36), the timber becomes a tan beam a",
+    "visual_integrity": "Decisive observation: visible defects affect focal structures - the minifigure's head is oversized with a wide neck and the torso is tilted/oversized in several frames of the 2.333-3.5s window (candidate:timelinep2:56, candidate:timelinep2:64, candidate:timelinep2:84), the held bar shows a mildly wavy silhouette and motion blur exceeding the source (candidate:timelinep1:47, candidate:timelinep1:48 vs source:timelinep",
+    "aesthetic_coherence": "Decisive observation: the frame is dominated by an unrequested mixture of toy-styled elements and live-action photography - the minifigure, tan beam and studded plates sit against a photographic truck body, red tail light, hedge, trees, banner, sky and path (candidate:timelinep0:0, candidate:timelinep1:56, candidate:timelinep3:84, candidate:timelinep4:112) - a conflicting visual system that caps this dimension at 2.0"
+   },
+   "requirement_labels": [
+    "partial",
+    "partial",
+    "partial",
+    "pass",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "long",
+   "video_sha256": "2a24e18e71c80b2b2c7941248dc83426c4ceed328a7e4973c5134e1732f63b19",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": "source",
+   "prompt_words": 253,
+   "v5_scores": {
+    "instruction_adherence": 2.0,
+    "content_preservation": 3.0,
+    "temporal_consistency": 2.4,
+    "visual_integrity": 2.0,
+    "aesthetic_coherence": 2.0
+   },
+   "low_reasons": {
+    "instruction_adherence": "Decisive observation: in every reviewed candidate frame the truck, its bed liner and rails, the ground and the entire background remain photographic live-action, so only the man and the carried timber are rebuilt in the requested brick world. Supporting observations: the figure is a genuine workwear minifigure (blue printed shirt with pockets and badge, yellow C-hands), the long materials become smooth sage plastic b",
+    "temporal_consistency": "Decisive observation: between roughly 2.46s and 3.5s the minifigure's printed face switches between different smile designs across consecutive frames, the black hairpiece vanishes and returns (absent ~2.46-2.54s, visible from ~2.58s, though present in the opening frame), and the carried beam's seam layout, bow and end shape morph — focal-subject and focal-prop drift — while the remaining reviewed intervals are stable",
+    "visual_integrity": "Decisive observation: the carried beam intermittently bows, shifts its seam positions and changes its end shape from squared to a rounded knob — a visible structural defect located on the focal held prop — which caps VI at 2. Supporting observations: elsewhere the converted elements are well formed (clean minifigure geometry, tidy composite edges without halo, soft plastic highlights), the scene remains interpretable",
+    "aesthetic_coherence": "Decisive observation: the toy-styled figure and plastic beams sit unchanged inside the live-action truck, path, hedge and sky, producing the unrequested stylized-subject/live-action-surroundings mixture that anchor 2 describes, which caps AC at 2. Supporting observations: the compositing itself is competent (matched daylight, plausible scale, bright saturated figure colors, no visible edge artifacts), but the gritty "
+   },
+   "requirement_labels": [
+    "partial",
+    "pass",
+    "partial",
+    "pass",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "long",
+   "video_sha256": "847edd87536a01c880b3a3febf2f23dbb6b81a90d3e719c024f1c55acf14d323",
+   "method": "full",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": "v1",
+   "prompt_words": 276,
+   "v5_scores": {
+    "instruction_adherence": 2.7,
+    "content_preservation": 3.0,
+    "temporal_consistency": 3.0,
+    "visual_integrity": 2.5,
+    "aesthetic_coherence": 2.0
+   },
+   "low_reasons": {
+    "visual_integrity": "During roughly the first 0.4-0.6s the dominant foreground tailgate region shows a cellular mosaic blur texture, residual photoreal shadows and warping/ghosting that read as rendering artifacts rather than brick construction detail. Supporting observations: outside that interval and region the render is well formed for the medium - the minifigure's geometry, C-shaped hand grips on the beams, studded bed plates, brick ",
+    "aesthetic_coherence": "For the first ~0.6s a photoreal painted tailgate panel carrying the source's camera-and-person shadows sits inside the otherwise fully brick-built scene, an unrequested mixture of a live-action surface and the stylized world that conflicts with the toy visual system. Supporting observations: the panel dominates the frame during that interval, so the clash is prominent even though brief; after ~0.6s integration is con"
+   },
+   "requirement_labels": [
+    "partial",
+    "pass",
+    "partial",
+    "pass",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "long",
+   "video_sha256": "0b73e8471fbc4bbadd901dc9baeb22ecec755d317bdc8978079dbd3b2b72555c",
+   "method": "full",
+   "round": "v3",
+   "seed": 44,
+   "planner_input": "v2",
+   "prompt_words": 326,
+   "v5_scores": {
+    "instruction_adherence": 2.5,
+    "content_preservation": 2.5,
+    "temporal_consistency": 2.5,
+    "visual_integrity": 2.0,
+    "aesthetic_coherence": 3.0
+   },
+   "low_reasons": {
+    "instruction_adherence": "The structures standing in for the truck never read as a recognizable truck built from interlocking pieces in most of the runtime (a white brick wall and dark studded recess in 1.167-4.667s; a mostly smooth, unstudded white plastic tailgate in 0-1.167s), leaving the explicitly requested truck only partially realized while the rest of the scene is converted. Supporting observations: the man is realized as a yellow min",
+    "content_preservation": "The minifigure continues the source's unloading beat in the same order and staging — figure beside the bed recess, long material across the lower frame, camera over the bed area — so the moment remains recognizable, while the stacking outcome and the clear grip are lost in the later segments. Supporting observations: the role correspondence is full (man becoming a workwear minifigure is a translated counterpart, cand",
+    "temporal_consistency": "During 2.333-3.5s the minifigure's face print alternates between frames (single-line mouth vs open smile), head and hair orientation jump, and the tan element warps in shape and angle, a recurring drift affecting the focal subject and focal prop. Supporting observations: the clip opens with 0-0.29s of unresolved blurred live-action-to-LEGO conversion (candidate:timelinep0:0-6); 1.167-2.333s is stable with the same mi",
+    "visual_integrity": "The held long element visibly warps in shape and angle across 2.333-3.5s frames while heavy blur smears structure, a consequential deformation of the focal held prop, which caps visual integrity at 2. Supporting observations: outside that interval the in-focus geometry is well formed — wall courses align and the dangling wire elements hang plausibly at 1.167-2.333s (candidate:timelinep1:33, candidate:timelinep1:50), "
+   },
+   "requirement_labels": [
+    "partial",
+    "pass",
+    "partial",
+    "partial",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "long",
+   "video_sha256": "a5b7403f56fc9cd3b0bfcc536a05bd931fd5939d716648587700ed3d874a8433",
+   "method": "full",
+   "round": "v4",
+   "seed": 45,
+   "planner_input": "v2",
+   "prompt_words": 313,
+   "v5_scores": {
+    "instruction_adherence": 2.8,
+    "content_preservation": 2.7,
+    "temporal_consistency": 3.0,
+    "visual_integrity": 3.2,
+    "aesthetic_coherence": 3.1
+   },
+   "low_reasons": {},
+   "requirement_labels": [
+    "pass",
+    "pass",
+    "pass",
+    "partial",
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "long",
+   "video_sha256": "c4b72b66f61ac95b30e61e6ec99d35cab40a85593f19763c146a18905b304998",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 292,
+   "v5_scores": {
+    "instruction_adherence": 2.0,
+    "content_preservation": 2.7,
+    "temporal_consistency": 3.5,
+    "visual_integrity": 3.0,
+    "aesthetic_coherence": 2.0
+   },
+   "low_reasons": {
+    "instruction_adherence": "Only the man (as a workwear minifigure) and the carried material (as smooth gray plastic bars) are rebuilt in the LEGO medium, while the truck and the entire surroundings remain photographic live-action in every supplied frame.",
+    "aesthetic_coherence": "The result is a toy-styled figure and plastic bars inserted into an otherwise unchanged live-action world — photographic truck, sharp real hedge, trees, banner and barriers — an unrequested stylized/live-action mixture with no miniature depth of field binding the two systems together."
+   },
+   "requirement_labels": [
+    "partial",
+    "pass",
+    "fail",
+    "partial",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "long",
+   "video_sha256": "92c775fb42b9ba92bc74cf18e7477e0eb0cff61631f86cf9818d40a100d0940c",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 330,
+   "v5_scores": {
+    "instruction_adherence": 2.0,
+    "content_preservation": 3.0,
+    "temporal_consistency": 4.0,
+    "visual_integrity": 2.7,
+    "aesthetic_coherence": 2.0
+   },
+   "low_reasons": {
+    "instruction_adherence": "Across the full reviewed duration only the man (as a workwear minifigure) and the boards he carries are rebuilt, while the truck, the lumber stack in the bed, and every visible surrounding element remain photographic, so a consequential central element of the requested brick-built world is wholly missing.",
+    "aesthetic_coherence": "The result is a hybrid in which a large toy-plastic minifigure and plastic beams sit inside an otherwise unmodified live-action yard and photographic truck, an unrequested stylized/live-action mixture that dominates every reviewed frame and caps integration at the clash level."
+   },
+   "requirement_labels": [
+    "partial",
+    "pass",
+    "partial",
+    "pass",
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "short",
+   "video_sha256": "68adf9506ac2b11eb486e94a5ea869a8ee4696da3164eca6ef487d8f441257f1",
+   "method": "full",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": "source",
+   "prompt_words": 235,
+   "v5_scores": {
+    "instruction_adherence": 2.4,
+    "content_preservation": 3.1,
+    "temporal_consistency": 3.3,
+    "visual_integrity": 2.4,
+    "aesthetic_coherence": 2.4
+   },
+   "low_reasons": {
+    "instruction_adherence": "In every supplied candidate frame from 0.0s to 4.708s only the man (rendered as a yellow minifigure with gray cap, printed tan torso and one black glove) and the timber (segmented gray/olive plastic beams, including the stacked lumber in the bed) are rebuilt in the brick medium, while the truck, tailgate, bed liner, white retaining wall, hedge, trees, sign and sky remain photographic live-action. Supporting observati",
+    "visual_integrity": "In the final observed segment (4.667-4.833s) a dark glove-shaped element sits at the plank's far end detached from the minifigure, whose visible arms terminate in yellow hands - a floating-prop defect on the hand/prop contact of the central interaction, while the scene remains interpretable. Supporting observations: elsewhere the composite is well formed for the medium - clean figure edges, stable plank segment seams",
+    "aesthetic_coherence": "The result is a persistent hybrid that composites a rendered plastic minifigure and brick beams into an otherwise photographic world - an unrequested mixture of stylized subjects and live-action surroundings for a request invoking The LEGO Movie's fully brick-built aesthetic. Supporting observations: within the hybrid the craft is careful - source cast shadows (including the filmer's shadow band) are carried onto the"
+   },
+   "requirement_labels": [
+    "pass"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "short",
+   "video_sha256": "d8be81462f1ed20db8666db23c5cc33826430d712f25476e60d99b342f3b5dcf",
+   "method": "full",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": "v1",
+   "prompt_words": 282,
+   "v5_scores": {
+    "instruction_adherence": 2.5,
+    "content_preservation": 2.7,
+    "temporal_consistency": 3.0,
+    "visual_integrity": 2.2,
+    "aesthetic_coherence": 2.0
+   },
+   "low_reasons": {
+    "instruction_adherence": "Most of the visible scene is rebuilt in brick — the minifigure subject, tan-brick timber, the rebuilt truck bed with white and gray bricks, brick trees, hedge and lamp post — but the real photographic silver truck body with its taillight fills the frame through the opening seconds and a live-action cloudy sky with photographic vegetation persists to the end of the clip. Supporting: the subject and much of the environ",
+    "visual_integrity": "The focal timber build shows visible construction defects — misaligned and rotated bricks, uneven stud patterns, gaps and pieces floating above or overlapping the bed line — and the figure's torso plates shift and a darker plate protrudes at the flank, while the scene remains interpretable. Supporting: the figure itself, head, hands and the rebuilt bed walls stay clean and well formed, so the damage is concentrated i",
+    "aesthetic_coherence": "The work composites a stylized LEGO figure and brick builds over live-action photographic regions — the real silver truck body and real plants in the opening seconds, a real cloudy sky with a real conifer and photographic hedge later — an unrequested stylized/live-action mixture that weakens integration throughout. Supporting: the tailgate interior keeps a realistic dark texture rather than a brick build, the sky rea"
+   },
+   "requirement_labels": [
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "short",
+   "video_sha256": "bbe12076bb5589bce9632df722569d5d782772fe9c11c588b0954e856813af6a",
+   "method": "pe-loop",
+   "round": "v1",
+   "seed": 42,
+   "planner_input": null,
+   "prompt_words": 239,
+   "v5_scores": {
+    "instruction_adherence": 2.4,
+    "content_preservation": 3.4,
+    "temporal_consistency": 3.5,
+    "visual_integrity": 3.4,
+    "aesthetic_coherence": 3.2
+   },
+   "low_reasons": {
+    "instruction_adherence": "The brick conversion is limited to the man and the timber: a classic LEGO minifigure (yellow printed head, cap, printed torso, gray glove hand) and segmented green beam elements for both the handled boards and the bed stack appear across the full reviewed duration, while the truck's tailgate, bed and taillight and the entire hedge-and-garden environment remain photographic live-action in every reviewed frame from 0 t"
+   },
+   "requirement_labels": [
+    "partial"
+   ]
+  },
+  {
+   "sample_id": "026",
+   "prompt_form": "short",
+   "video_sha256": "ca2a0943f7270bec028f2272873e26c7ea091095739fbccc09d6063b21fea292",
+   "method": "pe-loop",
+   "round": "v2",
+   "seed": 43,
+   "planner_input": null,
+   "prompt_words": 260,
+   "v5_scores": {
+    "instruction_adherence": 2.3,
+    "content_preservation": 3.1,
+    "temporal_consistency": 2.8,
+    "visual_integrity": 2.3,
+    "aesthetic_coherence": 2.2
+   },
+   "low_reasons": {
+    "instruction_adherence": "The man is rebuilt as a LEGO-style minifigure and the timber as smooth orange brick-style planks across the whole supplied duration, while the truck, tailgate and every background element remain live-action photographic. Supporting observations: the figure carries the man's cap, a printed collar torso echoing the gray henley, a smiling printed face and a gray glove-hand surrogate from frame 0 (candidate:timelinep0:0,",
+    "visual_integrity": "The only consequential structural defect is the figure's gray glove-hand surrogate, which is amorphous, changes silhouette between frames and at times blends into the white barrier wall, while the rest of the figure, the planks and the composite are well formed. Supporting observations: the mitt reads as adjacent to rather than clasping the plank in several frames (candidate:timelinep2:64, candidate:timelinep2:70, ca",
+    "aesthetic_coherence": "A rendered minifigure and smooth orange planks are placed into otherwise photographic live-action surroundings, leaving two unreconciled visual systems across the whole clip. Supporting observations: the truck bed, tailgate, hedge, sign, lamppost and white barrier keep their source photographic texture and lighting while the figure carries clean plastic shading and a consistent design echoing the man's cap, collar sh"
+   },
+   "requirement_labels": [
+    "pass"
+   ]
+  }
+ ],
+ "steady_train_rows": [
+  {
+   "sample_id": "002",
+   "prompt_form": "short",
+   "video_sha256": "0acb1feaebeb9d5d6f39a0ac4849a7c100d05517e3fb6e3fa96a830611170cd3",
+   "method": "direct",
+   "v5_scores": {
+    "instruction_adherence": 2.6,
+    "content_preservation": 3.0,
+    "temporal_consistency": 3.1,
+    "visual_integrity": 3.2,
+    "aesthetic_coherence": 3.2
+   },
+   "low_reasons": {}
+  },
+  {
+   "sample_id": "011",
+   "prompt_form": "short",
+   "video_sha256": "522a36cf177c5b7dd81998b2fe5c3a1e94fc11809c6c5a9ca2d5f03d594cb1ab",
+   "method": "pe-loop",
+   "v5_scores": {
+    "instruction_adherence": 3.0,
+    "content_preservation": 3.5,
+    "temporal_consistency": 3.5,
+    "visual_integrity": 3.5,
+    "aesthetic_coherence": 3.5
+   },
+   "low_reasons": {},
+   "round": "first round, seed 42"
+  },
+  {
+   "sample_id": "011",
+   "prompt_form": "short",
+   "video_sha256": "7949df2fdae79daa3f8f0eae64b0f22438ec4f3af61821278ac6e8c0225f2a6e",
+   "method": "direct",
+   "v5_scores": {
+    "instruction_adherence": 2.0,
+    "content_preservation": 3.0,
+    "temporal_consistency": 3.0,
+    "visual_integrity": 2.0,
+    "aesthetic_coherence": 2.0
+   },
+   "low_reasons": {
+    "instruction_adherence": "The environment transformation is realized: the courtyard is replaced throughout the candidate by a desert settlement with dunes, a domed sand-colored citadel with towers and an arched gate, and conical outbuildings. One of the two courtyard figures is recast as a traveler (blue head-wrap/veil, striped blue cloak, tall boots) who walks toward the citadel. However, the second figure — the woman — retains her exact sou",
+    "visual_integrity": "Consequential defects affect both key foreground subjects while the scene remains interpretable. The woman reads as a cut-out composite with hard/halo edges over the painted desert backdrop, with no visible grounding or cast shadow, standing above a flat untextured dark-gray band whose straight top edge forms a hard seam against the sand. The walker's boots and legs merge into an elongated dark mass in mid-stride fra",
+    "aesthetic_coherence": "The desert citadel scene has a recognizable stylized design intent (warm sand palette, red-magenta ridges, dusky sky, simplified sand architecture), but integration is broken by composited foreground elements: the woman retains the source's bright soft daylight illumination against the warmer, flatter desert light, her cutout edges and the untextured gray platform wedge clash with the surrounding sand, and leftover s"
+   }
+  }
+ ]
+}
