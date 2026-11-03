@@ -1,5 +1,10 @@
 # Models Directory
 
+Current campaigns use API Planner/Critic clients; local Qwen weights are not
+required. Renderer assets and verified manifests are supplied by each operator.
+Use the [public experiment guide](../docs/public-experiment-guide.md) for current
+interfaces. The model descriptions below document the earlier local-model layout.
+
 这个目录用于存放 `low-high-new` 项目运行时依赖的本地模型与权重文件。
 
 当前代码已经改为优先从仓库内的 `models/` 目录读取资源，因此本目录是默认的模型根目录。

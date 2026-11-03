@@ -32,7 +32,7 @@ def main():
     from experiments import campaign
     from planner_harness.common import load
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['plan', 'run', 'status'])
+    parser.add_argument('command', choices=['plan', 'check', 'run', 'status'])
     parser.add_argument('--config', type=Path, default=ROOT / 'configs/experiment-campaign.json')
     parser.add_argument('--output', type=Path, default=ROOT / 'out/main-all67-v2')
     parser.add_argument('--host-config', type=Path)
@@ -40,7 +40,13 @@ def main():
                         help='both runs separate Bernini/Ditto subdirectories; single-host configs infer the backend')
     parser.add_argument('--stage', choices=['main', 'self-review', *campaign.STAGES, 'score'], default='main')
     parser.add_argument('--execute', action='store_true', help='Actually submit generation/model/evaluation work')
+    parser.add_argument('--verify-assets', action='store_true',
+                        help='With check, hash all declared asset files (CPU/disk only; no model load)')
     args = parser.parse_args()
+    if args.verify_assets and args.command != 'check':
+        parser.error('--verify-assets is only available with check')
+    if args.execute and args.command != 'run':
+        parser.error('--execute is only available with run')
     both = args.backend == 'both'
     if args.command == 'status':
         models = [n for n in ('bernini', 'ditto') if (args.output / n / 'campaign.json').exists()]
@@ -49,7 +55,11 @@ def main():
         result = {n: campaign.status(args.output / n) for n in models} if both or (args.backend is None and models) else campaign.status(args.output)
     else:
         config = campaign.configuration(args.config)
-        if args.command == 'plan':
+        if args.command == 'check':
+            from experiments.readiness import check
+            hosts = load_hosts(args.host_config, args.backend) if args.host_config else None
+            result = check(ROOT, config, hosts, verify_assets=args.verify_assets)
+        elif args.command == 'plan':
             result = campaign.plan(ROOT, config)
             if both:
                 result = {'models': {n: result for n in ('bernini', 'ditto')},
@@ -72,7 +82,8 @@ def main():
                 result = campaign.execute(ROOT, args.output, config, next(iter(hosts.values())) if hosts else None,
                                           args.stage, execute_paid=True)
     print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 2 if args.command == 'check' and result['status'] != 'offline_checks_passed' else 0
 
 
 if __name__ == '__main__':
-    main()
+    raise SystemExit(main())

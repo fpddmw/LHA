@@ -4,6 +4,7 @@
 
 | 内容 | 当前说明 | 对应实现 |
 |---|---|---|
+| Public setup, deployment interfaces and CPU-only smoke | [Public experiment guide](public-experiment-guide.md) | `run_experiment_campaign.py check`, `smoke_experiment_campaign.py` |
 | 完整 Loop 与模块边界 | [实现说明](creative-loop-implementation.md) | `planner_harness`、`critic_harness` |
 | Planner 动作、上下文、恢复 | [Planner](planner-harness.md) | `runner`、`creative_actions`、`context` |
 | 每次生成后的定性检查 | [Critic](critic-harness.md) | `qualitative`、`automatic_review` |

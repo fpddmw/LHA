@@ -27,6 +27,8 @@ CURRENT = (
     "test_chatgpt_subscription",
     "test_configuration_boundaries",
     "test_chain_integration",
+    "test_public_campaign",
+    "test_fixed_budget_completion",
     "test_review_modes",
     "test_review_experiments",
     "test_loop_protocol_upgrade",

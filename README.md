@@ -6,6 +6,7 @@ LHA 研究 Planner 如何结合视频观察、生成反馈和编辑经验完成 
 
 | 要做什么 | 入口 |
 |---|---|
+| Reproduce the experiments from a fresh checkout; run a CPU-only smoke test | [Public experiment guide](docs/public-experiment-guide.md) |
 | 理解完整 loop、模块职责和设计边界 | [Loop 设计与实现](docs/creative-loop-implementation.md) |
 | 配置模型、凭据、资源和评审方式 | [配置说明](docs/benchmark-guide/configuration.md) |
 | 准备并运行主实验、经验训练及消融 | [实验运行安排](docs/experiment-campaign.md) |
@@ -20,6 +21,7 @@ LHA 研究 Planner 如何结合视频观察、生成反馈和编辑经验完成 
 ```bash
 python -m pip install -r requirements.server-runtime.txt
 python scripts/run_experiment_campaign.py plan
+python scripts/smoke_experiment_campaign.py --output out/public-smoke
 python scripts/check_repository.py --suite current
 ```
 

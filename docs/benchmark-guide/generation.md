@@ -4,6 +4,10 @@
 
 ## 适用范围
 
+Current source-checkout campaigns use the [public experiment guide](../public-experiment-guide.md).
+This page documents historical standalone generation bundles, whose commands and
+verification status apply to those bundles rather than the current campaign.
+
 以下 PE 命令针对此前交接的 `bernini-tools.zip` 和 `ditto-tools.zip`（Ditto adapted-v2），在各自工具包解压目录执行。工具包与 `benchmark.zip` 需向项目交接人获取；本次 GitHub 评分包不包含它们。Linux / WSL，Python 3.11+，FFmpeg/ffprobe，以及各渲染器依赖和权重需提前安装。
 
 示例路径均需换成使用者机器的真实路径：数据解压到 `/data/lha` 后有 `benchmark_data/benchmark.json`；Bernini 官方代码在 `/opt/Bernini`，Diffusers 权重在 `/models/Bernini-R-1.3B-Diffusers`；Ditto 代码在 `/opt/Ditto`，权重布局按包内 `ditto_models.json` 准备。

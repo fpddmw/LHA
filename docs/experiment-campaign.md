@@ -1,5 +1,8 @@
 # 全量主实验与 RSI 运行安排
 
+For a fresh checkout, deployment interfaces, complete launch commands and the
+CPU-only smoke test, start with the [public experiment guide](public-experiment-guide.md).
+
 主实验四组均覆盖当前 **67 条任务**，每条保留 short、long 两版，共 **134 个条件**。40／27 是 RSI 的经验积累与测试划分，四组主实验都跑全量。独立 Critic 为主实验评审方式，Planner 自评切换作为追加消融。
 
 ## 先跑什么、跑多少次
