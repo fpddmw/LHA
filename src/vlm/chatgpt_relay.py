@@ -27,27 +27,27 @@ def open_upstream(request, timeout):
 
     class Connection(HTTPSConnection):
         def connect(self):
-            for attempt in (1, 2):
-                remaining = deadline - time.monotonic()
-                if remaining <= 0:
-                    raise UpstreamHandshakeFailed("TLS setup exhausted the request timeout")
-                self.timeout = remaining
-                try:
-                    # Includes TCP, optional proxy CONNECT, and TLS handshake.
-                    # HTTPConnection.send writes the Responses request only
-                    # after this method returns successfully.
-                    return super().connect()
-                except ssl.SSLEOFError as exc:
-                    self.close()
-                    request.lha_connect_failures.append(safe_exception(exc))
-                    if attempt == 2:
-                        raise UpstreamHandshakeFailed("TLS setup ended before sending the request") from exc
+            try:
+                return super().connect()
+            except ssl.SSLEOFError as exc:
+                request.lha_connect_failures.append(safe_exception(exc))
+                raise UpstreamHandshakeFailed("TLS setup ended before sending the request") from exc
 
     class Handler(urllib.request.HTTPSHandler):
         def https_open(self, req):
             if req is not request:
                 return super().https_open(req)
-            return self.do_open(Connection, req, context=self._context)
+            for attempt in (1, 2):
+                req.timeout = deadline - time.monotonic()
+                if req.timeout <= 0:
+                    raise UpstreamHandshakeFailed("TLS setup exhausted the request timeout")
+                try:
+                    # do_open owns cleanup. The retry needs a fresh HTTP state
+                    # machine because close() resets the current one to Idle.
+                    return self.do_open(Connection, req, context=self._context)
+                except urllib.error.URLError as exc:
+                    if attempt == 2 or not isinstance(exc.reason, UpstreamHandshakeFailed):
+                        raise
 
     request.lha_connect_failures = []
     return urllib.request.build_opener(Handler()).open(request, timeout=timeout)

@@ -20,26 +20,55 @@ from planner_harness.accounting import ExternalExecutionUnknown  # noqa: E402
 
 
 class RelayTLSBoundaryTests(unittest.TestCase):
-    def test_handshake_retry_does_not_repeat_a_started_request(self):
+    def test_handshake_retry_uses_fresh_http_state_and_sends_once(self):
+        from http.client import HTTPSConnection
+        import ssl
+        import urllib.request
+        from unittest.mock import Mock
+        from vlm.chatgpt_relay import open_upstream
+
+        sock = Mock()
+        sock.makefile.return_value = io.BytesIO(
+            b"HTTP/1.1 200 OK\r\nContent-Length: 2\r\nConnection: close\r\n\r\nOK"
+        )
+        connections = []
+
+        def connect(connection):
+            connections.append(connection)
+            if len(connections) == 1:
+                raise ssl.SSLEOFError("handshake")
+            connection.sock = sock
+
+        request = urllib.request.Request("https://fixture.invalid/responses", data=b"{}")
+        with patch.object(HTTPSConnection, "connect", autospec=True, side_effect=connect):
+            with open_upstream(request, 5) as response:
+                self.assertEqual(response.read(), b"OK")
+        self.assertEqual(len(connections), 2)
+        self.assertIsNot(connections[0], connections[1])
+        wire = b"".join(call.args[0] for call in sock.sendall.call_args_list)
+        self.assertEqual(wire.count(b"POST "), 1)
+        self.assertTrue(wire.endswith(b"\r\n\r\n{}"))
+        self.assertEqual(len(request.lha_connect_failures), 1)
+
+    def test_request_write_eof_does_not_repeat_a_started_request(self):
         from http.client import HTTPSConnection
         import ssl
         import urllib.error
         import urllib.request
+        from unittest.mock import Mock
         from vlm.chatgpt_relay import open_upstream
 
-        def send(connection, *args, **kwargs):
-            connection.connect()
-            raise ssl.SSLEOFError("request write interrupted")
-
+        sock = Mock()
+        sock.sendall.side_effect = ssl.SSLEOFError("request write interrupted")
         request = urllib.request.Request("https://fixture.invalid/responses", data=b"{}")
-        with patch.object(HTTPSConnection, "connect", side_effect=[ssl.SSLEOFError("handshake"), None]) as connect:
-            with patch.object(HTTPSConnection, "request", autospec=True, side_effect=send) as dispatch:
-                with self.assertRaises(urllib.error.URLError) as raised:
-                    open_upstream(request, 5)
+        with patch.object(HTTPSConnection, "connect", autospec=True,
+                          side_effect=lambda conn: setattr(conn, "sock", sock)) as connect:
+            with self.assertRaises(urllib.error.URLError) as raised:
+                open_upstream(request, 5)
         self.assertIsInstance(raised.exception.reason, ssl.SSLEOFError)
-        self.assertEqual(connect.call_count, 2)
-        self.assertEqual(dispatch.call_count, 1)
-        self.assertEqual(len(request.lha_connect_failures), 1)
+        self.assertEqual(connect.call_count, 1)
+        self.assertEqual(sock.sendall.call_count, 1)
+        self.assertEqual(request.lha_connect_failures, [])
 
     def test_exhausted_handshake_is_proven_predispatch(self):
         from http.client import HTTPSConnection
