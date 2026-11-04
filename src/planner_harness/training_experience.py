@@ -354,7 +354,8 @@ def maintain(root, output, run, job_id, config=None, *, model_factory=None):
     for number in range(1, cfg["attempts"] + 1):
         attempt = folder / ("training-attempt-" + str(number))
         try:
-            contribution = _execute(root, attempt, job, cfg, model_factory())
+            if not (attempt/'contribution.json').exists():
+                _execute(root, attempt, job, cfg, model_factory())
             result = activate(root, output, attempt / "contribution.json")
             break
         except Exception as exc:

@@ -171,7 +171,7 @@ class Engineering(unittest.TestCase):
         self.assertGreater(totals["tokens"], 4000000)
         self.assertEqual(policy["mode"], "live")
         self.assertEqual(policy["online_task_budget"]["max_generations"], 9)
-        self.assertEqual(policy["online_task_budget"]["wall_seconds"], 11400)
+        self.assertIsNone(policy["online_task_budget"]["wall_seconds"])
         self.assertEqual(binding["topic"], "topic")
         self.assertFalse((service.directory / "accounting/ledger.json").exists())
         self.assertFalse(renderer.calls)

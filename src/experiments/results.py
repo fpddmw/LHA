@@ -431,6 +431,8 @@ def ensure_evaluation(repository, root, *, evaluation_id=None):
     active = current_evaluation(root)
     if active is not None:
         return active
+    if (Path(root) / 'current-evaluation.json').exists():
+        raise ValueError('Evaluation protocol/model changed. Resume with its frozen runtime or explicitly prepare a new evaluation; restart does not authorize rescoring.')
     if evaluation_id and (Path(root) / 'evaluations' / evaluation_id).exists():
         # A previous protocol can retain the requested label and all its receipts.
         evaluation_id = evaluation_id + '-' + uuid.uuid4().hex[:8]
@@ -457,6 +459,9 @@ def score_evaluation(repository, root, budget=None, *, models=None):
     if budget is not None:accounting.install(directory / "accounting", budget, require_live=live, required_quotes=("compute:features","compute:temporal"))
     tasks = inventory(repository)
     with RunLock(directory / "evaluation-owner"):
+        from planner_harness.resumption import reconcile_accounting, recover_texts
+        reconcile_accounting(directory/'accounting')
+        recover_texts(directory,directory/'accounting')
         for position in evaluation["positions"]:
             entry = find(root, position["sample_id"], position["prompt_form"], position["method"], position["seed"], position.get("review_mode"))
             available = [entry] + entry.get("candidates", []) if entry else []

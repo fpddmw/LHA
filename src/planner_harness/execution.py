@@ -504,6 +504,7 @@ def collect(harness):
     }
     state["events"].append(event)
     save(harness.output / "events" / (event["event_id"] + ".json"), event)
+    state.setdefault('unresolved_jobs', {}).pop(job['id'], None)
     state.update(pending_tool=None, status="running")
     if state["config"].get("workflow") == "creative_loop_v1" and job["kind"] == "critique":
         from .automatic_review import collected

@@ -15,6 +15,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 COVERAGE = {
+    'test_same_command_recovery': 'Original-command continuation, four-render Planner recovery, duplicate starts and GPU reassignment',
     'test_fixed117': 'Uniform source normalization, evaluation/export provenance and count-only stopping',
     'test_public_campaign': 'Public check/launch contracts and synthetic delivery-to-scoring handoff',
     'test_pre_experience_parallel': 'N independent task workers, fixed-seed maintenance, atomic appends and public device overrides',

@@ -98,6 +98,9 @@ class Engine:
             }
             save(self.directory / "lifecycle" / generation / "started.json", lifecycle)
             save(self.directory / "worker-lifecycle.json", lifecycle)
+            reconcile = getattr(self.handler, 'reconcile_queue', None)
+            if reconcile:
+                reconcile()
             self.queue.recover()
             pools = {
                 r: ThreadPoolExecutor(max_workers=n, thread_name_prefix=f"lha-{r}")

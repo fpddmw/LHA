@@ -23,11 +23,22 @@ def sha(path):
 
 
 def save(path, value):
+    write_atomic(path, json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+
+
+def write_atomic(path, text):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    with temporary.open('w', encoding='utf-8') as stream:
+        stream.write(text)
+        stream.flush()
+        os.fsync(stream.fileno())
     os.replace(temporary, path)
+    if os.name == 'posix':
+        descriptor = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY)
+        try: os.fsync(descriptor)
+        finally: os.close(descriptor)
 
 
 def load(path):

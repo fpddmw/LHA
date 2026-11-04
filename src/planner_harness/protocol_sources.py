@@ -10,11 +10,11 @@ from functools import lru_cache
 from .common import sha
 
 MODULES = {
-    "planner_harness": "__init__ common lock runner video event_observation knowledge knowledge_search creative_knowledge creative creative_actions candidate_selection context working_memory resources accounting supervisor owned_process recovery integrity json_output model_call report_call execution automatic_review continuation delivery delivery_review experience_usage creative_report report protocol_sources lineage",
+    "planner_harness": "__init__ common lock runner video event_observation knowledge knowledge_search creative_knowledge creative creative_actions candidate_selection context working_memory resources accounting supervisor owned_process recovery integrity json_output model_call report_call execution automatic_review continuation delivery delivery_review experience_usage creative_report report protocol_sources lineage resumption",
     "critic_harness": "__init__ adapter one_shot qualitative",
     "server_runtime": "__init__ queue engine service renderers ditto media_cache lifecycle",
     "vlm": "__init__ openrouter settings chatgpt_subscription chatgpt_auth chatgpt_relay responses_stream",
-    "experiments": "__init__ creative_benchmark unified_benchmark pe_loop bernini_pe render_profiles device_scheduler results preflight recovery",
+    "experiments": "__init__ creative_benchmark unified_benchmark pe_loop bernini_pe render_profiles device_scheduler results preflight recovery resumption",
 }
 SCRIPTS = (
     "scripts/benchmark_device_worker.py",

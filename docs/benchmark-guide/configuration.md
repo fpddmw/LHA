@@ -54,6 +54,14 @@ contributions append; full-experience begins after those tasks settle. Device co
 does not change the four-attempt per-task budget. See the [public guide](../public-experiment-guide.md#n-gpus-on-one-host)
 for device selection, resume and automatic library handoff commands.
 
+Recovery uses the original command and output root. Changing the physical GPU list
+preserves task directories, model context and the four submitted-render allowance.
+The old workers must exit first. Model/profile/seed/data changes are rejected rather
+than silently treated as recovery. Node replacement requires the original absolute
+mount paths and a fenced old node; the queue remains host-local. See
+[same-command recovery](../public-experiment-guide.md#5-run-resume-and-score-explicitly)
+for per-method behavior and unresolved-call handling.
+
 主机文件填写实际设备及渲染资产清单。单设备服务串行生成并复用常驻模型；多设备批次由 scheduler 为各设备派发任务，任务内依赖顺序不变。配置两个 GPU 并不意味着同时在一张卡上启动两次 Bernini。
 
 当前双卡主机已配置临时 SSH 出口。远端环境文件可额外包含 `HTTPS_PROXY`、`HTTP_PROXY`、`NO_PROXY`；这些值仅供对应运行进程使用。地址依实际主机设置，不将临时端口作为项目公共默认值。Experiments remain paused during the current integration repair; historical host notes are not a fresh availability check.

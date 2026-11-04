@@ -60,7 +60,8 @@ class Service:
                 )
         self.runtime_sources = self.source_inventory()
         with RunLock(self.directory / "configuration"):
-            immutable(self.directory / "config.json", self.config)
+            from experiments.resumption import bind_deployment
+            bind_deployment(self.directory / "config.json", self.config)
             immutable(self.directory / "runtime-sources.json", self.runtime_sources)
             if self.config.get("workflow") == "creative_loop_v1":
                 from planner_harness.creative import role_settings, verify_experiment
@@ -147,6 +148,13 @@ class Service:
 
     def blocks_dispatch(self, job):
         # An old unknown model request quarantines its topic, not this GPU.
+        if getattr(self, 'admitted_topic', None):
+            payload = job.get('payload', {})
+            task = load(payload['request']).get('accounting_scope', {}) if 'request' in payload else payload.get('task', {})
+            topic = task.get('topic', task.get('budget_topic'))
+            lane = task.get('lane', task.get('budget_lane'))
+            if topic != self.admitted_topic or lane != self.admitted_lane:
+                return True
         rows = self.unresolved_resources()
         if any(r["resource"] == "gpu" for r in rows):
             return True
@@ -227,7 +235,8 @@ class Service:
             self.renderer.close()
 
     def recover(self, job, directory):
-        # This path reads an already committed tool response; it must never issue a new call.
+        # Replay committed responses first. Unsubmitted work and remaining transport
+        # attempts may resume only under their original request identity and allowance.
         if (
             job["kind"] == "tool"
             and Path(job["payload"]["request"]).with_name("response.json").exists()
@@ -265,9 +274,56 @@ class Service:
                                 and sent["user_text"] == prepared["user_text"]
                                 and sent["system_prompt"] == prepared["system_prompt"]
                             )
-            if completed_response:
+            from planner_harness.resumption import planner_ready
+            if completed_response or planner_ready(run):
                 return self(job, directory)
+        if job['kind'] == 'tool':
+            from planner_harness.resumption import calls_ready
+            request_path = Path(job['payload']['request'])
+            request = load(request_path)
+            if request['kind'] == 'generate':
+                from planner_harness.accounting import operation
+                scope = request.get('accounting_scope')
+                record = operation(scope,request['sha256']) if scope else None
+                if not request_path.with_name('render-started.json').exists() and (record is None or record['status']=='reserved'):
+                    return self(job,directory)
+            elif calls_ready(request_path.parent):
+                return self(job,directory)
         return None
+
+    def reconcile_queue(self):
+        """Repair original queue receipts, leaving ambiguous external calls blocked."""
+        from planner_harness.resumption import (reconcile_accounting, recover_texts,
+            repair_render_response, planner_ready, calls_ready, archive_remove)
+        reconcile_accounting(self.accounting_root)
+        recover_texts(self.directory,self.accounting_root)
+        rows = self.queue.rows()
+        latest = {}
+        for row in rows:
+            if row['kind']=='planner':latest[row['payload']['run']] = row['id']
+        for row in rows:
+            if self.blocks_dispatch(row):continue
+            ready = False
+            if row['kind']=='planner':
+                run = Path(row['payload']['run'])
+                if row['id'] != latest[str(run)]:continue
+                state = load(run/'state.json') if (run/'state.json').exists() else {}
+                interrupted = state.get('status') in {'running','interrupted','model_unavailable','needs_reconciliation','transport_or_runtime_error'}
+                ready = planner_ready(run) and (row['state'] in {'failed','needs_review'} or (row['state']=='complete' and interrupted))
+            elif row['kind']=='tool':
+                path = Path(row['payload']['request'])
+                repair_render_response(path)
+                response = path.with_name('response.json')
+                ready = (response.exists() and not load(response).get('outcome_unknown')) or (
+                    not response.exists() and not path.with_name('render-started.json').exists() and calls_ready(path.parent))
+                ready = ready and row['state'] in {'failed','needs_review'}
+            if ready:
+                folder = self.directory/'jobs'/str(row['id'])
+                history = folder/'recovery-history'
+                immutable(history/(signature(row)+'.json'),row)
+                archive_remove(folder/'receipt.json',history)
+                with self.queue.transaction() as db:
+                    db.execute('UPDATE jobs SET state="queued",owner=NULL,result=NULL,finished=NULL,expanded=0 WHERE id=? AND state=?', (row['id'],row['state']))
 
     def submit(self, task):
         task = copy.deepcopy(task)

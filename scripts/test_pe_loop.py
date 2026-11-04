@@ -141,7 +141,7 @@ class PELoopTests(Fixture):
         self.assertEqual(row['evidence']['actual_generations'], 2)
         self.assertEqual(row['candidates'][-1]['roles'], ['last'])
 
-    def test_unknown_selection_keeps_last_choice_and_registers_new_candidate(self):
+    def test_unknown_selection_keeps_original_phase_for_recovery(self):
         batch, runtime = self.setup_loop(n=4)
         def choose(topic, candidates, reviews, directory, scope):
             if len(candidates) == 2:
@@ -149,14 +149,15 @@ class PELoopTests(Fixture):
                            'reason': 'Second candidate has the preferred design.', 'model_called': True}
             raise accounting.ExternalExecutionUnknown('Interrupted selection stream')
         runtime.choose = choose
-        self.assertTrue(self.run_loop(batch, runtime)['partial'])
-        row = results.find(self.registry, '001', 'short', 'pe-loop', 42)
-        self.assertEqual(row['evidence']['delivery_kind'], 'selection_unavailable_delivery')
-        self.assertEqual(row['evidence']['actual_generations'], 3)
-        self.assertEqual([c['roles'] for c in row['candidates']], [['first'], ['selected'], ['last']])
-        before = list(runtime.calls)
+        with self.assertRaises(accounting.ExternalExecutionUnknown):
+            self.run_loop(batch, runtime)
+        folder=self.output/'methods'/batch['topics'][0]['id']/'pe-loop'
+        self.assertFalse((folder/'complete.json').exists())
+        self.assertEqual(load(folder/'progress.json')['phase'],'select')
+        runtime.choose=lambda *args: (1, {'policy':u.SELECTOR,'selected_index':1,'reason':'Original choice after recovery'})
         self.run_loop(batch, runtime)
-        self.assertEqual(runtime.calls, before)
+        self.assertEqual(sum(v[0]=='render' for v in runtime.calls),4)
+        self.assertEqual(sum(v[0]=='review' for v in runtime.calls),4)
 
     def test_unknown_review_remains_recoverable(self):
         batch, runtime = self.setup_loop(n=2)
@@ -308,7 +309,7 @@ class PELoopTests(Fixture):
                 u.run_serial(self.repo, self.output, host, runtime_factory=lambda *args: runtime)
                 topic = batch['topics'][0]['id']
                 folder = self.output / 'methods' / topic / 'pe-loop'
-                self.assertEqual(load(folder / 'settlement.json')['status'], 'failed')
+                self.assertEqual(load(folder / 'settlement.json')['status'], 'recovery_required')
                 queue = Claims(self.output / 'device-queue.sqlite3', batch['topics'], batch['sha256'], 'fixture')
                 with queue.connect() as db:
                     db.execute('UPDATE tasks SET status="settled"')

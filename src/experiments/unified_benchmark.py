@@ -292,8 +292,18 @@ def verify(root, output):
     current = results.inventory(root)
     for topic in batch["topics"]:
         row = current.get((topic["sample_id"], topic["prompt_form"]))
-        if not row or row["source_sha256"] != topic["source_sha256"] or row["request"] != topic["request"] or sha(root / topic["source"]) != topic["source_sha256"]:
+        original = topic.get("original_source_sha256", topic["source_sha256"])
+        if not row or row["source_sha256"] != original or row["request"] != topic["request"] or sha(root / topic["source"]) != topic["source_sha256"]:
             raise IntegrityError("Current benchmark differs from the prepared source/request")
+        if sha(root / row['source']) != original:
+            raise IntegrityError("Original source changed after preparation")
+        if topic.get('normalization'):
+            from .video_contract import POLICY, sample_indices
+            proof = topic['normalization']
+            if (proof['policy'] != POLICY or proof['original_sha256'] != original
+                    or proof['normalized_sha256'] != topic['source_sha256']
+                    or proof['source_indices'] != sample_indices(proof['original_info']['frames'])):
+                raise IntegrityError('Normalized source provenance changed')
     return batch
 
 
@@ -531,8 +541,33 @@ class Runtime:
         host['review']=batch.get('review',{'mode':'critic'})
         init_worker(devices[0], str(root), str(output), host)
         self.root, self.output, self.queue, self.service, self.directory = worker_state()
+        self.resident_service = self.service
+        self.task_services = {}
         self.batch, self.host = batch, host
         self.pe_backend = None
+
+    def bind_task(self, topic, method):
+        from .resumption import task_directory
+        from server_runtime.service import Service
+        from server_runtime.queue import Queue
+        from . import creative_benchmark
+        directory = task_directory(self.output, topic, method)
+        resident = self.resident_service
+
+        class TaskService(Service):
+            def close(self): pass
+
+        if str(directory) not in self.task_services:
+            resident.ensure_ready()
+            queue = Queue(directory / 'queue.sqlite3', {'gpu':1, 'llm':1, 'cpu':1})
+            factory = None if resident.model_factory == resident.client else resident.model_factory
+            service = TaskService(queue, directory, self.root, resident.config, renderer=resident.renderer,model_factory=factory)
+            self.task_services[str(directory)] = (queue, service)
+        self.directory = directory
+        self.queue, self.service = self.task_services[str(directory)]
+        self.service.admitted_topic = topic
+        self.service.admitted_lane = method
+        creative_benchmark._WORKER = (self.root, self.output, self.queue, self.service, directory)
 
     def ready(self):
         self.service.ensure_ready()
@@ -658,7 +693,11 @@ class Runtime:
         # Engine.close keeps resident models warm between topics. Final worker
         # shutdown must release an idle GPU even with an unknown LLM request.
         from server_runtime.service import Service
-        Service.close(self.service)
+        for _, service in self.task_services.values():
+            if service.gpu_unknown():
+                Service.close(service)
+                return
+        Service.close(self.resident_service)
 
 
 def execute_method(root, output, topic, method, batch, runtime):
@@ -837,7 +876,12 @@ def run_serial(root, output, host, *, runtime_factory=Runtime, maintenance_model
     # No independent judging occurs here. Its fresh evaluation identity is
     # prepared separately from this generation manifest and result registry.
     with RunLock(output / ("unified-owner" if claim is None else "device-owner-"+str(host["devices"][0]))):
-        immutable(output / ("host.json" if claim is None else "workers/"+str(host["devices"][0])+"/host.json"), host)
+        from .resumption import bind_deployment, reconcile_batch, reopen_method
+        bind_deployment(output / ("host.json" if claim is None else "workers/"+str(host["devices"][0])+"/host.json"), host)
+        if claim is None:
+            from .resumption import check_owners
+            check_owners(output)
+            reconcile_batch(root,output)
         preflight(root, output, host)
         runtime = None
         statuses = []
@@ -851,6 +895,7 @@ def run_serial(root, output, host, *, runtime_factory=Runtime, maintenance_model
                 for method in topic.get("methods",batch["arms"]):
                     conditions=task_conditions(root,output,topic,method,batch)
                     path = output / "methods" / topic["id"] / method / "settlement.json"
+                    reopen_method(output,topic['id'],method)
                     previous = load(path) if path.exists() else None
                     lane=accounting.load_ledger(output/'accounting').get('topics',{}).get(topic['id'],{}).get('lanes',{}).get(method,{})
                     operations=[r for r in accounting.load_ledger(output/'accounting')['operations'].values() if r['topic']==topic['id'] and r['lane']==method]
@@ -872,7 +917,10 @@ def run_serial(root, output, host, *, runtime_factory=Runtime, maintenance_model
                             else:
                                 if runtime is None:
                                     runtime = runtime_factory(root, output, host, batch)
-                                result = execute_method(root, output, topic, method, conditions, runtime)
+                                if hasattr(runtime,'bind_task'):
+                                    runtime.bind_task(topic['id'],method)
+                                with RunLock(Path(getattr(runtime,'directory',path.parent))/'task-execution-owner'):
+                                    result = execute_method(root, output, topic, method, conditions, runtime)
                         except IntegrityError:
                             raise
                         except (ResourceExhausted, ValueError, RuntimeError) as exc:
@@ -880,6 +928,9 @@ def run_serial(root, output, host, *, runtime_factory=Runtime, maintenance_model
                                 raise
                             result = {"status": "execution_unknown" if getattr(exc, "outcome_unknown", False) else "budget_exhausted" if isinstance(exc,ResourceExhausted) else "failed",
                                       "error_type": type(exc).__name__, "failure_kind": getattr(exc, "failure_kind", None)}
+                            progress = path.parent/'progress.json'
+                            if result['status']=='failed' and method=='pe-loop' and progress.exists() and load(progress).get('status')=='awaiting_recovery':
+                                result['status']='recovery_required'
                         row = {"topic": topic["id"], "method": method, "review_mode":method_review_mode(method,batch) if method in results.REVIEW_METHODS else 'shared', "batch_sha256": batch["sha256"], **result}
                         if previous:
                             archived = path.parent / 'settlement-history' / (signature(previous) + '.json') if requested_recovery else path.parent / "original-unknown-settlement.json"
@@ -919,7 +970,7 @@ def run_serial(root, output, host, *, runtime_factory=Runtime, maintenance_model
             if runtime is not None:
                 runtime.close()
             if claim is None:results.report(root, batch["results_root"])
-        result = {"status": "partial" if any(r["status"] in {"execution_unknown","topic_quarantined"} for r in statuses) else "settled", "topics": batch["topics"], "positions": statuses,
+        result = {"status": "partial" if any(r["status"] in {"execution_unknown","topic_quarantined","model_unavailable","recovery_required"} for r in statuses) else "settled", "topics": batch["topics"], "positions": statuses,
                   "quality_scoring": "pending_new_evaluation"}
         save(output / ("checkpoint.json" if claim is None else "workers/"+str(host["devices"][0])+"/checkpoint.json"), result)
         if claim is not None:return result

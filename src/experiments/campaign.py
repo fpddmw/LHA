@@ -301,7 +301,8 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
         immutable(output / 'plan.json', summary)
         immutable(registry / 'analysis-population.json', summary['population'])
         if host:
-            immutable(output / 'host-input.json', host)
+            from .resumption import bind_deployment
+            bind_deployment(output / 'host-input.json', host)
         seed_snapshot = seed_library(root, output, initial_snapshot)
         for item in stages:
             if item == 'score':
@@ -347,7 +348,7 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
             accounting.install(folder / 'accounting', runner.policy(batch, budget), require_live=True)
             result = runner.run(root, folder, run_host)
             save(output / 'stage-status.json', {'stage': item, 'result': result['status']})
-            bad = [p for p in result['positions'] if p['status'] in {'execution_unknown','topic_quarantined','unexecuted'}]
+            bad = [p for p in result['positions'] if p['status'] in {'execution_unknown','topic_quarantined','unexecuted','model_unavailable'}]
             if bad or result['status'] not in {'settled','complete'}:
                 raise RuntimeError(f'{item}: unresolved trajectories or dispatch need attention; retained original receipts, no new dependent stage')
             if item == 'pre-experience':
@@ -380,7 +381,7 @@ def batch_status(output):
     workers = dispatch.get('workers', {})
     final_checkpoint = (checkpoint.get('status') in {'settled', 'complete', 'partial'}
                         and (not dispatch_path.exists() or checkpoint_path.stat().st_mtime_ns >= dispatch_path.stat().st_mtime_ns))
-    unresolved_states = {'execution_unknown', 'topic_quarantined', 'recovery_required', 'gpu_quarantined', 'unexecuted'}
+    unresolved_states = {'execution_unknown', 'topic_quarantined', 'recovery_required', 'gpu_quarantined', 'unexecuted','model_unavailable'}
     if final_checkpoint:
         state, basis = checkpoint['status'], 'final_checkpoint'
     elif dispatch:
@@ -416,4 +417,6 @@ def status(output):
     answer['trained_snapshot'] = (output / 'trained-experience.json').exists()
     answer['self_review_trained_snapshot'] = (output / 'self-review-trained-experience.json').exists()
     answer['results'] = str(output / 'results/index.html')
+    from .resumption import preview
+    answer['recovery'] = preview(output)
     return answer

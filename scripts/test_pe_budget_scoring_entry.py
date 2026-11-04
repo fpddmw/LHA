@@ -160,16 +160,20 @@ class ScoringEntryTests(Fixture):
             self.assertFalse((self.root / name / 'host-input.json').exists())
             self.assertIsNotNone(results.current_evaluation(self.root / name / 'results'))
 
-    def test_old_scoring_namespace_is_preserved_and_replaced_automatically(self):
+    def test_changed_scoring_protocol_requires_explicit_new_evaluation(self):
         from evaluation import low_high
         results.import_video(self.repo, self.registry, self.row())
         old = {**low_high.profile(), 'sha256': 'old-protocol'}
         with patch.object(low_high, 'profile', return_value=old):
             results.prepare_evaluation(self.repo, self.registry, evaluation_id='old')
         original = sha(self.registry / 'evaluations/old/evaluation.json')
-        directory, current = results.ensure_evaluation(self.repo, self.registry, evaluation_id='old')
-        self.assertNotEqual(current['evaluation_id'], 'old')
-        self.assertEqual(results.ensure_evaluation(self.repo, self.registry, evaluation_id='old')[0], directory)
+        with self.assertRaisesRegex(ValueError, 'explicitly prepare a new evaluation'):
+            results.ensure_evaluation(self.repo, self.registry, evaluation_id='old')
+        self.assertEqual(len(list((self.registry / 'evaluations').iterdir())), 1)
+        results.prepare_evaluation(self.repo, self.registry, evaluation_id='new-reviewed-protocol')
+        directory, current = results.ensure_evaluation(self.repo, self.registry)
+        self.assertEqual(current['evaluation_id'], 'new-reviewed-protocol')
+        self.assertEqual(results.ensure_evaluation(self.repo, self.registry)[0], directory)
         self.assertEqual(sha(self.registry / 'evaluations/old/evaluation.json'), original)
 
 

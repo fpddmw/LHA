@@ -137,6 +137,9 @@ def verify_settlement(run):
     run = Path(run)
     state = load(run / "state.json")
     status = state["status"]
+    if status in {'model_unavailable','interrupted','transport_or_runtime_error'}:
+        return {'outcome':'model_unavailable', 'selected':None,'successful':False,
+                'scope':'Recoverable technical interruption; original task and allowance retained'}
     if status == "complete":
         delivery = verify_delivery(run)
         return {"outcome": "delivered", "selected": delivery["selected"], "successful": True}

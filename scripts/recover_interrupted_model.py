@@ -36,7 +36,8 @@ def _call(run, state):
 def _inspect(run, audit_sha256, reason):
     state = load(run / 'state.json')
     clock = state.get('online_clock') or {}
-    if state.get('final') or clock.get('frozen_unix') or time.time() >= clock.get('deadline_unix', 0):
+    deadline = clock.get('deadline_unix')
+    if state.get('final') or clock.get('frozen_unix') or (deadline is not None and time.time() >= deadline):
         raise ValueError('Original task is settled or expired; retain its existing result')
     if state.get('status') != 'needs_reconciliation':
         raise ValueError('This entry resumes a recorded needs_reconciliation task')

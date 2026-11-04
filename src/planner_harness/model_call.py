@@ -57,9 +57,8 @@ def reopen_call(directory, reason, extra_attempts=1):
 
 
 def write_text_atomic(path, text):
-    temporary = path.with_suffix(path.suffix + ".part")
-    temporary.write_text(text, encoding="utf-8")
-    os.replace(temporary, path)
+    from .common import write_atomic
+    write_atomic(path, text)
 
 
 def transient(exc):

@@ -256,11 +256,41 @@ On one host, `--backend both --host-config configs/experiment-hosts.local.json
 Separate hosts run their single-backend commands. Main and self-review are separate
 stage selections; `main` never implicitly includes the ablation.
 
-Repeating an unchanged command collects existing receipts and skips completed work.
-Uncertain calls/renders remain quarantined; use the existing
-[recovery procedures](server-runtime.md) against their original requests. Do not
-delete receipts or change identities to force a rerender. Main `full-experience` depends
-on its own `pre-experience` settlement; self-review has its separate dependency and owner.
+Repeating the original command with the original output root resumes that experiment.
+No resume flag or new run directory is needed. `check` and `status` include a read-only
+recovery preview with method states, submitted/reserved renders and unresolved operations.
+`run` checks ownership, reconciles durable receipts, and continues unfinished work:
+
+| Interrupted work | What the same command reuses and continues |
+|---|---|
+| Direct / single-pass PE | The original prompt, seed, signed render request and completed video; a missing registry entry is rebuilt from its receipt |
+| PE Loop | Completed refinement, render, review and selection phases; continue the first unfinished phase with the same four-submission allowance |
+| Planner with Critic or self-review | The original task, knowledge binding, working notes, observations, candidates, pending answer/tool result and input ancestry; no task restart or budget reset |
+| After the fourth render, before delivery | Continue observation/review/selection and confirmation; a saved Planner answer is replayed, and no fifth render is admitted |
+| Task-post maintenance | Recover committed contributions and activation journals once; retry only an unfinished original call within its remaining transport allowance |
+| Independent scoring / reports | Reuse each judge's valid output and cached automatic metrics; complete missing scoring and rebuild indexes/exports from the same results |
+
+The four-attempt limit counts actual submitted renders, including definite failed
+submissions. Recovery does not replenish it. The manifest's topics, methods, seeds,
+knowledge, render settings and model settings also stay fixed. No additional topics
+are admitted by restarting. Main `full-experience` depends on its own
+`pre-experience` settlement; self-review retains its separate dependency and owner.
+
+An active coordinator or worker rejects a duplicate start. After stopping the old
+workers, `--devices` may select different or fewer/more available GPUs. New tasks
+live under `executions/<topic>/<method>`; a durable location index also reuses old
+`workers/<device>` task directories. GPU reassignment does not create a new task.
+For a node replacement, first fence the old node, preserve the complete output and
+frozen checkout, and mount them with the **same absolute paths** (including assets
+and inputs). Host-local SQLite is not a distributed scheduler; do not run two hosts
+against the same writable queue. Existing explicit disjoint shards remain separate.
+
+An external submission with no conclusive receipt remains blocked. Process death
+alone does not establish whether a provider finished a call. Exhausted/permanent
+transport failures also retain their original allowance. Use the existing
+[recovery procedures](server-runtime.md) for these recorded exceptions; do not delete
+receipts or change identities to force another call. Historical code/protocols are
+not silently migrated by this entry; use their frozen runtime for historical runs.
 
 To run the first stage now and continue full-experience later on the same host:
 
@@ -296,8 +326,10 @@ python scripts/benchmark_results.py score-evaluation \
 
 The command creates the current evaluation identity, adds collected videos, computes
 automatic metrics, calls both independent judges, performs anonymous order-swapped
-comparisons and writes reports. It can run after generation. Protocol changes create
-a new evaluation directory; old raw outcomes remain intact. A copied registry must
+comparisons and writes reports. It can run after generation. Repeating the command
+retains its evaluation identity. A changed protocol/model is rejected until an
+explicit `prepare-evaluation --evaluation-id NEW_ID` creates a separately authorized
+evaluation; old raw outcomes remain intact. A copied registry must
 retain all media and frozen metadata. If source media paths change, relocate the
 checkout consistently before scoring.
 

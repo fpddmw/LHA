@@ -637,11 +637,13 @@ class PlannerHarness:
                             from .compat.legacy.runtime import call_model
 
                             raw = call_model(self, call_dir, user_text, images)
-                        raw_path.write_text(raw, encoding="utf-8")
+                        from .common import write_atomic
+                        write_atomic(raw_path, raw)
                     check_wall(self.state)
                     from .json_output import decode_object
 
                     parsed = decode_object(raw)
+                    self.state.setdefault('unresolved_calls', {}).pop(event_id, None)
                     event = {"event_id": event_id, "at": stamp(), "request": parsed, "status": "ok"}
                     try:
                         event["result"] = self.operate(parsed, event_id)
@@ -692,9 +694,11 @@ class PlannerHarness:
             }
             self.state["status"] = "needs_reconciliation"
         except ModelTransportError as exc:
-            settle(self.state, str(exc), status="execution_failed")
-            self.state["pending_event"] = None
-            save(self.output / "final.json", self.state["final"])
+            self.state['status'] = 'model_unavailable'
+            self.state['last_error'] = str(exc)
+            # Keep the exact pending input and attempt allowance for original-command recovery.
+            # Exhausted/permanent transport failures stay blocked, never silently get new attempts.
+            self.checkpoint()
         except KeyboardInterrupt:
             self.state["status"] = "interrupted"
             self.checkpoint()

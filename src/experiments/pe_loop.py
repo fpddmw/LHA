@@ -265,15 +265,9 @@ def execute(topic, batch, runtime, directory, scope):
             stop_kind = "prompt_limit_delivery"
             save(directory / "prompt-limit-stop.json", exc.details)
         except accounting.ExternalExecutionUnknown as exc:
-            if phase != "select" or decision is None:
-                save(directory / "progress.json", {"round": number + 1, "phase": phase,
-                     "status": "awaiting_recovery", "error_type": type(exc).__name__, "reason": str(exc)})
-                raise
-            stop = str(exc)
-            stop_kind = "selection_unavailable_delivery"
-            save(directory / "selection-stop.json", {"round": number + 1,
-                 "reason": stop, "retained_candidate": candidates[selected]["id"],
-                 "call": str(folder / "selection/call")})
+            save(directory / "progress.json", {"round": number + 1, "phase": phase,
+                 "status": "awaiting_recovery", "error_type": type(exc).__name__, "reason": str(exc)})
+            raise
         except RecordedInterruption as exc:
             if decision is None:
                 raise

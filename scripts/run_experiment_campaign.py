@@ -75,6 +75,8 @@ def main():
             from experiments.readiness import check
             hosts = selected_hosts()
             result = check(ROOT, config, hosts, verify_assets=args.verify_assets)
+            from experiments.resumption import preview
+            result['recovery'] = preview(args.output)
         elif args.command == 'plan':
             result = campaign.plan(ROOT, config)
             if both:

@@ -82,14 +82,18 @@ class Claims:
     def __init__(self,path,topics,plan,owner):
         self.path=Path(path);self.path.parent.mkdir(parents=True,exist_ok=True);self.owner=owner
         self.topics={t.get('claim_id',t['id']):t for t in topics}
+        if len(self.topics) != len(topics):
+            raise ValueError('Duplicate task identities in the frozen queue')
         with self.connect() as db:
             db.execute('CREATE TABLE IF NOT EXISTS tasks (id TEXT PRIMARY KEY, ordinal INTEGER, plan TEXT, status TEXT, owner TEXT, dependency TEXT)')
             if 'dependency' not in [r[1] for r in db.execute('PRAGMA table_info(tasks)')]:db.execute('ALTER TABLE tasks ADD COLUMN dependency TEXT')
-            for i,t in enumerate(topics):db.execute('INSERT OR IGNORE INTO tasks VALUES (?,?,?,"pending",NULL,?)',(t.get('claim_id',t['id']),i,plan,t.get('dependency')))
-            rows=db.execute('SELECT id,plan,dependency FROM tasks').fetchall()
-            if ({r[0] for r in rows}!=set(self.topics)
-                    or any(r[1]!=plan or r[2]!=self.topics[r[0]].get('dependency') for r in rows)):
+            db.execute('BEGIN IMMEDIATE')
+            rows=db.execute('SELECT id,plan,dependency FROM tasks ORDER BY ordinal').fetchall()
+            expected=[(t.get('claim_id',t['id']),plan,t.get('dependency')) for t in topics]
+            if rows and rows != expected:
                 raise ValueError('Queue differs from frozen local shard/dependencies; retain the original runtime for an existing run')
+            if not rows:
+                for i,t in enumerate(topics):db.execute('INSERT INTO tasks VALUES (?,?,?,"pending",NULL,?)',(t.get('claim_id',t['id']),i,plan,t.get('dependency')))
     def connect(self):return sqlite3.connect(self.path,timeout=30)
     def next(self,*,wait=False):
         while True:
@@ -120,21 +124,29 @@ class Claims:
         batch=load(output/'batch.json')
         with self.connect() as db:
             db.execute('BEGIN IMMEDIATE')
-            for identity,owner in db.execute('SELECT id,owner FROM tasks WHERE status="claimed"').fetchall():
-                parts=owner.split(':')
-                alive=parts[0]==socket.gethostname() and birth(int(parts[1]))==parts[2]
+            for identity,owner in db.execute("SELECT id,owner FROM tasks WHERE status IN ('claimed','recovery_required','topic_quarantined','gpu_quarantined','settled','settled_from_receipts')").fetchall():
+                parts=(owner or 'unknown:0:none').split(':')
+                alive=len(parts)>2 and parts[0]==socket.gethostname() and parts[1].isdigit() and birth(int(parts[1]))==parts[2]
                 if alive:continue
                 topic=self.topics[identity]
                 receipts=[output/'methods'/topic['id']/m/'settlement.json' for m in topic.get('methods',batch['arms'])]
                 if all(p.exists() and load(p).get('batch_sha256')==batch['sha256'] for p in receipts):
                     outcomes={load(p).get('status') for p in receipts}
                     needs_maintenance=training_topic(topic,batch) and not training_maintenance_settled(output,topic)
-                    status='recovery_required' if outcomes & {'execution_unknown','topic_quarantined','unexecuted'} else 'pending' if needs_maintenance else 'settled_from_receipts'
+                    status='recovery_required' if outcomes & {'execution_unknown','topic_quarantined','unexecuted','model_unavailable','failed','recovery_required'} else 'pending' if needs_maintenance else 'settled_from_receipts'
                 else:
                     operations=[r for r in ledger.get('operations',{}).values() if r['topic']==topic['id'] and r.get('lane') in topic.get('methods',batch['arms']) and r['status']!='not_submitted']
                     # Even successful external calls without their final method
                     # receipt need original task recovery, never a fresh claim.
                     status='recovery_required' if operations else 'pending'
+                if status == 'recovery_required':
+                    from .resumption import method_recoverable, reopen_method
+                    methods = topic.get('methods', batch['arms'])
+                    if all((output/'methods'/topic['id']/m/'settlement.json').exists()
+                           and load(output/'methods'/topic['id']/m/'settlement.json').get('status') == 'ready'
+                           or method_recoverable(output,topic['id'],m) for m in methods):
+                        for method in methods:reopen_method(output,topic['id'],method)
+                        status = 'pending'
                 db.execute('UPDATE tasks SET status=?,owner=NULL WHERE id=?',(status,identity))
 
     def rows(self):
@@ -146,6 +158,7 @@ def worker(root,output,host,device):
     output=Path(output);batch=verify(root,output)
     from planner_harness.owned_process import birth
     identity=socket.gethostname()+':'+str(os.getpid())+':'+str(birth(os.getpid()))+':'+str(device)+':'+uuid.uuid4().hex
+    save(output/'workers'/str(device)/'dispatch-identity.json', {'host':socket.gethostname(),'pid':os.getpid(),'birth':birth(os.getpid())})
     queue=Claims(output/'device-queue.sqlite3',work_units(batch,host),batch['sha256'],identity)
     single={**host,'devices':[device]}
     try:
@@ -157,7 +170,7 @@ def worker(root,output,host,device):
 
 
 def dispatch_status(positions,claims):
-    unresolved={'execution_unknown','unexecuted','topic_quarantined','recovery_required','gpu_quarantined','pending','claimed'}
+    unresolved={'execution_unknown','unexecuted','topic_quarantined','recovery_required','gpu_quarantined','pending','claimed','model_unavailable'}
     return 'partial' if any(r['status'] in unresolved for r in [*positions,*claims]) else 'settled'
 
 
@@ -172,15 +185,18 @@ def run_devices(root,output,host):
         frozen_host['local_results_root']=str(Path(host['local_results_root']).resolve())
     ensure_local_queue(output)
     with scheduler_owner(output):
-        immutable(output/'host.json',frozen_host)
+        from .resumption import check_owners, bind_deployment, reconcile_batch
+        check_owners(output)
+        bind_deployment(output/'host.json',frozen_host)
         accounting.install(output/'accounting',frozen_host['budget'],require_live=True)
         if host.get('local_results_root'):
             batch={**batch,'results_root':str(Path(host['local_results_root']).resolve())}
             results.register_plan(batch['results_root'],batch)
         preflight(root,output,frozen_host)
-        immutable(output/'dispatch-plan.json',{'batch_sha256':batch['sha256'],'host':socket.gethostname(),
+        bind_deployment(output/'dispatch-plan.json',{'batch_sha256':batch['sha256'],'host':socket.gethostname(),
             'devices':selected,'renders_per_device':1,'shard_rank':host.get('shard_rank',0),'shard_count':host.get('shard_count',1),
             'topics':[t['id'] for t in topics],'coordination':'host-local SQLite; disjoint explicit shards across hosts'})
+        save(output/'recovery-report.json',reconcile_batch(root,output))
         queue=Claims(output/'device-queue.sqlite3',work_units(batch,host),batch['sha256'],'supervisor')
         queue.recover(output)
         children=[];recovered=set()

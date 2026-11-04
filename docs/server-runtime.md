@@ -40,6 +40,19 @@ python scripts/run_server_pipeline.py --service /persistent/lha-service drain
 
 多卡主实验优先使用 [实验运行安排](experiment-campaign.md) 中的 campaign 入口；不要手动重复启动同一张卡的生成 worker。This documentation does not authorize a new launch. The current integration repair leaves experiments paused; existing frozen services retain their own configuration.
 
+## Current campaign recovery
+
+For an ordinary interruption, repeat the original campaign command with its original
+output directory. Startup restores durable model/render responses, resumes the same
+Planner task and preserves its submitted-generation count. GPU reassignment uses the
+same task directory. No manual queue edit or retry allowance is needed for already
+saved responses or work that was not submitted. See the
+[public recovery guide](public-experiment-guide.md#5-run-resume-and-score-explicitly).
+
+The explicit relay procedure below is for an unresolved provider submission. It can
+authorize an additional transport attempt; normal command restart does not grant one.
+It preserves the original task clock, including a null deadline in current runs.
+
 ## Relay 502 后续接原文本调用
 
 `scripts/recover_interrupted_model.py` 处理已经返回本地失败回执的 Planner／Critic 文本调用。先停止原 worker，再用原 `client-audit/summary.json` 的 SHA256 检查恢复范围：
