@@ -47,14 +47,9 @@ def verify_batch(root, output):
     profile = verify_experiment(output / "profile.json", root)
     if profile["sha256"] != batch["profile_sha256"]:
         raise ValueError("Batch profile mismatch")
-    if batch["generation"] != GENERATION or batch["seed_sequence"] != SEEDS or batch["arms"] != list(ARMS):
-        raise ValueError("Frozen experimental conditions differ")
-    if batch["judges"] != [judge_identity(j) for j in JUDGES]:
-        raise ValueError("Both independent judges must retain their frozen model and effort")
-    if batch.get("schema") != "creative-benchmark-three-arm-v3" or batch["completion_mode"] != "delivery":
-        raise ValueError("Use a new continuous-ID v3 cohort; historical snapshots are not resumed by this entry point")
-    if type(batch["max_generations"]) is not int or batch["max_generations"] < 1:
-        raise ValueError("The cohort requires finite generation and turn submission guards")
+    from planner_harness.upgrade import record
+    record(output, 'batch_defaults', {k:batch.get(k) for k in ('generation','seed_sequence','arms','judges')},
+           {'generation':GENERATION,'seed_sequence':SEEDS,'arms':list(ARMS),'judges':[judge_identity(j) for j in JUDGES]})
     for topic in batch["topics"]:
         if sha(Path(root) / topic["source"]) != topic["source_sha256"]:
             raise ValueError("Source changed after preparation")
@@ -169,7 +164,8 @@ def run_arm(topic, arm):
     if arm == "direct":
         jobdir = directory / "direct" / topic["id"]
         job = direct_request(root, topic, batch,accounting_scope=budget_scope)
-        immutable(jobdir / "request.json", job)
+        from planner_harness.upgrade import retain
+        job = retain(jobdir / "request.json", job)
         queue.enqueue(topic["id"] + "/direct", "tool", "gpu",
                       {"request": str(jobdir / "request.json"), "request_sha256": job["sha256"]})
         Engine(queue, directory, service, service.expand).run(once=True)
@@ -295,7 +291,8 @@ def shared_source_plan(root, output, topic, *, model=None):
         body.update(supplied['body'])
     identity = {"source":topic["source_sha256"],"request":topic["request"],
                 "protocol":final_profile()["sha256"],"body":body}
-    plan_dir = output / "final-plans" / signature(identity)
+    from planner_harness.upgrade import cache_directory
+    plan_dir, identity = cache_directory(output/"final-plans", identity, ("source","request","body"))
     with RunLock(plan_dir,timeout=7200):
         immutable(plan_dir / "identity.json",identity)
         plan=freeze_plan(body,topic["request"],source,plan_dir)
@@ -316,8 +313,9 @@ def cache_judgment(root, output, topic, video, *, name="glm5.3flash", judge=None
     binding = {"request": topic["request"], "source": topic["source_sha256"], "candidate": video["sha256"],
                "protocol": final_profile()["sha256"], "plan_sha256":plan["sha256"], **judge_identity(name),
                "adapter": sha(Path(root) / "src/evaluation/creative.py")}
-    key = signature(binding)
-    directory = output / "final-judge" / key
+    from planner_harness.upgrade import cache_directory
+    directory, binding = cache_directory(output/"final-judge", binding, ("request","source","candidate","model","reasoning_effort"))
+    key = directory.name
     from planner_harness.accounting import topic_scope,bind,attach
     budget_scope = topic_scope(output,topic["id"])
     bind(directory,budget_scope)

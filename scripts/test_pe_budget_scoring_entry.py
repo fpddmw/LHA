@@ -109,7 +109,9 @@ class ScoringEntryTests(Fixture):
             original = sha(directory / 'evaluation.json')
             calls = sum(len(m.calls) for m in models.values())
             feature_calls, motion_calls = features.call_count, motion.call_count
-            entry.main()
+            changed = {**low_high.profile(), 'sha256':'new-scoring-defaults'}
+            with patch.object(low_high, 'profile', return_value=changed):
+                entry.main()
             self.assertEqual(sum(len(m.calls) for m in models.values()), calls)
             self.assertEqual((features.call_count, motion.call_count), (feature_calls, motion_calls))
         self.assertEqual(sha(directory / 'evaluation.json'), original)
@@ -160,15 +162,15 @@ class ScoringEntryTests(Fixture):
             self.assertFalse((self.root / name / 'host-input.json').exists())
             self.assertIsNotNone(results.current_evaluation(self.root / name / 'results'))
 
-    def test_changed_scoring_protocol_requires_explicit_new_evaluation(self):
+    def test_changed_scoring_defaults_reuse_original_evaluation(self):
         from evaluation import low_high
         results.import_video(self.repo, self.registry, self.row())
         old = {**low_high.profile(), 'sha256': 'old-protocol'}
         with patch.object(low_high, 'profile', return_value=old):
             results.prepare_evaluation(self.repo, self.registry, evaluation_id='old')
         original = sha(self.registry / 'evaluations/old/evaluation.json')
-        with self.assertRaisesRegex(ValueError, 'explicitly prepare a new evaluation'):
-            results.ensure_evaluation(self.repo, self.registry, evaluation_id='old')
+        _, saved = results.ensure_evaluation(self.repo, self.registry, evaluation_id='old')
+        self.assertEqual(saved['protocol_sha256'],'old-protocol')
         self.assertEqual(len(list((self.registry / 'evaluations').iterdir())), 1)
         results.prepare_evaluation(self.repo, self.registry, evaluation_id='new-reviewed-protocol')
         directory, current = results.ensure_evaluation(self.repo, self.registry)

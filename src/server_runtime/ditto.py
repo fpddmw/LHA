@@ -226,6 +226,8 @@ class PersistentDittoRenderer:
         from run_prompt_probe import inspect_video
 
         info = inspect_video(source)
+        from experiments.video_contract import conditioning_input
+        source, info = conditioning_input(payload, directory, info)
         indices = conditioning_indices(payload, info)
         if not self.ready:
             self.initialize()
@@ -244,6 +246,7 @@ class PersistentDittoRenderer:
             directory / "renderer-input.json",
             {
                 "request": job,
+                "conditioning_path":str(source),
                 "encoded_text": payload["prompt"],
                 "system_prompt": "",
                 "token_count": tokens,
@@ -258,6 +261,7 @@ class PersistentDittoRenderer:
         g, output = cfg["generation"], cfg["output"]
         source = Path(payload["input"]["path"])
         info, indices, tokens = self.prepare(job, directory)
+        source = Path((load(directory/"renderer-input.json") if (directory/"renderer-input.json").exists() else {}).get("conditioning_path", str(source)))
         from run_prompt_probe import inspect_video
         if self.pipeline is None:
             self.load_pipeline()

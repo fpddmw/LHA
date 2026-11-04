@@ -35,7 +35,8 @@ def seed_library(root, output, initial=None):
     if target.exists():
         value = load(target)
         if initial and value != load(initial):
-            raise ValueError('Campaign initial knowledge differs; retain the original snapshot')
+            from planner_harness.upgrade import record
+            record(output, 'initial_knowledge_defaults', value, load(initial))
     elif initial:
         value = load(initial)
     else:
@@ -53,7 +54,8 @@ def seed_library(root, output, initial=None):
     if not knowledge.curated_catalog['entries']:
         raise ValueError('Campaign requires pre-existing knowledge entries, not an empty library')
     immutable(target, value)
-    immutable(output / 'initial-experience-receipt.json', {
+    from planner_harness.upgrade import retain
+    retain(output / 'initial-experience-receipt.json', {
         'snapshot_sha256': sha(target), 'preexisting_entries': len(knowledge.curated_catalog['entries']),
         'online_exposure': 'pre-experience reads this seed online and after settlement',
         'maintenance': 'train contributions enter the current campaign; test contributions are deferred',
@@ -82,7 +84,7 @@ def configuration(path):
     value = load(path)
     expected = {'version', 'max_generations', 'prompt_forms', 'seed_start', 'seed_step',
                 'task_budget', 'model', 'reasoning_effort', 'evaluation_id', 'maintenance', 'reuse_direct_results', 'pe_max_generations', 'rsi_partition'}
-    if set(value) != expected or value['version'] != VERSION:
+    if set(value) != expected or not str(value['version']).startswith('lha-experiment-campaign-v'):
         raise ValueError('Use the versioned campaign configuration')
     for key in ('max_generations', 'pe_max_generations', 'seed_step'):
         if type(value[key]) is not int or value[key] < 1:
@@ -158,33 +160,36 @@ def plan(root, config):
 
 
 def reuse_direct(root, output, batch, host, registry):
-    """Import compatible Direct videos, never old scores or legacy loop traces."""
+    """Reuse explicitly configured historical results for every selected method."""
     from . import results, unified_benchmark as runner
     source = (Path(root) / registry).resolve()
     target = Path(batch['results_root'])
     rows = []
     for topic in batch['topics']:
-        existing = results.find(target, topic['sample_id'], topic['prompt_form'], 'direct', batch['seed_sequence']['start'])
-        if existing:
-            runner.check_entry(topic,'direct',{**batch,'renderer_identity':host['renderer']},existing)
-            rows.append({'topic': topic['id'], 'status': 'already_registered'})
-            continue
-        old = results.find(source, topic['sample_id'], topic['prompt_form'], 'direct', batch['seed_sequence']['start'])
-        if old is None:
-            rows.append({'topic': topic['id'], 'status': 'not_found'})
-            continue
-        try:
-            runner.check_entry(topic, 'direct', {**batch, 'renderer_identity': host['renderer'], 'results_root': str(source)}, old)
-            row = copy.deepcopy(old)
-            row['video'] = str(source / row['video'])
-            if row.get('normalization'):row['source'] = str(source / row['source'])
-            for candidate in row.get('candidates', []):
-                candidate['video'] = str(source / candidate['video'])
-            results.import_video(root, target, row)
-            rows.append({'topic': topic['id'], 'status': 'reused', 'entry_sha256': old['sha256']})
-        except (ValueError, OSError, RuntimeError) as exc:
-            rows.append({'topic': topic['id'], 'status': 'incompatible', 'reason': str(exc)})
+        for method in topic.get('methods',batch['arms']):
+            existing = results.find(target, topic['sample_id'], topic['prompt_form'], method, batch['seed_sequence']['start'], runner.method_review_mode(method,batch))
+            if existing:
+                runner.check_entry(topic,method,{**batch,'renderer_identity':host['renderer']},existing)
+                rows.append({'topic': topic['id'], 'method':method, 'status': 'already_registered'})
+                continue
+            old = results.find(source, topic['sample_id'], topic['prompt_form'], method, batch['seed_sequence']['start'], runner.method_review_mode(method,batch))
+            if old is None:
+                rows.append({'topic': topic['id'], 'method':method, 'status': 'not_found'})
+                continue
+            try:
+                runner.check_entry(topic, method, {**batch, 'renderer_identity': host['renderer'], 'results_root': str(source)}, old)
+                row = copy.deepcopy(old)
+                row['video'] = str(source / row['video'])
+                if row.get('normalization'):row['source'] = str(source / row['source'])
+                for candidate in row.get('candidates', []):
+                    candidate['video'] = str(source / candidate['video'])
+                results.import_video(root, target, row)
+                rows.append({'topic': topic['id'], 'method':method, 'status': 'reused', 'entry_sha256': old['sha256']})
+            except (ValueError, OSError, RuntimeError) as exc:
+                rows.append({'topic': topic['id'], 'method':method, 'status': 'incompatible', 'reason': str(exc)})
     save(Path(output) / 'direct-reuse.json', {'source': str(source), 'positions': rows})
+    if any(row['status']=='incompatible' for row in rows):
+        raise ValueError('Existing registered work needs registration repair; it will not be regenerated')
     return rows
 
 
@@ -223,6 +228,9 @@ def freeze_training(root, output, *, review_mode="critic"):
         raise ValueError('Unknown review family')
     source = output / ('pre-experience' if review_mode == 'critic' else 'self-review-pre-experience')
     name = 'trained-experience' if review_mode == 'critic' else 'self-review-trained-experience'
+    if (output/(name+'.json')).exists() and (output/(name+'-receipt.json')).exists():
+        validate_snapshot(root, load(output/(name+'.json')))
+        return output/(name+'.json')
     if not (source / 'batch.json').exists():
         source = output / ('zero' if review_mode == 'critic' else 'self-review-zero')
     batch = load(source / 'batch.json')
@@ -282,33 +290,47 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
     from planner_harness import accounting
     from planner_harness.training_experience import validate_snapshot
     root, output = Path(root).resolve(), Path(output).resolve()
+    from planner_harness.upgrade import retain, record
+    saved_campaign = output/'campaign.json'
+    if saved_campaign.exists():
+        original = load(saved_campaign)
+        record(output, 'campaign_defaults', original.get('configuration', original), config)
+        recovered = original.get('configuration', original)
+        if 'evaluation_id' in recovered:config = recovered
     if stage == 'score':
         with RunLock(output / 'campaign-owner'):
-            return score_stage(root, output, config, plan(root, config))
+            return score_stage(root, output, config, load(output/'plan.json') if (output/'plan.json').exists() else plan(root, config))
     if stage != 'score' and not host:
         raise ValueError('Generation requires --host-config with verified renderer assets/devices')
     if host and (host.get('local_results_root') or host.get('shard_count', 1) != 1):
         raise ValueError('Campaign uses its own result roots/models and one host with N GPUs; use the lower-level runner for read-only sharding')
     from . import render_profiles
     name = render_profiles.backend({'backend': host['renderer']['backend']}) if host else None
-    if host and host['renderer'].get('generation', render_profiles.generation(name)) != render_profiles.generation(name):
+    if host and not saved_campaign.exists() and host['renderer'].get('generation', render_profiles.generation(name)) != render_profiles.generation(name):
         raise ValueError('Host generation settings differ from the supported renderer profile')
     stages = {'main': MAIN, 'all': ALL, 'self-review': SELF_REVIEW}.get(stage, (stage,))
-    summary = plan(root, config)
+    summary = load(output/'plan.json') if (output/'plan.json').exists() else plan(root, config)
     registry = output / 'results'
     with RunLock(output / 'campaign-owner'):
-        immutable(output / 'campaign.json', {'configuration': config, 'benchmark_sha256': sha(root / 'benchmark_data/benchmark.json')})
-        immutable(output / 'plan.json', summary)
+        retain(output / 'campaign.json', {'configuration': config, 'benchmark_sha256': sha(root / 'benchmark_data/benchmark.json')})
+        retain(output / 'plan.json', summary)
         immutable(registry / 'analysis-population.json', summary['population'])
         if host:
             from .resumption import bind_deployment
-            bind_deployment(output / 'host-input.json', host)
+            host = bind_deployment(output / 'host-input.json', host)
         seed_snapshot = seed_library(root, output, initial_snapshot)
         for item in stages:
             if item == 'score':
                 score_stage(root, output, config, summary)
                 continue
             methods, review, maintain = STAGES[item]
+            legacy_name = {'pre-experience':'zero','full-experience':'knowledge',
+                           'self-review-pre-experience':'self-review-zero','self-review-full-experience':'self-review-knowledge'}.get(item)
+            stage_name = legacy_name if legacy_name and (output/legacy_name/'batch.json').exists() and not (output/item/'batch.json').exists() else item
+            if stage_name != item:
+                old_batch=load(output/stage_name/'batch.json')
+                methods=tuple(old_batch['arms']);review=old_batch.get('review',{'mode':review})['mode']
+                maintain=old_batch.get('training_maintenance',maintain)
             local_config = stage_config(config, item, name)
             snapshot = seed_snapshot
             owner = None
@@ -317,19 +339,20 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
                 validate_snapshot(root, load(snapshot))
                 receipt = load(snapshot.with_name(snapshot.stem + '-receipt.json'))
                 owner = receipt['revision']['owner']
-            folder = output / item
+            folder = output / stage_name
             settings = {'model': config['model'], 'reasoning_effort': config['reasoning_effort']}
             resolved,critic,roles=runner.model_configuration(settings,host.get('models'))
-            if resolved!=settings or critic!=settings:raise ValueError('Host API model roles differ from campaign configuration')
+            if not (folder/'batch.json').exists() and (resolved!=settings or critic!=settings):raise ValueError('Host API model roles differ from campaign configuration')
             if not (folder / 'batch.json').exists():
                 runner.prepare(root, folder, splits=['train','test'], prompt_forms=config['prompt_forms'], methods=list(methods),
+                               sample_ids=summary.get('population',{}).get('main_sample_ids'),
                                seed_start=config['seed_start'], seed_step=config['seed_step'], max_generations=local_config['max_generations'],
                                results_root=registry,
                                planner=settings, models=roles, review={'mode': review}, experience_snapshot=snapshot, experience_owner=owner,
                                budget_settings=config['task_budget'], training_maintenance=maintain,
                                backend=name, output_dimensions=host['renderer'].get('output'))
             batch = runner.verify(root, folder)
-            immutable(output/'runtime-profile.json',{'profile_sha256':batch['profile_sha256']})
+            retain(output/'runtime-profile.json',{'profile_sha256':batch['profile_sha256']})
             expected = {'arms': list(methods), 'review': {'mode': review},
                         'max_generations': local_config['max_generations'], 'training_maintenance':maintain,
                         'seed_sequence': {'start': config['seed_start'], 'step': config['seed_step']},
@@ -337,13 +360,14 @@ def execute(root, output, config, host, stage, *, execute_paid=False, initial_sn
                         'results_root': str(registry)}
             expected['experience_seed_sha256'] = sha(snapshot)
             if owner is not None:expected['experience_owner'] = owner
-            if any(batch.get(k) != v for k, v in expected.items()):
-                raise ValueError('Existing batch differs from the requested campaign stage: ' + item)
-            if item == 'direct' and config['reuse_direct_results']:
+            record(folder, 'launch_defaults', {k:batch.get(k) for k in expected}, expected)
+            # Models, task list and generation allowance belong to the saved batch.
+            roles = batch.get('models', roles)
+            if config['reuse_direct_results']:
                 reuse_direct(root, folder, batch, host, config['reuse_direct_results'])
             budget = online_budget(local_config, methods, len(batch['topics']))
-            immutable(folder / 'launch-budget.json', budget)
-            run_host = {**host, 'models':roles,'budget': budget, 'maintenance': config['maintenance']}
+            budget = retain(folder / 'launch-budget.json', budget)
+            run_host = runner.effective_host(batch, {**host, 'models':roles,'budget': budget, 'maintenance': config['maintenance']})
             runner.preflight(root, folder, run_host)
             accounting.install(folder / 'accounting', runner.policy(batch, budget), require_live=True)
             result = runner.run(root, folder, run_host)

@@ -53,6 +53,8 @@ def profile():
 
 def freeze_plan(body, request, source, directory):
     from .task_spec import build, validate
+    if (Path(directory)/"plan.json").exists():
+        return check_plan(load(Path(directory)/"plan.json"), request, source)
     if set(body)-{'track','events','motion_preservation'}:
         raise ValueError('Plan body accepts track and optional evidence/motion scope only')
     task=build(request,source['duration_seconds'],track=body.get('track','long'),
@@ -66,8 +68,8 @@ def freeze_plan(body, request, source, directory):
 
 
 def check_plan(plan, request, source):
-    if plan.get('sha256')!=signature({k:v for k,v in plan.items() if k!='sha256'}) or plan.get('protocol_id')!=PLAN_PROTOCOL or plan.get('source_sha256')!=source['sha256'] or plan.get('request_sha256')!=text_sha(request):
-        raise ValueError('Task plan version or identity changed; use a new evaluation directory')
+    if plan.get('sha256')!=signature({k:v for k,v in plan.items() if k!='sha256'}) or plan.get('source_sha256')!=source['sha256'] or plan.get('request_sha256')!=text_sha(request):
+        raise ValueError('Original evaluation source/request is missing or corrupt; restore the saved input')
     from .task_spec import validate
     validate(plan['task'],request,source['duration_seconds'])
     return plan
@@ -191,7 +193,16 @@ def validate_observations(report, packet):
 
 def prepare_final(request, source, candidate, directory, *, plan=None, model=None):
     directory = Path(directory)
+    from planner_harness.upgrade import retain
+    saved_packet = directory/'evidence/request.json'
+    if saved_packet.exists():
+        saved = load(saved_packet)
+        return saved, [r['path'] for r in saved['images']]
     frozen = profile()
+    for parent in (directory, *directory.parents):
+        path = parent/'profile.json'
+        if path.exists() and load(path).get('rubric'):
+            frozen = load(path); break
     overview, segments, coverage = collect_evidence(request,source,{"candidate":candidate},directory / "evidence",plan)
     event_reports, reviewed_rows = [], []
     if model is not None:
@@ -201,8 +212,8 @@ def prepare_final(request, source, candidate, directory, *, plan=None, model=Non
             destination = directory / "events" / segment["id"]
             visible = {"original_request":request,"task_spec":plan["task"],
                        "scope":{k:v for k,v in segment.items() if k != "rows"}}
-            packet = _packet(EVENT_PROMPT,visible,segment["rows"],frozen["sha256"])
-            immutable(destination / "request.json",packet)
+            packet = _packet(frozen.get("event_prompt", EVENT_PROMPT),visible,segment["rows"],frozen["sha256"])
+            packet = retain(destination / "request.json",packet)
             try:
                 report, binding = call_report(destination,model,packet,[r["path"] for r in packet["images"]],validate_observations,usage="independent_final")
             except ReportUnavailable:
@@ -213,7 +224,7 @@ def prepare_final(request, source, candidate, directory, *, plan=None, model=Non
             event_reports.append({"id":segment["id"],**record,"request_sha256":sha(destination / "request.json")})
             if report["status"] == "observed":
                 reviewed_rows.extend(segment["rows"])
-    visible = {"protocol_id":PROTOCOL,"candidate_id":"candidate","original_request":request,
+    visible = {"protocol_id":frozen["protocol_id"],"candidate_id":"candidate","original_request":request,
                "task_spec":plan["task"] if plan else None,
                "plan_sha256":plan["sha256"] if plan else None,"compare_to":None,"focus":"","extra_checks":[],
                "evidence_policy":POLICY,"coverage":coverage,"videos":coverage,

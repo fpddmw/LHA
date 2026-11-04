@@ -67,7 +67,8 @@ def attempt_packet(call,packet):
 def call_report(directory, model, packet, images, validate, *, usage="online_feedback"):
     policy=FINAL_POLICY if usage=="independent_final" else POLICY
     directory = Path(directory)
-    immutable(directory / "recovery-policy.json", policy)
+    from .upgrade import retain
+    policy = retain(directory / "recovery-policy.json", policy)
     from .working_memory import estimate
     visible_packet = retry_packet(packet, [], policy)
     context = estimate(visible_packet["system_prompt"], visible_packet["user_text"], len(images))
@@ -75,7 +76,7 @@ def call_report(directory, model, packet, images, validate, *, usage="online_fee
     context["total_estimated"] = context["text_tokens_estimated"] + context["image_tokens_estimated"] + context["reserve_tokens"]
     context["limit"] = policy["max_context_estimated_tokens"]
     context["capacity_scope"] = "Operator submission guard; provider-specific capacity is verified by preflight."
-    immutable(directory / "context-budget.json", context)
+    context = retain(directory / "context-budget.json", context)
     if context["limit"] is not None and context["total_estimated"] > context["limit"]:
         immutable(directory / "unavailable.json", {"status":"missing", "reason":"input_context_budget", "failures":[]})
         raise ReportUnavailable("Report multimodal input exceeds its submission budget")
@@ -172,8 +173,11 @@ def verify_inputs(call, model, packet, images):
         if not bound or not isinstance(sent["transport"], dict):
             raise IntegrityError("Offline report transport identity has no original input receipt")
         expected["transport"] = sent["transport"]
-    if sent != expected:
-        raise IntegrityError("Original report call input identity changed")
+    from .upgrade import record
+    record(call, "report_defaults", sent, expected)
+    for image in sent["images"]:
+        if sha(image["path"]) != image["sha256"]:
+            raise IntegrityError("Original report evidence is missing or corrupt")
 
 
 def verify_answer(directory, report, *, project=lambda x: x):

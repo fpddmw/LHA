@@ -61,15 +61,16 @@ class Service:
         self.runtime_sources = self.source_inventory()
         with RunLock(self.directory / "configuration"):
             from experiments.resumption import bind_deployment
-            bind_deployment(self.directory / "config.json", self.config)
-            immutable(self.directory / "runtime-sources.json", self.runtime_sources)
+            self.config = bind_deployment(self.directory / "config.json", self.config)
+            from planner_harness.upgrade import retain
+            retain(self.directory / "runtime-sources.json", self.runtime_sources)
             if self.config.get("workflow") == "creative_loop_v1":
                 from planner_harness.creative import role_settings, verify_experiment
                 from critic_harness.one_shot import frozen_profile
 
                 for role in ("planner", "online_critic"):
                     role_settings(self.config, role)
-                immutable(
+                retain(
                     self.directory / "critic-profile.json",
                     frozen_profile(**role_settings(self.config, "online_critic")),
                 )
@@ -249,6 +250,8 @@ class Service:
                 state_path = run / "state.json"
                 if state_path.exists():
                     state = load(state_path)
+                    from planner_harness.resumption import reopen_interrupted_state
+                    state = reopen_interrupted_state(run,state)
                     if not state.get("pending_event") and state.get("status") in {
                         "waiting_tool",
                         "complete",
@@ -275,7 +278,7 @@ class Service:
                                 and sent["system_prompt"] == prepared["system_prompt"]
                             )
             from planner_harness.resumption import planner_ready
-            if completed_response or planner_ready(run):
+            if completed_response or ("task" in job["payload"] and planner_ready(run)):
                 return self(job, directory)
         if job['kind'] == 'tool':
             from planner_harness.resumption import calls_ready
@@ -308,6 +311,8 @@ class Service:
                 run = Path(row['payload']['run'])
                 if row['id'] != latest[str(run)]:continue
                 state = load(run/'state.json') if (run/'state.json').exists() else {}
+                from planner_harness.resumption import reopen_interrupted_state
+                state = reopen_interrupted_state(run,state)
                 interrupted = state.get('status') in {'running','interrupted','model_unavailable','needs_reconciliation','transport_or_runtime_error'}
                 ready = planner_ready(run) and (row['state'] in {'failed','needs_review'} or (row['state']=='complete' and interrupted))
             elif row['kind']=='tool':
@@ -329,6 +334,13 @@ class Service:
         task = copy.deepcopy(task)
         if not re.fullmatch(r"[A-Za-z0-9_-]+", task["id"]):
             raise ValueError("Task id must be a safe path component")
+        # Recover the original task before processing new launch defaults.
+        saved = self.directory/'tasks'/task['id']/'task.json'
+        if saved.exists():
+            from planner_harness.upgrade import retain
+            task = retain(saved, task)
+            return self.queue.enqueue(task['id']+'/planner/start', 'planner', 'llm',
+                {'task':task, 'run':str(saved.parent/'run')})
         source = (self.root / task["source"]).resolve()
         if sha(source) != task["source_sha256"]:
             raise ValueError("Source hash mismatch")

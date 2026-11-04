@@ -57,11 +57,13 @@ def verify(run, state):
     proof = state.get("final", {}).get("delivery_review", {})
     identity = state["final"].get("video")
     if (
-        proof.get("protocol") != PROTOCOL
+        not str(proof.get("protocol", "")).startswith("creative-delivery-v")
         or proof.get("candidate_id") != identity
         or proof.get("candidate_sha256") != state["videos"][identity]["sha256"]
     ):
         raise ValueError("Delivery does not match the Planner choice")
+    from .upgrade import record
+    record(run, 'completed_delivery_protocol', proof['protocol'], PROTOCOL)
     event = proof["planner_event_id"]
     directory = run / "calls" / event
     from .json_output import decode_object

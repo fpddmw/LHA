@@ -149,14 +149,20 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
         runtime_identity = getattr(model, "runtime_identity", None)
         if callable(runtime_identity):
             binding["transport"] = runtime_identity()
-        try:
-            immutable(directory / "input.json", binding)
-        except ValueError as exc:
-            raise IntegrityError(str(exc)) from None
+        from .upgrade import retain
+        binding = retain(directory / 'input.json', binding)
+        system, user = binding['system_prompt'], binding['user_text']
+        images = [row['path'] for row in binding['images']]
         raw_path = directory / "response.txt"
         if raw_path.exists():
             returned_receipt(directory)
             return raw_path.read_text(encoding="utf-8")
+        for row in binding['images']:
+            if sha(row['path']) != row['sha256']:
+                raise IntegrityError('Original pending model image is missing or damaged; no replacement call')
+        model = copy.copy(model)
+        model.model = binding["model"]
+        model.reasoning_effort = binding.get("reasoning_effort")
         policy_path = directory / "allowance.json"
         if not policy_path.exists():
             immutable(policy_path, {"first": 1, "last": attempts})
@@ -286,7 +292,12 @@ def metered_text(directory,model,system,user,images,*,max_new_tokens=None):
         binding={'system_prompt':system,'user_text':user,'images':[{'path':str(p),'sha256':sha(p)} for p in images],
             'model':model.model,'reasoning_effort':getattr(model,'reasoning_effort',None)}
         if callable(getattr(model,'runtime_identity',None)):binding['transport']=model.runtime_identity()
-        immutable(directory/'input.json',binding)
+        from .upgrade import retain
+        binding = retain(directory/'input.json',binding)
+        system,user = binding['system_prompt'],binding['user_text']
+        images = [row['path'] for row in binding['images']]
+        model = copy.copy(model)
+        model.model,model.reasoning_effort = binding['model'],binding.get('reasoning_effort')
         immutable(directory/'meter-only.json',{'mode':'live_meter_only' if getattr(model,'requires_live_budget',False) else 'fixture_meter_only',
             'admission_limits':None,'output_token_reservation':None,'cost':'Unknown without provider invoice; actual usage retained'})
         allowance=directory/'allowance.json'
@@ -303,6 +314,8 @@ def metered_text(directory,model,system,user,images,*,max_new_tokens=None):
             if failed.get('failure_kind')=='integrity_error':raise IntegrityError('Recorded provider identity failure')
             if (failed.get('provider_error') or {}).get('category') in {'provider_balance_insufficient','quota_exhausted'}:raise ProviderDispatchPaused(failed['provider_error'])
             raise ModelTransportError('Recorded independent final transport failure',retryable=failed['retryable'],provider_error=failed.get('provider_error'))
+        for row in binding['images']:
+            if sha(row['path'])!=row['sha256']:raise IntegrityError('Original scoring image is missing or corrupt')
         client=copy.copy(model)
         for key,value in [('attempts',1),('max_retries',0)]:
             if hasattr(client,key):setattr(client,key,value)

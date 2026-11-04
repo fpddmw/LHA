@@ -170,12 +170,13 @@ class PELoopTests(Fixture):
         self.assertEqual(load(directory / 'progress.json')['phase'], 'review')
         self.assertFalse((directory / 'complete.json').exists())
 
-    def test_changed_budget_cannot_reuse_a_pe_result(self):
+    def test_changed_default_budget_reuses_original_pe_result(self):
         batch, runtime = self.setup_loop(n=1)
         self.run_loop(batch, runtime)
         changed = {**batch, 'max_generations': 3}
-        with self.assertRaises(IntegrityError):
-            self.run_loop(changed, runtime)
+        before=list(runtime.calls)
+        self.run_loop(changed, runtime)
+        self.assertEqual(runtime.calls,before)
 
     def test_long_task_routes_to_the_same_critic_with_long_track(self):
         batch, runtime = self.setup_loop(n=1)

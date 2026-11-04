@@ -87,7 +87,8 @@ def initialize(root, output, initial=None, *, review_mode="critic", renderer_bac
             validate_owner(pointer["owner"], output=output, review_mode=review_mode,
                            renderer_backend=renderer_backend)
             if initial and load(initial) != load(directory / "versions/base/snapshot.json"):
-                raise ValueError("Private library initial seed differs")
+                from .upgrade import record
+                record(directory, "seed_defaults", load(directory / "versions/base/snapshot.json"), load(initial))
             return pointer
         snapshot = load(initial) if initial else None
         target = directory / "versions/base/snapshot.json"
@@ -341,6 +342,7 @@ def maintain(root, output, run, job_id, config=None, *, model_factory=None):
     result_path = folder / "training-maintenance.json"
     if result_path.exists():
         return load(result_path)
+    cfg = configuration(job.get("maintenance_configuration", cfg))
     job["original_job_path"] = str(folder / "job.json")
     job["original_job_sha256"] = sha(folder / "job.json")
     if model_factory is None:

@@ -20,13 +20,20 @@ def bind_deployment(path, value):
     path = Path(path)
     if path.exists():
         previous = load(path)
-        if semantic_host(previous) != semantic_host(value):
-            raise ValueError('Experiment settings changed; deployment may only change host/devices/locks')
+        from planner_harness.upgrade import record
+        record(path.parent, path.stem+'-defaults', semantic_host(previous), semantic_host(value))
+        effective = copy.deepcopy(previous)
+        for key in ('devices', 'host', 'lock_directory'):
+            if key in value: effective[key] = value[key]
+        for key in ('gpu_lock', 'weights', 'model_path', 'checkpoint_path', 'asset_manifest'):
+            if key in value.get('renderer', {}): effective.setdefault('renderer', {})[key] = value['renderer'][key]
+        value = effective
         if previous != value:
             immutable(path.parent / 'deployment-history' / (path.stem + '-' + signature(previous) + '.json'), previous)
             save(path, value)
     else:
         immutable(path, value)
+    return value
 
 
 def task_directory(output, topic, method):
@@ -88,6 +95,9 @@ def reconcile_batch(root, output):
     from planner_harness.training_experience import _recover_activations
     output = Path(output)
     repaired = reconcile_accounting(output / 'accounting')
+    if (output/'accounting/policy.json').exists():
+        from planner_harness.accounting import lift_time_limits
+        lift_time_limits(output/'accounting')
     recover_texts(output, output / 'accounting')
     from planner_harness.resumption import calls_ready, archive_remove
     for job in (output/'maintenance/jobs').glob('*'):
@@ -113,6 +123,7 @@ def method_recoverable(output, topic, method):
     from planner_harness import accounting as a
     from planner_harness.resumption import calls_ready, planner_ready
     output = Path(output)
+    if (output/'accounting/ledger.json').exists() and not (output/'accounting/policy.json').exists():return False
     ledger = a.load_ledger(output / 'accounting') if (output / 'accounting/ledger.json').exists() else {'operations': {}}
     operations = [r for r in ledger['operations'].values() if r['topic'] == topic and r.get('lane') == method]
     if any(r['status'] not in {'not_submitted', 'reserved'} and not r.get('completion') for r in operations):
@@ -124,13 +135,16 @@ def method_recoverable(output, topic, method):
         if state.get('status') == 'complete':return True
         if not planner_ready(run) or not calls_ready(run):
             return False
-        return not state.get('final') or state.get('status') == 'complete'
+        return not state.get('final') or state.get('status') == 'complete' or state['final'].get('outcome') in {'incomplete','deadline_delivery'}
     if method == 'pe-loop':
         folder = output / 'methods' / topic / method
         return not (folder / 'complete.json').exists() and calls_ready(folder)
     responses = list((directory / 'baselines' / topic / method).glob('*/response.json'))
     if method == 'direct' and responses:
         return any(load(p).get('status') == 'complete' for p in responses)
+    settlement = output/'methods'/topic/method/'settlement.json'
+    if settlement.exists() and load(settlement).get('status') in {'execution_unknown','recovery_required','topic_quarantined'}:
+        return False
     return not operations
 
 
@@ -153,7 +167,8 @@ def preview(output):
     from collections import Counter
     output = Path(output)
     if not output.exists():
-        return {'status': 'new_run', 'new_topics_on_resume': 0, 'extra_generation_allowance': 0}
+        return {'status': 'new_run', 'new_topics_on_resume': None, 'extra_generation_allowance': None,
+                'reason': 'No saved task manifest; inspect plan for proposed new work'}
     batches = [output] if (output / 'batch.json').exists() else [p.parent for p in output.rglob('batch.json') if (p.parent / 'inputs').exists()]
     counts = Counter()
     tasks = []
@@ -172,7 +187,9 @@ def preview(output):
                 tasks.append({'batch':str(folder),'topic':topic['id'],'method':method,'status':state['status'],
                               'reserved_or_submitted_renders':charged,'remaining_generation_slots':max(0,limit-charged),
                               'unresolved_external_operations':unknown,'failure_kind':state.get('failure_kind')})
-    return {'status': 'existing_run', 'method_states': dict(counts), 'new_topics_on_resume': 0,
+    return {'status': 'existing_run' if batches else 'no_saved_batch', 'method_states': dict(counts),
+            'saved_batches':len(batches), 'saved_method_positions':len(tasks),
+            'new_topics_on_resume':0 if batches else None,
             'tasks':tasks,
-            'extra_generation_allowance': 0, 'process_liveness': 'checked by run before dispatch',
+            'extra_generation_allowance': 0 if batches else None, 'process_liveness': 'checked by run before dispatch',
             'policy': 'Reuse completed work; continue original tasks; unresolved external execution stays blocked'}

@@ -10,7 +10,7 @@
   "model": "openai/gpt-6.1-sol",
   "reasoning_effort": "high",
   "evaluation_id": "all67-critic-v2",
-  "reuse_direct_results": null,
+  "reuse_direct_results": "out/benchmark_results",
   "maintenance": {
     "enabled": true,
     "automatic_phase": "after_each_training_task",

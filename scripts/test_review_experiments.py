@@ -78,8 +78,10 @@ class ReviewExperiments(Fixture):
         identity=u.method_identity('none',batch)
         self.assertEqual(identity['review_mode'],'planner')
         self.assertEqual(u.selection_config(),batch['selection'])
-        with self.assertRaisesRegex(ValueError,'Training runs none'):
-            self.prepare(methods=['full'],best_of_n=None,splits=['train'])
+        with patch('planner_harness.creative.verify_experiment',return_value={'sha256':'fixture'}):
+            restored=self.prepare(methods=['full'],best_of_n=None,splits=['train'])
+        self.assertEqual(restored['arms'],batch['arms'])
+        self.assertEqual(restored['review'],batch['review'])
 
     def test_qualitative_selector_cannot_read_formal_review_scores(self):
         batch=self.prepare(methods=['direct-best-of-n'],best_of_n=2)

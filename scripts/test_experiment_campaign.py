@@ -134,6 +134,7 @@ class CampaignTests(base.Fixture):
                          {'pre-experience':True,'full-experience':False,'direct':False,'pe-loop':False, 'self-review-pre-experience':True, 'self-review-full-experience':False})
         self.assertEqual(preparations['pe-loop']['max_generations'],4)
         self.assertEqual(preparations['full-experience']['max_generations'],4)
+        self.assertTrue(all(p['sample_ids']==[r['sample_id'] for r in self.rows] for p in preparations.values()))
         score.assert_called_once()
 
     def test_pending_generation_does_not_start_training(self):

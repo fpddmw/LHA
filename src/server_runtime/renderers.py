@@ -132,6 +132,8 @@ class PersistentRenderer:
         from run_prompt_probe import inspect_video
 
         info, output = inspect_video(source), cfg["output"]
+        from experiments.video_contract import conditioning_input
+        source, info = conditioning_input(payload, directory, info)
         count, fps = output["frames"], output["fps"]
         if type(cfg.get("seed")) is not int or count < 1 or count % 4 != 1 or fps <= 0:
             raise ValueError("Explicit seed and valid native frame configuration required")
@@ -164,6 +166,7 @@ class PersistentRenderer:
             directory / "renderer-input.json",
             {
                 "request": job,
+                "conditioning_path":str(source),
                 "encoded_text": encoded_text,
                 "system_prompt": self.prefix,
                 "token_count": tokens,
@@ -187,7 +190,7 @@ class PersistentRenderer:
         info, indices, tokens = self.prepare(job, directory)
         payload, directory = job["payload"], Path(directory)
         cfg = payload["renderer"]
-        source, output = Path(payload["input"]["path"]), cfg["output"]
+        source, output = Path((load(directory/"renderer-input.json") if (directory/"renderer-input.json").exists() else {}).get("conditioning_path", payload["input"]["path"])), cfg["output"]
         count, fps = output["frames"], output["fps"]
         encoded_text = self.prefix + self.clean(payload["prompt"])
         started = time.time()

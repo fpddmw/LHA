@@ -99,6 +99,29 @@ def project(report, packet):
 
 
 def evaluate(directory, model, packet, images):
+    directory = Path(directory)
+    if (directory / "final-main-projection.json").exists():
+        projection = load(directory / "final-main-projection.json")
+        binding = projection["answer_binding"]
+        if binding != load(directory / 'selected-answer.json'):
+            raise ValueError('Final main projection binding changed')
+        from planner_harness.json_output import decode_object
+        call = Path(binding["call_path"])
+        raw = decode_object((call / "response.txt").read_text(encoding="utf-8"))
+        verify_answer(directory, raw)
+        verify_inputs(call, model, packet, images)
+        # Reconstruct the already accepted projection from its recorded edits.
+        # Never retry a completed main judgment under a new validator.
+        report = copy.deepcopy(raw)
+        for row in projection.get("normalized", []):
+            refs = {e['id'] for e in json.loads(packet['user_text'])['evidence']}
+            replacement, notes = normalize_row(row['original'], refs)
+            if notes != row['changes']:
+                raise ValueError('Saved normalization requires its original adapter; main judgment was retained')
+            report[row['path'][0]][row['path'][1]] = replacement
+        for row in projection.get('errors', []):
+            report[row['path'][0]][row['path'][1]] = row['replacement']
+        return report, binding, projection
     errors, normalized = [], []
 
     def accept(value, packet):
@@ -119,24 +142,10 @@ def evaluate(directory, model, packet, images):
 
 def verify(directory, result, packet, model):
     directory = Path(directory)
-    projection = load(directory / "final-main-projection.json")
-    call = verify_answer(
-        directory, result["report"], project=lambda value: project(value, packet)[0]
-    )
-    from planner_harness.json_output import decode_object
-
-    _, errors, normalized = project(decode_object((call / "response.txt").read_text()), packet)
-    expected = {
-        "version": VERSION,
-        "answer_binding": load(directory / "selected-answer.json"),
-        "errors": errors,
-        "normalized": normalized,
-    }
-    if (
-        projection != expected
-        or result.get("main_projection") != expected
-        or result["answer_binding"] != expected["answer_binding"]
-    ):
-        raise ValueError("Final main projection binding changed")
-    verify_inputs(call, model, packet, [r["path"] for r in packet["images"]])
-    return call
+    if not (directory / "final-main-projection.json").exists():
+        raise ValueError('Saved main projection is missing')
+    report, binding, projection = evaluate(directory, model, packet, [r['path'] for r in packet['images']])
+    if (result.get('report') != report or result.get('main_projection') != projection
+            or result.get('answer_binding') != binding):
+        raise ValueError('Final main projection binding changed')
+    return Path(binding['call_path'])

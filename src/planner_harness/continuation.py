@@ -163,17 +163,20 @@ def authorize_finish(state):
 
 
 def record_input(harness, event_id, call_dir):
+    if (call_dir/'continuation-policy.json').exists():
+        return load(call_dir/'continuation-policy.json')
     saved = load(call_dir / "input.json")
     import json
 
     actual = json.loads(saved["user_text"]).get("continuation")
-    if not isinstance(actual, dict) or set(actual) != set(view(harness.state)):
-        raise ValueError("Saved continuation prompt has an unexpected visible surface")
+    # Historical prompts retain their actual visible fields, including absence.
+    if actual is not None and not isinstance(actual, dict):
+        raise ValueError("Saved continuation context is malformed")
     record = {
         "event_id": event_id,
         "model_input_sha256": sha(call_dir / "input.json"),
         "policy": copy.deepcopy(harness.state["config"]["continuation_policy"]),
-        "stage": actual["stage"],
+        "stage": (actual or {}).get("stage", "historical_unrecorded"),
         "trigger_state": usage(harness.state),
         "visible": actual,
     }

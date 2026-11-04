@@ -236,14 +236,20 @@ class Commands(Fixture):
         with patch('planner_harness.creative.verify_experiment',return_value={'sha256':'fixture'}):
             u.verify(self.repo,self.output)
             self.source.write_bytes(self.source.read_bytes()+b'changed')
-            with self.assertRaisesRegex(Exception,'Original source changed'):
-                u.verify(self.repo,self.output)
+            # The saved normalized source remains usable after the original is updated.
+            recovered=u.verify(self.repo,self.output)
+            self.assertEqual(recovered['sha256'],load(self.output/'batch.json')['sha256'])
+            saved_source=self.repo/recovered['topics'][0]['source']
+            saved_source.write_bytes(saved_source.read_bytes()+b'corrupt')
+            with self.assertRaises(Exception):u.verify(self.repo,self.output)
 
     def test_deployment_and_legacy_task_location_preserve_identity(self):
         p=self.output/'host.json'
         resume.bind_deployment(p,{'devices':['0'],'renderer':{'backend':'bernini'}})
         resume.bind_deployment(p,{'devices':['2','4'],'renderer':{'backend':'bernini'}})
-        with self.assertRaises(ValueError):resume.bind_deployment(p,{'devices':['2'],'renderer':{'backend':'ditto'}})
+        effective=resume.bind_deployment(p,{'devices':['2'],'renderer':{'backend':'ditto'}})
+        self.assertEqual(effective['renderer']['backend'],'bernini')
+        self.assertEqual(effective['devices'],['2'])
         old=self.output/'workers/7';save(old/'tasks/topic__full/task.json',{'id':'topic__full'})
         self.assertEqual(resume.task_directory(self.output,'topic','full'),old)
         self.assertEqual(resume.task_directory(self.output,'topic','full'),old)
@@ -287,8 +293,11 @@ class Commands(Fixture):
             results.score_evaluation(self.repo,self.registry,models=models)
             self.assertEqual(calls,list(JUDGES))
             self.assertEqual(sha(self.registry/'current-evaluation.json'),identity)
-        with patch.object(results,'current_evaluation',return_value=None),self.assertRaisesRegex(ValueError,'protocol/model changed'):
-            results.ensure_evaluation(self.repo,self.registry,evaluation_id='original')
+        (self.registry/'current-evaluation.json').unlink()
+        restored, _ = results.ensure_evaluation(self.repo,self.registry,evaluation_id='original')
+        self.assertEqual(restored,self.registry/'evaluations/original')
+        self.assertEqual(len(list((self.registry/'evaluations').iterdir())),1)
+        self.assertEqual(calls,list(JUDGES))
 
     def test_claim_recovery_reopens_only_the_original_task(self):
         import socket

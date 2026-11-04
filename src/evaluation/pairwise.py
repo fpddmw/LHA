@@ -6,7 +6,7 @@ from collections import defaultdict
 from statistics import mean
 
 from planner_harness.execution import immutable
-from planner_harness.common import sha
+from planner_harness.common import sha, load
 from planner_harness.report_call import call_report, ReportUnavailable
 from .low_high import collect_evidence, check_plan, profile, _packet, _visible, EVENT_PROMPT, validate_observations
 
@@ -37,7 +37,7 @@ Use the common scoring definitions below as concepts, but return relative choice
 
 def validate_comparison(report, packet):
     visible = json.loads(packet["user_text"])
-    if not isinstance(report,dict) or set(report) != {"protocol_id","judgments"} or report["protocol_id"] != PROTOCOL:
+    if not isinstance(report,dict) or set(report) != {"protocol_id","judgments"} or report["protocol_id"] != visible["protocol_id"]:
         raise ValueError("Blind comparison protocol mismatch")
     if not isinstance(report["judgments"],dict) or set(report["judgments"]) != set(QUESTIONS):
         raise ValueError("Two blind questions are required")
@@ -70,8 +70,10 @@ def reconcile(first, second, first_order):
 
 
 def compare(request, source, left, right, directory, *, plan, seed, model=None):
-    check_plan(plan,request,source)
     directory = Path(directory)
+    if (directory/"result.json").exists():return load(directory/"result.json")
+    check_plan(plan,request,source)
+    from planner_harness.upgrade import retain
     order = ["left","right"]
     random.Random(str(seed) + source["sha256"] + ''.join(sorted([left["sha256"],right["sha256"]]))).shuffle(order)
     frozen = profile()
@@ -80,7 +82,8 @@ def compare(request, source, left, right, directory, *, plan, seed, model=None):
                "source_sha256":source["sha256"],"left_sha256":left["sha256"],"right_sha256":right["sha256"],
                "plan_sha256":plan["sha256"],"seed":seed,"first_order":order,
                "judge":getattr(model,"model",None),"reasoning_effort":getattr(model,"reasoning_effort",None)}
-    immutable(directory / "binding.json",binding)
+    binding = retain(directory / "binding.json",binding)
+    order = binding["first_order"]
     reports = []
     for number,labels in enumerate((order,order[::-1]),1):
         path = directory / f"order-{number}"
@@ -92,7 +95,7 @@ def compare(request, source, left, right, directory, *, plan, seed, model=None):
                 target = path / "events" / segment["id"]
                 packet = _packet(EVENT_PROMPT.replace("source/candidate", "source and anonymized A/B"),
                     {"original_request":request,"task_spec":plan["task"],"scope":{k:v for k,v in segment.items() if k != "rows"}},segment["rows"],frozen["sha256"])
-                immutable(target / "request.json",packet)
+                packet = retain(target / "request.json",packet)
                 try:
                     report,answer = call_report(target,model,packet,[r["path"] for r in packet["images"]],validate_observations,usage="independent_final")
                 except ReportUnavailable:
@@ -107,7 +110,7 @@ def compare(request, source, left, right, directory, *, plan, seed, model=None):
         visible = json.loads(packet["user_text"])
         visible["evidence"].extend([{**r,"attachment":None,"delivery":"separate_event_review"} for r in _visible(reviewed)])
         packet["user_text"] = json.dumps(visible,ensure_ascii=False,indent=2)
-        immutable(path / "request.json",packet)
+        packet = retain(path / "request.json",packet)
         if model is not None:
             try:
                 report,answer = call_report(path,model,packet,[r["path"] for r in packet["images"]],validate_comparison,usage="independent_final")

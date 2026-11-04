@@ -32,7 +32,8 @@ not authorize repeating a render or a possibly completed model call.
    calls. Rebuild missing settlement records from original evidence. Preserve
    pending/unknown operations and finite transport retry accounting.
 5. Recover maintenance journals exactly once and retain family/seed isolation.
-   Continue the same independent evaluation; changed evaluation protocols require
+   Continue the same independent evaluation; historical policy (superseded by
+   upgrade-continuation-plan.md): changed evaluation protocols required
    an explicit new evaluation, never an automatic full rescore on restart.
 6. Extend existing check/status/run interfaces with a recovery preview and clear
    blocked reasons. Preserve ordinary commands. New topics or extra generation
@@ -63,7 +64,8 @@ GPU assignments. Validate no implicit migration of historical protocols.
 - Atomic state/model-answer writes now flush before replacement. Original model
   completions and render receipts repair missing local responses without new calls.
 - Public command defaults are unchanged. Check/status expose recovery scope;
-  changed experiment identities remain rejected. No live work has been launched.
+  this historical test did not cover code upgrades. Upgrade coverage is recorded in
+  upgrade-continuation-plan.md. No live work was launched.
 - Queue initialization now validates the complete original task list before any
   insertion. A rejected additional task leaves the queue unchanged.
 - Public commands and per-method recovery behavior are documented in
@@ -93,6 +95,7 @@ python scripts/smoke_experiment_campaign.py --output out/recovery-smoke-review
 Use a fresh smoke output directory to preserve previous verification evidence.
 These tests exercise real orchestration with scripted model/render/encoder outputs.
 They do not establish remote provider availability, CUDA compatibility or performance.
-Existing runs with a different frozen code/profile remain on their original runtime;
-this change does not rewrite their protocol identity. Ambiguous external submissions
+Superseded limitation: that implementation covered same-version restarts only.
+The upgrade-continuation plan now supports updated code in the original directory,
+retaining saved inputs, results and allowances. Ambiguous external submissions
 still require their original receipt or explicit evidence-bound reconciliation.

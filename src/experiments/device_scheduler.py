@@ -187,7 +187,7 @@ def run_devices(root,output,host):
     with scheduler_owner(output):
         from .resumption import check_owners, bind_deployment, reconcile_batch
         check_owners(output)
-        bind_deployment(output/'host.json',frozen_host)
+        frozen_host = bind_deployment(output/'host.json',frozen_host)
         accounting.install(output/'accounting',frozen_host['budget'],require_live=True)
         if host.get('local_results_root'):
             batch={**batch,'results_root':str(Path(host['local_results_root']).resolve())}

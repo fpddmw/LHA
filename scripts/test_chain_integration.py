@@ -150,9 +150,13 @@ class LaunchTests(unittest.TestCase):
         self.assertEqual(sha(run / 'state.json'), before)
         count = len(FixtureClient.instances)
         for override in (['--max-generations', '4'], ['--backend', 'openrouter'], ['--reasoning', 'high']):
-            with self.subTest(override=override), contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
-                self.invoke(['--output', str(run), '--resume', *override])
-        self.assertEqual(len(FixtureClient.instances), count)
+            with self.subTest(override=override):
+                self.invoke(['--output', str(run), *override])
+                self.assertEqual(self.calls[-2]['client'].model, 'fixture/planner')
+                self.assertIsNone(self.calls[-2]['client'].reasoning_effort)
+                self.assertIsNone(self.calls[-1]['resume']['execution'])
+        self.assertEqual(len(FixtureClient.instances), count + 3)
+        self.assertEqual(sha(run / 'state.json'), before)
 
     def test_historical_resume_does_not_load_the_new_default_profile(self):
         run = self.folder / 'old'

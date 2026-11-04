@@ -170,8 +170,8 @@ def verify_experiment(path, root):
     from .protocol_sources import protocol_inventory
 
     current = protocol_inventory(Path(__file__).resolve().parents[2])
-    if any(binding.get("files", {}).get(name) != digest for name, digest in current.items()):
-        raise ValueError("Current online implementation differs from the prepared experiment")
+    from .upgrade import record
+    record(Path(path).parent, 'implementation', binding.get('files', {}), current)
     return binding
 
 

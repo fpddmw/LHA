@@ -27,10 +27,16 @@ def prepare_final_request(request, source, candidate, directory, *, plan=None):
 
 def judge_candidate(request, source, candidate, directory, *, model=None, plan=None):
     directory = Path(directory)
+    if (directory/'judgment.json').exists():
+        from planner_harness.common import load
+        saved = load(directory/'judgment.json')
+        if saved['source_sha256'] != source['sha256'] or saved['output_sha256'] != candidate['sha256']:
+            raise ValueError('Saved judgment belongs to another video')
+        return saved
     if plan is None:
         raise ValueError("Independent final scoring requires a shared frozen source-only plan")
     client = model or make_judge(MODEL)
-    identity = judge_identity(client.model)
+    identity = getattr(client, "frozen_identity", None) or judge_identity(client.model)
     if getattr(client, "reasoning_effort", None) != identity["reasoning_effort"]:
         raise ValueError(
             "Independent judge reasoning configuration differs from the frozen identity"
@@ -83,3 +89,15 @@ def paired_summary(pairs):
             "worsened": sum(d < 0 for d in deltas),
         }
     return result
+
+
+def frozen_judge(identity):
+    """Keep the original judge slot/provider when configuration changes."""
+    try:
+        unchanged = judge_identity(identity['model']) == identity
+    except ValueError:
+        unchanged = False
+    if unchanged:
+        return make_judge(identity['model'])
+    from .providers import make_frozen_judge
+    return make_frozen_judge(identity)

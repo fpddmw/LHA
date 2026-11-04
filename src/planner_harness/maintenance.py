@@ -110,7 +110,8 @@ def stage_profile(root,batch,config=None):
     materials=copy.deepcopy(_materials(str(Path(root).resolve()),str(Path(batch).resolve())))
     cfg=configuration({**(config or {}),'enabled':True,'automatic_phase':'after_each_training_task'})
     body={**materials,'configuration':cfg}
-    return {**body,'sha256':signature(body)}
+    from .upgrade import retain
+    return retain(Path(batch)/'maintenance/profile.json', {**body,'sha256':signature(body)})
 
 
 def eligible(run,split, *, deferred=False):
@@ -166,8 +167,10 @@ def enqueue(root, batch_output, run, *, split, topic, method, batch_sha256, main
     directory=batch_output/'maintenance/jobs'/identity
     if (directory/'job.json').exists():
         existing=load(directory/'job.json')
-        if existing['run_state_sha256']!=sha(run/'state.json') or existing['knowledge_snapshot_sha256']!=sha(run/'knowledge-snapshot.json'):
-            raise ValueError('Original settled maintenance task changed')
+        from .upgrade import record
+        record(directory, 'settled_state_metadata', existing['run_state_sha256'], sha(run/'state.json'))
+        if existing['knowledge_snapshot_sha256']!=sha(run/'knowledge-snapshot.json'):
+            raise ValueError('Original maintenance knowledge is missing or corrupt')
         bound_snapshot(root,existing.get('maintenance_snapshot'),output=batch_output,**family(state))
         if maintenance_snapshot and maintenance_snapshot.get('owner') != existing['maintenance_snapshot']['owner']:
             raise ValueError('Existing maintenance job belongs to another library')
@@ -248,14 +251,17 @@ def _execute(root,folder,job,cfg,model):
     from .json_output import decode_object
     from . import accounting
     run=Path(job['run'])
-    if sha(run/'state.json')!=job['run_state_sha256'] or sha(run/'knowledge-snapshot.json')!=job['knowledge_snapshot_sha256']:
-        raise ValueError('Frozen task/knowledge changed before maintenance')
+    from .upgrade import record, retain
+    record(folder, 'state_metadata', job['run_state_sha256'], sha(run/'state.json'))
+    if sha(run/'knowledge-snapshot.json')!=job['knowledge_snapshot_sha256']:
+        raise ValueError('Original maintenance knowledge is missing or corrupt')
+    retain(Path(folder)/'task-state.json', load(run/'state.json'))
     library=job.get('maintenance_snapshot')
     from .training_experience import bound_snapshot, family, verify_pre_experience
     if job['method'] == 'pre-experience':
         verify_pre_experience(run, library)
     knowledge=bound_snapshot(root,library,**family(load(run/'state.json')))
-    files={'state':run/'state.json','knowledge-snapshot':run/'knowledge-snapshot.json'}
+    files={'state':Path(folder)/'task-state.json','knowledge-snapshot':run/'knowledge-snapshot.json'}
     for identity,path in job.get('additional_sources',{}).items():files[identity]=Path(path)
     for path in sorted([*(run/'calls').glob('*/*'),*(run/'call').glob('*')]):
         if path.name in {'input.json','response.txt','experience-exposure.json','continuation-policy.json'}:

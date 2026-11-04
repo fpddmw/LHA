@@ -19,30 +19,16 @@ def creative_configuration(args, profile, execution, recorded, parser):
 
     declared_factory = (execution or {}).get("models", {}).get("planner", {}).get("factory")
     if recorded is not None:
-        saved = recorded["execution"]
-        if execution is not None and execution != saved:
-            parser.error("Resume retains the recorded execution configuration")
-        execution = copy.deepcopy(saved)
-        for field in ("model", "reasoning_effort"):
-            supplied = args.model if field == "model" else args.reasoning
-            if supplied is not None and supplied != recorded[field]:
-                parser.error("Resume retains the recorded " + field)
-        if args.review_mode and args.review_mode != saved.get("review", {}).get("mode", "critic"):
-            parser.error("Resume retains its original review mode")
-        count = recorded.get("resource_policy", {}).get("max_generations", recorded.get("max_generations"))
-        if args.max_generations is not None and args.max_generations != count:
-            parser.error("Resume retains its recorded generation limit")
-        # A profile may confirm a resume, but cannot silently switch its client.
-        for role in ("planner", "online_critic"):
-            proposed = profile.get("models", {}).get(role, {})
-            original = saved.get("models", {}).get(role, {})
-            if proposed.get("factory", original.get("factory")) != original.get("factory"):
-                parser.error("Resume retains its recorded model factory")
-            if any(original.get("options", {}).get(k) != v for k, v in proposed.get("options", {}).items()):
-                parser.error("Resume retains its recorded model options")
-        execution.setdefault("models", {}).setdefault("planner", {}).setdefault("options", {}).update(
-            model=recorded["model"], reasoning_effort=recorded["reasoning_effort"]
-        )
+        from planner_harness.upgrade import record
+        record(Path(args.output), 'planner_cli_defaults', recorded,
+               {'profile':profile, 'execution':execution, 'model':args.model,
+                'reasoning_effort':args.reasoning, 'max_generations':args.max_generations,
+                'backend':args.backend, 'review_mode':args.review_mode})
+        execution = copy.deepcopy(recorded['execution'])
+        args.model, args.reasoning = recorded['model'], recorded['reasoning_effort']
+        args.backend = None
+        args.max_generations = recorded.get('resource_policy', {}).get('max_generations', recorded.get('max_generations'))
+        return execution
     else:
         supplied = copy.deepcopy(execution or {})
         execution = copy.deepcopy(supplied)
@@ -110,7 +96,7 @@ def main():
     parser.add_argument("--max-generations", type=int, default=None, help="New-task generation limit; overrides the profile consistently (current default: 4)")
     parser.add_argument("--completion-mode", choices=["delivery", "bounded_experiment"], default="delivery")
     parser.add_argument("--label", default="")
-    parser.add_argument("--max-turns", type=int, default=None, help="Legacy turn limit; creative tasks use generation and time limits")
+    parser.add_argument("--max-turns", type=int, default=None, help="Legacy turn limit; creative tasks use generation limits")
     parser.add_argument("--max-context-chars", type=int, default=None, help="New capacity or explicit resume capacity; default 180000 for new runs")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--continue-delivery", action="store_true", help="Continue an eligible stopped delivery with its recorded generation and time policy")
@@ -118,6 +104,8 @@ def main():
     parser.add_argument("--worker-command", nargs=argparse.REMAINDER,
                         help="Optional worker argv, last on the command line. {request} and {response} are substituted without a shell.")
     args = parser.parse_args()
+    saved_state = Path(args.output) / 'state.json'
+    if saved_state.exists():args.resume = True
     profile = json.loads(args.profile.read_text(encoding="utf-8")) if args.profile else {}
     if profile:
         if profile.get("workflow") != "creative_loop_v1" or (args.workflow and args.workflow != profile["workflow"]):
@@ -138,7 +126,7 @@ def main():
         if args.mode != "loop":
             parser.error("Creative tasks use --mode loop; use --workflow legacy for proposal-only planning")
         if args.max_turns is not None:
-            parser.error("Creative tasks use generation and time limits, not --max-turns")
+            parser.error("Creative tasks use generation limits, not --max-turns")
         execution = creative_configuration(args, profile, execution, recorded, parser)
     elif recorded:
         args.reasoning = args.reasoning if args.reasoning is not None else recorded["reasoning_effort"]
@@ -155,7 +143,9 @@ def main():
         parser.error("A new run requires --source and --request or --request-file")
     from planner_harness import PlannerHarness
     from planner_harness.lock import RunLock
-    if args.workflow == "creative_loop_v1":
+    if args.resume and json.loads(saved_state.read_text()).get('status') == 'complete':
+        model = None  # Completed tasks require no credentials or provider construction.
+    elif args.workflow == "creative_loop_v1":
         from vlm.settings import create_client
         model = create_client({**execution, "workflow": args.workflow}, "planner")
     elif args.backend in {None, "openrouter"}:
@@ -174,10 +164,8 @@ def main():
         if args.experiment_profile and not args.resume:
             execution = {**(execution or {}), "experiment_profile": str(args.experiment_profile.resolve())}
         elif args.experiment_profile:
-            from planner_harness.creative import verify_experiment
-            verify_experiment(args.experiment_profile, ROOT)
-            if recorded["execution"].get("experiment_profile") != str(args.experiment_profile.resolve()):
-                parser.error("Resume must use its recorded shared profile")
+            from planner_harness.upgrade import record
+            record(output, 'experiment_profile_default', recorded['execution'].get('experiment_profile'), str(args.experiment_profile.resolve()))
         if args.resume:
             state = harness.resume(additional_turns=args.additional_turns, execution=None if args.workflow == "creative_loop_v1" else execution, continue_delivery=args.continue_delivery,
                                    max_context_chars=args.max_context_chars)

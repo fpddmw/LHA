@@ -215,9 +215,11 @@ def request_packet(packet, usage):
 def evaluate(packet, directory, model, *, usage="independent_final"):
     from pathlib import Path
     directory=Path(directory)
-    request=request_packet(packet, usage)
+    from planner_harness.common import load
+    from planner_harness.upgrade import retain
+    if (directory/"result.json").exists():return load(directory/"result.json")
+    request=retain(directory/"request.json",request_packet(packet, usage))
     visible=json.loads(request["user_text"])
-    immutable(directory/'request.json',request)
     projection_errors=[];projection_normalized=[]
     def accept(value,packet):
         if usage=='independent_final':

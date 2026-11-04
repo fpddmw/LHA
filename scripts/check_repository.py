@@ -29,6 +29,7 @@ CURRENT = (
     "test_chain_integration",
     "test_public_campaign",
     "test_same_command_recovery",
+    "test_upgrade_continuation",
     "test_fixed117",
     "test_pre_experience_parallel",
     "test_fixed_budget_completion",

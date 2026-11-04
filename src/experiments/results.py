@@ -305,12 +305,19 @@ def import_bernini(repository, root, run):
 
 
 def task_for_entry(task, entry, root):
-    if not task or entry.get("original_source_sha256", entry["source_sha256"]) != task["source_sha256"] or entry["request_sha256"] != task["request_sha256"]:
-        raise ValueError("Result no longer matches the current source/request")
-    if entry.get("normalization"):
-        return {**task, "source": str((Path(root) / entry["source"]).resolve()),
-                "source_sha256": entry["source_sha256"], "normalization": entry["normalization"]}
-    return task
+    from planner_harness.upgrade import record
+    if task:
+        record(Path(root)/'reuse', entry['sample_id']+'-'+entry['prompt_form']+'-evaluation-source',
+               {'source':entry['source_sha256'],'request':entry['request_sha256']},
+               {'source':task['source_sha256'],'request':task['request_sha256']})
+    saved = {k:entry[k] for k in ('sample_id','prompt_form','request','request_sha256','source','source_sha256','split','source_group') if k in entry}
+    if task and entry.get('original_source_sha256',entry['source_sha256'])==task['source_sha256'] and entry['request_sha256']==task['request_sha256']:
+        saved = {**task, **saved}
+    if 'request' not in saved or 'source' not in saved:
+        raise ValueError('Original evaluation request/source record is missing; restore it without regeneration')
+    if entry.get('normalization'):
+        saved.update(source=str((Path(root)/entry['source']).resolve()), normalization=entry['normalization'])
+    return saved
 
 
 def _evaluation_positions(repository, root):
@@ -358,6 +365,7 @@ def prepare_evaluation(repository, root, *, evaluation_id=None):
         "comparison_pairs": comparison_pairs(pre_experience=pre_experience),
         "cache_scope": "this fresh evaluation only; bound additions retain the same rules"}
     with RunLock(root / "registry-owner"):
+        immutable(directory / "profile.json", profile())
         immutable(directory / "evaluation.json", {**body, "sha256": signature(body)})
         save(root / "current-evaluation.json", {"path": str((directory / "evaluation.json").relative_to(root)),
             "sha256": sha(directory / "evaluation.json")})
@@ -378,9 +386,11 @@ def current_evaluation(root):
     plan = load(path)
     if plan.get("schema") != "lha-result-evaluation-v1" or plan.get("sha256") != signature({k: v for k, v in plan.items() if k != "sha256"}):
         raise ValueError("Current evaluation identity changed")
-    # A scoring-code change makes the old session inactive. Raw records remain.
-    if plan["protocol_sha256"] != profile()["sha256"] or plan["judges"] != [judge_identity(j) for j in JUDGES] or plan.get("adapter_sha256") != sha(Path(__file__).parents[1] / "evaluation/creative.py"):
-        return None
+    from planner_harness.upgrade import record
+    record(path.parent, 'evaluation_defaults',
+           {k:plan.get(k) for k in ('protocol_sha256','judges','adapter_sha256')},
+           {'protocol_sha256':profile()['sha256'], 'judges':[judge_identity(j) for j in JUDGES],
+            'adapter_sha256':sha(Path(__file__).parents[1]/'evaluation/creative.py')})
     if plan.get('analysis_population_sha256'):
         population_path=root/'analysis-population.json'
         if not population_path.exists() or sha(population_path)!=plan['analysis_population_sha256']:
@@ -431,17 +441,23 @@ def ensure_evaluation(repository, root, *, evaluation_id=None):
     active = current_evaluation(root)
     if active is not None:
         return active
-    if (Path(root) / 'current-evaluation.json').exists():
-        raise ValueError('Evaluation protocol/model changed. Resume with its frozen runtime or explicitly prepare a new evaluation; restart does not authorize rescoring.')
-    if evaluation_id and (Path(root) / 'evaluations' / evaluation_id).exists():
-        # A previous protocol can retain the requested label and all its receipts.
-        evaluation_id = evaluation_id + '-' + uuid.uuid4().hex[:8]
+    root = Path(root).resolve()
+    candidates = ([root/'evaluations'/evaluation_id/'evaluation.json'] if evaluation_id
+                  else list((root/'evaluations').glob('*/evaluation.json')))
+    candidates = [p for p in candidates if p.exists()]
+    if len(candidates) > 1:
+        raise ValueError('Several saved evaluations lack a current pointer; select the original evaluation ID, without rescoring')
+    if candidates:
+        path = candidates[0]
+        with RunLock(root/'registry-owner'):
+            save(root/'current-evaluation.json', {'path':str(path.relative_to(root)), 'sha256':sha(path)})
+        return current_evaluation(root)
     prepare_evaluation(repository, root, evaluation_id=evaluation_id)
     return current_evaluation(root)
 
 
 def score_evaluation(repository, root, budget=None, *, models=None):
-    """Explicit live entry using the current evaluator, confined to the fresh session."""
+    """Continue the saved evaluation; current defaults apply only to a new session."""
     from evaluation.creative import JUDGES, judge_identity, make_judge, judge_candidate
     from evaluation.low_high import freeze_plan
     from planner_harness.video import Video
@@ -463,11 +479,15 @@ def score_evaluation(repository, root, budget=None, *, models=None):
         reconcile_accounting(directory/'accounting')
         recover_texts(directory,directory/'accounting')
         for position in evaluation["positions"]:
+            score_links = [directory/'scores'/(_score_key(position, j['model'])+'.json') for j in evaluation['judges']]
+            if score_links and all(p.exists() for p in score_links):
+                for link in score_links:_read_score(directory, link, evaluation)
+                continue
             entry = find(root, position["sample_id"], position["prompt_form"], position["method"], position["seed"], position.get("review_mode"))
             available = [entry] + entry.get("candidates", []) if entry else []
             if not any(v["video_sha256"] == position["video_sha256"] for v in available):
                 raise ValueError("Frozen evaluation candidate changed")
-            task = task_for_entry(tasks[position["sample_id"], position["prompt_form"]], entry, root)
+            task = task_for_entry(tasks.get((position["sample_id"], position["prompt_form"])), entry, root)
             topic = position["sample_id"] + "__" + position["prompt_form"]
             source = Video(repository / task["source"], directory / "tasks" / topic).info
             if source["sha256"] != position["source_sha256"] or task["request_sha256"] != position["request_sha256"]:
@@ -485,7 +505,7 @@ def score_evaluation(repository, root, budget=None, *, models=None):
             scope = accounting.scope(directory / "accounting", topic, "independent") if budget is not None else None
             from evaluation.final_suite import automatic
             measured=automatic(source,candidate,task_plan,directory/'automatic-metrics',accounting_scope=scope)
-            for name in JUDGES:
+            for name in (row["model"] for row in evaluation["judges"]):
                 key = _score_key(position, name)
                 link = directory / "scores" / (key + ".json")
                 if link.exists():
@@ -493,7 +513,8 @@ def score_evaluation(repository, root, budget=None, *, models=None):
                     continue
                 call = directory / "calls" / key
                 if scope:accounting.bind(call, scope)
-                model = models[name] if models else make_judge(name)
+                from evaluation.creative import frozen_judge
+                model = models[name] if models else frozen_judge(next(j for j in evaluation['judges'] if j['model']==name))
                 try:
                     result = judge_candidate(task["request"], source, candidate, call, model=model, plan=task_plan)
                 except ReportUnavailable:
@@ -580,7 +601,7 @@ def compare_evaluation(repository, root, *, models=None):
             plan = check_plan(load(plan_path), task["request"], source) if plan_path.exists() else freeze_plan({"track": form}, task["request"], source, plan_path.parent)
             videos = {label: Video(root / p["video"], directory / "tasks" / topic_id).info for label, p in positions.items() if p}
             output = blind_pairs(repository, directory, {"id": topic_id, "request": task["request"]}, videos,
-                judges=models, source_plan=(source, plan), pairs=pairs, media_root=root / "media", write_topic_record=False, retain_unknown=True)
+                judges=models, judge_specs=evaluation["judges"], source_plan=(source, plan), pairs=pairs, media_root=root / "media", write_topic_record=False, retain_unknown=True)
             for judge, rows in output.items():
                 for left, right in pairs:
                     label = left + "__to__" + right
@@ -588,7 +609,10 @@ def compare_evaluation(repository, root, *, models=None):
                     if left in videos and right in videos:
                         identity = {"source": source["sha256"], "left": videos[left]["sha256"], "right": videos[right]["sha256"],
                             "plan": plan["sha256"], "profile": profile()["sha256"], "judge": judge, "seed": 0}
-                        path = directory / "blind-judge" / signature(identity) / "result.json"
+                        from planner_harness.upgrade import cache_directory
+                        cached, _ = cache_directory(directory / "blind-judge", identity,
+                            ('source','left','right','plan','judge','seed'))
+                        path = cached / "result.json"
                     records.append({"sample_id": topic_id + "__" + str(seed) + ("__review-"+mode if mode!="shared" else ""), "source_id": source["sha256"], "review_mode":mode,
                         "length": form, "judge": judge, "comparison": label,"split":task["split"],"source_group":task["source_group"],"seed":seed,
                         "availability":{"left":left in videos,"right":right in videos},
@@ -756,7 +780,8 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
     if population_path.exists():
         cohort=load(population_path)
         if cohort['benchmark_sha256']!=sha(Path(repository)/'benchmark_data/benchmark.json'):
-            raise ValueError('Report population differs from frozen benchmark')
+            from planner_harness.upgrade import record
+            record(root, 'report_inventory', cohort['benchmark_sha256'], sha(Path(repository)/'benchmark_data/benchmark.json'))
     analysis_population=analysis_population or ('main' if population_path.exists() else 'test')
     if analysis_population=='rsi' and splits!=['test']:
         raise ValueError('RSI report must filter heldout tasks')
@@ -775,8 +800,10 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
         for r in (verify_entry(root, p) for p in entry_files(root)))
     for sample, form, method, seed, mode in sorted(positions):
         task = tasks.get((sample, form))
+        entry = find(root, sample, form, method, seed,mode)
+        if entry:task = task_for_entry(task, entry, root)
         if not task:
-            raise ValueError("Registered result/plan has no current task")
+            raise ValueError("Saved unfinished position needs its original task metadata; no generation was submitted")
         if (splits and task["split"] not in splits) or (forms and form not in forms) or (methods and method not in methods) or (seeds and seed not in seeds) or (review_modes and mode not in {*review_modes,"shared"}):
             continue
         entry = find(root, sample, form, method, seed,mode)

@@ -25,7 +25,8 @@ def automatic(source,candidate,plan,directory,*,accounting_scope=None):
               'request_sha256':signature({'text':request}),
               'motion_scope':plan['task']['motion_preservation'],'config':CONFIG,
               'implementation':{n:sha(Path(__file__).parent/n) for n in ('features.py','temporal.py','media.py','final_suite.py')}}
-    directory=Path(directory)/signature(identity)
+    from planner_harness.upgrade import cache_directory
+    directory, identity = cache_directory(directory, identity, ("source", "candidate", "request_sha256", "motion_scope"))
     with RunLock(directory,timeout=7200):
         immutable(directory/'identity.json',identity)
         if (directory/'result.json').exists():
@@ -45,7 +46,11 @@ def automatic(source,candidate,plan,directory,*,accounting_scope=None):
         from planner_harness.resources import ResourceExhausted
         for kind,names,compute in jobs:
             try:
-                raw=compute();details[kind]=raw
+                receipt = directory/(kind+"-result.json")
+                if receipt.exists():raw=load(receipt)
+                else:
+                    raw=compute();immutable(receipt,raw)
+                details[kind]=raw
                 for name in names:
                     value=raw.get(name)
                     if value is not None and (type(value) not in (int,float) or not math.isfinite(value)):
@@ -95,7 +100,7 @@ def metric_pairs(pairs):
     return out
 
 
-def blind_pairs(root,output,topic,positions,*,judges=None,source_plan=None,pairs=None,media_root=None,write_topic_record=True,retain_unknown=False):
+def blind_pairs(root,output,topic,positions,*,judges=None,judge_specs=None,source_plan=None,pairs=None,media_root=None,write_topic_record=True,retain_unknown=False):
     """Default six reporting contrasts. Provider locks share the absolute-score queue."""
     from experiments.creative_benchmark import PAIRS,shared_source_plan,copy_verified
     from evaluation.creative import JUDGES,make_judge
@@ -106,7 +111,7 @@ def blind_pairs(root,output,topic,positions,*,judges=None,source_plan=None,pairs
     from .low_high import profile
     output=Path(output);source,plan=source_plan or shared_source_plan(root,output,topic)
     results={}
-    for name in JUDGES:
+    for name in ([j["model"] for j in judge_specs] if judge_specs is not None else JUDGES):
         rows={};client=None
         for a,b in (PAIRS if pairs is None else pairs):
             label=a+'__to__'+b
@@ -115,16 +120,20 @@ def blind_pairs(root,output,topic,positions,*,judges=None,source_plan=None,pairs
             left,right=positions[a],positions[b]
             identity={'source':source['sha256'],'left':left['sha256'],'right':right['sha256'],
                       'plan':plan['sha256'],'profile':profile()['sha256'],'judge':name,'seed':0}
-            directory=output/'blind-judge'/signature(identity)
+            from planner_harness.upgrade import cache_directory
+            directory, identity = cache_directory(output/'blind-judge', identity, ('source','left','right','plan','judge','seed'))
             with RunLock(output/'judge-providers'/name,timeout=7200),RunLock(directory,timeout=7200):
                 immutable(directory/'identity.json',identity)
                 if (directory/'sealed.json').exists():
                     record=load(directory/'sealed.json')
                     files={p.relative_to(directory).as_posix():sha(p) for p in sorted(directory.rglob('*'))
-                           if p.is_file() and p.name not in {'.run.lock','sealed.json'}}
+                           if p.is_file() and 'upgrade-history' not in p.parts and p.name not in {'.run.lock','sealed.json'}}
                     if record['files']!=files:raise ValueError('Blind evaluation cache changed')
                     rows[label]=load(directory/'result.json');continue
-                if client is None:client=attach(judges[name] if judges else make_judge(name),topic_scope(output,topic['id']))
+                if client is None:
+                    from evaluation.creative import frozen_judge
+                    original = next((j for j in (judge_specs or []) if j['model']==name), None)
+                    client=attach(judges[name] if judges else (frozen_judge(original) if original else make_judge(name)),topic_scope(output,topic['id']))
                 bind(directory,topic_scope(output,topic['id']))
                 anonymous=[]
                 for video in (left,right):
@@ -136,7 +145,7 @@ def blind_pairs(root,output,topic,positions,*,judges=None,source_plan=None,pairs
                     if retain_unknown and isinstance(exc,ExternalExecutionUnknown):raise
                     result={'status':'missing','reason':type(exc).__name__,'judgments':None,'judge':name}
                     immutable(directory/'result.json',result)
-                files={p.relative_to(directory).as_posix():sha(p) for p in sorted(directory.rglob('*')) if p.is_file() and p.name not in {'.run.lock','sealed.json'}}
+                files={p.relative_to(directory).as_posix():sha(p) for p in sorted(directory.rglob('*')) if p.is_file() and 'upgrade-history' not in p.parts and p.name not in {'.run.lock','sealed.json'}}
                 immutable(directory/'sealed.json',{'files':files})
                 rows[label]=result
         results[name]=rows

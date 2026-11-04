@@ -98,6 +98,8 @@ def inspect_video(path):
 
 def prepare(benchmark, output, *, data_root=None, conditions=("pe",), seed=42, splits=None, prompt_forms=None, sample_ids=None, uniform_frames=False):
     benchmark, output = Path(benchmark).resolve(), Path(output).resolve()
+    if (output/"plan.json").exists():
+        return load_plan(output/"plan.json")
     if not conditions or len(set(conditions)) != len(conditions) or set(conditions) - {"direct", "pe"}:
         raise ValueError("Choose direct, pe, or both exactly once")
     if benchmark.suffix.lower() == ".jsonl":
@@ -457,20 +459,19 @@ def verify_completed(directory, result, expected=None):
 def execute(case, root, plan_sha, backend):
     directory = Path(root) / "cases" / case["case_id"]
     binding = {"case": case, "plan_sha256": plan_sha, "runtime_sha256": signature(backend.identity)}
-    expected = signature(binding)
     result_path = directory / "result.json"
-    if digest(case["source_video"]) != case["source_sha256"]:
-        raise ValueError("Source video changed: " + case["case_id"])
-    if result_path.exists():
+    if result_path.exists() and read(result_path).get('status') == 'complete':
         previous = read(result_path)
-        if previous["input_sha256"] != expected:
-            raise ValueError("Existing case identity differs: " + case["case_id"])
-        if previous["status"] != "complete":
-            raise RuntimeError("Prior failed/interrupted case requires inspection; no external call repeated: " + case["case_id"])
-        verify_completed(directory, previous, expected)
+        verify_completed(directory, previous)
         return previous
-    if directory.exists() and any(directory.iterdir()):
-        raise RuntimeError("Uncommitted case artifacts require inspection: " + case["case_id"])
+    if (directory/'input.json').exists():
+        binding = read(directory/'input.json')
+        case = binding['case']
+    elif directory.exists() and any(directory.iterdir()):
+        raise RuntimeError('Uncommitted original artifacts; recover ownership before continuing: '+case['case_id'])
+    expected = signature(binding)
+    if digest(case['source_video']) != case['source_sha256']:
+        raise ValueError('Original source is missing or damaged: '+case['case_id'])
     api = accounting()
     budget_root = Path(root)/"accounting"
     if not (budget_root/"policy.json").exists():
@@ -484,12 +485,17 @@ def execute(case, root, plan_sha, backend):
     write(directory / "input.json", binding, frozen=True)
     record = {"case_id": case["case_id"], "input_sha256": expected,
               "input_file_sha256": digest(directory / "input.json"), "status": "running", "started_unix": time.time()}
-    write(result_path, record)
+    if result_path.exists():record = read(result_path)
+    else:write(result_path, record)
     started = time.monotonic()
     try:
         prompt, pe = case["prompt"], None
         if case["condition"] == "pe":
-            prompt, pe = backend.enhance(case, directory / "pe")
+            if (directory/"pe/result.json").exists():
+                pe = read(directory/"pe/result.json")
+                if pe.get("status") != "enhanced":raise RuntimeError("Original PE failed; no external call repeated; recover the original call")
+                prompt = pe["returned_prompt"]
+            else:prompt, pe = backend.enhance(case, directory / "pe")
         count, encoded = backend.tokens(prompt)
         write(directory / "prompt.json", {"original": case["prompt"], "render_prompt": prompt,
             "encoded_text": encoded, "token_count": count, "token_limit": 512}, frozen=True)

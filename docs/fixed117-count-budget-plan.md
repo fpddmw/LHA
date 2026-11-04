@@ -8,15 +8,17 @@ and encode at 24 fps. Short sources repeat nearest frames; long sources subsampl
 The original files remain unchanged. Record original hash, frame count, FPS,
 sample indices, normalized hash and policy identity. Planner, renderer and final
 evaluation use the normalized source. Every generated candidate must also contain
-117 frames at 24 fps. Existing native-length results are historical, not reusable
-under this contract. Both renderers use identical source timing.
+117 frames at 24 fps for new tasks. Existing native-length results remain complete
+and reusable in their original experiment; record their actual axes. A software
+upgrade never regenerates them. Both renderers share source preparation for new tasks.
 
 Remove elapsed-time admission and stopping limits from new campaign tasks,
 post-task maintenance and independent evaluation. Retain elapsed-time accounting,
 the four submitted-generation budget, model-led input/prompt/selection decisions,
 and existing non-time controls. Transport/connection timeouts and process-failure
 detection remain technical recovery mechanisms. Explicit finite policies on
-historical runs retain their original meaning; never rewrite frozen receipts.
+historical runs remain in receipts. On authorized upgrade continuation remove old
+time stopping, preserving all consumed generation slots. See [upgrade continuation](upgrade-continuation-plan.md).
 
 Implementation checklist:
 
@@ -27,8 +29,9 @@ Implementation checklist:
       completion, source endpoints and incompatible historical result reuse.
 - [x] Commit and synchronize the authorized changes; no model or GPU calls.
 
-Use a new output directory when starting this protocol. Runtime plan/profile hashes
-must prevent resuming an incompatible old input plan as a uniform-frame batch.
+Updated 2026-11-05: reuse the original output directory on upgrade. Runtime and
+profile differences are provenance. Completed old videos keep their actual timing;
+unfinished original tasks retain their prepared inputs and remaining allowance.
 
 ## Implementation and validation
 

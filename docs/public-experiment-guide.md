@@ -84,11 +84,13 @@ Every new source is uniformly sampled over the complete clip, including endpoint
 to **117 frames at 24 fps (4.875 seconds)**. This retimes the complete source; short
 clips repeat nearest frames and longer clips omit intermediate frames. Bernini,
 Ditto, all six arms, and both judges use the same prepared source. Iterative inputs
-and outputs retain the 117-frame axis. Original files and hashes remain unchanged;
+and new outputs retain the 117-frame axis. Original files and hashes remain unchanged;
 `inputs/sources/*/normalization.json` records all selected original indices and
-both file hashes. Result archives include the prepared source. Use a fresh output
-root for campaign v6; old native-length results are not current-protocol inputs.
-Direct reuse is disabled in the default configuration.
+both file hashes. Result archives include the prepared source. Keep the original
+output root when upgrading; existing native-length videos remain complete and
+retain their actual timing. The default explicit historical registry is
+`out/benchmark_results`. Its matching completed method/review-family results are
+reused; no directory-wide scan or cross-renderer substitution occurs.
 
 Per renderer: main 536 trajectories / at most 1,742 render submissions; self-review
 268 additional trajectories / at most 1,072 submissions. Both renderers together
@@ -151,7 +153,7 @@ GPU availability, visibility and duplicate index/UUID aliases.
 
 The selected devices and scheduling dependencies are frozen when a batch starts.
 Resume with the same host/selection. Historical sequential queues retain their
-original runtime; changing the scheduling contract requires a new output root.
+original task identities; a new implementation resumes their saved task manifest.
 
 Put API credentials outside the checkout, for example `~/.config/lha/openrouter.env`:
 
@@ -228,8 +230,9 @@ configurations as a successful live probe.
 ## 5. Run, resume and score explicitly
 
 The following commands submit real work. Run them only after deployment checks.
-Keep the same output root for one immutable experiment; changing code, data,
-knowledge or policy requires a new run root.
+Keep the original output root across software updates. Its saved manifests and
+completed steps take precedence over current defaults. Code, knowledge, profile
+and sampling differences are recorded as provenance; they do not create a new run.
 
 ```bash
 # Main: pre-experience -> full-experience -> direct -> pe-loop -> independent score.
@@ -281,7 +284,7 @@ workers, `--devices` may select different or fewer/more available GPUs. New task
 live under `executions/<topic>/<method>`; a durable location index also reuses old
 `workers/<device>` task directories. GPU reassignment does not create a new task.
 For a node replacement, first fence the old node, preserve the complete output and
-frozen checkout, and mount them with the **same absolute paths** (including assets
+saved input assets, and mount them with the **same absolute paths** (including assets
 and inputs). Host-local SQLite is not a distributed scheduler; do not run two hosts
 against the same writable queue. Existing explicit disjoint shards remain separate.
 
@@ -290,7 +293,8 @@ alone does not establish whether a provider finished a call. Exhausted/permanent
 transport failures also retain their original allowance. Use the existing
 [recovery procedures](server-runtime.md) for these recorded exceptions; do not delete
 receipts or change identities to force another call. Historical code/protocols are
-not silently migrated by this entry; use their frozen runtime for historical runs.
+recorded alongside the current implementation. Original requests and receipts are
+reused; upgrade differences do not authorize duplicate calls or new tasks.
 
 To run the first stage now and continue full-experience later on the same host:
 
@@ -327,9 +331,10 @@ python scripts/benchmark_results.py score-evaluation \
 The command creates the current evaluation identity, adds collected videos, computes
 automatic metrics, calls both independent judges, performs anonymous order-swapped
 comparisons and writes reports. It can run after generation. Repeating the command
-retains its evaluation identity. A changed protocol/model is rejected until an
-explicit `prepare-evaluation --evaluation-id NEW_ID` creates a separately authorized
-evaluation; old raw outcomes remain intact. A copied registry must
+retains its evaluation identity and completed scores after code/profile changes.
+Missing steps use their saved requests and scoring material where present; their
+actual protocol remains recorded. Deliberate rescoring requires an explicit
+`prepare-evaluation --evaluation-id NEW_ID`; ordinary restart never invokes it. A copied registry must
 retain all media and frozen metadata. If source media paths change, relocate the
 checkout consistently before scoring.
 
@@ -353,3 +358,11 @@ Copy complete output trees when archiving, verify file hashes, and preserve the
 code commit and installed dependency versions. Source publication excludes private
 credentials, weights, full runtime logs and generated results. Software-smoke
 artifacts and experimental measurements use separate output roots throughout.
+
+
+For a standalone Planner run, the original `run_planner_harness.py` command also
+resumes automatically when its output contains `state.json`; adding `--resume`
+is optional. Saved model configuration, instructions, pending work and generation
+occupancy win over updated profile defaults. A completed task needs no new provider
+client. Upgrade details and offline evidence are recorded in
+[the continuation plan](upgrade-continuation-plan.md).

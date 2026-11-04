@@ -125,12 +125,12 @@ class ReviewModes(unittest.TestCase):
         self.assertEqual(verify_delivery(self.h.output)['selected'],'v1')
         self.assertEqual(sum(j['kind']=='critique' for j in self.h.state['jobs'].values()),1)
 
-    def test_deadline_keeps_unreviewed_fallback_without_claiming_review_or_confirmation(self):
+    def test_expired_clock_upgrade_retains_pending_review_without_false_delivery(self):
         self.start(resource={'max_wall_seconds':1});self.render();time.sleep(1.03)
-        state=self.resume([]);settlement=verify_settlement(self.h.output)
-        self.assertEqual(state['status'],'budget_exhausted');self.assertEqual(settlement['selected'],'v1')
-        self.assertEqual(settlement['selection']['origin'],'latest_generated_fallback')
-        self.assertFalse(settlement['selection']['review_completed']);self.assertFalse(settlement['planner_confirmed'])
+        state=self.resume([])
+        self.assertEqual(state['status'],'waiting_tool')
+        self.assertIsNone(state['online_clock']['deadline_unix'])
+        self.assertIsNone(state.get('final'))
         self.assertEqual(state['reviews']['v1']['status'],'pending')
 
     def test_both_knowledge_scopes_have_review_skill_without_scoring_manual(self):

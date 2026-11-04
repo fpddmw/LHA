@@ -285,6 +285,9 @@ accounting_worker.main()"""
         with self.assertRaises(RuntimeError):
             with RunLock(device):self.fail('device falsely released')
         self.assertTrue((directory/'resources-retained.json').exists());release.set()
+        deadline=time.monotonic()+3
+        while a.active(service.accounting_root) and time.monotonic()<deadline:time.sleep(.01)
+        self.assertFalse(a.active(service.accounting_root))
     def test_shared_plan_missing_preserves_unknown_and_budget_reason(self):
         import test_planner_harness as fixture
         from planner_harness.common import sha

@@ -283,12 +283,13 @@ class ServiceTests(unittest.TestCase):
             service.submit_evaluation({})
         self.assertEqual(service.queue.rows(), [])
 
-    def test_runtime_revision_change_requires_new_service(self):
+    def test_runtime_revision_change_records_upgrade_and_keeps_service(self):
         service = self.service()
         manifest = service.directory / "runtime-sources.json"
         save(manifest, {"changed": "fixture"})
-        with self.assertRaisesRegex(ValueError, "Job record changed"):
-            self.service()
+        self.service()
+        self.assertEqual(load(manifest), {"changed":"fixture"})
+        self.assertTrue(list((service.directory/"upgrade-history").glob("*.json")))
 
     def test_signed_tool_response_recovers_without_resampling(self):
         service = self.service(renderer=lambda *args: self.fail("Completed tool must not render again"))

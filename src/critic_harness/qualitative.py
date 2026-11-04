@@ -149,6 +149,10 @@ def run(payload, directory, model=None):
     from planner_harness.json_output import decode_object
 
     directory = Path(directory) / "one-shot-critic"
+    if (directory / 'feedback.json').exists():
+        return load(directory / 'feedback.json')
+    from planner_harness.upgrade import retain
+    payload = retain(directory / 'review-request.json', payload)
     frozen = payload.get("critic", {}).get("frozen_profile") or profile(
         getattr(model, "model", None), getattr(model, "reasoning_effort", None)
     )
@@ -194,8 +198,7 @@ def run(payload, directory, model=None):
     while True:
         number = state["attempts"] + 1
         identity = f"review-{number:04d}"
-        request = packet(payload, state, frozen)
-        immutable(directory / "calls" / identity / "request.json", request)
+        request = retain(directory / "calls" / identity / "request.json", packet(payload, state, frozen))
         if number == 1:
             immutable(directory / "request.json", request)
         raw = call_text(

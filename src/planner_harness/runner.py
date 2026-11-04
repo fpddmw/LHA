@@ -42,6 +42,8 @@ class PlannerHarness:
         completion_mode=None,
         workflow="legacy",
     ):
+        if (self.output / "state.json").exists():
+            return self.resume()
         if workflow not in {"legacy", "creative_loop_v1"}:
             raise ValueError("Unknown Planner workflow")
         if workflow == "creative_loop_v1":
@@ -51,8 +53,6 @@ class PlannerHarness:
                 raise ValueError(
                     "Creative loop requires loop mode and excludes imported legacy feedback"
                 )
-        if (self.output / "state.json").exists():
-            raise ValueError("Run already exists. Use resume or a new output directory.")
         if mode not in {"plan", "loop"}:
             raise ValueError("Use plan/loop mode")
         from .delivery import completion_mode as resolve_completion_mode
@@ -199,7 +199,15 @@ class PlannerHarness:
         self, *, additional_turns=0, execution=None, continue_delivery=False, max_context_chars=None
     ):
         self.state = load(self.output / "state.json")
+        from .resumption import reopen_interrupted_state
+        self.state = reopen_interrupted_state(self.output, self.state)
         from .creative import active
+
+        # A completed task is independent of today's code, manuals and defaults.
+        if self.state.get('status') == 'complete':
+            from .delivery import verify_delivery
+            if active(self.state):verify_delivery(self.output)
+            return self.state
 
         if not active(self.state):
             from .compat.legacy.runtime import verify_state
@@ -223,9 +231,11 @@ class PlannerHarness:
                 or self.state["config"].get("continuation_policy", {}).get("version")
                 != CONTINUATION
             ):
-                raise ValueError(
-                    "Record an explicit creative protocol migration before resuming this run"
-                )
+                from .upgrade import record
+                record(self.output, 'continuation_protocol',
+                       {'delivery': self.state['config'].get('delivery_review_protocol'),
+                        'continuation': self.state['config'].get('continuation_policy', {}).get('version')},
+                       {'delivery': DELIVERY_REVIEW, 'continuation': CONTINUATION})
         if (
             active(self.state)
             and self.state.get("online_clock")
@@ -267,21 +277,19 @@ class PlannerHarness:
 
                 verify_delivery(self.output)
             return self.state
-        if active(self.state) and self.state.get("online_clock"):
-            from .resources import check_wall, ResourceExhausted
-
-            try:
-                check_wall(self.state)
-            except ResourceExhausted:
-                # An expired result is immutable even with an explicit continuation.
-                if self.state.get("final"):
-                    return self.state
-                from .resources import settle
-
-                settle(self.state, "Task wall-time submission budget exhausted")
-                save(self.output / "final.json", self.state["final"])
-                self.checkpoint()
-                return self.state
+        if active(self.state) and not self.state.get('final'):
+            from .upgrade import record
+            policy = self.state['config'].get('resource_policy', {})
+            clock = self.state.get('online_clock', {})
+            record(self.output, 'wall_limit_removed', {'limit':policy.get('max_wall_seconds'), 'deadline':clock.get('deadline_unix')}, {'limit':None,'deadline':None})
+            policy['max_wall_seconds'] = None
+            if clock:
+                clock['deadline_unix'] = None
+                clock.pop('frozen_unix', None)
+            marker = self.output/'budget-scope.json'
+            if marker.exists():
+                from .accounting import lift_time_limits
+                lift_time_limits(load(marker)['root'])
         config = self.state["config"]
         if max_context_chars is not None:
             if type(max_context_chars) is not int or max_context_chars < 8192:
@@ -302,10 +310,16 @@ class PlannerHarness:
             or getattr(self.model, "reasoning_effort", "unknown") != config["reasoning_effort"]
             or type(self.model).__name__ != config["backend"]
         ):
-            raise ValueError("Resume must use the recorded backend, model and reasoning effort")
+            from .upgrade import record
+            record(self.output, 'model_defaults', {k:config[k] for k in ('model','reasoning_effort','backend')},
+                   {'model':getattr(self.model,'model',None),'reasoning_effort':getattr(self.model,'reasoning_effort',None),'backend':type(self.model).__name__})
+            # The service resolves the original transport; preserve its model settings.
+            self.model = copy.copy(self.model)
+            self.model.model = config['model']
+            self.model.reasoning_effort = config['reasoning_effort']
         self.video = Video(self.state["request"]["source"]["path"], self.output)
         if self.video.info["sha256"] != self.state["request"]["source"]["sha256"]:
-            raise ValueError("Source video changed; use a new run")
+            raise ValueError("Original source is missing or corrupt; restore it to continue this task without regeneration")
         if self.state.get("knowledge_snapshot_sha256"):
             if (
                 sha(self.output / "knowledge-snapshot.json")
@@ -320,11 +334,9 @@ class PlannerHarness:
                 )
             else:
                 self.knowledge = Knowledge(self.root, self.output / "knowledge-snapshot.json")
-        elif (
-            sha(self.root / "knowledge/source-map.json") != self.state["knowledge_manifest_sha256"]
-        ):
-            raise ValueError("Knowledge manifest changed; use a new run")
         else:
+            from .upgrade import record
+            record(self.output, 'legacy_knowledge_manifest', self.state.get('knowledge_manifest_sha256'), sha(self.root / 'knowledge/source-map.json'))
             self.knowledge = Knowledge(self.root)
         if sha(self.output / "system-prompt.txt") != self.state["system_prompt_sha256"]:
             raise ValueError("Recorded operating instructions changed")
@@ -335,9 +347,9 @@ class PlannerHarness:
             profile = prepare_profile(execution, self.root, self.state["request"])
             if profile != config.get("execution"):
                 if config.get("rsi") or active(self.state):
-                    raise ValueError(
-                        "This workflow freezes execution profiles; start a new run to change them"
-                    )
+                    from .upgrade import record
+                    record(self.output, 'execution_defaults', config.get('execution'), profile)
+                    profile = config['execution']
                 event = {
                     "event_id": "runtime-config-" + str(len(self.state["events"]) + 1),
                     "at": stamp(),

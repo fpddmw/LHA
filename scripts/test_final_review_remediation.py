@@ -25,7 +25,11 @@ class Remediation(base.Fixture):
         save(self.root/'bad/state.json',bad)
         from planner_harness.delivery import verify_settlement
         with self.assertRaisesRegex(__import__('planner_harness.integrity',fromlist=['IntegrityError']).IntegrityError,'persisted freeze'):verify_settlement(self.root/'bad')
-        with patch('time.time',return_value=state['online_clock']['deadline_unix']+1):self.h.resume()
+        # Construct a historical timeout receipt; new resumes no longer impose this clock.
+        from planner_harness.resources import settle
+        state['online_clock']['deadline_unix']=time.time()
+        settle(state,'Historical timeout')
+        save(self.h.output/'state.json',state);save(self.h.output/'final.json',state['final'])
         settled=verify_settlement(self.h.output)
         self.assertEqual(settled['outcome'],'deadline_delivery');self.assertFalse(settled['planner_confirmed'])
         state=load(self.h.output/'state.json');videos={k:v for k,v in state['videos'].items() if k!='source'}

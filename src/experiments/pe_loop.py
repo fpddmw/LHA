@@ -206,9 +206,11 @@ def execute(topic, batch, runtime, directory, scope):
                "max_generations": batch["max_generations"], "resource_policy": batch.get("resource_policy"),
                "selection": batch["selection"]}
     with RunLock(directory / "loop-owner"):
-        immutable(directory / "loop.json", binding)
         if (directory / "complete.json").exists():
             return _completed(directory / "complete.json", lambda: None)
+        from planner_harness.upgrade import retain
+        binding = retain(directory / 'loop.json', binding)
+        batch = {**batch, **{k:binding[k] for k in ('max_generations','seed_sequence') if k in binding}}
         history, candidates, reviews = [], [], []
         selected, decision, stop = 0, None, None
         stop_kind = "deadline_delivery"

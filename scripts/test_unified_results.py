@@ -271,6 +271,12 @@ class MethodTests(Fixture):
             def render(inner, topic, method, prompt, seed, number, scope):
                 return a.invoke(scope, "owned-render", "render", "render:bernini", render_actual)
             def close(inner):pass
+        # Seed an already submitted, unresolved operation under the historical clock.
+        # The upgraded run removes wall limits but must still respect this owner.
+        a.install(self.output / "accounting", policy)
+        scope=a.scope(self.output / "accounting", batch["topics"][0]["id"], "direct")
+        with self.assertRaises(a.ExternalExecutionUnknown):
+            a.invoke(scope, "owned-render", "render", "render:bernini", render_actual)
         with patch("experiments.unified_benchmark.verify", return_value=batch), patch("experiments.unified_benchmark.policy", return_value=a.validate_policy(policy)), patch("experiments.preflight.renderer_asset_paths"):
             try:
                 with self.assertRaises(a.ExternalExecutionUnknown):
@@ -378,8 +384,8 @@ class MethodTests(Fixture):
         row = r.import_video(self.repo, self.registry, self.row(generation={**GENERATION, "backend": "bernini",
             "task_type": "v2v", "num_frames": 117, "fps": 24.0, "omega_txt": 4.0, "seed": 42}))
         u.check_entry(topic, "direct", batch, row)
-        with self.assertRaises(IntegrityError):
-            u.check_entry(topic, "direct", batch, {**row, "generation": {**row["generation"], "fps": 20.0}})
+        u.check_entry(topic, "direct", batch, {**row, "generation": {**row["generation"], "fps": 20.0}})
+        self.assertTrue(list((self.registry/"reuse/upgrade-history").glob("*.json")))
 
 
 class BudgetRecoveryTests(Fixture):

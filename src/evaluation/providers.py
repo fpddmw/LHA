@@ -43,8 +43,8 @@ def judge_identity(name):
 class OpenRouterJudge(OpenRouterVisionModel):
     """Keep report slot names while sending canonical API model identifiers."""
 
-    def __init__(self, name=MODEL, **options):
-        spec = judge_spec(name)
+    def __init__(self, name=MODEL, *, frozen_spec=None, **options):
+        spec = copy.deepcopy(frozen_spec) if frozen_spec is not None else judge_spec(name)
         load_credentials(options.get("credential_file"))
         options.setdefault("api_key_env", spec.get("api_key_env", "OPENROUTER_API_KEY"))
         endpoint = os.environ.get(spec.get("base_url_env", "OPENROUTER_BASE_URL"))
@@ -63,3 +63,17 @@ class OpenRouterJudge(OpenRouterVisionModel):
 
 def make_judge(name):
     return OpenRouterJudge(name)
+
+
+def make_frozen_judge(identity):
+    """Construct the original evaluator without adopting a newer model default."""
+    identity = copy.deepcopy(identity)
+    if identity.get('provider') == 'openrouter':
+        model = OpenRouterJudge(identity['model'], frozen_spec=identity)
+    elif identity.get('model') in {'glm5.3flash', 'sonnet-5.5high'}:
+        from .legacy_providers import ParateraJudge, SonnetJudge
+        model = (ParateraJudge if identity['model'] == 'glm5.3flash' else SonnetJudge)()
+    else:
+        raise ValueError('Original judge provider needs its saved adapter; no substitute call was made')
+    model.frozen_identity = identity
+    return model

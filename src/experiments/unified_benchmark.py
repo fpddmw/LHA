@@ -48,6 +48,12 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
             review=None, models=None, training_maintenance=None, sample_ids=None, backend="bernini", output_dimensions=None,
             experience_owner=None, budget_settings=None):
     root, output = Path(root).resolve(), Path(output).resolve()
+    if (output/'batch.json').exists():
+        from planner_harness.upgrade import record
+        saved = verify(root,output)
+        record(output,'prepare_defaults', {'arms':saved['arms'],'max_generations':saved['max_generations']},
+               {'arms':methods,'max_generations':max_generations})
+        return saved
     backend = render_profiles.backend({"backend": backend})
     if str(root / "scripts") not in sys.path:
         sys.path.insert(0, str(root / "scripts"))
@@ -280,10 +286,10 @@ def verify(root, output):
             raise IntegrityError('Training batch belongs to another experience library')
     if 'pe-loop' in batch['arms']:
         from .pe_loop import configuration
-        if batch.get('pe_loop') != configuration(render_profiles.backend(batch)):
-            raise IntegrityError('PE Loop contract changed; prepare a new batch')
-    if batch.get("selection")!=selection_config():
-        raise IntegrityError("Frozen qualitative selection policy differs; prepare a new batch")
+        from planner_harness.upgrade import record
+        record(output,'pe_implementation', batch.get('pe_loop'), configuration(render_profiles.backend(batch)))
+    from planner_harness.upgrade import record
+    record(output,'selection_defaults', batch.get('selection'), selection_config())
     if verify_experiment(output / "profile.json", root)["sha256"] != batch["profile_sha256"]:
         raise IntegrityError("Unified runtime differs from the frozen profile")
     inputs = load(output / "inputs/plan.json")
@@ -293,17 +299,14 @@ def verify(root, output):
     for topic in batch["topics"]:
         row = current.get((topic["sample_id"], topic["prompt_form"]))
         original = topic.get("original_source_sha256", topic["source_sha256"])
-        if not row or row["source_sha256"] != original or row["request"] != topic["request"] or sha(root / topic["source"]) != topic["source_sha256"]:
-            raise IntegrityError("Current benchmark differs from the prepared source/request")
-        if sha(root / row['source']) != original:
-            raise IntegrityError("Original source changed after preparation")
+        record(output,'benchmark-'+topic['id'], {'source':original,'request':topic['request']},
+               {'source':row.get('source_sha256'),'request':row.get('request')} if row else None)
+        if sha(root / topic['source']) != topic['source_sha256']:
+            raise IntegrityError('Saved task input is missing or damaged; retain its completed results, do not regenerate')
         if topic.get('normalization'):
             from .video_contract import POLICY, sample_indices
             proof = topic['normalization']
-            if (proof['policy'] != POLICY or proof['original_sha256'] != original
-                    or proof['normalized_sha256'] != topic['source_sha256']
-                    or proof['source_indices'] != sample_indices(proof['original_info']['frames'])):
-                raise IntegrityError('Normalized source provenance changed')
+            record(output,'source-policy-'+topic['id'], proof['policy'], POLICY)
     return batch
 
 
@@ -316,7 +319,7 @@ def policy(batch, supplied, *, require_live=True):
         if options.get("model"):required.append("model:"+options["model"]+"/"+str(options.get("reasoning_effort") or "none"))
     supplied = copy.deepcopy(supplied or {"version":accounting.VERSION,"mode":"offline"})
     supplied["online_task_budget"] = {"version":"online-task-v2","lanes":list(batch["arms"]),
-        "max_generations":batch["max_generations"],"wall_seconds":batch.get("resource_policy",{}).get("max_wall_seconds",MAX_WALL_SECONDS)}
+        "max_generations":batch["max_generations"],"wall_seconds":None}
     p = accounting.validate_policy(supplied, require_live=require_live, required_quotes=required)
     if not require_live:
         return p
@@ -338,6 +341,15 @@ def policy(batch, supplied, *, require_live=True):
     return p
 
 
+def effective_host(batch, host):
+    """Current placement and credentials with the original experiment recipe."""
+    host = copy.deepcopy(host)
+    host['models'] = batch.get('models', host.get('models', {}))
+    if 'generation' in batch:host.setdefault('renderer', {})['generation'] = batch['generation']
+    host['renderer']['backend'] = batch.get('backend', host['renderer'].get('backend','bernini'))
+    return host
+
+
 def preflight(root, output, host=None):
     batch = verify(root, output)
     if host and host.get("local_results_root"):batch={**batch,"results_root":str(Path(host["local_results_root"]).resolve())}
@@ -349,7 +361,8 @@ def preflight(root, output, host=None):
             if entry:
                 check_entry(topic, method, conditions, entry,static_only=True)
                 ready += 1
-    if host:
+    if host and ready < sum(len(t.get("methods",batch["arms"])) for t in batch["topics"]):
+        host = effective_host(batch, host)
         render_profiles.check_host(batch, host)
         from .preflight import renderer_asset_paths
         renderer_asset_paths(root, host["renderer"])
@@ -365,34 +378,18 @@ def preflight(root, output, host=None):
 
 
 def check_entry(topic, method, batch, entry, *, static_only=False):
-    recorded = entry["generation"]
-    generation = dict(recorded.get("generation", recorded))
-    # The standalone official runner records task_type; the resident renderer
-    # records prompt_enhancer=False. They denote the same raw render settings.
-    generation.setdefault("prompt_enhancer", False)
-    if any(generation.get(k) != v for k, v in batch["generation"].items()) or recorded.get("backend", "bernini") != render_profiles.backend(batch) or generation.get("task_type", "v2v") != "v2v" or entry["source_sha256"] != topic["source_sha256"] or entry["request_sha256"] != signature({"text": topic["request"]}):
-        raise IntegrityError("Registered result differs from frozen generation/source/request")
-    actual_output = recorded.get("output", {})
-    for name, alias in (("frames", "num_frames"), ("fps", "fps"), ("width", "width"), ("height", "height")):
-        actual = actual_output.get(name, recorded.get(alias))
-        if actual is not None and name in topic["native_output"] and actual != topic["native_output"][name]:
-            raise IntegrityError("Registered result uses a different native output time axis")
-    if topic.get("normalization"):
-        from planner_harness.video import Video
-        for item in [entry, *entry.get("candidates", [])]:
-            actual = Video(Path(batch["results_root"]) / item["video"], Path(batch["results_root"]) / "reuse-info").info
-            if actual["frames"] != 117 or abs(actual["fps"] - 24) > .001:
-                raise IntegrityError("Registered video does not satisfy the 117-frame/24-fps contract")
-    expected_assets = batch.get("renderer_identity", {}).get("asset_manifest_sha256")
-    if expected_assets and recorded.get("asset_manifest_sha256") and expected_assets != recorded["asset_manifest_sha256"]:
-        raise IntegrityError("Registered result uses different renderer assets")
-    if method != "direct":
-        binding = entry["evidence"].get("method_identity")
-        expected=method_identity(method,batch)
-        ignored={"actual_knowledge_sha256","experience_seed_sha256","maintenance_identity"} if static_only else set()
-        if not isinstance(binding,dict) or any(binding.get(k)!=v for k,v in expected.items() if k not in ignored):
-            raise IntegrityError("Registered method was generated under different planning/selection conditions")
-
+    from planner_harness.upgrade import record
+    # Result identity is sample/form/method/seed/review family, not today's recipe.
+    if entry['sample_id'] != topic['sample_id'] or entry['prompt_form'] != topic['prompt_form'] or entry['method'] != method:
+        raise IntegrityError('Result belongs to a different task')
+    if entry.get('generation',{}).get('backend','bernini') != render_profiles.backend(batch):
+        raise IntegrityError('Result belongs to a different renderer arm')
+    record(Path(batch['results_root'])/'reuse', topic['id']+'-'+method,
+           {'generation':entry['generation'],'source':entry['source_sha256'],'request':entry['request_sha256'],
+            'method_identity':entry.get('evidence',{}).get('method_identity')},
+           {'generation':batch['generation'],'source':topic['source_sha256'],'request':signature({'text':topic['request']}),
+            'method_identity':method_identity(method,batch) if method!='direct' else None})
+    return
 
 def method_identity(method,batch):
     return {'method':method,'planner':batch['planner'] if method in {'planner-once','full','none','pre-experience','direct-best-of-n','pe-loop'} else None,
@@ -536,7 +533,8 @@ class Runtime:
             raise ValueError("Select one explicitly authorized existing device for this serial execution entry")
         host=copy.deepcopy(host)
         if host.get('models') and host['models']!=batch.get('models'):
-            raise ValueError('Host model configuration differs from the frozen batch')
+            from planner_harness.upgrade import record
+            record(output, 'host_model_defaults', batch.get('models'), host['models'])
         host['models']=batch.get('models',{})
         host['review']=batch.get('review',{'mode':'critic'})
         init_worker(devices[0], str(root), str(output), host)
@@ -599,7 +597,9 @@ class Runtime:
             "accounting_scope": scope, "payload": {"input_id": "source", "input": topic["source_info"],
                 "prompt": prompt, "renderer": render_profiles.renderer_spec(topic, self.batch, seed)}}
         request = {**body, "sha256": signature(body)}
-        immutable(jobdir / "request.json", request)
+        from planner_harness.upgrade import retain
+        request = retain(jobdir / "request.json", request)
+        body = {k:v for k,v in request.items() if k != "sha256"}
         response_path = jobdir / "response.json"
         if response_path.exists():
             response = load(response_path)
@@ -693,20 +693,20 @@ class Runtime:
         # Engine.close keeps resident models warm between topics. Final worker
         # shutdown must release an idle GPU even with an unknown LLM request.
         from server_runtime.service import Service
-        for _, service in self.task_services.values():
+        for _, service in getattr(self,"task_services",{}).values():
             if service.gpu_unknown():
                 Service.close(service)
                 return
-        Service.close(self.resident_service)
+        Service.close(getattr(self,"resident_service",self.service))
 
 
 def execute_method(root, output, topic, method, batch, runtime):
-    batch=task_conditions(root,output,topic,method,batch)
     seed = batch["seed_sequence"]["start"]
     existing = results.find(batch["results_root"], topic["sample_id"], topic["prompt_form"], method, seed,method_review_mode(method,batch))
     if existing:
         check_entry(topic, method, batch, existing)
         return {"status": "ready", "entry_sha256": existing["sha256"]}
+    batch=task_conditions(root,output,topic,method,batch)
     directory = Path(output) / "methods" / topic["id"] / method
     scope = accounting.topic_scope(output, topic["id"], lane=method)
     accounting.bind(directory, scope)
@@ -877,7 +877,7 @@ def run_serial(root, output, host, *, runtime_factory=Runtime, maintenance_model
     # prepared separately from this generation manifest and result registry.
     with RunLock(output / ("unified-owner" if claim is None else "device-owner-"+str(host["devices"][0]))):
         from .resumption import bind_deployment, reconcile_batch, reopen_method
-        bind_deployment(output / ("host.json" if claim is None else "workers/"+str(host["devices"][0])+"/host.json"), host)
+        host = bind_deployment(output / ("host.json" if claim is None else "workers/"+str(host["devices"][0])+"/host.json"), host)
         if claim is None:
             from .resumption import check_owners
             check_owners(output)

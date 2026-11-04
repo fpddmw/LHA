@@ -78,13 +78,13 @@ class RunnerTests(unittest.TestCase):
 
     def test_identity_change_duplicate_ids_or_manifest_tamper_rejected(self):
         plan = self.prepare()
-        with self.assertRaisesRegex(ValueError, "frozen"):
-            self.prepare(seed=43)
+        self.assertEqual(self.prepare(seed=43),plan)
         changed = copy.deepcopy(plan)
         changed["cases"][0]["prompt"] = "changed"
         runner.write(self.out / "plan.json", changed)
         with self.assertRaisesRegex(ValueError, "identity"):
             runner.load_plan(self.out / "plan.json")
+        self.out = self.root/"new-duplicate-test"
         row = {"id": "dup", "source_video": "source.mp4", "prompt": "Prompt"}
         with self.assertRaisesRegex(ValueError, "unique"):
             self.prepare([row, row])
@@ -136,17 +136,17 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(prompt["token_count"], 600)
         self.assertEqual(backend.render_calls, 0)
 
-    def test_changed_source_or_runtime_prevents_reuse_and_reports_all_positions(self):
+    def test_completed_video_survives_source_and_runtime_updates(self):
         plan = self.prepare()
         case, backend = plan["cases"][0], Backend()
         self.execute(plan, case, backend)
         other = Backend()
         other.identity = {"test_backend": "different model"}
-        with self.assertRaisesRegex(ValueError, "identity differs"):
-            self.execute(plan, case, other)
+        self.execute(plan, case, other)
+        self.assertEqual(other.render_calls,0)
         (self.root / "source.mp4").write_bytes(b"changed")
-        with self.assertRaisesRegex(ValueError, "Source video changed"):
-            self.execute(plan, case, backend)
+        self.execute(plan, case, backend)
+        self.assertEqual(backend.render_calls,1)
         summary = runner.report(self.out)
         self.assertEqual(summary["positions"], 4)
         self.assertEqual(summary["counts"]["not_started"], 3)

@@ -128,8 +128,9 @@ def planner_ready(run):
     if not (run / 'state.json').exists():
         return True
     state = load(run / 'state.json')
-    if state.get('final'):
-        return state.get('status') == 'complete'
+    if state.get('status') == 'complete':return True
+    if state.get('final') and state['final'].get('outcome') not in {'incomplete','deadline_delivery'}:
+        return False
     event = state.get('pending_event')
     if event and not call_ready(run / 'calls' / event / 'transport'):
         return False
@@ -139,6 +140,21 @@ def planner_ready(run):
         if path.exists() and load(path).get('outcome_unknown'):
             return False
     return True
+
+
+def reopen_interrupted_state(run, state):
+    """Remove a technical settlement only; preserve all decisions and consumed slots."""
+    run = Path(run)
+    if state.get('status') == 'complete' or not state.get('final'):return state
+    if state['final'].get('outcome') not in {'incomplete','deadline_delivery'}:return state
+    if not planner_ready(run) or not calls_ready(run):return state
+    archive_remove(run/'final.json', run/'recovery-history')
+    state.setdefault('recovery_history', []).append({'previous_status':state['status'], 'final':state['final'],
+        'reason':'Resume interrupted original task with original generation allowance'})
+    state.pop('final')
+    state['status'] = 'running'
+    save(run/'state.json', state)
+    return state
 
 
 def archive_remove(path, history):

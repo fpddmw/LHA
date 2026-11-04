@@ -275,7 +275,9 @@ def install(root, policy=None, *, require_live=False, required_quotes=()):
     p = validate_policy(policy, require_live=require_live, required_quotes=required_quotes)
     root.mkdir(parents=True, exist_ok=True)
     with RunLock(root / "accounting-lock", timeout=10):
-        immutable(root / "policy.json", p)
+        proposed = p
+        from .upgrade import retain
+        p = retain(root / "policy.json", p)
         if not (root / "ledger.json").exists():
             save(
                 root / "ledger.json",
@@ -290,7 +292,32 @@ def install(root, policy=None, *, require_live=False, required_quotes=()):
                     "breaches": [],
                 },
             )
+    if proposed.get('max_call_seconds') is None and proposed['batch']['wall_seconds'] is None and proposed['topic']['wall_seconds'] is None:
+        lift_time_limits(root)
     return root
+
+
+def lift_time_limits(root):
+    """Authorized count-budget upgrade; keep policy, operations and all charges."""
+    root = Path(root)
+    with RunLock(root/'accounting-lock', timeout=10):
+        original = load(root/'policy.json')
+        if not (root/'ledger.json').exists():return
+        ledger = load_ledger(root)
+        changed = False
+        for topic in ledger['topics'].values():
+            for lane in topic.get('lanes', {}).values():
+                if lane.get('deadline_unix') is not None or lane.get('frozen_unix'):
+                    # Execution ownership is checked independently before any dispatch.
+                    lane.setdefault('historical_clock', {k:lane.get(k) for k in ('deadline_unix','frozen_unix','reason')})
+                    lane['deadline_unix'] = None
+                    lane.pop('frozen_unix', None)
+                    changed = True
+        if changed:
+            _event(ledger, 'task_start', 'upgrade:no-time-limit', {'reason':'Continue original count budget; no allowance added'})
+            save(root/'ledger.json', ledger)
+        if changed or original.get('max_call_seconds') is not None or any(original[k].get('wall_seconds') is not None for k in ('batch','topic')):
+            save(root/'upgrade-time-policy.json', {'wall_limits':None, 'generation_allowance':'unchanged'})
 
 
 def scope(root, topic, lane="independent"):
@@ -320,6 +347,11 @@ def checked(binding, *, require_live=False):
     p = validate_policy(load(root / "policy.json"), require_live=require_live)
     if binding.get("policy_sha256") != signature(p):
         raise IntegrityError("Unified accounting policy binding changed")
+    if (root/'upgrade-time-policy.json').exists():
+        p = copy.deepcopy(p)
+        p['max_call_seconds'] = None
+        for value in [p['batch'],p['topic'],*p['allocations'].values()]:value['wall_seconds']=None
+        if p.get('online_task_budget'):p['online_task_budget']['wall_seconds']=None
     return root, p
 
 
@@ -1129,6 +1161,7 @@ def online_limits(binding, policy=None):
 def start_task(binding, *, wall_seconds=None):
     root, p = checked(binding)
     limits = online_limits(binding, p)
+    if (root/'upgrade-time-policy.json').exists():wall_seconds=None
     if wall_seconds is None:
         wall_seconds = limits["wall_seconds"] if limits else MAX_WALL_SECONDS
     if limits and wall_seconds != limits["wall_seconds"]:

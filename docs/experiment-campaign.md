@@ -52,7 +52,8 @@ Private libraries carry an immutable owner identity. Enqueue, maintenance read,
 contribution ingestion, recovery and family freeze verify this identity. A frozen
 read-only copy must match an actual revision of that owner. Empty full libraries
 are rejected at batch preparation and maintenance entry points. Existing unbound
-legacy runs remain historical records; use a new output directory for this policy.
+legacy runs retain their original group and saved tasks when resumed. Do not relabel
+an actual no-experience result as pre-experience.
 
 Maintenance appends new entries, comments, clarifications and revision proposals
 with their source cases. An explicit curator can revise canonical guidance. Full tasks read the frozen map, entries, contributions and linked cases.
@@ -72,7 +73,9 @@ validated offline and did not launch it.
 All new arms use 117 frames at 24 fps, sampled uniformly across each complete
 source including both endpoints. Source hashes and selected indices are recorded.
 The same prepared source is supplied to the Planner, renderer and final judges.
-Original videos remain unchanged. Use a fresh campaign-v6 output directory.
+Original videos remain unchanged. Existing output directories resume their saved
+manifests. Completed results remain usable with their actual frame counts and
+preparation policy; the uniform117 default applies to new tasks.
 
 There are no elapsed-time task, maintenance or evaluation limits. Planner and PE
 use four submitted render attempts; Direct uses one. The `task_budget` time/token
