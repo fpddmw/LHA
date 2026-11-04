@@ -29,7 +29,7 @@ full 的阅读指南进一步引导 Planner 把适用经验落实到输入选择
 - 实验入口：`scripts/run_experiment_campaign.py`。
 - 多任务服务：[server-runtime.md](server-runtime.md)。
 
-The current experiment profile requires using all N generation attempts before final selection, with default N=4. Both knowledge arms can select an earlier candidate at the end. The task deadline is the renderer estimate multiplied by N+0.5: 90 minutes for Bernini and 180 minutes for Ditto at this N. Tokens are estimated and metered rather than capped by a default token limit. Resume retains the original counts and deadline and collects saved answers or receipts under their original call/job. Known failure and uncertain external execution retain their respective recovery paths. Configuration changes use a new run directory.
+The current experiment profile requires using all N generation attempts before final selection, with default N=4. Both knowledge arms can select an earlier candidate at the end. Online tasks have no elapsed-time deadline. Tokens are estimated and metered rather than capped by a default token limit. Resume retains original counts and any explicitly frozen historical deadline and collects saved answers or receipts under their original call/job. Known failure and uncertain external execution retain their respective recovery paths. Configuration changes use a new run directory.
 
 Planner 调用明确失败时，结果登记沿用运行中已保存的候选选择，保留所有生成版本。原状态及 arm 回执保持 `execution_failed`；展示结果记录 `interrupted_delivery`、`partial=true`、`planner_confirmed=false`，同时保存原失败状态与选择依据。旧运行可用 `python scripts/settle_planner_failure.py --output 原run --topic SAMPLE__long --device 原worker编号` 检查，加 `--execute` 后登记。该入口只读取缓存，新增模型和 GPU 调用均为零，原 native 状态、调用回执和时钟保持原样。
 
@@ -48,7 +48,7 @@ python scripts/run_planner_harness.py --output out/single-task --resume
 
 These are execution commands: starting a task calls its configured model. A render worker or service is still required to execute a returned `waiting_tool` job. For a complete experiment use the campaign entry instead of manually duplicating its workers.
 
-For a new task, `--max-generations N` updates both the resource limit and continuation guard. A profile's explicit wall-time limit remains explicit; otherwise time is derived from the effective N and renderer. Creative tasks have no `--max-turns` control. Resume constructs the saved client, preserves an explicit null reasoning effort, and retains the original generation limit, review mode and execution configuration. It never substitutes today's default profile for a historical run.
+For a new task, `--max-generations N` updates both the resource limit and continuation guard. New profiles use no elapsed-time limit. Explicit finite limits remain readable on frozen historical runs. Creative tasks have no `--max-turns` control. Resume constructs the saved client, preserves an explicit null reasoning effort, and retains the original generation limit, review mode and execution configuration. It never substitutes today's default profile for a historical run.
 
 ## 检索和工作记忆
 

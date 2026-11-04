@@ -3,6 +3,7 @@ from pathlib import Path
 import copy
 
 from planner_harness.resources import estimate_budget
+from .video_contract import POLICY as VIDEO_POLICY, FRAMES, FPS
 from planner_harness.common import load, save, sha
 from planner_harness.execution import immutable, signature
 from planner_harness.lock import RunLock
@@ -19,7 +20,7 @@ STAGES = {
 MAIN = ('pre-experience', 'full-experience', 'direct', 'pe-loop', 'score')
 SELF_REVIEW = ('self-review-pre-experience', 'self-review-full-experience')
 ALL = (*MAIN[:-1], *SELF_REVIEW, 'score')
-VERSION = 'lha-experiment-campaign-v5'
+VERSION = 'lha-experiment-campaign-v6'
 
 
 def seed_library(root, output, initial=None):
@@ -147,7 +148,7 @@ def plan(root, config):
                         'deferred_contribution_conditions': count - train_count if maintain else 0,
                         'rsi_train_conditions': train_count, 'rsi_test_conditions': count - train_count,
                         'additional_ablation': stage.startswith('self-review')})
-    return {'version': VERSION, 'planner_N': config['max_generations'], 'pe_N': config['pe_max_generations'],
+    return {'version': VERSION, 'video_policy': {'id': VIDEO_POLICY, 'frames': FRAMES, 'fps': FPS}, 'planner_N': config['max_generations'], 'pe_N': config['pe_max_generations'],
             'seed': config['seed_start'], 'prompt_forms': config['prompt_forms'], 'population': cohort, 'batches': batches,
             'main_max_generations': sum(b['max_generations'] for b in batches if not b['additional_ablation']),
             'main_trajectories': sum(b['trajectories'] for b in batches if not b['additional_ablation']),
@@ -173,9 +174,10 @@ def reuse_direct(root, output, batch, host, registry):
             rows.append({'topic': topic['id'], 'status': 'not_found'})
             continue
         try:
-            runner.check_entry(topic, 'direct', {**batch, 'renderer_identity': host['renderer']}, old)
+            runner.check_entry(topic, 'direct', {**batch, 'renderer_identity': host['renderer'], 'results_root': str(source)}, old)
             row = copy.deepcopy(old)
             row['video'] = str(source / row['video'])
+            if row.get('normalization'):row['source'] = str(source / row['source'])
             for candidate in row.get('candidates', []):
                 candidate['video'] = str(source / candidate['video'])
             results.import_video(root, target, row)
@@ -188,14 +190,14 @@ def reuse_direct(root, output, batch, host, registry):
 
 def online_budget(config, methods, conditions):
     from planner_harness import accounting
-    # Online policy owns N/time stopping. Count fields are explicit inputs to the
+    # Online policy owns generation-count stopping. Count fields are explicit inputs to the
     # existing normalizer, which meters API calls/tokens without extra task caps.
     estimate = config.get('budget_estimate') or estimate_budget('bernini', config['max_generations'], **config['task_budget'])
     lane = {**accounting.LIMITS, 'render_requests': config['max_generations'],
             'tokens': estimate['estimated_total_tokens'],
             'wall_seconds': estimate['max_wall_seconds'], 'amount': None}
-    topic = {k: None if k == 'amount' else v * len(methods) for k, v in lane.items()}
-    batch = {k: None if k == 'amount' else v * max(conditions, 1) for k, v in topic.items()}
+    topic = {k: None if v is None else v * len(methods) for k, v in lane.items()}
+    batch = {k: None if v is None else v * max(conditions, 1) for k, v in topic.items()}
     return {'version': accounting.VERSION, 'mode': 'live', 'cost_control': 'count_limits_only',
             'max_call_seconds': estimate['max_wall_seconds'], 'budget_estimate': estimate, 'batch': batch, 'topic': topic,
             'lanes': list(methods), 'allocations': {m: copy.deepcopy(lane) for m in methods}}
@@ -206,10 +208,10 @@ def evaluation_budget(config, conditions):
     # Each condition has <= 16 distinct first/last/final positions including the
     # optional ablation; two automatic compute families fit within 64 requests.
     topic = {**accounting.LIMITS, 'model_calls': 0, 'render_requests': 0,
-             'compute_requests': 64, 'tokens': 0, 'wall_seconds': 86400, 'amount': None}
-    batch = {k: None if k == 'amount' else v * max(conditions, 1) for k, v in topic.items()}
+             'compute_requests': 64, 'tokens': 0, 'wall_seconds': None, 'amount': None}
+    batch = {k: None if v is None else v * max(conditions, 1) for k, v in topic.items()}
     return {'version': accounting.VERSION, 'mode': 'live', 'cost_control': 'count_limits_only',
-            'max_call_seconds': 3600, 'batch': batch, 'topic': topic,
+            'max_call_seconds': None, 'batch': batch, 'topic': topic,
             'lanes': ['independent'], 'allocations': {'independent': topic}}
 
 

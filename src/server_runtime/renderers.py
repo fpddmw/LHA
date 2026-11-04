@@ -146,7 +146,7 @@ class PersistentRenderer:
             })
             raise ValueError("Prompt exceeds tokenizer limit; automatic truncation is disabled")
         reader = self.reader(str(source))
-        indices = [
+        indices = list(range(count)) if info["frames"] == count and abs(info["fps"] - fps) < 0.001 else [
             int(i)
             for i in self.indices(
                 reader.length, reader.fps, fps, frame_factor=4, max_frames=count, add_one=True

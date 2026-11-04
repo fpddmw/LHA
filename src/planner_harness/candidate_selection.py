@@ -42,7 +42,7 @@ def _projection(state):
 
 def refresh(state):
     clock = state.get("online_clock", {})
-    if clock and (clock.get("frozen_unix") or time.time() >= clock["deadline_unix"]):
+    if clock and (clock.get("frozen_unix") or (clock.get("deadline_unix") is not None and time.time() >= clock["deadline_unix"])):
         return
     projection = _projection(state)
     body = {**projection, "recorded_unix": time.time()}
@@ -51,7 +51,7 @@ def refresh(state):
 
 def deadline_choice(state):
     clock = state.get("online_clock", {})
-    if clock.get("frozen_unix") is None or clock["frozen_unix"] < clock.get(
+    if clock.get("deadline_unix") is None or clock.get("frozen_unix") is None or clock["frozen_unix"] < clock.get(
         "deadline_unix", float("inf")
     ):
         raise IntegrityError(
@@ -70,6 +70,6 @@ def recorded_choice(state):
         k: v for k, v in body.items() if k != "recorded_unix"
     } != _projection(state):
         raise IntegrityError("Precommitted deadline selection changed")
-    if body["recorded_unix"] > state.get("online_clock", {}).get("deadline_unix", float("inf")):
+    if state.get("online_clock", {}).get("deadline_unix") is not None and body["recorded_unix"] > state["online_clock"]["deadline_unix"]:
         raise IntegrityError("Deadline selection was not committed before the deadline")
     return copy.deepcopy(record)

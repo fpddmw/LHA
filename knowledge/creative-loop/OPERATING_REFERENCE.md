@@ -1,6 +1,6 @@
 # Shared operating reference
 
-These are common tool semantics for both experience conditions. The runtime supplies a broad phase reminder and whether generation is available. The phase schedule is an engineering convention. It does not predict render duration. Once generation is unavailable, observation, reading and delivery remain available until the deadline. At the deadline the runtime freezes the task. The last intended candidate is retained, or a latest-generated fallback is marked explicitly; a fallback does not claim a pending review completed or a Planner confirmation.
+These are common tool semantics for both experience conditions. The runtime supplies a broad phase reminder based on generation use and whether generation is available. Use the fixed generation allowance before final selection. Once generation is unavailable, observation, reading, review and delivery remain available without a closing-time limit. Retain the strongest candidate and select it explicitly; it may be an earlier version. The experiment supplies the same 117-frame, 24-fps source to all methods and preserves this axis on every generation.
 
 Every successful generation is checked under `review.mode`: `critic` is the default,
 while `planner` records the check in the current Planner context. Supply overall

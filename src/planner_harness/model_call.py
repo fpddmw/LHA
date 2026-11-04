@@ -134,7 +134,7 @@ def _wait_for_provider_retry(scope, previous_attempt):
     if online_limits(scope):
         check_task(scope)
         clock = load_ledger(scope["root"])["topics"][scope["topic"]]["lanes"][scope["lane"]]
-        if time.time() + wait >= clock["deadline_unix"]:
+        if clock["deadline_unix"] is not None and time.time() + wait >= clock["deadline_unix"]:
             raise TaskDeadline("Provider retry-after exceeds the original task deadline")
     time.sleep(wait)
     check_task(scope)

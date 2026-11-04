@@ -73,11 +73,22 @@ comments, clarifications and revision proposals. Canonical curation is separate.
 Four attempts are required before final Planner selection. Prompts and input
 candidates remain model-led; the selected result may be an early candidate. Failed
 submitted renders consume an attempt. Uncertain execution is recovered against its
-original receipt. Technical/time stops retain their actual incomplete status.
-The online deadline is 90 minutes for Bernini and 180 minutes for Ditto at N=4;
-Direct receives 30/60 minutes. Token totals are metered, not subject to the planning
-estimate as a hard limit. Maintenance has its separate 30-minute / 32-call /
-2-million-token / two-attempt policy.
+original receipt. Technical interruptions retain their actual incomplete status.
+There is no elapsed-time deadline for online tasks, maintenance or final scoring.
+Render count remains four (Direct renders once). Token/time estimates are recorded
+for planning, not enforced as deadlines. Maintenance retains its 32-call,
+2-million-token and two-attempt controls. Network/connection timeouts and failed
+process detection remain technical recovery controls.
+
+Every new source is uniformly sampled over the complete clip, including endpoints,
+to **117 frames at 24 fps (4.875 seconds)**. This retimes the complete source; short
+clips repeat nearest frames and longer clips omit intermediate frames. Bernini,
+Ditto, all six arms, and both judges use the same prepared source. Iterative inputs
+and outputs retain the 117-frame axis. Original files and hashes remain unchanged;
+`inputs/sources/*/normalization.json` records all selected original indices and
+both file hashes. Result archives include the prepared source. Use a fresh output
+root for campaign v6; old native-length results are not current-protocol inputs.
+Direct reuse is disabled in the default configuration.
 
 Per renderer: main 536 trajectories / at most 1,742 render submissions; self-review
 268 additional trajectories / at most 1,072 submissions. Both renderers together
@@ -90,7 +101,7 @@ source-group aggregation.
 | Interface | What the operator supplies | Where it is used |
 |---|---|---|
 | `benchmark_data/benchmark.json` | Published source videos at the declared paths, with matching hashes | Shared source/request identity for all arms |
-| `configs/experiment-campaign.json` | Frozen N, seeds, forms, online models, deadlines, maintenance | Main and self-review campaigns |
+| `configs/experiment-campaign.json` | Frozen N, seeds, forms, online models, estimate-only budgets, maintenance | Main and self-review campaigns |
 | `configs/*-campaign-host.local.json` | Device IDs, renderer paths, asset manifest/hash and model factories | One renderer's execution host |
 | `configs/experiment-hosts.local.json` | Links to two local host files | Sequential two-renderer entry on one host |
 | External credential file/environment | Provider key/base URL, or the supported subscription client configuration | Online clients and independent judges |

@@ -35,7 +35,7 @@ class ResidentWorker:
         command = self.directory/"commands"/(identity+".json")
         result = self.directory/"results"/(identity+".json")
         immutable(command,{"topic":topic,"arm":arm})
-        deadline = time.monotonic()+timeout
+        deadline = float("inf") if timeout is None else time.monotonic()+timeout
         while not result.exists():
             if self.process.poll() is not None:
                 raise ExternalExecutionUnknown("Worker exited without a committed result; inspect its original request")
@@ -66,7 +66,7 @@ def maybe_supervise_cli(output,argv):
     directory.mkdir(parents=True,exist_ok=True)
     policy = load(directory / "accounting/policy.json")
     ledger = load_ledger(directory / "accounting")
-    remaining = policy["batch"]["wall_seconds"] - (time.time() - (ledger["started_unix"] or time.time()))
+    remaining = float("inf") if policy["batch"]["wall_seconds"] is None else policy["batch"]["wall_seconds"] - (time.time() - (ledger["started_unix"] or time.time()))
     if policy.get("online_task_budget"):remaining = float("inf")
     if remaining <= 0:
         raise ResourceExhausted("Batch wall allowance already expired; no child was started")

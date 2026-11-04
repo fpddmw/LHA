@@ -1,5 +1,5 @@
 {
-  "version": "lha-experiment-campaign-v5",
+  "version": "lha-experiment-campaign-v6",
   "max_generations": 4,
   "prompt_forms": [
     "short",
@@ -10,12 +10,12 @@
   "model": "openai/gpt-6.1-sol",
   "reasoning_effort": "high",
   "evaluation_id": "all67-critic-v2",
-  "reuse_direct_results": "out/benchmark_results",
+  "reuse_direct_results": null,
   "maintenance": {
     "enabled": true,
     "automatic_phase": "after_each_training_task",
     "publish": false,
-    "wall_seconds": 1800,
+    "wall_seconds": null,
     "model_calls": 32,
     "tokens": 2000000,
     "attempts": 2

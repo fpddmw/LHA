@@ -29,7 +29,7 @@ Planner 自评与 Critic 共享观察能力。Planner 可先阅读、补看和�
 
 ## 资源与终止
 
-Each sample × prompt form × method × seed is a separate task. Current experiments require using the configured generation allowance (default N=4) before final selection. The Planner controls each input and prompt and can select an earlier candidate. Submitted generation attempts count, including execution failures; recovering the same request does not count again. The submission deadline is the renderer estimate multiplied by N+0.5, using 1200 seconds per Bernini generation and 2400 seconds per Ditto generation. After N, observation, reading and delivery remain available within the remaining task time. Technical interruption remains an interrupted outcome.
+Each sample × prompt form × method × seed is a separate task. Current experiments require using the configured generation allowance (default N=4) before final selection. The Planner controls each input and prompt and can select an earlier candidate. Submitted generation attempts count, including execution failures; recovering the same request does not count again. Online tasks have no elapsed-time deadline. After N, observation, reading and delivery remain available without a closing-time limit. Technical interruption remains an interrupted outcome.
 
 模型调用、token、费用和执行状态继续记录。默认在线路径以生成次数和任务期限为边界；Planner 看到模糊阶段提示和是否还能生成。任务后维护单独配置，不消耗在线生成预算。独立 GLM／Sonnet 评分不设置人为调用、token 或费用上限。
 

@@ -58,11 +58,11 @@ class Fixture(unittest.TestCase):
         import av
         import numpy as np
         with av.open(str(self.source), "w") as container:
-            stream = container.add_stream("libx264", rate=10)
+            stream = container.add_stream("libx264", rate=24)
             stream.width = stream.height = 32
             stream.pix_fmt = "yuv420p"
-            for i in range(9):
-                frame = av.VideoFrame.from_ndarray(np.full((32, 32, 3), i * 20, dtype=np.uint8), format="rgb24")
+            for i in range(117):
+                frame = av.VideoFrame.from_ndarray(np.full((32, 32, 3), i % 256, dtype=np.uint8), format="rgb24")
                 for packet in stream.encode(frame): container.mux(packet)
             for packet in stream.encode(): container.mux(packet)
         rows = []
@@ -291,7 +291,7 @@ class MethodTests(Fixture):
         from fractions import Fraction
         variable = self.root / "vfr.mp4"
         with av.open(str(variable), "w") as container:
-            stream = container.add_stream("libx264", rate=10)
+            stream = container.add_stream("libx264", rate=24)
             stream.width = stream.height = 32
             stream.pix_fmt = "yuv420p"
             for pts in (0, 1, 2, 4, 5):
@@ -300,7 +300,7 @@ class MethodTests(Fixture):
                 for packet in stream.encode(frame):container.mux(packet)
             for packet in stream.encode():container.mux(packet)
         with patch("run_bernini_benchmark.shutil.which", return_value=None):
-            self.assertEqual(inspect_video(self.source)["frames"], 9)
+            self.assertEqual(inspect_video(self.source)["frames"], 117)
             with self.assertRaisesRegex(ValueError, "constant-frame-rate"):
                 inspect_video(variable)
 
@@ -376,7 +376,7 @@ class MethodTests(Fixture):
         batch = self.prepare(methods=["direct"], best_of_n=None)
         topic = batch["topics"][0]
         row = r.import_video(self.repo, self.registry, self.row(generation={**GENERATION, "backend": "bernini",
-            "task_type": "v2v", "num_frames": 9, "fps": 10.0, "omega_txt": 4.0, "seed": 42}))
+            "task_type": "v2v", "num_frames": 117, "fps": 24.0, "omega_txt": 4.0, "seed": 42}))
         u.check_entry(topic, "direct", batch, row)
         with self.assertRaises(IntegrityError):
             u.check_entry(topic, "direct", batch, {**row, "generation": {**row["generation"], "fps": 20.0}})

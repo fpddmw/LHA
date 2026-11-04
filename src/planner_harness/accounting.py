@@ -85,8 +85,7 @@ def validate_policy(supplied=None, *, require_live=False, required_quotes=()):
         online.get("version") != "online-task-v2"
         or type(online.get("max_generations")) is not int
         or online["max_generations"] < 1
-        or type(online.get("wall_seconds")) is not int
-        or online["wall_seconds"] < 1
+        or (online.get("wall_seconds") is not None and (type(online["wall_seconds"]) is not int or online["wall_seconds"] < 1))
         or not set(online.get("lanes", [])) <= set(LANES + OPTIONAL_LANES)
     ):
         raise BudgetConfigurationError("Invalid per-task online generation/time policy")
@@ -127,6 +126,8 @@ def validate_policy(supplied=None, *, require_live=False, required_quotes=()):
             if online and key != "wall_seconds":
                 p[scope][key] = None
                 continue
+            if key == "wall_seconds" and p[scope][key] is None:
+                continue
             if type(p[scope][key]) is not int or p[scope][key] < (
                 1 if key == "wall_seconds" else 0
             ):
@@ -144,9 +145,9 @@ def validate_policy(supplied=None, *, require_live=False, required_quotes=()):
         if p[scope]["amount"] is not None:
             p[scope]["amount"] = str(amount(p[scope]["amount"]))
     if live and "max_call_seconds" not in p:
-        raise BudgetConfigurationError("Live execution needs a finite per-call deadline")
+        raise BudgetConfigurationError("Live execution must declare its per-call deadline (null disables it)")
     timeout = p.setdefault("max_call_seconds", 900)
-    if type(timeout) not in {int, float} or not math.isfinite(timeout) or timeout <= 0:
+    if timeout is not None and (type(timeout) not in {int, float} or not math.isfinite(timeout) or timeout <= 0):
         raise BudgetConfigurationError("Invalid external-call deadline")
     allocations = p.setdefault("allocations", {})
     lane_names = p.get("lanes", LANES)
@@ -169,6 +170,8 @@ def validate_policy(supplied=None, *, require_live=False, required_quotes=()):
             if online and lane in online["lanes"] and key != "wall_seconds":
                 limits[key] = None
                 continue
+            if key == "wall_seconds" and limits[key] is None:
+                continue
             if type(limits[key]) is not int or limits[key] < (1 if key == "wall_seconds" else 0):
                 raise BudgetConfigurationError("Invalid lane allowance")
         if limits["amount"] is None and live and monetary:
@@ -188,6 +191,10 @@ def validate_policy(supplied=None, *, require_live=False, required_quotes=()):
                     raise BudgetConfigurationError(
                         "Unpriced lanes cannot be claimed within a monetary topic cap"
                     )
+                continue
+            if key == "wall_seconds" and any(v[key] is None for v in allocations.values()):
+                if p["topic"][key] is not None:
+                    raise BudgetConfigurationError("Unlimited lane time requires unlimited topic time")
                 continue
             total = (
                 sum((amount(v[key]) for v in allocations.values()), Decimal(0))
@@ -316,8 +323,12 @@ def checked(binding, *, require_live=False):
     return root, p
 
 
+def remaining_time(limit, started):
+    return float("inf") if limit is None else limit - (time.time() - started)
+
+
 def default_online_policy(*, max_generations=MAX_GENERATIONS, wall_seconds=None, lanes=("full",), backend="bernini"):
-    """Online execution meters usage; each task owns its N/time allowance."""
+    """Online execution meters usage; new tasks stop by generation count only."""
     from .resources import estimate_budget
     if wall_seconds is None:
         wall_seconds = estimate_budget(backend, max_generations)["max_wall_seconds"]
@@ -552,7 +563,7 @@ def reserve(binding, key, kind, target, tokens=0):
                 raise BudgetConfigurationError(
                     "Start the ready online task before external admission"
                 )
-            if task.get("frozen_unix") or now >= task["deadline_unix"]:
+            if task.get("frozen_unix") or (task.get("deadline_unix") is not None and now >= task["deadline_unix"]):
                 raise TaskDeadline("Task wall-time submission budget exhausted")
             if kind == "render":
                 occupied = [
@@ -577,7 +588,7 @@ def reserve(binding, key, kind, target, tokens=0):
         else:
             for label, records, clock, limits in checks:
                 totals = _totals([*records, record])
-                if now - clock >= limits["wall_seconds"] or any(
+                if (limits["wall_seconds"] is not None and now - clock >= limits["wall_seconds"]) or any(
                     limits[k] is not None and totals[k] > limits[k]
                     for k in set(LIMITS) - {"wall_seconds", "amount"}
                 ):
@@ -848,9 +859,8 @@ def invoke(
 
     root_ledger = load_ledger(root)
     remaining = min(
-        p["batch"]["wall_seconds"] - (time.time() - root_ledger["started_unix"]),
-        p["topic"]["wall_seconds"]
-        - (time.time() - root_ledger["topics"][binding["topic"]]["started_unix"]),
+        remaining_time(p["batch"]["wall_seconds"], root_ledger["started_unix"]),
+        remaining_time(p["topic"]["wall_seconds"], root_ledger["topics"][binding["topic"]]["started_unix"]),
     )
     if p["allocations"]:
         lane_records = [
@@ -861,14 +871,14 @@ def invoke(
         lane_started = min(v["admitted_unix"] for v in lane_records)
         remaining = min(
             remaining,
-            p["allocations"][record["lane"]]["wall_seconds"] - (time.time() - lane_started),
+            remaining_time(p["allocations"][record["lane"]]["wall_seconds"], lane_started),
         )
     if online_limits(binding, p):
         task = root_ledger["topics"][binding["topic"]]["lanes"][record["lane"]]
-        remaining = task["deadline_unix"] - time.time()
+        remaining = float("inf") if task["deadline_unix"] is None else task["deadline_unix"] - time.time()
         wait_seconds = max(0, remaining)
     else:
-        wait_seconds = min(p["max_call_seconds"], max(0, remaining))
+        wait_seconds = min(p["max_call_seconds"] if p["max_call_seconds"] is not None else float("inf"), max(0, remaining))
     if wait_seconds <= 0:
         transition(
             binding,
@@ -1016,7 +1026,7 @@ def admit_topic(binding):
         ):
             raise ResourceExhausted("Insufficient remaining funds to admit all planned topic lanes")
         elapsed = time.time() - (ledger["started_unix"] or time.time())
-        if elapsed + p["topic"]["wall_seconds"] > p["batch"]["wall_seconds"]:
+        if p["batch"]["wall_seconds"] is not None and (p["topic"]["wall_seconds"] is None or elapsed + p["topic"]["wall_seconds"] > p["batch"]["wall_seconds"]):
             raise ResourceExhausted(
                 "Insufficient remaining batch wall allowance for a complete topic"
             )
@@ -1123,7 +1133,7 @@ def start_task(binding, *, wall_seconds=None):
         wall_seconds = limits["wall_seconds"] if limits else MAX_WALL_SECONDS
     if limits and wall_seconds != limits["wall_seconds"]:
         raise BudgetConfigurationError("Task clock must match the frozen online wall allowance")
-    if type(wall_seconds) is not int or wall_seconds <= 0:
+    if wall_seconds is not None and (type(wall_seconds) is not int or wall_seconds <= 0):
         raise BudgetConfigurationError("Online task clock requires a positive wall allowance")
     with RunLock(root / "accounting-lock", timeout=10):
         ledger = load_ledger(root)
@@ -1132,7 +1142,7 @@ def start_task(binding, *, wall_seconds=None):
         lanes = topic.setdefault("lanes", {})
         lane = binding.get("lane", "independent")
         if lane not in lanes:
-            lanes[lane] = {"started_unix": now, "deadline_unix": now + wall_seconds}
+            lanes[lane] = {"started_unix": now, "deadline_unix": now + wall_seconds if wall_seconds is not None else None}
             ledger["started_unix"] = ledger["started_unix"] or now
             _event(ledger, "task_start", binding["topic"] + ":" + lane, copy.deepcopy(lanes[lane]))
             save(root / "ledger.json", ledger)
@@ -1153,7 +1163,7 @@ def register_cancel(callback):
             .get("lanes", {})
             .get(binding.get("lane", "independent"), {})
         )
-        if task.get("frozen_unix") or time.time() >= task.get("deadline_unix", 0):
+        if task.get("frozen_unix") or (task.get("deadline_unix") is not None and time.time() >= task["deadline_unix"]):
             callback()
             raise ResourceExhausted("Task deadline reached before owned execution registration")
     with _ACTIVE_LOCK:
@@ -1244,7 +1254,7 @@ def submission_guard():
                 .get("lanes", {})
                 .get(binding.get("lane", "independent"), {})
             )
-            if task.get("frozen_unix") or time.time() >= task.get("deadline_unix", 0):
+            if task.get("frozen_unix") or (task.get("deadline_unix") is not None and time.time() >= task["deadline_unix"]):
                 raise ResourceExhausted("Task deadline reached; no new execution submitted")
         yield
 
@@ -1268,7 +1278,7 @@ def check_task(binding):
         .get("lanes", {})
         .get(binding.get("lane", "independent"), {})
     )
-    if task.get("frozen_unix") or time.time() >= task.get("deadline_unix", 0):
+    if task.get("frozen_unix") or (task.get("deadline_unix") is not None and time.time() >= task["deadline_unix"]):
         raise TaskDeadline("Task result frozen at its original deadline")
 
 
@@ -1311,7 +1321,7 @@ def bounded_preflight(binding, key, fn, *, owner=None, resource_kind="gpu"):
         }
     thread.start()
     try:
-        value, error = result.get(timeout=max(0, task["deadline_unix"] - time.time()))
+        value, error = result.get(timeout=None if task["deadline_unix"] is None else max(0, task["deadline_unix"] - time.time()))
     except queue.Empty:
         cleanup = freeze_task(binding, reason="online deadline during unsubmitted preparation")
         raise TaskDeadline(

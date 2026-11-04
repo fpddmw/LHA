@@ -115,19 +115,44 @@ def import_video(repository, root, row):
         if request_hash and request_hash != actual:
             raise ValueError("Import request text/hash differ")
         request_hash = actual
-    matches = [r for r in index.values() if r["source_sha256"] == row.get("source_sha256")
+    matches = [r for r in index.values() if r["source_sha256"] == row.get("original_source_sha256", row.get("source_sha256"))
                and r["request_sha256"] == request_hash
                and (not row.get("prompt_form") or r["prompt_form"] == row["prompt_form"])]
     if row.get("sample_id"):
         matches = [r for r in matches if r["sample_id"] == row["sample_id"]]
     if len(matches) != 1:
         raise ValueError("Import must match exactly one current source, prompt and sample")
-    task = matches[0]
+    task = dict(matches[0])
+    normalized_copy = None
+    if row.get("normalization"):
+        from .video_contract import POLICY, FRAMES, FPS, sample_indices
+        from planner_harness.video import Video
+        record = row["normalization"]
+        normalized = Path(row["source"])
+        info = Video(normalized, root / "source-info").info
+        if (record.get("policy") != POLICY or record.get("original_sha256") != task["source_sha256"]
+                or record.get("normalized_sha256") != row["source_sha256"] or info["sha256"] != row["source_sha256"]
+                or info["frames"] != FRAMES or abs(info["fps"] - FPS) > .001
+                or record.get("source_indices") != sample_indices(record["original_info"]["frames"])):
+            raise ValueError("Normalized source provenance or time axis differs")
+        portable = "media/" + row["source_sha256"] + ".mp4"
+        normalized_copy = normalized, root / portable, row["source_sha256"]
+        task.update(original_source=task["source"], original_source_sha256=task["source_sha256"],
+                    source=portable, source_sha256=row["source_sha256"], normalization=record)
+    elif row.get("original_source_sha256"):
+        raise ValueError("Original source identity requires normalization evidence")
     method, seed = row.get("method"), row.get("seed")
     mode = normalize_review_mode(method, row.get("review_mode"))
     path = entry_path(root, task["sample_id"], task["prompt_form"], method, seed, mode)
     source = Path(row["video"]).resolve()
     digest = sha(source)
+    if row.get("normalization"):
+        from .video_contract import FRAMES, FPS
+        from planner_harness.video import Video
+        for item in [row, *row.get("candidates", [])]:
+            actual = Video(item["video"], root / "candidate-info").info
+            if actual["frames"] != FRAMES or abs(actual["fps"] - FPS) > .001:
+                raise ValueError("Every uniform-protocol candidate requires 117 frames at 24 fps")
     if row.get("video_sha256") and row["video_sha256"] != digest:
         raise ValueError("Imported video hash differs")
     if not isinstance(row.get("generation"), dict) or not row["generation"]:
@@ -174,6 +199,8 @@ def import_video(repository, root, row):
             if any(old[k] != body[k] for k in identity) or (method!="direct" and old["evidence"].get("method_identity")!=body["evidence"].get("method_identity")):
                 raise ValueError("This result key already names different video/conditions; inspect the conflict")
             return old
+        if normalized_copy:
+            _copy(*normalized_copy)
         if receipt_copy:
             _copy(*receipt_copy)
         _copy(source, root / body["video"], digest)
@@ -193,6 +220,10 @@ def verify_entry(root, path):
     video = (Path(root) / row["video"]).resolve()
     if not video.is_relative_to(Path(root).resolve()) or sha(video) != row["video_sha256"]:
         raise ValueError("Result video is missing or changed")
+    if row.get("normalization"):
+        source_path = (Path(root) / row["source"]).resolve()
+        if not source_path.is_relative_to(Path(root).resolve()) or sha(source_path) != row["source_sha256"]:
+            raise ValueError("Normalized evaluation source is missing or changed")
     for candidate in row.get("candidates", []):
         candidate_path = (Path(root) / candidate["video"]).resolve()
         if not candidate_path.is_relative_to(Path(root).resolve()) or sha(candidate_path) != candidate["video_sha256"]:
@@ -230,6 +261,7 @@ def import_manifest(repository, root, manifest):
     relocated=[]
     for row in rows:
         row=copy.deepcopy(row)
+        if row.get('normalization') and not Path(row['source']).is_absolute():row['source']=str((path.parent/row['source']).resolve())
         receipt=row.get('evidence',{}).get('receipt')
         if receipt and not Path(receipt).is_absolute():row['evidence']['receipt']=str((path.parent/receipt).resolve())
         for item in [row,*row.get('candidates',[])]:
@@ -263,11 +295,22 @@ def import_bernini(repository, root, run):
         result.append(import_video(repository, root, {
             "prompt_form": case["tier"], "method": case["condition"], "seed": case["seed"],
             "source_sha256": case["source_sha256"], "request": case["prompt"],
+            **({"normalization":case["normalization"], "original_source_sha256":case["original_source_sha256"],
+                "source":case["source_video"]} if case.get("normalization") else {}),
             "video": str(directory / "native.mp4"), "video_sha256": complete["output_sha256"],
             "generation": plan["generation"], "evidence": {"receipt": str(receipt),
                 "receipt_sha256": sha(receipt), "input_sha256": complete["input_sha256"],
                 "runtime_sha256": binding["runtime_sha256"], "original_sample_id": case["sample_id"]}}))
     return result
+
+
+def task_for_entry(task, entry, root):
+    if not task or entry.get("original_source_sha256", entry["source_sha256"]) != task["source_sha256"] or entry["request_sha256"] != task["request_sha256"]:
+        raise ValueError("Result no longer matches the current source/request")
+    if entry.get("normalization"):
+        return {**task, "source": str((Path(root) / entry["source"]).resolve()),
+                "source_sha256": entry["source_sha256"], "normalization": entry["normalization"]}
+    return task
 
 
 def _evaluation_positions(repository, root):
@@ -276,9 +319,8 @@ def _evaluation_positions(repository, root):
     for path in entry_files(root):
         entry = verify_entry(root, path)
         current = tasks.get((entry["sample_id"], entry["prompt_form"]))
-        if not current or any(entry[k] != current[k] for k in ("source_sha256", "request_sha256")):
-            raise ValueError("Evaluation input no longer matches the current benchmark")
-        base = {"review_mode":normalize_review_mode(entry["method"],entry.get("review_mode")),"execution":entry.get("evidence",{}),**{k: entry[k] for k in ("sample_id", "prompt_form", "method", "seed", "source_sha256", "request_sha256", "video", "video_sha256")}}
+        task_for_entry(current, entry, root)
+        base = {"review_mode":normalize_review_mode(entry["method"],entry.get("review_mode")),"execution":entry.get("evidence",{}), **{k: entry[k] for k in ("original_source_sha256", "normalization", "source") if k in entry},**{k: entry[k] for k in ("sample_id", "prompt_form", "method", "seed", "source_sha256", "request_sha256", "video", "video_sha256")}}
         positions.append({**base, "position": "final"})
         if entry["method"] in TRAJECTORY_METHODS:
             first = next((c for c in entry.get("candidates", []) if "first" in c["roles"]), None)
@@ -420,7 +462,7 @@ def score_evaluation(repository, root, budget=None, *, models=None):
             available = [entry] + entry.get("candidates", []) if entry else []
             if not any(v["video_sha256"] == position["video_sha256"] for v in available):
                 raise ValueError("Frozen evaluation candidate changed")
-            task = tasks[position["sample_id"], position["prompt_form"]]
+            task = task_for_entry(tasks[position["sample_id"], position["prompt_form"]], entry, root)
             topic = position["sample_id"] + "__" + position["prompt_form"]
             source = Video(repository / task["source"], directory / "tasks" / topic).info
             if source["sha256"] != position["source_sha256"] or task["request_sha256"] != position["request_sha256"]:
@@ -524,7 +566,10 @@ def compare_evaluation(repository, root, *, models=None):
             if not pairs:
                 continue
             topic_id = sample + "__" + form
-            task = tasks[sample, form]
+            present = [p for p in positions.values() if p]
+            if present and len({p["source_sha256"] for p in present}) != 1:
+                raise ValueError("Pairwise comparison requires the same prepared source time axis")
+            task = task_for_entry(tasks[sample, form], present[0], root) if present else tasks[sample, form]
             source = Video(repository / task["source"], directory / "tasks" / topic_id).info
             plan_path = directory / "tasks" / topic_id / "plan.json"
             plan = check_plan(load(plan_path), task["request"], source) if plan_path.exists() else freeze_plan({"track": form}, task["request"], source, plan_path.parent)
@@ -730,8 +775,8 @@ def report(repository, root, *, methods=None, seeds=None, splits=None, forms=Non
         if (splits and task["split"] not in splits) or (forms and form not in forms) or (methods and method not in methods) or (seeds and seed not in seeds) or (review_modes and mode not in {*review_modes,"shared"}):
             continue
         entry = find(root, sample, form, method, seed,mode)
-        if entry and any(entry[k] != task[k] for k in ("source_sha256", "request_sha256")):
-            raise ValueError("Registered result differs from current task")
+        if entry:
+            task = task_for_entry(task, entry, root)
         rows.append({**task, "method": method, "seed": seed, "review_mode":mode,
             "status": "ready" if entry else "missing", "video": entry["video"] if entry else None,
             "video_sha256": entry["video_sha256"] if entry else None, "evaluation_status": "pending",
@@ -879,6 +924,9 @@ def export_shard(repository,root,run,target):
         for candidate in [entry,*entry.get('candidates',[])]:copy_verified(root/candidate['video'],target/candidate['video'],candidate['video_sha256'])
         relative=path.relative_to(root);copy_verified(path,target/relative)
         row={k:entry[k] for k in ('sample_id','prompt_form','method','seed','source_sha256','video','video_sha256','generation')}
+        if entry.get('normalization'):
+            copy_verified(root / entry['source'], target / entry['source'], entry['source_sha256'])
+            row.update({k:entry[k] for k in ('source','original_source_sha256','normalization')})
         row['review_mode']=normalize_review_mode(entry['method'],entry.get('review_mode'))
         row['candidates']=entry.get('candidates',[])
         evidence=copy.deepcopy(entry['evidence'])

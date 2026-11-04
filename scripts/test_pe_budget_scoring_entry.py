@@ -24,23 +24,23 @@ class FormulaTests(unittest.TestCase):
         for backend, seconds in [('bernini', 1200), ('ditto', 2400)]:
             for count in (1, 4, 8):
                 estimate = resources.estimate_budget(backend, count)
-                self.assertEqual(estimate['max_wall_seconds'], seconds * (count + .5))
+                self.assertEqual(estimate['estimated_wall_seconds'], seconds * (count + .5))
                 self.assertEqual(estimate['estimated_total_tokens'], 1000000 * (count + .5))
                 state = {'config': {'max_generations': count}}
                 policy = resources.configure(state, backend=backend)
                 self.assertEqual(policy['max_wall_seconds'], estimate['max_wall_seconds'])
                 self.assertIsNone(policy['max_total_tokens'])
         config = campaign.configuration(ROOT / 'configs/experiment-campaign.json')
-        self.assertEqual(campaign.stage_config(config, 'direct', 'ditto')['task_wall_seconds'], 3600)
-        self.assertEqual(campaign.stage_config(config, 'pe-loop', 'bernini')['task_wall_seconds'], 5400)
+        self.assertIsNone(campaign.stage_config(config, 'direct', 'ditto')['task_wall_seconds'])
+        self.assertIsNone(campaign.stage_config(config, 'pe-loop', 'bernini')['task_wall_seconds'])
 
-    def test_three_hour_ditto_clock_resumes_and_tokens_do_not_block_calls(self):
+    def test_unlimited_ditto_clock_resumes_and_tokens_do_not_block_calls(self):
         with tempfile.TemporaryDirectory() as tmp:
             policy = accounting.default_online_policy(backend='ditto')
             root = accounting.install(Path(tmp) / 'accounting', policy)
             scope = accounting.scope(root, 'topic', 'full')
             first = accounting.start_task(scope)
-            self.assertEqual(first['deadline_unix'] - first['started_unix'], 10800)
+            self.assertIsNone(first['deadline_unix'])
             self.assertEqual(accounting.start_task(scope), first)
             record = accounting.reserve(scope, 'large-model-call', 'model', 'fixture', tokens=10000000)
             self.assertEqual(record['reserved_tokens'], 10000000)

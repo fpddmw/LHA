@@ -23,12 +23,12 @@ class BackendTests(Fixture):
         batch = self.prepare(methods=['direct','pe-loop','none','full'], training_maintenance=False, backend='ditto')
         topic = batch['topics'][0]
         self.assertEqual(batch['generation'], profiles.DITTO)
-        self.assertEqual(topic['native_output'], {'frames':9,'fps':10.0,'width':32,'height':32})
-        self.assertEqual(topic['conditioning_source_indices'], list(range(9)))
+        self.assertEqual(topic['native_output'], {'frames':117,'fps':24.0,'width':32,'height':32})
+        self.assertEqual(topic['conditioning_source_indices'], list(range(117)))
         for spec in (direct_request(self.repo,topic,batch)['payload']['renderer'],
                      task_spec(topic,'none',batch,'profile.json')['execution']['renderer']):
             self.assertEqual(spec['backend'],'ditto')
-            self.assertEqual(spec['conditioning_source_indices'],list(range(9)))
+            self.assertEqual(spec['conditioning_source_indices'],list(range(117)))
         with self.assertRaises(IntegrityError):
             runner.check_entry(topic,'direct',batch,self.row(request_sha256=__import__('planner_harness.execution',fromlist=['signature']).signature({'text':topic['request']})))
         with self.assertRaises(ValueError):

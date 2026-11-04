@@ -20,7 +20,7 @@ def recover_tool(run, job_id, action, reason, *, response=None, extra_attempts=1
             raise ValueError("Use the historical recovery procedure for legacy runs")
         clock=state.get('online_clock',{})
         import time
-        frozen=bool(clock and (clock.get('frozen_unix') or time.time()>=clock['deadline_unix'] or state.get('final')))
+        frozen=bool(clock and (clock.get('frozen_unix') or (clock.get('deadline_unix') is not None and time.time()>=clock['deadline_unix']) or state.get('final')))
         job = state["jobs"][job_id]
         if frozen:
             if action=='retry-review':raise ValueError('The task is settled; no new review submission is allowed')

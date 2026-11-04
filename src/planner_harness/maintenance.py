@@ -11,7 +11,7 @@ from .lock import RunLock
 
 VERSION="lha-post-task-maintenance-v1"
 SKILLS=("lha-experience-analysis","lha-experience-use-review","lha-experience-curation")
-DEFAULTS={"enabled":False,"wall_seconds":1800,"model_calls":32,"tokens":2000000,"attempts":2,
+DEFAULTS={"enabled":False,"wall_seconds":None,"model_calls":32,"tokens":2000000,"attempts":2,
           "automatic_phase":"after_batch_settlement","publish":False}
 PROMPT="""You are reviewing this task after its online outcome has settled. Contribute useful
 conditional judgments for the next Planner using analysis, use-review or curation
@@ -68,7 +68,9 @@ def configuration(value=None):
     cfg={**DEFAULTS,**(value or {})}
     if set(cfg)!=set(DEFAULTS) or type(cfg['enabled']) is not bool or cfg['publish'] is not False or cfg['automatic_phase'] not in {'after_batch_settlement','after_each_training_task'}:
         raise ValueError('Maintenance is a separate post-batch candidate workflow')
-    for name in ('wall_seconds','model_calls','tokens','attempts'):
+    if cfg['wall_seconds'] is not None and (type(cfg['wall_seconds']) is not int or cfg['wall_seconds'] < 1):
+        raise ValueError('Optional maintenance time must be positive or null')
+    for name in ('model_calls','tokens','attempts'):
         if type(cfg[name]) is not int or cfg[name]<1:raise ValueError('Finite maintenance allowances required')
     return cfg
 
@@ -277,7 +279,7 @@ def _execute(root,folder,job,cfg,model):
             'lanes':['independent'],'allocations':{'independent':{**accounting.LIMITS,'model_calls':cfg['model_calls'],'tokens':cfg['tokens'],'wall_seconds':cfg['wall_seconds']}}}
     budget=accounting.install(folder/'accounting',policy,require_live=bool(getattr(model,'requires_live_budget',False)))
     model=accounting.attach(model,accounting.scope(budget,job['id']))
-    deadline=time.time()+cfg['wall_seconds']
+    deadline=None if cfg['wall_seconds'] is None else time.time()+cfg['wall_seconds']
     result={'job':{k:job[k] for k in ('id','topic','method','split','settlement','experience_mode','entry_versions')},
             'skills':[{"id":name,"description":job['skills'][name]['text'].split('description:',1)[1].split('---',1)[0].strip()} for name in SKILLS],
             'run_sources':source_index,'maintenance_references':{k:{'sha256':v['sha256'],'scope':'Post-task writing/usage guidance, not original online exposure'} for k,v in job.get('references',{}).items()},'image_catalog':image_catalog,'video_catalog':video_catalog,'knowledge_entrances':knowledge.overview(), 'library_scope':'Post-task private library; online exposure remains the run knowledge-snapshot', 'maintenance_snapshot':library}
@@ -285,7 +287,7 @@ def _execute(root,folder,job,cfg,model):
     loaded_skills={};reading_cache=[];notes=''
     task_identity=copy.deepcopy(result['job'])
     for number in range(cfg['model_calls']):
-        if time.time()>=deadline:raise TimeoutError('Maintenance time allowance exhausted')
+        if deadline is not None and time.time()>=deadline:raise TimeoutError('Maintenance time allowance exhausted')
         for identity in image_focus:
             if sha(image_catalog[identity]['path'])!=image_catalog[identity]['sha256']:raise ValueError('Original Planner image changed')
         raw=call_text(folder/'calls'/f'{number+1:04d}',model,job.get('instructions',PROMPT),json.dumps(result,ensure_ascii=False),[image_catalog[i]['path'] for i in image_focus],attempts=1)

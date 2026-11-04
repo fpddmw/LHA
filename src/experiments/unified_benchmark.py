@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 from pathlib import Path
 import sys
 from types import SimpleNamespace
@@ -88,11 +89,11 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
     budget_estimate = estimate_budget(backend, max_generations, **(budget_settings or {}))
     resource_policy = configure_resources(resource_state,
         {"max_wall_seconds": budget_estimate["max_wall_seconds"], **(resource_policy or {})}, backend=backend)
-    # Reuse existing native-frame/prompt/split/hash preparation, not an alternate
+    # Reuse existing prompt/split/hash preparation with shared uniform source frames, not an alternate
     # dataset reader. The intermediate plan makes its exact source checks auditable.
     with RunLock(output / "batch-owner"):
         inputs = prepare_inputs(root / "benchmark_data/benchmark.json", output / "inputs",
-            data_root=root, conditions=("direct",), seed=seed_start, splits=splits, prompt_forms=prompt_forms,
+            data_root=root, conditions=("direct",), seed=seed_start, splits=splits, prompt_forms=prompt_forms, uniform_frames=True,
             **({"sample_ids":sample_ids} if sample_ids is not None else {}))
         topics, infos = [], {}
         for case in inputs["cases"]:
@@ -100,8 +101,10 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
                 infos[case["source_sha256"]] = Video(case["source_video"], output / "source-info" / case["sample_id"]).info
             topics.append({"id": case["sample_id"] + "__" + case["tier"], "sample_id": case["sample_id"],
                 "prompt_form": case["tier"], "split": case["split"], "methods":methods if explicit_methods or case["split"]!="train" else ["none"], "source_group": case["source_group"],
-                "source": str(Path(case["source_video"]).relative_to(root)), "source_sha256": case["source_sha256"],
+                "source": os.path.relpath(case["source_video"], root), "source_sha256": case["source_sha256"],
                 "request": case["prompt"], "source_info": infos[case["source_sha256"]],
+                "original_source": os.path.relpath(case["original_source_video"], root),
+                "original_source_sha256": case["original_source_sha256"], "normalization": case["normalization"],
                 "native_output": render_profiles.native_output(infos[case["source_sha256"]], case["num_frames"], backend, output_dimensions),
                 **({"conditioning_source_indices": list(range(case["num_frames"]))} if backend == "ditto" else {}),
                 "tail_frames_omitted": case["tail_frames_omitted"]})
@@ -364,6 +367,12 @@ def check_entry(topic, method, batch, entry, *, static_only=False):
         actual = actual_output.get(name, recorded.get(alias))
         if actual is not None and name in topic["native_output"] and actual != topic["native_output"][name]:
             raise IntegrityError("Registered result uses a different native output time axis")
+    if topic.get("normalization"):
+        from planner_harness.video import Video
+        for item in [entry, *entry.get("candidates", [])]:
+            actual = Video(Path(batch["results_root"]) / item["video"], Path(batch["results_root"]) / "reuse-info").info
+            if actual["frames"] != 117 or abs(actual["fps"] - 24) > .001:
+                raise IntegrityError("Registered video does not satisfy the 117-frame/24-fps contract")
     expected_assets = batch.get("renderer_identity", {}).get("asset_manifest_sha256")
     if expected_assets and recorded.get("asset_manifest_sha256") and expected_assets != recorded["asset_manifest_sha256"]:
         raise IntegrityError("Registered result uses different renderer assets")
@@ -791,6 +800,8 @@ def _register(root, batch, topic, method, seed, candidate, directory, candidates
     return results.import_video(root, batch["results_root"], {"sample_id": topic["sample_id"],
         "prompt_form": topic["prompt_form"], "method": method, "seed": seed,"review_mode":method_review_mode(method,batch) if method in results.REVIEW_METHODS else 'shared',
         "source_sha256": topic["source_sha256"], "request": topic["request"],
+        **({"original_source_sha256": topic["original_source_sha256"], "normalization": topic["normalization"],
+            "source": str((Path(root) / topic["source"]).resolve())} if topic.get("normalization") else {}),
         "video": candidate["video"]["path"], "video_sha256": candidate["video"]["sha256"],
         "generation": generation, "evidence": {"receipt": str(receipt.resolve()), "receipt_sha256": sha(receipt),
             "method_identity": method_identity(method, batch), "trace": str(Path(directory).resolve()),

@@ -15,6 +15,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 COVERAGE = {
+    'test_fixed117': 'Uniform source normalization, evaluation/export provenance and count-only stopping',
     'test_public_campaign': 'Public check/launch contracts and synthetic delivery-to-scoring handoff',
     'test_pre_experience_parallel': 'N independent task workers, fixed-seed maintenance, atomic appends and public device overrides',
     'test_fixed_budget_completion': 'Four attempts, early-version selection, finish gate and both review modes',

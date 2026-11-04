@@ -41,7 +41,7 @@ OPENROUTER_REASONING_EFFORT=high
 
 ## 生成、时间与维护
 
-Planner uses the complete configured `max_generations` allowance, currently 4, before final selection. PE Loop uses `pe_max_generations`, currently 4. Both knowledge arms share the completion contract and can select an earlier candidate. Task deadlines are the renderer estimate multiplied by N+0.5, currently 5400 seconds for Bernini and 10800 seconds for Ditto. `task_budget` configures that estimate, the token planning basis and headroom. The default token estimate is one million × (N+0.5); actual calls and tokens are metered without the former default turn/call/token ceilings. Planner continues to receive approximate resource hints.
+Planner uses the complete configured `max_generations` allowance, currently 4, before final selection. PE Loop uses `pe_max_generations`, currently 4. Both knowledge arms share the completion contract and can select an earlier candidate. Online tasks have no elapsed-time deadline; four submitted generations bound the loop. `task_budget` supplies planning estimates only; it does not impose time or token stopping limits. The default token estimate is one million × (N+0.5); actual calls and tokens are metered without the former default turn/call/token ceilings. Planner continues to receive approximate resource hints.
 
 任务后维护使用 `experiment-campaign.json` 中自己的设置；它不追加生成视频。独立终评默认 `max_output_tokens: null`，由供应商处理输出容量；不要求人工填写 GLM／Sonnet 费用额度。显式计算预算只用于相应自动指标账本，不能把旧冻结包的报价模板套成当前在线任务的必填门槛。
 

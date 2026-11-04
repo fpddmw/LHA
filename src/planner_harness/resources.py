@@ -16,7 +16,7 @@ HEADROOM_GENERATIONS = 0.5
 
 def estimate_budget(backend="bernini", max_generations=MAX_GENERATIONS, *, generation_seconds=None,
                     tokens_per_generation=TOKENS_PER_GENERATION, headroom_generations=HEADROOM_GENERATIONS):
-    """Time is a submission deadline; tokens are a planning estimate only."""
+    """Time and tokens are planning estimates, not task deadlines."""
     if backend not in GENERATION_SECONDS or type(max_generations) is not int or max_generations < 1:
         raise ValueError("Choose a renderer and a positive generation count")
     seconds = GENERATION_SECONDS[backend] if generation_seconds is None else generation_seconds
@@ -30,12 +30,14 @@ def estimate_budget(backend="bernini", max_generations=MAX_GENERATIONS, *, gener
     return {"backend": backend, "max_generations": max_generations,
             "generation_seconds": seconds, "tokens_per_generation": tokens_per_generation,
             "headroom_generations": headroom_generations,
-            "max_wall_seconds": math.ceil(seconds * factor),
+            "max_wall_seconds": None,
+            "estimated_wall_seconds": math.ceil(seconds * factor),
+            "time_policy": "estimate_only",
             "estimated_total_tokens": math.ceil(tokens_per_generation * factor),
             "token_policy": "estimate_only"}
 
 
-# Backward-compatible name for the default Bernini allowance, not a global cap.
+# Backward-compatible field name; new tasks have no wall-time allowance.
 MAX_WALL_SECONDS = estimate_budget()["max_wall_seconds"]
 DEFAULTS = {
     "version": "creative-resources-v2",
@@ -80,9 +82,11 @@ def configure(state, supplied=None, *, continuation=None, backend=None):
             policy[field] = top
     if set(policy) != set(DEFAULTS) or policy["version"] != DEFAULTS["version"]:
         raise ValueError("Unknown resource policy")
-    for key in ("max_generations", "max_wall_seconds"):
+    for key in ("max_generations",):
         if type(policy[key]) is not int or policy[key] <= 0:
             raise ValueError("Generation and wall guards require positive integer limits")
+    if policy["max_wall_seconds"] is not None and (type(policy["max_wall_seconds"]) is not int or policy["max_wall_seconds"] <= 0):
+        raise ValueError("Optional wall guard must be a positive integer or null")
     # These fields remain in records for compatibility, with no task stop semantics.
     for key in ("max_turns", "max_model_calls", "max_total_tokens"):
         policy[key] = None
@@ -117,7 +121,7 @@ def elapsed(state):
 
 def check_wall(state):
     policy = state["config"].get("resource_policy")
-    if policy and elapsed(state) >= policy["max_wall_seconds"]:
+    if policy and policy["max_wall_seconds"] is not None and elapsed(state) >= policy["max_wall_seconds"]:
         raise TaskDeadline("Task wall-time submission budget exhausted")
 
 
@@ -171,6 +175,7 @@ def settle(state, reason, *, status="budget_exhausted"):
     if (
         status == "budget_exhausted"
         and state.get("online_clock")
+        and state["online_clock"].get("deadline_unix") is not None
         and time.time() >= state["online_clock"]["deadline_unix"]
     ):
         from .candidate_selection import deadline_choice
@@ -211,6 +216,6 @@ def start_clock(state, binding=None):
 
         clock = start_task(binding, wall_seconds=limit)
     else:
-        clock = {"started_unix": now, "deadline_unix": now + limit}
+        clock = {"started_unix": now, "deadline_unix": now + limit if limit is not None else None}
     state["online_clock"] = clock
     return clock

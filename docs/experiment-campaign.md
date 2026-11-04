@@ -18,7 +18,7 @@ CPU-only smoke test, start with the [public experiment guide](public-experiment-
 
 **主实验最多 1742 次视频生成、536 条完整任务轨迹。** 每个提示词条件对应 `1＋4＋4＋4＝13` 次生成。预经验组每题结算后维护，维护只增加模型调用。只跑一种提示词时，上述主实验是 871 次；配置默认长短两版均跑。
 
-一键顺序是 `pre-experience → full-experience → direct → pe-loop → score`。Direct 和 PE 是独立基线，也能单独启动；全经验组依赖预经验全量流程结束后的经验快照。Planner loops use the complete configured generation allowance before final selection, including when an early candidate is adequate. The Planner chooses every prompt and input and may finally select an earlier candidate. Actual submissions include failed render attempts; deadline, execution-unknown and interrupted outcomes remain separately reported. Historical Direct reuse reduces new submissions. First-round comparisons reuse each loop's first saved video.
+一键顺序是 `pre-experience → full-experience → direct → pe-loop → score`。Direct 和 PE 是独立基线，也能单独启动；全经验组依赖预经验全量流程结束后的经验快照。Planner loops use the complete configured generation allowance before final selection, including when an early candidate is adequate. The Planner chooses every prompt and input and may finally select an earlier candidate. Actual submissions include failed render attempts; execution-unknown and interrupted outcomes remain separately reported. Historical Direct reuse reduces new submissions. First-round comparisons reuse each loop's first saved video.
 
 ## 40／27 怎样用于 RSI
 
@@ -69,14 +69,16 @@ validated offline and did not launch it.
 
 在自己的 LHA 仓库根目录执行。通用实验参数见 [experiment-campaign.json](../configs/experiment-campaign.json)：Planner／PE 含首轮最多 4 次，seed42 起步，每条在线任务的时间与 token 预估按下述公式计算；Planner 与 Critic 使用 6.1-sol high。模型资产、设备和凭据放在各自主机配置里。
 
-时间上限 = `单次生成秒数 ×（本阶段生成次数上限＋0.5）`；token 预估 = `每次 token 基数 ×（本阶段生成次数上限＋0.5）`。配置集中在 `task_budget`，Planner 与 PE 的次数可分别设置。当前 token 基数为 100 万，沿此前 4 次／400 万配置折算，用于规划；没有 token 硬上限。它包含在线 Planner／PE、Critic 和选片的输入与输出用量；维护和独立终评分开记录。Planner 继续获得模糊资源提醒。
+All new arms use 117 frames at 24 fps, sampled uniformly across each complete
+source including both endpoints. Source hashes and selected indices are recorded.
+The same prepared source is supplied to the Planner, renderer and final judges.
+Original videos remain unchanged. Use a fresh campaign-v6 output directory.
 
-| 阶段 | 次数上限 | Bernini（20 分钟/次） | Ditto（40 分钟/次） | token 预估 |
-|---|---:|---:|---:|---:|
-| Planner／PE Loop | 4 | 90 分钟 | 180 分钟 | 450 万 |
-| Direct | 1 | 30 分钟 | 60 分钟 | 无在线模型调用；通用公式预留 150 万 |
-
-`plan` 展示各阶段、各渲染器的计算值，批次记录 `budget_estimate`。实际时间从设备和服务就绪、任务开始执行时计算；恢复沿用原截止时间。
+There are no elapsed-time task, maintenance or evaluation limits. Planner and PE
+use four submitted render attempts; Direct uses one. The `task_budget` time/token
+values are estimates only. Generation-count phases supply qualitative reminders;
+wall time cannot freeze a new task. Connection timeouts remain technical recovery
+controls. The default disables historical Direct reuse.
 
 首次复制三个示例，然后填写两份主机配置的实际设备、已验证资产清单及哈希。`*.local.json` 已加入 Git 排除。两模型若部署在同一主机，可直接使用 `both`；分处两台主机时，各自在本机用对应单模型命令。
 

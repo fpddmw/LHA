@@ -335,7 +335,7 @@ class PELoopTests(Fixture):
             recover_pe_loop(self.output, topic, 'Try recovery')
         self.assertFalse((self.output / 'methods' / topic / 'pe-loop/recovery.json').exists())
 
-    def test_pe_budget_uses_shared_online_generation_and_time_limits(self):
+    def test_pe_budget_uses_shared_online_count_limit_without_deadline(self):
         batch, runtime = self.setup_loop(n=3)
         limits = {**accounting.LIMITS, 'amount': None}
         supplied = {'version': accounting.VERSION, 'mode': 'live', 'cost_control': 'count_limits_only',
@@ -344,7 +344,7 @@ class PELoopTests(Fixture):
         policy = u.policy(batch, supplied)
         self.assertEqual(policy['online_task_budget']['lanes'], ['pe-loop'])
         self.assertEqual(policy['online_task_budget']['max_generations'], 3)
-        self.assertEqual(policy['online_task_budget']['wall_seconds'], 4200)
+        self.assertEqual(policy['online_task_budget']['wall_seconds'], None)
 
     def test_prompt_compaction_is_cached_and_uses_original_scope(self):
         batch, _ = self.setup_loop(n=2)

@@ -109,12 +109,7 @@ def phase(state):
     n = usage(state)["submitted_render_requests"]
     if n >= policy["hard_generation_limit"]:
         return "frozen"
-    from .resources import elapsed
-
-    p = max(
-        n / policy["hard_generation_limit"],
-        elapsed(state) / state["config"]["resource_policy"]["max_wall_seconds"],
-    )
+    p = n / policy["hard_generation_limit"]
     return (
         "exploration"
         if p < 0.4

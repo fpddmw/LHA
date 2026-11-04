@@ -30,7 +30,7 @@ def fake_renderer_owner(connection, lock):
 class ProtocolTests(unittest.TestCase):
     def state(self, n=5, used=0, fraction=0):
         now = time.time()
-        wall = r.estimate_budget(max_generations=n)['max_wall_seconds']
+        wall = r.estimate_budget(max_generations=n)['estimated_wall_seconds']
         s = {
             "created_at": "2026-11-02T00:00:00Z",
             "config": {"max_generations": n},
@@ -50,7 +50,7 @@ class ProtocolTests(unittest.TestCase):
             s["submitted_generation_ids"].append(key)
         return s
 
-    def test_n_and_time_phase_do_not_disclose_limits(self):
+    def test_count_phase_ignores_elapsed_time_and_does_not_disclose_limits(self):
         for n in (1, 3, 5, 9):
             for fraction, stage in (
                 (0, "exploration"),
@@ -60,7 +60,7 @@ class ProtocolTests(unittest.TestCase):
             ):
                 s = self.state(n, fraction=fraction)
                 v = c.view(s)
-                self.assertEqual(v["stage"], stage)
+                self.assertEqual(v["stage"], "exploration")
                 self.assertEqual(
                     set(v),
                     {

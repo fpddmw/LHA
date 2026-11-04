@@ -94,6 +94,8 @@ class RuntimeTests(unittest.TestCase):
         self.assertFalse(c.completion_pending(state))
         self.assertEqual(c.usage(state)['failed_render_attempts'],1)
         actual=self.h.state
+        # Compatibility: a historical finite clock still keeps its original stop.
+        actual['online_clock']['deadline_unix'] = time.time() + 1
         with patch('planner_harness.resources.time.time',return_value=actual['online_clock']['deadline_unix']+1):
             resources.settle(actual,'Real task deadline reached')
         self.assertEqual(actual['status'],'budget_exhausted')

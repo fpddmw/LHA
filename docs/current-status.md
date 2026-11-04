@@ -1,5 +1,13 @@
 # Current implementation status
 
+2026-11-04 update: campaign v6 uses uniform full-span 117-frame inputs and outputs
+at 24 fps. Task, maintenance and evaluation elapsed-time caps are disabled;
+Planner/PE loops retain four submitted generations and may choose earlier results.
+Use a new output root. See [implementation and checks](fixed117-count-budget-plan.md).
+
+## Previous integration status (2026-11-03)
+
+
 2026-11-03 integration repair. The current continuation protocol is `creative-continuation-v5`. Main experiments use all configured generation attempts before final selection; N remains 4. Bernini and Ditto deadlines remain 90 and 180 minutes at this N. Both knowledge arms share the completion rules; the Planner still chooses each prompt, input and final candidate.
 
 The single-task entry uses the same role factory as the service, retains saved clients on resume, and carries a new-task generation override into both guards. Maintenance search returns executable maintenance read actions. Campaign and batch status read active dispatch and durable settlements, with last-recorded process state explicitly distinguished from fresh liveness verification.

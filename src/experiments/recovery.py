@@ -47,7 +47,7 @@ def pe_prompt_recovery_plan(output, topic, device):
         raise ValueError("Recovery must use the original PE accounting scope")
     ledger = accounting.load_ledger(scope["root"])
     clock = ledger["topics"].get(topic, {}).get("lanes", {}).get("pe-loop", {})
-    if not all(isinstance(clock.get(k), (int, float)) for k in ("started_unix", "deadline_unix")):
+    if not isinstance(clock.get("started_unix"), (int, float)) or (clock.get("deadline_unix") is not None and not isinstance(clock["deadline_unix"], (int, float))):
         raise ValueError("Original PE task clock is unavailable")
     unresolved = [r["id"] for r in ledger["operations"].values()
                   if r["topic"] == topic and r["status"] != "not_submitted" and not r.get("completion")]
@@ -186,7 +186,7 @@ def settle_pe_interruption(output, topic, device, *, execute=False):
         scope = accounting.scope(output / "accounting", topic, lane="pe-loop")
         ledger = accounting.load_ledger(scope["root"])
         clock = ledger["topics"].get(topic, {}).get("lanes", {}).get("pe-loop", {})
-        if not all(isinstance(clock.get(k), (int, float)) for k in ("started_unix", "deadline_unix")):
+        if not isinstance(clock.get("started_unix"), (int, float)) or (clock.get("deadline_unix") is not None and not isinstance(clock["deadline_unix"], (int, float))):
             raise ValueError("Original PE task clock is unavailable")
         unknown = [r["id"] for r in ledger["operations"].values()
                    if r["topic"] == topic and r["lane"] == "pe-loop" and r["kind"] == "model"

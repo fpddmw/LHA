@@ -96,7 +96,7 @@ def inspect_video(path):
             "width": int(row["width"]), "height": int(row["height"])}
 
 
-def prepare(benchmark, output, *, data_root=None, conditions=("pe",), seed=42, splits=None, prompt_forms=None, sample_ids=None):
+def prepare(benchmark, output, *, data_root=None, conditions=("pe",), seed=42, splits=None, prompt_forms=None, sample_ids=None, uniform_frames=False):
     benchmark, output = Path(benchmark).resolve(), Path(output).resolve()
     if not conditions or len(set(conditions)) != len(conditions) or set(conditions) - {"direct", "pe"}:
         raise ValueError("Choose direct, pe, or both exactly once")
@@ -163,6 +163,15 @@ def prepare(benchmark, output, *, data_root=None, conditions=("pe",), seed=42, s
         frames = ((info["frames"] - 1) // 4) * 4 + 1
         if frames < 5:
             raise ValueError(sample + ": at least five source frames are required")
+        original_source, original_sha, original_info = source, source_sha, dict(info)
+        normalization = None
+        if uniform_frames:
+            accounting()
+            from experiments.video_contract import normalize, FRAMES, FPS
+            source, normalization = normalize(source, output / "sources", info)
+            source_sha = digest(source)
+            info = {**info, "frames": FRAMES, "fps": FPS}
+            frames = FRAMES
         if canonical:
             prompt = row.get("instruction")
             if not isinstance(prompt, str) or not prompt.strip() or row.get("prompt_long", prompt) != prompt:
@@ -207,6 +216,8 @@ def prepare(benchmark, output, *, data_root=None, conditions=("pe",), seed=42, s
                     "source_group": row.get("source_group", sample), "benchmark_version": row.get("benchmark_version"),
                     "source_video": str(source),
                     "source_sha256": source_sha, "source_info": info, "prompt": prompt,
+                    **({"original_source_video": str(original_source), "original_source_sha256": original_sha,
+                        "original_source_info": original_info, "normalization": normalization} if normalization else {}),
                     "num_frames": frames, "fps": info["fps"], "tail_frames_omitted": info["frames"] - frames,
                     "seed": seed})
         if not available:
@@ -610,7 +621,7 @@ def main(argv=None):
     args = p.parse_args(argv)
     if args.command == "prepare":
         plan = prepare(args.benchmark, args.output, data_root=args.data_root, conditions=args.conditions,
-                       seed=args.seed, splits=args.split, prompt_forms=args.prompt_form)
+                       seed=args.seed, splits=args.split, prompt_forms=args.prompt_form, uniform_frames=True)
         print(json.dumps({"samples": plan["sample_count"], "positions": len(plan["cases"]),
                           "split_counts": plan["split_counts"], "missing_prompts": plan["missing_prompts"]}))
         return 0
