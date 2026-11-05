@@ -551,6 +551,7 @@ class PlannerHarness:
         from .resources import ResourceExhausted, check_wall, settle
         from .model_call import ModelTransportError
         from .accounting import ExternalExecutionUnknown
+        from .model_answers import ModelAnswerUnavailable, call_object
 
         if self.state["config"].get("resource_policy"):
             self.model.lha_resource_budget = {
@@ -646,7 +647,7 @@ class PlannerHarness:
                 )
                 raw_path = call_dir / "response.txt"
                 try:
-                    if raw_path.exists():
+                    if raw_path.exists() and raw_path.read_text(encoding='utf-8').strip():
                         raw = raw_path.read_text(encoding="utf-8")
                     else:
                         if self.state["config"].get("workflow") == "creative_loop_v1":
@@ -661,20 +662,16 @@ class PlannerHarness:
                             raw = call_model(self, call_dir, user_text, images)
                         from .common import write_atomic
                         write_atomic(raw_path, raw)
-                    if not raw.strip():
-                        self.state['status'] = 'needs_reconciliation'
-                        self.state.setdefault('unresolved_calls', {})[event_id] = {
-                            'event_id': event_id, 'failure_kind': 'empty_model_answer',
-                            'error': 'Provider completed without an executable answer',
-                            'response': str(raw_path),
-                            'scope': 'Retain this completed call; recover saved stream text before continuing',
-                        }
-                        self.checkpoint()
-                        break
                     check_wall(self.state)
                     from .json_output import decode_object
 
-                    parsed = decode_object(raw, allow_prose=self.state["config"].get("workflow") == "creative_loop_v1")
+                    if self.state['config'].get('workflow') == 'creative_loop_v1':
+                        from .tool_interface import normalize
+                        parsed, selection = call_object(call_dir / 'transport', self.model,
+                            self.system, user_text, images, initial=raw, validate=normalize)
+                        save(call_dir / 'effective-answer.json', selection)
+                    else:
+                        parsed = decode_object(raw)
                     self.state.setdefault('unresolved_calls', {}).pop(event_id, None)
                     event = {"event_id": event_id, "at": stamp(), "request": parsed, "status": "ok"}
                     try:
@@ -707,6 +704,8 @@ class PlannerHarness:
                     f"[{self.output.name}] {event_id}: {event.get('request', {}).get('action')} / {event['status']}",
                     flush=True,
                 )
+                if event['status'] in {'operation_error', 'response_error'}:
+                    print(f"[{self.output.name}] {event_id}: {event['result'].get('error', '')}", flush=True)
             if self.state["status"] == "running":
                 settle(self.state, "Planner turn submission budget exhausted")
                 save(self.output / "final.json", self.state["final"])
@@ -720,6 +719,14 @@ class PlannerHarness:
             settle(self.state, str(exc))
             self.state["pending_event"] = None
             save(self.output / "final.json", self.state["final"])
+        except ModelAnswerUnavailable as exc:
+            event_id = self.state.get('pending_event')
+            self.state['status'] = 'needs_reconciliation'
+            self.state.setdefault('unresolved_calls', {})[event_id or 'pending-review'] = {
+                'event_id': event_id, 'failure_kind': exc.failure_kind,
+                'error': str(exc), 'call': exc.call,
+            }
+            print(f'[{self.output.name}] response recovery exhausted; original step and completed work retained', flush=True)
         except ExternalExecutionUnknown as exc:
             event_id = self.state.get("pending_event")
             self.state.setdefault("unresolved_calls", {})[event_id or "unknown-call"] = {
@@ -733,7 +740,8 @@ class PlannerHarness:
             self.state['status'] = 'model_unavailable'
             self.state['last_error'] = str(exc)
             # Keep the exact pending input and attempt allowance for original-command recovery.
-            # Exhausted/permanent transport failures stay blocked, never silently get new attempts.
+            # An original-command restart resumes this request with a new retry window.
+            print(f'[{self.output.name}] model unavailable: {exc}; task retained for restart', flush=True)
             self.checkpoint()
         except KeyboardInterrupt:
             self.state["status"] = "interrupted"

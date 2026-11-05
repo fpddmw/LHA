@@ -145,8 +145,8 @@ def packet(payload, state, profile):
 
 
 def run(payload, directory, model=None):
-    from planner_harness.model_call import call_text
-    from planner_harness.json_output import decode_object
+    from planner_harness.model_answers import call_object
+    from planner_harness.json_output import action_envelope
 
     directory = Path(directory) / "one-shot-critic"
     if (directory / 'feedback.json').exists():
@@ -201,21 +201,39 @@ def run(payload, directory, model=None):
         request = retain(directory / "calls" / identity / "request.json", packet(payload, state, frozen))
         if number == 1:
             immutable(directory / "request.json", request)
-        raw = call_text(
+        def validate_action(value):
+            normalized = action_envelope(value, default_action='review', metadata={'note', 'purpose'})
+            action, args = normalized['action'], normalized['arguments']
+            if action in {'review', 'finish'}:
+                validate(args, request)
+            elif action == 'observe':
+                from planner_harness.tool_interface import normalize
+                normalize(normalized)
+            elif action == 'note':
+                if not isinstance(args.get('text'), str):
+                    raise ValueError('note requires text')
+            else:
+                raise ValueError('Choose observe, note or review')
+        response, selection = call_object(
             directory / "calls" / identity / "call",
             model,
             request["system_prompt"],
             request["user_text"],
             [r["path"] for r in request["images"]],
-            attempts=1,
+            validate=validate_action,
         )
-        response = decode_object(raw)
-        action = response.get("action", "review")
-        args = response.get("arguments", response)
+        status = 'ok'
         try:
+            from planner_harness.json_output import action_envelope
+            normalized = action_envelope(response, default_action="review", metadata={"note", "purpose"})
+            if normalized != response:
+                save(directory / "calls" / identity / "normalization.json", {"original": response, "normalized": normalized})
+            action, args = normalized["action"], normalized["arguments"]
             if response.get("note"):
                 state["notes"].append(response["note"])
             if action == "observe":
+                from planner_harness.tool_interface import normalize
+                args = normalize({"action": "observe", "arguments": args})["arguments"]
                 result = observe(state, directory, args, identity)
                 state["last_result"] = {
                     k: v for k, v in result.items() if k not in {"frames", "observations"}
@@ -237,16 +255,17 @@ def run(payload, directory, model=None):
                     "request_path": str(directory / "review-request.json"),
                     "evidence": frames(state),
                     "observations": state["observations"],
-                    "review_call": str(directory / "calls" / identity / "call"),
+                    "review_call": selection['call_path'],
                 }
                 immutable(directory / "feedback.json", result)
                 return result
             else:
                 raise ValueError("Choose observe, note or review")
         except (ValueError, KeyError, TypeError, OSError) as exc:
+            status = 'response_error' if response is None else 'operation_error'
             state["last_result"] = {"error_type": type(exc).__name__, "error": str(exc)}
         state["events"].append(
-            {"id": identity, "response": response, "result": state["last_result"]}
+            {"id": identity, "status": status, "response": response, "result": state["last_result"]}
         )
         state["attempts"] = number
         save(state_path, state)

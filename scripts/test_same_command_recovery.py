@@ -98,18 +98,15 @@ class PlannerRecovery(unittest.TestCase):
         self.assertEqual(verify_delivery(service.directory/'tasks/topic/run')['selected'],'v1')
         self.assertEqual(len(renderer.calls),1)
 
-    def test_uncertain_planner_call_stays_original_without_repeated_calls(self):
+    def test_historical_uncertain_planner_call_resumes_without_repeated_renders(self):
         from test_interrupted_model_recovery import RecoveryTests
         output,worker,run,call,digest,service,queue,renderer,planner,critic=RecoveryTests.setup_run(self,'planner')
         before=(len(renderer.calls),len(planner.inputs),len(critic.inputs))
         for _ in range(2):Engine(queue,worker,service,service.expand,interval=.001).run(once=True)
-        self.assertEqual((len(renderer.calls),len(planner.inputs),len(critic.inputs)),before)
-        self.assertEqual(load(run/'state.json')['status'],'needs_reconciliation')
-        # The explicit recovery preview accepts the new no-deadline clock.
-        state=load(run/'state.json');state['online_clock']['deadline_unix']=None;save(run/'state.json',state)
-        import recover_interrupted_model
-        plan=recover_interrupted_model.recover(run,digest,'Inspect the original uncertain call')
-        self.assertEqual(plan['role'],'planner')
+        self.assertEqual((len(renderer.calls),len(planner.inputs),len(critic.inputs)),
+                         (before[0],before[1]+1,before[2]))
+        self.assertEqual(verify_delivery(run)['selected'],'v2')
+        self.assertTrue((call/'attempts/01/unknown.json').exists())
 
     def test_physical_device_change_keeps_the_task_queue_and_run(self):
         from test_loop_engineering import Engineering
@@ -162,6 +159,8 @@ class Commands(Fixture):
         reopen_call(call, 'Provider access restored.', 1)
         self.assertTrue(call_ready(call))
         save(call/'attempts/02/submitted.json', {'attempt':2})
+        self.assertTrue(call_ready(call))
+        save(call/'attempts/02/failed.json', {'failure_kind':'integrity_error'})
         self.assertFalse(call_ready(call))
 
     def test_original_pe_command_recovers_and_reuses_completed_direct(self):

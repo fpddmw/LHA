@@ -129,7 +129,7 @@ class Engineering(unittest.TestCase):
                 review.action(
                     "finish",
                     video="v1",
-                    message="I choose this result after the explicit Critic failure.",
+                    message="I choose this result after inspecting the review.",
                 ),
             ],
             critic=critic,
@@ -137,10 +137,21 @@ class Engineering(unittest.TestCase):
         service.submit(self.task())
         Engine(queue, service.directory, service, service.expand, interval=0.005).run(once=True)
         state = load(service.directory / "tasks/topic/run/state.json")
+        self.assertEqual(state['status'],'waiting_tool')
+        self.assertFalse(state.get('final'))
+        self.assertEqual(len(planner.inputs),1)
+        critic.actions.extend(review.Reviewer().actions)
+        run = service.directory / "tasks/topic/run"
+        call = next((run / 'jobs' / state['pending_tool']).rglob('allowance.json')).parent
+        from planner_harness.model_call import reopen_call
+        reopen_call(call, 'Critic provider access restored.', 1)
+        Engine(queue, service.directory, service, service.expand, interval=0.005).run(once=True)
+        state = load(service.directory / "tasks/topic/run/state.json")
         self.assertEqual(state["status"], "complete")
-        self.assertEqual(state["reviews"]["v1"]["status"], "failed")
+        self.assertEqual(state["reviews"]["v1"]["status"], "complete")
         self.assertEqual({r["state"] for r in queue.rows()}, {"complete"})
-        self.assertEqual(len(critic.inputs), 1)
+        self.assertEqual(len(critic.inputs), 2)
+        self.assertNotIn('Known rejected fixture API request',json.dumps(planner.inputs))
         self.assertEqual(len(planner.inputs), 2)
         self.assertEqual(len(renderer.calls), 1)
         self.assertEqual(verify_delivery(service.directory / "tasks/topic/run")["selected"], "v1")
@@ -232,7 +243,7 @@ class Engineering(unittest.TestCase):
         self.addCleanup(cleanup)
         return release
 
-    def test_unknown_llm_quarantines_only_its_topic_on_same_service(self):
+    def test_unknown_llm_does_not_quarantine_recoverable_text_work(self):
         policy = a.default_online_policy(wall_seconds=1, lanes=("full",))
         service, queue, renderer, _ = self.service([], kind=ProbeService, config={"budget": policy})
         self.unknown(service, service.accounting_root, "model", "held")
@@ -241,7 +252,7 @@ class Engineering(unittest.TestCase):
         engine = Engine(queue, service.directory, service, service.expand, interval=0.005)
         engine.run(once=True)
         rows = {r["id"]: r for r in queue.rows()}
-        self.assertEqual(rows[first]["state"], "queued")
+        self.assertEqual(rows[first]["state"], "complete")
         self.assertEqual(rows[second]["state"], "complete")
         self.assertFalse(engine.stop.is_set())
         self.assertTrue(renderer.closed)

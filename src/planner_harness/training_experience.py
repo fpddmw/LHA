@@ -228,7 +228,8 @@ def activate(root, output, contribution):
             raise ValueError("Original training contribution call changed")
     if load(folder / "returned.json")["sha256"] != call["response_sha256"]:
         raise ValueError("Training contribution has no original returned answer")
-    action = decode_object((folder / "response.txt").read_text())
+    from .json_output import action_envelope
+    action = action_envelope(decode_object((folder / 'response.txt').read_text(),allow_prose=True),metadata={'purpose'})
     if (
         action.get("action") != "contribute"
         or action["arguments"].get("text") != value["text"]
@@ -341,7 +342,11 @@ def maintain(root, output, run, job_id, config=None, *, model_factory=None):
     bound_snapshot(root,job.get("maintenance_snapshot"),output=output,**family(load(Path(run)/"state.json")))
     result_path = folder / "training-maintenance.json"
     if result_path.exists():
-        return load(result_path)
+        previous = load(result_path)
+        if previous.get('status') not in {'failed','execution_unknown'}:
+            return previous
+        from .resumption import archive_remove
+        archive_remove(result_path, folder/'recovery-history')
     cfg = configuration(job.get("maintenance_configuration", cfg))
     job["original_job_path"] = str(folder / "job.json")
     job["original_job_sha256"] = sha(folder / "job.json")
@@ -371,7 +376,8 @@ def maintain(root, output, run, job_id, config=None, *, model_factory=None):
                 "shared_corpus_changed": False,
             }
             save(attempt / "failure.json", result)
-            if getattr(exc, "outcome_unknown", False):
+            from .model_call import ModelTransportError
+            if isinstance(exc, ModelTransportError) or getattr(exc, 'outcome_unknown', False):
                 break
     save(result_path, result)
     save(

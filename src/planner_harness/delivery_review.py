@@ -68,7 +68,10 @@ def verify(run, state):
     directory = run / "calls" / event
     from .json_output import decode_object
 
-    decision = decode_object((directory / "response.txt").read_text())
+    from .tool_interface import normalize
+    from .model_answers import effective_response
+    answer_path = effective_response(directory)
+    decision = normalize(decode_object(answer_path.read_text(), allow_prose=True))
     args = decision.get("arguments", {})
     if (
         decision.get("action") != "finish"
@@ -76,21 +79,35 @@ def verify(run, state):
         or args.get("stop_reason", "satisfied") != "satisfied"
     ):
         raise ValueError("Delivery is not the recorded Planner decision")
-    transport = directory / "transport"
+    original_transport = directory / "transport"
+    transport = original_transport
+    if (directory / 'effective-answer.json').exists():
+        selected = load(directory / 'effective-answer.json')
+        if selected != load(original_transport / 'format-recovery/selected.json'):
+            raise ValueError('Delivery selection differs from the accepted response')
+        transport = Path(selected['call_path'])
     if not (transport / "returned.json").exists():
         raise ValueError("Delivery has no returned Planner response")
     returned = load(transport / "returned.json")
-    attempt = transport / "attempts" / f"{returned['attempt']:02d}" / "response.txt"
-    digest = sha(directory / "response.txt")
+    attempt = transport / "attempts" / f"{returned['attempt']:02d}"
+    digest = sha(answer_path)
     if (
         returned["sha256"] != digest
         or sha(transport / "response.txt") != digest
-        or sha(attempt) != digest
+        or not any(p.exists() and sha(p) == digest
+                   for p in (attempt / 'response.txt', attempt / 'replayed-response.txt'))
     ):
         raise ValueError("Delivery differs from the original returned Planner response")
-    prepared, sent = load(directory / "input.json"), load(transport / "input.json")
+    prepared, sent = load(directory / "input.json"), load(original_transport / "input.json")
     if any(prepared[key] != sent[key] for key in ("system_prompt", "user_text")):
         raise ValueError("Delivery input differs from the actual Planner input")
+    if transport != original_transport:
+        corrected = load(transport / 'input.json')
+        correction = json.loads(corrected['user_text'])
+        if (corrected['system_prompt'] != sent['system_prompt']
+                or corrected['images'] != sent['images']
+                or correction.get('original_input') != sent['user_text']):
+            raise ValueError('Delivery correction differs from the original decision context')
     if args.get("message") != state["final"].get("message"):
         raise ValueError("Delivery explanation differs from the Planner response")
     if state.get("pending_review"):

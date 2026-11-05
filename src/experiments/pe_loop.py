@@ -38,8 +38,15 @@ class RecordedInterruption(RuntimeError):
     """Explicit cached settlement of an already recorded interrupted phase."""
 
 
+def validate_prompt(answer):
+    from planner_harness.ledger import english
+    if set(answer) != {'prompt'} or not isinstance(answer['prompt'], str) or not answer['prompt'].strip():
+        raise ValueError('Return exactly {"prompt": "nonempty English rendering prompt"}')
+    english(answer['prompt'])
+
+
 def compact_prompt(topic, prompt, details, directory, model, scope, *, backend="bernini"):
-    from planner_harness.model_call import call_text
+    from planner_harness.model_answers import call_object
     from planner_harness.json_output import decode_object
     from planner_harness.ledger import english
     from .render_profiles import prompt_guidance
@@ -54,12 +61,8 @@ def compact_prompt(topic, prompt, details, directory, model, scope, *, backend="
 
     def produce():
         accounting.check_task(scope)
-        raw = call_text(directory / "call", model, COMPACT_PROMPT,
-                        json.dumps(packet, ensure_ascii=False), [], attempts=1)
-        answer = decode_object(raw)
-        if set(answer) != {"prompt"} or not isinstance(answer["prompt"], str) or not answer["prompt"].strip():
-            raise ValueError("Prompt compaction requires one nonempty English prompt")
-        english(answer["prompt"])
+        answer, _ = call_object(directory / "call", model, COMPACT_PROMPT,
+                        json.dumps(packet, ensure_ascii=False), [], validate=validate_prompt)
         return answer["prompt"]
 
     return _completed(directory / "prompt.json", produce)
@@ -143,7 +146,7 @@ def diagnostics(feedback):
 def rewrite(topic, directory, model, history, *, backend="bernini"):
     """One durable enhancement call, using only recorded online evidence."""
     from planner_harness.video import Video
-    from planner_harness.model_call import call_text
+    from planner_harness.model_answers import call_object
     from planner_harness.json_output import decode_object
     from planner_harness.ledger import english
     directory = Path(directory)
@@ -172,12 +175,8 @@ def rewrite(topic, directory, model, history, *, backend="bernini"):
               "latest_feedback_candidate_id": history[-1]['candidate']['id'] if history else None,
               "history": [{"candidate_id": row["candidate"]["id"], "prompt": row["prompt"],
                            "feedback": diagnostics(row["feedback"])} for row in history]}
-    raw = call_text(directory / "call", model, system_prompt(backend),
-                    json.dumps(packet, ensure_ascii=False), images, attempts=1)
-    answer = decode_object(raw)
-    if set(answer) != {"prompt"} or not isinstance(answer["prompt"], str) or not answer["prompt"].strip():
-        raise ValueError("PE enhancement requires one nonempty prompt")
-    english(answer["prompt"])
+    answer, _ = call_object(directory / "call", model, system_prompt(backend),
+                    json.dumps(packet, ensure_ascii=False), images, validate=validate_prompt)
     return answer["prompt"]
 
 

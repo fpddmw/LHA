@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import copy
 import os
+import random
+import sys
 from pathlib import Path
 import time
 
@@ -12,6 +14,128 @@ from .lock import RunLock
 from .integrity import IntegrityError
 from .resources import ResourceExhausted
 from .accounting import BudgetConfigurationError
+
+DEFAULT_TRANSPORT_ATTEMPTS = 12
+
+
+def transport_attempts():
+    value = int(os.environ.get('LHA_MODEL_TRANSPORT_ATTEMPTS', DEFAULT_TRANSPORT_ATTEMPTS))
+    if value < 1:
+        raise ValueError('LHA_MODEL_TRANSPORT_ATTEMPTS must be positive')
+    return value
+
+
+def restore_model(model, binding):
+    client = copy.copy(model)
+    client.model = binding['model']
+    client.reasoning_effort = binding.get('reasoning_effort')
+    provider = binding.get('transport', {}).get('provider_model')
+    # Some final-judge adapters have a distinct provider alias. Subscription
+    # derives its provider name from model and has no independent stored alias.
+    if provider and 'api_model' in vars(client):
+        client.api_model = provider
+    return client
+
+
+def _attempt_policy(directory, count, automatic):
+    """A restart opens one new bounded window, retaining every old attempt."""
+    path = directory / 'allowance.json'
+    if not path.exists():
+        immutable(path, {'first': 1, 'last': count})
+    policy = load(path)
+    for failed in (directory/'attempts').glob('*/failed.json'):
+        if load(failed).get('failure_kind')=='integrity_error':
+            raise IntegrityError('Recorded model identity/response integrity failure')
+    if automatic:
+        marker = directory / 'retry-window.json'
+        previous = load(marker) if marker.exists() else None
+        entries = [int(p.name) for p in (directory/'attempts').glob('*') if p.is_dir() and p.name.isdigit()]
+        if previous is None or previous.get('closed'):
+            # Old exhausted and uncertain calls are resumed without editing receipts.
+            first = max(entries, default=0) + 1
+            policy = {'first': first, 'last': max(policy['last'], first + count - 1)}
+            if previous:
+                immutable(directory/'recoveries'/('runtime-'+str(first)+'.json'), previous)
+            save(path, policy)
+            save(marker, {**policy, 'closed': False, 'opened_at': stamp()})
+    return policy
+
+
+def _close_window(directory, reason):
+    marker = directory / 'retry-window.json'
+    if marker.exists():
+        save(marker, {**load(marker), 'closed': True, 'reason': reason})
+
+
+def saved_answer(entry):
+    """Read an original usable final, replaying its own SSE when necessary."""
+    raw = entry / 'response.txt'
+    if raw.exists() and raw.read_text(encoding='utf-8').strip():
+        return raw
+    recovered = entry / 'replayed-response.txt'
+    if recovered.exists():
+        return recovered if recovered.read_text(encoding='utf-8').strip() else None
+    stream = entry / 'client-audit' / 'stream.bin'
+    if stream.exists():
+        from vlm.responses_stream import replay_answer
+        try:
+            replay = replay_answer(stream)
+        except ValueError:
+            return None
+        metadata = entry / 'client-audit' / 'summary.json'
+        if metadata.exists():
+            audit = load(metadata)
+            if ((audit.get('response_id') and audit['response_id'] != replay['response_id'])
+                    or (audit.get('stream_sha256') and audit['stream_sha256'] != replay['stream_sha256'])):
+                raise IntegrityError('Saved stream differs from its original receipt')
+        if replay['text'].strip():
+            save(entry / 'replayed-answer.json', replay)
+            write_text_atomic(recovered, replay['text'])
+            return recovered
+    return None
+
+
+def retire_empty_cache(directory):
+    """Keep the original empty cache and receipt before publishing a usable one."""
+    import shutil
+    raw = directory / 'response.txt'
+    if not raw.exists() or raw.read_text(encoding='utf-8').strip():
+        return
+    history = directory / 'empty-cache-history'
+    history.mkdir(parents=True, exist_ok=True)
+    for name in ('response.txt', 'returned.json', 'answer-stop.json'):
+        path = directory / name
+        if path.exists():
+            target = history / (sha(path) + '-' + name)
+            if not target.exists():
+                shutil.copyfile(path, target)
+            path.unlink()
+
+
+def _recover_answer(directory, scope, output_budget, capabilities, *, allow_empty=False):
+    from .accounting import operation
+    for entry in sorted((directory/'attempts').glob('*')):
+        if not entry.is_dir() or not entry.name.isdigit():
+            continue
+        answer = saved_answer(entry)
+        if answer is None and allow_empty and (entry/'response.txt').exists():
+            answer = entry/'response.txt'
+        if answer:
+            text = answer.read_text(encoding='utf-8')
+            write_text_atomic(directory/'response.txt', text)
+            returned_receipt(directory)
+            return text
+        record = operation(scope, str(entry.resolve()))
+        completion = (record or {}).get('completion')
+        if completion and load(completion['path']).get('status') == 'complete' and not (entry/'response.txt').exists():
+            text = collect_owned_answer(directory, entry, scope, output_budget, capabilities)
+            if text.strip():
+                return text
+            if allow_empty:
+                write_text_atomic(directory/'response.txt', text)
+                returned_receipt(directory)
+                return text
+    return None
 
 
 class ModelTransportError(RuntimeError):
@@ -80,7 +204,8 @@ def returned_receipt(directory, *, recovered=True):
     """Repair a crash after durable text, using only its original attempt record."""
     directory = Path(directory)
     raw = directory / "response.txt"
-    matches = [p for p in (directory / "attempts").glob("*/response.txt") if sha(p) == sha(raw)]
+    matches = [p for pattern in ('*/response.txt', '*/replayed-response.txt')
+               for p in (directory / 'attempts').glob(pattern) if sha(p) == sha(raw)]
     if not matches:
         raise IntegrityError("Saved response has no matching durable transport attempt")
     attempt = min(matches, key=lambda p: int(p.parent.name)).parent
@@ -117,6 +242,9 @@ def collect_owned_answer(directory, entry, accounting_scope, output_budget, capa
         "budget_capabilities": capabilities, "collected_original_completion": completion,
         "output_limit": {"requested_tokens": output_budget, "hard_enforced": bool(capabilities.get("hard_output_tokens"))}})
     write_text_atomic(entry / "response.txt", value["text"])
+    if not value['text'].strip():
+        save(entry / 'unusable.json', {'reason': 'completed_without_text', 'at': stamp()})
+        return value['text']
     write_text_atomic(directory / "response.txt", value["text"])
     returned_receipt(directory, recovered=True)
     return value["text"]
@@ -141,12 +269,13 @@ def _wait_for_provider_retry(scope, previous_attempt):
     check_task(scope)
 
 
-def call_text(directory, model, system, user, images, *, attempts=3, retry_delay=2, max_new_tokens=7000, meter_only=False):
+def call_text(directory, model, system, user, images, *, attempts=None, retry_delay=2, max_new_tokens=7000, meter_only=False, retry_empty=True):
     if meter_only:return metered_text(directory,model,system,user,images,max_new_tokens=max_new_tokens)
     # Gateway adapters that already record bounded HTTP retries own recovery
     # inside this call. Do not multiply them by the outer default allowance.
-    if getattr(model, "manages_transport_retries", False):
-        attempts = 1
+    automatic = attempts is None
+    attempts = transport_attempts() if automatic else attempts
+    adapter_retries = bool(getattr(model, "manages_transport_retries", False))
     directory = Path(directory)
     with RunLock(directory):
         binding = {"system_prompt": system, "user_text": user,
@@ -160,6 +289,8 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
         system, user = binding['system_prompt'], binding['user_text']
         images = [row['path'] for row in binding['images']]
         raw_path = directory / "response.txt"
+        if retry_empty:
+            retire_empty_cache(directory)
         if raw_path.exists():
             returned_receipt(directory)
             return raw_path.read_text(encoding="utf-8")
@@ -172,17 +303,15 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
         for row in binding['images']:
             if sha(row['path']) != row['sha256']:
                 raise IntegrityError('Original pending model image is missing or damaged; no replacement call')
-        model = copy.copy(model)
-        model.model = binding["model"]
-        model.reasoning_effort = binding.get("reasoning_effort")
-        policy_path = directory / "allowance.json"
-        if not policy_path.exists():
-            immutable(policy_path, {"first": 1, "last": attempts})
-        policy = load(policy_path)
+        model = restore_model(model, binding)
+        policy = _attempt_policy(directory, attempts, automatic)
         from .accounting import discover, invoke, ExternalExecutionUnknown
         accounting_scope = discover(directory,model)
         from .accounting import check_model_capabilities
         capabilities = check_model_capabilities(accounting_scope, model)
+        recovered = _recover_answer(directory, accounting_scope, max_new_tokens, capabilities, allow_empty=not retry_empty)
+        if recovered is not None:
+            return recovered
         # Clone only transport controls. Never change the shared model instance.
         client = copy.copy(model)
         client.lha_accounting_scope = accounting_scope
@@ -190,18 +319,22 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
             if hasattr(client, key):
                 setattr(client, key, 1 if key == "attempts" else 0)
         for number in range(policy["first"], policy["last"] + 1):
+            recovered = _recover_answer(directory, accounting_scope, max_new_tokens, capabilities, allow_empty=not retry_empty)
+            if recovered is not None:
+                return recovered
+            # A timed-out call can complete late; its metadata must not race a retry.
+            client = copy.copy(client)
             entry = directory / "attempts" / f"{number:02d}"
             if (entry / "response.txt").exists():
-                raw = (entry / "response.txt").read_text(encoding="utf-8")
-                write_text_atomic(raw_path, raw)
-                returned_receipt(directory)
-                return raw
+                # Empty provider completions are retained, not returned as success.
+                continue
             if (entry / "failed.json").exists():
                 failed = load(entry / "failed.json")
                 if failed.get("failure_kind") == "integrity_error":
                     raise IntegrityError("Recorded model identity/response integrity failure")
                 if not failed["retryable"]:
-                    raise ModelTransportError("Recorded permanent model failure; explicit recovery is required", retryable=False)
+                    _close_window(directory, 'permanent_provider_failure')
+                    raise ModelTransportError("Recorded provider failure; original-command restart opens recovery", retryable=False)
                 continue
             if (entry / 'submitted.json').exists():
                 from .accounting import operation,reserve as reserve_unified,transition
@@ -211,7 +344,11 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
                     transition(accounting_scope,str(entry.resolve()),'in_flight_unknown',origin='imported_prior_submission')
                     save(entry/'unknown.json',{'failure_kind':'external_execution_unknown','scope':accounting_scope})
             if (entry / "unknown.json").exists():
-                return collect_owned_answer(directory, entry, accounting_scope, max_new_tokens, capabilities)
+                # Text inference has no tool side effect. Keep unknown cost and the
+                # original receipt, then use another attempt of this logical call.
+                save(entry/'failed.json', {'retryable':True, 'failure_kind':'model_transport',
+                     'cost_status':'unknown', 'recovered_by_runtime':True})
+                continue
             _wait_for_provider_retry(accounting_scope, entry.parent / f"{number - 1:02d}")
             budget = getattr(model, "lha_resource_budget", None)
             if budget and budget["policy"].get("max_cost") is not None:
@@ -224,7 +361,7 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
             try:
                 def submit():
                     save(entry / "submitted.json", {"at":stamp(),"logical_call":str(directory),"attempt":number})
-                def request():
+                def request(client=client):
                     client.lha_audit_directory = str(entry / "client-audit")
                     client.last_usage = {}
                     client.last_provider_response = {}
@@ -239,7 +376,7 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
                 target = "model:"+model.model+"/"+str(getattr(model,"reasoning_effort",None) or "none")
                 accounted = invoke(accounting_scope,str(entry.resolve()),"model",target,request,
                     tokens=(len(system)+len(user))//3+len(images)*1600+max_new_tokens,
-                    before_submit=submit,usage_getter=lambda:getattr(client,"last_usage",{}),owner=getattr(client,"lha_service_owner",None))
+                    before_submit=submit,usage_getter=lambda client=client:getattr(client,"last_usage",{}),owner=getattr(client,"lha_service_owner",None))
                 raw = accounted["text"]
                 client.last_usage = accounted["usage"]
                 client.last_finish_reason = accounted["finish_reason"]
@@ -247,7 +384,13 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
                     raise ValueError("Model did not return text")
             except ExternalExecutionUnknown as exc:
                 save(entry / "unknown.json", {"failure_kind":exc.failure_kind,"at":stamp(),"scope":accounting_scope,"client_execution":getattr(client,"last_client_audit",None)})
-                raise
+                if not automatic:
+                    raise
+                save(entry/'failed.json', {'retryable':True,'failure_kind':'model_transport','cost_status':'unknown'})
+                print(f'[model transport] {directory.name} attempt {number}: interrupted response; retrying same call', file=sys.stderr, flush=True)
+                if retry_delay and number < policy['last']:
+                    time.sleep(min(retry_delay * 2**min(number-1, 5), 60) + random.uniform(0, retry_delay))
+                continue
             except ResourceExhausted:
                 raise
             except BudgetConfigurationError:
@@ -256,9 +399,6 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
                 save(entry / "failed.json", {"type":"IntegrityError", "failure_kind":"integrity_error", "retryable":False})
                 raise
             except Exception as exc:
-                if getattr(model,"requires_live_budget",False) and isinstance(exc,(TimeoutError,ConnectionError)):
-                    save(entry / "unknown.json", {"failure_kind":"external_execution_unknown","at":stamp(),"scope":accounting_scope})
-                    raise ExternalExecutionUnknown("Provider timeout retains unknown execution/cost; reconcile before resubmission") from None
                 retryable = False if getattr(exc,"retryable",None) is False else transient(exc)
                 # Do not persist provider error bodies that can contain credentials.
                 diagnostic = getattr(exc, "safe_diagnostic", None)
@@ -268,10 +408,12 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
                 if retryable and retry_after is not None:
                     failure["retry_not_before_unix"] = time.time() + retry_after
                 save(entry / "failed.json", failure)
-                if not retryable or number == policy["last"]:
+                print(f'[model transport] {directory.name} attempt {number}/{policy["last"]}: {type(exc).__name__}; '+('retrying' if retryable and number < policy['last'] else 'unavailable'), file=sys.stderr, flush=True)
+                if not retryable or number == policy["last"] or adapter_retries:
+                    _close_window(directory, 'transport_exhausted' if retryable else 'permanent_provider_failure')
                     raise ModelTransportError("Model transport failed; inspect recorded attempt status", retryable=retryable,provider_error=diagnostic) from None
                 if retry_after is None:
-                    time.sleep(retry_delay * number)
+                    time.sleep(min(retry_delay * 2**min(number-1, 5), 60) + random.uniform(0, retry_delay))
                 continue
             body = getattr(client, "last_provider_response", {})
             finish = getattr(client, "last_finish_reason", None)
@@ -286,10 +428,20 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
                 from .resources import reconcile
                 reconcile(budget["root"], entry, getattr(client, "last_usage", {}))
             write_text_atomic(entry / "response.txt", raw)
+            if not raw.strip() and retry_empty:
+                save(entry / 'unusable.json', {'reason': 'completed_without_text', 'at': stamp()})
+                recovered = _recover_answer(directory, accounting_scope, max_new_tokens, capabilities)
+                if recovered is not None:
+                    return recovered
+                print(f'[model transport] {directory.name} attempt {number}: empty completion; recovering same request', file=sys.stderr, flush=True)
+                if retry_delay and number < policy['last']:
+                    time.sleep(min(retry_delay * 2**min(number-1, 5), 60))
+                continue
             write_text_atomic(raw_path, raw)
             returned_receipt(directory, recovered=False)
             return raw
-        raise ModelTransportError("Recorded transport retry budget exhausted; explicitly reopen the same call")
+        _close_window(directory, 'transport_exhausted')
+        raise ModelTransportError("Model transport unavailable after bounded retries; restart continues the same call")
 
 
 def metered_text(directory,model,system,user,images,*,max_new_tokens=None):
@@ -308,8 +460,7 @@ def metered_text(directory,model,system,user,images,*,max_new_tokens=None):
         binding = retain(directory/'input.json',binding)
         system,user = binding['system_prompt'],binding['user_text']
         images = [row['path'] for row in binding['images']]
-        model = copy.copy(model)
-        model.model,model.reasoning_effort = binding['model'],binding.get('reasoning_effort')
+        model = restore_model(model, binding)
         immutable(directory/'meter-only.json',{'mode':'live_meter_only' if getattr(model,'requires_live_budget',False) else 'fixture_meter_only',
             'admission_limits':None,'output_token_reservation':None,'cost':'Unknown without provider invoice; actual usage retained'})
         allowance=directory/'allowance.json'

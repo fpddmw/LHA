@@ -28,7 +28,7 @@ def reconcile_accounting(root):
 
 
 def call_ready(directory):
-    """Whether the original call can advance without replacing an uncertain request."""
+    """Text requests recover in call_text; GPU jobs retain their separate receipts."""
     directory = Path(directory)
     if (directory / 'response.txt').exists():
         return True
@@ -36,36 +36,45 @@ def call_ready(directory):
     if blocked_permanent_failure(directory):
         return False
     attempts = directory / 'attempts'
-    allowance = load(directory / 'allowance.json') if (directory / 'allowance.json').exists() else None
-    used = 0
     for entry in sorted(attempts.glob('*')):
         if not entry.is_dir() or not entry.name.isdigit():
             continue
-        used = max(used, int(entry.name))
         if (entry / 'response.txt').exists():
-            return True
+            continue
         if (entry / 'unknown.json').exists():
-            return False
+            continue
         if (entry / 'failed.json').exists():
-            # A separately authorized transport recovery has its own saved range.
-            # Historical failures stay recorded but do not block that range.
-            if int(entry.name) >= (allowance or {}).get('first', 1) and not load(entry / 'failed.json').get('retryable'):
+            # Historical transport failures stay recorded; integrity faults stop.
+            if load(entry / 'failed.json').get('failure_kind') == 'integrity_error':
                 return False
         elif (entry / 'submitted.json').exists():
-            return False
+            continue
         else:
             return True
-    return allowance is None or used < allowance['last']
+    return True
+
+
+def active_calls(directory):
+    """Recovery copies are evidence, not outstanding executable calls."""
+    directory = Path(directory)
+    history = {'response-recoveries', 'recovery-history', 'empty-final-recovery',
+               'empty-cache-history'}
+    for path in directory.rglob('allowance.json'):
+        if not history.intersection(path.relative_to(directory).parts):
+            yield path.parent
 
 
 def recover_texts(directory, accounting_root):
     """Recreate transport answers from saved attempts/accounting, without a model."""
-    from .model_call import returned_receipt, write_text_atomic
+    from .model_call import returned_receipt, write_text_atomic, saved_answer, retire_empty_cache
     from . import accounting as a
     directory = Path(directory)
     ledger = a.load_ledger(accounting_root) if (Path(accounting_root) / 'ledger.json').exists() else {'operations': {}}
-    for allowance in directory.rglob('allowance.json'):
-        call = allowance.parent
+    for call in active_calls(directory):
+        retire_empty_cache(call)
+        if (call/'response.txt').exists():
+            returned_receipt(call)
+            continue
         for attempt in sorted((call / 'attempts').glob('*')):
             if not attempt.is_dir() or not attempt.name.isdigit():
                 continue
@@ -81,7 +90,8 @@ def recover_texts(directory, accounting_root):
                     save(attempt / 'result.json', {'usage': result.get('usage', value.get('usage', {})),
                          'finish_reason': result.get('finish_reason'), 'recovered_completion': completion})
                     write_text_atomic(raw, result['text'])
-            if raw.exists():
+            raw = saved_answer(attempt)
+            if raw:
                 target = call / 'response.txt'
                 if target.exists() and sha(target) != sha(raw):
                     raise ValueError('Conflicting saved model answers')
@@ -123,7 +133,7 @@ def repair_render_response(path):
 
 
 def calls_ready(directory):
-    return all(call_ready(p.parent) for p in Path(directory).rglob('allowance.json'))
+    return all(call_ready(call) for call in active_calls(directory))
 
 
 def planner_ready(run):
@@ -135,11 +145,6 @@ def planner_ready(run):
     if state.get('final') and state['final'].get('outcome') not in {'incomplete','deadline_delivery'}:
         return False
     event = state.get('pending_event')
-    if event:
-        call = run / 'calls' / event
-        for response in (call / 'response.txt', call / 'transport/response.txt'):
-            if response.exists() and not response.read_text(encoding='utf-8').strip():
-                return False
     if event and not call_ready(run / 'calls' / event / 'transport'):
         return False
     tool = state.get('pending_tool')

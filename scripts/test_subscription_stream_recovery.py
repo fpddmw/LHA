@@ -1,4 +1,4 @@
-"""Stream assembly, empty-answer stopping and zero-API original-call recovery."""
+"""Stream assembly, original-call recovery and historical empty-cache migration."""
 import copy
 import io
 import json
@@ -91,7 +91,7 @@ class AssemblyTests(unittest.TestCase):
 class OriginalCallTests(unittest.TestCase):
     setUp, tearDown = fixture.Tests.setUp, fixture.Tests.tearDown
 
-    def stopped(self):
+    def stopped(self, *, historical=True):
         generate = json.dumps(action('generate', input_video='source', prompt='Make the visible scene blue.'))
         class EmptyStoredPlanner(APIPlanner):
             def predict_text(inner, **kwargs):
@@ -118,22 +118,37 @@ class OriginalCallTests(unittest.TestCase):
         service.submit({'id': 'topic', 'source': str(self.source), 'source_sha256': sha(self.source),
                         'request': 'Make the scene blue.', 'max_generations': 1,
                         'execution': {'mode': 'live', 'renderer': {'backend': 'bernini', 'seed': 42, 'generation': {}}}})
-        Engine(queue, worker, service, service.expand, interval=.001).run(once=True)
         run = worker / 'tasks/topic/run'
+        if historical:
+            # Construct the exact pre-fix cache layout. Only this migration fixture
+            # suppresses recovery, so it can represent an old stopped worker.
+            with patch.dict('os.environ', {'LHA_MODEL_TRANSPORT_ATTEMPTS':'1'}), \
+                 patch('planner_harness.model_call._recover_answer', return_value=None):
+                Engine(queue, worker, service, service.expand, interval=.001).run(once=True)
+            from planner_harness.model_call import write_text_atomic, returned_receipt
+            call = run / 'calls/event-0001'
+            write_text_atomic(call / 'response.txt', '')
+            write_text_atomic(call / 'transport/response.txt', '')
+            returned_receipt(call / 'transport')
+            state = load(run / 'state.json')
+            state['status'] = 'needs_reconciliation'
+            save(run / 'state.json', state)
+        else:
+            Engine(queue, worker, service, service.expand, interval=.001).run(once=True)
         return service, queue, planner, renderer, run
 
-    def test_empty_answer_stops_same_event_across_restarts(self):
-        service, queue, planner, renderer, run = self.stopped()
-        state = load(run / 'state.json')
-        self.assertEqual(state['status'], 'needs_reconciliation')
-        self.assertEqual(state['pending_event'], 'event-0001')
-        self.assertEqual(state['events'], [])
-        self.assertFalse(planner_ready(run))
+    def test_empty_cached_parser_result_recovers_and_delivers_automatically(self):
+        service, queue, planner, renderer, run = self.stopped(historical=False)
+        self.assertEqual(verify_delivery(run)['selected'], 'v1')
+        self.assertEqual(len(renderer.calls), 1)
+        self.assertEqual(len(planner.inputs), 2)
+        entry = run / 'calls/event-0001/transport/attempts/01'
+        self.assertEqual((entry / 'response.txt').read_text(), '')
+        self.assertIn('generate', (entry / 'replayed-response.txt').read_text())
+        self.assertTrue(planner_ready(run))
         for _ in range(2):
             Engine(queue, service.directory, service, service.expand, interval=.001).run(once=True)
-        self.assertEqual(len(planner.inputs), 1)
-        self.assertEqual(len(renderer.calls), 0)
-        self.assertEqual(load(run / 'state.json')['attempts'], 1)
+        self.assertEqual((len(renderer.calls), len(planner.inputs)), (1, 2))
 
     def test_replay_restores_original_call_without_ledger_clock_or_api_change(self):
         service, queue, planner, renderer, run = self.stopped()

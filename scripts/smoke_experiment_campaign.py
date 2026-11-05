@@ -15,6 +15,9 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 COVERAGE = {
+    'test_subscription_submission': 'Native result submission, four generations and reviews, corrected delivery, recovery and maintenance through the production CLI',
+    'test_runtime_completion': 'Empty and invalid replies recover within the original decision, retaining completed work',
+    'test_subscription_stream_recovery': 'Saved stream assembly and original-call recovery',
     'test_upgrade_continuation': 'Real historical record projections and cross-version Planner/PE/count-budget recovery',
     'test_same_command_recovery': 'Original-command continuation, four-render Planner recovery, duplicate starts and GPU reassignment',
     'test_fixed117': 'Uniform source normalization, evaluation/export provenance and count-only stopping',

@@ -329,6 +329,13 @@ def collect(harness):
         raise ValueError("Tool response does not match the pending job")
     if response.get("status") not in {"complete", "failed"}:
         raise ValueError("Only final worker responses can be collected")
+    if response.get('status') == 'failed' and response.get('failure_kind') == 'model_transport':
+        from .model_call import ModelTransportError
+        raise ModelTransportError('Pending tool is waiting for its model service',
+                                  retryable=response.get('retryable', True))
+    if response.get('status') == 'failed' and response.get('failure_kind') == 'model_answer_unavailable':
+        from .model_answers import ModelAnswerUnavailable
+        raise ModelAnswerUnavailable('Pending review has no usable report; retain the original tool job')
     if state["config"].get("workflow") == "creative_loop_v1" and job["kind"] == "generate":
         from .continuation import record_outcome
 

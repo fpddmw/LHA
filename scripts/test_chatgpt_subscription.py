@@ -177,7 +177,8 @@ class SubscriptionTests(unittest.TestCase):
         request = post.call_args.args[0]
         body = json.loads(request.data)
         self.assertEqual(len(body["input"][0]["content"][0]["text"]), 167902)
-        self.assertEqual(body["instructions"], "Only LHA instructions")
+        from vlm.response_contract import INSTRUCTION
+        self.assertEqual(body["instructions"], "Only LHA instructions\n\n" + INSTRUCTION)
         self.assertEqual(body["model"], "gpt-6.1-sol")
         self.assertEqual(
             body["input"][0]["content"][1]["image_url"],
@@ -636,7 +637,8 @@ class SubscriptionTests(unittest.TestCase):
                 request = upstream.call_args.args[0]
                 self.assertEqual(request.get_header("Authorization"), "Bearer relay-owner-secret")
                 self.assertEqual(request.full_url, auth.RESOURCE + "/responses")
-                self.assertEqual(json.loads(request.data)["instructions"], "same instructions")
+                from vlm.response_contract import INSTRUCTION
+                self.assertEqual(json.loads(request.data)["instructions"], "same instructions\n\n" + INSTRUCTION)
                 self.assertEqual(
                     len(json.loads(request.data)["input"][0]["content"][0]["text"]), 167902
                 )

@@ -81,7 +81,6 @@ class ChatGPTSubscriptionVisionModel:
         timeout=3600,
     ):
         self.model = model
-        self.api_model = model.removeprefix("openai/")
         self.reasoning_effort = reasoning_effort
         self.role = role
         self.credential_file = str(credential_path(credential_file))
@@ -89,6 +88,11 @@ class ChatGPTSubscriptionVisionModel:
         self.base_url = (relay_url or RESOURCE).rstrip("/")
         self.relay_url = relay_url
         self.api_url = self.base_url + "/responses"
+
+    @property
+    def api_model(self):
+        # Recovery restores self.model from the original call, not launch defaults.
+        return self.model.removeprefix("openai/")
 
     def budget_capabilities(self):
         return {
@@ -112,7 +116,7 @@ class ChatGPTSubscriptionVisionModel:
             "endpoint": self.api_url,
             "upstream_endpoint": RESOURCE + "/responses",
             "provider_model": self.api_model,
-            "protocol": "responses-sse-final-phase-v3",
+            "protocol": "responses-sse-submission-v4",
             "reasoning_effort": self.reasoning_effort,
             "output_limit_mode": "provider_default",
             "image_transport": "original-bytes-data-url",
@@ -145,6 +149,8 @@ class ChatGPTSubscriptionVisionModel:
         }
         if self.reasoning_effort:
             body["reasoning"] = {"effort": self.reasoning_effort}
+        from .response_contract import apply_contract
+        apply_contract(body)
         encoded = json.dumps(body, ensure_ascii=False).encode()
         self.last_client_audit = {
             **self.runtime_identity(),

@@ -101,10 +101,12 @@ def call_report(directory, model, packet, images, validate, *, usage="online_fee
         allowance=output_tokens(failures,policy)
         try:
             raw = call_text(call, model, sent_packet["system_prompt"], sent_packet["user_text"], images,
-                            attempts=1, retry_delay=0, max_new_tokens=allowance,meter_only=usage=="independent_final")
+                            attempts=1 if usage=="independent_final" else None, max_new_tokens=allowance,meter_only=usage=="independent_final", retry_empty=False)
         except ProviderDispatchPaused:
             raise
         except ModelTransportError as exc:
+            if usage != 'independent_final':
+                raise
             transport_error = exc
         if transport_error is None:
             returned = load(call / "returned.json")

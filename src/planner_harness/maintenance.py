@@ -294,7 +294,11 @@ def _execute(root,folder,job,cfg,model):
     for identity,path in job.get('additional_sources',{}).items():files[identity]=Path(path)
     for path in sorted([*(run/'calls').glob('*/*'),*(run/'call').glob('*')]):
         if path.name in {'input.json','response.txt','experience-exposure.json','continuation-policy.json'}:
-            files[path.relative_to(run).as_posix()]=path
+            identity=path.relative_to(run).as_posix()
+            if path.name == 'response.txt':
+                from .model_answers import effective_response
+                path=effective_response(path.parent)
+            files[identity]=path
     image_catalog={}
     for call in [*(run/'calls').glob('*/input.json'),*(run/'call').glob('input.json')]:
         saved=load(call)
@@ -307,11 +311,13 @@ def _execute(root,folder,job,cfg,model):
     observations = []
     image_focus=[]
     source_index={identity:{'sha256':sha(path),'characters':path.stat().st_size} for identity,path in files.items()}
+    from .model_call import transport_attempts
+    physical_calls=cfg['model_calls']*transport_attempts()
     policy={'version':accounting.VERSION,'mode':'live' if getattr(model,'requires_live_budget',False) else 'offline',
             'cost_control':'count_limits_only','max_call_seconds':cfg['wall_seconds'],
-            'batch':{**accounting.LIMITS,'model_calls':cfg['model_calls'],'tokens':cfg['tokens'],'wall_seconds':cfg['wall_seconds']},
-            'topic':{**accounting.LIMITS,'model_calls':cfg['model_calls'],'tokens':cfg['tokens'],'wall_seconds':cfg['wall_seconds']},
-            'lanes':['independent'],'allocations':{'independent':{**accounting.LIMITS,'model_calls':cfg['model_calls'],'tokens':cfg['tokens'],'wall_seconds':cfg['wall_seconds']}}}
+            'batch':{**accounting.LIMITS,'model_calls':physical_calls,'tokens':cfg['tokens'],'wall_seconds':cfg['wall_seconds']},
+            'topic':{**accounting.LIMITS,'model_calls':physical_calls,'tokens':cfg['tokens'],'wall_seconds':cfg['wall_seconds']},
+            'lanes':['independent'],'allocations':{'independent':{**accounting.LIMITS,'model_calls':physical_calls,'tokens':cfg['tokens'],'wall_seconds':cfg['wall_seconds']}}}
     budget=accounting.install(folder/'accounting',policy,require_live=bool(getattr(model,'requires_live_budget',False)))
     model=accounting.attach(model,accounting.scope(budget,job['id']))
     deadline=None if cfg['wall_seconds'] is None else time.time()+cfg['wall_seconds']
@@ -325,8 +331,15 @@ def _execute(root,folder,job,cfg,model):
         if deadline is not None and time.time()>=deadline:raise TimeoutError('Maintenance time allowance exhausted')
         for identity in image_focus:
             if sha(image_catalog[identity]['path'])!=image_catalog[identity]['sha256']:raise ValueError('Original Planner image changed')
-        raw=call_text(folder/'calls'/f'{number+1:04d}',model,job.get('instructions',PROMPT),json.dumps(model_view(result),ensure_ascii=False,separators=(',',':')),[image_catalog[i]['path'] for i in image_focus],attempts=1)
-        action=decode_object(raw, allow_prose=True);kind=action.get('action');args=action.get('arguments',{})
+        from .model_answers import call_object
+        from .json_output import action_envelope
+        value, selected = call_object(folder/'calls'/f'{number+1:04d}',model,
+            job.get('instructions',PROMPT),json.dumps(model_view(result),ensure_ascii=False,separators=(',',':')),
+            [image_catalog[i]['path'] for i in image_focus],
+            validate=lambda value: action_envelope(value,metadata={'purpose'}))
+        actual_call=Path(selected['call_path'])
+        action=action_envelope(value,metadata={'purpose'})
+        kind=action.get('action');args=action['arguments']
         try:
             if kind=='skill':
                 loaded_skills[args['id']]=job['skills'][args['id']]['text']
@@ -378,7 +391,7 @@ def _execute(root,folder,job,cfg,model):
                 if changes:
                     from .experience_contributions import append
                     append(knowledge.snapshot, changes, job['provenance'])
-                contribution={'maintenance_identity' :signature({'instructions':job.get('instructions',PROMPT),'skills':{k:v['sha256'] for k,v in job['skills'].items()},'references':{k:v['sha256'] for k,v in job['references'].items()},'configuration':cfg,'implementation':job.get('implementation_sha256')}),'changes':copy.deepcopy(changes),'contribution_call':{'path':str(folder/'calls'/f'{number+1:04d}'),'input_sha256':sha(folder/'calls'/f'{number+1:04d}'/'input.json'),'response_sha256':sha(folder/'calls'/f'{number+1:04d}'/'response.txt'),'returned_sha256':sha(folder/'calls'/f'{number+1:04d}'/'returned.json')},'version':VERSION,'provenance':job['provenance'],'job_path':job.get('original_job_path'), 'job_sha256':job.get('original_job_sha256'),'job_id':job['id'],'text':text,'run':job['run'],
+                contribution={'maintenance_identity' :signature({'instructions':job.get('instructions',PROMPT),'skills':{k:v['sha256'] for k,v in job['skills'].items()},'references':{k:v['sha256'] for k,v in job['references'].items()},'configuration':cfg,'implementation':job.get('implementation_sha256')}),'changes':copy.deepcopy(changes),'contribution_call':{'path':str(actual_call),'input_sha256':sha(actual_call/'input.json'),'response_sha256':sha(actual_call/'response.txt'),'returned_sha256':sha(actual_call/'returned.json')},'version':VERSION,'provenance':job['provenance'],'job_path':job.get('original_job_path'), 'job_sha256':job.get('original_job_sha256'),'job_id':job['id'],'text':text,'run':job['run'],
                     'run_state_sha256':job['run_state_sha256'],'knowledge_snapshot_sha256':job['knowledge_snapshot_sha256'],
                     'entry_versions':job['entry_versions'],'event_refs':job['events'],
                     'visibility':job['experience_mode'],'source_index':source_index,'model_call':number+1,
@@ -412,15 +425,16 @@ def drain(root,output,config=None,*,model_factory=None):
         for path in sorted((output/'maintenance/jobs').glob('*/job.json')):
             folder=path.parent;job=load(path);job['original_job_path']=str(path);job['original_job_sha256']=sha(path);state=load(folder/'status.json')
             if job['batch_sha256']!=load(output/'maintenance/batch-settled.json')['batch_sha256']:raise ValueError('Maintenance batch identity changed')
-            if state['status']=='complete' or state['attempts']>=cfg['attempts']:continue
-            # Unknown external work blocks a blind retry of this maintenance job only.
-            if state['status']=='execution_unknown':continue
-            state.update(status='running',attempts=state['attempts']+1);save(folder/'status.json',state)
+            recover_transport=(state.get('failure_kind') in {'model_transport','model_answer_unavailable'}
+                               or state.get('error_type')=='ModelTransportError'
+                               or state['status']=='execution_unknown')
+            if state['status']=='complete' or (state['attempts']>=cfg['attempts'] and not recover_transport):continue
+            state.update(status='running',attempts=max(1,state['attempts']) if recover_transport else state['attempts']+1);save(folder/'status.json',state)
             try:
                 _execute(root,folder/('attempt-'+str(state['attempts'])),job,cfg,model_factory())
                 state['status']='complete'
             except Exception as exc:
-                state.update(status='execution_unknown' if getattr(exc,'outcome_unknown',False) else 'failed',error_type=type(exc).__name__)
+                state.update(status='execution_unknown' if getattr(exc,'outcome_unknown',False) else 'failed',error_type=type(exc).__name__,failure_kind=getattr(exc,'failure_kind',None))
             save(folder/'status.json',state);results.append({'job_id':job['id'],**state})
         bundle=merge_candidates(output)
         # Curation is explicitly invoked; draining contributions does not start another model.

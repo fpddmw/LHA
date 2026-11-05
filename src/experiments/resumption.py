@@ -126,7 +126,7 @@ def method_recoverable(output, topic, method):
     if (output/'accounting/ledger.json').exists() and not (output/'accounting/policy.json').exists():return False
     ledger = a.load_ledger(output / 'accounting') if (output / 'accounting/ledger.json').exists() else {'operations': {}}
     operations = [r for r in ledger['operations'].values() if r['topic'] == topic and r.get('lane') == method]
-    if any(r['status'] not in {'not_submitted', 'reserved'} and not r.get('completion') for r in operations):
+    if any(r.get('kind') != 'model' and r['status'] not in {'not_submitted', 'reserved'} and not r.get('completion') for r in operations):
         return False
     directory = task_directory(output, topic, method)
     run = directory / 'tasks' / (topic + '__' + method) / 'run'

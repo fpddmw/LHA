@@ -83,7 +83,20 @@ class RecoveryTests(unittest.TestCase):
                         'budget_lane': 'full', 'execution': {'mode': 'live',
                         'resource_policy': {'max_wall_seconds': 9000},
                         'renderer': {'backend': 'bernini', 'seed': 42, 'generation': {}}}})
-        Engine(queue, worker, service, service.expand, interval=.005).run(once=True)
+        # Materialize an old release's unresolved state for migration coverage.
+        # Current text calls recover automatically; the operator CLI must still
+        # understand the historical records produced before that change.
+        from planner_harness import model_call
+        current_call=model_call.call_text
+        def historical_call(*args,**kwargs):
+            kwargs.update(attempts=1,retry_delay=0)
+            try:return current_call(*args,**kwargs)
+            except model_call.ModelTransportError:
+                if list(Path(args[0]).glob('attempts/*/unknown.json')):
+                    raise a.ExternalExecutionUnknown('Historical unresolved model call')
+                raise
+        with patch.object(model_call,'call_text',historical_call):
+            Engine(queue, worker, service, service.expand, interval=.005).run(once=True)
         run = worker / 'tasks/001__short__full/run'
         self.assertTrue((run / 'state.json').exists(), queue.summary())
         state = load(run / 'state.json')

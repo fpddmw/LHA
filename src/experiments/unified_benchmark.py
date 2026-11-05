@@ -458,7 +458,7 @@ def planner_once(root, topic, directory, model, *, backend='bernini'):
                        "source_observation": observation}, ensure_ascii=False)
     prompt = PLANNER_ONCE if backend == 'bernini' else PLANNER_ONCE.replace('Bernini V2V', 'Ditto V2V').replace(
         'Bernini\naccepts 512 encoder tokens including its official prefix.', render_profiles.prompt_guidance(backend))
-    raw = call_text(Path(directory) / "call", model, prompt, user, images, attempts=1, max_new_tokens=7000)
+    raw = call_text(Path(directory) / "call", model, prompt, user, images, max_new_tokens=7000)
     parsed = decode_object(raw)
     if set(parsed) != {"prompt"} or not isinstance(parsed["prompt"], str) or not parsed["prompt"].strip():
         raise ValueError("Single Planner call did not return its rendering prompt")
@@ -507,7 +507,7 @@ def qualitative_select(root, topic, candidates, reviews, directory, model):
         report=(reviews[i] or {}).get('report',{}) if i<len(reviews) else {}
         rows.append({'id':identity,'diagnostic_findings':{k:report[k] for k in ('summary','findings') if k in report}})
     user=json.dumps({'original_request':topic['request'],'candidates':rows,'evidence':evidence},ensure_ascii=False)
-    raw=call_text(directory/'call',model,SELECTION_PROMPT,user,images,attempts=1,max_new_tokens=7000)
+    raw=call_text(directory/'call',model,SELECTION_PROMPT,user,images,max_new_tokens=7000)
     answer=decode_object(raw)
     ids=[r['id'] for r in rows];refs={r['id']:r for r in evidence}
     if set(answer)!={'selected','reason','evidence_refs'} or answer['selected'] not in ids or not isinstance(answer['reason'],str) or not answer['reason'].strip():

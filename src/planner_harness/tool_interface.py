@@ -18,11 +18,31 @@ SIGNATURES = {
     "finish": '{video,message,stop_reason?}',
 }
 
+# These are consumed by the current actions, including historical aliases.
+# Explicit unsupported fields are errors, never silently discarded defaults.
+PARAMETERS = {
+    "browse": {"id"},
+    "search": {"query", "scope", "limit"},
+    "read": {"targets", "id", "section", "start_line", "start_char", "max_chars"},
+    "view_reference": {"id"},
+    "video": {"id", "ids", "video", "videos", "raw", "compare_prompts"},
+    "observe": {"video", "videos", "video_id", "observation", "mode", "start", "end", "count", "page", "crop", "indices"},
+    "history": {"event_id", "feedback", "review", "catalog", "video", "videos", "start_line", "start_char", "raw", "result_only", "compare_prompts"},
+    "note": {"text", "append"},
+    "workspace": {"summary", "nodes", "remove_nodes"},
+    "delivery_candidate": {"video", "video_id", "id"},
+    "generate": {"input_video", "input_id", "prompt", "seed", "justification", "review_focus"},
+    "review": {"video_id", "summary", "findings"},
+    "finish": {"video", "video_id", "id", "message", "stop_reason"},
+}
+
 
 def reference():
     return "Use one JSON operation `{action, arguments}`. Available actions:\n" + "\n".join(
         f"- `{name} {signature}`" for name, signature in SIGNATURES.items()
-    ) + ("\n\nOptional top-level `note` and `workspace` updates can accompany an action. "
+    ) + ("\n\nAction parameters may also be supplied directly beside `action`; equivalent flat/nested forms are accepted. "
+         "Conflicting duplicate values and unsupported parameter names return a specific error. "
+         "Optional top-level `note` and `workspace` updates can accompany an action. "
          "`extra_checks` accepts text or a list of texts; `focus` accepts text or a list "
          "of texts joined in the supplied order. These forms have the same meaning.")
 
@@ -54,26 +74,36 @@ def normalize(response):
     if not isinstance(response, dict):
         raise ValueError("Return an object with action and arguments")
     result = copy.deepcopy(response)
-    if "tool" in result:
-        _alias(result, "tool", "action")
-    action = result.get("action")
+    action = result.get("action", result.get("tool"))
     if action not in SIGNATURES:
         raise ValueError("Unknown action; available: " + ", ".join(SIGNATURES))
-    args = result.setdefault("arguments", {})
-    if action == "read" and isinstance(args, (str, list)):
-        args = {"targets": args}
-        result["arguments"] = args
-    if not isinstance(args, dict):
-        raise ValueError(f"{action} arguments: {SIGNATURES[action]}")
+    if action == "read" and isinstance(result.get("arguments"), (str, list)):
+        result["arguments"] = {"targets": result["arguments"]}
+    from .json_output import action_envelope
+    metadata = {"purpose", "note", "workspace", "review"}
+    # A history review ID is a retrieval argument; an attached review object is
+    # a Planner self-review and retains its original top-level meaning.
+    if action == "history" and isinstance(result.get("review"), (str, list)):
+        metadata.remove("review")
+    result = action_envelope(result, metadata=metadata)
+    args = result["arguments"]
+    unknown = set(args) - PARAMETERS[action]
+    if unknown:
+        raise ValueError(f"{action} unsupported parameters: {', '.join(sorted(unknown))}; use {SIGNATURES[action]}")
     if action == "read":
         if "targets" not in args and "id" in args:
             args = {"targets": [args]}
             result["arguments"] = args
+        if "targets" in args and set(args) != {"targets"}:
+            raise ValueError("Put read pagination and section inside each target")
         targets = args.get("targets", [])
         if isinstance(targets, (str, dict)):
             targets = [targets]
         if isinstance(targets, list):
             args["targets"] = [{"id": t} if isinstance(t, str) else t for t in targets]
+            for target in args["targets"]:
+                if isinstance(target, dict) and set(target) - {"id", "section", "start_line", "start_char", "max_chars"}:
+                    raise ValueError("Unsupported read target parameter; use id, section, start_line, start_char, max_chars")
     if action == "video":
         _alias(args, "video", "id")
         _alias(args, "videos", "ids")

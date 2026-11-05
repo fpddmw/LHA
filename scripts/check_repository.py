@@ -23,6 +23,9 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 CURRENT = (
+    "test_subscription_submission",
+    "test_runtime_completion",
+    "test_subscription_stream_recovery",
     "test_api_backend",
     "test_chatgpt_subscription",
     "test_configuration_boundaries",

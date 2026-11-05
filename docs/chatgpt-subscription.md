@@ -40,7 +40,9 @@ python scripts/run_creative_benchmark.py prepare \
 
 每次请求发送完整所需上下文；系统提示映射为 `instructions`，截图以原始图像字节发送。使用 `store:false`、`stream:true`，不发送此授权通道不支持的 `max_output_tokens`、temperature、previous_response_id 等字段。项目不额外设置订阅 token 或金额上限；账号自身的服务额度仍由 OpenAI 决定。
 
-客户端按 output/content index 与 message ID 组装流式文本，再选择最后一条 `phase: final_answer` 助手消息。`response.completed.output=[]` 或空的 done 快照保留已经收到的同一消息文本。同一次响应中的 `commentary` 不进入 Planner 动作解析；未提供 phase 的兼容响应使用最后一条未标注消息。真正的空答复保留原调用与 usage，Planner 停在同一 pending event，等待恢复，不自动发下一事件。原始流和中间消息完整保存在调用证据中。
+订阅客户端通过 `lha.submit_result` 原生 custom tool 提交本步结果，设置 `tool_choice: required` 和 `parallel_tool_calls: false`。工具输入直接承载现有 JSON 动作或所请求的报告，现有 harness 执行一个动作，并在下一请求提供真实结果；不增加模型调用。提交说明完整定义于 `src/vlm/response_contract.py`，实际传输版本记为 `responses-sse-submission-v4`。
+
+客户端按 output/content index 与消息 ID 组装工具输入和文本，`response.completed.output=[]` 或空的 done 快照保留已经收到的内容。只有注册的提交工具输入进入执行层，过程消息不当作动作。兼容历史流时选择最后一条 `phase: final_answer`，无 phase 时使用最后一条未标注消息。真正空答复先尝试从原始流找回正文，仍为空则由原逻辑调用自动重试；每次响应和 usage 保留，已有动作、视频及评价继续复用。格式纠正在原决策步骤内完成。
 
 已有空缓存可从其原始完成流零调用恢复：
 
@@ -55,7 +57,7 @@ python scripts/recover_subscription_answer.py --run "$RUN" --event event-0010 --
 
 完成依据是实际 SSE 帧中的 `response.completed` 和响应对象的 `status: completed`。部分中转会把真实 SSE 标成 `application/json`，客户端保留这个头部差异并按实际流解析；普通 JSON 正文和没有终态的残缺流仍不视为完成。
 
-只有 `response.completed` 才保存为成功回答。明确失败和截断保留原因及实际 usage；连接中断保留未确认状态，由原运行的恢复入口处理。原请求已经保存完整回答时直接收取，不重复提交。模型调用沿用在线任务的 2.5 小时期限以及原有账本。
+只有 `response.completed` 且有可用正文才作为返回结果交给 harness。明确失败、截断和空结果保留原因及实际 usage；自动恢复使用同一逻辑调用，每个恢复窗口默认 12 次传输尝试，已保存的完整回答直接收取。恢复扫描跳过历史备份。调用沿用任务配置和原有账本，不重置生成次数。
 
 多卡同机进程共享同一受保护凭证文件，串行续期。跨主机部署时，先指定一个运行宿主为凭证续期负责人；不要复制同一可旋转 refresh token 后让多台主机独立续期。官方支持在本机完成授权后转移到自托管主机，该主机接管后续续期并保留独立宿主标识；使用多个独立运行宿主时应各自完成授权或通过单一凭证负责人转发调用。
 

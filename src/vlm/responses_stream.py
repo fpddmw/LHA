@@ -48,9 +48,17 @@ class ResponseOutput:
     def __init__(self):
         self.items = {}
         self.parts = {}
+        self.tool_inputs = {}
         self.streamed = False
 
     def item(self, index, item):
+        if item.get('type') == 'custom_tool_call':
+            current = self.items.setdefault(index, {'type': 'custom_tool_call'})
+            current.update({k: item[k] for k in ('id', 'type', 'name', 'namespace', 'call_id', 'status') if k in item})
+            value = item.get('input')
+            if isinstance(value, str) and (value or index not in self.tool_inputs):
+                self.tool_inputs[index] = value
+            return
         if item.get('type') != 'message':
             return
         current = self.items.setdefault(index, {'type': 'message', 'role': 'assistant'})
@@ -75,6 +83,17 @@ class ResponseOutput:
         if kind in {'response.output_item.added', 'response.output_item.done'}:
             self.item(index, event.get('item') or {})
             self.streamed = True
+        elif kind in {'response.custom_tool_call_input.delta', 'response.custom_tool_call_input.done'}:
+            item = self.items.setdefault(index, {'type': 'custom_tool_call'})
+            if event.get('item_id'):
+                item.setdefault('id', event['item_id'])
+            value = event.get('delta' if kind.endswith('.delta') else 'input', '')
+            if isinstance(value, str):
+                if kind.endswith('.delta'):
+                    self.tool_inputs[index] = self.tool_inputs.get(index, '') + value
+                elif value or index not in self.tool_inputs:
+                    self.tool_inputs[index] = value
+            self.streamed = True
         elif kind in {'response.output_text.delta', 'response.output_text.done', 'response.content_part.done'}:
             item = self.items.setdefault(index, {'type': 'message', 'role': 'assistant'})
             if event.get('item_id'):
@@ -94,9 +113,24 @@ class ResponseOutput:
         output = []
         for index, item in sorted(self.items.items()):
             row = copy.deepcopy(item)
-            row['content'] = [{'type': 'output_text', 'text': text} for (i, _), text in sorted(self.parts.items()) if i == index]
+            if row.get('type') == 'custom_tool_call':
+                row['input'] = self.tool_inputs.get(index, '')
+            else:
+                row['content'] = [{'type': 'output_text', 'text': text} for (i, _), text in sorted(self.parts.items()) if i == index]
             output.append(row)
-        text, selection = final_answer({'output': output})
+        from .response_contract import is_submission
+        calls = [row for row in output if row.get('type') == 'custom_tool_call']
+        if calls:
+            selected = calls[0] if len(calls) == 1 and is_submission(calls[0]) else None
+            text = selected['input'] if selected else ''
+            selection = {
+                'selection': 'tool_submission' if selected else 'invalid_tool_submission',
+                'selected_message_id': selected.get('id') if selected else None,
+                'selected_call_id': selected.get('call_id') if selected else None,
+                'tool_calls': [{k: row.get(k) for k in ('id', 'name', 'namespace', 'call_id')} for row in calls],
+            }
+        else:
+            text, selection = final_answer({'output': output})
         selection['selection_source'] = 'assembled_stream' if self.streamed else 'response.output'
         return text, selection
 

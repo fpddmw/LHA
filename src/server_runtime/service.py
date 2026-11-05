@@ -142,13 +142,14 @@ class Service:
         return rows
 
     def resources_unknown(self):
-        return bool(self.unresolved_resources())
+        return self.gpu_unknown()
 
     def gpu_unknown(self):
         return any(r["resource"] == "gpu" for r in self.unresolved_resources())
 
     def blocks_dispatch(self, job):
-        # An old unknown model request quarantines its topic, not this GPU.
+        # Text requests recover under their logical-call lock. Uncertain GPU
+        # execution retains its resource ownership and cannot be submitted twice.
         if getattr(self, 'admitted_topic', None):
             payload = job.get('payload', {})
             task = load(payload['request']).get('accounting_scope', {}) if 'request' in payload else payload.get('task', {})
@@ -156,22 +157,7 @@ class Service:
             lane = task.get('lane', task.get('budget_lane'))
             if topic != self.admitted_topic or lane != self.admitted_lane:
                 return True
-        rows = self.unresolved_resources()
-        if any(r["resource"] == "gpu" for r in rows):
-            return True
-        payload = job.get("payload", {})
-        if "request" in payload:
-            if not rows:
-                return False
-            try:
-                scope = load(payload["request"]).get("accounting_scope", {})
-            except (OSError, ValueError, TypeError, AttributeError):
-                return False
-            topic = scope.get("topic")
-        else:
-            task = payload.get("task", {})
-            topic = task.get("budget_topic", task.get("id"))
-        return any(r["topic"] == topic for r in rows)
+        return self.gpu_unknown()
 
     def task_scope(self, task, run):
         """Use explicit batch accounting, or the same per-task defaults as standalone runs."""
@@ -278,7 +264,7 @@ class Service:
                                 and sent["system_prompt"] == prepared["system_prompt"]
                             )
             from planner_harness.resumption import planner_ready
-            if completed_response or ("task" in job["payload"] and planner_ready(run)):
+            if planner_ready(run) and (completed_response or "task" in job["payload"]):
                 return self(job, directory)
         if job['kind'] == 'tool':
             from planner_harness.resumption import calls_ready
@@ -322,6 +308,8 @@ class Service:
                 ready = (response.exists() and not load(response).get('outcome_unknown')) or (
                     not response.exists() and not path.with_name('render-started.json').exists() and calls_ready(path.parent))
                 ready = ready and row['state'] in {'failed','needs_review'}
+                if response.exists() and load(response).get('failure_kind') == 'model_answer_unavailable':
+                    ready = ready and calls_ready(path.parent)
             if ready:
                 folder = self.directory/'jobs'/str(row['id'])
                 history = folder/'recovery-history'
@@ -509,6 +497,12 @@ class Service:
                 raise ValueError("Signed tool request changed")
             response_path = path.with_name("response.json")
             with RunLock(path.parent / "worker"):
+                if response_path.exists() and request['kind'] == 'critique':
+                    previous = load(response_path)
+                    from planner_harness.resumption import archive_remove, calls_ready
+                    if previous.get('failure_kind') == 'model_transport' or (
+                            previous.get('failure_kind') == 'model_answer_unavailable' and calls_ready(path.parent)):
+                        archive_remove(response_path, path.parent/'recovery-history')
                 if response_path.exists():
                     response = load(response_path)
                     if (
@@ -700,7 +694,16 @@ class Service:
                         if getattr(exc, "failure_kind", None) == "model_transport":
                             response["failure_kind"] = "model_transport"
                             response["retryable"] = exc.retryable
+                        elif getattr(exc, 'failure_kind', None) == 'model_answer_unavailable':
+                            response['failure_kind'] = 'model_answer_unavailable'
                     save(response_path, response)
+            if response.get('failure_kind') == 'model_transport':
+                from planner_harness.model_call import ModelTransportError
+                raise ModelTransportError('Online review service unavailable; retain the original tool job',
+                                          retryable=response.get('retryable', True))
+            if response.get('failure_kind') == 'model_answer_unavailable':
+                from planner_harness.model_answers import ModelAnswerUnavailable
+                raise ModelAnswerUnavailable('Online review has no usable report; retain the original tool job')
             if self.config.get("workflow") == "creative_loop_v1":
                 if response.get("task_deadline"):
                     self.freeze_task_result(path, request, response)

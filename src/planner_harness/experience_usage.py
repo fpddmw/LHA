@@ -228,6 +228,7 @@ def artifact_reference(run, state, path, expected=None, *, topic_archive=None, v
 
 def decision_records(run, state, surfaces, mentions):
     """Join existing records for an offline reader; no judgment of explanation quality."""
+    from .model_answers import effective_response
     result = []
     proposals = state.get("delivery_reviews", {})
     for event in state.get("events", []):
@@ -249,7 +250,7 @@ def decision_records(run, state, surfaces, mentions):
             "call_status": call_status(run / "calls" / identity),
             "model_input": artifact_reference(run, state, run / "calls" / identity / "input.json"),
             "model_response": artifact_reference(
-                run, state, run / "calls" / identity / "response.txt"
+                run, state, effective_response(run / 'calls' / identity)
             ),
             "experience_exposure": [s for s in surfaces if s["call_id"] == identity],
             "literal_references": [m for m in mentions if m["event_id"] == identity],
