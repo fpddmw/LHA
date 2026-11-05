@@ -66,6 +66,8 @@ python scripts/run_creative_benchmark.py recover-pe-loop \
 
 该命令只重新开放原任务的结算和队列位置，保存恢复原因；它不调用模型、不重置预算或删除阶段记录。之后用原 `run` 命令接续。仍在执行或结果未知的外部请求会阻止恢复，历史失败结算单独存档。
 
+选片引用使用本次输入顶层 `evidence` 中的精确 ID；Critic 旧观察里的 ID 属于各自的观察记录。回复格式或引用不合要求时，在原 selection 步骤内调用已有的有界纠正流程，由模型重新提交回答。原始回答保留在 `call/response.txt`，纠正及实际采纳的回答记录在 `call/format-recovery/`，`decision.json` 的 `response_call` 与 `response_sha256` 指向实际采纳的调用。代码不猜测或替换图片引用。第三轮选片发生这类失败时，以上恢复入口复用前三轮提示词、视频和 Critic，仅接续第三轮选片及尚未进行的第四轮。
+
 ### 提示词长度恢复
 
 Bernini 用官方 tokenizer 计算清洗后的提示词和官方前缀，共 512 token；Ditto 计算提示词本身的 512 token。超长请求在 GPU 生成前返回失败，并保存 `prompt-length.json` 中的实际计数。

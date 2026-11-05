@@ -273,7 +273,7 @@ def execute(topic, batch, runtime, directory, scope):
             if decision is None:
                 raise
             stop = str(exc)
-            stop_kind = "interrupted_delivery"
+            stop_kind = "selection_unavailable_delivery" if phase == "select" else "interrupted_delivery"
         except Exception as exc:
             save(directory / "progress.json", {"round": number + 1, "phase": phase,
                  "status": "awaiting_recovery", "error_type": type(exc).__name__, "reason": str(exc)})

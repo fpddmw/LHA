@@ -231,8 +231,7 @@ def settle_pe_interruption(output, topic, device, *, execute=False):
             refine = settle if phase == "enhance" else unavailable
             review = settle if phase == "review" else unavailable
 
-            def choose(self, *args, **kwargs):
-                raise accounting.ExternalExecutionUnknown(progress["reason"])
+            choose = settle if phase == "select" else unavailable
 
         root = Path(__file__).resolve().parents[2]
         result = unified.execute_method(root, output, task, "pe-loop", batch, CachedRuntime())
