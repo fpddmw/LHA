@@ -55,6 +55,10 @@ python scripts/recover_subscription_answer.py --run "$RUN" --event event-0010 --
 
 升级接续使用独立的新源码目录，与旧冻结源码保持同一目录层级。新目录的 `src/`、`scripts/` 使用修复版；数据、知识、模型及数值后端可链接到原冻结资产，使原 source/input plan 的绝对路径继续有效。使用新目录的 `scripts/run_creative_benchmark.py run --output <原批次> --host-config <原配置> --devices 0 1`，入口 ROOT 和子 worker 导入均指向新源码。原冻结目录保持原样。
 
+维护动作统一为 `{"action":"skill","arguments":{"id":"lha-experience-analysis"}}`，同时兼容历史实际返回的 `{"skill":{"id":"lha-experience-analysis"}}` 和 `{"skill":"lha-experience-analysis"}`。缺少动作的回复在原步骤内纠正；加载成功后，Skill 正文进入下一次输入的 `loaded_skills`。
+
+已经交付、仅维护失败的任务使用 `python scripts/run_creative_benchmark.py recover-maintenance --output <原批次> --topic <原题目ID>`。该入口直接接续指定题目的维护，不经过 GPU 队列；模型沿用批次配置。程序识别旧维护输入中反复出现的 `Choose an available maintenance action` 且 `loaded_skills={}`，在原维护 attempt 下使用 `calls-v2/` 重新开展维护；原 `calls/` 和失败记录保留。有正常进展的旧维护继续使用原调用缓存。已完成的视频、Critic 和选片不重跑，维护成功后重复运行直接复用结果。维护读取任务绑定的经验快照，预经验组与原在线任务读取相同预经验。
+
 完成依据是实际 SSE 帧中的 `response.completed` 和响应对象的 `status: completed`。部分中转会把真实 SSE 标成 `application/json`，客户端保留这个头部差异并按实际流解析；普通 JSON 正文和没有终态的残缺流仍不视为完成。
 
 只有 `response.completed` 且有可用正文才作为返回结果交给 harness。明确失败、截断和空结果保留原因及实际 usage；自动恢复使用同一逻辑调用，每个恢复窗口默认 12 次传输尝试，已保存的完整回答直接收取。恢复扫描跳过历史备份。调用沿用任务配置和原有账本，不重置生成次数。

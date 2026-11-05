@@ -43,6 +43,7 @@ skill {id}; browse {id}; search {query};
 read {source:run|knowledge|reference,id,start_line?,start_char?,max_chars?};
 view_image {ids}; observe {video_id,start?,end?,count?,crop?}; note {text};
 contribute {text,changes?}.
+Example: {"action":"skill","arguments":{"id":"lha-experience-analysis"}}.
 
 A change uses op=create with id,title,text,summary,questions?,renderers?,
 layer?,tracks?,families?,stages?;
@@ -326,19 +327,20 @@ def _execute(root,folder,job,cfg,model):
             'run_sources':source_index,'maintenance_references':{k:{'sha256':v['sha256'],'scope':'Post-task writing/usage guidance, not original online exposure'} for k,v in job.get('references',{}).items()},'image_catalog':image_catalog,'video_catalog':video_catalog,'knowledge_entrances':knowledge.overview(), 'library_scope':'Post-task private library; online exposure remains the run knowledge-snapshot', 'maintenance_snapshot':library}
     result['writing_references'] = writing_references(knowledge)
     loaded_skills={};reading_cache=[];notes=''
+    from .maintenance_actions import normalize as normalize_action, instructions, calls_directory
+    calls = calls_directory(folder)
     task_identity=copy.deepcopy(result['job'])
     for number in range(cfg['model_calls']):
         if deadline is not None and time.time()>=deadline:raise TimeoutError('Maintenance time allowance exhausted')
         for identity in image_focus:
             if sha(image_catalog[identity]['path'])!=image_catalog[identity]['sha256']:raise ValueError('Original Planner image changed')
         from .model_answers import call_object
-        from .json_output import action_envelope
-        value, selected = call_object(folder/'calls'/f'{number+1:04d}',model,
-            job.get('instructions',PROMPT),json.dumps(model_view(result),ensure_ascii=False,separators=(',',':')),
+        value, selected = call_object(calls/f'{number+1:04d}',model,
+            instructions(job.get('instructions',PROMPT)),json.dumps(model_view(result),ensure_ascii=False,separators=(',',':')),
             [image_catalog[i]['path'] for i in image_focus],
-            validate=lambda value: action_envelope(value,metadata={'purpose'}))
+            validate=lambda value: normalize_action(value, skills=job['skills']))
         actual_call=Path(selected['call_path'])
-        action=action_envelope(value,metadata={'purpose'})
+        action=normalize_action(value, skills=job['skills'])
         kind=action.get('action');args=action['arguments']
         try:
             if kind=='skill':

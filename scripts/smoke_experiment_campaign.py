@@ -15,6 +15,8 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 COVERAGE = {
+    'test_maintenance_actions': 'Actual maintenance action spellings, Skill text delivery, format correction and maintenance-only recovery after two failed attempts',
+    'test_subscription_submission': 'Native registered result submission, streamed custom tool inputs and separation from commentary',
     'test_subscription_submission': 'Native result submission, four generations and reviews, corrected delivery, recovery and maintenance through the production CLI',
     'test_runtime_completion': 'Empty and invalid replies recover within the original decision, retaining completed work',
     'test_subscription_stream_recovery': 'Saved stream assembly and original-call recovery',

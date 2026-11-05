@@ -228,8 +228,8 @@ def activate(root, output, contribution):
             raise ValueError("Original training contribution call changed")
     if load(folder / "returned.json")["sha256"] != call["response_sha256"]:
         raise ValueError("Training contribution has no original returned answer")
-    from .json_output import action_envelope
-    action = action_envelope(decode_object((folder / 'response.txt').read_text(),allow_prose=True),metadata={'purpose'})
+    from .maintenance_actions import normalize
+    action = normalize(decode_object((folder / 'response.txt').read_text(),allow_prose=True))
     if (
         action.get("action") != "contribute"
         or action["arguments"].get("text") != value["text"]

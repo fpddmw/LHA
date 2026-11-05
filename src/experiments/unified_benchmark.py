@@ -223,7 +223,7 @@ def maintain_training_task(root,output,topic,batch,profile,config,model_factory=
     from planner_harness.maintenance import enqueue
     from planner_harness.training_experience import maintain,current,base_snapshot
     previous=training_completion(output,topic['id'])
-    if previous['status']!='pending':return previous
+    if previous['status'] not in {'pending','failed','execution_unknown'}:return previous
     output=Path(output)
     marker=output/'maintenance/training-errors'/(topic['id']+'.json')
     method = 'pre-experience' if 'pre-experience' in topic.get('methods', batch['arms']) else TRAINING_METHOD

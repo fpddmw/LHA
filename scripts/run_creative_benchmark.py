@@ -10,7 +10,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["prepare", "preflight", "provider-preflight", "recover-direct", "recover-pe-loop", "run", "status"])
+    parser.add_argument("command", choices=["prepare", "preflight", "provider-preflight", "recover-direct", "recover-pe-loop", "recover-maintenance", "run", "status"])
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--host-config", type=Path)
     parser.add_argument("--backend", choices=["bernini", "ditto"], default=None)
@@ -85,6 +85,16 @@ def main():
         verify_batch(ROOT, args.output)
         from experiments.recovery import recover_pe_loop
         print(json.dumps(recover_pe_loop(args.output, args.topic, args.reason)))
+    elif args.command == 'recover-maintenance':
+        if not args.topic:
+            parser.error('Maintenance recovery requires --topic')
+        batch = verify_batch(ROOT, args.output)
+        from experiments.unified_benchmark import training_topic, maintain_training_task
+        topic = next((t for t in batch['topics'] if t['id'] == args.topic), None)
+        if topic is None or not training_topic(topic, batch):
+            parser.error('Choose an existing topic with post-task maintenance')
+        profile = load(args.output / 'maintenance/profile.json')
+        print(json.dumps(maintain_training_task(ROOT, args.output, topic, batch, profile, None)))
     elif args.command == "recover-direct":
         if args.device is None or not args.topic:
             parser.error("Direct recovery requires --device and --topic")
