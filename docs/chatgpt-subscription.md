@@ -57,7 +57,11 @@ python scripts/recover_subscription_answer.py --run "$RUN" --event event-0010 --
 
 维护动作统一为 `{"action":"skill","arguments":{"id":"lha-experience-analysis"}}`，同时兼容历史实际返回的 `{"skill":{"id":"lha-experience-analysis"}}` 和 `{"skill":"lha-experience-analysis"}`。缺少动作的回复在原步骤内纠正；加载成功后，Skill 正文进入下一次输入的 `loaded_skills`。
 
+维护阅读按实际返回页面去重，在当前维护期间保留所有不同页面，并提供 `next_page` 动作继续分页。单页最多 8000 字符；改变更大的请求长度不会产生多个缓存副本。读取已保存的模型输入时，优先展示解析后的 `user_text`，随后展示原系统指令，原文件保持完整。`operation_history` 记录已完成动作；维护自己的 `maintenance_progress` 显示当前步骤，最后一步用于模型提交 `contribute`。这些信息仅用于事后维护，在线 Planner 的模糊预算提示保持原设计。
+
 已经交付、仅维护失败的任务使用 `python scripts/run_creative_benchmark.py recover-maintenance --output <原批次> --topic <原题目ID>`。该入口直接接续指定题目的维护，不经过 GPU 队列；模型沿用批次配置。程序识别旧维护输入中反复出现的 `Choose an available maintenance action` 且 `loaded_skills={}`，在原维护 attempt 下使用 `calls-v2/` 重新开展维护；原 `calls/` 和失败记录保留。有正常进展的旧维护继续使用原调用缓存。已完成的视频、Critic 和选片不重跑，维护成功后重复运行直接复用结果。维护读取任务绑定的经验快照，预经验组与原在线任务读取相同预经验。
+
+若旧版本在最后一步仍返回阅读而耗尽维护次数，恢复会从已有回答重建前面的阅读和 Skill 状态，仅在最后一步的 `submission/` 中请求模型提交自己的结论。原最后一步回答保留；步骤上限、token 配置与实际调用账本沿用原值。内容是否形成条目由模型提交的 `changes` 决定，程序不生成“无新增”结论。
 
 完成依据是实际 SSE 帧中的 `response.completed` 和响应对象的 `status: completed`。部分中转会把真实 SSE 标成 `application/json`，客户端保留这个头部差异并按实际流解析；普通 JSON 正文和没有终态的残缺流仍不视为完成。
 

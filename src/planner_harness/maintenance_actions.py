@@ -10,7 +10,13 @@ PROTOCOL = 'maintenance-actions-v2'
 INSTRUCTION = '''Submit one JSON object with "action" and "arguments", for example:
 {"action":"skill","arguments":{"id":"lha-experience-analysis"}}
 {"action":"read","arguments":{"source":"knowledge","id":"EX-P-every-plane"}}
-After each operation, use its returned result to choose the next operation.'''
+After each operation, use its returned result to choose the next operation.
+Read returns at most 8000 characters. Use its next_page action to continue;
+increasing max_chars past 8000 returns the same page. Unique pages remain in
+retained_reading, and operation_history records completed operations.
+Finish with {"action":"contribute","arguments":{"text":"<your findings>","changes":[]}};
+include supported entry changes when useful. maintenance_progress marks the final
+step for contribution submission within the existing allowance.'''
 
 PARAMETERS = {
     'skill': {'id'}, 'browse': {'id'}, 'search': {'query'},
@@ -24,7 +30,7 @@ REQUIRED_TEXT = {
 }
 
 
-def normalize(value, *, skills=None):
+def normalize(value, *, skills=None, final_step=False):
     """Accept unambiguous captured spellings; reject missing/unknown actions."""
     value = copy.deepcopy(value)
     if isinstance(value, dict) and not {'action', 'tool'}.intersection(value):
@@ -40,6 +46,9 @@ def normalize(value, *, skills=None):
     name, args = value.get('action'), value['arguments']
     if name not in PARAMETERS:
         raise ValueError('Choose a maintenance action: ' + ', '.join(PARAMETERS))
+    if final_step and name != 'contribute':
+        raise ValueError('This is the final maintenance step: submit action contribute with your findings; '
+                         'use changes: [] for a prose-only conclusion. The preceding operation was not executed.')
     if name == 'observe' and 'video' in args:
         from .tool_interface import _alias
         _alias(args, 'video', 'video_id')

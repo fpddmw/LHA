@@ -328,17 +328,23 @@ def _execute(root,folder,job,cfg,model):
     result['writing_references'] = writing_references(knowledge)
     loaded_skills={};reading_cache=[];notes=''
     from .maintenance_actions import normalize as normalize_action, instructions, calls_directory
+    from .maintenance_reading import retain as retain_reading, progress, submission_call, input_view
     calls = calls_directory(folder)
+    operation_history=[]
     task_identity=copy.deepcopy(result['job'])
     for number in range(cfg['model_calls']):
         if deadline is not None and time.time()>=deadline:raise TimeoutError('Maintenance time allowance exhausted')
         for identity in image_focus:
             if sha(image_catalog[identity]['path'])!=image_catalog[identity]['sha256']:raise ValueError('Original Planner image changed')
         from .model_answers import call_object
-        value, selected = call_object(calls/f'{number+1:04d}',model,
+        final_step=number+1==cfg['model_calls']
+        result['maintenance_progress']=progress(number+1,cfg['model_calls'])
+        result['operation_history']=operation_history
+        call=submission_call(calls/f'{number+1:04d}',final_step)
+        value, selected = call_object(call,model,
             instructions(job.get('instructions',PROMPT)),json.dumps(model_view(result),ensure_ascii=False,separators=(',',':')),
             [image_catalog[i]['path'] for i in image_focus],
-            validate=lambda value: normalize_action(value, skills=job['skills']))
+            validate=lambda value: normalize_action(value, skills=job['skills'], final_step=final_step))
         actual_call=Path(selected['call_path'])
         action=normalize_action(value, skills=job['skills'])
         kind=action.get('action');args=action['arguments']
@@ -364,7 +370,10 @@ def _execute(root,folder,job,cfg,model):
             elif kind=='read' and args.get('source')=='run':
                 path=files[args['id']]
                 if sha(path)!=source_index[args['id']]['sha256']:raise ValueError('Original run source changed')
-                result=page(path.read_text(),args.get('start_line',1),max_chars=min(8000,args.get('max_chars',6000)),start_char=args.get('start_char',0),split_long_lines=True)
+                text=path.read_text()
+                if path.name=='input.json':text=input_view(text)
+                result=page(text,args.get('start_line',1),max_chars=min(8000,args.get('max_chars',6000)),start_char=args.get('start_char',0),split_long_lines=True)
+                if path.name=='input.json':result['read_view']='Saved call JSON with user_text decoded and shown first; original file unchanged.'
             elif kind=='observe':
                 observed = observe_saved(video_catalog, folder, args, 'maintenance-'+str(number+1))
                 observations.append(observed)
@@ -403,15 +412,12 @@ def _execute(root,folder,job,cfg,model):
                 return contribution
             else:raise ValueError('Choose an available maintenance action')
         except (ValueError,KeyError,TypeError) as exc:result={'error':str(exc),'scope':'No render, score or publication was submitted'}
-        if kind in {'read','search','browse'}:
-            reading_cache[:] = [row for row in reading_cache if row['action'] != action]
-            reading_cache.append({'action':action,'result':copy.deepcopy(result)})
-            while reading_cache and len(json.dumps(reading_cache,ensure_ascii=False))>24000:reading_cache.pop(0)
+        retain_reading(reading_cache,operation_history,action,result,number+1)
         result={'current_result':result,'task':task_identity,'original_request':load(run/'state.json')['request']['text'],
                 'knowledge_mode':job['experience_mode'],'loaded_skills':loaded_skills,'retained_reading':reading_cache,
                 'writing_references':writing_references(knowledge),
                 'notes':notes,'available_skills':list(SKILLS),'run_sources':source_index,'maintenance_references':{k:v['sha256'] for k,v in job.get('references',{}).items()},'image_catalog':image_catalog,'video_catalog':video_catalog,'observations':observations,'attached_images':image_focus,
-                'archive_scope':'Older exact pages remain available through read; only the bounded cache is omitted.'}
+                'archive_scope':'Unique pages read in this maintenance session remain in retained_reading; original files remain available through read.'}
     raise RuntimeError('Maintenance call allowance exhausted')
 
 
