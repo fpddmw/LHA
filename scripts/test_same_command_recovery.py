@@ -150,14 +150,16 @@ class Commands(Fixture):
     def test_transport_recovery_keeps_original_or_explicit_allowance(self):
         from planner_harness.resumption import call_ready
         call = self.root/'transport'
+        save(call/'input.json', {'model': 'fixture'})
         save(call/'allowance.json', {'first':1, 'last':1})
         save(call/'attempts/01/failed.json', {'retryable':False})
         self.assertFalse(call_ready(call))
         before = sha(call/'allowance.json')
         self.assertFalse(call_ready(call))
         self.assertEqual(sha(call/'allowance.json'),before)
-        # Only an explicit prior recovery changes the range, never the run command.
-        save(call/'allowance.json', {'first':2, 'last':2})
+        # Only explicit recovery advances past a permanent provider rejection.
+        from planner_harness.model_call import reopen_call
+        reopen_call(call, 'Provider access restored.', 1)
         self.assertTrue(call_ready(call))
         save(call/'attempts/02/submitted.json', {'attempt':2})
         self.assertFalse(call_ready(call))

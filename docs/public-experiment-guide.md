@@ -280,6 +280,19 @@ knowledge, render settings and model settings also stay fixed. No additional top
 are admitted by restarting. Main `full-experience` depends on its own
 `pre-experience` settlement; self-review retains its separate dependency and owner.
 
+An explicit permanent API rejection, such as HTTP 403, holds that logical call
+across worker exits, GPU reassignment and repeated batch starts. After provider
+access is restored, authorize the existing call through the existing recovery entry:
+
+```bash
+python scripts/manage_creative_run.py retry-planner --run "$RUN" \
+  --reason "Provider access restored" --extra-attempts 1
+```
+
+This records permission for the same saved request. The next batch run can reclaim
+the task with that range; automatic transport windows keep its authorized size.
+Previous failed submissions, accounting and generation usage remain recorded.
+
 Inspect a Direct attempt without changing its queue, receipts or accounting:
 
 ```bash

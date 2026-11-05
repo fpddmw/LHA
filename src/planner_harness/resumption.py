@@ -32,6 +32,9 @@ def call_ready(directory):
     directory = Path(directory)
     if (directory / 'response.txt').exists():
         return True
+    from .transport_recovery import blocked_permanent_failure
+    if blocked_permanent_failure(directory):
+        return False
     attempts = directory / 'attempts'
     allowance = load(directory / 'allowance.json') if (directory / 'allowance.json').exists() else None
     used = 0

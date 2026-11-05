@@ -53,6 +53,8 @@ def reopen_call(directory, reason, extra_attempts=1):
                           "previous": load(directory / "allowance.json") if (directory / "allowance.json").exists() else None,
                           "next": policy, "note": "Interrupted provider calls may have incurred cost; previous attempts are retained."})
         save(directory / "allowance.json", policy)
+        save(directory / "retry-window.json", {**policy, "closed": False, "opened_at": stamp(),
+                                                "authorization": str(entry)})
         return policy
 
 
@@ -161,6 +163,12 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
         if raw_path.exists():
             returned_receipt(directory)
             return raw_path.read_text(encoding="utf-8")
+        from .transport_recovery import blocked_permanent_failure
+        blocked = blocked_permanent_failure(directory)
+        if blocked:
+            raise ModelTransportError(
+                "Recorded permanent provider failure; explicitly reopen after restoring provider access",
+                retryable=False, provider_error=blocked['failure'].get('provider_error'))
         for row in binding['images']:
             if sha(row['path']) != row['sha256']:
                 raise IntegrityError('Original pending model image is missing or damaged; no replacement call')
