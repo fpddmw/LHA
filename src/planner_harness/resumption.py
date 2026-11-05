@@ -135,6 +135,11 @@ def planner_ready(run):
     if state.get('final') and state['final'].get('outcome') not in {'incomplete','deadline_delivery'}:
         return False
     event = state.get('pending_event')
+    if event:
+        call = run / 'calls' / event
+        for response in (call / 'response.txt', call / 'transport/response.txt'):
+            if response.exists() and not response.read_text(encoding='utf-8').strip():
+                return False
     if event and not call_ready(run / 'calls' / event / 'transport'):
         return False
     tool = state.get('pending_tool')

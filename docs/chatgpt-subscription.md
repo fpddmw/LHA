@@ -40,7 +40,18 @@ python scripts/run_creative_benchmark.py prepare \
 
 每次请求发送完整所需上下文；系统提示映射为 `instructions`，截图以原始图像字节发送。使用 `store:false`、`stream:true`，不发送此授权通道不支持的 `max_output_tokens`、temperature、previous_response_id 等字段。项目不额外设置订阅 token 或金额上限；账号自身的服务额度仍由 OpenAI 决定。
 
-客户端从 `response.completed.output` 中选择最后一条 `phase: final_answer` 助手消息；同一次响应中的 `commentary` 不进入 Planner 动作解析。未提供 phase 的兼容响应使用最后一条未标注消息；只有 commentary 时返回空文本，走已有输出校验。原始输出项与所有中间消息完整保存在调用证据中。
+客户端按 output/content index 与 message ID 组装流式文本，再选择最后一条 `phase: final_answer` 助手消息。`response.completed.output=[]` 或空的 done 快照保留已经收到的同一消息文本。同一次响应中的 `commentary` 不进入 Planner 动作解析；未提供 phase 的兼容响应使用最后一条未标注消息。真正的空答复保留原调用与 usage，Planner 停在同一 pending event，等待恢复，不自动发下一事件。原始流和中间消息完整保存在调用证据中。
+
+已有空缓存可从其原始完成流零调用恢复：
+
+```bash
+python scripts/recover_subscription_answer.py --run "$RUN" --event event-0010 --stream "$STREAM"
+python scripts/recover_subscription_answer.py --run "$RUN" --event event-0010 --stream "$STREAM" --execute
+```
+
+入口绑定原 response ID 与 client/relay 流哈希，只为没有执行动作或生成的任务准备恢复。旧空输出、returned 回执、状态和技术结算进入 `response-recoveries/`；原输入、usage、账本、clock、已用次数及其它调用保留。`--execute` 只写回原缓存并重新排入原事件，不调用模型或渲染；监督暂停标记继续保留。没有最终文本的流如实返回 `completed_without_answer`。
+
+升级接续使用独立的新源码目录，与旧冻结源码保持同一目录层级。新目录的 `src/`、`scripts/` 使用修复版；数据、知识、模型及数值后端可链接到原冻结资产，使原 source/input plan 的绝对路径继续有效。使用新目录的 `scripts/run_creative_benchmark.py run --output <原批次> --host-config <原配置> --devices 0 1`，入口 ROOT 和子 worker 导入均指向新源码。原冻结目录保持原样。
 
 完成依据是实际 SSE 帧中的 `response.completed` 和响应对象的 `status: completed`。部分中转会把真实 SSE 标成 `application/json`，客户端保留这个头部差异并按实际流解析；普通 JSON 正文和没有终态的残缺流仍不视为完成。
 

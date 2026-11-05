@@ -13,7 +13,7 @@ from http.client import HTTPException
 from .chatgpt_auth import RESOURCE, access_token, credential_path
 from .openrouter import _image_to_data_url
 from pathlib import Path
-from .responses_stream import events, StreamAudit, final_answer, response_headers, safe_exception
+from .responses_stream import events, StreamAudit, ResponseOutput, response_headers, safe_exception
 
 
 class SubscriptionAPIError(RuntimeError):
@@ -112,7 +112,7 @@ class ChatGPTSubscriptionVisionModel:
             "endpoint": self.api_url,
             "upstream_endpoint": RESOURCE + "/responses",
             "provider_model": self.api_model,
-            "protocol": "responses-sse-final-phase-v2",
+            "protocol": "responses-sse-final-phase-v3",
             "reasoning_effort": self.reasoning_effort,
             "output_limit_mode": "provider_default",
             "image_transport": "original-bytes-data-url",
@@ -184,7 +184,9 @@ class ChatGPTSubscriptionVisionModel:
                 self.last_client_audit["content_type_mismatch"] = bool(
                     content_type and "text/event-stream" not in content_type.lower()
                 )
+                output = ResponseOutput()
                 for event in events(response, audit):
+                    output.feed(event)
                     kind = event.get("type")
                     value = event.get("response") or {}
                     if value.get("id"):
@@ -210,7 +212,7 @@ class ChatGPTSubscriptionVisionModel:
                             raise ExternalExecutionUnknown(
                                 "ChatGPT completion event has no completed response status"
                             )
-                        answer, selection = final_answer(value)
+                        answer, selection = output.answer(value)
                         self.last_client_audit.update(selection)
                         self.last_client_audit["outcome"] = "completed"
                         return answer

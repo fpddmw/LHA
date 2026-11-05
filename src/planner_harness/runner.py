@@ -661,6 +661,16 @@ class PlannerHarness:
                             raw = call_model(self, call_dir, user_text, images)
                         from .common import write_atomic
                         write_atomic(raw_path, raw)
+                    if not raw.strip():
+                        self.state['status'] = 'needs_reconciliation'
+                        self.state.setdefault('unresolved_calls', {})[event_id] = {
+                            'event_id': event_id, 'failure_kind': 'empty_model_answer',
+                            'error': 'Provider completed without an executable answer',
+                            'response': str(raw_path),
+                            'scope': 'Retain this completed call; recover saved stream text before continuing',
+                        }
+                        self.checkpoint()
+                        break
                     check_wall(self.state)
                     from .json_output import decode_object
 

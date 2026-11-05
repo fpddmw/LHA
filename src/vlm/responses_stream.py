@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import copy
 import json
 from pathlib import Path
 import re
@@ -39,6 +40,86 @@ def final_answer(response):
         "selected_message_id": selected.get("id") if selected else None,
         "messages": [{"id": item.get("id"), "phase": item.get("phase")} for item in messages],
     }
+
+
+class ResponseOutput:
+    """Assemble message text by output/content index without joining messages."""
+
+    def __init__(self):
+        self.items = {}
+        self.parts = {}
+        self.streamed = False
+
+    def item(self, index, item):
+        if item.get('type') != 'message':
+            return
+        current = self.items.setdefault(index, {'type': 'message', 'role': 'assistant'})
+        current.update({k: item[k] for k in ('id', 'type', 'role', 'phase', 'status') if k in item})
+        for number, part in enumerate(item.get('content', [])):
+            if part.get('type') == 'output_text':
+                self.text(index, number, part.get('text', ''))
+
+    def text(self, index, number, text, *, delta=False):
+        key = index, number
+        if not isinstance(text, str):
+            return
+        if delta:
+            self.parts[key] = self.parts.get(key, '') + text
+        elif text or key not in self.parts:
+            # Empty tail snapshots must not erase text already received.
+            self.parts[key] = text
+
+    def feed(self, event):
+        kind = event.get('type')
+        index = event.get('output_index', 0)
+        if kind in {'response.output_item.added', 'response.output_item.done'}:
+            self.item(index, event.get('item') or {})
+            self.streamed = True
+        elif kind in {'response.output_text.delta', 'response.output_text.done', 'response.content_part.done'}:
+            item = self.items.setdefault(index, {'type': 'message', 'role': 'assistant'})
+            if event.get('item_id'):
+                item.setdefault('id', event['item_id'])
+            part = event.get('part') or {}
+            text = part.get('text', '') if kind == 'response.content_part.done' else event.get('delta' if kind.endswith('.delta') else 'text', '')
+            self.text(index, event.get('content_index', 0), text, delta=kind.endswith('.delta'))
+            self.streamed = True
+
+    def answer(self, response):
+        known = {item.get('id'): index for index, item in self.items.items() if item.get('id')}
+        for index, item in enumerate(response.get('output') or []):
+            target = known.get(item.get('id'), index)
+            if target in self.items and self.items[target].get('id') != item.get('id'):
+                target = max(self.items, default=-1) + 1
+            self.item(target, item)
+        output = []
+        for index, item in sorted(self.items.items()):
+            row = copy.deepcopy(item)
+            row['content'] = [{'type': 'output_text', 'text': text} for (i, _), text in sorted(self.parts.items()) if i == index]
+            output.append(row)
+        text, selection = final_answer({'output': output})
+        selection['selection_source'] = 'assembled_stream' if self.streamed else 'response.output'
+        return text, selection
+
+
+def replay_answer(path):
+    """Read a completed saved stream without a provider call or tool execution."""
+    import io
+    path = Path(path)
+    raw = path.read_bytes()
+    output = ResponseOutput()
+    for event in events(io.BytesIO(raw)):
+        output.feed(event)
+        if event.get('type') == 'response.completed':
+            response = event.get('response') or {}
+            if response.get('status') != 'completed':
+                raise ValueError('Saved response has no completed status')
+            text, selection = output.answer(response)
+            return {'text': text, 'selection': selection, 'response_id': response.get('id'),
+                    'model': response.get('model'), 'usage': response.get('usage'),
+                    'stream_sha256': hashlib.sha256(raw).hexdigest()}
+        if event.get('type') in TERMINAL_EVENTS:
+            raise ValueError('Saved response did not complete successfully')
+    raise ValueError('Saved stream has no completed terminal event')
 
 
 def safe_exception(exc, secrets=()):
