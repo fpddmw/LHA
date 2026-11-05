@@ -361,8 +361,71 @@ def recover_pe_loop(output, topic, reason):
                 connection.close()
 
 
+def direct_recovery_plan(output, device, topic):
+    """Inspect the original Direct attempt without changing receipts or queues."""
+    output = Path(output).resolve()
+    batch = load(output / 'batch.json')
+    task = next((t for t in batch['topics'] if t['id'] == topic), None)
+    if not task or 'direct' not in task.get('methods', batch.get('arms', ['direct'])):
+        raise ValueError('Supply a planned Direct topic')
+    service = output / 'workers' / str(device)
+    location = output / 'task-locations' / (signature({'topic': topic, 'method': 'direct'}) + '.json')
+    if location.exists():
+        service = output / load(location)['directory']
+    folders = [service / 'baselines' / topic / 'direct' / '0', service / 'direct' / topic]
+    if any(not folder.resolve().is_relative_to(output) for folder in folders):
+        raise ValueError('Direct attempt must belong to the original batch')
+    folder = next((p for p in folders if (p / 'request.json').exists()), None)
+    if folder is None:
+        return {'status': 'not_started', 'topic': topic, 'model_calls': 0, 'gpu_jobs': 0}
+    request = load(folder / 'request.json')
+    key = request['sha256']
+    if key != signature({k: v for k, v in request.items() if k != 'sha256'}):
+        raise ValueError('Signed Direct request changed')
+    ledger = load(output / 'accounting/ledger.json')
+    records = [r for r in ledger['operations'].values()
+               if r['topic'] == topic and r.get('lane') == 'direct']
+    submitted = sum(r['kind'] == 'render' and r['status'] != 'not_submitted' for r in records)
+    plan = {'status': 'original_receipt_required', 'topic': topic, 'request_sha256': key,
+            'submitted_renders': submitted, 'remaining_generation_slots': max(0, 1 - submitted),
+            'extra_generation_allowance': 0, 'model_calls': 0, 'gpu_jobs': 0}
+    response_path = folder / 'response.json'
+    if not response_path.exists():
+        return plan
+    response = load(response_path)
+    if response.get('request_sha256') != key:
+        raise ValueError('Direct response belongs to another request')
+    if response.get('status') == 'complete':
+        return {**plan, 'status': 'completed_response', 'action': 'reuse_original_response'}
+    record = ledger['operations'].get(key, {})
+    proof = record.get('completion')
+    if not proof:
+        return plan
+    completion_path = output / 'accounting/operations' / signature({'id': key}) / 'completion.json'
+    if sha(completion_path) != proof['sha256']:
+        raise ValueError('Original Direct completion changed')
+    completion = load(completion_path)
+    cancellations = [r for r in response.get('deadline_cleanup', {}).get('cancellations', [])
+                     if r.get('operation') == key]
+    unknown = any(r['status'] not in {'not_submitted', 'reserved'} and not r.get('completion') for r in records)
+    videos = list(folder.rglob('*.mp4'))
+    if (record.get('kind') == 'render' and record in records and record.get('status') != 'not_submitted'
+            and response.get('status') == 'failed' and response.get('task_deadline') is True
+            and response.get('outcome_unknown') is False and response.get('resource_ownership_unknown') is False
+            and completion.get('status') == 'failed' and completion.get('result') is None
+            and cancellations and all(all(r.get(k) is True for k in
+                ('identity_verified', 'local_stopped', 'resource_released')) for r in cancellations)
+            and not unknown and not videos and not (response.get('payload') or {}).get('video')):
+        return {**plan, 'status': 'cancelled_without_output', 'completion_sha256': proof['sha256'],
+                'action': 'continue_other_pending_tasks',
+                'retry': 'An additional render requires separate authorization; retain the original submitted attempt'}
+    return {**plan, 'status': 'reconciliation_required'}
+
+
 def recover_direct(output, device, topic, reason, *, receipt=None, not_executed=False):
     output = Path(output).resolve()
+    if receipt is None and not not_executed:
+        return direct_recovery_plan(output, device, topic)
     if not reason.strip() or bool(receipt) == bool(not_executed):
         raise ValueError("Supply a definite receipt OR explicit non-execution confirmation and a reason")
     batch = load(output / "batch.json")

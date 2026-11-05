@@ -15,7 +15,11 @@ def conditioning_input(payload, directory, info):
     """CPU adapter for an old candidate used in a new 117-frame request."""
     source = Path(payload['input']['path'])
     output = payload['renderer']['output']
-    if output.get('frames') == FRAMES and output.get('fps') == FPS and (info['frames'] != FRAMES or abs(info['fps']-FPS) > .001):
+    # Historical native requests can also produce 117/24. Only an explicit
+    # uniform policy permits replacing their conditioning time axis.
+    if (payload['renderer'].get('conditioning_policy') == POLICY
+            and output.get('frames') == FRAMES and output.get('fps') == FPS
+            and (info['frames'] != FRAMES or abs(info['fps']-FPS) > .001)):
         path, receipt = normalize(source, Path(directory)/'conditioning', info)
         save(Path(directory)/'conditioning-upgrade.json', {'parent':payload['input'], 'prepared_path':str(path), 'normalization':receipt})
         return path, {**info, 'frames':FRAMES, 'fps':FPS}

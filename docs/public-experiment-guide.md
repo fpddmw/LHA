@@ -267,6 +267,7 @@ recovery preview with method states, submitted/reserved renders and unresolved o
 | Interrupted work | What the same command reuses and continues |
 |---|---|
 | Direct / single-pass PE | The original prompt, seed, signed render request and completed video; a missing registry entry is rebuilt from its receipt |
+| Direct cancelled at an old deadline, with no video | Keep its failed submission and used slot; resume the other pending tasks. Lifting the deadline does not regenerate this attempt |
 | PE Loop | Completed refinement, render, review and selection phases; continue the first unfinished phase with the same four-submission allowance |
 | Planner with Critic or self-review | The original task, knowledge binding, working notes, observations, candidates, pending answer/tool result and input ancestry; no task restart or budget reset |
 | After the fourth render, before delivery | Continue observation/review/selection and confirmation; a saved Planner answer is replayed, and no fifth render is admitted |
@@ -278,6 +279,25 @@ submissions. Recovery does not replenish it. The manifest's topics, methods, see
 knowledge, render settings and model settings also stay fixed. No additional topics
 are admitted by restarting. Main `full-experience` depends on its own
 `pre-experience` settlement; self-review retains its separate dependency and owner.
+
+Inspect a Direct attempt without changing its queue, receipts or accounting:
+
+```bash
+python scripts/run_creative_benchmark.py recover-direct --output "$BATCH" \
+  --device 0 --topic 046__short
+```
+
+`cancelled_without_output` means the signed response, hash-bound failed completion
+and task-owned cancellation agree that execution stopped and released its resource,
+and the attempt directory contains no MP4. The original submission remains counted.
+Use the original run command to continue the remaining pending tasks. An additional
+render for that cancelled position needs separate authorization and its own counted
+attempt. `--receipt` still imports a completed response for the exact original request.
+
+New uniform-117 tasks carry an explicit conditioning policy in their renderer request.
+Historical native tasks keep their saved input and official frame selection, including
+leading 117 frames of a 120-frame/24-fps source. Output dimensions alone do not opt a
+historical request into whole-clip normalization.
 
 An active coordinator or worker rejects a duplicate start. After stopping the old
 workers, `--devices` may select different or fewer/more available GPUs. New tasks

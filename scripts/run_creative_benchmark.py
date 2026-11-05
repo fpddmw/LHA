@@ -23,7 +23,7 @@ def main():
     parser.add_argument("--shard-count",type=int)
     parser.add_argument("--topic")
     parser.add_argument("--reason")
-    parser.add_argument("--receipt", type=Path)
+    parser.add_argument("--receipt", type=Path, help="Completed original Direct response; omit with --not-executed unset for read-only recovery inspection")
     parser.add_argument("--not-executed", action="store_true")
     parser.add_argument("--split", nargs="+", choices=["train", "validation", "test"], default=["test"])
     parser.add_argument("--sample-ids", nargs="+", help="Prepare only these sample IDs within the selected splits")
@@ -86,10 +86,12 @@ def main():
         from experiments.recovery import recover_pe_loop
         print(json.dumps(recover_pe_loop(args.output, args.topic, args.reason)))
     elif args.command == "recover-direct":
-        if args.device is None or not args.topic or not args.reason:
-            parser.error("Direct recovery requires --device, --topic and --reason")
+        if args.device is None or not args.topic:
+            parser.error("Direct recovery requires --device and --topic")
+        if (args.receipt or args.not_executed) and not args.reason:
+            parser.error("Changing Direct recovery records requires --reason")
         from experiments.recovery import recover_direct
-        print(json.dumps(recover_direct(args.output, args.device, args.topic, args.reason,
+        print(json.dumps(recover_direct(args.output, args.device, args.topic, args.reason or '',
                                        receipt=args.receipt, not_executed=args.not_executed)))
     elif args.command == "run":
         if host is None:

@@ -45,6 +45,9 @@ def renderer_spec(topic, batch, seed=None):
     name = backend(batch)
     spec = {"backend": name, "seed": batch["seed_sequence"]["start"] if seed is None else seed,
             "output": topic["native_output"], "generation": batch["generation"]}
+    from .video_contract import POLICY
+    if topic.get("normalization", {}).get("policy") == POLICY:
+        spec["conditioning_policy"] = POLICY
     if name == "ditto":
         spec["conditioning_source_indices"] = topic["conditioning_source_indices"]
     return spec
