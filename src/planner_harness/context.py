@@ -75,6 +75,8 @@ def present(payload, state, knowledge):
         for identity, value in evaluations.items()
     }
     if state["config"].get("workflow") == "creative_loop_v1":
+        from .candidate_view import candidate
+        payload["videos"] = {identity: candidate(state, identity, review=False) for identity in state["videos"]}
         for identity, feedback in payload["evaluations"].items():
             if "observations" in feedback:
                 feedback["observation_archive"] = {
@@ -98,7 +100,7 @@ def present(payload, state, knowledge):
                 identity in state.get("videos", {})
                 and result.get("video") == state["videos"][identity]
             ):
-                result["video"] = copy.deepcopy(payload["videos"][identity])
+                result["video"] = {"id": identity, "context_location": "videos." + identity}
             reference = result.get("payload_reference")
             if reference and reference.get("key") in payload["evaluations"]:
                 reference["note"] = (
@@ -207,7 +209,6 @@ def creative_view(payload, state):
         )
     payload["read_receipts"] = {
         "count": len(state["reads"]),
-        "recent": dict(list(state["reads"].items())[-8:]),
         "open": {"action": "history", "arguments": {"catalog": "reads"}},
     }
     payload["archived_operation_index"] = {
@@ -230,6 +231,8 @@ def creative_view(payload, state):
     if recent:
         newest = recent[-1]
         result = newest.get("result", {})
+        if newest.get("request", {}).get("action") == "observe":
+            newest["result"] = result = observation_view(result)
         limit = max(2048, state["config"]["max_context_chars"] // 4)
         if "materials" not in result and len(json.dumps(result, ensure_ascii=False)) > limit:
             from .common import page
@@ -249,6 +252,21 @@ def creative_view(payload, state):
     payload["history_catalogs"] = ["events", "reads", "observations", "evaluations", "videos"]
 
 
+def observation_view(value):
+    """Strip frame transport metadata; retain sampling, coverage and navigation."""
+    if isinstance(value, list):
+        return [observation_view(v) for v in value]
+    if not isinstance(value, dict):
+        return value
+    result = {}
+    for key, item in value.items():
+        if key == "frames":
+            result[key] = [{k: f[k] for k in ("frame_index", "timestamp_seconds", "crop") if k in f} for f in item]
+        elif key not in {"path", "sha256"}:
+            result[key] = observation_view(item)
+    return result
+
+
 def fit_creative(payload, state, system_chars):
     """Remove older view entries, never the latest report/task/notes or raw data."""
     limit = state["config"]["max_context_chars"]
@@ -264,7 +282,7 @@ def fit_creative(payload, state, system_chars):
     }
 
     def fits():
-        return system_chars + len(json.dumps(payload, ensure_ascii=False, indent=2)) <= limit
+        return system_chars + len(json.dumps(payload, ensure_ascii=False, separators=(",", ":"))) <= limit
 
     if not fits():
         # Transport hashes/paths and directory inventories are already saved in
@@ -363,7 +381,10 @@ def fit_multimodal(payload, state, system, images, mapping):
             "available": len(payload["attached_images_in_order"]),
             "scope": "Evenly spaced subset for this input capacity; reopen saved observations or request smaller intervals for the omitted evidence.",
         }
-    payload["attached_images_in_order"] = mapping
+    payload["attached_images_in_order"] = [
+        {k: frame[k] for k in ("attachment", "id", "video_id", "observation_id", "frame_index", "timestamp_seconds", "crop", "kind") if k in frame}
+        for frame in mapping
+    ]
     available_chars = max(
         8192,
         3

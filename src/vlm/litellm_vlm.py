@@ -10,6 +10,7 @@ Activated with ``LOW_HIGH_AGENT_USE_LITELLM_VLM=1``; see ``vlm.resolve_planner_m
 from __future__ import annotations
 
 import base64
+import copy
 import io
 import json
 import os
@@ -134,6 +135,10 @@ class LiteLLMVisionModel:
     total_cost = 0.0
     total_tokens = 0
     total_calls = 0
+    cost_records = 0
+    token_records = 0
+    manages_transport_retries = True
+    is_live_api = True
 
     def __init__(
         self,
@@ -157,6 +162,41 @@ class LiteLLMVisionModel:
         self.timeout = int(_env("LOW_HIGH_AGENT_LITELLM_TIMEOUT") or timeout)
         self.retries = int(_env("LOW_HIGH_AGENT_LITELLM_RETRIES") or retries)
         self.role = role
+        self.last_usage = {}
+        self.last_provider_response = {}
+        self.last_finish_reason = None
+
+    def runtime_identity(self):
+        return {"backend": "litellm", "model": self.model, "reasoning_effort": self.reasoning_effort,
+                "base_url": self.base_url, "image_max_width": _max_image_width(),
+                "image_encoding": "jpeg-quality85", "model_fallback": False}
+
+    def _audit_http(self, number, record):
+        """Only safe request metadata and usage; never headers or provider bodies."""
+        record = {"http_attempt": number, "role": self.role, "model": self.model, **record}
+        self.last_client_audit = record
+        directory = getattr(self, "lha_audit_directory", None)
+        if directory:
+            from planner_harness.common import save
+            save(Path(directory) / "http-attempts" / f"{number:04d}.json", record)
+
+    def _returned_usage(self, usage):
+        self._attempt_usage.append(copy.deepcopy(usage))
+        combined = {}
+        for key in ("prompt_tokens", "completion_tokens", "input_tokens", "output_tokens", "total_tokens", "cost"):
+            values = [u.get(key) for u in self._attempt_usage]
+            if all(isinstance(v, (int, float)) for v in values):
+                combined[key] = sum(values)
+        for key in ("prompt_tokens_details", "input_tokens_details", "completion_tokens_details", "output_tokens_details"):
+            fields = set().union(*((u.get(key) or {}) for u in self._attempt_usage))
+            totals = {}
+            for field in fields:
+                values = [(u.get(key) or {}).get(field) for u in self._attempt_usage]
+                if all(isinstance(v, (int, float)) for v in values):
+                    totals[field] = sum(values)
+            if totals:
+                combined[key] = totals
+        self.last_usage = combined
 
     @property
     def url(self) -> str:
@@ -176,8 +216,12 @@ class LiteLLMVisionModel:
 
     def _record_usage(self, usage: dict[str, Any]) -> None:
         with LiteLLMVisionModel._usage_lock:
-            LiteLLMVisionModel.total_cost += float(usage.get("cost") or 0.0)
-            LiteLLMVisionModel.total_tokens += int(usage.get("total_tokens") or 0)
+            if isinstance(usage.get("cost"), (int, float)):
+                LiteLLMVisionModel.total_cost += float(usage["cost"])
+                LiteLLMVisionModel.cost_records += 1
+            if isinstance(usage.get("total_tokens"), (int, float)):
+                LiteLLMVisionModel.total_tokens += int(usage["total_tokens"])
+                LiteLLMVisionModel.token_records += 1
             LiteLLMVisionModel.total_calls += 1
 
     @classmethod
@@ -185,8 +229,11 @@ class LiteLLMVisionModel:
         with cls._usage_lock:
             return {
                 "calls": cls.total_calls,
-                "tokens": cls.total_tokens,
-                "cost_usd": round(cls.total_cost, 6),
+                "tokens": cls.total_tokens if cls.token_records == cls.total_calls else None,
+                "cost_usd": round(cls.total_cost, 6) if cls.cost_records == cls.total_calls else None,
+                "known_tokens": cls.total_tokens if cls.token_records else None,
+                "known_cost_usd": round(cls.total_cost, 6) if cls.cost_records else None,
+                "usage_coverage": {"token_records": cls.token_records, "cost_records": cls.cost_records},
             }
 
     def predict_text(
@@ -197,6 +244,10 @@ class LiteLLMVisionModel:
         image_paths: list[str],
         max_new_tokens: int = 1024,
     ) -> str:
+        self.last_usage = {}
+        self.last_provider_response = {}
+        self.last_finish_reason = None
+        self._attempt_usage = []
         content: list[dict[str, Any]] = [{"type": "text", "text": user_text}]
         for image_path in image_paths or []:
             content.append({"type": "image_url", "image_url": {"url": _image_to_data_url(image_path)}})
@@ -218,16 +269,26 @@ class LiteLLMVisionModel:
         last_error: Exception | None = None
         for attempt in range(self.retries):
             started = time.time()
+            audit = {"status": "submitted", "started_unix": started,
+                     "images": len(image_paths or []), "output_limit": body["max_completion_tokens"]}
+            self._audit_http(attempt + 1, audit)
             try:
                 request = urllib.request.Request(
                     self.url,
-                    data=json.dumps(body).encode("utf-8"),
+                    data=json.dumps(body, separators=(",", ":")).encode("utf-8"),
                     headers={"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"},
                 )
                 with urllib.request.urlopen(request, timeout=self.timeout) as response:
                     payload = json.load(response)
                 self._record_usage(payload.get("usage") or {})
+                self._returned_usage(payload.get("usage") or {})
+                audit.update(status="returned", usage=payload.get("usage") or {},
+                             response_id=payload.get("id"), returned_model=payload.get("model"))
                 choice = payload["choices"][0]
+                self.last_finish_reason = choice.get("finish_reason")
+                self.last_provider_model = payload.get("model")
+                self.last_provider_response = {"id": payload.get("id"), "model": payload.get("model"),
+                                               "usage": self.last_usage, "choices": [{"finish_reason": self.last_finish_reason}]}
                 text = choice["message"].get("content") or ""
                 if not text.strip():
                     if choice.get("finish_reason") == "length":
@@ -254,6 +315,12 @@ class LiteLLMVisionModel:
                             stream.write(json.dumps(record) + "\n")
                 return text
             except Exception as exc:  # noqa: BLE001 - retry transport and parse failures alike
+                audit["elapsed_seconds"] = round(time.time() - started, 3)
+                audit.update(error_type=type(exc).__name__)
+                if audit["status"] == "submitted":
+                    audit["status"] = "rejected" if isinstance(exc, urllib.error.HTTPError) else "outcome_unknown"
+                if isinstance(exc, urllib.error.HTTPError):
+                    audit["http_status"] = exc.code
                 last_error = exc
                 if isinstance(exc, urllib.error.HTTPError) and exc.code in {400, 401, 403, 404, 413}:
                     try:
@@ -268,6 +335,8 @@ class LiteLLMVisionModel:
                 if attempt >= self.retries - 1:
                     break
                 delay = self._retry_delay(exc, attempt)
+                audit["retry_delay_seconds"] = delay
+                self._audit_http(attempt + 1, audit)
                 # Retries used to be silent, so a request stuck in a timeout/retry
                 # cycle was indistinguishable from a merely slow one.
                 print(
@@ -277,6 +346,9 @@ class LiteLLMVisionModel:
                     flush=True,
                 )
                 time.sleep(delay)
+            finally:
+                audit.setdefault("elapsed_seconds", round(time.time() - started, 3))
+                self._audit_http(attempt + 1, audit)
         raise RuntimeError(f"litellm request failed after {self.retries} attempts: {last_error!r}")
 
     def _retry_delay(self, exc: Exception, attempt: int) -> float:

@@ -1,12 +1,14 @@
-"""Keep read pages across actions; fit their display only at actual context capacity."""
+"""Project current reading and concise older references; keep raw pages on disk."""
 import copy
 import json
 import math
+import re
 
-POLICY = {"version": "creative-memory-v2", "notes_chars": 12000,
+POLICY = {"version": "creative-memory-v3-local-archive", "notes_chars": 12000,
           "max_input_tokens": 100000,
           "image_tokens": 1600, "reserve_tokens": 8192,
-          "eviction": "No read-page eviction; deduplicate rereads and shorten displayed excerpts only at total context capacity"}
+          "read_display_chars": 24000,
+          "eviction": "Current reads stay complete; older pages use approved summaries and exact archive links under a soft display allowance"}
 
 MATERIAL_FIELDS = (
     "id", "path", "title", "kind", "sha256", "version", "read_id", "text",
@@ -36,58 +38,85 @@ def retain(state, materials, event_id):
 
 
 def visible(payload, state):
-    retained = [
-        {**copy.deepcopy(row), "material": compact(row["material"])}
-        for row in state.get("knowledge_memory", [])
-    ]
-    payload["working_memory"] = {"policy": {k:POLICY[k] for k in ("version","eviction")}, "retained_reads": retained,
-        "evicted_fragment_count": sum(len(r["read_ids"]) for r in state.get("memory_evictions", [])),
-        "scope": "Previously read pages remain available here across actions. Exact complete read results open through their history links."}
+    memory = state.get("knowledge_memory", [])
+    latest = (state.get("events") or [{}])[-1].get("event_id")
+    selected, archived, seen, used = [], {}, set(), 0
+    for row in reversed(memory):
+        original = row["material"]
+        material = {k: copy.deepcopy(original[k]) for k in
+                    ("id", "title", "read_id", "text", "start_line", "start_char", "end_line", "end_char", "next_line", "next_char") if k in original}
+        text = material.get("text", "")
+        current = row["event_id"] == latest
+        if not current and used + len(text) > POLICY["read_display_chars"]:
+            identity = original.get("id", original.get("path", row["event_id"]))
+            archived.setdefault(identity, {k: copy.deepcopy(original[k]) for k in ("id", "title", "summary") if k in original})
+            archived[identity].setdefault("open", {"action": "read", "arguments": {
+                "id": identity, "start_line": original.get("start_line", 1), "start_char": original.get("start_char", 0)}})
+            archived[identity].setdefault("raw", {"action": "history", "arguments": {"event_id": row["event_id"]}})
+            continue
+        # Repeated complete source lines from overlapping pages need only one
+        # display copy. Character-sliced boundary lines remain verbatim.
+        lines, fresh = text.splitlines(keepends=True), []
+        for n, line in enumerate(lines):
+            match = re.match(r"(\d+): ", line)
+            boundary = (n == 0 and original.get("start_char", 0)) or (n == len(lines)-1 and original.get("next_char", 0))
+            key = (original.get("sha256"), original.get("id"), line)
+            if match and not boundary and key in seen and not current:
+                continue
+            if match and not boundary:
+                seen.add(key)
+            fresh.append(line)
+        material["text"] = "".join(fresh)
+        if not material["text"] and text:
+            continue
+        material["text_is_complete"] = material["text"] == text
+        if material["text"] != text:
+            material["display_note"] = "Repeated source lines appear once in these read materials; raw pages are unchanged."
+        used += len(material["text"])
+        selected.append({"event_id": row["event_id"], "material": material,
+                         "open": {"action": "history", "arguments": {"event_id": row["event_id"]}}})
+    retained = list(reversed(selected))
+    payload["working_memory"] = {"policy": {k:POLICY[k] for k in ("version","eviction")},
+        "retained_reads": retained, "archived_reads": list(archived.values()),
+        "scope": "Full read pages and complete operation history remain on disk and can be reopened. No additional memory action is required."}
     # The newest tool result and memory otherwise repeat the same page verbatim.
     retained_ids = {r["material"]["read_id"] for r in retained}
     for event in payload.get("recent_operations", []):
-        for material in event.get("result", {}).get("materials", []):
+        materials = event.get("result", {}).get("materials", [])
+        for material in materials:
             if material.get("read_id") in retained_ids:
-                material.pop("text", None)
-                material["text_location"] = "working_memory.retained_reads"
+                brief = {k: material[k] for k in ("id", "read_id", "title") if k in material}
+                material.clear()
+                material.update(brief, text_location="working_memory.retained_reads")
 
 
 def fit_display(payload, limit, system_chars):
-    """Fit all remembered sources together; never delete state or a source's pointer.
-
-    A shared excerpt length gives every read a visible place under real pressure.
-    Short pages remain complete. The original full pages stay in state/history.
-    """
+    """Archive whole older pages, preserving conclusions and conditions together."""
     memory = payload.get("working_memory", {})
     rows = memory.get("retained_reads", [])
     if not rows:
         return
-    # Preserve useful prose before repeated hashes, page receipts and link lists.
-    # The event link opens all of that metadata with the exact original page.
-    for row in rows:
-        row.pop("fragment_key", None)
-        row["material"] = {
-            k: row["material"][k]
-            for k in ("id", "title", "read_id", "text", "start_line", "start_char")
-            if k in row["material"]
-        }
-    texts = [r["material"].get("text", "") for r in rows]
+    newest = (payload.get("recent_operations") or [{}])[-1].get("event_id")
+    for row in list(rows):
+        if system_chars + len(json.dumps(payload, ensure_ascii=False, separators=(",", ":"))) <= limit:
+            break
+        if row["event_id"] == newest:
+            continue
+        rows.remove(row)
+        material = row["material"]
+        memory.setdefault("archived_reads", []).append({
+            **{k: material[k] for k in ("id", "title") if k in material}, "open": row["open"]})
 
-    def project(size):
-        for row, text in zip(rows, texts):
-            row["material"]["text"] = text[:size]
-            row["material"]["text_is_complete"] = len(text) <= size
-        return system_chars + len(json.dumps(payload, ensure_ascii=False, indent=2))
 
-    # Binary search uses the actual serialized size, including image metadata.
-    low, high = 0, max(map(len, texts), default=0)
-    while low < high:
-        middle = (low + high + 1) // 2
-        if project(middle) <= limit:
-            low = middle
-        else:
-            high = middle - 1
-    project(low)
+def component_sizes(system, user, images):
+    """Local diagnostic only; characters are not claimed to be tokenizer counts."""
+    try:
+        payload = json.loads(user)
+    except (ValueError, TypeError):
+        payload = {}
+    return {"version": POLICY["version"], "system_chars": len(system), "user_chars": len(user),
+            "images": images, "component_chars": {k: len(json.dumps(v, ensure_ascii=False, separators=(",", ":")))
+                                                    for k, v in payload.items()} if isinstance(payload, dict) else {}}
 
 
 def estimate(system, user, images):

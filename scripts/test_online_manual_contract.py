@@ -75,7 +75,8 @@ class ManualContractTests(unittest.TestCase):
                 self.assertTrue(observed["next_arguments"])
                 self.assertFalse(observed["coverage"]["complete"])
                 attached = json.loads(model.inputs[1]["user_text"])["attached_images_in_order"]
-                self.assertTrue({f["sha256"] for f in observed["frames"]} <= {f["sha256"] for f in attached})
+                self.assertTrue({f["sha256"] for f in observed["frames"]} <= {sha(p) for p in model.inputs[1]["image_paths"]})
+                self.assertTrue({f["frame_index"] for f in observed["frames"]} <= {f["frame_index"] for f in attached if f["video_id"] == "v1"})
                 # New generate carries review_focus; the next successful render queues the focused review.
                 fixture=type('Fixture',(),{})();fixture.h=h;fixture.source=self.source
                 fixtures.CreativeTests.respond(fixture,review=False)

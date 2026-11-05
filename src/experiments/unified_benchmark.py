@@ -86,10 +86,8 @@ def prepare(root, output, *, splits, prompt_forms, methods=None,
         raise ValueError("Run accumulating pre-experience separately from other Planner arms")
     review = normalize_review(review)
     planner, critic, model_config = model_configuration(planner, models)
-    if 'pe-loop' in methods:
-        for role in (planner, critic):
-            if role['model'] not in {'gpt-6.1-sol', 'openai/gpt-6.1-sol'} or role['reasoning_effort'] != 'high':
-                raise ValueError('PE Loop uses GPT-6.1-sol high for enhancement, selection and Critic')
+    # PE uses the same explicit, frozen role configuration as the Planner arm.
+    # Defaults remain Sol/high; a named pilot can select another provider model.
     from planner_harness.resources import configure as configure_resources, estimate_budget
     resource_state = {"config": {"max_turns": max_turns, "max_generations": max_generations}}
     budget_estimate = estimate_budget(backend, max_generations, **(budget_settings or {}))

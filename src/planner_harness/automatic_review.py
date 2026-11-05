@@ -6,6 +6,8 @@ from .execution import immutable, signature
 
 
 def validate_focus(value, state):
+    from .tool_interface import normalize_focus
+    value = normalize_focus(value)
     if value is None:
         value = {}
     if isinstance(value, str):
@@ -20,12 +22,12 @@ def validate_focus(value, state):
     if not isinstance(value.get("focus", ""), str) or not isinstance(
         value.get("extra_checks", []), list
     ):
-        raise ValueError("Review questions must be text")
+        raise ValueError("review_focus.focus must be text; extra_checks accepts text or a list of texts")
     if any(not isinstance(v, str) for v in value.get("extra_checks", [])):
-        raise ValueError("Review questions must be text")
+        raise ValueError("review_focus.extra_checks must contain texts, for example ['Check hand contact']")
     comparison = value.get("compare_to")
     if comparison is not None and comparison not in state["videos"]:
-        raise ValueError("Choose an existing comparison video")
+        raise ValueError("Unknown compare_to; available videos: " + ", ".join(state["videos"]))
     return copy.deepcopy(
         {
             "focus": value.get("focus", ""),

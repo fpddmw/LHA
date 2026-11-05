@@ -182,6 +182,11 @@ def system_prompt(harness):
     operations = (harness.knowledge.snapshot or {}).get("documents", {}).get(path, {}).get("text")
     if operations is None:
         operations = (harness.root / path).read_text(encoding="utf-8")
+    from .tool_interface import reference
+    start = operations.find("Use one JSON operation")
+    end = operations.find("\n\nEvery successful generation", start)
+    if start >= 0 and end > start:
+        operations = operations[:start] + reference() + operations[end:]
     sections = [operations]
     # Older snapshots retain their original instruction set.
     if "prompt-writing" in harness.knowledge.items:

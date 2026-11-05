@@ -192,9 +192,12 @@ class PELoopTests(Fixture):
         self.assertEqual(row['evidence']['method_identity']['pe_loop']['review_mode'], 'critic')
         self.assertEqual(sum(v[0] == 'review' for v in runtime.calls), 1)
 
-    def test_other_model_requires_a_different_experiment_contract(self):
-        with self.assertRaisesRegex(ValueError, 'GPT-6.1-sol high'):
-            self.prepare(methods=['pe-loop'], best_of_n=None, planner={'model': 'other', 'reasoning_effort': 'high'})
+    def test_explicit_model_is_frozen_without_changing_critic_or_defaults(self):
+        batch = self.prepare(methods=['pe-loop'], best_of_n=None,
+                             planner={'model': 'offline-luna-fixture', 'reasoning_effort': 'high'})
+        self.assertEqual(batch['planner']['model'], 'offline-luna-fixture')
+        self.assertEqual(batch['models']['planner']['options']['model'], 'offline-luna-fixture')
+        self.assertEqual(batch['critic']['model'], 'openai/gpt-6.1-sol')
 
     def test_model_receives_online_diagnostics_and_actual_images_without_scores(self):
         batch, runtime = self.setup_loop(n=2)

@@ -9,14 +9,21 @@ render input, prompt, evidence to inspect and final candidate. Keep useful worki
 notes when needed; no private reasoning transcript or fixed planning form is required.
 
 Use one JSON operation `{action, arguments}`. Available actions:
-- `browse {id?}`, `search {query,scope?:"style"|"experience"|"all"}`, `read {targets:[{id,start_line?,start_char?,max_chars?}]}`
-- `view_reference {id}` and `video {id}`
-- `observe {video, mode?, start?, end?, count?, page?, crop?}` or `observe {observation:id}`
-- `history {event_id? | feedback? | review? | catalog?, start_line?, start_char?}`
-- `note {text}`, `workspace {...}`, `delivery_candidate {video}`
-- `generate {input_video, prompt, justification?, review_focus?}`
-- `review {video_id, summary, findings?}` in Planner review mode
-- `finish {video, message, stop_reason?}`
+- `browse {id?}`
+- `search {query, scope?:"style"|"experience"|"all", limit?}`
+- `read {targets:[{id,section?,start_line?,start_char?,max_chars?}]} (1-4 targets; a single id or string target is accepted)`
+- `view_reference {id}`
+- `video {id? | ids:[id,...], raw?, compare_prompts?} (prompt, input and saved review together)`
+- `observe {video:id|[id,...], mode?,start?,end?,count?,page?,crop?} or {observation:id}`
+- `history {event_id? | feedback? | review? | catalog? | video? | videos?, start_line?,start_char?,raw?}; review/feedback may be an ID list`
+- `note {text, append?}`
+- `workspace {summary?,nodes?,remove_nodes?}`
+- `delivery_candidate {video}`
+- `generate {input_video,prompt,justification?,review_focus?:{focus?,extra_checks?,events?,compare_to?}}`
+- `review {video_id,summary,findings?} (Planner review mode)`
+- `finish {video,message,stop_reason?}`
+
+Optional top-level `note` and `workspace` updates can accompany an action. `extra_checks` accepts text or a list of texts; `focus` accepts text or a list of texts joined in the supplied order. These forms have the same meaning.
 
 Every successful generation is checked, including the last. The configured review
 mode is shown in context. In Critic mode a separate reviewer sees the original
@@ -56,19 +63,19 @@ version. Keep useful candidates; after using the allowance, select the best avai
 answer to the original request, including an early version. For other tasks, choose
 continuation or delivery from the actual results.
 If generation becomes unavailable, reading, observing
-and delivery remain possible within the task's remaining time.
+and delivery remain possible. There is no elapsed-time task deadline.
 
 `finish` delivers your selected generated candidate and concise explanation. It
 reuses the per-generation checks and never starts a new review. Low confidence,
 defects or a failed Critic request do not impose a grade threshold; explain the
 actual tradeoffs. In a fixed-budget experiment, no `stop_reason` bypasses the
 remaining generation allowance. After using it, `no_promising_attempt` can report
-that no useful result is available. At the time limit the runtime preserves your last intended
-candidate, or explicitly marks a latest-generated fallback when you made no choice.
-A fallback does not claim that a pending review completed or that you confirmed it.
+that no useful result is available. Technical interruptions retain the original task and completed work for recovery.
 
-Read pages stay in working memory across actions, without repeating large catalogs.
-At total context capacity, exact excerpts and reopening links remain visible;
-complete material and observations stay in history. Large text has exact
+The current read is supplied in full. Older knowledge uses its existing summary
+and exact reopening links under a soft display allowance. Complete operation history
+and read pages stay on disk. Candidate entries connect actual prompts, inputs and
+saved reviews; video can retrieve one or several candidates directly. Optional notes
+can accompany an action; no memory-management operation is required. Large text has exact
 continuation positions; pass `next_line`/`next_char` to continue. Supplied pages
 support your decision without requiring a ceremony before delivery.

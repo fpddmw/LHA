@@ -4,22 +4,9 @@ import json
 import re
 
 from .common import page, save
+from .tool_interface import SIGNATURES
 
-ACTIONS = {
-    "browse",
-    "search",
-    "read",
-    "observe",
-    "view_reference",
-    "video",
-    "history",
-    "note",
-    "workspace",
-    "generate",
-    "delivery_candidate",
-    "review",
-    "finish",
-}
+ACTIONS = set(SIGNATURES)
 
 
 def read(harness, args, event_id):
@@ -70,20 +57,36 @@ def read(harness, args, event_id):
 def history(harness, args):
     from .context import history_catalog
 
+    if "video" in args or "videos" in args:
+        from .candidate_view import select
+        if "video" in args and "videos" in args:
+            raise ValueError("Choose video or videos")
+        return select(harness.state, {"ids" if "videos" in args else "id": args.get("videos", args.get("video")),
+                                     "raw": args.get("raw", False), "compare_prompts": args.get("compare_prompts", False)})
     if "catalog" in args:
         value = history_catalog(harness.state, args["catalog"])
     elif "review" in args:
-        value = harness.state["reviews"][args["review"]]
+        identities = args["review"]
+        if isinstance(identities, list):
+            return {"reviews": {i: harness.state["reviews"].get(i, {"error": "Unknown review", "available": list(harness.state["reviews"])}) for i in identities}}
+        if identities not in harness.state["reviews"]:
+            raise ValueError("Unknown review; available: " + ", ".join(harness.state["reviews"]))
+        value = harness.state["reviews"][identities]
     elif "feedback" in args:
         if "event_id" in args:
             raise ValueError("Choose feedback or event_id")
-        value = harness.state["evaluations"][args["feedback"]]
+        identities = args["feedback"]
+        if isinstance(identities, list):
+            return {"feedback": {i: harness.state["evaluations"].get(i, {"error": "Unknown feedback", "available": list(harness.state["evaluations"])}) for i in identities}}
+        if identities not in harness.state["evaluations"]:
+            raise ValueError("Unknown feedback; available: " + ", ".join(harness.state["evaluations"]))
+        value = harness.state["evaluations"][identities]
     else:
         event = next(
             (e for e in harness.state["events"] if e["event_id"] == args.get("event_id")), None
         )
         if event is None:
-            raise ValueError("Unknown event ID")
+            raise ValueError("Unknown event ID; available: " + ", ".join(e["event_id"] for e in harness.state["events"]))
         value = event.get("result", {}) if args.get("result_only") else event
     return page(
         json.dumps(value, ensure_ascii=False, indent=2),
@@ -174,7 +177,8 @@ def operate(harness, response, event_id):
         harness.state.update(reference_images=refs, reference_image=refs[-1])
         return refs[0] if len(refs) == 1 else {"images": refs}
     if action == "video":
-        return harness.state["videos"][args.get("id", "source")]
+        from .candidate_view import select
+        return select(harness.state, args)
     if action == "workspace":
         if args:
             harness.update_workspace(args)
@@ -187,7 +191,7 @@ def operate(harness, response, event_id):
     if action == "delivery_candidate":
         identity = args.get("video", args.get("id", "source"))
         if identity not in harness.state["videos"]:
-            raise ValueError("Unknown video ID")
+            raise ValueError("Unknown video ID; available: " + ", ".join(harness.state["videos"]))
         harness.state["delivery_candidate"] = identity
         from .candidate_selection import refresh
 

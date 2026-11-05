@@ -428,7 +428,7 @@ class PlannerHarness:
         from .context import fit_multimodal
 
         payload, images, mapping = fit_multimodal(payload, self.state, self.system, images, mapping)
-        return json.dumps(payload, ensure_ascii=False, indent=2), images, mapping
+        return json.dumps(payload, ensure_ascii=False, separators=(",", ":")), images, mapping
 
     def _legacy_context(self):
         """Compatibility facade for callers of the archived raw context API."""
@@ -480,6 +480,14 @@ class PlannerHarness:
 
             if active(self.state):
                 from .automatic_review import capture
+                from .tool_interface import normalize
+
+                normalized = normalize(response)
+                if normalized != response:
+                    save(self.output / "calls" / event_id / "normalization.json",
+                         {"original": response, "normalized": normalized,
+                          "scope": "Equivalent tool expression; no inferred decision"})
+                response = normalized
 
                 review = capture(self, response, event_id)
                 if review and review.get("status") == "review_required":
@@ -607,6 +615,8 @@ class PlannerHarness:
                         },
                     )
                     save(call_dir / "context-budget.json", estimate_record)
+                    from .working_memory import component_sizes
+                    save(call_dir / "context-components.json", component_sizes(self.system, user_text, len(images)))
                     if self.state["config"].get("workflow") != "creative_loop_v1":
                         from .compat.legacy.runtime import record_decision
 
@@ -654,7 +664,7 @@ class PlannerHarness:
                     check_wall(self.state)
                     from .json_output import decode_object
 
-                    parsed = decode_object(raw)
+                    parsed = decode_object(raw, allow_prose=self.state["config"].get("workflow") == "creative_loop_v1")
                     self.state.setdefault('unresolved_calls', {}).pop(event_id, None)
                     event = {"event_id": event_id, "at": stamp(), "request": parsed, "status": "ok"}
                     try:
@@ -663,6 +673,10 @@ class PlannerHarness:
                         raise
                     except (ValueError, KeyError, TypeError, OSError) as exc:
                         event.update(status="operation_error", result={"error": str(exc)})
+                    normalization = call_dir / "normalization.json"
+                    if normalization.exists():
+                        event["request"] = load(normalization)["normalized"]
+                        event["original_request"] = str(normalization.relative_to(self.output))
                 except ResourceExhausted:
                     raise
                 except (json.JSONDecodeError, ValueError) as exc:

@@ -245,6 +245,31 @@ def case_videos(knowledge, case_id):
     return {case_id+':'+identity: value for identity, value in saved_videos(body).items()}
 
 
+def model_view(payload):
+    """Project repeated transport metadata out of maintenance inputs only."""
+    from .context import observation_view
+    result = copy.deepcopy(payload)
+    result['run_sources'] = {k: {'characters': v['characters']} for k, v in payload.get('run_sources', {}).items()}
+    images, seen = {}, set()
+    for identity, row in payload.get('image_catalog', {}).items():
+        key = (row.get('sha256'), row.get('video_id'), row.get('timestamp_seconds'))
+        if key in seen and identity not in payload.get('attached_images', []):
+            continue
+        seen.add(key)
+        images[identity] = {k: row[k] for k in ('video_id', 'timestamp_seconds', 'observation_id') if k in row}
+    result['image_catalog'] = images
+    result['image_catalog_scope'] = 'Each saved image is listed once; original call/image IDs remain readable.'
+    result['observations'] = observation_view(result.get('observations', []))
+    current = result.get('current_result')
+    for row in result.get('retained_reading', []):
+        if row.get('result') == current:
+            row['result'] = {'text_location': 'current_result'}
+    if isinstance(current, dict) and 'skill' in current and current.get('text') == result.get('loaded_skills', {}).get(current['skill']):
+        current.pop('text', None)
+        current['text_location'] = 'loaded_skills.' + current['skill']
+    return result
+
+
 def _execute(root,folder,job,cfg,model):
     from .creative_knowledge import CreativeKnowledge
     from .model_call import call_text
@@ -296,8 +321,8 @@ def _execute(root,folder,job,cfg,model):
         if deadline is not None and time.time()>=deadline:raise TimeoutError('Maintenance time allowance exhausted')
         for identity in image_focus:
             if sha(image_catalog[identity]['path'])!=image_catalog[identity]['sha256']:raise ValueError('Original Planner image changed')
-        raw=call_text(folder/'calls'/f'{number+1:04d}',model,job.get('instructions',PROMPT),json.dumps(result,ensure_ascii=False),[image_catalog[i]['path'] for i in image_focus],attempts=1)
-        action=decode_object(raw);kind=action.get('action');args=action.get('arguments',{})
+        raw=call_text(folder/'calls'/f'{number+1:04d}',model,job.get('instructions',PROMPT),json.dumps(model_view(result),ensure_ascii=False,separators=(',',':')),[image_catalog[i]['path'] for i in image_focus],attempts=1)
+        action=decode_object(raw, allow_prose=True);kind=action.get('action');args=action.get('arguments',{})
         try:
             if kind=='skill':
                 loaded_skills[args['id']]=job['skills'][args['id']]['text']
@@ -360,6 +385,7 @@ def _execute(root,folder,job,cfg,model):
             else:raise ValueError('Choose an available maintenance action')
         except (ValueError,KeyError,TypeError) as exc:result={'error':str(exc),'scope':'No render, score or publication was submitted'}
         if kind in {'read','search','browse'}:
+            reading_cache[:] = [row for row in reading_cache if row['action'] != action]
             reading_cache.append({'action':action,'result':copy.deepcopy(result)})
             while reading_cache and len(json.dumps(reading_cache,ensure_ascii=False))>24000:reading_cache.pop(0)
         result={'current_result':result,'task':task_identity,'original_request':load(run/'state.json')['request']['text'],

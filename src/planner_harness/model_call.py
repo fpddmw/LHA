@@ -141,6 +141,10 @@ def _wait_for_provider_retry(scope, previous_attempt):
 
 def call_text(directory, model, system, user, images, *, attempts=3, retry_delay=2, max_new_tokens=7000, meter_only=False):
     if meter_only:return metered_text(directory,model,system,user,images,max_new_tokens=max_new_tokens)
+    # Gateway adapters that already record bounded HTTP retries own recovery
+    # inside this call. Do not multiply them by the outer default allowance.
+    if getattr(model, "manages_transport_retries", False):
+        attempts = 1
     directory = Path(directory)
     with RunLock(directory):
         binding = {"system_prompt": system, "user_text": user,
@@ -265,7 +269,7 @@ def call_text(directory, model, system, user, images, *, attempts=3, retry_delay
             finish = getattr(client, "last_finish_reason", None)
             if not finish and isinstance(body, dict):
                 finish = body.get("stop_reason") or (body.get("choices") or [{}])[0].get("finish_reason")
-            save(entry / "result.json", {"usage": getattr(client, "last_usage", {}),
+            save(entry / "result.json", {"usage": getattr(client, "last_usage", {}), "role": getattr(client, "role", None),
                  "finish_reason": finish, "output_budget": max_new_tokens,
                  "output_limit": getattr(client, "last_output_limit", {"requested_tokens": max_new_tokens,
                      "hard_enforced": bool(capabilities.get("hard_output_tokens"))}),
@@ -340,7 +344,7 @@ def metered_text(directory,model,system,user,images,*,max_new_tokens=None):
             raise ModelTransportError('Independent final provider failure',retryable=retryable,provider_error=diagnostic) from None
         body=getattr(client,'last_provider_response',{});finish=getattr(client,'last_finish_reason',None)
         if not finish and isinstance(body,dict):finish=body.get('stop_reason') or (body.get('choices') or [{}])[0].get('finish_reason')
-        save(entry/'result.json',{'usage':getattr(client,'last_usage',{}),'finish_reason':finish,'output_budget':None,
+        save(entry/'result.json',{'usage':getattr(client,'last_usage',{}),'role':getattr(client,'role',None),'finish_reason':finish,'output_budget':None,
             'output_limit':getattr(client,'last_output_limit',{'requested_tokens':None,'mode':'provider_default'}),
              'client_execution':getattr(client,'last_client_audit',None),
              'accounting_mode':'live_meter_only' if getattr(model,'requires_live_budget',False) or getattr(model,'is_live_api',False) else 'fixture_meter_only',
