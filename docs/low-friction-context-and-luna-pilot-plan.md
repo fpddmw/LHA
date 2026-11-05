@@ -72,13 +72,19 @@ model and context implementation change in this pilot.
 - [x] Context projection and exact archive access.
 - [x] Provider accounting and explicit per-role model configuration support.
 - [x] Offline verification and historical context comparison.
-- [ ] Commit and verified GitHub synchronization.
+- [x] Commit and verified GitHub synchronization.
 - [ ] Confirm role scope and available authorized pilot host.
 - [ ] Complete and archive the pilot, including final evaluation.
 
 No production experiment was started or modified when this plan was created.
 
 ## Implementation record
+
+Implementation commit `998982f489d161e987e7edd16d69950468a9dcb3` was pushed to
+`origin/codex/experience-curation-v1`; `git ls-remote` matched the local commit.
+The live pilot remains pending the two explicitly requested inputs: online Critic
+model scope and an authorized idle GPU host. No production defaults, active queues,
+or saved experiment outputs were changed.
 
 `tool_interface.py` provides the tool signatures used by new Planner instructions
 and deterministic equivalent-argument normalization. Original output and each
