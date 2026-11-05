@@ -73,6 +73,14 @@ def task_spec(topic, arm, batch, profile_path):
                 "The rendering seed sequence is fixed by the experiment. A blocked or interrupted task remains incomplete."}
     if arm == "pre-experience":
         spec["execution"]["experience_condition"] = arm
+    if topic.get("normalization") and batch.get("input_plan_sha256"):
+        spec["execution"]["benchmark_source"] = {
+            **{key: copy.deepcopy(topic[key]) for key in
+               ("source", "source_sha256", "original_source", "original_source_sha256", "normalization")},
+            "input_plan": {"path": str(Path(profile_path).parent / "inputs/plan.json"),
+                           "sha256": batch["input_plan_sha256"],
+                           "case_id": topic["id"] + "__direct"},
+        }
     if batch.get("resource_policy"):
         spec["execution"]["resource_policy"] = batch["resource_policy"]
     spec["execution"]["review"] = copy.deepcopy(batch.get("review", {"mode":"critic"}))

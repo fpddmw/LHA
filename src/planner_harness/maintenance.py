@@ -139,13 +139,17 @@ def provenance(root,run,split, *, deferred=False):
     if (split != 'train' and not (deferred and split == 'test')) or metadata.get('split')!=split or row is None or row['split']!=split:
         raise ValueError('New library candidates require an attested training task; test/validation are excluded')
     source=state.get('videos',{}).get('source',state.get('source',{}))
-    if source.get('sha256')!=row['source_video_sha256']:
+    from .benchmark_source import verify_normalized_source
+    normalized = verify_normalized_source(root, state, row, source)
+    if normalized is None and source.get('sha256')!=row['source_video_sha256']:
         raise ValueError('Maintenance source is not the attested benchmark source')
     prompts=[row.get('prompt_short'),row.get('prompt_long'),row.get('instruction')]
     if state['request']['text'] not in prompts:raise ValueError('Maintenance request differs from the attested task')
     body={'split':split,'sample_id':sample,'source_group':row.get('source_group',sample),
           'source_sha256':row['source_video_sha256'],'request_sha256':signature({'text':state['request']['text']}),
           'benchmark_row_sha256':signature(row),'run_state_sha256':sha(Path(run)/'state.json')}
+    if normalized is not None:
+        body['normalized_source'] = normalized
     from .training_experience import family
     body.update(family(state))
     return {**body,'sha256':signature(body)}
