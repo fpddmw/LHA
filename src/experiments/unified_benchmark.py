@@ -225,12 +225,22 @@ def maintain_training_task(root,output,topic,batch,profile,config,model_factory=
     from planner_harness.maintenance import enqueue
     from planner_harness.training_experience import maintain,current,base_snapshot
     previous=training_completion(output,topic['id'])
-    if previous['status'] not in {'pending','failed','execution_unknown'}:return previous
+    if previous['status'] not in {'pending','failed','execution_unknown','not_eligible'}:return previous
     output=Path(output)
     marker=output/'maintenance/training-errors'/(topic['id']+'.json')
     method = 'pre-experience' if 'pre-experience' in topic.get('methods', batch['arms']) else TRAINING_METHOD
+    arm_path=output/'topics'/topic['id']/(method+'.json')
+    if previous['status'] == 'not_eligible':
+        if not arm_path.exists():return previous
+        arm = load(arm_path)
+        if arm.get('outcome') != 'delivered':return previous
+        # Includes verify_delivery: the actual task must now match its original
+        # topic, source, request, profile and completed artifact receipts.
+        from .creative_benchmark import verify_arm
+        verify_arm(topic,method,arm,batch['profile_sha256'])
+        from planner_harness.resumption import archive_remove
+        archive_remove(marker,marker.parent/'recovery-history'/topic['id'])
     try:
-        arm_path=output/'topics'/topic['id']/(method+'.json')
         if not arm_path.exists():
             save(marker,{'status':'not_eligible','reason':'Online task produced no settled Planner trace','current_version_retained':True,'online_result_changed':False})
         else:

@@ -61,6 +61,8 @@ python scripts/recover_subscription_answer.py --run "$RUN" --event event-0010 --
 
 已经交付、仅维护失败的任务使用 `python scripts/run_creative_benchmark.py recover-maintenance --output <原批次> --topic <原题目ID>`。该入口直接接续指定题目的维护，不经过 GPU 队列；模型沿用批次配置。程序识别旧维护输入中反复出现的 `Choose an available maintenance action` 且 `loaded_skills={}`，在原维护 attempt 下使用 `calls-v2/` 重新开展维护；原 `calls/` 和失败记录保留。有正常进展的旧维护继续使用原调用缓存。已完成的视频、Critic 和选片不重跑，维护成功后重复运行直接复用结果。维护读取任务绑定的经验快照，预经验组与原在线任务读取相同预经验。
 
+在线中断时留下的 `maintenance/training-errors/<题目>.json`、`status: not_eligible` 会在原任务交付后重新检查。原入口及 `recover-maintenance` 先验证交付、候选文件和原题目／源片／请求／profile 绑定，再将旧标记保存至同目录的 `recovery-history/<题目>/` 并接续维护。尚未交付时保留原标记；已完成的维护直接复用。
+
 若旧版本在最后一步仍返回阅读而耗尽维护次数，恢复会从已有回答重建前面的阅读和 Skill 状态，仅在最后一步的 `submission/` 中请求模型提交自己的结论。原最后一步回答保留；步骤上限、token 配置与实际调用账本沿用原值。内容是否形成条目由模型提交的 `changes` 决定，程序不生成“无新增”结论。
 
 完成依据是实际 SSE 帧中的 `response.completed` 和响应对象的 `status: completed`。部分中转会把真实 SSE 标成 `application/json`，客户端保留这个头部差异并按实际流解析；普通 JSON 正文和没有终态的残缺流仍不视为完成。
