@@ -286,6 +286,12 @@ class Service:
             repair_render_response, planner_ready, calls_ready, archive_remove)
         reconcile_accounting(self.accounting_root)
         recover_texts(self.directory,self.accounting_root)
+        # Creative services may bind each task to its own default ledger.
+        for marker in (self.directory/'tasks').glob('*/run/budget-scope.json'):
+            root = Path(load(marker)['root'])
+            if root != self.accounting_root:
+                reconcile_accounting(root)
+                recover_texts(marker.parent,root)
         rows = self.queue.rows()
         latest = {}
         for row in rows:

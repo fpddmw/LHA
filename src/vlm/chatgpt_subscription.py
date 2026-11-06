@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import hashlib
+import errno
 import json
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlsplit
 import uuid
 from http.client import HTTPException
 
@@ -42,6 +44,12 @@ def _stream_error(detail, fallback):
             if value.isascii() and value.isdecimal() and len(value) <= 12:
                 delays.append(int(value) / divisor)
     return SubscriptionAPIError(503, code, retry_after=max(delays, default=None))
+
+
+def connection_refused(exc):
+    cause = exc.reason if isinstance(exc, urllib.error.URLError) else exc
+    return isinstance(cause, OSError) and (
+        cause.errno == errno.ECONNREFUSED or getattr(cause, 'winerror', None) == 10061)
 
 
 def _deadline_timeout(client):
@@ -265,6 +273,12 @@ class ChatGPTSubscriptionVisionModel:
             self.last_client_audit.update(outcome="execution_unknown", error=safe_exception(exc))
             raise
         except (OSError, ValueError, HTTPException) as exc:
+            if (stage == 'connect' and urlsplit(self.api_url).hostname in {'localhost','127.0.0.1','::1'}
+                    and connection_refused(exc)):
+                from planner_harness.accounting import ExternalNotSubmitted
+                self.last_client_audit.update(outcome='not_submitted', error=safe_exception(exc),
+                                             failure_kind='connection_refused_before_request')
+                raise ExternalNotSubmitted('ChatGPT endpoint refused the connection before receiving the request') from None
             if isinstance(getattr(exc, "partial", None), bytes):
                 audit.received(exc.partial)
             self.last_client_audit.update(outcome="execution_unknown", error=safe_exception(exc))

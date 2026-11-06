@@ -7,17 +7,21 @@ from .lock import RunLock
 
 def reconcile_accounting(root):
     from . import accounting as a
+    from .connection_recovery import reconcile as reconcile_connection
     root = Path(root)
     if not (root / 'ledger.json').exists():
         return []
     repaired = []
     for key, record in a.load_ledger(root)['operations'].items():
-        directory = root / 'operations' / signature({'id': key})
-        receipt = directory / 'completion.json'
-        if record.get('completion') or not receipt.exists():
-            continue
         binding = a.scope(root, record['topic'], record['lane'])
         try:
+            if reconcile_connection(binding,key):
+                repaired.append(key)
+                continue
+            directory = root / 'operations' / signature({'id': key})
+            receipt = directory / 'completion.json'
+            if record.get('completion') or not receipt.exists():
+                continue
             a.reconcile(binding, key, evidence=receipt, reason='Recover durable original completion')
         except RuntimeError as exc:
             if 'owned by another process' in str(exc):

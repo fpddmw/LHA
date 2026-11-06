@@ -61,6 +61,14 @@ class ExternalExecutionUnknown(RuntimeError):
     outcome_unknown = True
 
 
+class ExternalNotSubmitted(RuntimeError):
+    """The connection failed before the endpoint accepted this request."""
+    failure_kind = "request_not_submitted"
+    outcome_unknown = False
+    retryable = True
+    safe_diagnostic = {"category": "connection_refused", "submission": "not_submitted"}
+
+
 def amount(value):
     try:
         if isinstance(value, bool) or not isinstance(value, (str, int)):
@@ -869,18 +877,24 @@ def invoke(
         try:
             save(receipt, saved)
             decision.wait()
-            settle_operation(
-                binding,
-                key,
-                usage,
-                time.monotonic() - started,
-                {"path": str(receipt), "sha256": sha(receipt)},
-                "late_complete"
-                if timed_out.is_set() and error is None
-                else "failed_unknown_cost"
-                if error
-                else "complete",
-            )
+            if isinstance(error, ExternalNotSubmitted):
+                transition(binding, key, 'not_submitted', charged_tokens=0, charged_amount='0',
+                           settled_amount='0', actual_usage={}, cost_status='connection_refused_before_request',
+                           elapsed_seconds=time.monotonic()-started,
+                           completion={'path':str(receipt),'sha256':sha(receipt)})
+            else:
+                settle_operation(
+                    binding,
+                    key,
+                    usage,
+                    time.monotonic() - started,
+                    {"path": str(receipt), "sha256": sha(receipt)},
+                    "late_complete"
+                    if timed_out.is_set() and error is None
+                    else "failed_unknown_cost"
+                    if error
+                    else "complete",
+                )
         except BaseException as settlement_error:
             error = settlement_error
         finally:

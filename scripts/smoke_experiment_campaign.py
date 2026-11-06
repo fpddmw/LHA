@@ -15,6 +15,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 COVERAGE = {
+    'test_connection_refusal': 'Local connection refusal accounting; original CLI resumes first Planner and second Critic after twelve failures, preserving videos and original receipts',
     'test_selection_recovery': 'Invalid PE evidence references corrected in the original selection call; original command resumes round three and renders only round four',
     'test_maintenance_actions': 'Actual maintenance action spellings, Skill text delivery, format correction and maintenance-only recovery after two failed attempts',
     'test_subscription_submission': 'Native registered result submission, streamed custom tool inputs and separation from commentary',

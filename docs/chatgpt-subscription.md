@@ -82,6 +82,8 @@ python scripts/chatgpt_subscription.py serve --port 18766 \
 
 每次请求产生一个 `request_id`，客户端与中转层使用同一编号。调用目录的 `attempts/01/client-audit/` 保存原始 `stream.bin`、完成时的 `response.json` 和 `summary.json`；summary 包含 HTTP 状态、Content-Type、事件计数、完成标记、消息 phase、最终选中消息及异常阶段。`unknown.json` 同步引用这些诊断。Authorization 与 OAuth token 不写入日志。
 
+本机转发端口在建立连接时返回 `Connection refused`，表示请求尚未送达转发服务。客户端将它记为 `not_submitted`，该次请求的调用次数、token 和费用占用为零，原始失败回执继续保存。SSH 转发恢复后，直接重跑原 `run` 命令：程序核对旧调用的本机地址、连接阶段、空原始流、请求编号及失败完成回执，将误记为未知的本地拒绝连接修正后，在原 Planner／Critic 调用中继续尝试。公共账本和任务自己的账本均会处理；已生成视频、成功 Critic、原输入、时钟和生成额度保持原值。无需另建任务或使用 `recover_interrupted_model.py`。HTTP 502、连接重置或读取流中断继续保留其实际未知状态。
+
 中转层默认在凭证目录旁的 `subscription-relay-audit/<request_id>/<relay_id>/` 保存上游原始流和诊断，可通过 `serve --audit-dir <目录>` 指定位置。连接上游失败、读取中断、上游正常 EOF、下游写入失败分别记录。上游尚未返回响应便中断时返回明确的 `relay_execution_unknown`；已开始流式响应时发送相应中转错误事件。两者保留原请求的未知状态，均不自动重发 POST。若中转层已收到完整终态但下游断开，可从该请求的 `response.json` 核实原回答。日志落盘失败会保留内存诊断，不使已经完成的回答失败。
 
 红蓝图片探针只验证基本多模态通路。部署接入修复时，还应使用一份此前**已返回调用**的 Planner `transport/input.json` 做独立格式探针：
