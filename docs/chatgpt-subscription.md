@@ -44,6 +44,8 @@ python scripts/run_creative_benchmark.py prepare \
 
 客户端按 output/content index 与消息 ID 组装工具输入和文本，`response.completed.output=[]` 或空的 done 快照保留已经收到的内容。只有注册的提交工具输入进入执行层，过程消息不当作动作。兼容历史流时选择最后一条 `phase: final_answer`，无 phase 时使用最后一条未标注消息。真正空答复先尝试从原始流找回正文，仍为空则由原逻辑调用自动重试；每次响应和 usage 保留，已有动作、视频及评价继续复用。格式纠正在原决策步骤内完成。
 
+在线 Critic 兼容 `{"review":{"summary":"...","findings":[...]}}` 报告写法，在自己的入口将报告映射到 `action: review` 的 `arguments`，保持正文和证据引用原样，再执行原内容校验。原文、返回回执及 `normalization.json` 保留。若旧版本仅因这层包装耗尽格式纠正，升级后接续原任务即可从最初有效回执收取报告，无需再次调用 Critic；PE 随后接续原选片阶段。共享 Planner／判官解析器保持原有行为。
+
 已有空缓存可从其原始完成流零调用恢复：
 
 ```bash

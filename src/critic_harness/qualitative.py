@@ -44,6 +44,19 @@ def validate(report, packet=None):
     return report
 
 
+def normalize_action(value):
+    """Accept the Critic's named report wrapper without changing its contents."""
+    from planner_harness.json_output import action_envelope
+
+    normalized = action_envelope(value, default_action='review', metadata={'note', 'purpose'})
+    args = normalized['arguments']
+    if normalized['action'] in {'review', 'finish'} and 'review' in args:
+        if set(args) != {'review'} or not isinstance(args['review'], dict):
+            raise ValueError('Supply one review report object with summary and optional findings')
+        normalized['arguments'] = args['review']
+    return normalized
+
+
 def observe(state, directory, args, identity):
     from planner_harness.event_observation import observe_videos
 
@@ -146,7 +159,6 @@ def packet(payload, state, profile):
 
 def run(payload, directory, model=None):
     from planner_harness.model_answers import call_object
-    from planner_harness.json_output import action_envelope
 
     directory = Path(directory) / "one-shot-critic"
     if (directory / 'feedback.json').exists():
@@ -202,7 +214,7 @@ def run(payload, directory, model=None):
         if number == 1:
             immutable(directory / "request.json", request)
         def validate_action(value):
-            normalized = action_envelope(value, default_action='review', metadata={'note', 'purpose'})
+            normalized = normalize_action(value)
             action, args = normalized['action'], normalized['arguments']
             if action in {'review', 'finish'}:
                 validate(args, request)
@@ -224,8 +236,7 @@ def run(payload, directory, model=None):
         )
         status = 'ok'
         try:
-            from planner_harness.json_output import action_envelope
-            normalized = action_envelope(response, default_action="review", metadata={"note", "purpose"})
+            normalized = normalize_action(response)
             if normalized != response:
                 save(directory / "calls" / identity / "normalization.json", {"original": response, "normalized": normalized})
             action, args = normalized["action"], normalized["arguments"]

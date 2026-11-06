@@ -15,6 +15,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 COVERAGE = {
+    'test_critic_report_recovery': 'Captured nested Critic report; fourth-round PE recovers the original answer without resending after fifteen format corrections, then selects',
     'test_maintenance_eligibility_recovery': 'Original maintenance command rechecks stale not_eligible after verified delivery, activates once and preserves all online artifacts',
     'test_connection_refusal': 'Local connection refusal accounting; original CLI resumes first Planner and second Critic after twelve failures, preserving videos and original receipts',
     'test_selection_recovery': 'Invalid PE evidence references corrected in the original selection call; original command resumes round three and renders only round four',

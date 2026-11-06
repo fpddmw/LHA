@@ -23,6 +23,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 CURRENT = (
+    "test_critic_report_recovery",
     "test_maintenance_eligibility_recovery",
     "test_connection_refusal",
     "test_selection_recovery",

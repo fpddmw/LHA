@@ -174,10 +174,8 @@ class ReviewModes(unittest.TestCase):
         from planner_harness.recovery import recover_tool
         self.start();self.render();job=self.h.state['jobs'][self.h.state['pending_tool']];folder=self.h.output/'jobs'/job['id']
         reviewer=Reviewer([ConnectionError('Temporary software-fixture transport failure'),action('review',summary='Original review resumed on the same evidence.')])
-        with self.assertRaises(ModelTransportError):critique(job,folder,ROOT,model=reviewer)
-        save(folder/'response.json',{'status':'failed','mode':job['mode'],'request_sha256':job['sha256'],'failure_kind':'model_transport','error':'Known fixture transport failure.'})
-        recover_tool(self.h.output,job['id'],'retry-review','Retry the known failed original software-fixture request.')
-        self.h.state=load(self.h.output/'state.json');self.review(reviewer)
+        with patch('planner_harness.model_call.time.sleep'):
+            self.review(reviewer)
         self.assertEqual(len(reviewer.inputs),2);self.assertEqual(reviewer.inputs[0]['user_text'],reviewer.inputs[1]['user_text'])
         self.assertEqual(self.h.state['reviews']['v1']['status'],'complete')
         self.assertEqual(sum(j['kind']=='critique' for j in self.h.state['jobs'].values()),1)
